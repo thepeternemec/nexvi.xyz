@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
-import { getCategory, getCreator, getPrompt, prompts, reviews } from "@/lib/mock-data";
+import { getCategory, getCreator, getPrompt, prompts, reviews, type Prompt } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/prompt/$slug")({
   component: PromptDetail,
-  loader: ({ params }) => {
+  loader: ({ params }): { prompt: Prompt } => {
     const prompt = getPrompt(params.slug);
     if (!prompt) throw notFound();
     return { prompt };
