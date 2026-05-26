@@ -47,7 +47,7 @@ function Marketplace() {
     return list;
   }, [search]);
 
-  const update = (patch: Partial<Search>) => navigate({ search: (prev) => ({ ...prev, ...patch }) as Search });
+  const update = (patch: Partial<Search>) => navigate({ search: (prev: Search) => ({ ...prev, ...patch }) });
 
   return (
     <SiteShell>
