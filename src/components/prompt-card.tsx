@@ -1,11 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { Bookmark, Star, Sparkles } from "lucide-react";
+import { Bookmark, Star, Sparkles, Lock, Crown } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Prompt } from "@/lib/mock-data";
 import { getCreator } from "@/lib/mock-data";
+import { useSubscription } from "@/hooks/use-subscription";
+
+export function isPremium(p: Pick<Prompt, "price">) {
+  return p.price > 0;
+}
 
 export function PromptCard({ prompt }: { prompt: Prompt }) {
   const creator = getCreator(prompt.creatorId);
+  const { isPremium: hasPremium } = useSubscription();
+  const premium = isPremium(prompt);
+  const locked = premium && !hasPremium;
+
   return (
     <Link
       to="/prompt/$slug"
@@ -15,10 +24,12 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
       <div className={`relative aspect-[16/10] w-full bg-gradient-to-br ${prompt.cover}`}>
         <div className="absolute inset-0 bg-grain opacity-60" />
         <div className="absolute left-4 top-4 flex gap-1.5">
-          {prompt.price === 0 ? (
-            <Badge className="rounded-full bg-white/90 text-foreground hover:bg-white">Free</Badge>
+          {premium ? (
+            <Badge className="rounded-full bg-gradient-to-r from-amber-400 to-rose-500 text-white shadow-sm hover:from-amber-400 hover:to-rose-500">
+              <Crown className="mr-1 h-3 w-3" /> Premium
+            </Badge>
           ) : (
-            <Badge className="rounded-full bg-foreground text-background">${prompt.price}</Badge>
+            <Badge className="rounded-full bg-white/90 text-foreground hover:bg-white">Free</Badge>
           )}
           {prompt.beginner && (
             <Badge variant="secondary" className="rounded-full bg-white/80 text-foreground backdrop-blur">Beginner</Badge>
@@ -36,6 +47,13 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
             <span key={t} className="rounded-full bg-black/30 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-white backdrop-blur">{t}</span>
           ))}
         </div>
+        {locked && (
+          <div className="absolute inset-0 flex items-center justify-center bg-foreground/40 opacity-0 backdrop-blur-[2px] transition group-hover:opacity-100">
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-xs font-medium text-foreground shadow">
+              <Lock className="h-3.5 w-3.5" /> Premium — Upgrade to unlock
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-start justify-between gap-2">
