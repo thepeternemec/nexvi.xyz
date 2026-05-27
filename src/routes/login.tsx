@@ -1,8 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/login")({ component: Login });
 
@@ -11,6 +14,40 @@ function Login() {
 }
 
 export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }: { title: string; subtitle: string; cta: string; alt: string; altLink: string; altCta: string; signup?: boolean }) {
+  const navigate = useNavigate();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      if (signup) {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
+            data: { name },
+          },
+        });
+        if (error) throw error;
+        toast.success("Check your email to confirm your account.");
+      } else {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        toast.success("Welcome back!");
+        navigate({ to: "/dashboard" });
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="relative hidden overflow-hidden bg-aurora lg:block">
@@ -35,27 +72,23 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
           </Link>
           <h1 className="font-display text-4xl tracking-tight">{title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>
-          <form className="mt-8 space-y-4" onSubmit={(e) => { e.preventDefault(); window.location.href = "/dashboard"; }}>
+          <form className="mt-8 space-y-4" onSubmit={onSubmit}>
             {signup && (
               <div className="space-y-1.5">
                 <Label htmlFor="name">Your name</Label>
-                <Input id="name" placeholder="Alex Rivera" />
+                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Alex Rivera" />
               </div>
             )}
             <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="you@example.com" />
+              <Input id="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" />
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" placeholder="••••••••" />
+              <Input id="password" type="password" required minLength={6} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
             </div>
-            <Button type="submit" size="lg" className="w-full rounded-full">{cta}</Button>
+            <Button type="submit" size="lg" disabled={loading} className="w-full rounded-full">{loading ? "Please wait…" : cta}</Button>
           </form>
-          <div className="my-6 flex items-center gap-3 text-xs text-muted-foreground">
-            <div className="h-px flex-1 bg-border" /> or <div className="h-px flex-1 bg-border" />
-          </div>
-          <Button variant="outline" className="w-full rounded-full">Continue with Google</Button>
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {alt} <Link to={altLink} className="font-medium text-foreground hover:underline">{altCta}</Link>
           </p>
