@@ -19,6 +19,7 @@ import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
+import { Route as AdminImportRouteImport } from './routes/admin.import'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
@@ -70,6 +71,11 @@ const PromptSlugRoute = PromptSlugRouteImport.update({
   path: '/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminImportRoute = AdminImportRouteImport.update({
+  id: '/admin/import',
+  path: '/admin/import',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/admin/import': typeof AdminImportRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/admin/import': typeof AdminImportRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRoutesById {
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
+  '/admin/import': typeof AdminImportRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/marketplace'
     | '/pricing'
     | '/signup'
+    | '/admin/import'
     | '/prompt/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/marketplace'
     | '/pricing'
     | '/signup'
+    | '/admin/import'
     | '/prompt/$slug'
   id:
     | '__root__'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/marketplace'
     | '/pricing'
     | '/signup'
+    | '/admin/import'
     | '/prompt/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   MarketplaceRoute: typeof MarketplaceRoute
   PricingRoute: typeof PricingRoute
   SignupRoute: typeof SignupRoute
+  AdminImportRoute: typeof AdminImportRoute
   PromptSlugRoute: typeof PromptSlugRoute
 }
 
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/import': {
+      id: '/admin/import'
+      path: '/admin/import'
+      fullPath: '/admin/import'
+      preLoaderRoute: typeof AdminImportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   MarketplaceRoute: MarketplaceRoute,
   PricingRoute: PricingRoute,
   SignupRoute: SignupRoute,
+  AdminImportRoute: AdminImportRoute,
   PromptSlugRoute: PromptSlugRoute,
 }
 export const routeTree = rootRouteImport
