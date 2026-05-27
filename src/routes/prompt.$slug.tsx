@@ -1,11 +1,12 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { Copy, Check, Star, Bookmark, Share2, Sparkles } from "lucide-react";
+import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
-import { PromptCard } from "@/components/prompt-card";
+import { PromptCard, isPremium } from "@/components/prompt-card";
 import { getCategory, getCreator, getPrompt, prompts, reviews, type Prompt } from "@/lib/mock-data";
+import { useSubscription } from "@/hooks/use-subscription";
 
 export const Route = createFileRoute("/prompt/$slug")({
   component: PromptDetail,
@@ -30,8 +31,12 @@ function PromptDetail() {
   const category = getCategory(prompt.category);
   const related = prompts.filter(p => p.category === prompt.category && p.id !== prompt.id).slice(0, 3);
   const promptReviews = reviews.filter(r => r.promptId === prompt.id);
+  const { isPremium: hasPremium, isAuthenticated, loading: subLoading } = useSubscription();
+  const premium = isPremium(prompt);
+  const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
   const onCopy = () => {
+    if (locked) return;
     navigator.clipboard.writeText(prompt.body);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
@@ -48,7 +53,11 @@ function PromptDetail() {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
-              {prompt.price === 0 ? <Badge className="rounded-full">Free</Badge> : <Badge className="rounded-full bg-foreground text-background">${prompt.price}</Badge>}
+              {premium ? (
+                <Badge className="rounded-full bg-gradient-to-r from-amber-400 to-rose-500 text-white"><Crown className="mr-1 h-3 w-3" /> Premium</Badge>
+              ) : (
+                <Badge className="rounded-full">Free</Badge>
+              )}
               {prompt.beginner && <Badge variant="secondary" className="rounded-full">Beginner-friendly</Badge>}
               {prompt.tools.map(t => <span key={t} className="rounded-full border border-border px-2 py-0.5 text-[11px]">{t}</span>)}
             </div>
@@ -60,11 +69,36 @@ function PromptDetail() {
               <div className="rounded-[calc(theme(borderRadius.3xl)-1px)] bg-card p-6">
                 <div className="flex items-center justify-between">
                   <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">The prompt</div>
-                  <Button size="sm" onClick={onCopy} className="rounded-full">
-                    {copied ? <><Check className="mr-1.5 h-3.5 w-3.5" /> Copied</> : <><Copy className="mr-1.5 h-3.5 w-3.5" /> Copy prompt</>}
+                  <Button size="sm" onClick={onCopy} disabled={locked} className="rounded-full">
+                    {locked ? <><Lock className="mr-1.5 h-3.5 w-3.5" /> Locked</>
+                      : copied ? <><Check className="mr-1.5 h-3.5 w-3.5" /> Copied</>
+                      : <><Copy className="mr-1.5 h-3.5 w-3.5" /> Copy prompt</>}
                   </Button>
                 </div>
-                <pre className="mt-4 whitespace-pre-wrap rounded-2xl bg-muted/60 p-5 font-mono text-[13px] leading-relaxed text-foreground/90">{prompt.body}</pre>
+                <div className="relative mt-4">
+                  <pre className={`whitespace-pre-wrap rounded-2xl bg-muted/60 p-5 font-mono text-[13px] leading-relaxed text-foreground/90 ${locked ? "select-none blur-[6px]" : ""}`}>
+                    {locked ? prompt.body.slice(0, 240) + "\n\n…" : prompt.body}
+                  </pre>
+                  {locked && !subLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="max-w-sm rounded-2xl border border-border bg-background/95 p-5 text-center shadow-xl backdrop-blur">
+                        <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white">
+                          <Crown className="h-5 w-5" />
+                        </div>
+                        <div className="font-display mt-3 text-lg">Premium prompt</div>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Unlock this prompt and the whole library with Premium.
+                        </p>
+                        <div className="mt-4 flex flex-col gap-2">
+                          <Button asChild className="rounded-full"><Link to="/pricing">Upgrade to Premium</Link></Button>
+                          {!isAuthenticated && (
+                            <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I already have an account</Link></Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
@@ -125,10 +159,14 @@ function PromptDetail() {
               </div>
               <div className="mt-1 text-xs text-muted-foreground">{prompt.uses.toLocaleString()} people used this prompt</div>
               <div className="mt-5 grid gap-2">
-                {prompt.price === 0 ? (
-                  <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this prompt — free"}</Button>
+                {locked ? (
+                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white hover:opacity-95">
+                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock</Link>
+                  </Button>
+                ) : premium ? (
+                  <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this Premium prompt"}</Button>
                 ) : (
-                  <Button size="lg" className="rounded-full">Unlock for ${prompt.price}</Button>
+                  <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this prompt — free"}</Button>
                 )}
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1 rounded-full"><Bookmark className="mr-1.5 h-4 w-4" /> Save</Button>

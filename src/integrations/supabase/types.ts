@@ -14,6 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
+      bundle_prompts: {
+        Row: {
+          bundle_id: string
+          prompt_id: string
+          sort_order: number
+        }
+        Insert: {
+          bundle_id: string
+          prompt_id: string
+          sort_order?: number
+        }
+        Update: {
+          bundle_id?: string
+          prompt_id?: string
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bundle_prompts_bundle_id_fkey"
+            columns: ["bundle_id"]
+            isOneToOne: false
+            referencedRelation: "bundles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bundle_prompts_prompt_id_fkey"
+            columns: ["prompt_id"]
+            isOneToOne: false
+            referencedRelation: "prompts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bundles: {
+        Row: {
+          category_slug: string | null
+          cover: string | null
+          created_at: string
+          description: string | null
+          hero_image_url: string | null
+          id: string
+          is_premium: boolean
+          published: boolean
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category_slug?: string | null
+          cover?: string | null
+          created_at?: string
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_premium?: boolean
+          published?: boolean
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category_slug?: string | null
+          cover?: string | null
+          created_at?: string
+          description?: string | null
+          hero_image_url?: string | null
+          id?: string
+          is_premium?: boolean
+          published?: boolean
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bundles_category_slug_fkey"
+            columns: ["category_slug"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
       categories: {
         Row: {
           created_at: string
@@ -204,6 +290,48 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean
+          created_at: string
+          current_period_end: string | null
+          id: string
+          plan: string
+          provider: string | null
+          provider_customer_id: string | null
+          provider_subscription_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          plan?: string
+          provider?: string | null
+          provider_customer_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          id?: string
+          plan?: string
+          provider?: string | null
+          provider_customer_id?: string | null
+          provider_subscription_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -230,6 +358,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      has_active_subscription: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
