@@ -106,13 +106,3 @@ export const cancelSubscription = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
-// Bundles — public list, body of each prompt gated by subscription
-export const listBundles = createServerFn({ method: "GET" }).handler(async () => {
-  const { data, error } = await supabaseAdmin
-    .from("bundles")
-    .select("id, slug, title, description, cover, hero_image_url, category_slug, is_premium, sort_order")
-    .eq("published", true)
-    .order("sort_order", { ascending: true });
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
