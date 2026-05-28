@@ -16,6 +16,7 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           <Link to="/marketplace" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Marketplace</Link>
+          <Link to="/bundles" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Bundles</Link>
           <Link to="/assistant" className="text-sm text-muted-foreground transition-colors hover:text-foreground">AI Assistant</Link>
           <Link to="/creators" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Creators</Link>
           <Link to="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Pricing</Link>
@@ -32,6 +33,7 @@ export function SiteHeader() {
         <div className="border-t border-border/60 bg-background md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4">
             <Link to="/marketplace" onClick={() => setOpen(false)} className="text-sm">Marketplace</Link>
+            <Link to="/bundles" onClick={() => setOpen(false)} className="text-sm">Bundles</Link>
             <Link to="/assistant" onClick={() => setOpen(false)} className="text-sm">AI Assistant</Link>
             <Link to="/creators" onClick={() => setOpen(false)} className="text-sm">Creators</Link>
             <Link to="/pricing" onClick={() => setOpen(false)} className="text-sm">Pricing</Link>
@@ -68,6 +70,7 @@ export function SiteFooter() {
           <div className="text-sm font-medium">Product</div>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
             <li><Link to="/marketplace">Marketplace</Link></li>
+            <li><Link to="/bundles">Bundles</Link></li>
             <li><Link to="/assistant">AI Assistant</Link></li>
             <li><Link to="/pricing">Pricing</Link></li>
             <li><Link to="/creators">Creators</Link></li>

@@ -16,9 +16,11 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as CreatorRouteImport } from './routes/creator'
+import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
+import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 
 const SignupRoute = SignupRouteImport.update({
@@ -56,6 +58,11 @@ const CreatorRoute = CreatorRouteImport.update({
   path: '/creator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BundlesRoute = BundlesRouteImport.update({
+  id: '/bundles',
+  path: '/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AssistantRoute = AssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
@@ -71,6 +78,11 @@ const PromptSlugRoute = PromptSlugRouteImport.update({
   path: '/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BundleSlugRoute = BundleSlugRouteImport.update({
+  id: '/bundle/$slug',
+  path: '/bundle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -80,6 +92,7 @@ const AdminImportRoute = AdminImportRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/bundles': typeof BundlesRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
   '/dashboard': typeof DashboardRoute
@@ -88,11 +101,13 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/admin/import': typeof AdminImportRoute
+  '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/bundles': typeof BundlesRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
   '/dashboard': typeof DashboardRoute
@@ -101,12 +116,14 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/admin/import': typeof AdminImportRoute
+  '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/bundles': typeof BundlesRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
   '/dashboard': typeof DashboardRoute
@@ -115,6 +132,7 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/signup': typeof SignupRoute
   '/admin/import': typeof AdminImportRoute
+  '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
 }
 export interface FileRouteTypes {
@@ -122,6 +140,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/assistant'
+    | '/bundles'
     | '/creator'
     | '/creators'
     | '/dashboard'
@@ -130,11 +149,13 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signup'
     | '/admin/import'
+    | '/bundle/$slug'
     | '/prompt/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/assistant'
+    | '/bundles'
     | '/creator'
     | '/creators'
     | '/dashboard'
@@ -143,11 +164,13 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signup'
     | '/admin/import'
+    | '/bundle/$slug'
     | '/prompt/$slug'
   id:
     | '__root__'
     | '/'
     | '/assistant'
+    | '/bundles'
     | '/creator'
     | '/creators'
     | '/dashboard'
@@ -156,12 +179,14 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/signup'
     | '/admin/import'
+    | '/bundle/$slug'
     | '/prompt/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssistantRoute: typeof AssistantRoute
+  BundlesRoute: typeof BundlesRoute
   CreatorRoute: typeof CreatorRoute
   CreatorsRoute: typeof CreatorsRoute
   DashboardRoute: typeof DashboardRoute
@@ -170,6 +195,7 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   SignupRoute: typeof SignupRoute
   AdminImportRoute: typeof AdminImportRoute
+  BundleSlugRoute: typeof BundleSlugRoute
   PromptSlugRoute: typeof PromptSlugRoute
 }
 
@@ -224,6 +250,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bundles': {
+      id: '/bundles'
+      path: '/bundles'
+      fullPath: '/bundles'
+      preLoaderRoute: typeof BundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/assistant': {
       id: '/assistant'
       path: '/assistant'
@@ -245,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bundle/$slug': {
+      id: '/bundle/$slug'
+      path: '/bundle/$slug'
+      fullPath: '/bundle/$slug'
+      preLoaderRoute: typeof BundleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -258,6 +298,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssistantRoute: AssistantRoute,
+  BundlesRoute: BundlesRoute,
   CreatorRoute: CreatorRoute,
   CreatorsRoute: CreatorsRoute,
   DashboardRoute: DashboardRoute,
@@ -266,6 +307,7 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   SignupRoute: SignupRoute,
   AdminImportRoute: AdminImportRoute,
+  BundleSlugRoute: BundleSlugRoute,
   PromptSlugRoute: PromptSlugRoute,
 }
 export const routeTree = rootRouteImport
