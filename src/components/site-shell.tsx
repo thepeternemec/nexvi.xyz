@@ -33,6 +33,7 @@ export function SiteHeader() {
         <div className="border-t border-border/60 bg-background md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4">
             <Link to="/marketplace" onClick={() => setOpen(false)} className="text-sm">Marketplace</Link>
+            <Link to="/bundles" onClick={() => setOpen(false)} className="text-sm">Bundles</Link>
             <Link to="/assistant" onClick={() => setOpen(false)} className="text-sm">AI Assistant</Link>
             <Link to="/creators" onClick={() => setOpen(false)} className="text-sm">Creators</Link>
             <Link to="/pricing" onClick={() => setOpen(false)} className="text-sm">Pricing</Link>
