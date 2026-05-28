@@ -70,6 +70,7 @@ export function SiteFooter() {
           <div className="text-sm font-medium">Product</div>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
             <li><Link to="/marketplace">Marketplace</Link></li>
+            <li><Link to="/bundles">Bundles</Link></li>
             <li><Link to="/assistant">AI Assistant</Link></li>
             <li><Link to="/pricing">Pricing</Link></li>
             <li><Link to="/creators">Creators</Link></li>
