@@ -32,6 +32,29 @@ type BundlePromptRow = {
   sort_order: number;
 };
 
+type SlimPrompt = {
+  id: string;
+  slug: string;
+  title: string;
+  outcome: string | null;
+  description: string | null;
+  body: string | null;
+  category_slug: string | null;
+  difficulty: string | null;
+  beginner: boolean | null;
+  price: number | null;
+  is_premium: boolean | null;
+  cover: string | null;
+  tools: string[] | null;
+  tags: string[] | null;
+  rating: number | null;
+  reviews_count: number | null;
+  uses_count: number | null;
+  creator_name: string | null;
+  creator_handle: string | null;
+  creator_avatar: string | null;
+};
+
 export const getBundlePrompts = createServerFn({ method: "GET" })
   .inputValidator((input: unknown) => z.object({ bundleSlug: z.string() }).parse(input))
   .handler(async ({ data }) => {
@@ -54,7 +77,7 @@ export const getBundlePrompts = createServerFn({ method: "GET" })
     if (bpErr) throw new Error(bpErr.message);
 
     if (!rows || rows.length === 0) {
-      return { bundle, prompts: [] as Record<string, unknown>[] };
+      return { bundle, prompts: [] as SlimPrompt[] };
     }
 
     const promptIds = (rows as BundlePromptRow[]).map((r) => r.prompt_id);
@@ -70,7 +93,7 @@ export const getBundlePrompts = createServerFn({ method: "GET" })
     const promptMap = new Map(prompts?.map((p) => [p.id, p]));
     const orderedPrompts = (rows as BundlePromptRow[])
       .map((r) => promptMap.get(r.prompt_id))
-      .filter(Boolean) as Record<string, unknown>[];
+      .filter(Boolean) as SlimPrompt[];
 
     return { bundle, prompts: orderedPrompts };
   });
@@ -100,7 +123,7 @@ export const getBundleWithAuth = createServerFn({ method: "GET" })
       .eq("bundle_id", bundle.id)
       .order("sort_order", { ascending: true });
 
-    let orderedPrompts: Record<string, unknown>[] = [];
+    let orderedPrompts: SlimPrompt[] = [];
     if (rows && rows.length > 0) {
       const promptIds = (rows as BundlePromptRow[]).map((r) => r.prompt_id);
       const { data: prompts } = await supabaseAdmin
@@ -113,7 +136,7 @@ export const getBundleWithAuth = createServerFn({ method: "GET" })
       const promptMap = new Map(prompts?.map((p) => [p.id, p]));
       orderedPrompts = (rows as BundlePromptRow[])
         .map((r) => promptMap.get(r.prompt_id))
-        .filter(Boolean) as Record<string, unknown>[];
+        .filter(Boolean) as SlimPrompt[];
     }
 
     return { bundle, prompts: orderedPrompts, isPremium: !!isPremium };
