@@ -16,6 +16,7 @@ export function SiteHeader() {
         </Link>
         <nav className="hidden items-center gap-8 md:flex">
           <Link to="/marketplace" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Marketplace</Link>
+          <Link to="/bundles" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Bundles</Link>
           <Link to="/assistant" className="text-sm text-muted-foreground transition-colors hover:text-foreground">AI Assistant</Link>
           <Link to="/creators" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Creators</Link>
           <Link to="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Pricing</Link>
