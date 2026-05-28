@@ -54,7 +54,7 @@ export const getBundlePrompts = createServerFn({ method: "GET" })
     if (bpErr) throw new Error(bpErr.message);
 
     if (!rows || rows.length === 0) {
-      return { bundle, prompts: [] };
+      return { bundle, prompts: [] as Record<string, unknown>[] };
     }
 
     const promptIds = (rows as BundlePromptRow[]).map((r) => r.prompt_id);
@@ -70,7 +70,7 @@ export const getBundlePrompts = createServerFn({ method: "GET" })
     const promptMap = new Map(prompts?.map((p) => [p.id, p]));
     const orderedPrompts = (rows as BundlePromptRow[])
       .map((r) => promptMap.get(r.prompt_id))
-      .filter(Boolean);
+      .filter(Boolean) as Record<string, unknown>[];
 
     return { bundle, prompts: orderedPrompts };
   });
@@ -100,7 +100,7 @@ export const getBundleWithAuth = createServerFn({ method: "GET" })
       .eq("bundle_id", bundle.id)
       .order("sort_order", { ascending: true });
 
-    let orderedPrompts: unknown[] = [];
+    let orderedPrompts: Record<string, unknown>[] = [];
     if (rows && rows.length > 0) {
       const promptIds = (rows as BundlePromptRow[]).map((r) => r.prompt_id);
       const { data: prompts } = await supabaseAdmin
@@ -113,7 +113,7 @@ export const getBundleWithAuth = createServerFn({ method: "GET" })
       const promptMap = new Map(prompts?.map((p) => [p.id, p]));
       orderedPrompts = (rows as BundlePromptRow[])
         .map((r) => promptMap.get(r.prompt_id))
-        .filter(Boolean);
+        .filter(Boolean) as Record<string, unknown>[];
     }
 
     return { bundle, prompts: orderedPrompts, isPremium: !!isPremium };
