@@ -61,7 +61,7 @@ export const getBundlePrompts = createServerFn({ method: "GET" })
     // Get bundle to check premium status
     const { data: bundle, error: bErr } = await supabaseAdmin
       .from("bundles")
-      .select("id, is_premium")
+      .select("*")
       .eq("slug", data.bundleSlug)
       .eq("published", true)
       .maybeSingle();
