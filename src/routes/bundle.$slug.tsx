@@ -210,6 +210,24 @@ function BundlePromptRow({ prompt, locked }: { prompt: PromptItem; locked: boole
             </div>
           </div>
         )}
+        {locked && prompt.body && (
+          <div className="mt-4">
+            <div className="relative overflow-hidden rounded-xl border border-border/70">
+              <pre aria-hidden className="select-none whitespace-pre-wrap bg-muted/60 p-4 font-mono text-[13px] leading-relaxed text-foreground/90 blur-[5px]">
+                {prompt.body.slice(0, 220)}
+              </pre>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-card to-transparent" />
+            </div>
+            <div className="mt-3 flex items-center gap-2">
+              <Button size="sm" disabled className="rounded-full">
+                <Lock className="mr-1.5 h-3.5 w-3.5" /> Locked
+              </Button>
+              <Button asChild size="sm" variant="outline" className="rounded-full">
+                <Link to="/pricing">Upgrade to unlock</Link>
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
