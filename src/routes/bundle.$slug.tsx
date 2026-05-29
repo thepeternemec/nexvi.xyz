@@ -80,35 +80,42 @@ function BundleDetail() {
             <div className={`relative mt-8 overflow-hidden rounded-3xl bg-gradient-to-br ${gradient} p-px`}>
               <div className="rounded-[calc(theme(borderRadius.3xl)-1px)] bg-card p-6">
                 <div className="flex items-center justify-between">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Bundle contents</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    {locked ? "Bundle preview" : "Bundle contents"}
+                  </div>
+                  {locked && (
+                    <Badge variant="secondary" className="rounded-full text-[10px]">
+                      <Lock className="mr-1 h-3 w-3" /> Locked
+                    </Badge>
+                  )}
                 </div>
                 <div className="relative mt-4">
-                  <div className={`space-y-4 ${locked ? "select-none blur-[4px]" : ""}`}>
+                  <div className="space-y-4">
                     {prompts.length === 0 && (
                       <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-6 text-sm text-muted-foreground">
                         This bundle doesn't have any prompts yet.
                       </div>
                     )}
-                    {prompts.map((p) => (
+                    {(locked ? prompts.slice(0, 3) : prompts).map((p) => (
                       <BundlePromptRow key={p.id} prompt={p} locked={locked} />
                     ))}
                   </div>
                   {locked && !subLoading && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="max-w-sm rounded-2xl border border-border bg-background/95 p-5 text-center shadow-xl backdrop-blur">
-                        <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white">
-                          <Crown className="h-5 w-5" />
-                        </div>
-                        <div className="font-display mt-3 text-lg">Premium bundle</div>
-                        <p className="mt-1 text-sm text-muted-foreground">
-                          Unlock this bundle and the whole library with Premium.
-                        </p>
-                        <div className="mt-4 flex flex-col gap-2">
-                          <Button asChild className="rounded-full"><Link to="/pricing">Upgrade to Premium</Link></Button>
-                          {!isAuthenticated && (
-                            <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I already have an account</Link></Button>
-                          )}
-                        </div>
+                    <div className="mt-6 rounded-2xl border border-border bg-background p-6 text-center shadow-sm">
+                      <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white">
+                        <Crown className="h-5 w-5" />
+                      </div>
+                      <div className="font-display mt-3 text-lg">
+                        {prompts.length > 3 ? `+ ${prompts.length - 3} more premium prompts` : "Unlock this bundle"}
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        You're previewing {Math.min(3, prompts.length)} of {prompts.length}. Upgrade to Premium to view full prompts, copy them, and unlock the entire library.
+                      </p>
+                      <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
+                        <Button asChild className="rounded-full"><Link to="/pricing">Upgrade to Premium</Link></Button>
+                        {!isAuthenticated && (
+                          <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I already have an account</Link></Button>
+                        )}
                       </div>
                     </div>
                   )}
