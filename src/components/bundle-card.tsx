@@ -32,7 +32,8 @@ export function BundleCard({ bundle }: BundleCardProps) {
   const { isPremium: hasPremium } = useSubscription();
   const premium = bundle.is_premium;
   const locked = premium && !hasPremium;
-  const tint = bundle.cover ?? tintForSlug(bundle.slug);
+  const isGradient = (s: string) => s.startsWith("from-") || s.startsWith("bg-gradient") || s.includes("via-");
+  const tint = bundle.cover && !isGradient(bundle.cover) ? bundle.cover : tintForSlug(bundle.slug);
 
   return (
     <Link
