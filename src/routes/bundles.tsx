@@ -27,21 +27,21 @@ function BundlesPage() {
 
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
-        <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="border-b border-border/60 bg-muted/30">
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-20">
           <div className="flex items-center gap-2">
-            <Package className="h-5 w-5 text-muted-foreground" />
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Collections</span>
+            <Package className="h-4 w-4 text-muted-foreground" />
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">Collections</span>
           </div>
-          <h1 className="font-display mt-2 text-5xl tracking-tight sm:text-6xl">Bundles</h1>
-          <p className="mt-2 max-w-xl text-muted-foreground">
+          <h1 className="font-display mt-3 text-4xl tracking-tight sm:text-5xl lg:text-6xl">Bundles</h1>
+          <p className="mt-3 max-w-xl text-muted-foreground leading-relaxed">
             Curated prompt packs designed to work together — for careers, content, study, business, and more.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
-        <div className="mt-6">
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
+        <div>
           <BundleGrid items={bundles ?? []} />
         </div>
       </section>
