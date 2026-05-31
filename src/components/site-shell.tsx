@@ -1,45 +1,73 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, Search, Menu, X } from "lucide-react";
+import { Sparkles, Search, Menu, X, Languages } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { type Locale, localePathPrefix, t } from "@/lib/i18n";
 
-export function SiteHeader() {
+function LanguageSwitcher({ locale }: { locale: Locale }) {
+  const other: Locale = locale === "en" ? "de" : "en";
+  const href = localePathPrefix[other] || "/";
+  const label = other === "de" ? "DE" : "EN";
+  return (
+    <a
+      href={href}
+      hrefLang={other}
+      aria-label={`Switch to ${other === "de" ? "Deutsch" : "English"}`}
+      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-background hover:text-foreground"
+    >
+      <Languages className="h-3.5 w-3.5" />
+      <span>{locale.toUpperCase()}</span>
+      <span className="text-muted-foreground/50">/</span>
+      <span>{label}</span>
+    </a>
+  );
+}
+
+export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
   const [open, setOpen] = useState(false);
+  const prefix = localePathPrefix[locale];
+  const nav = t[locale].nav;
+  const homeHref = prefix || "/";
+  const link = (p: string) => `${prefix}${p}`;
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link to="/" className="flex items-center gap-2">
+        <a href={homeHref} className="flex items-center gap-2">
           <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white shadow-sm">
             <Sparkles className="h-4 w-4" />
           </div>
           <span className="font-display text-xl tracking-tight">Prompt Academia</span>
-        </Link>
+        </a>
         <nav className="hidden items-center gap-8 md:flex">
-          <Link to="/marketplace" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Marketplace</Link>
-          <Link to="/bundles" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Bundles</Link>
-          <Link to="/assistant" className="text-sm text-muted-foreground transition-colors hover:text-foreground">AI Assistant</Link>
-          <Link to="/creators" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Creators</Link>
-          <Link to="/pricing" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Pricing</Link>
+          <a href={link("/marketplace")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.marketplace}</a>
+          <a href={link("/bundles")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.bundles}</a>
+          <a href={link("/assistant")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.assistant}</a>
+          <a href={link("/creators")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.creators}</a>
+          <a href={link("/pricing")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.pricing}</a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          <Link to="/login"><Button variant="ghost" size="sm">Sign in</Button></Link>
-          <Link to="/signup"><Button size="sm" className="rounded-full">Get started</Button></Link>
+          <LanguageSwitcher locale={locale} />
+          <Link to="/login"><Button variant="ghost" size="sm">{t[locale].signIn}</Button></Link>
+          <Link to="/signup"><Button size="sm" className="rounded-full">{t[locale].getStarted}</Button></Link>
         </div>
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher locale={locale} />
+          <button onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
       {open && (
         <div className="border-t border-border/60 bg-background md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4">
-            <Link to="/marketplace" onClick={() => setOpen(false)} className="text-sm">Marketplace</Link>
-            <Link to="/bundles" onClick={() => setOpen(false)} className="text-sm">Bundles</Link>
-            <Link to="/assistant" onClick={() => setOpen(false)} className="text-sm">AI Assistant</Link>
-            <Link to="/creators" onClick={() => setOpen(false)} className="text-sm">Creators</Link>
-            <Link to="/pricing" onClick={() => setOpen(false)} className="text-sm">Pricing</Link>
+            <a href={link("/marketplace")} onClick={() => setOpen(false)} className="text-sm">{nav.marketplace}</a>
+            <a href={link("/bundles")} onClick={() => setOpen(false)} className="text-sm">{nav.bundles}</a>
+            <a href={link("/assistant")} onClick={() => setOpen(false)} className="text-sm">{nav.assistant}</a>
+            <a href={link("/creators")} onClick={() => setOpen(false)} className="text-sm">{nav.creators}</a>
+            <a href={link("/pricing")} onClick={() => setOpen(false)} className="text-sm">{nav.pricing}</a>
             <div className="mt-2 flex gap-2">
-              <Link to="/login" className="flex-1"><Button variant="outline" size="sm" className="w-full">Sign in</Button></Link>
-              <Link to="/signup" className="flex-1"><Button size="sm" className="w-full">Get started</Button></Link>
+              <Link to="/login" className="flex-1"><Button variant="outline" size="sm" className="w-full">{t[locale].signIn}</Button></Link>
+              <Link to="/signup" className="flex-1"><Button size="sm" className="w-full">{t[locale].getStarted}</Button></Link>
             </div>
           </div>
         </div>
@@ -103,10 +131,10 @@ export function SiteFooter() {
   );
 }
 
-export function SiteShell({ children }: { children: React.ReactNode }) {
+export function SiteShell({ children, locale = "en" }: { children: React.ReactNode; locale?: Locale }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader />
+      <SiteHeader locale={locale} />
       <main className="flex-1">{children}</main>
       <SiteFooter />
     </div>

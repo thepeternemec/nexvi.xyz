@@ -19,6 +19,7 @@ import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GerIndexRouteImport } from './routes/ger/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -73,6 +74,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GerIndexRoute = GerIndexRouteImport.update({
+  id: '/ger/',
+  path: '/ger/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PromptSlugRoute = PromptSlugRouteImport.update({
   id: '/prompt/$slug',
   path: '/prompt/$slug',
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/ger/': typeof GerIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +125,7 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/ger': typeof GerIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/ger/': typeof GerIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -151,6 +160,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/ger/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,6 +176,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/ger'
   id:
     | '__root__'
     | '/'
@@ -181,6 +192,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/ger/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   AdminImportRoute: typeof AdminImportRoute
   BundleSlugRoute: typeof BundleSlugRoute
   PromptSlugRoute: typeof PromptSlugRoute
+  GerIndexRoute: typeof GerIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ger/': {
+      id: '/ger/'
+      path: '/ger'
+      fullPath: '/ger/'
+      preLoaderRoute: typeof GerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/prompt/$slug': {
       id: '/prompt/$slug'
       path: '/prompt/$slug'
@@ -309,17 +329,8 @@ const rootRouteChildren: RootRouteChildren = {
   AdminImportRoute: AdminImportRoute,
   BundleSlugRoute: BundleSlugRoute,
   PromptSlugRoute: PromptSlugRoute,
+  GerIndexRoute: GerIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
