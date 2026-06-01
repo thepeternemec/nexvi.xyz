@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Sparkles, Search, Menu, X, Languages } from "lucide-react";
+import { Search, Menu, X, Languages } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { type Locale, localePathPrefix, t } from "@/lib/i18n";
@@ -32,10 +32,7 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
-        <a href={homeHref} className="flex items-center gap-2">
-          <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white shadow-sm">
-            <Sparkles className="h-4 w-4" />
-          </div>
+        <a href={homeHref} className="flex items-center">
           <span className="font-display text-xl tracking-tight">Prompt Academia</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
@@ -81,10 +78,7 @@ export function SiteFooter() {
     <footer className="border-t border-border/60 bg-muted/30">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-5">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white">
-              <Sparkles className="h-4 w-4" />
-            </div>
+          <div className="flex items-center">
             <span className="font-display text-xl tracking-tight">Prompt Academia</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
