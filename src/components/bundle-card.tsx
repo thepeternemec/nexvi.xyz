@@ -58,8 +58,8 @@ export function BundleCard({ bundle }: BundleCardProps) {
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)]"
     >
       <div className={`relative aspect-[16/10] w-full ${tint}`}>
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.06]">
-          <Package className="h-24 w-24 text-foreground" strokeWidth={0.8} />
+        <div className="absolute inset-0 flex items-center justify-center opacity-25">
+          <Package className={`h-24 w-24 ${accent}`} strokeWidth={0.8} />
         </div>
         <div className="absolute left-4 top-4 flex gap-2">
           {premium ? (
