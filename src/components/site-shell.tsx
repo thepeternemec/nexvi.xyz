@@ -31,7 +31,7 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
   const link = (p: string) => `${prefix}${p}`;
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6">
+      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 font-bold">
         <a href={homeHref} className="flex items-center">
           <span className="font-display text-xl tracking-tight">Prompt Academia</span>
         </a>
