@@ -3,19 +3,35 @@ import { Crown, Lock, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useSubscription } from "@/hooks/use-subscription";
 
-const BUNDLE_TINTS = [
-  "bg-[#f0ece6]",
-  "bg-[#e6eaf0]",
-  "bg-[#e8f0e6]",
-  "bg-[#f0e8ec]",
-  "bg-[#e6eef0]",
-  "bg-[#f0ece8]",
-];
+// Topic-driven color tokens. Each topic gets a calm, distinct surface tint
+// + a matching accent used for the topic icon foreground.
+const TOPIC_COLORS: Record<string, { bg: string; fg: string }> = {
+  career: { bg: "bg-[#e8eef7]", fg: "text-[#2d4a7c]" },
+  business: { bg: "bg-[#eaf1ec]", fg: "text-[#2f5a3a]" },
+  marketing: { bg: "bg-[#fbeae3]", fg: "text-[#a14a25]" },
+  content: { bg: "bg-[#f3e9f1]", fg: "text-[#7a3a6a]" },
+  writing: { bg: "bg-[#f0ece2]", fg: "text-[#6b5a2a]" },
+  productivity: { bg: "bg-[#e6efee]", fg: "text-[#2e5a55]" },
+  study: { bg: "bg-[#ecebf5]", fg: "text-[#4a4680]" },
+  education: { bg: "bg-[#ecebf5]", fg: "text-[#4a4680]" },
+  health: { bg: "bg-[#e6f0ea]", fg: "text-[#2f6a45]" },
+  lifestyle: { bg: "bg-[#f7ecea]", fg: "text-[#8a3f3a]" },
+  travel: { bg: "bg-[#e6eef3]", fg: "text-[#2c5a78]" },
+  finance: { bg: "bg-[#eef0e6]", fg: "text-[#5a6a2a]" },
+  design: { bg: "bg-[#f0eaf3]", fg: "text-[#5e3a78]" },
+  coding: { bg: "bg-[#e8ecef]", fg: "text-[#3a4750]" },
+  creative: { bg: "bg-[#f7eee6]", fg: "text-[#8a5530]" },
+  relationships: { bg: "bg-[#f7e9ec]", fg: "text-[#8a3a52]" },
+  parenting: { bg: "bg-[#fbf0e3]", fg: "text-[#a06a25]" },
+  cooking: { bg: "bg-[#fbeee0]", fg: "text-[#9a5a20]" },
+  fitness: { bg: "bg-[#eaf0e3]", fg: "text-[#4a6a25]" },
+};
 
-function tintForSlug(slug: string) {
-  let hash = 0;
-  for (let i = 0; i < slug.length; i++) hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
-  return BUNDLE_TINTS[Math.abs(hash) % BUNDLE_TINTS.length];
+const FALLBACK = { bg: "bg-[#eeeae3]", fg: "text-[#5a5046]" };
+
+function colorsForTopic(slug: string | null | undefined) {
+  if (!slug) return FALLBACK;
+  return TOPIC_COLORS[slug] ?? FALLBACK;
 }
 
 type BundleCardProps = {
@@ -25,6 +41,7 @@ type BundleCardProps = {
     description: string | null;
     cover: string | null;
     is_premium: boolean;
+    category_slug?: string | null;
   };
 };
 
@@ -32,8 +49,7 @@ export function BundleCard({ bundle }: BundleCardProps) {
   const { isPremium: hasPremium } = useSubscription();
   const premium = bundle.is_premium;
   const locked = premium && !hasPremium;
-  const isGradient = (s: string) => s.startsWith("from-") || s.startsWith("bg-gradient") || s.includes("via-");
-  const tint = bundle.cover && !isGradient(bundle.cover) ? bundle.cover : tintForSlug(bundle.slug);
+  const { bg: tint, fg: accent } = colorsForTopic(bundle.category_slug);
 
   return (
     <Link
@@ -42,8 +58,8 @@ export function BundleCard({ bundle }: BundleCardProps) {
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)]"
     >
       <div className={`relative aspect-[16/10] w-full ${tint}`}>
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.06]">
-          <Package className="h-24 w-24 text-foreground" strokeWidth={0.8} />
+        <div className="absolute inset-0 flex items-center justify-center opacity-25">
+          <Package className={`h-24 w-24 ${accent}`} strokeWidth={0.8} />
         </div>
         <div className="absolute left-4 top-4 flex gap-2">
           {premium ? (
