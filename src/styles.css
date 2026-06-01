@@ -132,7 +132,8 @@
   }
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-weight: 500;
+    letter-spacing: -0.025em;
   }
 }
 
