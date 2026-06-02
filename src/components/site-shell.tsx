@@ -13,11 +13,11 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       href={href}
       hrefLang={other}
       aria-label={`Switch to ${other === "de" ? "Deutsch" : "English"}`}
-      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-background hover:text-foreground"
+      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 dark:border-border/90 bg-background/60 dark:bg-background/80 px-3 py-1.5 text-xs font-medium text-muted-foreground dark:text-foreground/80 transition hover:bg-background hover:text-foreground dark:hover:text-foreground"
     >
       <Languages className="h-3.5 w-3.5" />
       <span>{locale.toUpperCase()}</span>
-      <span className="text-muted-foreground/50">/</span>
+      <span className="text-muted-foreground/50 dark:text-foreground/40">/</span>
       <span>{label}</span>
     </a>
   );
@@ -30,17 +30,17 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
   const homeHref = prefix || "/";
   const link = (p: string) => `${prefix}${p}`;
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 dark:border-border/80 bg-background/80 dark:bg-background/95 backdrop-blur-xl">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 font-bold">
         <a href={homeHref} className="flex items-center">
           <span className="font-display text-xl tracking-tight">Prompt Academia</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
-          <a href={link("/marketplace")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.marketplace}</a>
-          <a href={link("/bundles")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.bundles}</a>
-          <a href={link("/assistant")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.assistant}</a>
-          <a href={link("/creators")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.creators}</a>
-          <a href={link("/pricing")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.pricing}</a>
+          <a href={link("/marketplace")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.marketplace}</a>
+          <a href={link("/bundles")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.bundles}</a>
+          <a href={link("/assistant")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.assistant}</a>
+          <a href={link("/creators")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.creators}</a>
+          <a href={link("/pricing")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.pricing}</a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher locale={locale} />
