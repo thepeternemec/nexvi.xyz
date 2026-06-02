@@ -24,6 +24,19 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
   );
 }
 
+function ThemeToggle() {
+  const { isDark, toggleTheme } = useTheme();
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 dark:border-border/90 bg-background/60 dark:bg-background/80 text-muted-foreground dark:text-foreground/80 transition hover:bg-background hover:text-foreground dark:hover:text-foreground"
+    >
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </button>
+  );
+}
+
 export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
   const [open, setOpen] = useState(false);
   const prefix = localePathPrefix[locale];
