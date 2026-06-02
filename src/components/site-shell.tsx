@@ -36,11 +36,11 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
           <span className="font-display text-xl tracking-tight">Prompt Academia</span>
         </a>
         <nav className="hidden items-center gap-8 md:flex">
-          <a href={link("/marketplace")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.marketplace}</a>
-          <a href={link("/bundles")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.bundles}</a>
-          <a href={link("/assistant")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.assistant}</a>
-          <a href={link("/creators")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.creators}</a>
-          <a href={link("/pricing")} className="text-sm text-muted-foreground transition-colors hover:text-foreground">{nav.pricing}</a>
+          <a href={link("/marketplace")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.marketplace}</a>
+          <a href={link("/bundles")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.bundles}</a>
+          <a href={link("/assistant")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.assistant}</a>
+          <a href={link("/creators")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.creators}</a>
+          <a href={link("/pricing")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.pricing}</a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
           <LanguageSwitcher locale={locale} />
