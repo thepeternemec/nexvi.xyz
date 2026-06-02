@@ -13,11 +13,11 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       href={href}
       hrefLang={other}
       aria-label={`Switch to ${other === "de" ? "Deutsch" : "English"}`}
-      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:bg-background hover:text-foreground"
+      className="inline-flex items-center gap-1.5 rounded-full border border-border/70 dark:border-border/90 bg-background/60 dark:bg-background/80 px-3 py-1.5 text-xs font-medium text-muted-foreground dark:text-foreground/80 transition hover:bg-background hover:text-foreground dark:hover:text-foreground"
     >
       <Languages className="h-3.5 w-3.5" />
       <span>{locale.toUpperCase()}</span>
-      <span className="text-muted-foreground/50">/</span>
+      <span className="text-muted-foreground/50 dark:text-foreground/40">/</span>
       <span>{label}</span>
     </a>
   );
