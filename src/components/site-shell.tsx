@@ -57,6 +57,7 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
           <a href={link("/pricing")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.pricing}</a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
           <Link to="/login"><Button variant="ghost" size="sm">{t[locale].signIn}</Button></Link>
           <Link to="/signup"><Button size="sm" className="rounded-full">{t[locale].getStarted}</Button></Link>
