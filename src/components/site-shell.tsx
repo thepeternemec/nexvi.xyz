@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Search, Menu, X, Languages } from "lucide-react";
+import { Search, Menu, X, Languages, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/use-theme";
 import { type Locale, localePathPrefix, t } from "@/lib/i18n";
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {
