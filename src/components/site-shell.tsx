@@ -63,6 +63,7 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
           <Link to="/signup"><Button size="sm" className="rounded-full">{t[locale].getStarted}</Button></Link>
         </div>
         <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
           <button onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
