@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Search, Menu, X, Languages } from "lucide-react";
+import { Search, Menu, X, Languages, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/use-theme";
 import { type Locale, localePathPrefix, t } from "@/lib/i18n";
 
 function LanguageSwitcher({ locale }: { locale: Locale }) {
@@ -20,6 +21,19 @@ function LanguageSwitcher({ locale }: { locale: Locale }) {
       <span className="text-muted-foreground/50 dark:text-foreground/40">/</span>
       <span>{label}</span>
     </a>
+  );
+}
+
+function ThemeToggle() {
+  const { isDark, toggleTheme } = useTheme();
+  return (
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border/70 dark:border-border/90 bg-background/60 dark:bg-background/80 text-muted-foreground dark:text-foreground/80 transition hover:bg-background hover:text-foreground dark:hover:text-foreground"
+    >
+      {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </button>
   );
 }
 
@@ -43,11 +57,13 @@ export function SiteHeader({ locale = "en" as Locale }: { locale?: Locale }) {
           <a href={link("/pricing")} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">{nav.pricing}</a>
         </nav>
         <div className="hidden items-center gap-2 md:flex">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
           <Link to="/login"><Button variant="ghost" size="sm">{t[locale].signIn}</Button></Link>
           <Link to="/signup"><Button size="sm" className="rounded-full">{t[locale].getStarted}</Button></Link>
         </div>
         <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
           <LanguageSwitcher locale={locale} />
           <button onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
