@@ -61,14 +61,14 @@ export type Prompt = {
 };
 
 const g = [
-  "from-violet-500 via-fuchsia-500 to-amber-400",
-  "from-sky-500 via-indigo-500 to-violet-500",
-  "from-rose-500 via-pink-500 to-amber-400",
-  "from-emerald-500 via-teal-500 to-sky-500",
-  "from-amber-400 via-orange-500 to-rose-500",
-  "from-fuchsia-500 via-purple-500 to-indigo-500",
-  "from-lime-400 via-emerald-500 to-teal-500",
-  "from-cyan-400 via-sky-500 to-indigo-500",
+  "from-slate-600 via-slate-500 to-zinc-600 dark:from-slate-800 dark:via-slate-700 dark:to-zinc-800",
+  "from-zinc-600 via-slate-600 to-stone-600 dark:from-zinc-800 dark:via-slate-700 dark:to-stone-800",
+  "from-gray-600 via-slate-500 to-zinc-500 dark:from-gray-800 dark:via-slate-700 dark:to-zinc-800",
+  "from-stone-600 via-zinc-500 to-slate-600 dark:from-stone-800 dark:via-zinc-700 dark:to-slate-800",
+  "from-neutral-600 via-gray-600 to-slate-600 dark:from-neutral-800 dark:via-gray-700 dark:to-slate-800",
+  "from-slate-500 via-zinc-600 to-stone-600 dark:from-slate-700 dark:via-zinc-800 dark:to-stone-800",
+  "from-zinc-500 via-stone-600 to-gray-600 dark:from-zinc-700 dark:via-stone-800 dark:to-gray-800",
+  "from-gray-500 via-neutral-600 to-zinc-600 dark:from-gray-700 dark:via-neutral-800 dark:to-zinc-800",
 ];
 
 export const prompts: Prompt[] = [
