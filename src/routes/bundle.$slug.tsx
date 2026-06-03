@@ -108,7 +108,7 @@ export default function BundleDetail() {
                 </div>
                 {locked && !subLoading && (
                   <div className="mt-6 rounded-xl border border-border bg-muted/30 p-6 text-center">
-                    <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-amber-100 text-amber-700">
+                    <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
                       <Crown className="h-5 w-5" />
                     </div>
                     <div className="font-display mt-3 text-lg">
