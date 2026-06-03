@@ -68,8 +68,8 @@ export default function BundleDetail() {
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {premium ? (
-                <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100">
-                  <Crown className="mr-1 h-3 w-3 text-amber-600" /> Premium Bundle
+                <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-500/20 dark:text-amber-200 dark:hover:bg-amber-500/20">
+                  <Crown className="mr-1 h-3 w-3 text-amber-600 dark:text-amber-300" /> Premium Bundle
                 </Badge>
               ) : (
                 <Badge className="rounded-full border border-border bg-background text-foreground hover:bg-muted">Free Bundle</Badge>
