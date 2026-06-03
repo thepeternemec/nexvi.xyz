@@ -136,7 +136,7 @@ export default function BundleDetail() {
               <div className="mt-4 grid gap-2.5">
                 {locked ? (
                   <Button asChild size="lg" className="rounded-full">
-                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4 text-amber-600" /> Upgrade to unlock</Link>
+                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4 text-amber-600 dark:text-amber-300" /> Upgrade to unlock</Link>
                   </Button>
                 ) : premium ? (
                   <Button size="lg" className="rounded-full" variant="outline" asChild><Link to="/pricing">Premium Active</Link></Button>
