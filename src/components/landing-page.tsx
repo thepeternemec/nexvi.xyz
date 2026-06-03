@@ -216,7 +216,7 @@ export function LandingPage({ locale }: { locale: Locale }) {
         </div>
         <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
           {pricing.map((p) => (
-            <div key={p.name} className={`relative rounded-3xl border p-6 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-lg" : "border-border/70 bg-card"}`}>
+            <div key={p.name} className={`relative rounded-3xl border p-6 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-lg dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
               {p.highlight && <Badge className="absolute -top-3 left-6 rounded-full">{locale === "de" ? "Am beliebtesten" : "Most loved"}</Badge>}
               <div className="font-medium">{p.name}</div>
               <div className="font-display mt-2 text-4xl tracking-tight">{p.price}</div>
