@@ -68,8 +68,8 @@ export default function BundleDetail() {
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {premium ? (
-                <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100">
-                  <Crown className="mr-1 h-3 w-3 text-amber-600" /> Premium Bundle
+                <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-500/20 dark:text-amber-200 dark:hover:bg-amber-500/20">
+                  <Crown className="mr-1 h-3 w-3 text-amber-600 dark:text-amber-300" /> Premium Bundle
                 </Badge>
               ) : (
                 <Badge className="rounded-full border border-border bg-background text-foreground hover:bg-muted">Free Bundle</Badge>
@@ -108,7 +108,7 @@ export default function BundleDetail() {
                 </div>
                 {locked && !subLoading && (
                   <div className="mt-6 rounded-xl border border-border bg-muted/30 p-6 text-center">
-                    <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-amber-100 text-amber-700">
+                    <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
                       <Crown className="h-5 w-5" />
                     </div>
                     <div className="font-display mt-3 text-lg">
@@ -136,7 +136,7 @@ export default function BundleDetail() {
               <div className="mt-4 grid gap-2.5">
                 {locked ? (
                   <Button asChild size="lg" className="rounded-full">
-                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4 text-amber-600" /> Upgrade to unlock</Link>
+                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4 text-amber-600 dark:text-amber-300" /> Upgrade to unlock</Link>
                   </Button>
                 ) : premium ? (
                   <Button size="lg" className="rounded-full" variant="outline" asChild><Link to="/pricing">Premium Active</Link></Button>

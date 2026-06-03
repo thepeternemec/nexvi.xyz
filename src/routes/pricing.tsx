@@ -86,9 +86,9 @@ function Pricing() {
             <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Friendly pricing. Real outcomes.</h1>
             <p className="mt-4 text-lg text-muted-foreground">Start free. Upgrade when you're ready for everything.</p>
             {sub.isPremium && (
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
                 <Crown className="h-4 w-4" /> You're on Premium
-                {sub.currentPeriodEnd && <span className="text-amber-900/70">· renews {new Date(sub.currentPeriodEnd).toLocaleDateString()}</span>}
+                {sub.currentPeriodEnd && <span className="text-amber-900/70 dark:text-amber-100/70">· renews {new Date(sub.currentPeriodEnd).toLocaleDateString()}</span>}
               </div>
             )}
           </div>
@@ -98,7 +98,7 @@ function Pricing() {
               const isPremiumCard = p.key === "premium";
               const owned = isPremiumCard && sub.isPremium;
               return (
-                <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl" : "border-border/70 bg-card"}`}>
+                <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
                   {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Most loved</Badge>}
                   <div className="font-medium">{p.name}</div>
                   <div className="font-display mt-2 flex items-baseline gap-1 text-5xl tracking-tight">{p.price}{p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}</div>
