@@ -63,8 +63,8 @@ export function BundleCard({ bundle }: BundleCardProps) {
         </div>
         <div className="absolute left-4 top-4 flex gap-2">
           {premium ? (
-            <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100">
-              <Crown className="mr-1 h-3 w-3 text-amber-600" /> Premium
+            <Badge className="rounded-full border-0 bg-amber-100 text-amber-800 hover:bg-amber-100 dark:bg-amber-500/20 dark:text-amber-200 dark:hover:bg-amber-500/20">
+              <Crown className="mr-1 h-3 w-3 text-amber-600 dark:text-amber-300" /> Premium
             </Badge>
           ) : (
             <Badge className="rounded-full border-0 bg-background/80 text-foreground hover:bg-background">Free</Badge>
