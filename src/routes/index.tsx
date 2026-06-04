@@ -4,20 +4,13 @@ import { LandingPage } from "@/components/landing-page";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Prompt Academia — AI prompts for real outcomes" },
-      { name: "description", content: "Discover, save, and use AI prompts that help you get a job, study smarter, create content, grow a business, and more." },
-      { property: "og:title", content: "Prompt Academia — AI prompts for real outcomes" },
-      { property: "og:description", content: "AI prompts and toolkits for real-world outcomes." },
+      { title: "getHeired — AI CVs, Cover Letters & ATS Optimization" },
+      { name: "description", content: "Paste a job description. Get an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds." },
+      { property: "og:title", content: "getHeired — Land your next job with AI" },
+      { property: "og:description", content: "Tailored CVs, cover letters, and ATS scoring for every job description." },
       { property: "og:url", content: "/" },
-      { property: "og:locale", content: "en_US" },
-      { property: "og:locale:alternate", content: "de_DE" },
     ],
-    links: [
-      { rel: "canonical", href: "/" },
-      { rel: "alternate", hrefLang: "en", href: "/" },
-      { rel: "alternate", hrefLang: "de", href: "/ger" },
-      { rel: "alternate", hrefLang: "x-default", href: "/" },
-    ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
-  component: () => <LandingPage locale="en" />,
+  component: LandingPage,
 });
