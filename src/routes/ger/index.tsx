@@ -19,5 +19,5 @@ export const Route = createFileRoute("/ger/")({
       { rel: "alternate", hrefLang: "x-default", href: "/" },
     ],
   }),
-  component: () => <LandingPage locale="de" />,
+  component: LandingPage,
 });
