@@ -13,10 +13,14 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LibraryRouteImport } from './routes/library'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CvRouteImport } from './routes/cv'
 import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as CreatorRouteImport } from './routes/creator'
+import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as BundlesRouteImport } from './routes/bundles'
+import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
@@ -44,9 +48,19 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LibraryRoute = LibraryRouteImport.update({
+  id: '/library',
+  path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreatorsRoute = CreatorsRouteImport.update({
@@ -59,9 +73,19 @@ const CreatorRoute = CreatorRouteImport.update({
   path: '/creator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoverLetterRoute = CoverLetterRouteImport.update({
+  id: '/cover-letter',
+  path: '/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BundlesRoute = BundlesRouteImport.update({
   id: '/bundles',
   path: '/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtsRoute = AtsRouteImport.update({
+  id: '/ats',
+  path: '/ats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssistantRoute = AssistantRouteImport.update({
@@ -98,10 +122,14 @@ const AdminImportRoute = AdminImportRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
+  '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
@@ -114,10 +142,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
+  '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
@@ -131,10 +163,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
+  '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
   '/pricing': typeof PricingRoute
@@ -149,10 +185,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/assistant'
+    | '/ats'
     | '/bundles'
+    | '/cover-letter'
     | '/creator'
     | '/creators'
+    | '/cv'
     | '/dashboard'
+    | '/library'
     | '/login'
     | '/marketplace'
     | '/pricing'
@@ -165,10 +205,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/assistant'
+    | '/ats'
     | '/bundles'
+    | '/cover-letter'
     | '/creator'
     | '/creators'
+    | '/cv'
     | '/dashboard'
+    | '/library'
     | '/login'
     | '/marketplace'
     | '/pricing'
@@ -181,10 +225,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/assistant'
+    | '/ats'
     | '/bundles'
+    | '/cover-letter'
     | '/creator'
     | '/creators'
+    | '/cv'
     | '/dashboard'
+    | '/library'
     | '/login'
     | '/marketplace'
     | '/pricing'
@@ -198,10 +246,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssistantRoute: typeof AssistantRoute
+  AtsRoute: typeof AtsRoute
   BundlesRoute: typeof BundlesRoute
+  CoverLetterRoute: typeof CoverLetterRoute
   CreatorRoute: typeof CreatorRoute
   CreatorsRoute: typeof CreatorsRoute
+  CvRoute: typeof CvRoute
   DashboardRoute: typeof DashboardRoute
+  LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
   MarketplaceRoute: typeof MarketplaceRoute
   PricingRoute: typeof PricingRoute
@@ -242,11 +294,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/library': {
+      id: '/library'
+      path: '/library'
+      fullPath: '/library'
+      preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/creators': {
@@ -263,11 +329,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cover-letter': {
+      id: '/cover-letter'
+      path: '/cover-letter'
+      fullPath: '/cover-letter'
+      preLoaderRoute: typeof CoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bundles': {
       id: '/bundles'
       path: '/bundles'
       fullPath: '/bundles'
       preLoaderRoute: typeof BundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ats': {
+      id: '/ats'
+      path: '/ats'
+      fullPath: '/ats'
+      preLoaderRoute: typeof AtsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assistant': {
@@ -318,10 +398,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssistantRoute: AssistantRoute,
+  AtsRoute: AtsRoute,
   BundlesRoute: BundlesRoute,
+  CoverLetterRoute: CoverLetterRoute,
   CreatorRoute: CreatorRoute,
   CreatorsRoute: CreatorsRoute,
+  CvRoute: CvRoute,
   DashboardRoute: DashboardRoute,
+  LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
   MarketplaceRoute: MarketplaceRoute,
   PricingRoute: PricingRoute,
@@ -334,3 +418,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
