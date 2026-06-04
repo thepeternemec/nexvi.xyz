@@ -1,260 +1,147 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowRight, Search, Sparkles, Check, Quote, Wand2 } from "lucide-react";
+import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
-import { PromptCard } from "@/components/prompt-card";
-import { categories, creators, prompts } from "@/lib/mock-data";
-import { t, type Locale, localePathPrefix } from "@/lib/i18n";
 
-export function LandingPage({ locale }: { locale: Locale }) {
-  const [q, setQ] = useState("");
-  const trending = prompts.slice(0, 6);
-  const s = t[locale];
-  const prefix = localePathPrefix[locale];
-  const marketHref = `${prefix}/marketplace`;
-  const assistantHref = `${prefix}/assistant`;
-  const signupHref = `${prefix}/signup`;
-
-  const pricing =
-    locale === "de"
-      ? [
-          { name: "Free", price: "0 €", desc: "Für Neugierige.", cta: "Loslegen", features: ["Marktplatz durchstöbern", "Bis zu 20 Prompts speichern", "Alle kostenlosen Prompts nutzen"] },
-          { name: "Premium", price: "9 €/Monat", desc: "Die ganze Bibliothek.", highlight: true, cta: "Premium starten", features: ["Alles aus Free", "Unbegrenzter Bibliothekszugang", "Jede Woche neue Pakete", "Priorisierter KI-Assistent"] },
-          { name: "Creator", price: "80 % Anteil", desc: "Verkaufe deine eigenen.", cta: "Creator werden", features: ["Prompts hochladen & verkaufen", "Pakete & Abos", "Echtzeit-Analytics", "Stripe-Auszahlungen"] },
-        ]
-      : [
-          { name: "Free", price: "$0", desc: "For the curious.", cta: "Get started", features: ["Browse the marketplace", "Save up to 20 prompts", "Use all free prompts"] },
-          { name: "Premium", price: "$9/mo", desc: "The whole library.", highlight: true, cta: "Start Premium", features: ["Everything in Free", "Unlimited library access", "New packs every week", "Priority AI Assistant"] },
-          { name: "Creator", price: "Earn 80%", desc: "Sell your own.", cta: "Become a creator", features: ["Upload & sell prompts", "Bundles & subscriptions", "Real-time analytics", "Stripe payouts"] },
-        ];
-
-  const testimonials =
-    locale === "de"
-      ? [
-          { name: "Jamie L.", role: "Quereinsteigerin", body: "Ich saß ratlos vor ChatGPT — zwei Wochen später hatte ich drei Vorstellungsgespräche. Die Prompts fühlten sich wie ein Coach in der Tasche an." },
-          { name: "Priya S.", role: "Doktorandin", body: "Lernen hat endlich Klick gemacht. Das Paket 'In der halben Zeit lernen' hat alles verändert." },
-          { name: "Marco T.", role: "Indie-Gründer", body: "Landing Page, Launch-Plan und erste Ads — alles an einem Wochenende. Verrückt." },
-        ]
-      : [
-          { name: "Jamie L.", role: "Career switcher", body: "I went from staring at ChatGPT not knowing what to ask, to landing 3 interviews in two weeks. The prompts felt like a coach in my pocket." },
-          { name: "Priya S.", role: "Grad student", body: "Studying finally clicked. The 'Study Anything in Half the Time' pack changed how I read." },
-          { name: "Marco T.", role: "Indie founder", body: "I shipped my landing page, launch plan and first ads in a weekend. Wild." },
-        ];
-
-  const faq =
-    locale === "de"
-      ? [
-          ["Muss ich wissen, wie man Prompts schreibt?", "Überhaupt nicht. Jeder Prompt ist für Menschen geschrieben — kopieren, einfügen und den Schritten folgen."],
-          ["Mit welchen KI-Tools funktioniert das?", "Die meisten Prompts funktionieren großartig mit ChatGPT, Claude und Gemini. Wir kennzeichnen die Kompatibilität bei jedem Prompt."],
-          ["Kann ich jederzeit kündigen?", "Ja. Premium ist monatlich und du kannst mit einem Klick im Dashboard kündigen."],
-          ["Kann ich meine eigenen Prompts verkaufen?", "Ja — bewirb dich als Creator und leg los. Wir kümmern uns um Zahlungen und Auszahlungen."],
-        ]
-      : [
-          ["Do I need to know how to prompt?", "Not at all. Every prompt is written for humans — copy, paste, and follow the guided steps."],
-          ["Which AI tools do these work with?", "Most prompts work great with ChatGPT, Claude, and Gemini. We label compatibility on each prompt."],
-          ["Can I cancel anytime?", "Yes. Premium is monthly and you can cancel from your dashboard in one click."],
-          ["Can I sell my own prompts?", "Yes — apply as a creator and start selling. We handle payments and payouts."],
-        ];
-
+export function LandingPage() {
   return (
-    <SiteShell locale={locale}>
+    <SiteShell>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-aurora" aria-hidden />
-        <div className="absolute inset-0 bg-grain opacity-50" aria-hidden />
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-20 pt-16 sm:px-6 sm:pt-24 lg:pt-32">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
-            <Badge className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur" variant="outline">
-              <Sparkles className="mr-1.5 h-3 w-3 text-violet-500" /> {s.badge}
-            </Badge>
-            <h1 className="font-display mt-6 text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-              {s.heroTitle} <span className="text-gradient italic">{s.heroTitleEm}</span> {s.heroTitleEnd}
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">{s.heroSub}</p>
-
-            <form
-              onSubmit={(e) => { e.preventDefault(); window.location.href = `${marketHref}?q=${encodeURIComponent(q)}`; }}
-              className="mx-auto mt-10 flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-[0_20px_60px_-30px_rgb(0_0_0_/0.25)] backdrop-blur"
-            >
-              <div className="flex flex-1 items-center gap-3 px-3">
-                <Search className="h-5 w-5 text-muted-foreground" />
-                <Input
-                  value={q}
-                  onChange={(e) => setQ(e.target.value)}
-                  placeholder={s.searchPlaceholder}
-                  className="h-12 border-0 bg-transparent text-base shadow-none focus-visible:ring-0"
-                />
-              </div>
-              <Button type="submit" size="lg" className="rounded-xl px-5">
-                {s.search} <ArrowRight className="ml-1 h-4 w-4" />
-              </Button>
-            </form>
-            <div className="mx-auto mt-4 flex max-w-2xl flex-wrap items-center justify-center gap-2 text-xs text-muted-foreground">
-              <span>{s.tryLabel}</span>
-              {s.tryItems.map((item) => (
-                <a key={item} href={`${marketHref}?q=${encodeURIComponent(item)}`} className="rounded-full border border-border bg-background/60 px-3 py-1 hover:bg-background">
-                  {item}
-                </a>
-              ))}
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5" />
+              AI-powered • ATS-optimized • Tailored to every role
             </div>
-          </div>
-
-          <div className="mx-auto mt-16 grid max-w-3xl grid-cols-3 gap-4 text-center sm:gap-8">
-            {s.stats.map(([n, l]) => (
-              <div key={l} className="rounded-2xl border border-border/60 bg-background/60 p-5 backdrop-blur">
-                <div className="font-display text-3xl tracking-tight sm:text-4xl">{n}</div>
-                <div className="mt-1 text-xs text-muted-foreground">{l}</div>
-              </div>
-            ))}
+            <h1 className="mt-6 font-display text-5xl tracking-tight sm:text-6xl lg:text-7xl">
+              Get hired with CVs that <em className="italic text-muted-foreground">actually</em> beat the bots.
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground sm:text-xl">
+              Paste any job description. We generate a tailored CV and cover letter, score it against the ATS, and tell you exactly what to fix.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link to="/signup"><Button size="lg" className="rounded-full">Generate my CV <ArrowRight className="h-4 w-4" /></Button></Link>
+              <a href="/ats"><Button size="lg" variant="outline" className="rounded-full">Check my ATS score</Button></a>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> Free to try</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> No credit card</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> Built on top AI models</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CATEGORIES */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.browseKicker}</div>
-            <h2 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">{s.browseTitle}</h2>
-          </div>
-          <a href={marketHref} className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline-flex">{s.viewAll}</a>
+      {/* TOOLS */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
+        <div className="text-center">
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Three tools. One outcome.</div>
+          <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">Everything you need to land the job.</h2>
         </div>
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {categories.map((c) => (
-            <a
-              key={c.slug}
-              href={`${marketHref}?category=${c.slug}`}
-              className={`group relative overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br ${c.gradient} p-5 transition hover:-translate-y-0.5 hover:shadow-lg`}
-            >
-              <div className="text-3xl">{c.emoji}</div>
-              <div className="mt-3 font-medium">{c.name}</div>
-              <div className="mt-0.5 text-xs text-muted-foreground">{c.description}</div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {[
+            { icon: FileText, title: "CV Generator", desc: "A tailored, ATS-friendly CV in seconds — keyword-optimized for the exact job description you paste in.", href: "/cv", badge: "Most popular" },
+            { icon: Mail, title: "Cover Letter Generator", desc: "Personalized cover letters that connect your real experience to what the company actually wants.", href: "/cover-letter" },
+            { icon: Target, title: "ATS Optimizer", desc: "Score your CV against any job. Get matched keywords, gaps, and rewrite tips in plain English.", href: "/ats" },
+          ].map((t) => (
+            <a key={t.href} href={t.href} className="group relative flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
+              {t.badge && (
+                <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
+                  {t.badge}
+                </span>
+              )}
+              <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
+                <t.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold">{t.title}</h3>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">{t.desc}</p>
+              <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                Open tool <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </div>
             </a>
           ))}
         </div>
       </section>
 
-      {/* TRENDING */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.trendingKicker}</div>
-            <h2 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">{s.trendingTitle}</h2>
-          </div>
-          <a href={marketHref} className="hidden text-sm text-muted-foreground hover:text-foreground sm:inline-flex">{s.exploreMarket}</a>
-        </div>
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {trending.map((p) => <PromptCard key={p.id} prompt={p} />)}
-        </div>
-      </section>
-
-      {/* ASSISTANT CTA */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-violet-600 via-fuchsia-600 to-amber-500 p-8 text-white sm:p-12">
-          <div className="absolute inset-0 bg-grain opacity-30" />
-          <div className="relative grid items-center gap-6 md:grid-cols-2">
+      {/* HOW IT WORKS */}
+      <section className="border-y border-border/60 bg-muted/20">
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
-              <Badge className="rounded-full bg-white/20 text-white hover:bg-white/30" variant="secondary">
-                <Wand2 className="mr-1.5 h-3 w-3" /> {s.assistantBadge}
-              </Badge>
-              <h3 className="font-display mt-4 text-4xl tracking-tight sm:text-5xl">{s.assistantTitle}</h3>
-              <p className="mt-3 max-w-md text-white/85">{s.assistantSub}</p>
-              <a href={assistantHref} className="mt-6 inline-flex"><Button size="lg" variant="secondary" className="rounded-full">{s.assistantCta} <ArrowRight className="ml-1.5 h-4 w-4" /></Button></a>
+              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">How it works</div>
+              <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">From job description to interview-ready in 60 seconds.</h2>
+              <p className="mt-4 text-muted-foreground">No more rewriting your CV for every application. Paste the job description, paste your background, and we do the tailoring — keyword by keyword.</p>
+              <ul className="mt-8 space-y-5">
+                {[
+                  ["Paste the job description", "Any role, any industry. We extract the keywords that matter."],
+                  ["Add your background", "Past roles, skills, education, or your existing CV — however you have it."],
+                  ["Get tailored, ATS-ready docs", "A CV, a cover letter, and an ATS score with concrete fixes."],
+                ].map(([t, d], i) => (
+                  <li key={t} className="flex gap-4">
+                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">{i + 1}</div>
+                    <div>
+                      <div className="font-medium">{t}</div>
+                      <div className="text-sm text-muted-foreground">{d}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <div className="rounded-2xl bg-white/10 p-5 backdrop-blur">
-              <div className="text-sm text-white/80">{s.you}</div>
-              <div className="mt-1 rounded-xl bg-white/15 p-3 text-sm">{s.youMsg}</div>
-              <div className="mt-3 text-sm text-white/80">Prompt Academia</div>
-              <div className="mt-1 rounded-xl bg-white text-foreground p-3 text-sm">{s.aiReply}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CREATORS */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
-        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.creatorsKicker}</div>
-        <h2 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">{s.creatorsTitle}</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {creators.map((c) => (
-            <div key={c.id} className="rounded-3xl border border-border/70 bg-card p-6">
-              <div className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-sm font-semibold text-white">{c.avatar}</div>
-              <div className="mt-4 font-medium">{c.name} {c.verified && <span className="ml-1 text-xs text-violet-600">✓</span>}</div>
-              <div className="text-xs text-muted-foreground">{c.handle}</div>
-              <p className="mt-3 text-sm text-muted-foreground">{c.bio}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-20">
-        <h2 className="font-display max-w-2xl text-4xl tracking-tight sm:text-5xl">{s.testimonialTitle}</h2>
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {testimonials.map((tt) => (
-            <div key={tt.name} className="rounded-3xl border border-border/70 bg-card p-6">
-              <Quote className="h-5 w-5 text-violet-500" />
-              <p className="mt-4 text-[15px] leading-relaxed">{tt.body}</p>
-              <div className="mt-6 flex items-center gap-3">
-                <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-xs font-semibold text-white">{tt.name.split(" ").map((x) => x[0]).join("")}</div>
-                <div className="text-sm"><div className="font-medium">{tt.name}</div><div className="text-xs text-muted-foreground">{tt.role}</div></div>
+            <div className="rounded-3xl border border-border/70 bg-background p-6 shadow-sm">
+              <div className="rounded-xl bg-muted/40 p-4 font-mono text-xs">
+                <div className="text-muted-foreground">// Job description</div>
+                <div className="mt-1 line-clamp-3">Senior Product Designer at Linear. Lead end-to-end design for new B2B SaaS workflows. Ship fast. Collaborate with PMs and eng…</div>
+              </div>
+              <div className="mt-3 rounded-xl bg-muted/40 p-4 font-mono text-xs">
+                <div className="text-muted-foreground">// Your background</div>
+                <div className="mt-1 line-clamp-2">5 years product design, fintech &amp; SaaS. Led design systems at Stripe-style startups…</div>
+              </div>
+              <div className="mt-5 rounded-2xl border border-foreground/20 bg-foreground/[0.03] p-5">
+                <div className="flex items-center gap-2 text-sm font-semibold"><Zap className="h-4 w-4" /> ATS Match Score</div>
+                <div className="mt-3 flex items-end gap-3">
+                  <div className="font-display text-5xl">92</div>
+                  <div className="pb-1 text-xs text-muted-foreground">/ 100 — Excellent match</div>
+                </div>
+                <div className="mt-4 h-2 overflow-hidden rounded-full bg-muted">
+                  <div className="h-full w-[92%] bg-foreground" />
+                </div>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* PRICING */}
-      <section id="pricing" className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{s.pricingKicker}</div>
-          <h2 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">{s.pricingTitle}</h2>
-          <p className="mt-3 text-muted-foreground">{s.pricingSub}</p>
+      {/* SOCIAL PROOF */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+        <div className="text-center">
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Built for the modern job hunt.</h2>
+          <p className="mt-3 text-muted-foreground">Most CVs get filtered before a human sees them. We fix that.</p>
         </div>
-        <div className="mx-auto mt-12 grid max-w-5xl gap-5 md:grid-cols-3">
-          {pricing.map((p) => (
-            <div key={p.name} className={`relative rounded-3xl border p-6 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-lg dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
-              {p.highlight && <Badge className="absolute -top-3 left-6 rounded-full">{locale === "de" ? "Am beliebtesten" : "Most loved"}</Badge>}
-              <div className="font-medium">{p.name}</div>
-              <div className="font-display mt-2 text-4xl tracking-tight">{p.price}</div>
-              <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
-              <ul className="mt-5 space-y-2 text-sm">
-                {p.features.map((f) => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-violet-600" /> {f}</li>)}
-              </ul>
-              <a href={signupHref} className="mt-6 inline-flex w-full"><Button className="w-full rounded-full" variant={p.highlight ? "default" : "outline"}>{p.cta}</Button></a>
+        <div className="mt-12 grid gap-5 sm:grid-cols-3">
+          {[
+            ["75%", "of CVs are rejected by ATS before a recruiter sees them."],
+            ["3×", "more interviews when your CV is tailored per role."],
+            ["60s", "to generate a fully tailored CV and cover letter."],
+          ].map(([n, d]) => (
+            <div key={n} className="rounded-3xl border border-border/70 bg-card p-8 text-center">
+              <div className="font-display text-5xl tracking-tight">{n}</div>
+              <div className="mt-3 text-sm text-muted-foreground">{d}</div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section id="faq" className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 lg:py-20">
-        <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{s.faqTitle}</h2>
-        <div className="mt-8 divide-y divide-border/70 rounded-3xl border border-border/70 bg-card">
-          {faq.map(([q, a]) => (
-            <details key={q} className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium">
-                {q} <span className="text-muted-foreground transition group-open:rotate-45">+</span>
-              </summary>
-              <p className="mt-3 text-sm text-muted-foreground">{a}</p>
-            </details>
           ))}
         </div>
       </section>
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-foreground to-zinc-800 p-10 text-background sm:p-16">
-          <div className="absolute inset-0 bg-grain opacity-20" />
-          <div className="relative max-w-2xl">
-            <h3 className="font-display text-4xl tracking-tight sm:text-5xl">{s.ctaTitle}</h3>
-            <p className="mt-3 text-background/80">{s.ctaSub}</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a href={signupHref}><Button size="lg" className="rounded-full bg-white text-foreground hover:bg-white/90">{s.createAccount}</Button></a>
-              <a href={marketHref}><Button size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white/10">{s.exploreMarketBtn}</Button></a>
+        <div className="rounded-3xl bg-foreground p-12 text-background sm:p-16">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="font-display text-4xl tracking-tight sm:text-5xl">Your next job is one paste away.</h2>
+            <p className="mt-4 text-background/70">Free forever. Premium when you're ready for unlimited generations and saved history.</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link to="/signup"><Button size="lg" variant="secondary" className="rounded-full">Create free account</Button></Link>
+              <a href="/library"><Button size="lg" variant="outline" className="rounded-full border-background/30 bg-transparent text-background hover:bg-background hover:text-foreground">Browse prompt library</Button></a>
             </div>
           </div>
         </div>
