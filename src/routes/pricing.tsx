@@ -16,29 +16,31 @@ const plans = [
     key: "free",
     name: "Free",
     price: "$0",
-    desc: "For the curious.",
+    desc: "Land your first interview.",
     cta: "Get started",
-    features: ["Browse the marketplace", "Save up to 20 prompts", "All free prompts", "Basic AI Assistant"],
+    features: ["3 CV generations / month", "3 cover letters / month", "Basic ATS score", "Free prompt library"],
   },
   {
     key: "premium",
     name: "Premium",
     price: "$9",
     per: "/mo",
-    desc: "The whole library.",
+    desc: "Run a real job search.",
     highlight: true,
     cta: "Start Premium",
-    features: ["Everything in Free", "Unlimited Premium prompts & bundles", "New packs every week", "Priority AI Assistant", "Early access to creator drops"],
+    features: ["Unlimited CV & cover letter generations", "Full ATS optimizer with rewrites", "Saved CVs, letters & reports", "Entire premium prompt library", "Priority AI models"],
   },
   {
-    key: "creator",
-    name: "Creator",
-    price: "Earn 80%",
-    desc: "Sell your own work.",
-    cta: "Become a creator",
-    features: ["Upload & sell prompts", "Bundles & subscriptions", "Real-time analytics", "Stripe payouts"],
+    key: "coach",
+    name: "Career Coach",
+    price: "$29",
+    per: "/mo",
+    desc: "Land senior & exec roles.",
+    cta: "Talk to us",
+    features: ["Everything in Premium", "1:1 CV review every month", "Interview & negotiation playbooks", "Recruiter outreach templates", "Priority email support"],
   },
 ];
+
 
 function Pricing() {
   const sub = useSubscription();
