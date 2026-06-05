@@ -66,7 +66,7 @@ function Marketplace() {
           >
             <div className="flex flex-1 items-center gap-3 px-3">
               <Search className="h-5 w-5 text-muted-foreground" />
-              <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search outcomes, tools, creators…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
+              <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search CV, cover letter, ATS, interview…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
             </div>
             <Button type="submit" className="rounded-xl">Search</Button>
           </form>
