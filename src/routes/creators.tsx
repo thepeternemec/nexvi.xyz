@@ -8,11 +8,12 @@ export const Route = createFileRoute("/creators")({ component: Creators });
 function Creators() {
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Creators</div>
-          <h1 className="font-display mt-2 text-5xl tracking-tight sm:text-6xl">People to learn from.</h1>
-          <p className="mt-3 max-w-xl text-muted-foreground">A growing community of coaches, makers, and educators crafting prompts that actually help.</p>
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Career Coaches</div>
+          <h1 className="font-display mt-2 text-5xl tracking-tight sm:text-6xl">People who've helped thousands get hired.</h1>
+          <p className="mt-3 max-w-xl text-muted-foreground">Ex-recruiters, career coaches, and interview psychologists building the prompts that power getHeired.</p>
         </div>
       </section>
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
@@ -38,10 +39,10 @@ function Creators() {
           })}
         </div>
 
-        <div className="mt-16 rounded-3xl border border-border bg-gradient-to-br from-foreground to-zinc-800 p-10 text-background">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Become a creator.</h2>
-          <p className="mt-2 max-w-xl text-background/80">Turn your expertise into prompts and toolkits. Keep 80% of every sale.</p>
-          <Link to="/creator"><Button size="lg" variant="secondary" className="mt-5 rounded-full">Open creator dashboard</Button></Link>
+        <div className="mt-16 rounded-3xl border border-border bg-foreground p-10 text-background">
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Are you a career coach?</h2>
+          <p className="mt-2 max-w-xl text-background/80">Publish your prompts on getHeired and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.</p>
+          <Link to="/signup"><Button size="lg" variant="secondary" className="mt-5 rounded-full">Apply to become a coach</Button></Link>
         </div>
       </section>
     </SiteShell>

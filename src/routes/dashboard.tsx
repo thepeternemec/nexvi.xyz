@@ -1,99 +1,85 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Bookmark, Clock, Receipt, Settings, Crown, Sparkles } from "lucide-react";
+import { FileText, Mail, Target, Crown, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
 
+const tools = [
+  { icon: FileText, title: "CV Generator", desc: "Tailor your CV to any job description.", href: "/cv" },
+  { icon: Mail, title: "Cover Letter", desc: "Personalized letters in under a minute.", href: "/cover-letter" },
+  { icon: Target, title: "ATS Optimizer", desc: "Score your CV, fix the gaps.", href: "/ats" },
+];
+
 function Dashboard() {
-  const saved = prompts.slice(0, 3);
-  const recent = prompts.slice(3, 6);
-  const purchases = prompts.filter(p => p.price > 0).slice(0, 2);
+  const recommended = prompts.slice(0, 3);
 
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Your dashboard</div>
-              <h1 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">Welcome back, Alex.</h1>
-              <p className="mt-2 max-w-xl text-muted-foreground">Pick up where you left off — or ask the AI Assistant what to try next.</p>
-            </div>
-            <Link to="/assistant"><Button size="lg" className="rounded-full"><Sparkles className="mr-1.5 h-4 w-4" /> Ask the Assistant</Button></Link>
-          </div>
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Your job search HQ</div>
+          <h1 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">Welcome back.</h1>
+          <p className="mt-2 max-w-xl text-muted-foreground">Pick a tool, paste a JD, ship the application.</p>
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
         <div className="grid gap-4 sm:grid-cols-4">
           {[
-            { icon: <Bookmark className="h-4 w-4" />, label: "Saved", v: "12" },
-            { icon: <Clock className="h-4 w-4" />, label: "Recently used", v: "8" },
-            { icon: <Receipt className="h-4 w-4" />, label: "Purchases", v: "3" },
-            { icon: <Crown className="h-4 w-4" />, label: "Plan", v: "Free" },
+            { label: "CVs generated", v: "0" },
+            { label: "Cover letters", v: "0" },
+            { label: "ATS reports", v: "0" },
+            { label: "Plan", v: "Free" },
           ].map(s => (
             <div key={s.label} className="rounded-2xl border border-border/70 bg-card p-5">
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">{s.icon} {s.label}</div>
+              <div className="text-xs text-muted-foreground">{s.label}</div>
               <div className="font-display mt-2 text-3xl tracking-tight">{s.v}</div>
             </div>
           ))}
         </div>
 
-        <Section title="Saved prompts" linkText="View all" linkTo="/marketplace" items={saved} />
-        <Section title="Recently used" linkText="Marketplace" linkTo="/marketplace" items={recent} />
-        <Section title="Purchase history" linkText="Receipts" linkTo="/dashboard" items={purchases} empty="No purchases yet — explore the marketplace." />
+        <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
+        <div className="mt-5 grid gap-5 md:grid-cols-3">
+          {tools.map(t => (
+            <a key={t.href} href={t.href} className="group flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
+              <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
+                <t.icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold">{t.title}</h3>
+              <p className="mt-2 flex-1 text-sm text-muted-foreground">{t.desc}</p>
+              <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
+                Open <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-12 flex items-end justify-between">
+          <h2 className="font-display text-2xl tracking-tight">Recommended prompts</h2>
+          <Link to="/marketplace" className="text-sm text-muted-foreground hover:text-foreground">Browse library →</Link>
+        </div>
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {recommended.map(p => <PromptCard key={p.id} prompt={p} />)}
+        </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <div className="rounded-3xl border border-border/70 bg-card p-6">
-            <div className="flex items-center gap-2"><Settings className="h-4 w-4" /><div className="text-sm font-medium">Account settings</div></div>
-            <div className="mt-4 space-y-3 text-sm">
-              <Row label="Email" value="alex@example.com" />
-              <Row label="Name" value="Alex Rivera" />
-              <Row label="Notifications" value="Weekly digest" />
-            </div>
-            <Button variant="outline" className="mt-5 rounded-full">Edit settings</Button>
-          </div>
-          <div className="rounded-3xl border border-border/70 bg-gradient-to-br from-violet-600 to-fuchsia-600 p-6 text-white">
-            <div className="flex items-center gap-2"><Crown className="h-4 w-4" /><div className="text-sm font-medium">Subscription</div></div>
-            <div className="font-display mt-3 text-3xl tracking-tight">You're on Free.</div>
-            <p className="mt-2 text-sm text-white/85">Unlock the whole library, new packs weekly, and priority AI Assistant.</p>
-            <Button variant="secondary" className="mt-5 rounded-full">Upgrade to Premium — $9/mo</Button>
+          <Link to="/assistant" className="rounded-3xl border border-border/70 bg-card p-7 hover:border-foreground/30">
+            <div className="flex items-center gap-2 text-sm font-medium"><Sparkles className="h-4 w-4" /> Not sure where to start?</div>
+            <div className="font-display mt-3 text-2xl tracking-tight">Ask the AI career guide.</div>
+            <p className="mt-2 text-sm text-muted-foreground">Tell it your target role. It picks the right prompts and walks you through them.</p>
+          </Link>
+          <div className="rounded-3xl border border-border/70 bg-foreground p-7 text-background">
+            <div className="flex items-center gap-2 text-sm font-medium"><Crown className="h-4 w-4" /> Upgrade to Premium</div>
+            <div className="font-display mt-3 text-2xl tracking-tight">Unlimited applications.</div>
+            <p className="mt-2 text-sm text-background/80">Unlimited CVs, cover letters, ATS rewrites and the full premium library.</p>
+            <Link to="/pricing"><Button variant="secondary" className="mt-5 rounded-full">See pricing</Button></Link>
           </div>
         </div>
       </section>
     </SiteShell>
-  );
-}
-
-function Section({ title, linkText, linkTo, items, empty }: { title: string; linkText: string; linkTo: string; items: typeof prompts; empty?: string }) {
-  return (
-    <div className="mt-12">
-      <div className="flex items-end justify-between">
-        <h2 className="font-display text-2xl tracking-tight">{title}</h2>
-        <Link to={linkTo} className="text-sm text-muted-foreground hover:text-foreground">{linkText} →</Link>
-      </div>
-      <div className="mt-5">
-        {items.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-8 text-sm text-muted-foreground">{empty}</div>
-        ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map(p => <PromptCard key={p.id} prompt={p} />)}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between border-b border-border/60 pb-2 last:border-0 last:pb-0">
-      <span className="text-muted-foreground">{label}</span>
-      <span className="font-medium">{value}</span>
-    </div>
   );
 }

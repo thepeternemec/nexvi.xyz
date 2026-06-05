@@ -13,30 +13,34 @@ type Msg = { role: "user" | "ai"; content: string; recs?: string[] };
 
 const starters = [
   "I want to land a new job in 60 days",
-  "Help me study for finals",
-  "I want to grow on Instagram",
-  "Plan a trip to Japan",
-  "Validate my startup idea",
+  "Help me tailor my CV to a specific role",
+  "I'm switching careers — how do I reposition?",
+  "Write a cover letter for this JD",
+  "Prep me for behavioral interviews",
+  "Negotiate a counter-offer",
 ];
 
 function recommend(input: string): string[] {
   const text = input.toLowerCase();
   const pick = (kw: string[]) => prompts.filter(p => kw.some(k => p.title.toLowerCase().includes(k) || p.category.includes(k) || p.tags.some(t => t.includes(k))));
   let r: typeof prompts = [];
-  if (/(job|career|resume|interview)/.test(text)) r = pick(["career", "job", "resume", "interview", "email"]);
-  else if (/(study|exam|learn|school)/.test(text)) r = pick(["study", "skills"]);
-  else if (/(instagram|social|tiktok|growth)/.test(text)) r = pick(["social", "content"]);
-  else if (/(travel|trip|vacation)/.test(text)) r = pick(["travel"]);
-  else if (/(startup|business|idea|launch)/.test(text)) r = pick(["startup", "marketing", "slides"]);
-  else if (/(focus|productivity|plan|time)/.test(text)) r = pick(["productivity"]);
-  else if (/(fitness|workout|gym|weight)/.test(text)) r = pick(["fitness"]);
+  if (/(cv|resume)/.test(text)) r = pick(["cv", "resume", "ats"]);
+  else if (/(cover letter|letter)/.test(text)) r = pick(["cover-letter", "cover letter"]);
+  else if (/(ats|keyword|score)/.test(text)) r = pick(["ats", "keyword"]);
+  else if (/(interview|behavioral|star)/.test(text)) r = pick(["interview", "star"]);
+  else if (/(linkedin|profile|headline)/.test(text)) r = pick(["linkedin"]);
+  else if (/(recruiter|outreach|cold)/.test(text)) r = pick(["outreach", "recruiter"]);
+  else if (/(negotiat|offer|salary|comp)/.test(text)) r = pick(["negotiation", "comp"]);
+  else if (/(switch|change|pivot|career change)/.test(text)) r = pick(["career-change", "pivot"]);
+  else if (/(network|referral|intro)/.test(text)) r = pick(["networking", "referral"]);
+  else if (/(student|grad|intern|no experience)/.test(text)) r = pick(["grad", "student"]);
   else r = prompts.slice(0, 3);
   return r.slice(0, 3).map(p => p.id);
 }
 
 function Assistant() {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "ai", content: "Hi! I'm your AI guide. Tell me what you're trying to achieve — I'll handpick the right prompts and packs for you." },
+    { role: "ai", content: "Hi — I'm your AI career guide. Tell me your target role or what's stuck in your job search. I'll hand-pick the right prompts and walk you through." },
   ]);
   const [input, setInput] = useState("");
 
@@ -60,8 +64,8 @@ function Assistant() {
           <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white shadow-lg">
             <Sparkles className="h-5 w-5" />
           </div>
-          <h1 className="font-display mt-4 text-4xl tracking-tight sm:text-5xl">Your AI guide</h1>
-          <p className="mt-2 text-muted-foreground">What are you trying to achieve?</p>
+          <h1 className="font-display mt-4 text-4xl tracking-tight sm:text-5xl">Your AI career guide</h1>
+          <p className="mt-2 text-muted-foreground">What's your next move?</p>
         </div>
 
         <div className="mt-10 space-y-5">
@@ -105,7 +109,7 @@ function Assistant() {
           onSubmit={(e) => { e.preventDefault(); send(input); }}
           className="sticky bottom-4 mt-10 flex items-center gap-2 rounded-2xl border border-border bg-background/95 p-2 shadow-lg backdrop-blur"
         >
-          <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Tell me what you want to achieve…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
+          <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="e.g. Senior PM at a Series B fintech…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
           <Button type="submit" className="rounded-xl"><Send className="h-4 w-4" /></Button>
         </form>
       </section>

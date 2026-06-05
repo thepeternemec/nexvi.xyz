@@ -54,21 +54,21 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
         <div className="absolute inset-0 bg-grain opacity-50" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <Link to="/" className="flex items-center gap-2">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white"><Sparkles className="h-4 w-4" /></div>
-            <span className="font-display text-xl">Prompt Academia</span>
+            <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
+            <span className="font-display text-xl">getHeired</span>
           </Link>
           <div>
             <h2 className="font-display text-5xl leading-tight tracking-tight">AI prompts that help you actually get things done.</h2>
             <p className="mt-4 max-w-md text-muted-foreground">Loved by 50,000+ students, creators, freelancers, and small business owners.</p>
           </div>
-          <div className="text-xs text-muted-foreground">© Prompt Academia</div>
+          <div className="text-xs text-muted-foreground">© getHeired</div>
         </div>
       </div>
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-sm">
           <Link to="/" className="mb-8 inline-flex items-center gap-2 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white"><Sparkles className="h-4 w-4" /></div>
-            <span className="font-display text-xl">Prompt Academia</span>
+            <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
+            <span className="font-display text-xl">getHeired</span>
           </Link>
           <h1 className="font-display text-4xl tracking-tight">{title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>

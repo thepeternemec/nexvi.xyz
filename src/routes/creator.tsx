@@ -11,13 +11,14 @@ function Creator() {
   const mine = prompts.slice(0, 5);
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Creator dashboard</div>
+              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Coach dashboard</div>
               <h1 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">Hey Maya 👋</h1>
-              <p className="mt-2 text-muted-foreground">Your prompts helped 1,284 people this month.</p>
+              <p className="mt-2 text-muted-foreground">Your prompts helped 1,284 job seekers get interviews this month.</p>
             </div>
             <Button size="lg" className="rounded-full"><Plus className="mr-1.5 h-4 w-4" /> New prompt</Button>
           </div>
@@ -71,10 +72,10 @@ function Creator() {
                 ))}
               </ol>
             </div>
-            <div className="rounded-3xl border border-border/70 bg-gradient-to-br from-foreground to-zinc-800 p-6 text-background">
+            <div className="rounded-3xl border border-border bg-foreground p-6 text-background">
               <div className="text-xs uppercase tracking-wider text-background/70">Bundle idea</div>
               <div className="font-display mt-2 text-2xl tracking-tight">Career Switcher Pack</div>
-              <p className="mt-2 text-sm text-background/80">Bundle your 4 career prompts together for $24. People buying bundles spend 2.3x more.</p>
+              <p className="mt-2 text-sm text-background/80">Bundle your 4 career-change prompts for $24. Bundle buyers spend 2.3x more.</p>
               <Button size="sm" variant="secondary" className="mt-4 rounded-full">Create bundle</Button>
             </div>
           </div>
