@@ -93,7 +93,7 @@ export function BundleCard({ bundle }: BundleCardProps) {
             <div className="grid h-6 w-6 place-items-center rounded-full bg-muted text-[10px] font-semibold text-muted-foreground">
               <Package className="h-3 w-3" />
             </div>
-            <span className="text-xs text-muted-foreground">Prompt Academia</span>
+            <span className="text-xs text-muted-foreground">getHeired</span>
           </div>
         </div>
       </div>
