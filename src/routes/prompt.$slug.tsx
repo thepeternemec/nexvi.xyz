@@ -18,7 +18,7 @@ export const Route = createFileRoute("/prompt/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData?.prompt
       ? [
-          { title: `${loaderData.prompt.title} — Prompt Academia` },
+          { title: `${loaderData.prompt.title} — getHeired` },
           { name: "description", content: loaderData.prompt.description },
         ]
       : [],
