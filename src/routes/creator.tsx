@@ -72,10 +72,10 @@ function Creator() {
                 ))}
               </ol>
             </div>
-            <div className="rounded-3xl border border-border/70 bg-gradient-to-br from-foreground to-zinc-800 p-6 text-background">
+            <div className="rounded-3xl border border-border bg-foreground p-6 text-background">
               <div className="text-xs uppercase tracking-wider text-background/70">Bundle idea</div>
               <div className="font-display mt-2 text-2xl tracking-tight">Career Switcher Pack</div>
-              <p className="mt-2 text-sm text-background/80">Bundle your 4 career prompts together for $24. People buying bundles spend 2.3x more.</p>
+              <p className="mt-2 text-sm text-background/80">Bundle your 4 career-change prompts for $24. Bundle buyers spend 2.3x more.</p>
               <Button size="sm" variant="secondary" className="mt-4 rounded-full">Create bundle</Button>
             </div>
           </div>
