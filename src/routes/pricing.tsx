@@ -129,7 +129,7 @@ function Pricing() {
                       </div>
                     )
                   ) : (
-                    <Link to={p.key === "free" ? "/signup" : "/creator"} className="mt-7 inline-flex w-full">
+                    <Link to={p.key === "free" ? "/signup" : "/signup"} className="mt-7 inline-flex w-full">
                       <Button className="w-full rounded-full" variant={p.highlight ? "default" : "outline"} size="lg">{p.cta}</Button>
                     </Link>
                   )}
