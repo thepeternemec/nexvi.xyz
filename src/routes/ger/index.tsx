@@ -4,10 +4,10 @@ import { LandingPage } from "@/components/landing-page";
 export const Route = createFileRoute("/ger/")({
   head: () => ({
     meta: [
-      { title: "Prompt Academia — KI-Prompts für echte Ergebnisse" },
-      { name: "description", content: "Entdecke, speichere und nutze KI-Prompts, die dir helfen, einen Job zu finden, smarter zu lernen, Content zu erstellen, ein Business aufzubauen und mehr." },
-      { property: "og:title", content: "Prompt Academia — KI-Prompts für echte Ergebnisse" },
-      { property: "og:description", content: "KI-Prompts und Toolkits für echte Ergebnisse im Alltag." },
+      { title: "getHeired — KI-CVs, Anschreiben Prompt Academia — KI-Prompts für echte Ergebnisse ATS-Optimierung" },
+      { name: "description", content: "Füge eine Stellenbeschreibung ein. Erhalte einen ATS-optimierten Lebenslauf, ein passgenaues Anschreiben und einen Match-Score — in 60 Sekunden." },
+      { property: "og:title", content: "getHeired — KI-CVs, Anschreiben Prompt Academia — KI-Prompts für echte Ergebnisse ATS-Optimierung" },
+      { property: "og:description", content: "KI-Lebensläufe, Anschreiben und ATS-Scoring, abgestimmt auf jede Stellenanzeige." },
       { property: "og:url", content: "/ger" },
       { property: "og:locale", content: "de_DE" },
       { property: "og:locale:alternate", content: "en_US" },
