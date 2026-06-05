@@ -13,23 +13,27 @@ type Msg = { role: "user" | "ai"; content: string; recs?: string[] };
 
 const starters = [
   "I want to land a new job in 60 days",
-  "Help me study for finals",
-  "I want to grow on Instagram",
-  "Plan a trip to Japan",
-  "Validate my startup idea",
+  "Help me tailor my CV to a specific role",
+  "I'm switching careers — how do I reposition?",
+  "Write a cover letter for this JD",
+  "Prep me for behavioral interviews",
+  "Negotiate a counter-offer",
 ];
 
 function recommend(input: string): string[] {
   const text = input.toLowerCase();
   const pick = (kw: string[]) => prompts.filter(p => kw.some(k => p.title.toLowerCase().includes(k) || p.category.includes(k) || p.tags.some(t => t.includes(k))));
   let r: typeof prompts = [];
-  if (/(job|career|resume|interview)/.test(text)) r = pick(["career", "job", "resume", "interview", "email"]);
-  else if (/(study|exam|learn|school)/.test(text)) r = pick(["study", "skills"]);
-  else if (/(instagram|social|tiktok|growth)/.test(text)) r = pick(["social", "content"]);
-  else if (/(travel|trip|vacation)/.test(text)) r = pick(["travel"]);
-  else if (/(startup|business|idea|launch)/.test(text)) r = pick(["startup", "marketing", "slides"]);
-  else if (/(focus|productivity|plan|time)/.test(text)) r = pick(["productivity"]);
-  else if (/(fitness|workout|gym|weight)/.test(text)) r = pick(["fitness"]);
+  if (/(cv|resume)/.test(text)) r = pick(["cv", "resume", "ats"]);
+  else if (/(cover letter|letter)/.test(text)) r = pick(["cover-letter", "cover letter"]);
+  else if (/(ats|keyword|score)/.test(text)) r = pick(["ats", "keyword"]);
+  else if (/(interview|behavioral|star)/.test(text)) r = pick(["interview", "star"]);
+  else if (/(linkedin|profile|headline)/.test(text)) r = pick(["linkedin"]);
+  else if (/(recruiter|outreach|cold)/.test(text)) r = pick(["outreach", "recruiter"]);
+  else if (/(negotiat|offer|salary|comp)/.test(text)) r = pick(["negotiation", "comp"]);
+  else if (/(switch|change|pivot|career change)/.test(text)) r = pick(["career-change", "pivot"]);
+  else if (/(network|referral|intro)/.test(text)) r = pick(["networking", "referral"]);
+  else if (/(student|grad|intern|no experience)/.test(text)) r = pick(["grad", "student"]);
   else r = prompts.slice(0, 3);
   return r.slice(0, 3).map(p => p.id);
 }
