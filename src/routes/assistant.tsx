@@ -40,7 +40,7 @@ function recommend(input: string): string[] {
 
 function Assistant() {
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "ai", content: "Hi! I'm your AI guide. Tell me what you're trying to achieve — I'll handpick the right prompts and packs for you." },
+    { role: "ai", content: "Hi — I'm your AI career guide. Tell me your target role or what's stuck in your job search. I'll hand-pick the right prompts and walk you through." },
   ]);
   const [input, setInput] = useState("");
 
