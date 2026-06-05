@@ -46,7 +46,7 @@ function PromptDetail() {
     <SiteShell>
       <article className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:py-16">
         <nav className="mb-6 text-xs text-muted-foreground">
-          <Link to="/marketplace">Marketplace</Link>
+          <Link to="/marketplace">Prompt Library</Link>
           {category && <> / <Link to="/marketplace" search={{ category: category.slug } as never}>{category.name}</Link></>}
         </nav>
 
