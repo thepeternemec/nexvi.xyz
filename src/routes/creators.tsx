@@ -39,10 +39,10 @@ function Creators() {
           })}
         </div>
 
-        <div className="mt-16 rounded-3xl border border-border bg-gradient-to-br from-foreground to-zinc-800 p-10 text-background">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Become a creator.</h2>
-          <p className="mt-2 max-w-xl text-background/80">Turn your expertise into prompts and toolkits. Keep 80% of every sale.</p>
-          <Link to="/creator"><Button size="lg" variant="secondary" className="mt-5 rounded-full">Open creator dashboard</Button></Link>
+        <div className="mt-16 rounded-3xl border border-border bg-foreground p-10 text-background">
+          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Are you a career coach?</h2>
+          <p className="mt-2 max-w-xl text-background/80">Publish your prompts on getHeired and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.</p>
+          <Link to="/signup"><Button size="lg" variant="secondary" className="mt-5 rounded-full">Apply to become a coach</Button></Link>
         </div>
       </section>
     </SiteShell>
