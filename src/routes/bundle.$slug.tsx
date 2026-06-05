@@ -19,7 +19,7 @@ export const Route = createFileRoute("/bundle/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData?.bundle
       ? [
-          { title: `${loaderData.bundle.title} — Prompt Academia` },
+          { title: `${loaderData.bundle.title} — getHeired` },
           { name: "description", content: loaderData.bundle.description ?? "" },
         ]
       : [],
