@@ -16,8 +16,8 @@ export const Route = createFileRoute("/bundles")({
   loader: ({ context }) => context.queryClient.ensureQueryData(bundlesQueryOptions),
   head: () => ({
     meta: [
-      { title: "Bundles — Prompt Academia" },
-      { name: "description", content: "Curated prompt packs and toolkits for real-world outcomes." },
+      { title: "Bundles — getHeired" },
+      { name: "description", content: "Curated prompt packs for every step of the job hunt — CV, cover letter, interview, negotiation." },
     ],
   }),
 });
