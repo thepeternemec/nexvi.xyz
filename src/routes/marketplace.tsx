@@ -51,11 +51,15 @@ function Marketplace() {
 
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
           <Link to="/" className="text-xs text-muted-foreground">← Back</Link>
-          <h1 className="font-display mt-2 text-5xl tracking-tight sm:text-6xl">Marketplace</h1>
-          <p className="mt-2 max-w-xl text-muted-foreground">Discover prompts and toolkits for real outcomes — curated by experts you can trust.</p>
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
+            Prompt Library • Curated for job seekers
+          </div>
+          <h1 className="font-display mt-4 text-5xl tracking-tight sm:text-6xl">Prompts that get you hired.</h1>
+          <p className="mt-3 max-w-xl text-muted-foreground">CVs, cover letters, interview stories, recruiter outreach, negotiation scripts — built around the job hunt.</p>
           <form
             onSubmit={(e) => { e.preventDefault(); update({ q }); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
