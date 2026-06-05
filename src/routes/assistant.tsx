@@ -109,7 +109,7 @@ function Assistant() {
           onSubmit={(e) => { e.preventDefault(); send(input); }}
           className="sticky bottom-4 mt-10 flex items-center gap-2 rounded-2xl border border-border bg-background/95 p-2 shadow-lg backdrop-blur"
         >
-          <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Tell me what you want to achieve…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
+          <Input value={input} onChange={(e) => setInput(e.target.value)} placeholder="e.g. Senior PM at a Series B fintech…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
           <Button type="submit" className="rounded-xl"><Send className="h-4 w-4" /></Button>
         </form>
       </section>
