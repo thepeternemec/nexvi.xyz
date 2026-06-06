@@ -46,7 +46,7 @@ function ATSPage() {
     } finally { setLoading(false); }
   }
 
-  if (!ready) return <SiteShell><div className="flex min-h-[50vh] items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div></SiteShell>;
+
 
   const scoreColor = (s: number) => s >= 80 ? "text-emerald-600 dark:text-emerald-400" : s >= 60 ? "text-amber-600 dark:text-amber-400" : "text-rose-600 dark:text-rose-400";
 
