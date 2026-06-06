@@ -18,10 +18,10 @@ function ThemeToggle() {
 }
 
 const NAV = [
+  { href: "/library", label: "Find a Job Library" },
   { href: "/cv", label: "CV Generator" },
   { href: "/cover-letter", label: "Cover Letter" },
   { href: "/ats", label: "ATS Optimizer" },
-  { href: "/library", label: "Prompt Library" },
   { href: "/pricing", label: "Pricing" },
 ];
 
@@ -46,7 +46,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 md:flex">
           <ThemeToggle />
           <Link to="/login"><Button variant="ghost" size="sm">Sign in</Button></Link>
-          <Link to="/signup"><Button size="sm" className="rounded-full">Get hired</Button></Link>
+          <a href="/library"><Button size="sm" className="rounded-full">Find a job prompt</Button></a>
         </div>
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
@@ -63,7 +63,7 @@ export function SiteHeader() {
             ))}
             <div className="mt-2 flex gap-2">
               <Link to="/login" className="flex-1"><Button variant="outline" size="sm" className="w-full">Sign in</Button></Link>
-              <Link to="/signup" className="flex-1"><Button size="sm" className="w-full">Get hired</Button></Link>
+              <a href="/library" className="flex-1"><Button size="sm" className="w-full">Find a job prompt</Button></a>
             </div>
           </div>
         </div>
