@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useRequireAuth } from "@/hooks/use-require-auth";
 import { scoreATS } from "@/lib/career.functions";
 
 export const Route = createFileRoute("/ats")({
@@ -26,7 +25,6 @@ type Report = {
 };
 
 function ATSPage() {
-  const ready = useRequireAuth();
   const run = useServerFn(scoreATS);
   const [jd, setJd] = useState("");
   const [cv, setCv] = useState("");

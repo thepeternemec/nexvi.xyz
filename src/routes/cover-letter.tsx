@@ -7,7 +7,6 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { useRequireAuth } from "@/hooks/use-require-auth";
 import { generateCoverLetter } from "@/lib/career.functions";
 
 export const Route = createFileRoute("/cover-letter")({
@@ -21,7 +20,6 @@ export const Route = createFileRoute("/cover-letter")({
 });
 
 function CoverLetterPage() {
-  const ready = useRequireAuth();
   const run = useServerFn(generateCoverLetter);
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");
@@ -53,8 +51,6 @@ function CoverLetterPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a"); a.href = url; a.download = "cover-letter.md"; a.click(); URL.revokeObjectURL(url);
   }
-
-  if (!ready) return <SiteShell><div className="flex min-h-[50vh] items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div></SiteShell>;
 
   return (
     <SiteShell>

@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { useRequireAuth } from "@/hooks/use-require-auth";
 import { generateCV } from "@/lib/career.functions";
 
 export const Route = createFileRoute("/cv")({
@@ -20,7 +19,6 @@ export const Route = createFileRoute("/cv")({
 });
 
 function CVPage() {
-  const ready = useRequireAuth();
   const run = useServerFn(generateCV);
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");
@@ -37,7 +35,7 @@ function CVPage() {
     try {
       const res = await run({ data: { jobDescription: jd, background: bg, tone } });
       setOut(res.text);
-      toast.success("CV generated and saved to your library.");
+      toast.success("CV generated.");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
       toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited — try again shortly." : "Generation failed");
@@ -51,8 +49,6 @@ function CVPage() {
     const a = document.createElement("a");
     a.href = url; a.download = "cv.md"; a.click(); URL.revokeObjectURL(url);
   }
-
-  if (!ready) return <SiteShell><div className="flex min-h-[50vh] items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div></SiteShell>;
 
   return (
     <SiteShell>
