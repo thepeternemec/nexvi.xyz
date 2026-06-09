@@ -54,7 +54,7 @@ function PromptDetail() {
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {premium ? (
-                <Badge className="rounded-full bg-gradient-to-r from-amber-400 to-rose-500 text-white"><Crown className="mr-1 h-3 w-3" /> Premium</Badge>
+                <Badge className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white dark:from-white dark:to-neutral-200 dark:text-black"><Crown className="mr-1 h-3 w-3" /> Premium</Badge>
               ) : (
                 <Badge className="rounded-full">Free</Badge>
               )}
