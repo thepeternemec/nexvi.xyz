@@ -89,7 +89,7 @@ function PromptDetail() {
                       {!subLoading && (
                         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-background/95 via-background/80 to-background/40 p-5">
                           <div className="max-w-sm rounded-2xl border border-border bg-background/95 p-5 text-center shadow-xl backdrop-blur">
-                            <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white">
+                            <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-black to-neutral-800 text-white dark:from-white dark:to-neutral-200 dark:text-black">
                               <Crown className="h-5 w-5" />
                             </div>
                             <div className="font-display mt-3 text-lg">Unlock the full prompt</div>
