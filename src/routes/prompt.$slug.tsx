@@ -210,7 +210,7 @@ function PromptDetail() {
               </div>
             </div>
 
-            <Link to="/assistant" className="block rounded-3xl border border-border/70 bg-gradient-to-br from-violet-600 to-fuchsia-600 p-6 text-white">
+            <Link to="/assistant" className="block rounded-3xl border border-border/70 bg-gradient-to-br from-black to-neutral-800 p-6 text-white dark:from-white dark:to-neutral-200 dark:text-black">
               <Sparkles className="h-4 w-4" />
               <div className="font-display mt-2 text-xl">Want more like this?</div>
               <div className="mt-1 text-sm text-white/80">Ask the AI Assistant for a personal plan.</div>
