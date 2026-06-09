@@ -173,7 +173,7 @@ function PromptDetail() {
               <div className="mt-1 text-xs text-muted-foreground">{prompt.uses.toLocaleString()} people used this prompt</div>
               <div className="mt-5 grid gap-2">
                 {locked ? (
-                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white hover:opacity-95">
+                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
                     <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock</Link>
                   </Button>
                 ) : premium ? (
