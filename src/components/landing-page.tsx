@@ -101,13 +101,13 @@ export function LandingPage() {
                   { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free • 4.9★" },
                   { tag: "Negotiation", title: "Counter-offer script with comp research", meta: "Premium • 4.9★" },
                 ].map((p) => (
-                  <div key={p.title} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3">
+                  <a key={p.title} href="/marketplace" className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
                     <div>
                       <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.tag}</div>
                       <div className="text-sm font-medium">{p.title}</div>
                     </div>
                     <div className="text-xs text-muted-foreground">{p.meta}</div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>
