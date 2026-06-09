@@ -54,7 +54,7 @@ function PromptDetail() {
           <div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {premium ? (
-                <Badge className="rounded-full bg-gradient-to-r from-amber-400 to-rose-500 text-white"><Crown className="mr-1 h-3 w-3" /> Premium</Badge>
+                <Badge className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white dark:from-white dark:to-neutral-200 dark:text-black"><Crown className="mr-1 h-3 w-3" /> Premium</Badge>
               ) : (
                 <Badge className="rounded-full">Free</Badge>
               )}
@@ -89,7 +89,7 @@ function PromptDetail() {
                       {!subLoading && (
                         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-background/95 via-background/80 to-background/40 p-5">
                           <div className="max-w-sm rounded-2xl border border-border bg-background/95 p-5 text-center shadow-xl backdrop-blur">
-                            <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white">
+                            <div className="mx-auto grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-black to-neutral-800 text-white dark:from-white dark:to-neutral-200 dark:text-black">
                               <Crown className="h-5 w-5" />
                             </div>
                             <div className="font-display mt-3 text-lg">Unlock the full prompt</div>
@@ -173,7 +173,7 @@ function PromptDetail() {
               <div className="mt-1 text-xs text-muted-foreground">{prompt.uses.toLocaleString()} people used this prompt</div>
               <div className="mt-5 grid gap-2">
                 {locked ? (
-                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-amber-500 to-rose-500 text-white hover:opacity-95">
+                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
                     <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock</Link>
                   </Button>
                 ) : premium ? (
@@ -210,7 +210,7 @@ function PromptDetail() {
               </div>
             </div>
 
-            <Link to="/assistant" className="block rounded-3xl border border-border/70 bg-gradient-to-br from-violet-600 to-fuchsia-600 p-6 text-white">
+            <Link to="/assistant" className="block rounded-3xl border border-border/70 bg-gradient-to-br from-black to-neutral-800 p-6 text-white dark:from-white dark:to-neutral-200 dark:text-black">
               <Sparkles className="h-4 w-4" />
               <div className="font-display mt-2 text-xl">Want more like this?</div>
               <div className="mt-1 text-sm text-white/80">Ask the AI Assistant for a personal plan.</div>
