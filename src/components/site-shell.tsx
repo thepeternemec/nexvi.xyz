@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Briefcase } from "lucide-react";
+import { Search, Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
@@ -28,25 +28,22 @@ const NAV = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 dark:border-border/80 bg-background/80 dark:bg-background/95 backdrop-blur-xl">
-      <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 font-bold">
+    <header className="sticky top-0 z-50 w-full px-3 pt-3">
+      <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
         <a href="/" className="flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-background">
-            <Briefcase className="h-4 w-4" />
-          </span>
-          <span className="font-display text-xl tracking-tight">getHeired</span>
+          <span className="font-display text-[15px] font-semibold tracking-tight">ApplyWise</span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 md:flex">
           {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="text-sm text-muted-foreground dark:text-foreground/80 transition-colors hover:text-foreground">
+            <a key={n.href} href={n.href} className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
             </a>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-1.5 md:flex">
           <ThemeToggle />
-          <Link to="/login"><Button variant="ghost" size="sm">Sign in</Button></Link>
-          <a href="/library"><Button size="sm" className="rounded-full">Find a job prompt</Button></a>
+          <Link to="/login"><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Sign in</Button></Link>
+          <a href="/library"><Button size="sm" className="h-8 rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Find a job prompt</Button></a>
         </div>
         <div className="flex items-center gap-2 md:hidden">
           <ThemeToggle />
@@ -78,10 +75,7 @@ export function SiteFooter() {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-foreground text-background">
-              <Briefcase className="h-4 w-4" />
-            </span>
-            <span className="font-display text-xl tracking-tight">getHeired</span>
+            <span className="font-display text-xl tracking-tight">ApplyWise</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             AI-powered CVs, cover letters, and ATS optimization — tailored to every job description.
