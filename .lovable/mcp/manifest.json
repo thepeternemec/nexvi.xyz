@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "sdk_version": "0.22.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://qxopdnffeemjxyxeceaa.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "applywise-mcp",
+      "version": "0.1.0",
+      "title": "ApplyWise"
+    },
+    "tools": [
+      {
+        "name": "generate_cv",
+        "title": "Generate tailored CV",
+        "description": "Generate an ATS-optimized CV in Markdown, tailored to a specific job description using the candidate's background.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "jobDescription": {
+              "type": "string",
+              "description": "The full job description text to tailor the CV to."
+            },
+            "background": {
+              "type": "string",
+              "description": "Candidate background: experience, skills, education, achievements."
+            },
+            "tone": {
+              "type": "string",
+              "enum": [
+                "professional",
+                "confident",
+                "friendly",
+                "concise"
+              ],
+              "description": "Writing tone. Defaults to professional."
+            }
+          },
+          "required": [
+            "jobDescription",
+            "background"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "generate_cover_letter",
+        "title": "Generate cover letter",
+        "description": "Generate a concise, tailored cover letter in Markdown for a specific role and company using the candidate's background.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "jobDescription": {
+              "type": "string",
+              "description": "The full job description text."
+            },
+            "background": {
+              "type": "string",
+              "description": "Candidate background: experience, skills, achievements."
+            },
+            "companyName": {
+              "type": "string",
+              "description": "Company name."
+            },
+            "roleTitle": {
+              "type": "string",
+              "description": "Role title."
+            },
+            "tone": {
+              "type": "string",
+              "enum": [
+                "professional",
+                "enthusiastic",
+                "warm",
+                "concise"
+              ],
+              "description": "Writing tone. Defaults to professional."
+            }
+          },
+          "required": [
+            "jobDescription",
+            "background"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "score_ats",
+        "title": "Score CV against job (ATS)",
+        "description": "Analyze a CV against a job description and return an ATS match score (0-100), matched/missing keywords, strengths, and concrete improvements.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "jobDescription": {
+              "type": "string",
+              "description": "The full job description text."
+            },
+            "cv": {
+              "type": "string",
+              "description": "The candidate's CV text (plain text or Markdown)."
+            }
+          },
+          "required": [
+            "jobDescription",
+            "cv"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
