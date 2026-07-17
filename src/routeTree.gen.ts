@@ -24,6 +24,7 @@ import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
@@ -110,6 +111,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItIndexRoute = ItIndexRouteImport.update({
+  id: '/it/',
+  path: '/it/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GerIndexRoute = GerIndexRouteImport.update({
   id: '/ger/',
   path: '/ger/',
@@ -188,6 +194,7 @@ export interface FileRoutesByFullPath {
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/ger/': typeof GerIndexRoute
+  '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -215,6 +222,7 @@ export interface FileRoutesByTo {
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
   '/ger': typeof GerIndexRoute
+  '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -243,6 +251,7 @@ export interface FileRoutesById {
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/ger/': typeof GerIndexRoute
+  '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -272,6 +281,7 @@ export interface FileRouteTypes {
     | '/de/'
     | '/es/'
     | '/ger/'
+    | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
@@ -299,6 +309,7 @@ export interface FileRouteTypes {
     | '/de'
     | '/es'
     | '/ger'
+    | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   id:
@@ -326,6 +337,7 @@ export interface FileRouteTypes {
     | '/de/'
     | '/es/'
     | '/ger/'
+    | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
@@ -354,6 +366,7 @@ export interface RootRouteChildren {
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
   GerIndexRoute: typeof GerIndexRoute
+  ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -465,6 +478,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/': {
+      id: '/it/'
+      path: '/it'
+      fullPath: '/it/'
+      preLoaderRoute: typeof ItIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ger/': {
       id: '/ger/'
       path: '/ger'
@@ -563,6 +583,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,
   GerIndexRoute: GerIndexRoute,
+  ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
