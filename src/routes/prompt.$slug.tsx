@@ -2,9 +2,11 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLoaderData } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown } from "lucide-react";
+import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown, Twitter, Linkedin, Facebook, Mail, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard, isPremium } from "@/components/prompt-card";
 import { getCategory, getCreator, getPrompt, prompts, reviews, type Prompt } from "@/lib/mock-data";
@@ -37,6 +39,34 @@ export function PromptDetail() {
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareTitle = `${prompt.title} — ApplyWise`;
+  const shareText = prompt.outcome || prompt.description;
+  const copyLink = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = shareUrl; ta.style.position = "fixed"; ta.style.left = "-9999px";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+      }
+      setLinkCopied(true);
+      toast.success("Link copied to clipboard");
+      setTimeout(() => setLinkCopied(false), 1500);
+    } catch { toast.error("Couldn't copy link"); }
+  };
+  const onShareClick = async () => {
+    if (typeof navigator !== "undefined" && (navigator as Navigator & { share?: (d: ShareData) => Promise<void> }).share) {
+      try {
+        await (navigator as Navigator & { share: (d: ShareData) => Promise<void> }).share({ title: shareTitle, text: shareText, url: shareUrl });
+        return;
+      } catch { /* fall through to dialog */ }
+    }
+    setShareOpen(true);
+  };
   const onCopy = async () => {
     if (locked) return;
     try {
@@ -208,7 +238,7 @@ export function PromptDetail() {
                 )}
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1 rounded-full"><Bookmark className="mr-1.5 h-4 w-4" /> Save</Button>
-                  <Button variant="outline" className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
+                  <Button variant="outline" onClick={onShareClick} className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
                 </div>
               </div>
             </div>
@@ -252,6 +282,35 @@ export function PromptDetail() {
           </section>
         )}
       </article>
+
+      <Dialog open={shareOpen} onOpenChange={setShareOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Share this prompt</DialogTitle>
+            <DialogDescription>Send a link to this prompt or share it on your favorite platform.</DialogDescription>
+          </DialogHeader>
+          <div className="mt-2 flex items-center gap-2">
+            <Input readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} className="rounded-full text-xs" />
+            <Button onClick={copyLink} size="sm" className="rounded-full shrink-0">
+              {linkCopied ? <><Check className="mr-1 h-3.5 w-3.5" /> Copied</> : <><LinkIcon className="mr-1 h-3.5 w-3.5" /> Copy</>}
+            </Button>
+          </div>
+          <div className="mt-4 grid grid-cols-4 gap-2">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Twitter className="h-4 w-4" /> Twitter
+            </a>
+            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Facebook className="h-4 w-4" /> Facebook
+            </a>
+            <a href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`} className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Mail className="h-4 w-4" /> Email
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </SiteShell>
   );
 }
