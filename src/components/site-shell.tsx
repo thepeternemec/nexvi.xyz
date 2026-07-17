@@ -39,12 +39,23 @@ const NAV = [
 ];
 
 function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
-  const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
-  // Strip current locale prefix to get bare path
+  const router = useRouter();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { setLocale } = useLocale();
   const barePath = (() => {
-    const m = currentPath.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
-    return m ? (m[2] || "/") : currentPath || "/";
+    const m = pathname.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
+    return m ? (m[2] || "/") : pathname || "/";
   })();
+  const handleSelect = (l: Locale) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLocale(l);
+    const target = alternateHref(l, barePath);
+    // SPA navigation so provider state (locale, translations) persists and
+    // AutoTranslate immediately rescans in the new language.
+    router.navigate({ to: target, replace: false }).catch(() => {
+      window.location.href = target;
+    });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -59,7 +70,11 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
       <DropdownMenuContent align="end" className="min-w-[10rem]">
         {locales.map((l) => (
           <DropdownMenuItem key={l} asChild>
-            <a href={alternateHref(l, barePath)} className="flex items-center justify-between gap-3">
+            <a
+              href={alternateHref(l, barePath)}
+              onClick={handleSelect(l)}
+              className="flex items-center justify-between gap-3"
+            >
               <span className="flex items-center gap-2">
                 <span>{localeFlag[l]}</span>
                 <span>{localeLabel[l]}</span>
@@ -72,6 +87,7 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
     </DropdownMenu>
   );
 }
+
 
 export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   const locale = useActiveLocale(explicitLocale);
