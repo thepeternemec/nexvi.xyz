@@ -26,6 +26,7 @@ import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
+import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
@@ -121,6 +122,11 @@ const GerIndexRoute = GerIndexRouteImport.update({
   path: '/ger/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrIndexRoute = FrIndexRouteImport.update({
+  id: '/fr/',
+  path: '/fr/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsIndexRoute = EsIndexRouteImport.update({
   id: '/es/',
   path: '/es/',
@@ -193,6 +199,7 @@ export interface FileRoutesByFullPath {
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
+  '/fr/': typeof FrIndexRoute
   '/ger/': typeof GerIndexRoute
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -221,6 +228,7 @@ export interface FileRoutesByTo {
   '/prompt/$slug': typeof PromptSlugRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
+  '/fr': typeof FrIndexRoute
   '/ger': typeof GerIndexRoute
   '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -250,6 +258,7 @@ export interface FileRoutesById {
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
+  '/fr/': typeof FrIndexRoute
   '/ger/': typeof GerIndexRoute
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
@@ -280,6 +289,7 @@ export interface FileRouteTypes {
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
+    | '/fr/'
     | '/ger/'
     | '/it/'
     | '/.lovable/oauth/consent'
@@ -308,6 +318,7 @@ export interface FileRouteTypes {
     | '/prompt/$slug'
     | '/de'
     | '/es'
+    | '/fr'
     | '/ger'
     | '/it'
     | '/.lovable/oauth/consent'
@@ -336,6 +347,7 @@ export interface FileRouteTypes {
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
+    | '/fr/'
     | '/ger/'
     | '/it/'
     | '/.lovable/oauth/consent'
@@ -365,6 +377,7 @@ export interface RootRouteChildren {
   PromptSlugRoute: typeof PromptSlugRoute
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
+  FrIndexRoute: typeof FrIndexRoute
   GerIndexRoute: typeof GerIndexRoute
   ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -492,6 +505,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/': {
+      id: '/fr/'
+      path: '/fr'
+      fullPath: '/fr/'
+      preLoaderRoute: typeof FrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/': {
       id: '/es/'
       path: '/es'
@@ -582,6 +602,7 @@ const rootRouteChildren: RootRouteChildren = {
   PromptSlugRoute: PromptSlugRoute,
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,
+  FrIndexRoute: FrIndexRoute,
   GerIndexRoute: GerIndexRoute,
   ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
