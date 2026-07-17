@@ -61,9 +61,6 @@ export function Assistant() {
     <SiteShell>
       <section className="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 lg:py-20">
         <div className="text-center">
-          <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 via-fuchsia-500 to-amber-400 text-white shadow-lg">
-            <Sparkles className="h-5 w-5" />
-          </div>
           <h1 className="font-display mt-4 text-4xl tracking-tight sm:text-5xl">Your AI career guide</h1>
           <p className="mt-2 text-muted-foreground">What's your next move?</p>
         </div>
