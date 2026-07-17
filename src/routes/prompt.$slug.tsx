@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLoaderData } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -53,9 +54,11 @@ export function PromptDetail() {
         document.body.removeChild(ta);
       }
       setCopied(true);
+      toast.success("Prompt copied to clipboard");
       setTimeout(() => setCopied(false), 1500);
     } catch (err) {
       console.error("Copy failed", err);
+      toast.error("Couldn't copy — please try again");
     }
   };
 
