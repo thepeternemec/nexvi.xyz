@@ -25,6 +25,7 @@ import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
+import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -113,6 +114,11 @@ const GerIndexRoute = GerIndexRouteImport.update({
   path: '/ger/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeIndexRoute = DeIndexRouteImport.update({
+  id: '/de/',
+  path: '/de/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PromptSlugRoute = PromptSlugRouteImport.update({
   id: '/prompt/$slug',
   path: '/prompt/$slug',
@@ -173,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de/': typeof DeIndexRoute
   '/ger/': typeof GerIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de': typeof DeIndexRoute
   '/ger': typeof GerIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -224,6 +232,7 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de/': typeof DeIndexRoute
   '/ger/': typeof GerIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de/'
     | '/ger/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de'
     | '/ger'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -301,6 +312,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de/'
     | '/ger/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
@@ -327,6 +339,7 @@ export interface RootRouteChildren {
   AdminImportRoute: typeof AdminImportRoute
   BundleSlugRoute: typeof BundleSlugRoute
   PromptSlugRoute: typeof PromptSlugRoute
+  DeIndexRoute: typeof DeIndexRoute
   GerIndexRoute: typeof GerIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
@@ -446,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GerIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/de/': {
+      id: '/de/'
+      path: '/de'
+      fullPath: '/de/'
+      preLoaderRoute: typeof DeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/prompt/$slug': {
       id: '/prompt/$slug'
       path: '/prompt/$slug'
@@ -520,6 +540,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminImportRoute: AdminImportRoute,
   BundleSlugRoute: BundleSlugRoute,
   PromptSlugRoute: PromptSlugRoute,
+  DeIndexRoute: DeIndexRoute,
   GerIndexRoute: GerIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
