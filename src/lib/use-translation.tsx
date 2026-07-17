@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { useRouterState } from "@tanstack/react-router";
 import { translateBatch } from "./translate.functions";
 import { detectLocaleFromPath, type Locale } from "./i18n";
 
@@ -32,7 +33,8 @@ function saveCache(locale: Locale, cache: Record<string, string>) {
 }
 
 export function TranslationProvider({ children, locale: propLocale }: { children: React.ReactNode; locale?: Locale }) {
-  const detected = typeof window !== "undefined" ? detectLocaleFromPath(window.location.pathname) : "en";
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const detected = detectLocaleFromPath(pathname);
   const locale = propLocale ?? detected;
   const [cache, setCache] = useState<Record<string, string>>(() => loadCache(locale));
   const cacheRef = useRef(cache);
@@ -94,7 +96,9 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       }
       return text;
     },
-    [locale, schedule],
+    // include `cache` so consumers get a fresh identity when translations arrive,
+    // which forces the AutoTranslate effect to rescan the DOM.
+    [locale, schedule, cache],
   );
 
   const value = useMemo(() => ({ locale, t }), [locale, t, cache]);
@@ -106,14 +110,15 @@ export function useT() {
   return useContext(TranslationContext);
 }
 
+// Module-scope originals so text can be reverted/re-translated across locale changes.
+const originalsMap = new WeakMap<Text, string>();
+const originalAttrs = new WeakMap<HTMLElement, Record<string, string>>();
+
 /** Auto-translates all visible text nodes on the current page. */
 export function AutoTranslate() {
   const { locale, t } = useT();
   useEffect(() => {
-    if (locale === "en") return;
     let raf = 0;
-    const seen = new WeakSet<Text>();
-    const originals = new WeakMap<Text, string>();
 
     const scan = () => {
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
@@ -138,28 +143,33 @@ export function AutoTranslate() {
         n = walker.nextNode();
       }
       for (const node of nodes) {
-        const original = originals.get(node) ?? node.nodeValue ?? "";
-        if (!originals.has(node)) originals.set(node, original);
+        const original = originalsMap.get(node) ?? node.nodeValue ?? "";
+        if (!originalsMap.has(node)) originalsMap.set(node, original);
         const trimmed = original.trim();
         const leading = original.slice(0, original.indexOf(trimmed));
         const trailing = original.slice(original.indexOf(trimmed) + trimmed.length);
-        const translated = t(trimmed);
+        const translated = locale === "en" ? trimmed : t(trimmed);
         const next = leading + translated + trailing;
         if (node.nodeValue !== next) {
           node.nodeValue = next;
         }
-        seen.add(node);
       }
       // Translate common attributes
       const attrEls = document.querySelectorAll<HTMLElement>("[placeholder], [aria-label], [title], [alt]");
       attrEls.forEach((el) => {
         if (el.closest("[data-no-translate]")) return;
+        let stored = originalAttrs.get(el);
         for (const attr of ["placeholder", "aria-label", "title", "alt"]) {
-          const v = el.getAttribute(attr);
-          if (v && v.trim().length > 1 && !/^[\d\s.,%×+/-]+$/.test(v.trim())) {
-            const translated = t(v);
-            if (translated !== v) el.setAttribute(attr, translated);
+          const current = el.getAttribute(attr);
+          if (current == null) continue;
+          if (!stored || !(attr in stored)) {
+            stored = { ...(stored ?? {}), [attr]: current };
+            originalAttrs.set(el, stored);
           }
+          const orig = stored[attr];
+          if (!orig || orig.trim().length < 2 || /^[\d\s.,%×+/-]+$/.test(orig.trim())) continue;
+          const translated = locale === "en" ? orig : t(orig);
+          if (translated !== current) el.setAttribute(attr, translated);
         }
       });
     };

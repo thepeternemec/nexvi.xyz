@@ -32,6 +32,7 @@ import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as ItPricingRouteImport } from './routes/it/pricing'
 import { Route as ItMarketplaceRouteImport } from './routes/it/marketplace'
+import { Route as ItLibraryRouteImport } from './routes/it/library'
 import { Route as ItCvRouteImport } from './routes/it/cv'
 import { Route as ItCreatorsRouteImport } from './routes/it/creators'
 import { Route as ItCreatorRouteImport } from './routes/it/creator'
@@ -40,6 +41,7 @@ import { Route as ItBundlesRouteImport } from './routes/it/bundles'
 import { Route as ItAtsRouteImport } from './routes/it/ats'
 import { Route as FrPricingRouteImport } from './routes/fr/pricing'
 import { Route as FrMarketplaceRouteImport } from './routes/fr/marketplace'
+import { Route as FrLibraryRouteImport } from './routes/fr/library'
 import { Route as FrCvRouteImport } from './routes/fr/cv'
 import { Route as FrCreatorsRouteImport } from './routes/fr/creators'
 import { Route as FrCreatorRouteImport } from './routes/fr/creator'
@@ -48,6 +50,7 @@ import { Route as FrBundlesRouteImport } from './routes/fr/bundles'
 import { Route as FrAtsRouteImport } from './routes/fr/ats'
 import { Route as EsPricingRouteImport } from './routes/es/pricing'
 import { Route as EsMarketplaceRouteImport } from './routes/es/marketplace'
+import { Route as EsLibraryRouteImport } from './routes/es/library'
 import { Route as EsCvRouteImport } from './routes/es/cv'
 import { Route as EsCreatorsRouteImport } from './routes/es/creators'
 import { Route as EsCreatorRouteImport } from './routes/es/creator'
@@ -56,6 +59,7 @@ import { Route as EsBundlesRouteImport } from './routes/es/bundles'
 import { Route as EsAtsRouteImport } from './routes/es/ats'
 import { Route as DePricingRouteImport } from './routes/de/pricing'
 import { Route as DeMarketplaceRouteImport } from './routes/de/marketplace'
+import { Route as DeLibraryRouteImport } from './routes/de/library'
 import { Route as DeCvRouteImport } from './routes/de/cv'
 import { Route as DeCreatorsRouteImport } from './routes/de/creators'
 import { Route as DeCreatorRouteImport } from './routes/de/creator'
@@ -192,6 +196,11 @@ const ItMarketplaceRoute = ItMarketplaceRouteImport.update({
   path: '/it/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItLibraryRoute = ItLibraryRouteImport.update({
+  id: '/it/library',
+  path: '/it/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItCvRoute = ItCvRouteImport.update({
   id: '/it/cv',
   path: '/it/cv',
@@ -230,6 +239,11 @@ const FrPricingRoute = FrPricingRouteImport.update({
 const FrMarketplaceRoute = FrMarketplaceRouteImport.update({
   id: '/fr/marketplace',
   path: '/fr/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrLibraryRoute = FrLibraryRouteImport.update({
+  id: '/fr/library',
+  path: '/fr/library',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrCvRoute = FrCvRouteImport.update({
@@ -272,6 +286,11 @@ const EsMarketplaceRoute = EsMarketplaceRouteImport.update({
   path: '/es/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsLibraryRoute = EsLibraryRouteImport.update({
+  id: '/es/library',
+  path: '/es/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsCvRoute = EsCvRouteImport.update({
   id: '/es/cv',
   path: '/es/cv',
@@ -310,6 +329,11 @@ const DePricingRoute = DePricingRouteImport.update({
 const DeMarketplaceRoute = DeMarketplaceRouteImport.update({
   id: '/de/marketplace',
   path: '/de/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeLibraryRoute = DeLibraryRouteImport.update({
+  id: '/de/library',
+  path: '/de/library',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeCvRoute = DeCvRouteImport.update({
@@ -442,6 +466,7 @@ export interface FileRoutesByFullPath {
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/library': typeof DeLibraryRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/es/ats': typeof EsAtsRoute
@@ -450,6 +475,7 @@ export interface FileRoutesByFullPath {
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/library': typeof EsLibraryRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/fr/ats': typeof FrAtsRoute
@@ -458,6 +484,7 @@ export interface FileRoutesByFullPath {
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/library': typeof FrLibraryRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/it/ats': typeof ItAtsRoute
@@ -466,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/library': typeof ItLibraryRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
@@ -511,6 +539,7 @@ export interface FileRoutesByTo {
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/library': typeof DeLibraryRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/es/ats': typeof EsAtsRoute
@@ -519,6 +548,7 @@ export interface FileRoutesByTo {
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/library': typeof EsLibraryRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/fr/ats': typeof FrAtsRoute
@@ -527,6 +557,7 @@ export interface FileRoutesByTo {
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/library': typeof FrLibraryRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/it/ats': typeof ItAtsRoute
@@ -535,6 +566,7 @@ export interface FileRoutesByTo {
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/library': typeof ItLibraryRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
@@ -581,6 +613,7 @@ export interface FileRoutesById {
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/library': typeof DeLibraryRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/es/ats': typeof EsAtsRoute
@@ -589,6 +622,7 @@ export interface FileRoutesById {
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/library': typeof EsLibraryRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/fr/ats': typeof FrAtsRoute
@@ -597,6 +631,7 @@ export interface FileRoutesById {
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/library': typeof FrLibraryRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/it/ats': typeof ItAtsRoute
@@ -605,6 +640,7 @@ export interface FileRoutesById {
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/library': typeof ItLibraryRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
@@ -652,6 +688,7 @@ export interface FileRouteTypes {
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/library'
     | '/de/marketplace'
     | '/de/pricing'
     | '/es/ats'
@@ -660,6 +697,7 @@ export interface FileRouteTypes {
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/library'
     | '/es/marketplace'
     | '/es/pricing'
     | '/fr/ats'
@@ -668,6 +706,7 @@ export interface FileRouteTypes {
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/library'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/it/ats'
@@ -676,6 +715,7 @@ export interface FileRouteTypes {
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/library'
     | '/it/marketplace'
     | '/it/pricing'
     | '/prompt/$slug'
@@ -721,6 +761,7 @@ export interface FileRouteTypes {
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/library'
     | '/de/marketplace'
     | '/de/pricing'
     | '/es/ats'
@@ -729,6 +770,7 @@ export interface FileRouteTypes {
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/library'
     | '/es/marketplace'
     | '/es/pricing'
     | '/fr/ats'
@@ -737,6 +779,7 @@ export interface FileRouteTypes {
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/library'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/it/ats'
@@ -745,6 +788,7 @@ export interface FileRouteTypes {
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/library'
     | '/it/marketplace'
     | '/it/pricing'
     | '/prompt/$slug'
@@ -790,6 +834,7 @@ export interface FileRouteTypes {
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/library'
     | '/de/marketplace'
     | '/de/pricing'
     | '/es/ats'
@@ -798,6 +843,7 @@ export interface FileRouteTypes {
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/library'
     | '/es/marketplace'
     | '/es/pricing'
     | '/fr/ats'
@@ -806,6 +852,7 @@ export interface FileRouteTypes {
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/library'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/it/ats'
@@ -814,6 +861,7 @@ export interface FileRouteTypes {
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/library'
     | '/it/marketplace'
     | '/it/pricing'
     | '/prompt/$slug'
@@ -860,6 +908,7 @@ export interface RootRouteChildren {
   DeCreatorRoute: typeof DeCreatorRoute
   DeCreatorsRoute: typeof DeCreatorsRoute
   DeCvRoute: typeof DeCvRoute
+  DeLibraryRoute: typeof DeLibraryRoute
   DeMarketplaceRoute: typeof DeMarketplaceRoute
   DePricingRoute: typeof DePricingRoute
   EsAtsRoute: typeof EsAtsRoute
@@ -868,6 +917,7 @@ export interface RootRouteChildren {
   EsCreatorRoute: typeof EsCreatorRoute
   EsCreatorsRoute: typeof EsCreatorsRoute
   EsCvRoute: typeof EsCvRoute
+  EsLibraryRoute: typeof EsLibraryRoute
   EsMarketplaceRoute: typeof EsMarketplaceRoute
   EsPricingRoute: typeof EsPricingRoute
   FrAtsRoute: typeof FrAtsRoute
@@ -876,6 +926,7 @@ export interface RootRouteChildren {
   FrCreatorRoute: typeof FrCreatorRoute
   FrCreatorsRoute: typeof FrCreatorsRoute
   FrCvRoute: typeof FrCvRoute
+  FrLibraryRoute: typeof FrLibraryRoute
   FrMarketplaceRoute: typeof FrMarketplaceRoute
   FrPricingRoute: typeof FrPricingRoute
   ItAtsRoute: typeof ItAtsRoute
@@ -884,6 +935,7 @@ export interface RootRouteChildren {
   ItCreatorRoute: typeof ItCreatorRoute
   ItCreatorsRoute: typeof ItCreatorsRoute
   ItCvRoute: typeof ItCvRoute
+  ItLibraryRoute: typeof ItLibraryRoute
   ItMarketplaceRoute: typeof ItMarketplaceRoute
   ItPricingRoute: typeof ItPricingRoute
   PromptSlugRoute: typeof PromptSlugRoute
@@ -1067,6 +1119,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/library': {
+      id: '/it/library'
+      path: '/it/library'
+      fullPath: '/it/library'
+      preLoaderRoute: typeof ItLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/cv': {
       id: '/it/cv'
       path: '/it/cv'
@@ -1121,6 +1180,13 @@ declare module '@tanstack/react-router' {
       path: '/fr/marketplace'
       fullPath: '/fr/marketplace'
       preLoaderRoute: typeof FrMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/library': {
+      id: '/fr/library'
+      path: '/fr/library'
+      fullPath: '/fr/library'
+      preLoaderRoute: typeof FrLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fr/cv': {
@@ -1179,6 +1245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/library': {
+      id: '/es/library'
+      path: '/es/library'
+      fullPath: '/es/library'
+      preLoaderRoute: typeof EsLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/cv': {
       id: '/es/cv'
       path: '/es/cv'
@@ -1233,6 +1306,13 @@ declare module '@tanstack/react-router' {
       path: '/de/marketplace'
       fullPath: '/de/marketplace'
       preLoaderRoute: typeof DeMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/library': {
+      id: '/de/library'
+      path: '/de/library'
+      fullPath: '/de/library'
+      preLoaderRoute: typeof DeLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/de/cv': {
@@ -1405,6 +1485,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeCreatorRoute: DeCreatorRoute,
   DeCreatorsRoute: DeCreatorsRoute,
   DeCvRoute: DeCvRoute,
+  DeLibraryRoute: DeLibraryRoute,
   DeMarketplaceRoute: DeMarketplaceRoute,
   DePricingRoute: DePricingRoute,
   EsAtsRoute: EsAtsRoute,
@@ -1413,6 +1494,7 @@ const rootRouteChildren: RootRouteChildren = {
   EsCreatorRoute: EsCreatorRoute,
   EsCreatorsRoute: EsCreatorsRoute,
   EsCvRoute: EsCvRoute,
+  EsLibraryRoute: EsLibraryRoute,
   EsMarketplaceRoute: EsMarketplaceRoute,
   EsPricingRoute: EsPricingRoute,
   FrAtsRoute: FrAtsRoute,
@@ -1421,6 +1503,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrCreatorRoute: FrCreatorRoute,
   FrCreatorsRoute: FrCreatorsRoute,
   FrCvRoute: FrCvRoute,
+  FrLibraryRoute: FrLibraryRoute,
   FrMarketplaceRoute: FrMarketplaceRoute,
   FrPricingRoute: FrPricingRoute,
   ItAtsRoute: ItAtsRoute,
@@ -1429,6 +1512,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItCreatorRoute: ItCreatorRoute,
   ItCreatorsRoute: ItCreatorsRoute,
   ItCvRoute: ItCvRoute,
+  ItLibraryRoute: ItLibraryRoute,
   ItMarketplaceRoute: ItMarketplaceRoute,
   ItPricingRoute: ItPricingRoute,
   PromptSlugRoute: PromptSlugRoute,
