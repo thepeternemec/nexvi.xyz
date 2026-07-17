@@ -24,7 +24,11 @@ import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
+import { Route as FrIndexRouteImport } from './routes/fr/index'
+import { Route as EsIndexRouteImport } from './routes/es/index'
+import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -108,9 +112,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItIndexRoute = ItIndexRouteImport.update({
+  id: '/it/',
+  path: '/it/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GerIndexRoute = GerIndexRouteImport.update({
   id: '/ger/',
   path: '/ger/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrIndexRoute = FrIndexRouteImport.update({
+  id: '/fr/',
+  path: '/fr/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsIndexRoute = EsIndexRouteImport.update({
+  id: '/es/',
+  path: '/es/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeIndexRoute = DeIndexRouteImport.update({
+  id: '/de/',
+  path: '/de/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromptSlugRoute = PromptSlugRouteImport.update({
@@ -173,7 +197,11 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de/': typeof DeIndexRoute
+  '/es/': typeof EsIndexRoute
+  '/fr/': typeof FrIndexRoute
   '/ger/': typeof GerIndexRoute
+  '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -198,7 +226,11 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de': typeof DeIndexRoute
+  '/es': typeof EsIndexRoute
+  '/fr': typeof FrIndexRoute
   '/ger': typeof GerIndexRoute
+  '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -224,7 +256,11 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/de/': typeof DeIndexRoute
+  '/es/': typeof EsIndexRoute
+  '/fr/': typeof FrIndexRoute
   '/ger/': typeof GerIndexRoute
+  '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -251,7 +287,11 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de/'
+    | '/es/'
+    | '/fr/'
     | '/ger/'
+    | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesByTo: FileRoutesByTo
@@ -276,7 +316,11 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de'
+    | '/es'
+    | '/fr'
     | '/ger'
+    | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   id:
@@ -301,7 +345,11 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/bundle/$slug'
     | '/prompt/$slug'
+    | '/de/'
+    | '/es/'
+    | '/fr/'
     | '/ger/'
+    | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
   fileRoutesById: FileRoutesById
@@ -327,7 +375,11 @@ export interface RootRouteChildren {
   AdminImportRoute: typeof AdminImportRoute
   BundleSlugRoute: typeof BundleSlugRoute
   PromptSlugRoute: typeof PromptSlugRoute
+  DeIndexRoute: typeof DeIndexRoute
+  EsIndexRoute: typeof EsIndexRoute
+  FrIndexRoute: typeof FrIndexRoute
   GerIndexRoute: typeof GerIndexRoute
+  ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
 }
@@ -439,11 +491,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/': {
+      id: '/it/'
+      path: '/it'
+      fullPath: '/it/'
+      preLoaderRoute: typeof ItIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ger/': {
       id: '/ger/'
       path: '/ger'
       fullPath: '/ger/'
       preLoaderRoute: typeof GerIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/': {
+      id: '/fr/'
+      path: '/fr'
+      fullPath: '/fr/'
+      preLoaderRoute: typeof FrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/': {
+      id: '/es/'
+      path: '/es'
+      fullPath: '/es/'
+      preLoaderRoute: typeof EsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/': {
+      id: '/de/'
+      path: '/de'
+      fullPath: '/de/'
+      preLoaderRoute: typeof DeIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prompt/$slug': {
@@ -520,7 +600,11 @@ const rootRouteChildren: RootRouteChildren = {
   AdminImportRoute: AdminImportRoute,
   BundleSlugRoute: BundleSlugRoute,
   PromptSlugRoute: PromptSlugRoute,
+  DeIndexRoute: DeIndexRoute,
+  EsIndexRoute: EsIndexRoute,
+  FrIndexRoute: FrIndexRoute,
   GerIndexRoute: GerIndexRoute,
+  ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
 }
