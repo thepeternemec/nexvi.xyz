@@ -282,6 +282,35 @@ export function PromptDetail() {
           </section>
         )}
       </article>
+
+      <Dialog open={shareOpen} onOpenChange={setShareOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Share this prompt</DialogTitle>
+            <DialogDescription>Send a link to this prompt or share it on your favorite platform.</DialogDescription>
+          </DialogHeader>
+          <div className="mt-2 flex items-center gap-2">
+            <Input readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} className="rounded-full text-xs" />
+            <Button onClick={copyLink} size="sm" className="rounded-full shrink-0">
+              {linkCopied ? <><Check className="mr-1 h-3.5 w-3.5" /> Copied</> : <><LinkIcon className="mr-1 h-3.5 w-3.5" /> Copy</>}
+            </Button>
+          </div>
+          <div className="mt-4 grid grid-cols-4 gap-2">
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareTitle)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Twitter className="h-4 w-4" /> Twitter
+            </a>
+            <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noreferrer" className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Facebook className="h-4 w-4" /> Facebook
+            </a>
+            <a href={`mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(shareText + "\n\n" + shareUrl)}`} className="flex flex-col items-center gap-1.5 rounded-2xl border border-border/70 p-3 text-xs hover:bg-muted">
+              <Mail className="h-4 w-4" /> Email
+            </a>
+          </div>
+        </DialogContent>
+      </Dialog>
     </SiteShell>
   );
 }
