@@ -22,7 +22,7 @@ export const Route = createFileRoute("/bundles")({
   }),
 });
 
-function BundlesPage() {
+export function BundlesPage() {
   const { data: bundles } = useSuspenseQuery(bundlesQueryOptions);
 
   return (

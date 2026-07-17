@@ -1,15 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Search, Menu, X, Sun, Moon, Globe, Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
-import { locales, localeLabel, localeFlag, alternateHref, type Locale } from "@/lib/i18n";
+import { locales, localeLabel, localeFlag, alternateHref, detectLocaleFromPath, type Locale } from "@/lib/i18n";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
+function useDetectedLocale(explicit?: Locale): Locale {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  if (explicit) return explicit;
+  return detectLocaleFromPath(pathname);
+}
 
 function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
@@ -67,7 +73,8 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
   );
 }
 
-export function SiteHeader({ locale = "en" }: { locale?: Locale }) {
+export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
+  const locale = useDetectedLocale(explicitLocale);
   const [open, setOpen] = useState(false);
   const href = (p: string) => alternateHref(locale, p);
   return (
@@ -157,7 +164,8 @@ export function SiteFooter() {
   );
 }
 
-export function SiteShell({ children, locale = "en" }: { children: React.ReactNode; locale?: Locale }) {
+export function SiteShell({ children, locale: explicitLocale }: { children: React.ReactNode; locale?: Locale }) {
+  const locale = useDetectedLocale(explicitLocale);
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader locale={locale} />

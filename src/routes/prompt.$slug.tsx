@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useLoaderData } from "@tanstack/react-router";
 import { useState } from "react";
 import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,8 +26,8 @@ export const Route = createFileRoute("/prompt/$slug")({
   }),
 });
 
-function PromptDetail() {
-  const { prompt } = Route.useLoaderData() as { prompt: Prompt };
+export function PromptDetail() {
+  const { prompt } = useLoaderData({ strict: false }) as { prompt: Prompt };
   const creator = getCreator(prompt.creatorId);
   const category = getCategory(prompt.category);
   const related = prompts.filter(p => p.category === prompt.category && p.id !== prompt.id).slice(0, 3);

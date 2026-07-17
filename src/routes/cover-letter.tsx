@@ -19,7 +19,7 @@ export const Route = createFileRoute("/cover-letter")({
   component: CoverLetterPage,
 });
 
-function CoverLetterPage() {
+export function CoverLetterPage() {
   const run = useServerFn(generateCoverLetter);
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");
