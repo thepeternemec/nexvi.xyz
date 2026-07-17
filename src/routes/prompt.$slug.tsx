@@ -97,7 +97,7 @@ export function PromptDetail() {
                             You're seeing a short preview. Upgrade to Premium for the full prompt, examples, and unlimited copies.
                           </p>
                           <div className="mt-4 flex flex-col gap-2">
-                            <Button asChild className="rounded-full"><Link to="/pricing">Upgrade to Premium</Link></Button>
+                            <Button asChild className="rounded-full"><Link to="/pricing">Subscribe to get full prompt</Link></Button>
                             {!isAuthenticated && (
                               <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I already have an account</Link></Button>
                             )}
