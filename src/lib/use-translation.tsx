@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useRouterState } from "@tanstack/react-router";
 import { translateBatch } from "./translate.functions";
 import { detectLocaleFromPath, type Locale } from "./i18n";
+import { staticTranslations } from "./static-translations";
 
 type Ctx = {
   locale: Locale;
@@ -14,19 +15,21 @@ const TranslationContext = createContext<Ctx>({ locale: "en", t: (s) => s });
 const STORAGE_PREFIX = "aw:i18n:";
 
 function loadCache(locale: Locale): Record<string, string> {
-  if (typeof window === "undefined") return {};
+  const staticCache = staticTranslations[locale] ?? {};
+  if (typeof window === "undefined") return staticCache;
   try {
     const raw = window.localStorage.getItem(STORAGE_PREFIX + locale);
-    return raw ? JSON.parse(raw) : {};
+    const stored = raw ? JSON.parse(raw) : {};
+    return { ...stored, ...staticCache };
   } catch {
-    return {};
+    return staticCache;
   }
 }
 
 function saveCache(locale: Locale, cache: Record<string, string>) {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify(cache));
+    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify({ ...cache, ...(staticTranslations[locale] ?? {}) }));
   } catch {
     // ignore quota
   }
@@ -88,6 +91,8 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       if (!text || locale === "en") return text;
       const trimmed = text.trim();
       if (!trimmed) return text;
+      const staticTranslated = staticTranslations[locale]?.[text] ?? staticTranslations[locale]?.[trimmed];
+      if (staticTranslated) return text === trimmed ? staticTranslated : text.replace(trimmed, staticTranslated);
       if (cacheRef.current[text]) return cacheRef.current[text];
       if (cacheRef.current[trimmed]) return cacheRef.current[trimmed];
       if (!pending.current.has(text) && !inflight.current.has(text)) {
