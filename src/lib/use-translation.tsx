@@ -14,12 +14,16 @@ const TranslationContext = createContext<Ctx>({ locale: "en", t: (s) => s });
 
 const STORAGE_PREFIX = "aw:i18n:";
 
+function removeIdentityMappings(cache: Record<string, string>) {
+  return Object.fromEntries(Object.entries(cache).filter(([source, translated]) => source.trim() !== translated.trim()));
+}
+
 function loadCache(locale: Locale): Record<string, string> {
   const staticCache = staticTranslations[locale] ?? {};
   if (typeof window === "undefined") return staticCache;
   try {
     const raw = window.localStorage.getItem(STORAGE_PREFIX + locale);
-    const stored = raw ? JSON.parse(raw) : {};
+    const stored = raw ? removeIdentityMappings(JSON.parse(raw)) : {};
     return { ...stored, ...staticCache };
   } catch {
     return staticCache;
@@ -29,7 +33,7 @@ function loadCache(locale: Locale): Record<string, string> {
 function saveCache(locale: Locale, cache: Record<string, string>) {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify({ ...cache, ...(staticTranslations[locale] ?? {}) }));
+    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify(removeIdentityMappings({ ...cache, ...(staticTranslations[locale] ?? {}) })));
   } catch {
     // ignore quota
   }
@@ -93,8 +97,8 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       if (!trimmed) return text;
       const staticTranslated = staticTranslations[locale]?.[text] ?? staticTranslations[locale]?.[trimmed];
       if (staticTranslated) return text === trimmed ? staticTranslated : text.replace(trimmed, staticTranslated);
-      if (cacheRef.current[text]) return cacheRef.current[text];
-      if (cacheRef.current[trimmed]) return cacheRef.current[trimmed];
+      const cached = cacheRef.current[text] ?? cacheRef.current[trimmed];
+      if (cached && cached.trim() !== trimmed) return cached;
       if (!pending.current.has(text) && !inflight.current.has(text)) {
         pending.current.add(text);
         schedule();
