@@ -30,42 +30,58 @@ import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
+import { Route as ItSignupRouteImport } from './routes/it/signup'
 import { Route as ItPricingRouteImport } from './routes/it/pricing'
 import { Route as ItMarketplaceRouteImport } from './routes/it/marketplace'
+import { Route as ItLoginRouteImport } from './routes/it/login'
 import { Route as ItLibraryRouteImport } from './routes/it/library'
+import { Route as ItDashboardRouteImport } from './routes/it/dashboard'
 import { Route as ItCvRouteImport } from './routes/it/cv'
 import { Route as ItCreatorsRouteImport } from './routes/it/creators'
 import { Route as ItCreatorRouteImport } from './routes/it/creator'
 import { Route as ItCoverLetterRouteImport } from './routes/it/cover-letter'
 import { Route as ItBundlesRouteImport } from './routes/it/bundles'
 import { Route as ItAtsRouteImport } from './routes/it/ats'
+import { Route as ItAssistantRouteImport } from './routes/it/assistant'
+import { Route as FrSignupRouteImport } from './routes/fr/signup'
 import { Route as FrPricingRouteImport } from './routes/fr/pricing'
 import { Route as FrMarketplaceRouteImport } from './routes/fr/marketplace'
+import { Route as FrLoginRouteImport } from './routes/fr/login'
 import { Route as FrLibraryRouteImport } from './routes/fr/library'
+import { Route as FrDashboardRouteImport } from './routes/fr/dashboard'
 import { Route as FrCvRouteImport } from './routes/fr/cv'
 import { Route as FrCreatorsRouteImport } from './routes/fr/creators'
 import { Route as FrCreatorRouteImport } from './routes/fr/creator'
 import { Route as FrCoverLetterRouteImport } from './routes/fr/cover-letter'
 import { Route as FrBundlesRouteImport } from './routes/fr/bundles'
 import { Route as FrAtsRouteImport } from './routes/fr/ats'
+import { Route as FrAssistantRouteImport } from './routes/fr/assistant'
+import { Route as EsSignupRouteImport } from './routes/es/signup'
 import { Route as EsPricingRouteImport } from './routes/es/pricing'
 import { Route as EsMarketplaceRouteImport } from './routes/es/marketplace'
+import { Route as EsLoginRouteImport } from './routes/es/login'
 import { Route as EsLibraryRouteImport } from './routes/es/library'
+import { Route as EsDashboardRouteImport } from './routes/es/dashboard'
 import { Route as EsCvRouteImport } from './routes/es/cv'
 import { Route as EsCreatorsRouteImport } from './routes/es/creators'
 import { Route as EsCreatorRouteImport } from './routes/es/creator'
 import { Route as EsCoverLetterRouteImport } from './routes/es/cover-letter'
 import { Route as EsBundlesRouteImport } from './routes/es/bundles'
 import { Route as EsAtsRouteImport } from './routes/es/ats'
+import { Route as EsAssistantRouteImport } from './routes/es/assistant'
+import { Route as DeSignupRouteImport } from './routes/de/signup'
 import { Route as DePricingRouteImport } from './routes/de/pricing'
 import { Route as DeMarketplaceRouteImport } from './routes/de/marketplace'
+import { Route as DeLoginRouteImport } from './routes/de/login'
 import { Route as DeLibraryRouteImport } from './routes/de/library'
+import { Route as DeDashboardRouteImport } from './routes/de/dashboard'
 import { Route as DeCvRouteImport } from './routes/de/cv'
 import { Route as DeCreatorsRouteImport } from './routes/de/creators'
 import { Route as DeCreatorRouteImport } from './routes/de/creator'
 import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
 import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
+import { Route as DeAssistantRouteImport } from './routes/de/assistant'
 import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
@@ -186,6 +202,11 @@ const PromptSlugRoute = PromptSlugRouteImport.update({
   path: '/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItSignupRoute = ItSignupRouteImport.update({
+  id: '/it/signup',
+  path: '/it/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItPricingRoute = ItPricingRouteImport.update({
   id: '/it/pricing',
   path: '/it/pricing',
@@ -196,9 +217,19 @@ const ItMarketplaceRoute = ItMarketplaceRouteImport.update({
   path: '/it/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItLoginRoute = ItLoginRouteImport.update({
+  id: '/it/login',
+  path: '/it/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItLibraryRoute = ItLibraryRouteImport.update({
   id: '/it/library',
   path: '/it/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItDashboardRoute = ItDashboardRouteImport.update({
+  id: '/it/dashboard',
+  path: '/it/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ItCvRoute = ItCvRouteImport.update({
@@ -231,6 +262,16 @@ const ItAtsRoute = ItAtsRouteImport.update({
   path: '/it/ats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItAssistantRoute = ItAssistantRouteImport.update({
+  id: '/it/assistant',
+  path: '/it/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrSignupRoute = FrSignupRouteImport.update({
+  id: '/fr/signup',
+  path: '/fr/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrPricingRoute = FrPricingRouteImport.update({
   id: '/fr/pricing',
   path: '/fr/pricing',
@@ -241,9 +282,19 @@ const FrMarketplaceRoute = FrMarketplaceRouteImport.update({
   path: '/fr/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrLoginRoute = FrLoginRouteImport.update({
+  id: '/fr/login',
+  path: '/fr/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrLibraryRoute = FrLibraryRouteImport.update({
   id: '/fr/library',
   path: '/fr/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrDashboardRoute = FrDashboardRouteImport.update({
+  id: '/fr/dashboard',
+  path: '/fr/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrCvRoute = FrCvRouteImport.update({
@@ -276,6 +327,16 @@ const FrAtsRoute = FrAtsRouteImport.update({
   path: '/fr/ats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrAssistantRoute = FrAssistantRouteImport.update({
+  id: '/fr/assistant',
+  path: '/fr/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSignupRoute = EsSignupRouteImport.update({
+  id: '/es/signup',
+  path: '/es/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsPricingRoute = EsPricingRouteImport.update({
   id: '/es/pricing',
   path: '/es/pricing',
@@ -286,9 +347,19 @@ const EsMarketplaceRoute = EsMarketplaceRouteImport.update({
   path: '/es/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsLoginRoute = EsLoginRouteImport.update({
+  id: '/es/login',
+  path: '/es/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsLibraryRoute = EsLibraryRouteImport.update({
   id: '/es/library',
   path: '/es/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsDashboardRoute = EsDashboardRouteImport.update({
+  id: '/es/dashboard',
+  path: '/es/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsCvRoute = EsCvRouteImport.update({
@@ -321,6 +392,16 @@ const EsAtsRoute = EsAtsRouteImport.update({
   path: '/es/ats',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsAssistantRoute = EsAssistantRouteImport.update({
+  id: '/es/assistant',
+  path: '/es/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeSignupRoute = DeSignupRouteImport.update({
+  id: '/de/signup',
+  path: '/de/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DePricingRoute = DePricingRouteImport.update({
   id: '/de/pricing',
   path: '/de/pricing',
@@ -331,9 +412,19 @@ const DeMarketplaceRoute = DeMarketplaceRouteImport.update({
   path: '/de/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeLoginRoute = DeLoginRouteImport.update({
+  id: '/de/login',
+  path: '/de/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DeLibraryRoute = DeLibraryRouteImport.update({
   id: '/de/library',
   path: '/de/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeDashboardRoute = DeDashboardRouteImport.update({
+  id: '/de/dashboard',
+  path: '/de/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeCvRoute = DeCvRouteImport.update({
@@ -364,6 +455,11 @@ const DeBundlesRoute = DeBundlesRouteImport.update({
 const DeAtsRoute = DeAtsRouteImport.update({
   id: '/de/ats',
   path: '/de/ats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeAssistantRoute = DeAssistantRouteImport.update({
+  id: '/de/assistant',
+  path: '/de/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BundleSlugRoute = BundleSlugRouteImport.update({
@@ -460,42 +556,58 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/dashboard': typeof DeDashboardRoute
   '/de/library': typeof DeLibraryRoute
+  '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/signup': typeof DeSignupRoute
+  '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/dashboard': typeof EsDashboardRoute
   '/es/library': typeof EsLibraryRoute
+  '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/signup': typeof EsSignupRoute
+  '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/dashboard': typeof FrDashboardRoute
   '/fr/library': typeof FrLibraryRoute
+  '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/signup': typeof FrSignupRoute
+  '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/dashboard': typeof ItDashboardRoute
   '/it/library': typeof ItLibraryRoute
+  '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
@@ -533,42 +645,58 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/dashboard': typeof DeDashboardRoute
   '/de/library': typeof DeLibraryRoute
+  '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/signup': typeof DeSignupRoute
+  '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/dashboard': typeof EsDashboardRoute
   '/es/library': typeof EsLibraryRoute
+  '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/signup': typeof EsSignupRoute
+  '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/dashboard': typeof FrDashboardRoute
   '/fr/library': typeof FrLibraryRoute
+  '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/signup': typeof FrSignupRoute
+  '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/dashboard': typeof ItDashboardRoute
   '/it/library': typeof ItLibraryRoute
+  '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
@@ -607,42 +735,58 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
+  '/de/dashboard': typeof DeDashboardRoute
   '/de/library': typeof DeLibraryRoute
+  '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/signup': typeof DeSignupRoute
+  '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
+  '/es/dashboard': typeof EsDashboardRoute
   '/es/library': typeof EsLibraryRoute
+  '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/signup': typeof EsSignupRoute
+  '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
+  '/fr/dashboard': typeof FrDashboardRoute
   '/fr/library': typeof FrLibraryRoute
+  '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/signup': typeof FrSignupRoute
+  '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
+  '/it/dashboard': typeof ItDashboardRoute
   '/it/library': typeof ItLibraryRoute
+  '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
@@ -682,42 +826,58 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/dashboard'
     | '/de/library'
+    | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/signup'
+    | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/dashboard'
     | '/es/library'
+    | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/signup'
+    | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/dashboard'
     | '/fr/library'
+    | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/signup'
+    | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/dashboard'
     | '/it/library'
+    | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/signup'
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
@@ -755,42 +915,58 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/dashboard'
     | '/de/library'
+    | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/signup'
+    | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/dashboard'
     | '/es/library'
+    | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/signup'
+    | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/dashboard'
     | '/fr/library'
+    | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/signup'
+    | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/dashboard'
     | '/it/library'
+    | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/signup'
     | '/prompt/$slug'
     | '/de'
     | '/es'
@@ -828,42 +1004,58 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
+    | '/de/dashboard'
     | '/de/library'
+    | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/signup'
+    | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
+    | '/es/dashboard'
     | '/es/library'
+    | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/signup'
+    | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
+    | '/fr/dashboard'
     | '/fr/library'
+    | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/signup'
+    | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
+    | '/it/dashboard'
     | '/it/library'
+    | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/signup'
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
@@ -902,42 +1094,58 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
   BundleSlugRoute: typeof BundleSlugRoute
+  DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
   DeBundlesRoute: typeof DeBundlesRoute
   DeCoverLetterRoute: typeof DeCoverLetterRoute
   DeCreatorRoute: typeof DeCreatorRoute
   DeCreatorsRoute: typeof DeCreatorsRoute
   DeCvRoute: typeof DeCvRoute
+  DeDashboardRoute: typeof DeDashboardRoute
   DeLibraryRoute: typeof DeLibraryRoute
+  DeLoginRoute: typeof DeLoginRoute
   DeMarketplaceRoute: typeof DeMarketplaceRoute
   DePricingRoute: typeof DePricingRoute
+  DeSignupRoute: typeof DeSignupRoute
+  EsAssistantRoute: typeof EsAssistantRoute
   EsAtsRoute: typeof EsAtsRoute
   EsBundlesRoute: typeof EsBundlesRoute
   EsCoverLetterRoute: typeof EsCoverLetterRoute
   EsCreatorRoute: typeof EsCreatorRoute
   EsCreatorsRoute: typeof EsCreatorsRoute
   EsCvRoute: typeof EsCvRoute
+  EsDashboardRoute: typeof EsDashboardRoute
   EsLibraryRoute: typeof EsLibraryRoute
+  EsLoginRoute: typeof EsLoginRoute
   EsMarketplaceRoute: typeof EsMarketplaceRoute
   EsPricingRoute: typeof EsPricingRoute
+  EsSignupRoute: typeof EsSignupRoute
+  FrAssistantRoute: typeof FrAssistantRoute
   FrAtsRoute: typeof FrAtsRoute
   FrBundlesRoute: typeof FrBundlesRoute
   FrCoverLetterRoute: typeof FrCoverLetterRoute
   FrCreatorRoute: typeof FrCreatorRoute
   FrCreatorsRoute: typeof FrCreatorsRoute
   FrCvRoute: typeof FrCvRoute
+  FrDashboardRoute: typeof FrDashboardRoute
   FrLibraryRoute: typeof FrLibraryRoute
+  FrLoginRoute: typeof FrLoginRoute
   FrMarketplaceRoute: typeof FrMarketplaceRoute
   FrPricingRoute: typeof FrPricingRoute
+  FrSignupRoute: typeof FrSignupRoute
+  ItAssistantRoute: typeof ItAssistantRoute
   ItAtsRoute: typeof ItAtsRoute
   ItBundlesRoute: typeof ItBundlesRoute
   ItCoverLetterRoute: typeof ItCoverLetterRoute
   ItCreatorRoute: typeof ItCreatorRoute
   ItCreatorsRoute: typeof ItCreatorsRoute
   ItCvRoute: typeof ItCvRoute
+  ItDashboardRoute: typeof ItDashboardRoute
   ItLibraryRoute: typeof ItLibraryRoute
+  ItLoginRoute: typeof ItLoginRoute
   ItMarketplaceRoute: typeof ItMarketplaceRoute
   ItPricingRoute: typeof ItPricingRoute
+  ItSignupRoute: typeof ItSignupRoute
   PromptSlugRoute: typeof PromptSlugRoute
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
@@ -1105,6 +1313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/signup': {
+      id: '/it/signup'
+      path: '/it/signup'
+      fullPath: '/it/signup'
+      preLoaderRoute: typeof ItSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/pricing': {
       id: '/it/pricing'
       path: '/it/pricing'
@@ -1119,11 +1334,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/login': {
+      id: '/it/login'
+      path: '/it/login'
+      fullPath: '/it/login'
+      preLoaderRoute: typeof ItLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/library': {
       id: '/it/library'
       path: '/it/library'
       fullPath: '/it/library'
       preLoaderRoute: typeof ItLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/dashboard': {
+      id: '/it/dashboard'
+      path: '/it/dashboard'
+      fullPath: '/it/dashboard'
+      preLoaderRoute: typeof ItDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/it/cv': {
@@ -1168,6 +1397,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItAtsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/assistant': {
+      id: '/it/assistant'
+      path: '/it/assistant'
+      fullPath: '/it/assistant'
+      preLoaderRoute: typeof ItAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/signup': {
+      id: '/fr/signup'
+      path: '/fr/signup'
+      fullPath: '/fr/signup'
+      preLoaderRoute: typeof FrSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/pricing': {
       id: '/fr/pricing'
       path: '/fr/pricing'
@@ -1182,11 +1425,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/login': {
+      id: '/fr/login'
+      path: '/fr/login'
+      fullPath: '/fr/login'
+      preLoaderRoute: typeof FrLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/library': {
       id: '/fr/library'
       path: '/fr/library'
       fullPath: '/fr/library'
       preLoaderRoute: typeof FrLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/dashboard': {
+      id: '/fr/dashboard'
+      path: '/fr/dashboard'
+      fullPath: '/fr/dashboard'
+      preLoaderRoute: typeof FrDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fr/cv': {
@@ -1231,6 +1488,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrAtsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/assistant': {
+      id: '/fr/assistant'
+      path: '/fr/assistant'
+      fullPath: '/fr/assistant'
+      preLoaderRoute: typeof FrAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/signup': {
+      id: '/es/signup'
+      path: '/es/signup'
+      fullPath: '/es/signup'
+      preLoaderRoute: typeof EsSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/pricing': {
       id: '/es/pricing'
       path: '/es/pricing'
@@ -1245,11 +1516,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/login': {
+      id: '/es/login'
+      path: '/es/login'
+      fullPath: '/es/login'
+      preLoaderRoute: typeof EsLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/library': {
       id: '/es/library'
       path: '/es/library'
       fullPath: '/es/library'
       preLoaderRoute: typeof EsLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/dashboard': {
+      id: '/es/dashboard'
+      path: '/es/dashboard'
+      fullPath: '/es/dashboard'
+      preLoaderRoute: typeof EsDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/cv': {
@@ -1294,6 +1579,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsAtsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/assistant': {
+      id: '/es/assistant'
+      path: '/es/assistant'
+      fullPath: '/es/assistant'
+      preLoaderRoute: typeof EsAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/signup': {
+      id: '/de/signup'
+      path: '/de/signup'
+      fullPath: '/de/signup'
+      preLoaderRoute: typeof DeSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/pricing': {
       id: '/de/pricing'
       path: '/de/pricing'
@@ -1308,11 +1607,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeMarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/de/login': {
+      id: '/de/login'
+      path: '/de/login'
+      fullPath: '/de/login'
+      preLoaderRoute: typeof DeLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/library': {
       id: '/de/library'
       path: '/de/library'
       fullPath: '/de/library'
       preLoaderRoute: typeof DeLibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/dashboard': {
+      id: '/de/dashboard'
+      path: '/de/dashboard'
+      fullPath: '/de/dashboard'
+      preLoaderRoute: typeof DeDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/de/cv': {
@@ -1355,6 +1668,13 @@ declare module '@tanstack/react-router' {
       path: '/de/ats'
       fullPath: '/de/ats'
       preLoaderRoute: typeof DeAtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/assistant': {
+      id: '/de/assistant'
+      path: '/de/assistant'
+      fullPath: '/de/assistant'
+      preLoaderRoute: typeof DeAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bundle/$slug': {
@@ -1479,42 +1799,58 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
   BundleSlugRoute: BundleSlugRoute,
+  DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
   DeBundlesRoute: DeBundlesRoute,
   DeCoverLetterRoute: DeCoverLetterRoute,
   DeCreatorRoute: DeCreatorRoute,
   DeCreatorsRoute: DeCreatorsRoute,
   DeCvRoute: DeCvRoute,
+  DeDashboardRoute: DeDashboardRoute,
   DeLibraryRoute: DeLibraryRoute,
+  DeLoginRoute: DeLoginRoute,
   DeMarketplaceRoute: DeMarketplaceRoute,
   DePricingRoute: DePricingRoute,
+  DeSignupRoute: DeSignupRoute,
+  EsAssistantRoute: EsAssistantRoute,
   EsAtsRoute: EsAtsRoute,
   EsBundlesRoute: EsBundlesRoute,
   EsCoverLetterRoute: EsCoverLetterRoute,
   EsCreatorRoute: EsCreatorRoute,
   EsCreatorsRoute: EsCreatorsRoute,
   EsCvRoute: EsCvRoute,
+  EsDashboardRoute: EsDashboardRoute,
   EsLibraryRoute: EsLibraryRoute,
+  EsLoginRoute: EsLoginRoute,
   EsMarketplaceRoute: EsMarketplaceRoute,
   EsPricingRoute: EsPricingRoute,
+  EsSignupRoute: EsSignupRoute,
+  FrAssistantRoute: FrAssistantRoute,
   FrAtsRoute: FrAtsRoute,
   FrBundlesRoute: FrBundlesRoute,
   FrCoverLetterRoute: FrCoverLetterRoute,
   FrCreatorRoute: FrCreatorRoute,
   FrCreatorsRoute: FrCreatorsRoute,
   FrCvRoute: FrCvRoute,
+  FrDashboardRoute: FrDashboardRoute,
   FrLibraryRoute: FrLibraryRoute,
+  FrLoginRoute: FrLoginRoute,
   FrMarketplaceRoute: FrMarketplaceRoute,
   FrPricingRoute: FrPricingRoute,
+  FrSignupRoute: FrSignupRoute,
+  ItAssistantRoute: ItAssistantRoute,
   ItAtsRoute: ItAtsRoute,
   ItBundlesRoute: ItBundlesRoute,
   ItCoverLetterRoute: ItCoverLetterRoute,
   ItCreatorRoute: ItCreatorRoute,
   ItCreatorsRoute: ItCreatorsRoute,
   ItCvRoute: ItCvRoute,
+  ItDashboardRoute: ItDashboardRoute,
   ItLibraryRoute: ItLibraryRoute,
+  ItLoginRoute: ItLoginRoute,
   ItMarketplaceRoute: ItMarketplaceRoute,
   ItPricingRoute: ItPricingRoute,
+  ItSignupRoute: ItSignupRoute,
   PromptSlugRoute: PromptSlugRoute,
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,

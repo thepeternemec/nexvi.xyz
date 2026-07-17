@@ -93,7 +93,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
         <div className="hidden items-center gap-1.5 md:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
-          <Link to="/login"><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Sign in</Button></Link>
+          <a href={href("/login")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Sign in</Button></a>
           <a href={href("/library")}><Button size="sm" className="h-8 rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Find a job prompt</Button></a>
         </div>
         <div className="flex items-center gap-2 md:hidden">
@@ -111,7 +111,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
             ))}
             <div className="mt-2 flex gap-2">
-              <Link to="/login" className="flex-1"><Button variant="outline" size="sm" className="w-full">Sign in</Button></Link>
+              <a href={href("/login")} className="flex-1"><Button variant="outline" size="sm" className="w-full">Sign in</Button></a>
               <a href={href("/library")} className="flex-1"><Button size="sm" className="w-full">Find a job prompt</Button></a>
             </div>
           </div>
@@ -121,7 +121,8 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   );
 }
 
-export function SiteFooter() {
+export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
+  const href = (p: string) => alternateHref(locale, p);
   return (
     <footer className="border-t border-border/60 bg-muted/30">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
@@ -139,18 +140,18 @@ export function SiteFooter() {
         <div>
           <div className="text-sm font-medium">Tools</div>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href="/cv">CV Generator</a></li>
-            <li><a href="/cover-letter">Cover Letter Generator</a></li>
-            <li><a href="/ats">ATS Optimizer</a></li>
-            <li><a href="/library">Prompt Library</a></li>
+            <li><a href={href("/cv")}>CV Generator</a></li>
+            <li><a href={href("/cover-letter")}>Cover Letter Generator</a></li>
+            <li><a href={href("/ats")}>ATS Optimizer</a></li>
+            <li><a href={href("/library")}>Prompt Library</a></li>
           </ul>
         </div>
         <div>
           <div className="text-sm font-medium">Company</div>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href="/pricing">Pricing</a></li>
-            <li><a href="/login">Sign in</a></li>
-            <li><a href="/signup">Create account</a></li>
+            <li><a href={href("/pricing")}>Pricing</a></li>
+            <li><a href={href("/login")}>Sign in</a></li>
+            <li><a href={href("/signup")}>Create account</a></li>
           </ul>
         </div>
       </div>
@@ -170,7 +171,7 @@ export function SiteShell({ children, locale: explicitLocale }: { children: Reac
     <div className="flex min-h-screen flex-col">
       <SiteHeader locale={locale} />
       <main className="flex-1">{children}</main>
-      <SiteFooter />
+      <SiteFooter locale={locale} />
     </div>
   );
 }

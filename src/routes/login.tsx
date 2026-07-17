@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 type LoginSearch = { next?: string };
 
@@ -20,14 +21,17 @@ export const Route = createFileRoute("/login")({
   }),
 });
 
-function Login() {
+export function Login() {
   return <AuthShell title="Welcome back." subtitle="Sign in to keep going." cta="Sign in" alt="Don't have an account?" altLink="/signup" altCta="Create one" />;
 }
 
 export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }: { title: string; subtitle: string; cta: string; alt: string; altLink: string; altCta: string; signup?: boolean }) {
   const navigate = useNavigate();
   const search = useSearch({ strict: false }) as LoginSearch;
-  const nextPath = isSafeNext(search.next) ? search.next : "/dashboard";
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
+  const href = (p: string) => alternateHref(locale, p);
+  const nextPath = isSafeNext(search.next) ? search.next : href("/dashboard");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,10 +70,10 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
       <div className="relative hidden overflow-hidden bg-aurora lg:block">
         <div className="absolute inset-0 bg-grain opacity-50" />
         <div className="relative flex h-full flex-col justify-between p-12">
-          <Link to="/" className="flex items-center gap-2">
+          <a href={href("/")} className="flex items-center gap-2">
             <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
             <span className="font-display text-xl">ApplyWise</span>
-          </Link>
+          </a>
           <div>
             <h2 className="font-display text-5xl leading-tight tracking-tight">AI prompts that help you actually land the job.</h2>
             <p className="mt-4 max-w-md text-muted-foreground">Loved by 50,000+ candidates preparing tailored CVs, cover letters, and interviews.</p>
@@ -79,10 +83,10 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
       </div>
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-sm">
-          <Link to="/" className="mb-8 inline-flex items-center gap-2 lg:hidden">
+          <a href={href("/")} className="mb-8 inline-flex items-center gap-2 lg:hidden">
             <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
             <span className="font-display text-xl">ApplyWise</span>
-          </Link>
+          </a>
           <h1 className="font-display text-4xl tracking-tight">{title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>
           <form className="mt-8 space-y-4" onSubmit={onSubmit}>
@@ -103,7 +107,7 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
             <Button type="submit" size="lg" disabled={loading} className="w-full rounded-full">{loading ? "Please wait…" : cta}</Button>
           </form>
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            {alt} <Link to={altLink} search={{ next: nextPath }} className="font-medium text-foreground hover:underline">{altCta}</Link>
+            {alt} <a href={`${href(altLink)}?next=${encodeURIComponent(nextPath)}`} className="font-medium text-foreground hover:underline">{altCta}</a>
           </p>
         </div>
       </div>
