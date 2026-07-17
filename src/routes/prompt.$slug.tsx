@@ -102,6 +102,12 @@ export function PromptDetail() {
                               <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I already have an account</Link></Button>
                             )}
                           </div>
+                          <ul className="mt-4 space-y-1.5 text-left text-xs text-muted-foreground">
+                            <li className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" /> Unlock every Premium prompt in the library</li>
+                            <li className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" /> Copy-ready templates with examples & variables</li>
+                            <li className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" /> AI CV, cover letter & ATS scoring tools</li>
+                            <li className="flex items-start gap-2"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" /> Cancel anytime — no commitment</li>
+                          </ul>
                         </div>
                       </div>
                     )}
