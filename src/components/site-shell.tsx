@@ -1,8 +1,15 @@
 import { Link } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
+import { locales, localeLabel, localeFlag, alternateHref, type Locale } from "@/lib/i18n";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 function ThemeToggle() {
   const { isDark, toggleTheme } = useTheme();
