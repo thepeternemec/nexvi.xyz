@@ -64,7 +64,7 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       return;
     }
     const batch = Array.from(pending.current).filter(
-      (t) => !(t in cacheRef.current) && !inflight.current.has(t),
+      (t) => (!cacheRef.current[t] || cacheRef.current[t].trim() === t.trim()) && !inflight.current.has(t),
     );
     pending.current.clear();
     if (batch.length === 0) return;
@@ -188,11 +188,12 @@ export function AutoTranslate() {
       raf = requestAnimationFrame(scan);
     });
 
-    scan();
+    const initialScan = window.setTimeout(scan, 300);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 
     return () => {
       observer.disconnect();
+      window.clearTimeout(initialScan);
       cancelAnimationFrame(raf);
     };
   }, [locale, t]);
