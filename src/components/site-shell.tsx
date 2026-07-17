@@ -31,7 +31,7 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { href: "/library", label: "Find a Job Library" },
+  { href: "/library", label: "sFind a Job Library" },
   { href: "/cv", label: "CV Generator" },
   { href: "/cover-letter", label: "Cover Letter" },
   { href: "/ats", label: "ATS Optimizer" },
