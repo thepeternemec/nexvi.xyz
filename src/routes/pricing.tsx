@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { useSubscription } from "@/hooks/use-subscription";
 import { startSubscription, cancelSubscription } from "@/lib/subscriptions.functions";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export const Route = createFileRoute("/pricing")({ component: Pricing });
 
@@ -45,6 +46,9 @@ const plans = [
 export function Pricing() {
   const sub = useSubscription();
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
+  const href = (p: string) => alternateHref(locale, p);
   const start = useServerFn(startSubscription);
   const cancel = useServerFn(cancelSubscription);
   const [busy, setBusy] = useState<string | null>(null);
@@ -129,9 +133,9 @@ export function Pricing() {
                       </div>
                     )
                   ) : (
-                    <Link to={p.key === "free" ? "/signup" : "/signup"} className="mt-7 inline-flex w-full">
+        <a href={href("/signup")} className="mt-7 inline-flex w-full">
                       <Button className="w-full rounded-full" variant={p.highlight ? "default" : "outline"} size="lg">{p.cta}</Button>
-                    </Link>
+        </a>
                   )}
                 </div>
               );

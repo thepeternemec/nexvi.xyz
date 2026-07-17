@@ -1,7 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { Crown, Lock, Package } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useSubscription } from "@/hooks/use-subscription";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 // Topic-driven color tokens. Each topic gets a calm, distinct surface tint
 // + a matching accent used for the topic icon foreground.
@@ -47,14 +48,15 @@ type BundleCardProps = {
 
 export function BundleCard({ bundle }: BundleCardProps) {
   const { isPremium: hasPremium } = useSubscription();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
   const premium = bundle.is_premium;
   const locked = premium && !hasPremium;
   const { bg: tint, fg: accent } = colorsForTopic(bundle.category_slug);
 
   return (
-    <Link
-      to="/bundle/$slug"
-      params={{ slug: bundle.slug }}
+    <a
+      href={alternateHref(locale, `/bundle/${bundle.slug}`)}
       className="group relative flex flex-col overflow-hidden rounded-2xl border border-border/70 bg-card transition-all duration-300 hover:-translate-y-1 hover:border-border hover:shadow-[0_8px_32px_-12px_rgba(0,0,0,0.12)]"
     >
       <div className={`relative aspect-[16/10] w-full ${tint}`}>
@@ -97,7 +99,7 @@ export function BundleCard({ bundle }: BundleCardProps) {
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }
 

@@ -76,7 +76,7 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       setCache(merged);
       saveCache(locale, merged);
     } catch (e) {
-      console.error("translation batch failed", e);
+      // Keep built-in/local cached translations active if runtime translation is unavailable.
     } finally {
       batch.forEach((b) => inflight.current.delete(b));
     }

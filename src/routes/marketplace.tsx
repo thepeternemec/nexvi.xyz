@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useSearch, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
 import { categories, prompts } from "@/lib/mock-data";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 type Search = { q?: string; category?: string; sort?: "popular" | "newest" | "rating"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
@@ -24,6 +25,8 @@ export const Route = createFileRoute("/marketplace")({
 export function Marketplace() {
   const search = useSearch({ strict: false });
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
   const [q, setQ] = useState(search.q ?? "");
 
   const filtered = useMemo(() => {
@@ -54,7 +57,7 @@ export function Marketplace() {
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-          <Link to="/" className="text-xs text-muted-foreground">← Back</Link>
+          <a href={alternateHref(locale, "/")} className="text-xs text-muted-foreground">← Back</a>
           <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
             Prompt Library • Curated for job seekers
           </div>
