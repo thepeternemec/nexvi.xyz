@@ -39,7 +39,27 @@ export function PromptDetail() {
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const SAVED_KEY = "applywise:saved-prompts";
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(SAVED_KEY);
+      const list: string[] = raw ? JSON.parse(raw) : [];
+      setSaved(list.includes(prompt.id));
+    } catch { /* ignore */ }
+  }, [prompt.id]);
+  const onToggleSave = () => {
+    try {
+      const raw = localStorage.getItem(SAVED_KEY);
+      const list: string[] = raw ? JSON.parse(raw) : [];
+      const next = list.includes(prompt.id) ? list.filter(id => id !== prompt.id) : [...list, prompt.id];
+      localStorage.setItem(SAVED_KEY, JSON.stringify(next));
+      const nowSaved = next.includes(prompt.id);
+      setSaved(nowSaved);
+      toast.success(nowSaved ? "Prompt saved" : "Removed from saved");
+    } catch { toast.error("Couldn't update saved prompts"); }
+  };
   const [linkCopied, setLinkCopied] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareTitle = `${prompt.title} — ApplyWise`;
