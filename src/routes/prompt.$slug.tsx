@@ -257,7 +257,9 @@ export function PromptDetail() {
                   <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this prompt — free"}</Button>
                 )}
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1 rounded-full"><Bookmark className="mr-1.5 h-4 w-4" /> Save</Button>
+                  <Button variant={saved ? "default" : "outline"} onClick={onToggleSave} aria-pressed={saved} className="flex-1 rounded-full">
+                    {saved ? <><BookmarkCheck className="mr-1.5 h-4 w-4" /> Saved</> : <><Bookmark className="mr-1.5 h-4 w-4" /> Save</>}
+                  </Button>
                   <Button variant="outline" onClick={onShareClick} className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
                 </div>
               </div>
