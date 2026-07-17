@@ -1,4 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { useLoaderData } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { queryOptions } from "@tanstack/react-query";
 import { Lock, Crown, Package, Star, ArrowRight, Copy, Check } from "lucide-react";
@@ -50,7 +51,7 @@ type PromptItem = {
 };
 
 export default function BundleDetail() {
-  const { bundle, prompts } = Route.useLoaderData() as { bundle: { slug: string; title: string; description: string | null; cover: string | null; is_premium: boolean }; prompts: PromptItem[] };
+  const { bundle, prompts } = useLoaderData({ strict: false }) as { bundle: { slug: string; title: string; description: string | null; cover: string | null; is_premium: boolean }; prompts: PromptItem[] };
   const { isPremium: hasPremium, isAuthenticated, loading: subLoading } = useSubscription();
   const premium = bundle.is_premium;
   const locked = premium && !hasPremium;

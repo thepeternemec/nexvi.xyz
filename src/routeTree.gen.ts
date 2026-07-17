@@ -30,10 +30,50 @@ import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
+import { Route as ItPricingRouteImport } from './routes/it/pricing'
+import { Route as ItMarketplaceRouteImport } from './routes/it/marketplace'
+import { Route as ItCvRouteImport } from './routes/it/cv'
+import { Route as ItCreatorsRouteImport } from './routes/it/creators'
+import { Route as ItCreatorRouteImport } from './routes/it/creator'
+import { Route as ItCoverLetterRouteImport } from './routes/it/cover-letter'
+import { Route as ItBundlesRouteImport } from './routes/it/bundles'
+import { Route as ItAtsRouteImport } from './routes/it/ats'
+import { Route as FrPricingRouteImport } from './routes/fr/pricing'
+import { Route as FrMarketplaceRouteImport } from './routes/fr/marketplace'
+import { Route as FrCvRouteImport } from './routes/fr/cv'
+import { Route as FrCreatorsRouteImport } from './routes/fr/creators'
+import { Route as FrCreatorRouteImport } from './routes/fr/creator'
+import { Route as FrCoverLetterRouteImport } from './routes/fr/cover-letter'
+import { Route as FrBundlesRouteImport } from './routes/fr/bundles'
+import { Route as FrAtsRouteImport } from './routes/fr/ats'
+import { Route as EsPricingRouteImport } from './routes/es/pricing'
+import { Route as EsMarketplaceRouteImport } from './routes/es/marketplace'
+import { Route as EsCvRouteImport } from './routes/es/cv'
+import { Route as EsCreatorsRouteImport } from './routes/es/creators'
+import { Route as EsCreatorRouteImport } from './routes/es/creator'
+import { Route as EsCoverLetterRouteImport } from './routes/es/cover-letter'
+import { Route as EsBundlesRouteImport } from './routes/es/bundles'
+import { Route as EsAtsRouteImport } from './routes/es/ats'
+import { Route as DePricingRouteImport } from './routes/de/pricing'
+import { Route as DeMarketplaceRouteImport } from './routes/de/marketplace'
+import { Route as DeCvRouteImport } from './routes/de/cv'
+import { Route as DeCreatorsRouteImport } from './routes/de/creators'
+import { Route as DeCreatorRouteImport } from './routes/de/creator'
+import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
+import { Route as DeBundlesRouteImport } from './routes/de/bundles'
+import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
+import { Route as ItBundleSlugRouteImport } from './routes/it/bundle.$slug'
+import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
+import { Route as FrBundleSlugRouteImport } from './routes/fr/bundle.$slug'
+import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
+import { Route as EsBundleSlugRouteImport } from './routes/es/bundle.$slug'
+import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
+import { Route as DeBundleSlugRouteImport } from './routes/de/bundle.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
@@ -142,6 +182,166 @@ const PromptSlugRoute = PromptSlugRouteImport.update({
   path: '/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItPricingRoute = ItPricingRouteImport.update({
+  id: '/it/pricing',
+  path: '/it/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItMarketplaceRoute = ItMarketplaceRouteImport.update({
+  id: '/it/marketplace',
+  path: '/it/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItCvRoute = ItCvRouteImport.update({
+  id: '/it/cv',
+  path: '/it/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItCreatorsRoute = ItCreatorsRouteImport.update({
+  id: '/it/creators',
+  path: '/it/creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItCreatorRoute = ItCreatorRouteImport.update({
+  id: '/it/creator',
+  path: '/it/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItCoverLetterRoute = ItCoverLetterRouteImport.update({
+  id: '/it/cover-letter',
+  path: '/it/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItBundlesRoute = ItBundlesRouteImport.update({
+  id: '/it/bundles',
+  path: '/it/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItAtsRoute = ItAtsRouteImport.update({
+  id: '/it/ats',
+  path: '/it/ats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrPricingRoute = FrPricingRouteImport.update({
+  id: '/fr/pricing',
+  path: '/fr/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrMarketplaceRoute = FrMarketplaceRouteImport.update({
+  id: '/fr/marketplace',
+  path: '/fr/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrCvRoute = FrCvRouteImport.update({
+  id: '/fr/cv',
+  path: '/fr/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrCreatorsRoute = FrCreatorsRouteImport.update({
+  id: '/fr/creators',
+  path: '/fr/creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrCreatorRoute = FrCreatorRouteImport.update({
+  id: '/fr/creator',
+  path: '/fr/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrCoverLetterRoute = FrCoverLetterRouteImport.update({
+  id: '/fr/cover-letter',
+  path: '/fr/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrBundlesRoute = FrBundlesRouteImport.update({
+  id: '/fr/bundles',
+  path: '/fr/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrAtsRoute = FrAtsRouteImport.update({
+  id: '/fr/ats',
+  path: '/fr/ats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsPricingRoute = EsPricingRouteImport.update({
+  id: '/es/pricing',
+  path: '/es/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsMarketplaceRoute = EsMarketplaceRouteImport.update({
+  id: '/es/marketplace',
+  path: '/es/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsCvRoute = EsCvRouteImport.update({
+  id: '/es/cv',
+  path: '/es/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsCreatorsRoute = EsCreatorsRouteImport.update({
+  id: '/es/creators',
+  path: '/es/creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsCreatorRoute = EsCreatorRouteImport.update({
+  id: '/es/creator',
+  path: '/es/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsCoverLetterRoute = EsCoverLetterRouteImport.update({
+  id: '/es/cover-letter',
+  path: '/es/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBundlesRoute = EsBundlesRouteImport.update({
+  id: '/es/bundles',
+  path: '/es/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAtsRoute = EsAtsRouteImport.update({
+  id: '/es/ats',
+  path: '/es/ats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DePricingRoute = DePricingRouteImport.update({
+  id: '/de/pricing',
+  path: '/de/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeMarketplaceRoute = DeMarketplaceRouteImport.update({
+  id: '/de/marketplace',
+  path: '/de/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeCvRoute = DeCvRouteImport.update({
+  id: '/de/cv',
+  path: '/de/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeCreatorsRoute = DeCreatorsRouteImport.update({
+  id: '/de/creators',
+  path: '/de/creators',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeCreatorRoute = DeCreatorRouteImport.update({
+  id: '/de/creator',
+  path: '/de/creator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeCoverLetterRoute = DeCoverLetterRouteImport.update({
+  id: '/de/cover-letter',
+  path: '/de/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBundlesRoute = DeBundlesRouteImport.update({
+  id: '/de/bundles',
+  path: '/de/bundles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeAtsRoute = DeAtsRouteImport.update({
+  id: '/de/ats',
+  path: '/de/ats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BundleSlugRoute = BundleSlugRouteImport.update({
   id: '/bundle/$slug',
   path: '/bundle/$slug',
@@ -164,6 +364,46 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ItPromptSlugRoute = ItPromptSlugRouteImport.update({
+  id: '/it/prompt/$slug',
+  path: '/it/prompt/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItBundleSlugRoute = ItBundleSlugRouteImport.update({
+  id: '/it/bundle/$slug',
+  path: '/it/bundle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrPromptSlugRoute = FrPromptSlugRouteImport.update({
+  id: '/fr/prompt/$slug',
+  path: '/fr/prompt/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrBundleSlugRoute = FrBundleSlugRouteImport.update({
+  id: '/fr/bundle/$slug',
+  path: '/fr/bundle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsPromptSlugRoute = EsPromptSlugRouteImport.update({
+  id: '/es/prompt/$slug',
+  path: '/es/prompt/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBundleSlugRoute = EsBundleSlugRouteImport.update({
+  id: '/es/bundle/$slug',
+  path: '/es/bundle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DePromptSlugRoute = DePromptSlugRouteImport.update({
+  id: '/de/prompt/$slug',
+  path: '/de/prompt/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBundleSlugRoute = DeBundleSlugRouteImport.update({
+  id: '/de/bundle/$slug',
+  path: '/de/bundle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -196,6 +436,38 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/ats': typeof DeAtsRoute
+  '/de/bundles': typeof DeBundlesRoute
+  '/de/cover-letter': typeof DeCoverLetterRoute
+  '/de/creator': typeof DeCreatorRoute
+  '/de/creators': typeof DeCreatorsRoute
+  '/de/cv': typeof DeCvRoute
+  '/de/marketplace': typeof DeMarketplaceRoute
+  '/de/pricing': typeof DePricingRoute
+  '/es/ats': typeof EsAtsRoute
+  '/es/bundles': typeof EsBundlesRoute
+  '/es/cover-letter': typeof EsCoverLetterRoute
+  '/es/creator': typeof EsCreatorRoute
+  '/es/creators': typeof EsCreatorsRoute
+  '/es/cv': typeof EsCvRoute
+  '/es/marketplace': typeof EsMarketplaceRoute
+  '/es/pricing': typeof EsPricingRoute
+  '/fr/ats': typeof FrAtsRoute
+  '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cover-letter': typeof FrCoverLetterRoute
+  '/fr/creator': typeof FrCreatorRoute
+  '/fr/creators': typeof FrCreatorsRoute
+  '/fr/cv': typeof FrCvRoute
+  '/fr/marketplace': typeof FrMarketplaceRoute
+  '/fr/pricing': typeof FrPricingRoute
+  '/it/ats': typeof ItAtsRoute
+  '/it/bundles': typeof ItBundlesRoute
+  '/it/cover-letter': typeof ItCoverLetterRoute
+  '/it/creator': typeof ItCreatorRoute
+  '/it/creators': typeof ItCreatorsRoute
+  '/it/cv': typeof ItCvRoute
+  '/it/marketplace': typeof ItMarketplaceRoute
+  '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
@@ -204,6 +476,14 @@ export interface FileRoutesByFullPath {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/de/bundle/$slug': typeof DeBundleSlugRoute
+  '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/bundle/$slug': typeof EsBundleSlugRoute
+  '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/bundle/$slug': typeof FrBundleSlugRoute
+  '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/bundle/$slug': typeof ItBundleSlugRoute
+  '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -225,6 +505,38 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/ats': typeof DeAtsRoute
+  '/de/bundles': typeof DeBundlesRoute
+  '/de/cover-letter': typeof DeCoverLetterRoute
+  '/de/creator': typeof DeCreatorRoute
+  '/de/creators': typeof DeCreatorsRoute
+  '/de/cv': typeof DeCvRoute
+  '/de/marketplace': typeof DeMarketplaceRoute
+  '/de/pricing': typeof DePricingRoute
+  '/es/ats': typeof EsAtsRoute
+  '/es/bundles': typeof EsBundlesRoute
+  '/es/cover-letter': typeof EsCoverLetterRoute
+  '/es/creator': typeof EsCreatorRoute
+  '/es/creators': typeof EsCreatorsRoute
+  '/es/cv': typeof EsCvRoute
+  '/es/marketplace': typeof EsMarketplaceRoute
+  '/es/pricing': typeof EsPricingRoute
+  '/fr/ats': typeof FrAtsRoute
+  '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cover-letter': typeof FrCoverLetterRoute
+  '/fr/creator': typeof FrCreatorRoute
+  '/fr/creators': typeof FrCreatorsRoute
+  '/fr/cv': typeof FrCvRoute
+  '/fr/marketplace': typeof FrMarketplaceRoute
+  '/fr/pricing': typeof FrPricingRoute
+  '/it/ats': typeof ItAtsRoute
+  '/it/bundles': typeof ItBundlesRoute
+  '/it/cover-letter': typeof ItCoverLetterRoute
+  '/it/creator': typeof ItCreatorRoute
+  '/it/creators': typeof ItCreatorsRoute
+  '/it/cv': typeof ItCvRoute
+  '/it/marketplace': typeof ItMarketplaceRoute
+  '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
@@ -233,6 +545,14 @@ export interface FileRoutesByTo {
   '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/de/bundle/$slug': typeof DeBundleSlugRoute
+  '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/bundle/$slug': typeof EsBundleSlugRoute
+  '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/bundle/$slug': typeof FrBundleSlugRoute
+  '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/bundle/$slug': typeof ItBundleSlugRoute
+  '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -255,6 +575,38 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
   '/bundle/$slug': typeof BundleSlugRoute
+  '/de/ats': typeof DeAtsRoute
+  '/de/bundles': typeof DeBundlesRoute
+  '/de/cover-letter': typeof DeCoverLetterRoute
+  '/de/creator': typeof DeCreatorRoute
+  '/de/creators': typeof DeCreatorsRoute
+  '/de/cv': typeof DeCvRoute
+  '/de/marketplace': typeof DeMarketplaceRoute
+  '/de/pricing': typeof DePricingRoute
+  '/es/ats': typeof EsAtsRoute
+  '/es/bundles': typeof EsBundlesRoute
+  '/es/cover-letter': typeof EsCoverLetterRoute
+  '/es/creator': typeof EsCreatorRoute
+  '/es/creators': typeof EsCreatorsRoute
+  '/es/cv': typeof EsCvRoute
+  '/es/marketplace': typeof EsMarketplaceRoute
+  '/es/pricing': typeof EsPricingRoute
+  '/fr/ats': typeof FrAtsRoute
+  '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cover-letter': typeof FrCoverLetterRoute
+  '/fr/creator': typeof FrCreatorRoute
+  '/fr/creators': typeof FrCreatorsRoute
+  '/fr/cv': typeof FrCvRoute
+  '/fr/marketplace': typeof FrMarketplaceRoute
+  '/fr/pricing': typeof FrPricingRoute
+  '/it/ats': typeof ItAtsRoute
+  '/it/bundles': typeof ItBundlesRoute
+  '/it/cover-letter': typeof ItCoverLetterRoute
+  '/it/creator': typeof ItCreatorRoute
+  '/it/creators': typeof ItCreatorsRoute
+  '/it/cv': typeof ItCvRoute
+  '/it/marketplace': typeof ItMarketplaceRoute
+  '/it/pricing': typeof ItPricingRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
@@ -263,6 +615,14 @@ export interface FileRoutesById {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/de/bundle/$slug': typeof DeBundleSlugRoute
+  '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/bundle/$slug': typeof EsBundleSlugRoute
+  '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/bundle/$slug': typeof FrBundleSlugRoute
+  '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/bundle/$slug': typeof ItBundleSlugRoute
+  '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -286,6 +646,38 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/ats'
+    | '/de/bundles'
+    | '/de/cover-letter'
+    | '/de/creator'
+    | '/de/creators'
+    | '/de/cv'
+    | '/de/marketplace'
+    | '/de/pricing'
+    | '/es/ats'
+    | '/es/bundles'
+    | '/es/cover-letter'
+    | '/es/creator'
+    | '/es/creators'
+    | '/es/cv'
+    | '/es/marketplace'
+    | '/es/pricing'
+    | '/fr/ats'
+    | '/fr/bundles'
+    | '/fr/cover-letter'
+    | '/fr/creator'
+    | '/fr/creators'
+    | '/fr/cv'
+    | '/fr/marketplace'
+    | '/fr/pricing'
+    | '/it/ats'
+    | '/it/bundles'
+    | '/it/cover-letter'
+    | '/it/creator'
+    | '/it/creators'
+    | '/it/cv'
+    | '/it/marketplace'
+    | '/it/pricing'
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
@@ -294,6 +686,14 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/de/bundle/$slug'
+    | '/de/prompt/$slug'
+    | '/es/bundle/$slug'
+    | '/es/prompt/$slug'
+    | '/fr/bundle/$slug'
+    | '/fr/prompt/$slug'
+    | '/it/bundle/$slug'
+    | '/it/prompt/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -315,6 +715,38 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/ats'
+    | '/de/bundles'
+    | '/de/cover-letter'
+    | '/de/creator'
+    | '/de/creators'
+    | '/de/cv'
+    | '/de/marketplace'
+    | '/de/pricing'
+    | '/es/ats'
+    | '/es/bundles'
+    | '/es/cover-letter'
+    | '/es/creator'
+    | '/es/creators'
+    | '/es/cv'
+    | '/es/marketplace'
+    | '/es/pricing'
+    | '/fr/ats'
+    | '/fr/bundles'
+    | '/fr/cover-letter'
+    | '/fr/creator'
+    | '/fr/creators'
+    | '/fr/cv'
+    | '/fr/marketplace'
+    | '/fr/pricing'
+    | '/it/ats'
+    | '/it/bundles'
+    | '/it/cover-letter'
+    | '/it/creator'
+    | '/it/creators'
+    | '/it/cv'
+    | '/it/marketplace'
+    | '/it/pricing'
     | '/prompt/$slug'
     | '/de'
     | '/es'
@@ -323,6 +755,14 @@ export interface FileRouteTypes {
     | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/de/bundle/$slug'
+    | '/de/prompt/$slug'
+    | '/es/bundle/$slug'
+    | '/es/prompt/$slug'
+    | '/fr/bundle/$slug'
+    | '/fr/prompt/$slug'
+    | '/it/bundle/$slug'
+    | '/it/prompt/$slug'
   id:
     | '__root__'
     | '/'
@@ -344,6 +784,38 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
     | '/bundle/$slug'
+    | '/de/ats'
+    | '/de/bundles'
+    | '/de/cover-letter'
+    | '/de/creator'
+    | '/de/creators'
+    | '/de/cv'
+    | '/de/marketplace'
+    | '/de/pricing'
+    | '/es/ats'
+    | '/es/bundles'
+    | '/es/cover-letter'
+    | '/es/creator'
+    | '/es/creators'
+    | '/es/cv'
+    | '/es/marketplace'
+    | '/es/pricing'
+    | '/fr/ats'
+    | '/fr/bundles'
+    | '/fr/cover-letter'
+    | '/fr/creator'
+    | '/fr/creators'
+    | '/fr/cv'
+    | '/fr/marketplace'
+    | '/fr/pricing'
+    | '/it/ats'
+    | '/it/bundles'
+    | '/it/cover-letter'
+    | '/it/creator'
+    | '/it/creators'
+    | '/it/cv'
+    | '/it/marketplace'
+    | '/it/pricing'
     | '/prompt/$slug'
     | '/de/'
     | '/es/'
@@ -352,6 +824,14 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/de/bundle/$slug'
+    | '/de/prompt/$slug'
+    | '/es/bundle/$slug'
+    | '/es/prompt/$slug'
+    | '/fr/bundle/$slug'
+    | '/fr/prompt/$slug'
+    | '/it/bundle/$slug'
+    | '/it/prompt/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -374,6 +854,38 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
   BundleSlugRoute: typeof BundleSlugRoute
+  DeAtsRoute: typeof DeAtsRoute
+  DeBundlesRoute: typeof DeBundlesRoute
+  DeCoverLetterRoute: typeof DeCoverLetterRoute
+  DeCreatorRoute: typeof DeCreatorRoute
+  DeCreatorsRoute: typeof DeCreatorsRoute
+  DeCvRoute: typeof DeCvRoute
+  DeMarketplaceRoute: typeof DeMarketplaceRoute
+  DePricingRoute: typeof DePricingRoute
+  EsAtsRoute: typeof EsAtsRoute
+  EsBundlesRoute: typeof EsBundlesRoute
+  EsCoverLetterRoute: typeof EsCoverLetterRoute
+  EsCreatorRoute: typeof EsCreatorRoute
+  EsCreatorsRoute: typeof EsCreatorsRoute
+  EsCvRoute: typeof EsCvRoute
+  EsMarketplaceRoute: typeof EsMarketplaceRoute
+  EsPricingRoute: typeof EsPricingRoute
+  FrAtsRoute: typeof FrAtsRoute
+  FrBundlesRoute: typeof FrBundlesRoute
+  FrCoverLetterRoute: typeof FrCoverLetterRoute
+  FrCreatorRoute: typeof FrCreatorRoute
+  FrCreatorsRoute: typeof FrCreatorsRoute
+  FrCvRoute: typeof FrCvRoute
+  FrMarketplaceRoute: typeof FrMarketplaceRoute
+  FrPricingRoute: typeof FrPricingRoute
+  ItAtsRoute: typeof ItAtsRoute
+  ItBundlesRoute: typeof ItBundlesRoute
+  ItCoverLetterRoute: typeof ItCoverLetterRoute
+  ItCreatorRoute: typeof ItCreatorRoute
+  ItCreatorsRoute: typeof ItCreatorsRoute
+  ItCvRoute: typeof ItCvRoute
+  ItMarketplaceRoute: typeof ItMarketplaceRoute
+  ItPricingRoute: typeof ItPricingRoute
   PromptSlugRoute: typeof PromptSlugRoute
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
@@ -382,6 +894,14 @@ export interface RootRouteChildren {
   ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  DeBundleSlugRoute: typeof DeBundleSlugRoute
+  DePromptSlugRoute: typeof DePromptSlugRoute
+  EsBundleSlugRoute: typeof EsBundleSlugRoute
+  EsPromptSlugRoute: typeof EsPromptSlugRoute
+  FrBundleSlugRoute: typeof FrBundleSlugRoute
+  FrPromptSlugRoute: typeof FrPromptSlugRoute
+  ItBundleSlugRoute: typeof ItBundleSlugRoute
+  ItPromptSlugRoute: typeof ItPromptSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -533,6 +1053,230 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/pricing': {
+      id: '/it/pricing'
+      path: '/it/pricing'
+      fullPath: '/it/pricing'
+      preLoaderRoute: typeof ItPricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/marketplace': {
+      id: '/it/marketplace'
+      path: '/it/marketplace'
+      fullPath: '/it/marketplace'
+      preLoaderRoute: typeof ItMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/cv': {
+      id: '/it/cv'
+      path: '/it/cv'
+      fullPath: '/it/cv'
+      preLoaderRoute: typeof ItCvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/creators': {
+      id: '/it/creators'
+      path: '/it/creators'
+      fullPath: '/it/creators'
+      preLoaderRoute: typeof ItCreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/creator': {
+      id: '/it/creator'
+      path: '/it/creator'
+      fullPath: '/it/creator'
+      preLoaderRoute: typeof ItCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/cover-letter': {
+      id: '/it/cover-letter'
+      path: '/it/cover-letter'
+      fullPath: '/it/cover-letter'
+      preLoaderRoute: typeof ItCoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/bundles': {
+      id: '/it/bundles'
+      path: '/it/bundles'
+      fullPath: '/it/bundles'
+      preLoaderRoute: typeof ItBundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/ats': {
+      id: '/it/ats'
+      path: '/it/ats'
+      fullPath: '/it/ats'
+      preLoaderRoute: typeof ItAtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/pricing': {
+      id: '/fr/pricing'
+      path: '/fr/pricing'
+      fullPath: '/fr/pricing'
+      preLoaderRoute: typeof FrPricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/marketplace': {
+      id: '/fr/marketplace'
+      path: '/fr/marketplace'
+      fullPath: '/fr/marketplace'
+      preLoaderRoute: typeof FrMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/cv': {
+      id: '/fr/cv'
+      path: '/fr/cv'
+      fullPath: '/fr/cv'
+      preLoaderRoute: typeof FrCvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/creators': {
+      id: '/fr/creators'
+      path: '/fr/creators'
+      fullPath: '/fr/creators'
+      preLoaderRoute: typeof FrCreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/creator': {
+      id: '/fr/creator'
+      path: '/fr/creator'
+      fullPath: '/fr/creator'
+      preLoaderRoute: typeof FrCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/cover-letter': {
+      id: '/fr/cover-letter'
+      path: '/fr/cover-letter'
+      fullPath: '/fr/cover-letter'
+      preLoaderRoute: typeof FrCoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/bundles': {
+      id: '/fr/bundles'
+      path: '/fr/bundles'
+      fullPath: '/fr/bundles'
+      preLoaderRoute: typeof FrBundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/ats': {
+      id: '/fr/ats'
+      path: '/fr/ats'
+      fullPath: '/fr/ats'
+      preLoaderRoute: typeof FrAtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/pricing': {
+      id: '/es/pricing'
+      path: '/es/pricing'
+      fullPath: '/es/pricing'
+      preLoaderRoute: typeof EsPricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/marketplace': {
+      id: '/es/marketplace'
+      path: '/es/marketplace'
+      fullPath: '/es/marketplace'
+      preLoaderRoute: typeof EsMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/cv': {
+      id: '/es/cv'
+      path: '/es/cv'
+      fullPath: '/es/cv'
+      preLoaderRoute: typeof EsCvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/creators': {
+      id: '/es/creators'
+      path: '/es/creators'
+      fullPath: '/es/creators'
+      preLoaderRoute: typeof EsCreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/creator': {
+      id: '/es/creator'
+      path: '/es/creator'
+      fullPath: '/es/creator'
+      preLoaderRoute: typeof EsCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/cover-letter': {
+      id: '/es/cover-letter'
+      path: '/es/cover-letter'
+      fullPath: '/es/cover-letter'
+      preLoaderRoute: typeof EsCoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/bundles': {
+      id: '/es/bundles'
+      path: '/es/bundles'
+      fullPath: '/es/bundles'
+      preLoaderRoute: typeof EsBundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/ats': {
+      id: '/es/ats'
+      path: '/es/ats'
+      fullPath: '/es/ats'
+      preLoaderRoute: typeof EsAtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/pricing': {
+      id: '/de/pricing'
+      path: '/de/pricing'
+      fullPath: '/de/pricing'
+      preLoaderRoute: typeof DePricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/marketplace': {
+      id: '/de/marketplace'
+      path: '/de/marketplace'
+      fullPath: '/de/marketplace'
+      preLoaderRoute: typeof DeMarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/cv': {
+      id: '/de/cv'
+      path: '/de/cv'
+      fullPath: '/de/cv'
+      preLoaderRoute: typeof DeCvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/creators': {
+      id: '/de/creators'
+      path: '/de/creators'
+      fullPath: '/de/creators'
+      preLoaderRoute: typeof DeCreatorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/creator': {
+      id: '/de/creator'
+      path: '/de/creator'
+      fullPath: '/de/creator'
+      preLoaderRoute: typeof DeCreatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/cover-letter': {
+      id: '/de/cover-letter'
+      path: '/de/cover-letter'
+      fullPath: '/de/cover-letter'
+      preLoaderRoute: typeof DeCoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/bundles': {
+      id: '/de/bundles'
+      path: '/de/bundles'
+      fullPath: '/de/bundles'
+      preLoaderRoute: typeof DeBundlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/ats': {
+      id: '/de/ats'
+      path: '/de/ats'
+      fullPath: '/de/ats'
+      preLoaderRoute: typeof DeAtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bundle/$slug': {
       id: '/bundle/$slug'
       path: '/bundle/$slug'
@@ -559,6 +1303,62 @@ declare module '@tanstack/react-router' {
       path: '/.mcp/list-tools'
       fullPath: '/.mcp/list-tools'
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/prompt/$slug': {
+      id: '/it/prompt/$slug'
+      path: '/it/prompt/$slug'
+      fullPath: '/it/prompt/$slug'
+      preLoaderRoute: typeof ItPromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/bundle/$slug': {
+      id: '/it/bundle/$slug'
+      path: '/it/bundle/$slug'
+      fullPath: '/it/bundle/$slug'
+      preLoaderRoute: typeof ItBundleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/prompt/$slug': {
+      id: '/fr/prompt/$slug'
+      path: '/fr/prompt/$slug'
+      fullPath: '/fr/prompt/$slug'
+      preLoaderRoute: typeof FrPromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/bundle/$slug': {
+      id: '/fr/bundle/$slug'
+      path: '/fr/bundle/$slug'
+      fullPath: '/fr/bundle/$slug'
+      preLoaderRoute: typeof FrBundleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/prompt/$slug': {
+      id: '/es/prompt/$slug'
+      path: '/es/prompt/$slug'
+      fullPath: '/es/prompt/$slug'
+      preLoaderRoute: typeof EsPromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/bundle/$slug': {
+      id: '/es/bundle/$slug'
+      path: '/es/bundle/$slug'
+      fullPath: '/es/bundle/$slug'
+      preLoaderRoute: typeof EsBundleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/prompt/$slug': {
+      id: '/de/prompt/$slug'
+      path: '/de/prompt/$slug'
+      fullPath: '/de/prompt/$slug'
+      preLoaderRoute: typeof DePromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/bundle/$slug': {
+      id: '/de/bundle/$slug'
+      path: '/de/bundle/$slug'
+      fullPath: '/de/bundle/$slug'
+      preLoaderRoute: typeof DeBundleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/invoke-tool/$tool': {
@@ -599,6 +1399,38 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
   BundleSlugRoute: BundleSlugRoute,
+  DeAtsRoute: DeAtsRoute,
+  DeBundlesRoute: DeBundlesRoute,
+  DeCoverLetterRoute: DeCoverLetterRoute,
+  DeCreatorRoute: DeCreatorRoute,
+  DeCreatorsRoute: DeCreatorsRoute,
+  DeCvRoute: DeCvRoute,
+  DeMarketplaceRoute: DeMarketplaceRoute,
+  DePricingRoute: DePricingRoute,
+  EsAtsRoute: EsAtsRoute,
+  EsBundlesRoute: EsBundlesRoute,
+  EsCoverLetterRoute: EsCoverLetterRoute,
+  EsCreatorRoute: EsCreatorRoute,
+  EsCreatorsRoute: EsCreatorsRoute,
+  EsCvRoute: EsCvRoute,
+  EsMarketplaceRoute: EsMarketplaceRoute,
+  EsPricingRoute: EsPricingRoute,
+  FrAtsRoute: FrAtsRoute,
+  FrBundlesRoute: FrBundlesRoute,
+  FrCoverLetterRoute: FrCoverLetterRoute,
+  FrCreatorRoute: FrCreatorRoute,
+  FrCreatorsRoute: FrCreatorsRoute,
+  FrCvRoute: FrCvRoute,
+  FrMarketplaceRoute: FrMarketplaceRoute,
+  FrPricingRoute: FrPricingRoute,
+  ItAtsRoute: ItAtsRoute,
+  ItBundlesRoute: ItBundlesRoute,
+  ItCoverLetterRoute: ItCoverLetterRoute,
+  ItCreatorRoute: ItCreatorRoute,
+  ItCreatorsRoute: ItCreatorsRoute,
+  ItCvRoute: ItCvRoute,
+  ItMarketplaceRoute: ItMarketplaceRoute,
+  ItPricingRoute: ItPricingRoute,
   PromptSlugRoute: PromptSlugRoute,
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,
@@ -607,6 +1439,14 @@ const rootRouteChildren: RootRouteChildren = {
   ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  DeBundleSlugRoute: DeBundleSlugRoute,
+  DePromptSlugRoute: DePromptSlugRoute,
+  EsBundleSlugRoute: EsBundleSlugRoute,
+  EsPromptSlugRoute: EsPromptSlugRoute,
+  FrBundleSlugRoute: FrBundleSlugRoute,
+  FrPromptSlugRoute: FrPromptSlugRoute,
+  ItBundleSlugRoute: ItBundleSlugRoute,
+  ItPromptSlugRoute: ItPromptSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

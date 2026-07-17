@@ -18,7 +18,7 @@ export const Route = createFileRoute("/cv")({
   component: CVPage,
 });
 
-function CVPage() {
+export function CVPage() {
   const run = useServerFn(generateCV);
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");

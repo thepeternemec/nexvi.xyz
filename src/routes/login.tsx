@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { Sparkles } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -26,7 +26,7 @@ function Login() {
 
 export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }: { title: string; subtitle: string; cta: string; alt: string; altLink: string; altCta: string; signup?: boolean }) {
   const navigate = useNavigate();
-  const search = Route.useSearch() as LoginSearch;
+  const search = useSearch({ strict: false }) as LoginSearch;
   const nextPath = isSafeNext(search.next) ? search.next : "/dashboard";
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

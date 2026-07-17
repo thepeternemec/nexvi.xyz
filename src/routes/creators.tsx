@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/creators")({ component: Creators });
 
-function Creators() {
+export function Creators() {
   return (
     <SiteShell>
       <section className="relative overflow-hidden border-b border-border/60">

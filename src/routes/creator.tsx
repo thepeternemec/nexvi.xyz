@@ -7,7 +7,7 @@ import { prompts } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/creator")({ component: Creator });
 
-function Creator() {
+export function Creator() {
   const mine = prompts.slice(0, 5);
   return (
     <SiteShell>

@@ -24,7 +24,7 @@ type Report = {
   strengths: string[]; improvements: string[]; rewriteTips: string[];
 };
 
-function ATSPage() {
+export function ATSPage() {
   const run = useServerFn(scoreATS);
   const [jd, setJd] = useState("");
   const [cv, setCv] = useState("");

@@ -38,7 +38,7 @@ function recommend(input: string): string[] {
   return r.slice(0, 3).map(p => p.id);
 }
 
-function Assistant() {
+export function Assistant() {
   const [messages, setMessages] = useState<Msg[]>([
     { role: "ai", content: "Hi — I'm your AI career guide. Tell me your target role or what's stuck in your job search. I'll hand-pick the right prompts and walk you through." },
   ]);

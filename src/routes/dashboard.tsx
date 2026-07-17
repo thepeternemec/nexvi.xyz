@@ -13,7 +13,7 @@ const tools = [
   { icon: Target, title: "ATS Optimizer", desc: "Score your CV, fix the gaps.", href: "/ats" },
 ];
 
-function Dashboard() {
+export function Dashboard() {
   const recommended = prompts.slice(0, 3);
 
   return (

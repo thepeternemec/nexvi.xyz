@@ -42,7 +42,7 @@ const plans = [
 ];
 
 
-function Pricing() {
+export function Pricing() {
   const sub = useSubscription();
   const navigate = useNavigate();
   const start = useServerFn(startSubscription);

@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useSearch, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -21,9 +21,9 @@ export const Route = createFileRoute("/marketplace")({
   }),
 });
 
-function Marketplace() {
-  const search = Route.useSearch();
-  const navigate = Route.useNavigate();
+export function Marketplace() {
+  const search = useSearch({ strict: false });
+  const navigate = useNavigate();
   const [q, setQ] = useState(search.q ?? "");
 
   const filtered = useMemo(() => {
@@ -47,7 +47,7 @@ function Marketplace() {
     return list;
   }, [search]);
 
-  const update = (patch: Partial<Search>) => navigate({ search: (prev: Search) => ({ ...prev, ...patch }) });
+  const update = (patch: Partial<Search>) => (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }) });
 
   return (
     <SiteShell>
@@ -90,7 +90,7 @@ function Marketplace() {
             <FilterChip label="Premium" active={search.price === "paid"} onClick={() => update({ price: search.price === "paid" ? "all" : "paid" })} />
             <FilterChip label="Beginner-friendly" active={search.beginner === "1"} onClick={() => update({ beginner: search.beginner === "1" ? undefined : "1" })} />
             {(search.q || search.category || search.price !== "all" || search.beginner) && (
-              <button onClick={() => navigate({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
+              <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
             )}
           </div>
           <div className="flex items-center gap-2">
