@@ -1,8 +1,9 @@
-import { Link } from "@tanstack/react-router";
+import { useRouterState } from "@tanstack/react-router";
 import { Sparkles, Lock, Crown, ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import type { Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
@@ -10,13 +11,14 @@ export function isPremium(p: Pick<Prompt, "price">) {
 
 export function PromptCard({ prompt }: { prompt: Prompt }) {
   const { isPremium: hasPremium } = useSubscription();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
 
   return (
-    <Link
-      to="/prompt/$slug"
-      params={{ slug: prompt.slug }}
+    <a
+      href={alternateHref(locale, `/prompt/${prompt.slug}`)}
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card transition-all hover:border-foreground/20 hover:shadow-[0_8px_30px_-10px_rgb(0_0_0_/0.12)]"
     >
       <div className={`relative aspect-[16/10] w-full bg-gradient-to-br ${prompt.cover}`}>
@@ -53,7 +55,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
         </div>
         <p className="line-clamp-2 text-xs text-muted-foreground">{prompt.outcome}</p>
       </div>
-    </Link>
+    </a>
   );
 }
 

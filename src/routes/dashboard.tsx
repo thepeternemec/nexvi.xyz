@@ -1,9 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
 import { FileText, Mail, Target, Crown, Sparkles, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
+import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export const Route = createFileRoute("/dashboard")({ component: Dashboard });
 
@@ -15,6 +16,9 @@ const tools = [
 
 export function Dashboard() {
   const recommended = prompts.slice(0, 3);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const locale = detectLocaleFromPath(pathname);
+  const href = (p: string) => alternateHref(locale, p);
 
   return (
     <SiteShell>
@@ -45,7 +49,7 @@ export function Dashboard() {
         <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
           {tools.map(t => (
-            <a key={t.href} href={t.href} className="group flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
+            <a key={t.href} href={href(t.href)} className="group flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
               <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
                 <t.icon className="h-5 w-5" />
               </div>
@@ -60,23 +64,23 @@ export function Dashboard() {
 
         <div className="mt-12 flex items-end justify-between">
           <h2 className="font-display text-2xl tracking-tight">Recommended prompts</h2>
-          <Link to="/marketplace" className="text-sm text-muted-foreground hover:text-foreground">Browse library →</Link>
+          <a href={href("/marketplace")} className="text-sm text-muted-foreground hover:text-foreground">Browse library →</a>
         </div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {recommended.map(p => <PromptCard key={p.id} prompt={p} />)}
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <Link to="/assistant" className="rounded-3xl border border-border/70 bg-card p-7 hover:border-foreground/30">
+          <a href={href("/assistant")} className="rounded-3xl border border-border/70 bg-card p-7 hover:border-foreground/30">
             <div className="flex items-center gap-2 text-sm font-medium"><Sparkles className="h-4 w-4" /> Not sure where to start?</div>
             <div className="font-display mt-3 text-2xl tracking-tight">Ask the AI career guide.</div>
             <p className="mt-2 text-sm text-muted-foreground">Tell it your target role. It picks the right prompts and walks you through them.</p>
-          </Link>
+          </a>
           <div className="rounded-3xl border border-border/70 bg-foreground p-7 text-background">
             <div className="flex items-center gap-2 text-sm font-medium"><Crown className="h-4 w-4" /> Upgrade to Premium</div>
             <div className="font-display mt-3 text-2xl tracking-tight">Unlimited applications.</div>
             <p className="mt-2 text-sm text-background/80">Unlimited CVs, cover letters, ATS rewrites and the full premium library.</p>
-            <Link to="/pricing"><Button variant="secondary" className="mt-5 rounded-full">See pricing</Button></Link>
+            <a href={href("/pricing")}><Button variant="secondary" className="mt-5 rounded-full">See pricing</Button></a>
           </div>
         </div>
       </section>

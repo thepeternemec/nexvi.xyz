@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { useRouterState } from "@tanstack/react-router";
 import { translateBatch } from "./translate.functions";
 import { detectLocaleFromPath, type Locale } from "./i18n";
+import { staticTranslations } from "./static-translations";
 
 type Ctx = {
   locale: Locale;
@@ -13,20 +14,26 @@ const TranslationContext = createContext<Ctx>({ locale: "en", t: (s) => s });
 
 const STORAGE_PREFIX = "aw:i18n:";
 
+function removeIdentityMappings(cache: Record<string, string>) {
+  return Object.fromEntries(Object.entries(cache).filter(([source, translated]) => source.trim() !== translated.trim()));
+}
+
 function loadCache(locale: Locale): Record<string, string> {
-  if (typeof window === "undefined") return {};
+  const staticCache = staticTranslations[locale] ?? {};
+  if (typeof window === "undefined") return staticCache;
   try {
     const raw = window.localStorage.getItem(STORAGE_PREFIX + locale);
-    return raw ? JSON.parse(raw) : {};
+    const stored = raw ? removeIdentityMappings(JSON.parse(raw)) : {};
+    return { ...stored, ...staticCache };
   } catch {
-    return {};
+    return staticCache;
   }
 }
 
 function saveCache(locale: Locale, cache: Record<string, string>) {
   if (typeof window === "undefined") return;
   try {
-    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify(cache));
+    window.localStorage.setItem(STORAGE_PREFIX + locale, JSON.stringify(removeIdentityMappings({ ...cache, ...(staticTranslations[locale] ?? {}) })));
   } catch {
     // ignore quota
   }
@@ -57,7 +64,7 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       return;
     }
     const batch = Array.from(pending.current).filter(
-      (t) => !(t in cacheRef.current) && !inflight.current.has(t),
+      (t) => (!cacheRef.current[t] || cacheRef.current[t].trim() === t.trim()) && !inflight.current.has(t),
     );
     pending.current.clear();
     if (batch.length === 0) return;
@@ -69,7 +76,7 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       setCache(merged);
       saveCache(locale, merged);
     } catch (e) {
-      console.error("translation batch failed", e);
+      // Keep built-in/local cached translations active if runtime translation is unavailable.
     } finally {
       batch.forEach((b) => inflight.current.delete(b));
     }
@@ -88,8 +95,10 @@ export function TranslationProvider({ children, locale: propLocale }: { children
       if (!text || locale === "en") return text;
       const trimmed = text.trim();
       if (!trimmed) return text;
-      if (cacheRef.current[text]) return cacheRef.current[text];
-      if (cacheRef.current[trimmed]) return cacheRef.current[trimmed];
+      const staticTranslated = staticTranslations[locale]?.[text] ?? staticTranslations[locale]?.[trimmed];
+      if (staticTranslated) return text === trimmed ? staticTranslated : text.replace(trimmed, staticTranslated);
+      const cached = cacheRef.current[text] ?? cacheRef.current[trimmed];
+      if (cached && cached.trim() !== trimmed) return cached;
       if (!pending.current.has(text) && !inflight.current.has(text)) {
         pending.current.add(text);
         schedule();
@@ -179,11 +188,12 @@ export function AutoTranslate() {
       raf = requestAnimationFrame(scan);
     });
 
-    scan();
+    const initialScan = window.setTimeout(scan, 300);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
 
     return () => {
       observer.disconnect();
+      window.clearTimeout(initialScan);
       cancelAnimationFrame(raf);
     };
   }, [locale, t]);

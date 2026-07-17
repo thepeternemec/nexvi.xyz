@@ -10,6 +10,6 @@ export const Route = createFileRoute("/signup")({
   }),
 });
 
-function Signup() {
+export function Signup() {
   return <AuthShell signup title="Create your account." subtitle="Free forever. Upgrade when you're ready." cta="Create account" alt="Already have an account?" altLink="/login" altCta="Sign in" />;
 }
