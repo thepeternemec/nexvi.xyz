@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { useRouterState } from "@tanstack/react-router";
 import { translateBatch } from "./translate.functions";
-import { detectLocaleFromPath, type Locale } from "./i18n";
+import { type Locale } from "./i18n";
 import { staticTranslations } from "./static-translations";
+import { useLocale } from "./locale-context";
 
 type Ctx = {
   locale: Locale;
@@ -40,9 +40,8 @@ function saveCache(locale: Locale, cache: Record<string, string>) {
 }
 
 export function TranslationProvider({ children, locale: propLocale }: { children: React.ReactNode; locale?: Locale }) {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const detected = detectLocaleFromPath(pathname);
-  const locale = propLocale ?? detected;
+  const { locale: ctxLocale } = useLocale();
+  const locale = propLocale ?? ctxLocale;
   const [cache, setCache] = useState<Record<string, string>>(() => loadCache(locale));
   const cacheRef = useRef(cache);
   cacheRef.current = cache;

@@ -10,6 +10,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { getInitialThemeScript } from "@/hooks/use-theme";
 import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
+import { LocaleProvider } from "@/lib/locale-context";
 
 import appCss from "../styles.css?url";
 
@@ -115,11 +116,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <TranslationProvider>
-        <AutoTranslate />
-        <Outlet />
-        <Toaster richColors position="top-center" />
-      </TranslationProvider>
+      <LocaleProvider>
+        <TranslationProvider>
+          <AutoTranslate />
+          <Outlet />
+          <Toaster richColors position="top-center" />
+        </TranslationProvider>
+      </LocaleProvider>
     </QueryClientProvider>
   );
 }

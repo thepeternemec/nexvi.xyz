@@ -1,9 +1,10 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { Search, Menu, X, Sun, Moon, Globe, Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
-import { locales, localeLabel, localeFlag, alternateHref, detectLocaleFromPath, type Locale } from "@/lib/i18n";
+import { locales, localeLabel, localeFlag, alternateHref, type Locale } from "@/lib/i18n";
+import { useLocale } from "@/lib/locale-context";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-function useDetectedLocale(explicit?: Locale): Locale {
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-  if (explicit) return explicit;
-  return detectLocaleFromPath(pathname);
+function useActiveLocale(explicit?: Locale): Locale {
+  const { locale } = useLocale();
+  return explicit ?? locale;
 }
 
 function ThemeToggle() {
@@ -39,12 +39,23 @@ const NAV = [
 ];
 
 function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
-  const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
-  // Strip current locale prefix to get bare path
+  const router = useRouter();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { setLocale } = useLocale();
   const barePath = (() => {
-    const m = currentPath.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
-    return m ? (m[2] || "/") : currentPath || "/";
+    const m = pathname.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
+    return m ? (m[2] || "/") : pathname || "/";
   })();
+  const handleSelect = (l: Locale) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    setLocale(l);
+    const target = alternateHref(l, barePath);
+    // SPA navigation so provider state (locale, translations) persists and
+    // AutoTranslate immediately rescans in the new language.
+    router.navigate({ to: target, replace: false }).catch(() => {
+      window.location.href = target;
+    });
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -59,7 +70,11 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
       <DropdownMenuContent align="end" className="min-w-[10rem]">
         {locales.map((l) => (
           <DropdownMenuItem key={l} asChild>
-            <a href={alternateHref(l, barePath)} className="flex items-center justify-between gap-3">
+            <a
+              href={alternateHref(l, barePath)}
+              onClick={handleSelect(l)}
+              className="flex items-center justify-between gap-3"
+            >
               <span className="flex items-center gap-2">
                 <span>{localeFlag[l]}</span>
                 <span>{localeLabel[l]}</span>
@@ -73,8 +88,9 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
   );
 }
 
+
 export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
-  const locale = useDetectedLocale(explicitLocale);
+  const locale = useActiveLocale(explicitLocale);
   const [open, setOpen] = useState(false);
   const href = (p: string) => alternateHref(locale, p);
   return (
@@ -166,7 +182,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 }
 
 export function SiteShell({ children, locale: explicitLocale }: { children: React.ReactNode; locale?: Locale }) {
-  const locale = useDetectedLocale(explicitLocale);
+  const locale = useActiveLocale(explicitLocale);
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader locale={locale} />
