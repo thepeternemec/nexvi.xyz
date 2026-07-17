@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLoaderData } from "@tanstack/react-router";
 import { useState } from "react";
+import { toast } from "sonner";
 import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
