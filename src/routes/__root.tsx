@@ -10,6 +10,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { getInitialThemeScript } from "@/hooks/use-theme";
 import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
+import { LocaleProvider } from "@/lib/locale-context";
 
 import appCss from "../styles.css?url";
 
