@@ -4,6 +4,7 @@ import { z } from "zod";
 import { createHash } from "crypto";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 import { locales, type Locale } from "./i18n";
+import { staticTranslations } from "./static-translations";
 
 const LOCALE_NAMES: Record<Locale, string> = {
   en: "English",
@@ -37,6 +38,11 @@ export const translateBatch = createServerFn({ method: "POST" })
     if (unique.length === 0) return { translations: {} };
 
     const result: Record<string, string> = {};
+    const staticForLocale = staticTranslations[targetLocale] ?? {};
+    for (const source of unique) {
+      const translated = staticForLocale[source];
+      if (translated) result[source] = translated;
+    }
 
     // Load cache
     try {
@@ -49,7 +55,9 @@ export const translateBatch = createServerFn({ method: "POST" })
         .in("hash", hashes);
       if (cached) {
         for (const row of cached) {
-          result[row.source] = row.translated;
+          if (row.translated.trim() !== row.source.trim()) {
+            result[row.source] = row.translated;
+          }
         }
       }
     } catch (e) {
@@ -118,11 +126,13 @@ export const translateBatch = createServerFn({ method: "POST" })
             const src = chunk[j];
             const tr = translations[j] && translations[j].trim().length > 0 ? translations[j] : src;
             result[src] = tr;
-            rows.push({ hash: hashText(src), locale: targetLocale, source: src, translated: tr });
+            if (tr.trim() !== src.trim()) {
+              rows.push({ hash: hashText(src), locale: targetLocale, source: src, translated: tr });
+            }
           }
           try {
             const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-            await supabaseAdmin.from("translations_cache").upsert(rows, { onConflict: "hash,locale" });
+            if (rows.length > 0) await supabaseAdmin.from("translations_cache").upsert(rows, { onConflict: "hash,locale" });
           } catch (e) {
             console.error("translation cache write failed", e);
           }
