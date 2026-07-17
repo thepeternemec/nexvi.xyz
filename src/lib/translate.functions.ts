@@ -69,17 +69,19 @@ export const translateBatch = createServerFn({ method: "POST" })
       for (let i = 0; i < missing.length; i += chunkSize) {
         const chunk = missing.slice(i, i + chunkSize);
         const prompt = [
-          `You are a professional translator. Translate each of the following UI strings from English to ${LOCALE_NAMES[targetLocale]}.`,
-          "Rules:",
-          "- Return ONLY a JSON array of strings, same length and order as the input. No prose, no code fences.",
-          "- Preserve punctuation, capitalization style, emojis, and placeholders like {name} or %s exactly.",
-          "- Do NOT translate: brand names (ApplyWise, Lovable, ChatGPT, Claude, Gemini, ATS, CV, PM, HR, AI, MCP), URLs, or code.",
+          `You are a professional UI translator. Translate every string below from English to ${LOCALE_NAMES[targetLocale]}.`,
+          "Strict rules:",
+          "- Return ONLY a JSON array of strings, same length and order as the input. No prose, no code fences, no keys.",
+          "- ALWAYS translate common product nouns like: CV, resume, cover letter, generator, library, marketplace, pricing, bundles, creators, dashboard, sign in, sign up, search, tools, features, pay, free, premium, upgrade, notifications, menu, home, back, next, previous, open, close, save, submit, continue.",
+          "- Preserve punctuation, capitalization style, emojis, whitespace, and placeholders like {name} or %s exactly.",
+          "- Do NOT translate: the brand name ApplyWise, product names (ChatGPT, Claude, Gemini, Lovable, LinkedIn, Stripe), URLs, code, or the acronym ATS.",
           "- Keep translations concise and natural; match a product marketing / SaaS UI tone.",
+          "- Never return the English source unchanged unless it is a proper noun / brand / acronym listed above.",
           "",
           `Inputs (JSON array of ${chunk.length} strings):`,
           JSON.stringify(chunk),
           "",
-          `Output: a JSON array of exactly ${chunk.length} ${LOCALE_NAMES[targetLocale]} strings.`,
+          `Output: a JSON array of exactly ${chunk.length} natural ${LOCALE_NAMES[targetLocale]} translations.`,
         ].join("\n");
 
         try {
