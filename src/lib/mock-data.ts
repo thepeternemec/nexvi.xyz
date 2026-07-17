@@ -61,15 +61,24 @@ export type Prompt = {
 };
 
 const g = [
-  "from-slate-600 via-slate-500 to-zinc-600 dark:from-slate-800 dark:via-slate-700 dark:to-zinc-800",
-  "from-zinc-600 via-slate-600 to-stone-600 dark:from-zinc-800 dark:via-slate-700 dark:to-stone-800",
-  "from-gray-600 via-slate-500 to-zinc-500 dark:from-gray-800 dark:via-slate-700 dark:to-zinc-800",
-  "from-stone-600 via-zinc-500 to-slate-600 dark:from-stone-800 dark:via-zinc-700 dark:to-slate-800",
-  "from-neutral-600 via-gray-600 to-slate-600 dark:from-neutral-800 dark:via-gray-700 dark:to-slate-800",
-  "from-slate-500 via-zinc-600 to-stone-600 dark:from-slate-700 dark:via-zinc-800 dark:to-stone-800",
-  "from-zinc-500 via-stone-600 to-gray-600 dark:from-zinc-700 dark:via-stone-800 dark:to-gray-800",
-  "from-gray-500 via-neutral-600 to-zinc-600 dark:from-gray-700 dark:via-neutral-800 dark:to-zinc-800",
+  // Interview prep — deep indigo dusk
+  "from-indigo-900 via-slate-800 to-slate-950 dark:from-indigo-950 dark:via-slate-900 dark:to-black",
+  // Salary negotiation — emerald money
+  "from-emerald-800 via-teal-900 to-slate-900 dark:from-emerald-950 dark:via-teal-950 dark:to-black",
+  // CV / resume — warm graphite
+  "from-stone-700 via-neutral-800 to-zinc-900 dark:from-stone-900 dark:via-neutral-900 dark:to-black",
+  // Cover letters — burgundy ink
+  "from-rose-900 via-rose-950 to-slate-900 dark:from-rose-950 dark:via-neutral-950 dark:to-black",
+  // Networking — twilight blue
+  "from-sky-900 via-blue-950 to-slate-950 dark:from-sky-950 dark:via-blue-950 dark:to-black",
+  // ATS optimization — brass on graphite
+  "from-amber-800 via-stone-800 to-zinc-950 dark:from-amber-900 dark:via-stone-900 dark:to-black",
+  // Career pivot — violet horizon
+  "from-violet-900 via-purple-950 to-slate-950 dark:from-violet-950 dark:via-purple-950 dark:to-black",
+  // Personal branding — moss & ink
+  "from-teal-900 via-emerald-950 to-neutral-950 dark:from-teal-950 dark:via-emerald-950 dark:to-black",
 ];
+
 
 export const prompts: Prompt[] = [
   {
