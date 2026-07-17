@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLoaderData } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Copy, Check, Star, Bookmark, Share2, Sparkles, Lock, Crown, Twitter, Linkedin, Facebook, Mail, Link as LinkIcon } from "lucide-react";
+import { Copy, Check, Star, Bookmark, BookmarkCheck, Share2, Sparkles, Lock, Crown, Twitter, Linkedin, Facebook, Mail, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -39,7 +39,27 @@ export function PromptDetail() {
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const SAVED_KEY = "applywise:saved-prompts";
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(SAVED_KEY);
+      const list: string[] = raw ? JSON.parse(raw) : [];
+      setSaved(list.includes(prompt.id));
+    } catch { /* ignore */ }
+  }, [prompt.id]);
+  const onToggleSave = () => {
+    try {
+      const raw = localStorage.getItem(SAVED_KEY);
+      const list: string[] = raw ? JSON.parse(raw) : [];
+      const next = list.includes(prompt.id) ? list.filter(id => id !== prompt.id) : [...list, prompt.id];
+      localStorage.setItem(SAVED_KEY, JSON.stringify(next));
+      const nowSaved = next.includes(prompt.id);
+      setSaved(nowSaved);
+      toast.success(nowSaved ? "Prompt saved" : "Removed from saved");
+    } catch { toast.error("Couldn't update saved prompts"); }
+  };
   const [linkCopied, setLinkCopied] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareTitle = `${prompt.title} — ApplyWise`;
@@ -237,7 +257,9 @@ export function PromptDetail() {
                   <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this prompt — free"}</Button>
                 )}
                 <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1 rounded-full"><Bookmark className="mr-1.5 h-4 w-4" /> Save</Button>
+                  <Button variant={saved ? "default" : "outline"} onClick={onToggleSave} aria-pressed={saved} className="flex-1 rounded-full">
+                    {saved ? <><BookmarkCheck className="mr-1.5 h-4 w-4" /> Saved</> : <><Bookmark className="mr-1.5 h-4 w-4" /> Save</>}
+                  </Button>
                   <Button variant="outline" onClick={onShareClick} className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
                 </div>
               </div>
