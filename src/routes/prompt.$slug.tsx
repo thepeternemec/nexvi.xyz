@@ -39,6 +39,34 @@ export function PromptDetail() {
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareTitle = `${prompt.title} — ApplyWise`;
+  const shareText = prompt.outcome || prompt.description;
+  const copyLink = async () => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = shareUrl; ta.style.position = "fixed"; ta.style.left = "-9999px";
+        document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
+      }
+      setLinkCopied(true);
+      toast.success("Link copied to clipboard");
+      setTimeout(() => setLinkCopied(false), 1500);
+    } catch { toast.error("Couldn't copy link"); }
+  };
+  const onShareClick = async () => {
+    if (typeof navigator !== "undefined" && (navigator as Navigator & { share?: (d: ShareData) => Promise<void> }).share) {
+      try {
+        await (navigator as Navigator & { share: (d: ShareData) => Promise<void> }).share({ title: shareTitle, text: shareText, url: shareUrl });
+        return;
+      } catch { /* fall through to dialog */ }
+    }
+    setShareOpen(true);
+  };
   const onCopy = async () => {
     if (locked) return;
     try {
