@@ -238,7 +238,7 @@ export function PromptDetail() {
                 )}
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1 rounded-full"><Bookmark className="mr-1.5 h-4 w-4" /> Save</Button>
-                  <Button variant="outline" className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
+                  <Button variant="outline" onClick={onShareClick} className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
                 </div>
               </div>
             </div>
