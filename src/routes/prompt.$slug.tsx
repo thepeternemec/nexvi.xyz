@@ -36,11 +36,27 @@ export function PromptDetail() {
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
   const [copied, setCopied] = useState(false);
-  const onCopy = () => {
+  const onCopy = async () => {
     if (locked) return;
-    navigator.clipboard.writeText(prompt.body);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(prompt.body);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = prompt.body;
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
   };
 
   return (
