@@ -1,0 +1,1 @@
+DELETE FROM public.translations_cache WHERE source = translated;
