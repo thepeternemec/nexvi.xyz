@@ -74,7 +74,7 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
 }
 
 export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
-  const locale = useDetectedLocale(explicitLocale);
+  const locale = useActiveLocale(explicitLocale);
   const [open, setOpen] = useState(false);
   const href = (p: string) => alternateHref(locale, p);
   return (
@@ -166,7 +166,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 }
 
 export function SiteShell({ children, locale: explicitLocale }: { children: React.ReactNode; locale?: Locale }) {
-  const locale = useDetectedLocale(explicitLocale);
+  const locale = useActiveLocale(explicitLocale);
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader locale={locale} />
