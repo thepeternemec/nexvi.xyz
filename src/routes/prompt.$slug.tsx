@@ -54,9 +54,11 @@ export function PromptDetail() {
         document.body.removeChild(ta);
       }
       setCopied(true);
+      toast.success("Prompt copied to clipboard");
       setTimeout(() => setCopied(false), 1500);
     } catch (err) {
       console.error("Copy failed", err);
+      toast.error("Couldn't copy — please try again");
     }
   };
 
