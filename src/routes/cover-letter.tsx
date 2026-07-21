@@ -44,7 +44,11 @@ export function CoverLetterPage() {
     setLoading(true); setOut("");
     try {
       const res = await run({ data: { jobDescription: jdPayload, background: bgPayload, companyName: company || undefined, roleTitle: role || undefined, tone } });
-      setOut(res.text);
+      const cleaned = res.text
+        .replace(/\*\*(.+?)\*\*/g, "$1")
+        .replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*(?!\w)/g, "$1$2")
+        .replace(/^\s*[-*]\s+/gm, "• ");
+      setOut(cleaned);
       toast.success("Cover letter generated.");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
