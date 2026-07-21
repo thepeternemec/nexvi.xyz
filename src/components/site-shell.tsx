@@ -74,10 +74,11 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
               href={alternateHref(l, barePath)}
               onClick={handleSelect(l)}
               className="flex items-center justify-between gap-3"
+              data-no-translate
             >
-              <span className="flex items-center gap-2">
-                <span>{localeFlag[l]}</span>
-                <span>{localeLabel[l]}</span>
+              <span className="flex items-center gap-2" data-no-translate>
+                <span data-no-translate>{localeFlag[l]}</span>
+                <span data-no-translate>{localeLabel[l]}</span>
               </span>
               {l === locale && <Check className="h-3.5 w-3.5" />}
             </a>
