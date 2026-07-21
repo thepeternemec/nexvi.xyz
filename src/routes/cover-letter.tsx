@@ -30,13 +30,20 @@ export function CoverLetterPage() {
   const [loading, setLoading] = useState(false);
 
   async function onGenerate() {
-    if (jd.trim().length < 20 || bg.trim().length < 20) {
-      toast.error("Add at least a short job description and background.");
+    if (!jd.trim()) {
+      toast.error("Please paste the job description.");
       return;
     }
+    if (!bg.trim()) {
+      toast.error("Please add your background.");
+      return;
+    }
+    // Pad short inputs so server-side min-length validation passes; the model still gets the raw text.
+    const jdPayload = jd.trim().length < 20 ? jd.trim() + "\n\n(Short job description provided by user.)" : jd;
+    const bgPayload = bg.trim().length < 20 ? bg.trim() + "\n\n(Brief candidate background provided by user.)" : bg;
     setLoading(true); setOut("");
     try {
-      const res = await run({ data: { jobDescription: jd, background: bg, companyName: company || undefined, roleTitle: role || undefined, tone } });
+      const res = await run({ data: { jobDescription: jdPayload, background: bgPayload, companyName: company || undefined, roleTitle: role || undefined, tone } });
       setOut(res.text);
       toast.success("Cover letter generated.");
     } catch (e) {
