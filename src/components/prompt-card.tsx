@@ -29,10 +29,10 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
               <Crown className="mr-1 h-2.5 w-2.5" /> Premium
             </Badge>
           ) : (
-            <Badge className="rounded-md bg-white/90 text-foreground text-[10px] border-0 hover:bg-white">Free</Badge>
+            <Badge className="rounded-md bg-white/90 text-foreground text-[10px] border-0 hover:bg-white dark:bg-black/80 dark:text-white dark:hover:bg-black">Free</Badge>
           )}
           {prompt.beginner && (
-            <Badge variant="secondary" className="rounded-md bg-white/80 text-foreground text-[10px] border-0 backdrop-blur">Beginner</Badge>
+            <Badge variant="secondary" className="rounded-md bg-white/80 text-foreground text-[10px] border-0 backdrop-blur dark:bg-black/70 dark:text-white">Beginner</Badge>
           )}
         </div>
         <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5">
