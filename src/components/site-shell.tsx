@@ -95,24 +95,24 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
-      <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
-        <a href={href("/")} className="flex items-center gap-2">
+      <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
+        <a href={href("/")} className="flex shrink-0 items-center gap-2">
           <span className="font-display text-[15px] font-semibold tracking-tight">ApplyWise</span>
         </a>
-        <nav className="hidden items-center gap-5 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {NAV.map((n) => (
-            <a key={n.href} href={href(n.href)} className="text-[13px] text-muted-foreground transition-colors hover:text-foreground">
+            <a key={n.href} href={href(n.href)} className="whitespace-nowrap text-[13px] text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
             </a>
           ))}
         </nav>
-        <div className="hidden items-center gap-1.5 md:flex">
+        <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
           <a href={href("/login")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Sign in</Button></a>
-          <a href={href("/library")}><Button size="sm" className="h-8 rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Find a job prompt</Button></a>
+          <a href={href("/library")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Find a job prompt</Button></a>
         </div>
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
           <button onClick={() => setOpen(!open)} aria-label="Menu">
