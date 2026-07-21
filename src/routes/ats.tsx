@@ -18,8 +18,17 @@ export const Route = createFileRoute("/ats")({
   component: ATSPage,
 });
 
+type KeywordHit = { keyword: string; importance: "critical" | "important" | "nice-to-have"; inCV: boolean; frequency: number };
+type FormattingCheck = { name: string; passed: boolean; detail: string };
+type SubScore = { label: string; score: number; weight: number; note: string };
+type SectionCov = { section: string; present: boolean; quality: "strong" | "adequate" | "weak" | "missing"; note: string };
+
 type Report = {
   score: number; verdict: string;
+  subScores: SubScore[];
+  keywordCoverage: { matchedCount: number; totalCount: number; coveragePct: number; keywords: KeywordHit[] };
+  formattingChecks: FormattingCheck[];
+  sectionCoverage: SectionCov[];
   matchedKeywords: string[]; missingKeywords: string[];
   strengths: string[]; improvements: string[]; rewriteTips: string[];
 };
