@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
+import { useLocale } from "@/lib/locale-context";
 
 export const Route = createFileRoute("/assistant")({ component: Assistant });
+
 
 type Msg = { role: "user" | "ai"; content: string; recs?: string[] };
 
