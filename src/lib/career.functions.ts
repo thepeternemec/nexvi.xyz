@@ -53,9 +53,43 @@ const ATSInput = z.object({
   cv: z.string().min(20).max(15000),
 });
 
+const KeywordHit = z.object({
+  keyword: z.string().max(80),
+  importance: z.enum(["critical", "important", "nice-to-have"]),
+  inCV: z.boolean(),
+  frequency: z.number().min(0).max(50),
+});
+
+const FormattingCheck = z.object({
+  name: z.string().max(80),
+  passed: z.boolean(),
+  detail: z.string().max(240),
+});
+
+const SubScore = z.object({
+  label: z.string().max(60),
+  score: z.number().min(0).max(100),
+  weight: z.number().min(0).max(100),
+  note: z.string().max(240),
+});
+
 const ATSSchema = z.object({
   score: z.number().min(0).max(100),
   verdict: z.string().max(300),
+  subScores: z.array(SubScore).max(6),
+  keywordCoverage: z.object({
+    matchedCount: z.number().min(0).max(200),
+    totalCount: z.number().min(0).max(200),
+    coveragePct: z.number().min(0).max(100),
+    keywords: z.array(KeywordHit).max(40),
+  }),
+  formattingChecks: z.array(FormattingCheck).max(12),
+  sectionCoverage: z.array(z.object({
+    section: z.string().max(60),
+    present: z.boolean(),
+    quality: z.enum(["strong", "adequate", "weak", "missing"]),
+    note: z.string().max(240),
+  })).max(8),
   matchedKeywords: z.array(z.string().max(80)).max(40),
   missingKeywords: z.array(z.string().max(80)).max(40),
   strengths: z.array(z.string().max(300)).max(10),
@@ -67,8 +101,8 @@ export const scoreATS = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => ATSInput.parse(d))
   .handler(async ({ data }) => {
     const system =
-      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description, extract keywords, judge match quality, and propose concrete improvements. Be objective.";
-    const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}\n\nProduce the structured analysis.`;
+      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description. Produce a detailed, objective breakdown: overall score, weighted sub-scores (Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics), formatting/parseability checks (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, file-friendly length, action verbs, quantified achievements), keyword coverage with importance and CV frequency, and per-section coverage (Summary, Skills, Experience, Education, Certifications). Base every judgement strictly on the CV text provided; never invent.";
+    const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}\n\nReturn the full structured ATS analysis. The overall score must equal the weighted average of subScores (weights sum to 100). coveragePct = round(matchedCount/totalCount*100).`;
     const { experimental_output } = await generateText({
       model: gateway(),
       system,
