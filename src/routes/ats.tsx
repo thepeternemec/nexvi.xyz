@@ -94,6 +94,7 @@ export function ATSPage() {
 
         {report && (
           <div className="mt-10 space-y-6">
+            {/* Overall */}
             <div className="rounded-3xl border border-border/70 bg-card p-8">
               <div className="flex flex-wrap items-end gap-6">
                 <div>
@@ -101,14 +102,97 @@ export function ATSPage() {
                   <div className={`font-display text-7xl leading-none ${scoreColor(report.score)}`}>{report.score}</div>
                   <div className="text-xs text-muted-foreground">/ 100</div>
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 min-w-[240px]">
                   <p className="text-base">{report.verdict}</p>
                   <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-muted">
-                    <div className="h-full bg-foreground transition-all" style={{ width: `${report.score}%` }} />
+                    <div className={`h-full transition-all ${report.score >= 80 ? "bg-emerald-500" : report.score >= 60 ? "bg-amber-500" : "bg-rose-500"}`} style={{ width: `${report.score}%` }} />
                   </div>
                 </div>
               </div>
+
+              {/* Sub-scores */}
+              {report.subScores?.length > 0 && (
+                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {report.subScores.map((s) => (
+                    <div key={s.label} className="rounded-2xl border border-border/60 bg-background/60 p-4">
+                      <div className="flex items-baseline justify-between">
+                        <div className="text-sm font-medium">{s.label}</div>
+                        <div className={`text-lg font-semibold ${scoreColor(s.score)}`}>{s.score}<span className="text-xs text-muted-foreground">/100</span></div>
+                      </div>
+                      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
+                        <div className={`h-full ${s.score >= 80 ? "bg-emerald-500" : s.score >= 60 ? "bg-amber-500" : "bg-rose-500"}`} style={{ width: `${s.score}%` }} />
+                      </div>
+                      <div className="mt-2 text-xs text-muted-foreground">Weight {s.weight}% · {s.note}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
+
+            {/* Keyword coverage */}
+            {report.keywordCoverage && (
+              <Panel title={`Keyword coverage · ${report.keywordCoverage.matchedCount}/${report.keywordCoverage.totalCount} (${report.keywordCoverage.coveragePct}%)`} icon={<Target className="h-4 w-4 text-foreground" />}>
+                <div className="mb-4 h-2 overflow-hidden rounded-full bg-muted">
+                  <div className="h-full bg-foreground" style={{ width: `${report.keywordCoverage.coveragePct}%` }} />
+                </div>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead className="text-xs uppercase tracking-wider text-muted-foreground">
+                      <tr className="border-b border-border/60"><th className="py-2 text-left font-medium">Keyword</th><th className="py-2 text-left font-medium">Importance</th><th className="py-2 text-left font-medium">In CV</th><th className="py-2 text-right font-medium">Frequency</th></tr>
+                    </thead>
+                    <tbody>
+                      {report.keywordCoverage.keywords.map((k) => (
+                        <tr key={k.keyword} className="border-b border-border/30">
+                          <td className="py-2 font-medium">{k.keyword}</td>
+                          <td className="py-2"><span className={`rounded-full px-2 py-0.5 text-xs ${k.importance === "critical" ? "bg-rose-500/10 text-rose-700 dark:text-rose-300" : k.importance === "important" ? "bg-amber-500/10 text-amber-700 dark:text-amber-300" : "bg-muted text-muted-foreground"}`}>{k.importance}</span></td>
+                          <td className="py-2">{k.inCV ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : <XCircle className="h-4 w-4 text-rose-500" />}</td>
+                          <td className="py-2 text-right tabular-nums text-muted-foreground">{k.frequency}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Panel>
+            )}
+
+            {/* Formatting */}
+            {report.formattingChecks?.length > 0 && (
+              <Panel title="Formatting & parseability checks" icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {report.formattingChecks.map((c) => (
+                    <li key={c.name} className="flex items-start gap-2 rounded-lg border border-border/50 bg-background/40 p-3">
+                      {c.passed ? <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-500" /> : <AlertTriangle className="mt-0.5 h-4 w-4 flex-none text-amber-500" />}
+                      <div>
+                        <div className="text-sm font-medium">{c.name}</div>
+                        <div className="text-xs text-muted-foreground">{c.detail}</div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </Panel>
+            )}
+
+            {/* Sections */}
+            {report.sectionCoverage?.length > 0 && (
+              <Panel title="Section coverage" icon={<Target className="h-4 w-4 text-foreground" />}>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {report.sectionCoverage.map((s) => {
+                    const q = s.quality;
+                    const color = q === "strong" ? "text-emerald-600 dark:text-emerald-400" : q === "adequate" ? "text-amber-600 dark:text-amber-400" : q === "weak" ? "text-rose-600 dark:text-rose-400" : "text-muted-foreground";
+                    const Icon = q === "missing" ? MinusCircle : q === "strong" ? CheckCircle2 : q === "adequate" ? AlertTriangle : XCircle;
+                    return (
+                      <div key={s.section} className="flex items-start gap-2 rounded-lg border border-border/50 bg-background/40 p-3">
+                        <Icon className={`mt-0.5 h-4 w-4 flex-none ${color}`} />
+                        <div>
+                          <div className="text-sm font-medium">{s.section} <span className={`ml-1 text-xs ${color}`}>· {q}</span></div>
+                          <div className="text-xs text-muted-foreground">{s.note}</div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </Panel>
+            )}
 
             <div className="grid gap-4 md:grid-cols-2">
               <Panel title="Matched keywords" icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}>
