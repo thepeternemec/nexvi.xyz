@@ -80,7 +80,7 @@ export function ATSPage() {
           </div>
         </div>
 
-        <form onSubmit={onScore} className="mt-8 space-y-4" data-no-translate>
+        <form onSubmit={onScore} className="mt-8 space-y-4">
           <div className="grid gap-4 lg:grid-cols-2">
             <div>
               <label htmlFor="ats-job-description" className="text-sm font-medium">Job description</label>
