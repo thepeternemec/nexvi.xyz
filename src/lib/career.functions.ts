@@ -74,8 +74,8 @@ const SubScore = z.object({
 });
 
 const ATSSchema = z.object({
-  score: z.number(),
-  verdict: z.string(),
+  score: z.number().catch(0),
+  verdict: z.string().catch(""),
   subScores: z.array(SubScore).catch([]),
   keywordCoverage: z.object({
     matchedCount: z.number().catch(0),
@@ -101,27 +101,18 @@ export const scoreATS = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => ATSInput.parse(d))
   .handler(async ({ data }) => {
     const system =
-      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description. Produce a detailed, objective breakdown: overall score, weighted sub-scores (Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics), formatting/parseability checks (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, file-friendly length, action verbs, quantified achievements), keyword coverage with importance and CV frequency, and per-section coverage (Summary, Skills, Experience, Education, Certifications). Base every judgement strictly on the CV text provided; never invent. Always return every field in the schema; use empty arrays or short strings when unsure.";
-    const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}\n\nReturn the full structured ATS analysis. The overall score must equal the weighted average of subScores (weights sum to 100). coveragePct = round(matchedCount/totalCount*100).`;
+      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description and produce a detailed, objective breakdown. Base every judgement strictly on the CV text provided; never invent. Respond with ONE JSON object only (no prose, no markdown code fences). The JSON must have these keys: score (0-100), verdict (short string), subScores (array of {label, score, weight, note} for Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics; weights sum to 100), keywordCoverage {matchedCount, totalCount, coveragePct, keywords: [{keyword, importance:'critical'|'important'|'nice-to-have', inCV, frequency}]}, formattingChecks [{name, passed, detail}] (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, length, action verbs, quantified achievements), sectionCoverage [{section, present, quality:'strong'|'adequate'|'weak'|'missing', note}] for Summary/Skills/Experience/Education/Certifications, matchedKeywords[], missingKeywords[], strengths[], improvements[], rewriteTips[]. score must equal weighted average of subScores. coveragePct = round(matchedCount/totalCount*100).";
+    const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}`;
+    const { text } = await generateText({ model: gateway(), system, prompt });
+    const cleaned = text.replace(/```(?:json)?/gi, "").replace(/```/g, "").trim();
+    const s = cleaned.indexOf("{");
+    const e = cleaned.lastIndexOf("}");
+    if (s === -1 || e === -1) throw new Error("AI did not return JSON. Try again.");
+    let parsed: unknown;
     try {
-      const { experimental_output } = await generateText({
-        model: gateway(),
-        system,
-        prompt,
-        experimental_output: Output.object({ schema: ATSSchema }),
-      });
-      return experimental_output;
+      parsed = JSON.parse(cleaned.slice(s, e + 1));
     } catch {
-      // Fallback: ask for plain JSON and parse leniently
-      const { text } = await generateText({
-        model: gateway(),
-        system: system + " Respond ONLY with a single JSON object, no prose, no code fences.",
-        prompt,
-      });
-      const cleaned = text.replace(/```(?:json)?/gi, "").trim();
-      const s = cleaned.indexOf("{");
-      const e = cleaned.lastIndexOf("}");
-      const parsed = JSON.parse(cleaned.slice(s, e + 1));
-      return ATSSchema.parse(parsed);
+      throw new Error("Could not parse AI response. Try again.");
     }
+    return ATSSchema.parse(parsed);
   });
