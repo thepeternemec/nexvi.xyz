@@ -41,10 +41,30 @@ function recommend(input: string): string[] {
 }
 
 export function Assistant() {
+  const { locale } = useLocale();
+  const greetings: Record<string, string> = {
+    en: "Hi — I'm your AI career guide. Tell me your target role or what's stuck in your job search. I'll hand-pick the right prompts and walk you through.",
+    de: "Hi — ich bin dein KI-Karriereguide. Sag mir deine Zielrolle oder wo du bei der Jobsuche feststeckst. Ich wähle die passenden Prompts aus und begleite dich.",
+    es: "Hola — soy tu guía de carrera con IA. Cuéntame tu puesto objetivo o dónde te has atascado en la búsqueda de empleo. Elegiré los prompts adecuados y te acompañaré.",
+    fr: "Salut — je suis ton guide de carrière IA. Dis-moi le poste que tu vises ou ce qui te bloque dans ta recherche d'emploi. Je choisirai les bons prompts et t'accompagnerai.",
+    it: "Ciao — sono la tua guida di carriera IA. Dimmi il ruolo che vuoi raggiungere o dove sei bloccato nella ricerca di lavoro. Sceglierò i prompt giusti e ti guiderò.",
+  };
+  const followups: Record<string, string> = {
+    en: "Beautiful. Here's where I'd start — these three are loved by people working on the same goal:",
+    de: "Wunderbar. Hier würde ich anfangen — diese drei werden von Leuten mit dem gleichen Ziel geliebt:",
+    es: "Perfecto. Aquí es por donde empezaría — estos tres son los favoritos de quienes trabajan en el mismo objetivo:",
+    fr: "Parfait. Voici par où je commencerais — ces trois sont adorés par ceux qui visent le même objectif :",
+    it: "Perfetto. Ecco da dove partirei — questi tre sono amati da chi lavora sullo stesso obiettivo:",
+  };
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "ai", content: "Hi — I'm your AI career guide. Tell me your target role or what's stuck in your job search. I'll hand-pick the right prompts and walk you through." },
+    { role: "ai", content: greetings[locale] ?? greetings.en },
   ]);
   const [input, setInput] = useState("");
+
+  // Keep greeting in sync when locale changes and it's still the only message
+  if (messages.length === 1 && messages[0].role === "ai" && messages[0].content !== (greetings[locale] ?? greetings.en)) {
+    setMessages([{ role: "ai", content: greetings[locale] ?? greetings.en }]);
+  }
 
   const send = (text: string) => {
     if (!text.trim()) return;
@@ -52,12 +72,13 @@ export function Assistant() {
     const ids = recommend(text);
     const aiMsg: Msg = {
       role: "ai",
-      content: `Beautiful. Here's where I'd start — these three are loved by people working on the same goal:`,
+      content: followups[locale] ?? followups.en,
       recs: ids,
     };
     setMessages(m => [...m, userMsg, aiMsg]);
     setInput("");
   };
+
 
   return (
     <SiteShell>
