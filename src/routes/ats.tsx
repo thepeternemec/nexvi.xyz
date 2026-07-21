@@ -32,17 +32,25 @@ export function ATSPage() {
   const [loading, setLoading] = useState(false);
 
   async function onScore() {
-    if (jd.trim().length < 20 || cv.trim().length < 20) {
-      toast.error("Add a job description and a CV.");
+    if (!jd.trim()) {
+      toast.error("Please paste the job description.");
       return;
     }
+    if (!cv.trim()) {
+      toast.error("Please paste your CV.");
+      return;
+    }
+    const jdPayload = jd.trim().length < 20 ? jd.trim() + "\n\n(Short job description provided by user.)" : jd;
+    const cvPayload = cv.trim().length < 20 ? cv.trim() + "\n\n(Brief CV provided by user.)" : cv;
     setLoading(true); setReport(null);
     try {
-      const r = await run({ data: { jobDescription: jd, cv } });
+      const r = await run({ data: { jobDescription: jdPayload, cv: cvPayload } });
       setReport(r as Report);
+      toast.success("ATS analysis complete.");
     } catch (e) {
+      console.error("ATS scoring error:", e);
       const msg = e instanceof Error ? e.message : "Failed";
-      toast.error(msg.includes("402") ? "AI credits exhausted." : "Scoring failed");
+      toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited. Try again shortly." : "Scoring failed");
     } finally { setLoading(false); }
   }
 
