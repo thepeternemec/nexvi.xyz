@@ -40,7 +40,8 @@ export function ATSPage() {
   const [report, setReport] = useState<Report | null>(null);
   const [loading, setLoading] = useState(false);
 
-  async function onScore() {
+  async function onScore(event?: React.FormEvent<HTMLFormElement>) {
+    event?.preventDefault();
     if (!jd.trim()) {
       toast.error("Please paste the job description.");
       return;
@@ -58,8 +59,9 @@ export function ATSPage() {
       toast.success("ATS analysis complete.");
     } catch (e) {
       console.error("ATS scoring error:", e);
+      setReport(createLocalATSReport(jdPayload, cvPayload));
       const msg = e instanceof Error ? e.message : "Failed";
-      toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited. Try again shortly." : "Scoring failed");
+      toast.error(msg.includes("402") ? "AI credits exhausted. Showing an estimated ATS score." : msg.includes("429") ? "Rate limited. Showing an estimated ATS score." : "Showing an estimated ATS score.");
     } finally { setLoading(false); }
   }
 
@@ -78,19 +80,21 @@ export function ATSPage() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-4 lg:grid-cols-2">
-          <div>
-            <label className="text-sm font-medium">Job description</label>
-            <Textarea value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-2 min-h-[200px]" />
+        <form onSubmit={onScore} className="mt-8 space-y-4" data-no-translate>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div>
+              <label htmlFor="ats-job-description" className="text-sm font-medium">Job description</label>
+              <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-2 min-h-[200px]" />
+            </div>
+            <div>
+              <label htmlFor="ats-cv" className="text-sm font-medium">Your CV</label>
+              <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-2 min-h-[200px]" />
+            </div>
           </div>
-          <div>
-            <label className="text-sm font-medium">Your CV</label>
-            <Textarea value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-2 min-h-[200px]" />
-          </div>
-        </div>
-        <Button onClick={onScore} disabled={loading} size="lg" className="mt-4 rounded-full">
-          {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : "Score my CV"}
-        </Button>
+          <Button type="submit" disabled={loading} size="lg" className="rounded-full">
+            {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : "Score my CV"}
+          </Button>
+        </form>
 
         {report && (
           <div className="mt-10 space-y-6">
@@ -230,4 +234,81 @@ function Panel({ title, icon, children }: { title: string; icon: React.ReactNode
       <div className="mt-3">{children}</div>
     </div>
   );
+}
+
+function createLocalATSReport(jobDescription: string, cv: string): Report {
+  const jobTerms = extractKeywords(jobDescription);
+  const cvLower = cv.toLowerCase();
+  const keywords = jobTerms.slice(0, 18).map((keyword, index) => {
+    const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const matches = cvLower.match(new RegExp(`\\b${escaped}\\b`, "g"));
+    return {
+      keyword,
+      importance: index < 6 ? "critical" as const : index < 12 ? "important" as const : "nice-to-have" as const,
+      inCV: Boolean(matches?.length),
+      frequency: matches?.length ?? 0,
+    };
+  });
+  const matchedKeywords = keywords.filter((k) => k.inCV).map((k) => k.keyword);
+  const missingKeywords = keywords.filter((k) => !k.inCV).map((k) => k.keyword);
+  const coveragePct = keywords.length ? Math.round((matchedKeywords.length / keywords.length) * 100) : 0;
+  const formattingChecks: FormattingCheck[] = [
+    { name: "Contact info", passed: /@|linkedin|phone|\+\d|\b\d{3}[-.\s]?\d{3}/i.test(cv), detail: "ATS files should include reachable contact details near the top." },
+    { name: "Standard headings", passed: /(experience|skills|education|summary|profile)/i.test(cv), detail: "Use familiar headings like Summary, Skills, Experience and Education." },
+    { name: "Bullet-friendly structure", passed: /(^|\n)\s*[-•*]/.test(cv), detail: "Bullets help ATS parsers and recruiters scan responsibilities and achievements." },
+    { name: "Quantified impact", passed: /\d+%|\$\d+|\b\d+\+?\b/.test(cv), detail: "Numbers make achievements clearer and improve impact scoring." },
+    { name: "Plain text parseability", passed: !/[│┌┐└┘]/.test(cv), detail: "Avoid tables, images, columns and decorative layout elements." },
+  ];
+  const keywordScore = coveragePct;
+  const skillsScore = Math.min(100, coveragePct + (matchedKeywords.length >= 8 ? 10 : 0));
+  const experienceScore = /(led|managed|built|owned|launched|delivered|improved|increased|reduced|created)/i.test(cv) ? Math.min(100, coveragePct + 15) : Math.max(35, coveragePct - 10);
+  const formattingScore = Math.round((formattingChecks.filter((c) => c.passed).length / formattingChecks.length) * 100);
+  const impactScore = /\d+%|\$\d+|\b\d+\+?\b/.test(cv) ? 78 : 45;
+  const subScores: SubScore[] = [
+    { label: "Keyword Match", score: keywordScore, weight: 35, note: `${matchedKeywords.length} of ${keywords.length} priority terms found.` },
+    { label: "Skills Alignment", score: skillsScore, weight: 25, note: "Based on overlap between required skills and CV wording." },
+    { label: "Experience Relevance", score: experienceScore, weight: 20, note: "Checks whether your achievements mirror the role needs." },
+    { label: "Formatting/Parseability", score: formattingScore, weight: 10, note: `${formattingChecks.filter((c) => c.passed).length}/${formattingChecks.length} formatting checks passed.` },
+    { label: "Impact & Metrics", score: impactScore, weight: 10, note: "Looks for quantified outcomes and action-led achievements." },
+  ];
+  const score = Math.round(subScores.reduce((sum, item) => sum + item.score * (item.weight / 100), 0));
+  return {
+    score,
+    verdict: score >= 80 ? "Strong ATS match. Fine-tune missing keywords and keep the formatting simple." : score >= 60 ? "Moderate ATS match. Add missing job-specific terms and sharpen quantified achievements." : "Low ATS match. Rework the CV around the role's core skills, responsibilities and required keywords.",
+    subScores,
+    keywordCoverage: { matchedCount: matchedKeywords.length, totalCount: keywords.length, coveragePct, keywords },
+    formattingChecks,
+    sectionCoverage: [
+      sectionStatus("Summary", cv, /(summary|profile|objective)/i),
+      sectionStatus("Skills", cv, /skills/i),
+      sectionStatus("Experience", cv, /(experience|employment|work history)/i),
+      sectionStatus("Education", cv, /education/i),
+      sectionStatus("Certifications", cv, /(certification|certificate|licen[cs]e)/i),
+    ],
+    matchedKeywords,
+    missingKeywords,
+    strengths: matchedKeywords.length ? [`Matches priority terms like ${matchedKeywords.slice(0, 4).join(", ")}.`, "Readable text structure for initial ATS parsing."] : ["CV text was received and can be evaluated against the role."],
+    improvements: missingKeywords.length ? [`Add missing role keywords: ${missingKeywords.slice(0, 6).join(", ")}.`, "Mirror the job title, tools and responsibilities using truthful experience bullets."] : ["Keep keyword usage natural and avoid stuffing repeated terms."],
+    rewriteTips: [
+      "Rewrite the summary to include the target role title and the top 3 required skills.",
+      "Add 3-5 bullets that combine action verb + relevant keyword + measurable outcome.",
+      "Create a skills section that uses the exact terminology from the job description where accurate.",
+    ],
+  };
+}
+
+function extractKeywords(text: string) {
+  const stop = new Set(["the", "and", "for", "with", "you", "your", "our", "are", "this", "that", "will", "from", "have", "has", "into", "role", "team", "work", "job", "description", "candidate", "experience", "years", "about"]);
+  const counts = new Map<string, number>();
+  const words = text.toLowerCase().match(/[a-z][a-z+#-]{2,}/g) ?? [];
+  for (const word of words) {
+    if (stop.has(word)) continue;
+    counts.set(word, (counts.get(word) ?? 0) + 1);
+  }
+  return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]).map(([word]) => word);
+}
+
+function sectionStatus(section: string, cv: string, pattern: RegExp): SectionCov {
+  const present = pattern.test(cv);
+  return { section, present, quality: present ? "adequate" : "missing", note: present ? `${section} section appears present.` : `Add a clear ${section} section if relevant.` };
 }
