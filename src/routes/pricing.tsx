@@ -91,7 +91,7 @@ export function Pricing() {
             )}
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3">
+          <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
               const isPremiumCard = p.key === "premium";
               const owned = isPremiumCard && sub.isPremium;
