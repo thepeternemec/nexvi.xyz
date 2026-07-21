@@ -195,7 +195,7 @@ export function PromptDetail() {
               <ol className="mt-4 space-y-3">
                 {prompt.instructions.map((step, i) => (
                   <li key={i} className="flex gap-3 rounded-2xl border border-border/70 bg-card p-4">
-                    <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-xs font-semibold text-white">{i + 1}</div>
+                    <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{i + 1}</div>
                     <div className="text-sm">{step}</div>
                   </li>
                 ))}
