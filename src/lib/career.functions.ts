@@ -54,60 +54,74 @@ const ATSInput = z.object({
 });
 
 const KeywordHit = z.object({
-  keyword: z.string().max(80),
-  importance: z.enum(["critical", "important", "nice-to-have"]),
-  inCV: z.boolean(),
-  frequency: z.number().min(0).max(50),
+  keyword: z.string(),
+  importance: z.enum(["critical", "important", "nice-to-have"]).catch("important"),
+  inCV: z.boolean().catch(false),
+  frequency: z.number().catch(0),
 });
 
 const FormattingCheck = z.object({
-  name: z.string().max(80),
-  passed: z.boolean(),
-  detail: z.string().max(240),
+  name: z.string(),
+  passed: z.boolean().catch(false),
+  detail: z.string().catch(""),
 });
 
 const SubScore = z.object({
-  label: z.string().max(60),
-  score: z.number().min(0).max(100),
-  weight: z.number().min(0).max(100),
-  note: z.string().max(240),
+  label: z.string(),
+  score: z.number().catch(0),
+  weight: z.number().catch(0),
+  note: z.string().catch(""),
 });
 
 const ATSSchema = z.object({
-  score: z.number().min(0).max(100),
-  verdict: z.string().max(300),
-  subScores: z.array(SubScore).max(6),
+  score: z.number(),
+  verdict: z.string(),
+  subScores: z.array(SubScore).catch([]),
   keywordCoverage: z.object({
-    matchedCount: z.number().min(0).max(200),
-    totalCount: z.number().min(0).max(200),
-    coveragePct: z.number().min(0).max(100),
-    keywords: z.array(KeywordHit).max(40),
-  }),
-  formattingChecks: z.array(FormattingCheck).max(12),
+    matchedCount: z.number().catch(0),
+    totalCount: z.number().catch(0),
+    coveragePct: z.number().catch(0),
+    keywords: z.array(KeywordHit).catch([]),
+  }).catch({ matchedCount: 0, totalCount: 0, coveragePct: 0, keywords: [] }),
+  formattingChecks: z.array(FormattingCheck).catch([]),
   sectionCoverage: z.array(z.object({
-    section: z.string().max(60),
-    present: z.boolean(),
-    quality: z.enum(["strong", "adequate", "weak", "missing"]),
-    note: z.string().max(240),
-  })).max(8),
-  matchedKeywords: z.array(z.string().max(80)).max(40),
-  missingKeywords: z.array(z.string().max(80)).max(40),
-  strengths: z.array(z.string().max(300)).max(10),
-  improvements: z.array(z.string().max(400)).max(10),
-  rewriteTips: z.array(z.string().max(400)).max(8),
+    section: z.string(),
+    present: z.boolean().catch(false),
+    quality: z.enum(["strong", "adequate", "weak", "missing"]).catch("adequate"),
+    note: z.string().catch(""),
+  })).catch([]),
+  matchedKeywords: z.array(z.string()).catch([]),
+  missingKeywords: z.array(z.string()).catch([]),
+  strengths: z.array(z.string()).catch([]),
+  improvements: z.array(z.string()).catch([]),
+  rewriteTips: z.array(z.string()).catch([]),
 });
 
 export const scoreATS = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => ATSInput.parse(d))
   .handler(async ({ data }) => {
     const system =
-      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description. Produce a detailed, objective breakdown: overall score, weighted sub-scores (Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics), formatting/parseability checks (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, file-friendly length, action verbs, quantified achievements), keyword coverage with importance and CV frequency, and per-section coverage (Summary, Skills, Experience, Education, Certifications). Base every judgement strictly on the CV text provided; never invent.";
+      "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description. Produce a detailed, objective breakdown: overall score, weighted sub-scores (Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics), formatting/parseability checks (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, file-friendly length, action verbs, quantified achievements), keyword coverage with importance and CV frequency, and per-section coverage (Summary, Skills, Experience, Education, Certifications). Base every judgement strictly on the CV text provided; never invent. Always return every field in the schema; use empty arrays or short strings when unsure.";
     const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}\n\nReturn the full structured ATS analysis. The overall score must equal the weighted average of subScores (weights sum to 100). coveragePct = round(matchedCount/totalCount*100).`;
-    const { experimental_output } = await generateText({
-      model: gateway(),
-      system,
-      prompt,
-      experimental_output: Output.object({ schema: ATSSchema }),
-    });
-    return experimental_output;
+    try {
+      const { experimental_output } = await generateText({
+        model: gateway(),
+        system,
+        prompt,
+        experimental_output: Output.object({ schema: ATSSchema }),
+      });
+      return experimental_output;
+    } catch {
+      // Fallback: ask for plain JSON and parse leniently
+      const { text } = await generateText({
+        model: gateway(),
+        system: system + " Respond ONLY with a single JSON object, no prose, no code fences.",
+        prompt,
+      });
+      const cleaned = text.replace(/```(?:json)?/gi, "").trim();
+      const s = cleaned.indexOf("{");
+      const e = cleaned.lastIndexOf("}");
+      const parsed = JSON.parse(cleaned.slice(s, e + 1));
+      return ATSSchema.parse(parsed);
+    }
   });
