@@ -31,16 +31,8 @@ const plans = [
     cta: "Start Premium",
     features: ["Unlimited CV & cover letter generations", "Full ATS optimizer with rewrites", "Saved CVs, letters & reports", "Entire premium prompt library", "Priority AI models"],
   },
-  {
-    key: "coach",
-    name: "Career Coach",
-    price: "$29",
-    per: "/mo",
-    desc: "Land senior & exec roles.",
-    cta: "Talk to us",
-    features: ["Everything in Premium", "1:1 CV review every month", "Interview & negotiation playbooks", "Recruiter outreach templates", "Priority email support"],
-  },
 ];
+
 
 
 export function Pricing() {
@@ -99,7 +91,7 @@ export function Pricing() {
             )}
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3">
+          <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
               const isPremiumCard = p.key === "premium";
               const owned = isPremiumCard && sub.isPremium;
