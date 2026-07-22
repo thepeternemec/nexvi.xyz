@@ -81,19 +81,15 @@ function HumanizerPage() {
         </div>
 
         <div className="mt-8 space-y-4">
-          <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
-            <div>
-              <label className="text-sm font-medium">Editing strength</label>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {(["light", "balanced", "strong"] as const).map((t) => (
-                  <button key={t} onClick={() => setStrength(t)} className={`rounded-full border px-3 py-1.5 text-xs capitalize transition ${strength === t ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
-                ))}
-              </div>
+          <div>
+            <label className="text-sm font-medium">Editing strength</label>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(["light", "balanced", "strong"] as const).map((t) => (
+                <button key={t} onClick={() => setStrength(t)} className={`rounded-full border px-3 py-1.5 text-xs capitalize transition ${strength === t ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
+              ))}
             </div>
-            <Button onClick={onRun} disabled={loading} size="lg" className="rounded-full">
-              {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Humanizing…</> : <><ArrowRightLeft className="h-4 w-4" /> Humanize text</>}
-            </Button>
           </div>
+
 
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-3xl border border-border/70 bg-card p-5">
