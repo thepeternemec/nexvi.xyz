@@ -9,45 +9,6 @@ const ICONS = [Library, FileText, Mail, Target, Wand2];
 export function LandingPage({ locale = "en" }: { locale?: Locale }) {
   const c = copy[locale];
   const href = (p: string) => alternateHref(locale, p);
-
-  return (
-    <SiteShell locale={locale}>
-      {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
-              <Sparkles className="h-3.5 w-3.5" />
-              {c.badge}
-            </div>
-            <h1 className="mt-6 font-display text-5xl tracking-tight sm:text-6xl lg:text-7xl">
-              {c.heroTitleA} <em className="italic text-muted-foreground">{c.heroTitleEm}</em> {c.heroTitleB}
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground sm:text-xl">{c.heroSub}</p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={href("/library")}><Button size="lg" className="rounded-full">{c.ctaFind} <ArrowRight className="h-4 w-4" /></Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full">{c.ctaGenerate}</Button></a>
-              <a href={href("/ats")}><Button size="lg" variant="ghost" className="rounded-full">{c.ctaAts}</Button></a>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.free}</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.noCard}</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.topModels}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* TOOLS */}
-      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <div className="text-center">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.toolsKicker}</div>
-          <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.toolsTitle}</h2>
-        </div>
-export function LandingPage({ locale = "en" }: { locale?: Locale }) {
-  const c = copy[locale];
-  const href = (p: string) => alternateHref(locale, p);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0);
   const order = [1, 2, 3, 4, 0];
