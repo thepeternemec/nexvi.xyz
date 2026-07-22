@@ -36,8 +36,9 @@ const NAV = [
   { href: "/cover-letter", label: "Cover Letter" },
   { href: "/humanizer", label: "Humanizer" },
   { href: "/ats", label: "ATS Optimizer" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/pricing", label: "Pricing", mobileOnly: true },
 ];
+
 
 function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
   const router = useRouter();
