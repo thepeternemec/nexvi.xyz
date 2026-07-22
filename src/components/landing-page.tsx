@@ -162,9 +162,10 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                 ))}
               </div>
             </div>
-
+          </div>
         </div>
       </section>
+
 
       {/* HOW IT WORKS */}
       <section className="border-y border-border/60 bg-muted/20">
