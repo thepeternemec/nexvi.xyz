@@ -105,7 +105,7 @@ function HumanizerPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste your CV summary, cover letter, or any AI-written text…"
-                className="min-h-[400px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
+                className="min-h-[400px] max-h-[70vh] resize-y overflow-auto border-0 bg-transparent p-0 text-sm leading-relaxed shadow-none focus-visible:ring-0"
               />
             </div>
 
