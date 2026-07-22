@@ -322,6 +322,7 @@ export const copy: Record<Locale, Copy> = {
       { title: "Générateur de CV", desc: "Un CV sur mesure et compatible ATS en quelques secondes, optimisé sur les mots-clés de l'offre collée." },
       { title: "Générateur de Lettre", desc: "Des lettres personnalisées qui relient votre expérience réelle à ce que l'entreprise recherche vraiment." },
       { title: "Optimiseur ATS", desc: "Notez votre CV face à n'importe quelle offre. Mots-clés, écarts et conseils de réécriture en langage clair." },
+      { title: "Humanizer", desc: "Supprimez les traces d'IA de votre CV ou lettre. Sonnez naturel et humain — avec comparaison côte à côte de chaque changement." },
     ],
     open: "Ouvrir",
     librarySpotBadge: "Bibliothèque de Prompts",
