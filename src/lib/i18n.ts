@@ -106,6 +106,7 @@ export const copy: Record<Locale, Copy> = {
       { title: "CV Generator", desc: "A tailored, ATS-friendly CV in seconds — keyword-optimized for the job description you paste in." },
       { title: "Cover Letter Generator", desc: "Personalized cover letters that connect your real experience to what the company actually wants." },
       { title: "ATS Optimizer", desc: "Score your CV against any job. Get matched keywords, gaps, and rewrite tips in plain English." },
+      { title: "Humanizer", desc: "Strip AI tells from your CV or cover letter. Sound natural and human — with a side-by-side diff of every change." },
     ],
     open: "Open",
     librarySpotBadge: "Find a Job Prompt Library",
