@@ -136,7 +136,7 @@ export const copy: Record<Locale, Copy> = {
       ["3×", "more interviews when your CV is tailored per role."],
       ["60s", "to generate a fully tailored CV and cover letter."],
     ],
-    ctaBigTitle: "Your next job is one prompt away.",
+    ctaBigTitle: "oYour next job is one prompt away.",
     ctaBigSub: "Free to use. No sign-up required. Browse the library, run a tool, get results.",
     metaTitle: "ApplyWise — AI CVs, Cover Letters & ATS Optimization",
     metaDesc: "Paste a job description. Get an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds.",
