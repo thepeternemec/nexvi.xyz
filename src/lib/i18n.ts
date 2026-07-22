@@ -268,6 +268,7 @@ export const copy: Record<Locale, Copy> = {
       { title: "Generatore di CV", desc: "Un CV su misura e ATS-friendly in pochi secondi, ottimizzato con le parole chiave dell'annuncio che incolli." },
       { title: "Generatore di Lettera", desc: "Lettere personalizzate che collegano la tua esperienza reale a ciò che l'azienda cerca davvero." },
       { title: "Ottimizzatore ATS", desc: "Valuta il tuo CV contro qualsiasi annuncio. Parole chiave, lacune e suggerimenti in linguaggio semplice." },
+      { title: "Humanizer", desc: "Elimina i segnali di IA dal tuo CV o lettera. Suona naturale e umano — con confronto affiancato di ogni modifica." },
     ],
     open: "Apri",
     librarySpotBadge: "Libreria di Prompt",
