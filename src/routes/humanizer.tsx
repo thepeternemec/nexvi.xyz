@@ -151,9 +151,7 @@ function HumanizerPage() {
             </div>
           )}
 
-          <p className="text-xs text-muted-foreground">
-            Based on the open-source <a href="https://github.com/blader/humanizer" target="_blank" rel="noreferrer" className="underline">Humanizer</a> skill and Wikipedia's Signs of AI Writing guide.
-          </p>
+
         </div>
       </section>
     </SiteShell>
