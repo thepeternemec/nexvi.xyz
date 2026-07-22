@@ -1,9 +1,9 @@
-import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search } from "lucide-react";
+import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
 
-const ICONS = [Library, FileText, Mail, Target];
+const ICONS = [Library, FileText, Mail, Target, Wand2];
 
 export function LandingPage({ locale = "en" }: { locale?: Locale }) {
   const c = copy[locale];
