@@ -103,11 +103,12 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
           <span className="font-display text-[15px] font-semibold tracking-tight">ApplyWise</span>
         </a>
         <nav className="hidden items-center gap-5 lg:flex">
-          {NAV.map((n) => (
+          {NAV.filter((n) => !n.mobileOnly).map((n) => (
             <a key={n.href} href={href(n.href)} className="whitespace-nowrap text-[13px] text-muted-foreground transition-colors hover:text-foreground">
               {n.label}
             </a>
           ))}
+
         </nav>
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
