@@ -1,9 +1,9 @@
-import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search } from "lucide-react";
+import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
 
-const ICONS = [Library, FileText, Mail, Target];
+const ICONS = [Library, FileText, Mail, Target, Wand2];
 
 export function LandingPage({ locale = "en" }: { locale?: Locale }) {
   const c = copy[locale];
@@ -44,10 +44,10 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
           <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.toolsTitle}</h2>
         </div>
-        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {c.tools.map((t, i) => {
             const Icon = ICONS[i];
-            const link = ["/library", "/cv", "/cover-letter", "/ats"][i];
+            const link = ["/library", "/cv", "/cover-letter", "/ats", "/humanizer"][i];
             return (
               <a key={link} href={href(link)} className="group relative flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
                 {t.badge && (
