@@ -179,7 +179,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
       </div>
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-400 sm:flex-row sm:px-6">
-          <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers.</div>
+          <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers with ❤️ in Berlin</div>
           <div>Land your next role.</div>
         </div>
       </div>
