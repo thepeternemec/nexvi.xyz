@@ -208,8 +208,102 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
         </div>
       </section>
 
+      {/* HUMANIZER SPOTLIGHT */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="order-2 lg:order-1 rounded-3xl border border-border/70 bg-card p-6 shadow-sm">
+            <div className="grid grid-cols-2 gap-3 text-xs">
+              <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
+                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  <Bot className="h-3 w-3" /> AI draft
+                </div>
+                <p className="leading-relaxed">
+                  <span className="rounded bg-red-500/15 px-0.5 line-through decoration-red-500/60">Leveraged synergistic frameworks to</span> deliver <span className="rounded bg-red-500/15 px-0.5 line-through decoration-red-500/60">robust, scalable</span> solutions <span className="rounded bg-red-500/15 px-0.5 line-through decoration-red-500/60">in a dynamic environment</span>.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-primary/40 bg-primary/5 p-4">
+                <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                  <Wand2 className="h-3 w-3" /> Humanized
+                </div>
+                <p className="leading-relaxed">
+                  Built and shipped tools that <span className="rounded bg-primary/20 px-0.5">cut onboarding time by 40%</span> across three product teams.
+                </p>
+              </div>
+            </div>
+            <div className="mt-4 flex items-center justify-between rounded-xl bg-muted/40 px-4 py-3 text-xs">
+              <div className="flex items-center gap-2 text-muted-foreground">
+                <ShieldCheck className="h-3.5 w-3.5" /> AI-detector risk
+              </div>
+              <div className="flex items-center gap-2 font-medium">
+                <span className="text-muted-foreground line-through">High</span>
+                <ArrowRight className="h-3 w-3" />
+                <span className="text-primary">Low</span>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
+              <Wand2 className="h-3.5 w-3.5" /> Humanizer
+            </div>
+            <h2 className="font-display mt-4 text-3xl tracking-tight sm:text-5xl">
+              Sound like <em className="italic text-muted-foreground">you</em>, not a chatbot.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Recruiters spot AI-generated writing in seconds — and detectors like GPTZero and Turnitin flag it before your CV reaches a human. Our Humanizer rewrites any draft so it reads natural, specific, and unmistakably yours, with a side-by-side diff of every change.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm">
+              {[
+                "Strip generic AI phrases (\"leveraged\", \"synergistic\", \"passionate about\")",
+                "Rewrite in your voice — concise, specific, evidence-first",
+                "Bypass ATS AI-detection filters used by top employers",
+                "See every edit with a clear before/after diff",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" /> {t}</li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href={href("/humanizer")}><Button size="lg" className="rounded-full">Try the Humanizer <ArrowRight className="h-4 w-4" /></Button></a>
+              <a href={href("/ats")}><Button size="lg" variant="outline" className="rounded-full">Check ATS score</Button></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURE OVERVIEW */}
+      <section className="border-y border-border/60 bg-muted/20">
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Everything in one place</div>
+            <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">One toolkit for the whole job hunt.</h2>
+            <p className="mt-4 text-muted-foreground">From the first prompt to the signed offer — every step of the modern job search, powered by AI you can actually trust.</p>
+          </div>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { icon: Library, title: "Prompt Library", desc: "Hundreds of curated prompts for CVs, interviews, outreach and negotiation — written by career coaches." },
+              { icon: FileText, title: "Tailored CV Generator", desc: "Paste a job description and get a keyword-optimized CV shaped around your real experience in seconds." },
+              { icon: Mail, title: "Cover Letters that fit", desc: "Personal, specific letters that show why you — not another candidate — belong in the role." },
+              { icon: Scan, title: "ATS Match Scoring", desc: "See exactly which keywords, sections, and formatting choices are costing you interviews." },
+              { icon: Wand2, title: "AI Humanizer", desc: "Rewrite AI-sounding drafts into natural, human writing that gets past detectors and recruiters." },
+              { icon: Target, title: "Job-Specific Tailoring", desc: "Every output is shaped to one job description — no more copy-paste applications." },
+              { icon: Gauge, title: "60-Second Turnaround", desc: "Go from blank page to interview-ready docs in under a minute — for every role you apply to." },
+              { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
+              { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="rounded-3xl border border-border/70 bg-background p-6 transition hover:border-foreground/30 hover:shadow-sm">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 text-base font-semibold">{title}</h3>
+                <p className="mt-1.5 text-sm text-muted-foreground">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SOCIAL PROOF */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
+
         <div className="text-center">
           <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{c.socialTitle}</h2>
           <p className="mt-3 text-muted-foreground">{c.socialSub}</p>
