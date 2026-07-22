@@ -153,7 +153,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <span className="font-display text-xl tracking-tight text-white">ApplyWise</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-slate-400">
-            AI-powered CVs, cover letters, and ATS optimization — tailored to every job description.
+            Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">
             <Search className="h-3.5 w-3.5" /> Paste a job description. Get hired.
