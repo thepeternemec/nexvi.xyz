@@ -107,7 +107,13 @@ function HumanizerPage() {
                 placeholder="Paste your CV summary, cover letter, or any AI-written text…"
                 className="min-h-[400px] max-h-[70vh] resize-y overflow-auto border-0 bg-transparent p-0 text-sm leading-relaxed shadow-none focus-visible:ring-0"
               />
+              <div className="mt-4 border-t border-border/60 pt-4">
+                <Button onClick={onRun} disabled={loading} className="w-full rounded-full" size="lg">
+                  {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Humanizing…</> : <><ArrowRightLeft className="h-4 w-4" /> Humanize text</>}
+                </Button>
+              </div>
             </div>
+
 
             <div className="rounded-3xl border border-border/70 bg-card p-5">
               <div className="mb-3 flex items-center justify-between">
