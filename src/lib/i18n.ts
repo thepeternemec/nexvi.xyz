@@ -160,6 +160,7 @@ export const copy: Record<Locale, Copy> = {
       { title: "CV-Generator", desc: "Ein maßgeschneiderter, ATS-freundlicher Lebenslauf in Sekunden — optimiert auf die Stellenbeschreibung, die du einfügst." },
       { title: "Anschreiben-Generator", desc: "Persönliche Anschreiben, die deine echte Erfahrung mit dem verbinden, was das Unternehmen wirklich sucht." },
       { title: "ATS-Optimierer", desc: "Bewerte deinen Lebenslauf gegen jeden Job. Erhalte passende Keywords, Lücken und Umformulierungs-Tipps." },
+      { title: "Humanizer", desc: "Entferne KI-Spuren aus deinem Lebenslauf oder Anschreiben. Klinge natürlich und menschlich — mit direktem Vorher-Nachher-Vergleich." },
     ],
     open: "Öffnen",
     librarySpotBadge: "Job-Prompt-Bibliothek",
