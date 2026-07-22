@@ -45,14 +45,85 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
           <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.toolsTitle}</h2>
         </div>
-        <div className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
+export function LandingPage({ locale = "en" }: { locale?: Locale }) {
+  const c = copy[locale];
+  const href = (p: string) => alternateHref(locale, p);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(0);
+  const order = [1, 2, 3, 4, 0];
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const cards = el.querySelectorAll<HTMLElement>("[data-tool-card]");
+      if (!cards.length) return;
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const d = Math.abs(cardCenter - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      setActiveIdx(best);
+    };
+    onScroll();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollToIdx = (i: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelectorAll<HTMLElement>("[data-tool-card]")[i];
+    if (!card) return;
+    el.scrollTo({ left: card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2, behavior: "smooth" });
+  };
+
+  return (
+    <SiteShell locale={locale}>
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:py-28">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
+              <Sparkles className="h-3.5 w-3.5" />
+              {c.badge}
+            </div>
+            <h1 className="mt-6 font-display text-5xl tracking-tight sm:text-6xl lg:text-7xl">
+              {c.heroTitleA} <em className="italic text-muted-foreground">{c.heroTitleEm}</em> {c.heroTitleB}
+            </h1>
+            <p className="mt-6 text-lg text-muted-foreground sm:text-xl">{c.heroSub}</p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <a href={href("/library")}><Button size="lg" className="rounded-full">{c.ctaFind} <ArrowRight className="h-4 w-4" /></Button></a>
+              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full">{c.ctaGenerate}</Button></a>
+              <a href={href("/ats")}><Button size="lg" variant="ghost" className="rounded-full">{c.ctaAts}</Button></a>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.free}</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.noCard}</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.topModels}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* TOOLS */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
+        <div className="text-center">
+          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.toolsKicker}</div>
+          <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.toolsTitle}</h2>
+        </div>
+        <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
           <div className="flex gap-5 snap-x snap-mandatory">
-            {[1, 2, 3, 4, 0].map((i) => {
+            {order.map((i) => {
               const t = c.tools[i];
               const Icon = ICONS[i];
               const link = ["/library", "/cv", "/cover-letter", "/ats", "/humanizer"][i];
               return (
-                <a key={link} href={href(link)} className="group relative flex w-[280px] shrink-0 snap-start flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg sm:w-[320px]">
+                <a key={link} data-tool-card href={href(link)} className="group relative flex w-[280px] shrink-0 snap-start flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg sm:w-[320px]">
                   {t.badge && (
                     <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
                       {t.badge}
@@ -71,7 +142,21 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
             })}
           </div>
         </div>
+        <div className="mt-6 flex justify-center gap-2" role="tablist" aria-label="Tools carousel pagination">
+          {order.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              role="tab"
+              aria-selected={activeIdx === i}
+              aria-label={`Go to slide ${i + 1}`}
+              onClick={() => scrollToIdx(i)}
+              className={`h-1.5 rounded-full transition-all ${activeIdx === i ? "w-6 bg-foreground" : "w-1.5 bg-foreground/25 hover:bg-foreground/40"}`}
+            />
+          ))}
+        </div>
       </section>
+
 
       {/* LIBRARY SPOTLIGHT */}
       <section className="border-y border-border/60 bg-muted/20">
