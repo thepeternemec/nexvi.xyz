@@ -111,8 +111,9 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
-          <a href={href("/login")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Sign in</Button></a>
-          <a href={href("/library")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Find a job prompt</Button></a>
+          <a href={href("/pricing")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Pricing</Button></a>
+          <a href={href("/login")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Sign in</Button></a>
+
         </div>
         <div className="flex items-center gap-2 lg:hidden">
           <LanguageSwitcher locale={locale} />
