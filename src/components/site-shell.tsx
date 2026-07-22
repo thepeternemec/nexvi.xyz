@@ -130,8 +130,9 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
             ))}
             <div className="mt-2 flex gap-2">
-              <a href={href("/login")} className="flex-1"><Button variant="outline" size="sm" className="w-full">Sign in</Button></a>
-              <a href={href("/library")} className="flex-1"><Button size="sm" className="w-full">Find a job prompt</Button></a>
+              <a href={href("/pricing")} className="flex-1"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
+              <a href={href("/login")} className="flex-1"><Button size="sm" className="w-full">Sign in</Button></a>
+
             </div>
           </div>
         </div>
