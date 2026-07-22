@@ -190,7 +190,7 @@ export const copy: Record<Locale, Copy> = {
       ["3×", "mehr Interviews, wenn dein CV auf die Rolle zugeschnitten ist."],
       ["60 Sek.", "um einen kompletten CV und ein Anschreiben zu erstellen."],
     ],
-    ctaBigTitle: "Dein nächster Job ist nur einen Prompt entfernt.",
+    ctaBigTitle: "oDein nächster Job ist nur einen Prompt entfernt.",
     ctaBigSub: "Kostenlos. Keine Anmeldung nötig. Bibliothek durchstöbern, Tool starten, Ergebnisse bekommen.",
     metaTitle: "ApplyWise — KI-Lebensläufe, Anschreiben & ATS-Optimierung",
     metaDesc: "Füge eine Stellenbeschreibung ein. Erhalte einen ATS-optimierten Lebenslauf, ein passgenaues Anschreiben und einen Match-Score in 60 Sekunden.",
