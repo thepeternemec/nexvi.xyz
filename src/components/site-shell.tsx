@@ -146,44 +146,45 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
 export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
-    <footer className="border-t border-border/60 bg-muted/30">
+    <footer className="border-t border-white/5 bg-[#0a2540] text-slate-200">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-xl tracking-tight">ApplyWise</span>
+            <span className="font-display text-xl tracking-tight text-white">ApplyWise</span>
           </div>
-          <p className="mt-4 max-w-sm text-sm text-muted-foreground">
+          <p className="mt-4 max-w-sm text-sm text-slate-400">
             AI-powered CVs, cover letters, and ATS optimization — tailored to every job description.
           </p>
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-border/80 bg-background/60 px-3 py-1.5 text-xs text-muted-foreground">
+          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">
             <Search className="h-3.5 w-3.5" /> Paste a job description. Get hired.
           </div>
         </div>
         <div>
-          <div className="text-sm font-medium">Tools</div>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href={href("/cv")}>CV Generator</a></li>
-            <li><a href={href("/cover-letter")}>Cover Letter Generator</a></li>
-            <li><a href={href("/ats")}>ATS Optimizer</a></li>
-            <li><a href={href("/library")}>Prompt Library</a></li>
+          <div className="text-sm font-medium text-white">Tools</div>
+          <ul className="mt-3 space-y-2 text-sm text-slate-400">
+            <li><a href={href("/cv")} className="hover:text-white">CV Generator</a></li>
+            <li><a href={href("/cover-letter")} className="hover:text-white">Cover Letter Generator</a></li>
+            <li><a href={href("/ats")} className="hover:text-white">ATS Optimizer</a></li>
+            <li><a href={href("/library")} className="hover:text-white">Prompt Library</a></li>
           </ul>
         </div>
         <div>
-          <div className="text-sm font-medium">Company</div>
-          <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a href={href("/pricing")}>Pricing</a></li>
-            <li><a href={href("/login")}>Sign in</a></li>
-            <li><a href={href("/signup")}>Create account</a></li>
+          <div className="text-sm font-medium text-white">Company</div>
+          <ul className="mt-3 space-y-2 text-sm text-slate-400">
+            <li><a href={href("/pricing")} className="hover:text-white">Pricing</a></li>
+            <li><a href={href("/login")} className="hover:text-white">Sign in</a></li>
+            <li><a href={href("/signup")} className="hover:text-white">Create account</a></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-border/60">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6">
+      <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-400 sm:flex-row sm:px-6">
           <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers.</div>
           <div>Land your next role.</div>
         </div>
       </div>
     </footer>
+
   );
 }
 
