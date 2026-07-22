@@ -15,6 +15,7 @@ import { Route as McpRouteImport } from './routes/mcp'
 import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LibraryRouteImport } from './routes/library'
+import { Route as HumanizerRouteImport } from './routes/humanizer'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CvRouteImport } from './routes/cv'
 import { Route as CreatorsRouteImport } from './routes/creators'
@@ -125,6 +126,11 @@ const LoginRoute = LoginRouteImport.update({
 const LibraryRoute = LibraryRouteImport.update({
   id: '/library',
   path: '/library',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HumanizerRoute = HumanizerRouteImport.update({
+  id: '/humanizer',
+  path: '/humanizer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -546,6 +552,7 @@ export interface FileRoutesByFullPath {
   '/creators': typeof CreatorsRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/humanizer': typeof HumanizerRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -635,6 +642,7 @@ export interface FileRoutesByTo {
   '/creators': typeof CreatorsRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/humanizer': typeof HumanizerRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -725,6 +733,7 @@ export interface FileRoutesById {
   '/creators': typeof CreatorsRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
+  '/humanizer': typeof HumanizerRoute
   '/library': typeof LibraryRoute
   '/login': typeof LoginRoute
   '/marketplace': typeof MarketplaceRoute
@@ -816,6 +825,7 @@ export interface FileRouteTypes {
     | '/creators'
     | '/cv'
     | '/dashboard'
+    | '/humanizer'
     | '/library'
     | '/login'
     | '/marketplace'
@@ -905,6 +915,7 @@ export interface FileRouteTypes {
     | '/creators'
     | '/cv'
     | '/dashboard'
+    | '/humanizer'
     | '/library'
     | '/login'
     | '/marketplace'
@@ -994,6 +1005,7 @@ export interface FileRouteTypes {
     | '/creators'
     | '/cv'
     | '/dashboard'
+    | '/humanizer'
     | '/library'
     | '/login'
     | '/marketplace'
@@ -1084,6 +1096,7 @@ export interface RootRouteChildren {
   CreatorsRoute: typeof CreatorsRoute
   CvRoute: typeof CvRoute
   DashboardRoute: typeof DashboardRoute
+  HumanizerRoute: typeof HumanizerRoute
   LibraryRoute: typeof LibraryRoute
   LoginRoute: typeof LoginRoute
   MarketplaceRoute: typeof MarketplaceRoute
@@ -1206,6 +1219,13 @@ declare module '@tanstack/react-router' {
       path: '/library'
       fullPath: '/library'
       preLoaderRoute: typeof LibraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/humanizer': {
+      id: '/humanizer'
+      path: '/humanizer'
+      fullPath: '/humanizer'
+      preLoaderRoute: typeof HumanizerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -1788,6 +1808,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreatorsRoute: CreatorsRoute,
   CvRoute: CvRoute,
   DashboardRoute: DashboardRoute,
+  HumanizerRoute: HumanizerRoute,
   LibraryRoute: LibraryRoute,
   LoginRoute: LoginRoute,
   MarketplaceRoute: MarketplaceRoute,

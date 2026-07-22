@@ -116,3 +116,20 @@ export const scoreATS = createServerFn({ method: "POST" })
     }
     return ATSSchema.parse(parsed);
   });
+
+/* ---------- Humanizer ---------- */
+const HumanizeInput = z.object({
+  text: z.string().min(10).max(20000),
+  strength: z.enum(["light", "balanced", "strong"]).optional(),
+});
+
+export const humanizeText = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) => HumanizeInput.parse(d))
+  .handler(async ({ data }) => {
+    const system =
+      "You are the Humanizer editor, based on Wikipedia's 'Signs of AI writing' guide. Rewrite the given text so it no longer reads as AI-generated, while preserving every factual claim. Rules: (1) Cut inflated symbolism, promotional adjectives ('vibrant', 'rich', 'seamless', 'transformative'), and hollow -ing analyses ('underscoring', 'highlighting', 'reflecting'). (2) Remove vague attributions ('many experts say', 'it is widely believed'). (3) Kill em dash overuse — replace with commas, periods, or parentheses where natural. (4) Break the rule-of-three cadence; vary list length. (5) Avoid AI vocabulary: delve, tapestry, testament, navigate, landscape, realm, robust, leverage, crucial, pivotal, foster, underscore, moreover, furthermore, in conclusion, in today's world. (6) Prefer active voice. (7) Drop negative parallelisms ('not just X but Y'). (8) Cut filler ('it is important to note', 'it's worth mentioning'). (9) Vary sentence length — mix short and long. (10) Preserve information, not shape: merge/split paragraphs freely. Output ONLY the rewritten text, no preamble, no explanation, no markdown fences.";
+    const strength = data.strength ?? "balanced";
+    const prompt = `Editing strength: ${strength}. ${strength === "light" ? "Make minimal surface changes." : strength === "strong" ? "Aggressively rewrite phrasing and cadence." : "Balance faithfulness with natural rewriting."}\n\nTEXT TO HUMANIZE:\n${data.text}`;
+    const { text } = await generateText({ model: gateway(), system, prompt });
+    return { text: text.replace(/```[a-z]*\n?/gi, "").replace(/```/g, "").trim() };
+  });
