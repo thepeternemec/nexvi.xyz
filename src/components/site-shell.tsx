@@ -164,6 +164,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           <ul className="mt-3 space-y-2 text-sm text-slate-400">
             <li><a href={href("/cv")} className="hover:text-white">CV Generator</a></li>
             <li><a href={href("/cover-letter")} className="hover:text-white">Cover Letter Generator</a></li>
+            <li><a href={href("/humanizer")} className="hover:text-white">Humanizer</a></li>
             <li><a href={href("/ats")} className="hover:text-white">ATS Optimizer</a></li>
             <li><a href={href("/library")} className="hover:text-white">Prompt Library</a></li>
           </ul>
