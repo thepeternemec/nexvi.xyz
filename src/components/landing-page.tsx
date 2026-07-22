@@ -226,7 +226,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="rounded-3xl bg-foreground p-12 text-background sm:p-16">
+        <div className="rounded-3xl bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900 p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.ctaBigTitle}</h2>
             <p className="mt-4 text-background/70">{c.ctaBigSub}</p>
