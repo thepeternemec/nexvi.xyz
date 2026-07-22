@@ -265,20 +265,6 @@ export function PromptDetail() {
               </div>
             </div>
 
-            {creator && (
-              <div className="rounded-3xl border border-border/70 bg-card p-6">
-                <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Creator</div>
-                <div className="mt-3 flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-sm font-semibold text-white">{creator.avatar}</div>
-                  <div>
-                    <div className="font-medium">{creator.name} {creator.verified && <span className="text-xs text-violet-600">✓</span>}</div>
-                    <div className="text-xs text-muted-foreground">{creator.handle}</div>
-                  </div>
-                </div>
-                <p className="mt-3 text-sm text-muted-foreground">{creator.bio}</p>
-                <Button variant="outline" className="mt-4 w-full rounded-full">Follow</Button>
-              </div>
-            )}
 
             <div className="rounded-3xl border border-border/70 bg-card p-6">
               <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Tags</div>
