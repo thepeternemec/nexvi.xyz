@@ -130,7 +130,7 @@ function HumanizerPage() {
                   )}
                 </div>
               </div>
-              <div className="min-h-[400px] whitespace-pre-wrap text-sm leading-relaxed">
+              <div className="min-h-[400px] max-h-[70vh] overflow-auto whitespace-pre-wrap text-sm leading-relaxed">
                 {!out && <span className="text-muted-foreground">Your humanized text — with changes highlighted — will appear here.</span>}
                 {out && view === "clean" && out}
                 {out && view === "diff" && diff && diff.map((part, i) => {
