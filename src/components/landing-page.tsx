@@ -141,16 +141,18 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
             </div>
             <div className="rounded-3xl border border-border/70 bg-background p-6 shadow-sm">
               <div className="flex items-center gap-2 rounded-full border border-border/70 bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
-                <Search className="h-4 w-4" /> "cover letter for product manager"
+                <Search className="h-4 w-4" /> "prompts that actually land interviews"
               </div>
               <div className="mt-4 grid gap-3">
                 {[
-                  { tag: "Cover Letter", title: "PM cover letter that lands interviews", meta: "Free • 4.9★" },
-                  { tag: "Interview", title: "STAR stories from your real experience", meta: "Premium • 4.8★" },
-                  { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free • 4.9★" },
-                  { tag: "Negotiation", title: "Counter-offer script with comp research", meta: "Premium • 4.9★" },
+                  { tag: "CV", title: "Tailored CV for any job description", meta: "Free • 4.9★", slug: "tailored-cv-for-any-job-description" },
+                  { tag: "Cover Letter", title: "Cover letter that sounds human", meta: "Free • 4.9★", slug: "personalized-cover-letter-that-sounds-human" },
+                  { tag: "ATS", title: "ATS keyword gap analyzer", meta: "Premium • 4.8★", slug: "ats-keyword-gap-analyzer" },
+                  { tag: "Interview", title: "STAR interview stories from your CV", meta: "Premium • 4.9★", slug: "star-method-interview-stories" },
+                  { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free • 4.9★", slug: "recruiter-cold-message-that-gets-replies" },
+                  { tag: "Negotiation", title: "Salary counter-offer script", meta: "Premium • 4.9★", slug: "salary-negotiation-counter-offer-script" },
                 ].map((p) => (
-                  <a key={p.title} href={href("/marketplace")} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
+                  <a key={p.slug} href={href(`/prompt/${p.slug}`)} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
                     <div>
                       <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.tag}</div>
                       <div className="text-sm font-medium">{p.title}</div>
@@ -163,6 +165,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
       </section>
+
 
       {/* HOW IT WORKS */}
       <section className="border-y border-border/60 bg-muted/20">
