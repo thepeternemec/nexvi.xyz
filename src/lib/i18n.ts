@@ -244,7 +244,7 @@ export const copy: Record<Locale, Copy> = {
       ["3×", "más entrevistas cuando el CV está adaptado al puesto."],
       ["60 s", "para generar un CV y una carta totalmente a medida."],
     ],
-    ctaBigTitle: "Tu próximo empleo está a un prompt de distancia.",
+    ctaBigTitle: "oTu próximo empleo está a un prompt de distancia.",
     ctaBigSub: "Gratis. Sin registro. Explora la biblioteca, usa una herramienta, obtén resultados.",
     metaTitle: "ApplyWise — CVs con IA, cartas y optimización ATS",
     metaDesc: "Pega una descripción de puesto. Obtén un CV optimizado para ATS, una carta a medida y una puntuación con mejoras concretas — en 60 segundos.",
