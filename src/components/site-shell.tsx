@@ -146,7 +146,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
 export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
-    <footer className="border-t border-white/5 bg-[#0a2540] text-slate-200">
+    <footer className="border-t border-white/5 bg-[#1a1a1a] text-slate-200">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
