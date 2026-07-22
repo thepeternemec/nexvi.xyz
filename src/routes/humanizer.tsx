@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2, Sparkles, Copy, Download, ArrowRightLeft } from "lucide-react";
 import { toast } from "sonner";
+import { diffWords } from "diff";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,8 +25,25 @@ function HumanizerPage() {
   const run = useServerFn(humanizeText);
   const [input, setInput] = useState("");
   const [out, setOut] = useState("");
+  const [original, setOriginal] = useState("");
   const [strength, setStrength] = useState<"light" | "balanced" | "strong">("balanced");
   const [loading, setLoading] = useState(false);
+  const [view, setView] = useState<"diff" | "clean">("diff");
+
+  const diff = useMemo(() => {
+    if (!original || !out) return null;
+    return diffWords(original, out);
+  }, [original, out]);
+
+  const stats = useMemo(() => {
+    if (!diff) return null;
+    let added = 0, removed = 0;
+    for (const p of diff) {
+      if (p.added) added += p.value.trim().split(/\s+/).filter(Boolean).length;
+      if (p.removed) removed += p.value.trim().split(/\s+/).filter(Boolean).length;
+    }
+    return { added, removed };
+  }, [diff]);
 
   async function onRun() {
     if (input.trim().length < 10) {
@@ -35,6 +53,7 @@ function HumanizerPage() {
     setLoading(true); setOut("");
     try {
       const res = await run({ data: { text: input, strength } });
+      setOriginal(input);
       setOut(res.text);
       toast.success("Humanized.");
     } catch (e) {
@@ -52,21 +71,17 @@ function HumanizerPage() {
 
   return (
     <SiteShell>
-      <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6">
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
         <div className="flex items-center gap-3">
           <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-5 w-5" /></div>
           <div>
             <h1 className="font-display text-3xl tracking-tight sm:text-4xl">Humanizer</h1>
-            <p className="text-sm text-muted-foreground">Strip AI tells from your CV, cover letter, or any text — keep the meaning, lose the robot.</p>
+            <p className="text-sm text-muted-foreground">Strip AI tells from your text — see exactly what changed.</p>
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <div className="space-y-4">
-            <div>
-              <label className="text-sm font-medium">Paste AI-generated text</label>
-              <Textarea value={input} onChange={(e) => setInput(e.target.value)} placeholder="Paste your CV summary, cover letter, or any AI-written text…" className="mt-2 min-h-[280px]" />
-            </div>
+        <div className="mt-8 space-y-4">
+          <div className="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
             <div>
               <label className="text-sm font-medium">Editing strength</label>
               <div className="mt-2 flex flex-wrap gap-2">
@@ -75,28 +90,68 @@ function HumanizerPage() {
                 ))}
               </div>
             </div>
-            <Button onClick={onRun} disabled={loading} size="lg" className="w-full rounded-full">
+            <Button onClick={onRun} disabled={loading} size="lg" className="rounded-full">
               {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Humanizing…</> : <><ArrowRightLeft className="h-4 w-4" /> Humanize text</>}
             </Button>
-            <p className="text-xs text-muted-foreground">
-              Based on the open-source <a href="https://github.com/blader/humanizer" target="_blank" rel="noreferrer" className="underline">Humanizer</a> skill and Wikipedia's Signs of AI Writing guide.
-            </p>
           </div>
 
-          <div className="rounded-3xl border border-border/70 bg-card p-5">
-            <div className="flex items-center justify-between">
-              <div className="text-sm font-semibold">Humanized output</div>
-              {out && (
-                <div className="flex gap-1">
-                  <Button size="sm" variant="ghost" onClick={copy}><Copy className="h-4 w-4" /></Button>
-                  <Button size="sm" variant="ghost" onClick={download}><Download className="h-4 w-4" /></Button>
-                </div>
-              )}
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-3xl border border-border/70 bg-card p-5">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="text-sm font-semibold">Original</div>
+                {stats && <div className="text-xs text-muted-foreground"><span className="text-rose-500">−{stats.removed}</span> words</div>}
+              </div>
+              <Textarea
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Paste your CV summary, cover letter, or any AI-written text…"
+                className="min-h-[400px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
+              />
             </div>
-            <div className="mt-3 min-h-[400px] whitespace-pre-wrap rounded-2xl bg-muted/30 p-4 text-sm leading-relaxed">
-              {out || <span className="text-muted-foreground">Your humanized text will appear here.</span>}
+
+            <div className="rounded-3xl border border-border/70 bg-card p-5">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="text-sm font-semibold">Humanized</div>
+                  {out && (
+                    <div className="flex rounded-full border border-border p-0.5 text-xs">
+                      <button onClick={() => setView("diff")} className={`rounded-full px-2.5 py-0.5 transition ${view === "diff" ? "bg-foreground text-background" : "text-muted-foreground"}`}>Diff</button>
+                      <button onClick={() => setView("clean")} className={`rounded-full px-2.5 py-0.5 transition ${view === "clean" ? "bg-foreground text-background" : "text-muted-foreground"}`}>Clean</button>
+                    </div>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  {stats && <div className="text-xs text-muted-foreground"><span className="text-emerald-500">+{stats.added}</span> words</div>}
+                  {out && (
+                    <div className="flex gap-1">
+                      <Button size="sm" variant="ghost" onClick={copy}><Copy className="h-4 w-4" /></Button>
+                      <Button size="sm" variant="ghost" onClick={download}><Download className="h-4 w-4" /></Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="min-h-[400px] whitespace-pre-wrap text-sm leading-relaxed">
+                {!out && <span className="text-muted-foreground">Your humanized text — with changes highlighted — will appear here.</span>}
+                {out && view === "clean" && out}
+                {out && view === "diff" && diff && diff.map((part, i) => {
+                  if (part.added) return <span key={i} className="rounded bg-emerald-500/15 px-0.5 text-emerald-700 dark:text-emerald-300">{part.value}</span>;
+                  if (part.removed) return <span key={i} className="rounded bg-rose-500/15 px-0.5 text-rose-700 line-through decoration-rose-400/60 dark:text-rose-300">{part.value}</span>;
+                  return <span key={i}>{part.value}</span>;
+                })}
+              </div>
             </div>
           </div>
+
+          {out && (
+            <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-rose-500/25" /> Removed / replaced</span>
+              <span className="inline-flex items-center gap-1.5"><span className="h-3 w-3 rounded bg-emerald-500/25" /> Added</span>
+            </div>
+          )}
+
+          <p className="text-xs text-muted-foreground">
+            Based on the open-source <a href="https://github.com/blader/humanizer" target="_blank" rel="noreferrer" className="underline">Humanizer</a> skill and Wikipedia's Signs of AI Writing guide.
+          </p>
         </div>
       </section>
     </SiteShell>
