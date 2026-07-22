@@ -232,7 +232,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
             <p className="mt-4 text-white/70">{c.ctaBigSub}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href={href("/library")}><Button size="lg" variant="secondary" className="rounded-full">{c.browseLibrary}</Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full border-background/30 bg-transparent text-background hover:bg-background hover:text-foreground">{c.ctaGenerate}</Button></a>
+              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white hover:text-neutral-900">{c.ctaGenerate}</Button></a>
             </div>
           </div>
         </div>
