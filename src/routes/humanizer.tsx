@@ -105,7 +105,7 @@ function HumanizerPage() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste your CV summary, cover letter, or any AI-written text…"
-                className="min-h-[400px] resize-none border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
+                className="min-h-[400px] max-h-[70vh] resize-y overflow-auto border-0 bg-transparent p-0 text-sm leading-relaxed shadow-none focus-visible:ring-0"
               />
             </div>
 
@@ -130,7 +130,7 @@ function HumanizerPage() {
                   )}
                 </div>
               </div>
-              <div className="min-h-[400px] whitespace-pre-wrap text-sm leading-relaxed">
+              <div className="min-h-[400px] max-h-[70vh] overflow-auto whitespace-pre-wrap text-sm leading-relaxed">
                 {!out && <span className="text-muted-foreground">Your humanized text — with changes highlighted — will appear here.</span>}
                 {out && view === "clean" && out}
                 {out && view === "diff" && diff && diff.map((part, i) => {
