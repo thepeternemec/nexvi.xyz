@@ -31,11 +31,11 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { href: "/library", label: "Prompt Library" },
   { href: "/cv", label: "CV Generator" },
   { href: "/cover-letter", label: "Cover Letter" },
   { href: "/humanizer", label: "Humanizer" },
   { href: "/ats", label: "ATS Optimizer" },
+  { href: "/library", label: "Prompt Library" },
   { href: "/pricing", label: "Pricing", mobileOnly: true },
 ];
 
