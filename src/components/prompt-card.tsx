@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
+import { MeshGradient } from "@/components/mesh-gradient";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
