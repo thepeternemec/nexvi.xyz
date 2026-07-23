@@ -33,7 +33,7 @@ export function MeshGradient({ seed, className }: { seed: string; className?: st
           <feGaussianBlur stdDeviation="100" />
         </filter>
         <filter id={`${uid}-noise`} x="0" y="0" width="100%" height="100%">
-          <feTurbulence type="fractalNoise" baseFrequency="1" octaves="3" result="turbulence" stitchTiles="stitch" />
+          <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves={3} result="turbulence" stitchTiles="stitch" />
           <feBlend in="SourceGraphic" in2="turbulence" mode="overlay" />
         </filter>
       </defs>
