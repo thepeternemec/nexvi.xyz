@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import type { Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
+import { MeshGradient } from "@/components/mesh-gradient";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
@@ -21,8 +22,8 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
       href={alternateHref(locale, `/prompt/${prompt.slug}`)}
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card transition-all hover:border-foreground/20 hover:shadow-[0_8px_30px_-10px_rgb(0_0_0_/0.12)]"
     >
-      <div className={`relative aspect-[16/10] w-full bg-gradient-to-br ${prompt.cover}`}>
-        <div className="absolute inset-0 bg-grain opacity-40" />
+      <div className="relative aspect-[16/10] w-full overflow-hidden">
+        <MeshGradient seed={prompt.id} className="absolute inset-0 h-full w-full" />
         <div className="absolute left-3 top-3 flex gap-1.5">
           {premium ? (
             <Badge className="rounded-md bg-black/60 text-white text-[10px] border-0 hover:bg-black/60">
