@@ -145,12 +145,12 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               </div>
               <div className="mt-4 grid gap-3">
                 {[
-                  { tag: "CV", title: "Tailored CV for any job description", meta: "Free • 4.9★", slug: "tailored-cv-for-any-job-description" },
-                  { tag: "Cover Letter", title: "Cover letter that sounds human", meta: "Free • 4.9★", slug: "personalized-cover-letter-that-sounds-human" },
-                  { tag: "ATS", title: "ATS keyword gap analyzer", meta: "Premium • 4.8★", slug: "ats-keyword-gap-analyzer" },
-                  { tag: "Interview", title: "STAR interview stories from your CV", meta: "Premium • 4.9★", slug: "star-method-interview-stories" },
-                  { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free • 4.9★", slug: "recruiter-cold-message-that-gets-replies" },
-                  { tag: "Negotiation", title: "Salary counter-offer script", meta: "Premium • 4.9★", slug: "salary-negotiation-counter-offer-script" },
+                  { tag: "CV", title: "Tailored CV for any job description", meta: "Free", slug: "tailored-cv-for-any-job-description" },
+                  { tag: "Cover Letter", title: "Cover letter that sounds human", meta: "Free", slug: "personalized-cover-letter-that-sounds-human" },
+                  { tag: "ATS", title: "ATS keyword gap analyzer", meta: "Premium", slug: "ats-keyword-gap-analyzer" },
+                  { tag: "Interview", title: "STAR interview stories from your CV", meta: "Premium", slug: "star-method-interview-stories" },
+                  { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free", slug: "recruiter-cold-message-that-gets-replies" },
+                  { tag: "Negotiation", title: "Salary counter-offer script", meta: "Premium", slug: "salary-negotiation-counter-offer-script" },
                 ].map((p) => (
                   <a key={p.slug} href={href(`/prompt/${p.slug}`)} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
                     <div>
