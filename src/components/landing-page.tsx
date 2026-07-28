@@ -58,9 +58,9 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
             </h1>
             <p className="mt-6 text-lg text-muted-foreground sm:text-xl">{c.heroSub}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={href("/library")}><Button size="lg" className="rounded-full">{c.ctaFind} <ArrowRight className="h-4 w-4" /></Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full">{c.ctaGenerate}</Button></a>
-              <a href={href("/ats")}><Button size="lg" variant="ghost" className="rounded-full">{c.ctaAts}</Button></a>
+              <a href={href("/cv")}><Button size="lg" className="rounded-full">{c.ctaGenerate} <ArrowRight className="h-4 w-4" /></Button></a>
+              <a href={href("/ats")}><Button size="lg" variant="outline" className="rounded-full">{c.ctaAts}</Button></a>
+              <a href={href("/library")}><Button size="lg" variant="ghost" className="rounded-full">{c.ctaFind}</Button></a>
             </div>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /> {c.free}</span>
