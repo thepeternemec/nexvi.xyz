@@ -1,5 +1,5 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Linkedin, Instagram, Twitter } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
@@ -157,6 +157,29 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </p>
           <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">
             <Search className="h-3.5 w-3.5" /> Paste a job description. Get hired.
+          </div>
+          <div className="mt-6 flex items-center gap-3">
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+            >
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a
+              href="#"
+              aria-label="X"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+            >
+              <Twitter className="h-4 w-4" />
+            </a>
           </div>
         </div>
         <div>
