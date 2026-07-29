@@ -1,5 +1,13 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Linkedin, Instagram, Twitter } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Linkedin, Instagram } from "lucide-react";
+
+function XLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" className={className}>
+      <path d="M18.244 2H21l-6.52 7.45L22 22h-6.594l-5.163-6.75L4.4 22H1.64l6.98-7.97L2 2h6.75l4.67 6.17L18.244 2Zm-1.156 18.4h1.827L7.02 3.5H5.06L17.088 20.4Z" />
+    </svg>
+  );
+}
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
@@ -178,7 +186,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               aria-label="X"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
             >
-              <Twitter className="h-4 w-4" />
+              <XLogo className="h-4 w-4" />
             </a>
           </div>
         </div>
