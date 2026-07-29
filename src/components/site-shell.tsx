@@ -1,5 +1,5 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Linkedin, Instagram, Twitter } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/hooks/use-theme";
