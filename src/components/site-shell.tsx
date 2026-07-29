@@ -1,10 +1,18 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Linkedin, Instagram } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram } from "lucide-react";
 
 function XLogo({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" className={className}>
       <path d="M18.244 2H21l-6.52 7.45L22 22h-6.594l-5.163-6.75L4.4 22H1.64l6.98-7.97L2 2h6.75l4.67 6.17L18.244 2Zm-1.156 18.4h1.827L7.02 3.5H5.06L17.088 20.4Z" />
+    </svg>
+  );
+}
+
+function LinkedinLogo({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" className={className}>
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z" />
     </svg>
   );
 }
@@ -172,7 +180,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               aria-label="LinkedIn"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
             >
-              <Linkedin className="h-4 w-4" />
+              <LinkedinLogo className="h-4 w-4" />
             </a>
             <a
               href="#"
