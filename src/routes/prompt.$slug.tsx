@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useLoaderData } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Copy, Check, Star, Bookmark, BookmarkCheck, Share2, Sparkles, Lock, Crown, Twitter, Linkedin, Facebook, Mail, Link as LinkIcon } from "lucide-react";
+import { Copy, Check, Bookmark, BookmarkCheck, Share2, Sparkles, Lock, Crown, Twitter, Linkedin, Facebook, Mail, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
