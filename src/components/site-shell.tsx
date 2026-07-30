@@ -171,9 +171,12 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           <p className="mt-4 max-w-sm text-sm text-slate-400">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
-          <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300">
-            <Search className="h-3.5 w-3.5" /> Paste a job description. Get hired.
-          </div>
+          <a
+            href="mailto:hello@applywise.eu"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 transition hover:bg-white/10 hover:text-white"
+          >
+            <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on ApplyWise.
+          </a>
           <div className="mt-6 flex items-center gap-3">
             <a
               href="#"
