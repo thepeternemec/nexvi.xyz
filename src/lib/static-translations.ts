@@ -159,6 +159,23 @@ const de = {
   "A bio that works on LinkedIn, X, and your site": "Eine Bio, die auf LinkedIn, X und deiner Website funktioniert",
   "First CV With No Experience": "Erster CV ohne Erfahrung",
   "A one-page CV recruiters take seriously": "Ein einseitiger CV, den Recruiter ernst nehmen",
+
+  "Forgot password?": "Passwort vergessen?",
+  "Reset your password": "Passwort zurücksetzen",
+  "Enter your email and we'll send you a link to reset your password.": "Gib deine E-Mail ein und wir senden dir einen Link zum Zurücksetzen deines Passworts.",
+  "Send reset link": "Link zum Zurücksetzen senden",
+  "Reset link sent": "Link zum Zurücksetzen gesendet",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Ein Link zum Zurücksetzen wurde an deine E-Mail gesendet. Bitte überprüfe deinen Posteingang und Spam-Ordner, dann klicke darauf, um ein neues Passwort zu setzen.",
+  "Back to sign in": "Zurück zur Anmeldung",
+  "New password": "Neues Passwort",
+  "Confirm new password": "Neues Passwort bestätigen",
+  "Update password": "Passwort aktualisieren",
+  "Password updated": "Passwort aktualisiert",
+  "Your password has been updated.": "Dein Passwort wurde aktualisiert.",
+  "Redirecting to sign in…": "Weiterleitung zur Anmeldung…",
+  "Reset link is invalid or expired.": "Link zum Zurücksetzen ist ungültig oder abgelaufen.",
+  "Enter your email to request a new one.": "Gib deine E-Mail ein, um einen neuen Link anzufordern.",
+  "Continue to sign in": "Weiter zur Anmeldung",
 } satisfies Record<string, string>;
 
 const es = {
