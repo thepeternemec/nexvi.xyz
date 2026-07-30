@@ -1,10 +1,13 @@
 import { useRouterState } from "@tanstack/react-router";
-import { Sparkles, Lock, Crown, ArrowUpRight } from "lucide-react";
+import { Sparkles, Lock, Crown, ArrowUpRight, Bookmark, BookmarkCheck, FileDown } from "lucide-react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import type { Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { MeshGradient } from "@/components/mesh-gradient";
+import { useSavedPrompts } from "@/lib/saved-prompts";
+import { buildApplyTemplate, copyToClipboard } from "@/lib/apply-template";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
@@ -16,6 +19,24 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
   const locale = detectLocaleFromPath(pathname);
   const premium = isPremium(prompt);
   const locked = premium && !hasPremium;
+  const { isSaved, toggle } = useSavedPrompts();
+  const saved = isSaved(prompt.slug);
+
+  const onSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const nowSaved = toggle(prompt.slug);
+    toast.success(nowSaved ? "Saved to your library" : "Removed from saved");
+  };
+
+  const onApplyReady = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const ok = await copyToClipboard(buildApplyTemplate(prompt));
+    toast[ok ? "success" : "error"](
+      ok ? "Apply-ready template copied — paste it into ChatGPT or Claude" : "Could not copy the template",
+    );
+  };
 
   return (
     <a
@@ -35,6 +56,26 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
           {prompt.beginner && (
             <Badge variant="secondary" className="rounded-md bg-white/80 text-foreground text-[10px] border-0 backdrop-blur dark:bg-black/70 dark:text-white">Beginner</Badge>
           )}
+        </div>
+        <div className="absolute right-3 top-3 flex gap-1.5">
+          <button
+            type="button"
+            onClick={onSave}
+            aria-label={saved ? "Remove from saved" : "Save prompt"}
+            title={saved ? "Saved" : "Save prompt"}
+            className={`grid h-7 w-7 place-items-center rounded-md border border-white/20 backdrop-blur transition ${saved ? "bg-primary text-primary-foreground" : "bg-black/45 text-white hover:bg-black/70"}`}
+          >
+            {saved ? <BookmarkCheck className="h-3.5 w-3.5" /> : <Bookmark className="h-3.5 w-3.5" />}
+          </button>
+          <button
+            type="button"
+            onClick={onApplyReady}
+            aria-label="Copy apply-ready template"
+            title="Copy apply-ready template"
+            className="grid h-7 w-7 place-items-center rounded-md border border-white/20 bg-black/45 text-white backdrop-blur transition hover:bg-black/70"
+          >
+            <FileDown className="h-3.5 w-3.5" />
+          </button>
         </div>
         <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-1.5">
           {prompt.tools.slice(0, 3).map(t => (
