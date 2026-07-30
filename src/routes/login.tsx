@@ -106,8 +106,11 @@ export function AuthShell({
         // Supabase returns a user with an empty `identities` array when the
         // email is already registered — no confirmation email is sent.
         if (data.user && (data.user.identities?.length ?? 0) === 0) {
-          toast.error("This email already has an account. Sign in instead.");
-          navigate({ to: "/login", search: { next: nextPath } } as never);
+          toast.error(
+            "This email already has an account — no verification email was sent. Sign in instead."
+          );
+          setExistingAccount(true);
+          setShowVerify(false);
           return;
         }
         if (data.session) {
@@ -115,6 +118,9 @@ export function AuthShell({
           window.location.href = nextPath;
           return;
         }
+        toast.success(
+          "Email sent — please check your inbox and spam folders."
+        );
         setShowVerify(true);
       } else {
         const { error } = await supabase.auth.signInWithPassword({
