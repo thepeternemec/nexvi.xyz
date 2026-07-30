@@ -15,6 +15,18 @@ import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-te
 
 type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
+function matchesQuery(p: (typeof prompts)[number], query: string) {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return true;
+  return (
+    p.title.toLowerCase().includes(needle) ||
+    p.outcome.toLowerCase().includes(needle) ||
+    p.description.toLowerCase().includes(needle) ||
+    p.tags.some(t => t.toLowerCase().includes(needle))
+  );
+}
+
+
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
     meta: [
