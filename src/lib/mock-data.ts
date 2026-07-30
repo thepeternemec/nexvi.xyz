@@ -58,7 +58,23 @@ export type Prompt = {
   body: string;
   examples: { input: string; output: string }[];
   instructions: string[];
+  pack?: string; // prompt pack slug
 };
+
+export type Pack = {
+  slug: string;
+  name: string;
+  emoji: string;
+  description: string;
+};
+
+export const packs: Pack[] = [
+  { slug: "jd-alignment", name: "JD Alignment Pack", emoji: "🎯", description: "Match your CV line-by-line to any job description" },
+  { slug: "cover-letter-lab", name: "Cover Letter Lab", emoji: "✉️", description: "Cover letters, follow-ups and thank-you notes that land" },
+  { slug: "ats-audit", name: "ATS Audit Pack", emoji: "🤖", description: "Scores, keyword gaps and parser-safe rewrites" },
+  { slug: "interview-sprint", name: "Interview Sprint", emoji: "🎤", description: "Stories, mock questions and closing scripts" },
+  { slug: "career-switch", name: "Career Switch Kit", emoji: "🔄", description: "Reposition your experience for a new industry" },
+];
 
 const g = [
   // Interview prep — deep indigo dusk
