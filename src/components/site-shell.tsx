@@ -1,5 +1,8 @@
-import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram } from "lucide-react";
+import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 
 function XLogo({ className }: { className?: string }) {
   return (
