@@ -632,6 +632,23 @@ const fr = {
   "A bio that works on LinkedIn, X, and your site": "Une bio efficace sur LinkedIn, X et votre site",
   "First CV With No Experience": "Premier CV sans expérience",
   "A one-page CV recruiters take seriously": "Un CV d'une page que les recruteurs prennent au sérieux",
+
+  "Forgot password?": "Mot de passe oublié ?",
+  "Reset your password": "Réinitialiser votre mot de passe",
+  "Enter your email and we'll send you a link to reset your password.": "Entrez votre e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+  "Send reset link": "Envoyer le lien de réinitialisation",
+  "Reset link sent": "Lien de réinitialisation envoyé",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Un lien de réinitialisation a été envoyé à votre e-mail. Veuillez vérifier votre boîte de réception et vos spams, puis cliquez pour définir un nouveau mot de passe.",
+  "Back to sign in": "Retour à la connexion",
+  "New password": "Nouveau mot de passe",
+  "Confirm new password": "Confirmer le nouveau mot de passe",
+  "Update password": "Mettre à jour le mot de passe",
+  "Password updated": "Mot de passe mis à jour",
+  "Your password has been updated.": "Votre mot de passe a été mis à jour.",
+  "Redirecting to sign in…": "Redirection vers la connexion…",
+  "Reset link is invalid or expired.": "Le lien de réinitialisation est invalide ou expiré.",
+  "Enter your email to request a new one.": "Entrez votre e-mail pour en demander un nouveau.",
+  "Continue to sign in": "Continuer la connexion",
 } satisfies Record<string, string>;
 
 export const staticTranslations: StaticTranslations = { de, es, it, fr };
