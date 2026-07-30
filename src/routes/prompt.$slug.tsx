@@ -177,7 +177,7 @@ export function PromptDetail() {
                             <li className="flex items-start gap-1.5"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" /> Cancel anytime</li>
                           </ul>
                           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
-                            <Button asChild className="rounded-full sm:flex-1"><Link to="/pricing">Unlock full prompt</Link></Button>
+                            <Button onClick={() => openUpgradeDialog({ title: prompt.title })} className="rounded-full sm:flex-1">Unlock full prompt</Button>
                             {!isAuthenticated && (
                               <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I have an account</Link></Button>
                             )}
