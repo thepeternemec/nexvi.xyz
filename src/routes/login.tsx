@@ -1,7 +1,5 @@
 import {
   createFileRoute,
-  Link,
-  useNavigate,
   useRouterState,
   useSearch,
 } from "@tanstack/react-router";
@@ -12,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
-import { Mail, RotateCcw } from "lucide-react";
+import { AlertCircle, LogIn, Mail, RotateCcw } from "lucide-react";
 
 type LoginSearch = { next?: string };
 
@@ -65,7 +63,7 @@ export function AuthShell({
   altCta: string;
   signup?: boolean;
 }) {
-  const navigate = useNavigate();
+  
   const search = useSearch({ strict: false }) as LoginSearch;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
@@ -77,6 +75,7 @@ export function AuthShell({
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showVerify, setShowVerify] = useState(false);
+  const [existingAccount, setExistingAccount] = useState(false);
 
   const [resendLoading, setResendLoading] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
@@ -104,8 +103,11 @@ export function AuthShell({
         // Supabase returns a user with an empty `identities` array when the
         // email is already registered — no confirmation email is sent.
         if (data.user && (data.user.identities?.length ?? 0) === 0) {
-          toast.error("This email already has an account. Sign in instead.");
-          navigate({ to: "/login", search: { next: nextPath } } as never);
+          toast.error(
+            "This email already has an account — no verification email was sent. Sign in instead."
+          );
+          setExistingAccount(true);
+          setShowVerify(false);
           return;
         }
         if (data.session) {
@@ -113,6 +115,9 @@ export function AuthShell({
           window.location.href = nextPath;
           return;
         }
+        toast.success(
+          "Email sent — please check your inbox and spam folders."
+        );
         setShowVerify(true);
       } else {
         const { error } = await supabase.auth.signInWithPassword({
@@ -189,7 +194,81 @@ export function AuthShell({
           <h1 className="font-display text-4xl tracking-tight">{title}</h1>
           <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>
 
-          {!showVerify ? (
+          {existingAccount ? (
+            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10 text-destructive">
+                <AlertCircle className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl tracking-tight">
+                  This email already has an account
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  We didn't send a verification email because{" "}
+                  <span className="font-medium text-foreground">{email}</span>{" "}
+                  is already registered.
+                </p>
+              </div>
+              <Button asChild size="lg" className="w-full rounded-full">
+                <a href={`${href("/login")}?next=${encodeURIComponent(nextPath)}`}>
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Sign in with this email
+                </a>
+              </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setExistingAccount(false);
+                  setPassword("");
+                }}
+                className="block w-full text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Use a different email
+              </button>
+            </div>
+          ) : showVerify ? (
+            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <Mail className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl tracking-tight">
+                  {signup
+                    ? "Confirm your email to finish signing up"
+                    : "Confirm your email to finish signing in"}
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  A verification link was sent to{" "}
+                  <span className="font-medium text-foreground">{email}</span>.
+                  Please check your inbox and spam folders, then click it to{" "}
+                  {signup ? "create your account" : "sign in"}.
+                </p>
+              </div>
+              <Button
+                variant="outline"
+                className="w-full rounded-full"
+                onClick={resendVerification}
+                disabled={resendLoading || resendCountdown > 0}
+              >
+                <RotateCcw
+                  className={`mr-2 h-4 w-4 ${resendLoading ? "animate-spin" : ""}`}
+                />
+                {resendCountdown > 0
+                  ? `Resend in ${resendCountdown}s`
+                  : "Resend verification email"}
+              </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowVerify(false);
+                  setPassword("");
+                }}
+                className="block w-full text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Back to {signup ? "sign up" : "sign in"}
+              </button>
+            </div>
+          ) : (
             <form className="mt-8 space-y-4" onSubmit={onSubmit}>
               {signup && (
                 <div className="space-y-1.5">
@@ -234,48 +313,9 @@ export function AuthShell({
                 {loading ? "Please wait…" : cta}
               </Button>
             </form>
-          ) : (
-            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                <Mail className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="font-display text-xl tracking-tight">
-                  Verify your email
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  We sent a confirmation link to{" "}
-                  <span className="font-medium text-foreground">{email}</span>.
-                  Click it to finish signing in.
-                </p>
-              </div>
-              <Button
-                variant="outline"
-                className="w-full rounded-full"
-                onClick={resendVerification}
-                disabled={resendLoading || resendCountdown > 0}
-              >
-                <RotateCcw
-                  className={`mr-2 h-4 w-4 ${resendLoading ? "animate-spin" : ""}`}
-                />
-                {resendCountdown > 0
-                  ? `Resend in ${resendCountdown}s`
-                  : "Resend verification email"}
-              </Button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowVerify(false);
-                  setPassword("");
-                }}
-                className="block w-full text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-              >
-                Back to {signup ? "sign up" : "sign in"}
-              </button>
-            </div>
           )}
 
-          {!showVerify && (
+          {!existingAccount && !showVerify && (
             <p className="mt-6 text-center text-sm text-muted-foreground">
               {alt}{" "}
               <a
