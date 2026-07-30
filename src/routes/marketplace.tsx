@@ -1,6 +1,7 @@
 import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +9,8 @@ import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
 import { categories, packs, prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
+import { useSavedPrompts } from "@/lib/saved-prompts";
+import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
 
 type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
@@ -29,6 +32,24 @@ export function Marketplace() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const [q, setQ] = useState(search.q ?? "");
+  const { saveMany } = useSavedPrompts();
+
+  const activePack = packs.find(pk => pk.slug === search.pack);
+  const activePackItems = activePack ? prompts.filter(p => p.pack === activePack.slug) : [];
+
+  const savePack = () => {
+    if (!activePack) return;
+    const added = saveMany(activePackItems.map(p => p.slug));
+    toast.success(added > 0 ? `Saved ${added} prompt${added === 1 ? "" : "s"} from ${activePack.name}` : "All prompts in this pack are already saved");
+  };
+
+  const copyPackTemplate = async () => {
+    if (!activePack) return;
+    const text = buildPackTemplate(activePack, activePackItems);
+    const ok = await copyToClipboard(text);
+    if (ok) toast.success("Apply-ready workflow copied — paste it into ChatGPT or Claude");
+    else { downloadText(`${activePack.slug}-apply-ready.txt`, text); toast.success("Apply-ready workflow downloaded"); }
+  };
 
   const filtered = useMemo(() => {
     let list = [...prompts];
@@ -83,10 +104,18 @@ export function Marketplace() {
           <div className="flex items-center justify-between gap-3">
             <div>
               <h2 className="text-sm font-semibold">Prompt Packs</h2>
-              <p className="text-xs text-muted-foreground">Curated sets — everything lives right here in the library.</p>
+              <p className="text-xs text-muted-foreground">Curated sets — save a whole pack or copy an apply-ready template in one click.</p>
             </div>
-            {search.pack && (
-              <button onClick={() => update({ pack: undefined })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear pack</button>
+            {activePack && (
+              <div className="flex flex-wrap items-center gap-2">
+                <Button size="sm" variant="secondary" className="h-8 rounded-lg" onClick={savePack}>
+                  <Bookmark className="mr-1.5 h-3.5 w-3.5" /> Save pack
+                </Button>
+                <Button size="sm" className="h-8 rounded-lg" onClick={copyPackTemplate}>
+                  <FileDown className="mr-1.5 h-3.5 w-3.5" /> Apply-ready template
+                </Button>
+                <button onClick={() => update({ pack: undefined })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear</button>
+              </div>
             )}
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
