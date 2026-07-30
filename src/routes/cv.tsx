@@ -11,10 +11,29 @@ import { generateCV } from "@/lib/career.functions";
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "AI CV Generator — getHeired" },
-      { name: "description", content: "Generate an ATS-optimized CV tailored to any job description in seconds." },
+      { title: "Free AI CV Generator — ATS-Optimized Resumes | ApplyWise" },
+      { name: "description", content: "Paste a job description and get an ATS-optimized CV tailored to the role in under 60 seconds. Free AI resume generator by ApplyWise." },
+      { property: "og:title", content: "AI CV Generator — ATS-Optimized Resumes" },
+      { property: "og:description", content: "Turn any job description into a tailored, ATS-ready CV in 60 seconds." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/cv" },
+    ],
+    links: [{ rel: "canonical", href: "/cv" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "ApplyWise CV Generator",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }),
+      },
     ],
   }),
+
   component: CVPage,
 });
 
