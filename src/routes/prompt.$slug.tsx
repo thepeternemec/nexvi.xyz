@@ -89,7 +89,7 @@ export function PromptDetail() {
     setShareOpen(true);
   };
   const onCopy = async () => {
-    if (locked) return;
+    if (locked) { openUpgradeDialog({ title: prompt.title, reason: "Copying is part of Premium. Start a free 7-day trial to copy the full prompt — cancel anytime." }); return; }
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(prompt.body);
