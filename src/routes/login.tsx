@@ -15,7 +15,15 @@ function isSafeNext(next: string | undefined): next is string {
 }
 
 export const Route = createFileRoute("/login")({
+  head: () => ({
+    meta: [
+      { title: "Sign in — ApplyWise" },
+      { name: "description", content: "Sign in to your ApplyWise account." },
+      { name: "robots", content: "noindex, follow" },
+    ],
+  }),
   component: Login,
+
   validateSearch: (s: Record<string, unknown>): LoginSearch => ({
     next: typeof s.next === "string" ? s.next : undefined,
   }),

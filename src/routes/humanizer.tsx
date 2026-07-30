@@ -12,12 +12,16 @@ import { humanizeText } from "@/lib/career.functions";
 export const Route = createFileRoute("/humanizer")({
   head: () => ({
     meta: [
-      { title: "AI Humanizer — ApplyWise" },
-      { name: "description", content: "Remove signs of AI-generated writing from your CV, cover letter, or any text. Sound natural and human." },
+      { title: "AI Text Humanizer for CVs & Cover Letters | ApplyWise" },
+      { name: "description", content: "Remove signs of AI-generated writing from your CV, cover letter, or any text. Rewrite it so it reads naturally and sounds like you." },
       { property: "og:title", content: "AI Humanizer — ApplyWise" },
       { property: "og:description", content: "Rewrite AI text so it sounds like you wrote it. Based on Wikipedia's Signs of AI Writing guide." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/humanizer" },
     ],
+    links: [{ rel: "canonical", href: "/humanizer" }],
   }),
+
   component: HumanizerPage,
 });
 

@@ -11,10 +11,16 @@ import { scoreATS } from "@/lib/career.functions";
 export const Route = createFileRoute("/ats")({
   head: () => ({
     meta: [
-      { title: "ATS Optimizer & Score Checker — getHeired" },
-      { name: "description", content: "Score your CV against any job description. See matched and missing keywords, plus concrete rewrite suggestions." },
+      { title: "Free ATS Resume Checker & Score — ApplyWise" },
+      { name: "description", content: "Score your CV against any job description. See match percentage, matched and missing keywords, formatting checks, and concrete rewrite fixes." },
+      { property: "og:title", content: "ATS Resume Checker & Score — ApplyWise" },
+      { property: "og:description", content: "Check how your CV scores against a job description and fix what's missing." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/ats" },
     ],
+    links: [{ rel: "canonical", href: "/ats" }],
   }),
+
   component: ATSPage,
 });
 

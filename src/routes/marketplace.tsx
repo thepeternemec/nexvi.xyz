@@ -16,7 +16,19 @@ import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-te
 type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
 export const Route = createFileRoute("/marketplace")({
+  head: () => ({
+    meta: [
+      { title: "Job Search Prompt Library — CV, Cover Letter & ATS Prompts" },
+      { name: "description", content: "A curated library of AI prompts for job seekers: tailor your CV to a job description, write cover letters, prep interviews and beat ATS filters." },
+      { property: "og:title", content: "Job Search Prompt Library — ApplyWise" },
+      { property: "og:description", content: "Curated AI prompts for CVs, cover letters, ATS and interviews." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/marketplace" },
+    ],
+    links: [{ rel: "canonical", href: "/marketplace" }],
+  }),
   component: Marketplace,
+
   validateSearch: (s: Record<string, unknown>): Search => ({
     q: typeof s.q === "string" ? s.q : undefined,
     category: typeof s.category === "string" ? s.category : undefined,

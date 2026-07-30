@@ -20,15 +20,48 @@ export const Route = createFileRoute("/prompt/$slug")({
     if (!prompt) throw notFound();
     return { prompt };
   },
-  head: ({ loaderData }) => ({
-    meta: loaderData?.prompt
-      ? [
-          { title: `${loaderData.prompt.title} — getHeired` },
-          { name: "description", content: loaderData.prompt.description },
-        ]
-      : [],
-  }),
+  head: ({ params, loaderData }) => {
+    const p = loaderData?.prompt;
+    if (!p) return { meta: [] };
+    const url = `/prompt/${params.slug}`;
+    return {
+      meta: [
+        { title: `${p.title} — AI Prompt | ApplyWise` },
+        { name: "description", content: p.description },
+        { property: "og:title", content: `${p.title} — ApplyWise` },
+        { property: "og:description", content: p.description },
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: url },
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: p.title,
+            description: p.description,
+            about: "Job search, CV and cover letter writing",
+          }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: "/" },
+              { "@type": "ListItem", position: 2, name: "Prompt Library", item: "/marketplace" },
+              { "@type": "ListItem", position: 3, name: p.title, item: url },
+            ],
+          }),
+        },
+      ],
+    };
+  },
 });
+
 
 export function PromptDetail() {
   const { prompt } = useLoaderData({ strict: false }) as { prompt: Prompt };

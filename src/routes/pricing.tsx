@@ -10,7 +10,21 @@ import { useSubscription } from "@/hooks/use-subscription";
 import { startSubscription, cancelSubscription } from "@/lib/subscriptions.functions";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
-export const Route = createFileRoute("/pricing")({ component: Pricing });
+export const Route = createFileRoute("/pricing")({
+  head: () => ({
+    meta: [
+      { title: "Pricing — Free & Pro Plans | ApplyWise" },
+      { name: "description", content: "Start free with AI CVs, cover letters and ATS scoring. Upgrade to Pro for unlimited generations and the full prompt library." },
+      { property: "og:title", content: "ApplyWise Pricing — Free & Pro" },
+      { property: "og:description", content: "Free forever plan, plus Pro for unlimited AI job application tools." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/pricing" },
+    ],
+    links: [{ rel: "canonical", href: "/pricing" }],
+  }),
+  component: Pricing,
+});
+
 
 const plans = [
   {

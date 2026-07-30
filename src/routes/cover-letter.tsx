@@ -12,10 +12,16 @@ import { generateCoverLetter } from "@/lib/career.functions";
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
     meta: [
-      { title: "AI Cover Letter Generator — getHeired" },
-      { name: "description", content: "Generate personalized cover letters tailored to any job in seconds." },
+      { title: "AI Cover Letter Generator — Tailored in 60s | ApplyWise" },
+      { name: "description", content: "Generate a personalized cover letter for any job description in seconds. Matches your background, the role, and the company's tone." },
+      { property: "og:title", content: "AI Cover Letter Generator — ApplyWise" },
+      { property: "og:description", content: "Personalized cover letters tailored to any job description, in seconds." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/cover-letter" },
     ],
+    links: [{ rel: "canonical", href: "/cover-letter" }],
   }),
+
   component: CoverLetterPage,
 });
 
