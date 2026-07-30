@@ -12,7 +12,7 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
 
-type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating"; price?: "all" | "free" | "paid"; beginner?: "1" };
+type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
 export const Route = createFileRoute("/marketplace")({
   component: Marketplace,
