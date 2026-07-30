@@ -6,16 +6,17 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
-import { categories, prompts } from "@/lib/mock-data";
+import { categories, packs, prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
-type Search = { q?: string; category?: string; sort?: "popular" | "newest" | "rating"; price?: "all" | "free" | "paid"; beginner?: "1" };
+type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
 export const Route = createFileRoute("/marketplace")({
   component: Marketplace,
   validateSearch: (s: Record<string, unknown>): Search => ({
     q: typeof s.q === "string" ? s.q : undefined,
     category: typeof s.category === "string" ? s.category : undefined,
+    pack: typeof s.pack === "string" ? s.pack : undefined,
     sort: (s.sort as Search["sort"]) ?? "popular",
     price: (s.price as Search["price"]) ?? "all",
     beginner: s.beginner === "1" ? "1" : undefined,
@@ -32,6 +33,7 @@ export function Marketplace() {
   const filtered = useMemo(() => {
     let list = [...prompts];
     if (search.category) list = list.filter(p => p.category === search.category);
+    if (search.pack) list = list.filter(p => p.pack === search.pack);
     if (search.price === "free") list = list.filter(p => p.price === 0);
     if (search.price === "paid") list = list.filter(p => p.price > 0);
     if (search.beginner === "1") list = list.filter(p => p.beginner);
@@ -77,6 +79,31 @@ export function Marketplace() {
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        <div className="mb-6 rounded-2xl border border-border/70 bg-muted/30 p-4">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <h2 className="text-sm font-semibold">Prompt Packs</h2>
+              <p className="text-xs text-muted-foreground">Curated sets — everything lives right here in the library.</p>
+            </div>
+            {search.pack && (
+              <button onClick={() => update({ pack: undefined })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear pack</button>
+            )}
+          </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {packs.map(pk => (
+              <button
+                key={pk.slug}
+                onClick={() => update({ pack: search.pack === pk.slug ? undefined : pk.slug })}
+                title={pk.description}
+                className={`whitespace-nowrap rounded-xl border px-3 py-2 text-sm transition ${search.pack === pk.slug ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground/30"}`}
+              >
+                <span className="mr-1.5">{pk.emoji}</span>{pk.name}
+                <span className="ml-2 text-xs opacity-60">{prompts.filter(p => p.pack === pk.slug).length}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
         <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-4">
           <button onClick={() => update({ category: undefined })} className={`rounded-full border px-3 py-1.5 text-sm transition ${!search.category ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/30"}`}>All</button>
           {categories.map(c => (
@@ -92,7 +119,7 @@ export function Marketplace() {
             <FilterChip label="Free" active={search.price === "free"} onClick={() => update({ price: search.price === "free" ? "all" : "free" })} />
             <FilterChip label="Premium" active={search.price === "paid"} onClick={() => update({ price: search.price === "paid" ? "all" : "paid" })} />
             <FilterChip label="Beginner-friendly" active={search.beginner === "1"} onClick={() => update({ beginner: search.beginner === "1" ? undefined : "1" })} />
-            {(search.q || search.category || search.price !== "all" || search.beginner) && (
+            {(search.q || search.category || search.pack || search.price !== "all" || search.beginner) && (
               <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
             )}
           </div>
