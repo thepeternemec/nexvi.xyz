@@ -8,7 +8,20 @@ import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
 import { useLocale } from "@/lib/locale-context";
 
-export const Route = createFileRoute("/assistant")({ component: Assistant });
+export const Route = createFileRoute("/assistant")({
+  head: () => ({
+    meta: [
+      { title: "AI Job Application Assistant — ApplyWise" },
+      { name: "description", content: "Describe your job search goal and get the right ApplyWise prompt or tool for it." },
+      { property: "og:title", content: "AI Job Application Assistant — ApplyWise" },
+      { property: "og:description", content: "Get matched to the right prompt for your job search task." },
+      { property: "og:url", content: "/assistant" },
+    ],
+    links: [{ rel: "canonical", href: "/assistant" }],
+  }),
+  component: Assistant,
+});
+
 
 
 type Msg = { role: "user" | "ai"; content: string; recs?: string[] };

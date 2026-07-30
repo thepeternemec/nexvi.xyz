@@ -6,7 +6,17 @@ import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
-export const Route = createFileRoute("/dashboard")({ component: Dashboard });
+export const Route = createFileRoute("/dashboard")({
+  head: () => ({
+    meta: [
+      { title: "Your dashboard — ApplyWise" },
+      { name: "description", content: "Your ApplyWise tools, saved prompts and recent activity." },
+      { name: "robots", content: "noindex, follow" },
+    ],
+  }),
+  component: Dashboard,
+});
+
 
 const tools = [
   { icon: FileText, title: "CV Generator", desc: "Tailor your CV to any job description.", href: "/cv" },

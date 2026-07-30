@@ -4,7 +4,15 @@ import { AuthShell } from "./login";
 type SignupSearch = { next?: string };
 
 export const Route = createFileRoute("/signup")({
+  head: () => ({
+    meta: [
+      { title: "Create your account — ApplyWise" },
+      { name: "description", content: "Create a free ApplyWise account." },
+      { name: "robots", content: "noindex, follow" },
+    ],
+  }),
   component: Signup,
+
   validateSearch: (s: Record<string, unknown>): SignupSearch => ({
     next: typeof s.next === "string" ? s.next : undefined,
   }),
