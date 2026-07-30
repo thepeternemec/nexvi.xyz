@@ -143,14 +143,6 @@ export function Marketplace() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-4">
-          <button onClick={() => update({ category: undefined })} className={`rounded-full border px-3 py-1.5 text-sm transition ${!search.category ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/30"}`}>All</button>
-          {categories.map(c => (
-            <button key={c.slug} onClick={() => update({ category: c.slug })} className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm transition ${search.category === c.slug ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/30"}`}>
-              <span className="mr-1">{c.emoji}</span>{c.name}
-            </button>
-          ))}
-        </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y border-border/60 py-4 text-sm">
           <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
