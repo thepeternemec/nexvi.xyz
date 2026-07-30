@@ -167,8 +167,8 @@ export function Marketplace() {
 
         <div className="mt-3 text-sm text-muted-foreground">
           {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
-          {search.category && <> in <Badge variant="secondary" className="rounded-full">{categories.find(c => c.slug === search.category)?.name}</Badge></>}
         </div>
+
 
         {groups ? (
           <div className="mt-6 space-y-10">
