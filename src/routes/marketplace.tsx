@@ -208,9 +208,45 @@ export function Marketplace() {
           </div>
         </div>
 
-        <div className="mt-3 text-sm text-muted-foreground">
-          {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
+        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+          <span>
+            {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
+            {search.q ? <> matching “{search.q}”</> : null}
+            {activePack ? <> in <span className="font-medium text-foreground">{activePack.name}</span></> : null}
+          </span>
+          {search.q && activePack && matchesOutsidePack > 0 && (
+            <button
+              onClick={() => update({ pack: undefined })}
+              className="underline underline-offset-2 transition hover:text-foreground"
+            >
+              {matchesOutsidePack} more in other packs — search all
+            </button>
+          )}
         </div>
+
+        {filtered.length === 0 && (
+          <div className="mt-6 rounded-2xl border border-dashed border-border bg-muted/20 p-8 text-center">
+            <p className="text-sm font-medium">
+              {activePack ? `No prompts in ${activePack.name} match your search.` : "No prompts match your search."}
+            </p>
+            {activePack && matchesOutsidePack > 0 && (
+              <p className="mt-1 text-sm text-muted-foreground">
+                {matchesOutsidePack} prompt{matchesOutsidePack === 1 ? "" : "s"} elsewhere in the library match “{search.q}”.
+              </p>
+            )}
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {activePack && (
+                <Button size="sm" className="rounded-lg" onClick={() => update({ pack: undefined })}>
+                  Search all packs
+                </Button>
+              )}
+              <Button size="sm" variant="secondary" className="rounded-lg" onClick={() => { setQ(""); (navigate as any)({ search: {} }); }}>
+                Clear filters
+              </Button>
+            </div>
+          </div>
+        )}
+
 
 
         {groups ? (
