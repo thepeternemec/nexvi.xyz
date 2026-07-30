@@ -50,7 +50,7 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
     setLoading(true);
     try {
       if (signup) {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -59,6 +59,18 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
           },
         });
         if (error) throw error;
+        // Supabase returns a user with an empty `identities` array when the
+        // email is already registered — no confirmation email is sent.
+        if (data.user && (data.user.identities?.length ?? 0) === 0) {
+          toast.error("This email already has an account. Sign in instead.");
+          navigate({ to: "/login", search: { next: nextPath } } as never);
+          return;
+        }
+        if (data.session) {
+          toast.success("Account created!");
+          window.location.href = nextPath;
+          return;
+        }
         toast.success("Check your email to confirm your account.");
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
