@@ -181,9 +181,18 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
             {NAV.map((n) => (
               <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
             ))}
-            <div className="mt-2 flex gap-2">
-              <a href={href("/pricing")} className="flex-1"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
-              <a href={href("/login")} className="flex-1"><Button size="sm" className="w-full">Sign in</Button></a>
+            <div className="mt-2 flex flex-col gap-2">
+              {isAuthenticated ? (
+                <>
+                  <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="w-full">Dashboard</Button></a>
+                  <Button size="sm" variant="outline" className="w-full" onClick={handleSignOut}>Sign out</Button>
+                </>
+              ) : (
+                <>
+                  <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
+                  <a href={href("/login")} className="w-full"><Button size="sm" className="w-full">Sign in</Button></a>
+                </>
+              )}
 
             </div>
           </div>
