@@ -1,7 +1,5 @@
 import {
   createFileRoute,
-  Link,
-  useNavigate,
   useRouterState,
   useSearch,
 } from "@tanstack/react-router";
