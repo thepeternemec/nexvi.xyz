@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
-import { Mail, RotateCcw } from "lucide-react";
+import { AlertCircle, LogIn, Mail, RotateCcw } from "lucide-react";
 
 type LoginSearch = { next?: string };
 
