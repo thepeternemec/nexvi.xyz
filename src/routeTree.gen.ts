@@ -83,18 +83,13 @@ import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
 import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
-import { Route as BundleSlugRouteImport } from './routes/bundle.$slug'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
-import { Route as ItBundleSlugRouteImport } from './routes/it/bundle.$slug'
 import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
-import { Route as FrBundleSlugRouteImport } from './routes/fr/bundle.$slug'
 import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
-import { Route as EsBundleSlugRouteImport } from './routes/es/bundle.$slug'
 import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
-import { Route as DeBundleSlugRouteImport } from './routes/de/bundle.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
@@ -468,11 +463,6 @@ const DeAssistantRoute = DeAssistantRouteImport.update({
   path: '/de/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BundleSlugRoute = BundleSlugRouteImport.update({
-  id: '/bundle/$slug',
-  path: '/bundle/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -495,19 +485,9 @@ const ItPromptSlugRoute = ItPromptSlugRouteImport.update({
   path: '/it/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ItBundleSlugRoute = ItBundleSlugRouteImport.update({
-  id: '/it/bundle/$slug',
-  path: '/it/bundle/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const FrPromptSlugRoute = FrPromptSlugRouteImport.update({
   id: '/fr/prompt/$slug',
   path: '/fr/prompt/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FrBundleSlugRoute = FrBundleSlugRouteImport.update({
-  id: '/fr/bundle/$slug',
-  path: '/fr/bundle/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsPromptSlugRoute = EsPromptSlugRouteImport.update({
@@ -515,19 +495,9 @@ const EsPromptSlugRoute = EsPromptSlugRouteImport.update({
   path: '/es/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EsBundleSlugRoute = EsBundleSlugRouteImport.update({
-  id: '/es/bundle/$slug',
-  path: '/es/bundle/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DePromptSlugRoute = DePromptSlugRouteImport.update({
   id: '/de/prompt/$slug',
   path: '/de/prompt/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DeBundleSlugRoute = DeBundleSlugRouteImport.update({
-  id: '/de/bundle/$slug',
-  path: '/de/bundle/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
@@ -562,7 +532,6 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
-  '/bundle/$slug': typeof BundleSlugRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -623,13 +592,9 @@ export interface FileRoutesByFullPath {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/de/bundle/$slug': typeof DeBundleSlugRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
-  '/es/bundle/$slug': typeof EsBundleSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
-  '/fr/bundle/$slug': typeof FrBundleSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
-  '/it/bundle/$slug': typeof ItBundleSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRoutesByTo {
@@ -652,7 +617,6 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
-  '/bundle/$slug': typeof BundleSlugRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -713,13 +677,9 @@ export interface FileRoutesByTo {
   '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/de/bundle/$slug': typeof DeBundleSlugRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
-  '/es/bundle/$slug': typeof EsBundleSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
-  '/fr/bundle/$slug': typeof FrBundleSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
-  '/it/bundle/$slug': typeof ItBundleSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRoutesById {
@@ -743,7 +703,6 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
-  '/bundle/$slug': typeof BundleSlugRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -804,13 +763,9 @@ export interface FileRoutesById {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/de/bundle/$slug': typeof DeBundleSlugRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
-  '/es/bundle/$slug': typeof EsBundleSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
-  '/fr/bundle/$slug': typeof FrBundleSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
-  '/it/bundle/$slug': typeof ItBundleSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
 }
 export interface FileRouteTypes {
@@ -835,7 +790,6 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
-    | '/bundle/$slug'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -896,13 +850,9 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/de/bundle/$slug'
     | '/de/prompt/$slug'
-    | '/es/bundle/$slug'
     | '/es/prompt/$slug'
-    | '/fr/bundle/$slug'
     | '/fr/prompt/$slug'
-    | '/it/bundle/$slug'
     | '/it/prompt/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -925,7 +875,6 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
-    | '/bundle/$slug'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -986,13 +935,9 @@ export interface FileRouteTypes {
     | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/de/bundle/$slug'
     | '/de/prompt/$slug'
-    | '/es/bundle/$slug'
     | '/es/prompt/$slug'
-    | '/fr/bundle/$slug'
     | '/fr/prompt/$slug'
-    | '/it/bundle/$slug'
     | '/it/prompt/$slug'
   id:
     | '__root__'
@@ -1015,7 +960,6 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
-    | '/bundle/$slug'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1076,13 +1020,9 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/de/bundle/$slug'
     | '/de/prompt/$slug'
-    | '/es/bundle/$slug'
     | '/es/prompt/$slug'
-    | '/fr/bundle/$slug'
     | '/fr/prompt/$slug'
-    | '/it/bundle/$slug'
     | '/it/prompt/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -1106,7 +1046,6 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
-  BundleSlugRoute: typeof BundleSlugRoute
   DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
   DeBundlesRoute: typeof DeBundlesRoute
@@ -1167,13 +1106,9 @@ export interface RootRouteChildren {
   ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
-  DeBundleSlugRoute: typeof DeBundleSlugRoute
   DePromptSlugRoute: typeof DePromptSlugRoute
-  EsBundleSlugRoute: typeof EsBundleSlugRoute
   EsPromptSlugRoute: typeof EsPromptSlugRoute
-  FrBundleSlugRoute: typeof FrBundleSlugRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
-  ItBundleSlugRoute: typeof ItBundleSlugRoute
   ItPromptSlugRoute: typeof ItPromptSlugRoute
 }
 
@@ -1697,13 +1632,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/bundle/$slug': {
-      id: '/bundle/$slug'
-      path: '/bundle/$slug'
-      fullPath: '/bundle/$slug'
-      preLoaderRoute: typeof BundleSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -1732,25 +1660,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItPromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/it/bundle/$slug': {
-      id: '/it/bundle/$slug'
-      path: '/it/bundle/$slug'
-      fullPath: '/it/bundle/$slug'
-      preLoaderRoute: typeof ItBundleSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/fr/prompt/$slug': {
       id: '/fr/prompt/$slug'
       path: '/fr/prompt/$slug'
       fullPath: '/fr/prompt/$slug'
       preLoaderRoute: typeof FrPromptSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fr/bundle/$slug': {
-      id: '/fr/bundle/$slug'
-      path: '/fr/bundle/$slug'
-      fullPath: '/fr/bundle/$slug'
-      preLoaderRoute: typeof FrBundleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/prompt/$slug': {
@@ -1760,25 +1674,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsPromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/es/bundle/$slug': {
-      id: '/es/bundle/$slug'
-      path: '/es/bundle/$slug'
-      fullPath: '/es/bundle/$slug'
-      preLoaderRoute: typeof EsBundleSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/de/prompt/$slug': {
       id: '/de/prompt/$slug'
       path: '/de/prompt/$slug'
       fullPath: '/de/prompt/$slug'
       preLoaderRoute: typeof DePromptSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/de/bundle/$slug': {
-      id: '/de/bundle/$slug'
-      path: '/de/bundle/$slug'
-      fullPath: '/de/bundle/$slug'
-      preLoaderRoute: typeof DeBundleSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/.mcp/invoke-tool/$tool': {
@@ -1819,7 +1719,6 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
-  BundleSlugRoute: BundleSlugRoute,
   DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
   DeBundlesRoute: DeBundlesRoute,
@@ -1880,13 +1779,9 @@ const rootRouteChildren: RootRouteChildren = {
   ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
-  DeBundleSlugRoute: DeBundleSlugRoute,
   DePromptSlugRoute: DePromptSlugRoute,
-  EsBundleSlugRoute: EsBundleSlugRoute,
   EsPromptSlugRoute: EsPromptSlugRoute,
-  FrBundleSlugRoute: FrBundleSlugRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
-  ItBundleSlugRoute: ItBundleSlugRoute,
   ItPromptSlugRoute: ItPromptSlugRoute,
 }
 export const routeTree = rootRouteImport
