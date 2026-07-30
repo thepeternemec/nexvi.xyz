@@ -35,6 +35,7 @@ import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as ItSignupRouteImport } from './routes/it/signup'
+import { Route as ItResetPasswordRouteImport } from './routes/it/reset-password'
 import { Route as ItPricingRouteImport } from './routes/it/pricing'
 import { Route as ItMarketplaceRouteImport } from './routes/it/marketplace'
 import { Route as ItLoginRouteImport } from './routes/it/login'
@@ -48,6 +49,7 @@ import { Route as ItBundlesRouteImport } from './routes/it/bundles'
 import { Route as ItAtsRouteImport } from './routes/it/ats'
 import { Route as ItAssistantRouteImport } from './routes/it/assistant'
 import { Route as FrSignupRouteImport } from './routes/fr/signup'
+import { Route as FrResetPasswordRouteImport } from './routes/fr/reset-password'
 import { Route as FrPricingRouteImport } from './routes/fr/pricing'
 import { Route as FrMarketplaceRouteImport } from './routes/fr/marketplace'
 import { Route as FrLoginRouteImport } from './routes/fr/login'
@@ -61,6 +63,7 @@ import { Route as FrBundlesRouteImport } from './routes/fr/bundles'
 import { Route as FrAtsRouteImport } from './routes/fr/ats'
 import { Route as FrAssistantRouteImport } from './routes/fr/assistant'
 import { Route as EsSignupRouteImport } from './routes/es/signup'
+import { Route as EsResetPasswordRouteImport } from './routes/es/reset-password'
 import { Route as EsPricingRouteImport } from './routes/es/pricing'
 import { Route as EsMarketplaceRouteImport } from './routes/es/marketplace'
 import { Route as EsLoginRouteImport } from './routes/es/login'
@@ -74,6 +77,7 @@ import { Route as EsBundlesRouteImport } from './routes/es/bundles'
 import { Route as EsAtsRouteImport } from './routes/es/ats'
 import { Route as EsAssistantRouteImport } from './routes/es/assistant'
 import { Route as DeSignupRouteImport } from './routes/de/signup'
+import { Route as DeResetPasswordRouteImport } from './routes/de/reset-password'
 import { Route as DePricingRouteImport } from './routes/de/pricing'
 import { Route as DeMarketplaceRouteImport } from './routes/de/marketplace'
 import { Route as DeLoginRouteImport } from './routes/de/login'
@@ -226,6 +230,11 @@ const ItSignupRoute = ItSignupRouteImport.update({
   path: '/it/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItResetPasswordRoute = ItResetPasswordRouteImport.update({
+  id: '/it/reset-password',
+  path: '/it/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItPricingRoute = ItPricingRouteImport.update({
   id: '/it/pricing',
   path: '/it/pricing',
@@ -289,6 +298,11 @@ const ItAssistantRoute = ItAssistantRouteImport.update({
 const FrSignupRoute = FrSignupRouteImport.update({
   id: '/fr/signup',
   path: '/fr/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrResetPasswordRoute = FrResetPasswordRouteImport.update({
+  id: '/fr/reset-password',
+  path: '/fr/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrPricingRoute = FrPricingRouteImport.update({
@@ -356,6 +370,11 @@ const EsSignupRoute = EsSignupRouteImport.update({
   path: '/es/signup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsResetPasswordRoute = EsResetPasswordRouteImport.update({
+  id: '/es/reset-password',
+  path: '/es/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsPricingRoute = EsPricingRouteImport.update({
   id: '/es/pricing',
   path: '/es/pricing',
@@ -419,6 +438,11 @@ const EsAssistantRoute = EsAssistantRouteImport.update({
 const DeSignupRoute = DeSignupRouteImport.update({
   id: '/de/signup',
   path: '/de/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeResetPasswordRoute = DeResetPasswordRouteImport.update({
+  id: '/de/reset-password',
+  path: '/de/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DePricingRoute = DePricingRouteImport.update({
@@ -565,6 +589,7 @@ export interface FileRoutesByFullPath {
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
@@ -578,6 +603,7 @@ export interface FileRoutesByFullPath {
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
@@ -591,6 +617,7 @@ export interface FileRoutesByFullPath {
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
@@ -604,6 +631,7 @@ export interface FileRoutesByFullPath {
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
@@ -653,6 +681,7 @@ export interface FileRoutesByTo {
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
@@ -666,6 +695,7 @@ export interface FileRoutesByTo {
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
@@ -679,6 +709,7 @@ export interface FileRoutesByTo {
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
@@ -692,6 +723,7 @@ export interface FileRoutesByTo {
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de': typeof DeIndexRoute
@@ -742,6 +774,7 @@ export interface FileRoutesById {
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
+  '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
@@ -755,6 +788,7 @@ export interface FileRoutesById {
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
+  '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
@@ -768,6 +802,7 @@ export interface FileRoutesById {
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
+  '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
@@ -781,6 +816,7 @@ export interface FileRoutesById {
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
+  '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/de/': typeof DeIndexRoute
@@ -832,6 +868,7 @@ export interface FileRouteTypes {
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/reset-password'
     | '/de/signup'
     | '/es/assistant'
     | '/es/ats'
@@ -845,6 +882,7 @@ export interface FileRouteTypes {
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/reset-password'
     | '/es/signup'
     | '/fr/assistant'
     | '/fr/ats'
@@ -858,6 +896,7 @@ export interface FileRouteTypes {
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/reset-password'
     | '/fr/signup'
     | '/it/assistant'
     | '/it/ats'
@@ -871,6 +910,7 @@ export interface FileRouteTypes {
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
     | '/de/'
@@ -920,6 +960,7 @@ export interface FileRouteTypes {
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/reset-password'
     | '/de/signup'
     | '/es/assistant'
     | '/es/ats'
@@ -933,6 +974,7 @@ export interface FileRouteTypes {
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/reset-password'
     | '/es/signup'
     | '/fr/assistant'
     | '/fr/ats'
@@ -946,6 +988,7 @@ export interface FileRouteTypes {
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/reset-password'
     | '/fr/signup'
     | '/it/assistant'
     | '/it/ats'
@@ -959,6 +1002,7 @@ export interface FileRouteTypes {
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
     | '/de'
@@ -1008,6 +1052,7 @@ export interface FileRouteTypes {
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
+    | '/de/reset-password'
     | '/de/signup'
     | '/es/assistant'
     | '/es/ats'
@@ -1021,6 +1066,7 @@ export interface FileRouteTypes {
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
+    | '/es/reset-password'
     | '/es/signup'
     | '/fr/assistant'
     | '/fr/ats'
@@ -1034,6 +1080,7 @@ export interface FileRouteTypes {
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
+    | '/fr/reset-password'
     | '/fr/signup'
     | '/it/assistant'
     | '/it/ats'
@@ -1047,6 +1094,7 @@ export interface FileRouteTypes {
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
+    | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
     | '/de/'
@@ -1097,6 +1145,7 @@ export interface RootRouteChildren {
   DeLoginRoute: typeof DeLoginRoute
   DeMarketplaceRoute: typeof DeMarketplaceRoute
   DePricingRoute: typeof DePricingRoute
+  DeResetPasswordRoute: typeof DeResetPasswordRoute
   DeSignupRoute: typeof DeSignupRoute
   EsAssistantRoute: typeof EsAssistantRoute
   EsAtsRoute: typeof EsAtsRoute
@@ -1110,6 +1159,7 @@ export interface RootRouteChildren {
   EsLoginRoute: typeof EsLoginRoute
   EsMarketplaceRoute: typeof EsMarketplaceRoute
   EsPricingRoute: typeof EsPricingRoute
+  EsResetPasswordRoute: typeof EsResetPasswordRoute
   EsSignupRoute: typeof EsSignupRoute
   FrAssistantRoute: typeof FrAssistantRoute
   FrAtsRoute: typeof FrAtsRoute
@@ -1123,6 +1173,7 @@ export interface RootRouteChildren {
   FrLoginRoute: typeof FrLoginRoute
   FrMarketplaceRoute: typeof FrMarketplaceRoute
   FrPricingRoute: typeof FrPricingRoute
+  FrResetPasswordRoute: typeof FrResetPasswordRoute
   FrSignupRoute: typeof FrSignupRoute
   ItAssistantRoute: typeof ItAssistantRoute
   ItAtsRoute: typeof ItAtsRoute
@@ -1136,6 +1187,7 @@ export interface RootRouteChildren {
   ItLoginRoute: typeof ItLoginRoute
   ItMarketplaceRoute: typeof ItMarketplaceRoute
   ItPricingRoute: typeof ItPricingRoute
+  ItResetPasswordRoute: typeof ItResetPasswordRoute
   ItSignupRoute: typeof ItSignupRoute
   PromptSlugRoute: typeof PromptSlugRoute
   DeIndexRoute: typeof DeIndexRoute
@@ -1335,6 +1387,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/reset-password': {
+      id: '/it/reset-password'
+      path: '/it/reset-password'
+      fullPath: '/it/reset-password'
+      preLoaderRoute: typeof ItResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/pricing': {
       id: '/it/pricing'
       path: '/it/pricing'
@@ -1424,6 +1483,13 @@ declare module '@tanstack/react-router' {
       path: '/fr/signup'
       fullPath: '/fr/signup'
       preLoaderRoute: typeof FrSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/reset-password': {
+      id: '/fr/reset-password'
+      path: '/fr/reset-password'
+      fullPath: '/fr/reset-password'
+      preLoaderRoute: typeof FrResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fr/pricing': {
@@ -1517,6 +1583,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsSignupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/reset-password': {
+      id: '/es/reset-password'
+      path: '/es/reset-password'
+      fullPath: '/es/reset-password'
+      preLoaderRoute: typeof EsResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/pricing': {
       id: '/es/pricing'
       path: '/es/pricing'
@@ -1606,6 +1679,13 @@ declare module '@tanstack/react-router' {
       path: '/de/signup'
       fullPath: '/de/signup'
       preLoaderRoute: typeof DeSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/reset-password': {
+      id: '/de/reset-password'
+      path: '/de/reset-password'
+      fullPath: '/de/reset-password'
+      preLoaderRoute: typeof DeResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/de/pricing': {
@@ -1794,6 +1874,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeLoginRoute: DeLoginRoute,
   DeMarketplaceRoute: DeMarketplaceRoute,
   DePricingRoute: DePricingRoute,
+  DeResetPasswordRoute: DeResetPasswordRoute,
   DeSignupRoute: DeSignupRoute,
   EsAssistantRoute: EsAssistantRoute,
   EsAtsRoute: EsAtsRoute,
@@ -1807,6 +1888,7 @@ const rootRouteChildren: RootRouteChildren = {
   EsLoginRoute: EsLoginRoute,
   EsMarketplaceRoute: EsMarketplaceRoute,
   EsPricingRoute: EsPricingRoute,
+  EsResetPasswordRoute: EsResetPasswordRoute,
   EsSignupRoute: EsSignupRoute,
   FrAssistantRoute: FrAssistantRoute,
   FrAtsRoute: FrAtsRoute,
@@ -1820,6 +1902,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrLoginRoute: FrLoginRoute,
   FrMarketplaceRoute: FrMarketplaceRoute,
   FrPricingRoute: FrPricingRoute,
+  FrResetPasswordRoute: FrResetPasswordRoute,
   FrSignupRoute: FrSignupRoute,
   ItAssistantRoute: ItAssistantRoute,
   ItAtsRoute: ItAtsRoute,
@@ -1833,6 +1916,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItLoginRoute: ItLoginRoute,
   ItMarketplaceRoute: ItMarketplaceRoute,
   ItPricingRoute: ItPricingRoute,
+  ItResetPasswordRoute: ItResetPasswordRoute,
   ItSignupRoute: ItSignupRoute,
   PromptSlugRoute: PromptSlugRoute,
   DeIndexRoute: DeIndexRoute,
