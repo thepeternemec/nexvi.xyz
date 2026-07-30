@@ -58,7 +58,23 @@ export type Prompt = {
   body: string;
   examples: { input: string; output: string }[];
   instructions: string[];
+  pack?: string; // prompt pack slug
 };
+
+export type Pack = {
+  slug: string;
+  name: string;
+  emoji: string;
+  description: string;
+};
+
+export const packs: Pack[] = [
+  { slug: "jd-alignment", name: "JD Alignment Pack", emoji: "🎯", description: "Match your CV line-by-line to any job description" },
+  { slug: "cover-letter-lab", name: "Cover Letter Lab", emoji: "✉️", description: "Cover letters, follow-ups and thank-you notes that land" },
+  { slug: "ats-audit", name: "ATS Audit Pack", emoji: "🤖", description: "Scores, keyword gaps and parser-safe rewrites" },
+  { slug: "interview-sprint", name: "Interview Sprint", emoji: "🎤", description: "Stories, mock questions and closing scripts" },
+  { slug: "career-switch", name: "Career Switch Kit", emoji: "🔄", description: "Reposition your experience for a new industry" },
+];
 
 const g = [
   // Interview prep — deep indigo dusk
@@ -82,7 +98,7 @@ const g = [
 
 export const prompts: Prompt[] = [
   {
-    id: "p1", slug: "tailored-cv-for-any-job-description", title: "Tailored CV for Any Job Description",
+    id: "p1", pack: "jd-alignment", slug: "tailored-cv-for-any-job-description", title: "Tailored CV for Any Job Description",
     outcome: "An ATS-ready CV in under 60 seconds",
     description: "Paste the JD and your background. Get a rewritten CV with outcome-driven bullets, keyword coverage, and a clean ATS-safe structure.",
     category: "cv", price: 0, rating: 4.9, reviews: 1840, uses: 78310, beginner: true,
@@ -93,7 +109,7 @@ export const prompts: Prompt[] = [
     instructions: ["Open ChatGPT or Claude", "Paste the prompt", "Paste the job description, then your background", "Iterate one bullet at a time until it sounds like you"],
   },
   {
-    id: "p2", slug: "personalized-cover-letter-that-sounds-human", title: "Cover Letter That Sounds Human",
+    id: "p2", pack: "cover-letter-lab", slug: "personalized-cover-letter-that-sounds-human", title: "Cover Letter That Sounds Human",
     outcome: "A cover letter recruiters actually read",
     description: "Generate a one-page cover letter that connects your story to the company's mission — without sounding like a template.",
     category: "cover-letter", price: 0, rating: 4.8, reviews: 1290, uses: 42400, beginner: true,
@@ -104,7 +120,7 @@ export const prompts: Prompt[] = [
     instructions: ["Copy the prompt", "Paste the JD and your CV", "Pick the tone (warm / formal / direct)", "Iterate until the hook feels like you"],
   },
   {
-    id: "p3", slug: "ats-keyword-gap-analyzer", title: "ATS Keyword Gap Analyzer",
+    id: "p3", pack: "ats-audit", slug: "ats-keyword-gap-analyzer", title: "ATS Keyword Gap Analyzer",
     outcome: "See exactly which keywords you're missing",
     description: "Compares your CV against the JD and returns a match score, the keywords you have, the ones you're missing, and concrete rewrites.",
     category: "ats", price: 4, rating: 4.9, reviews: 980, uses: 34020, beginner: false,
@@ -115,7 +131,7 @@ export const prompts: Prompt[] = [
     instructions: ["Open Claude or ChatGPT", "Paste prompt + JD + CV", "Apply the rewrites", "Re-run until score ≥ 85"],
   },
   {
-    id: "p4", slug: "star-method-interview-stories", title: "STAR Interview Stories from Your CV",
+    id: "p4", pack: "interview-sprint", slug: "star-method-interview-stories", title: "STAR Interview Stories from Your CV",
     outcome: "10 polished stories you can reuse in any interview",
     description: "Pulls 10 STAR-formatted stories from your resume — covering leadership, conflict, failure, ambiguity, and impact.",
     category: "interview", price: 0, rating: 4.9, reviews: 2210, uses: 58900, beginner: true,
@@ -148,7 +164,7 @@ export const prompts: Prompt[] = [
     instructions: ["Paste prompt", "Add the recruiter, role, and your 1-line pitch", "Send within 24h of seeing the role", "Follow up once after 5 business days"],
   },
   {
-    id: "p7", slug: "career-change-positioning-narrative", title: "Career Change Positioning Narrative",
+    id: "p7", pack: "career-switch", slug: "career-change-positioning-narrative", title: "Career Change Positioning Narrative",
     outcome: "Sound like you belong in the new industry",
     description: "Builds a 90-second pitch that reframes your past experience for a new role, plus 5 CV bullets translated into the new industry's language.",
     category: "career-change", price: 7, rating: 4.8, reviews: 421, uses: 14210, beginner: false,
@@ -203,7 +219,7 @@ export const prompts: Prompt[] = [
     instructions: ["Pick your voice", "Paste your background", "Use the 100w version on LinkedIn About header", "Put the 600w version on your site"],
   },
   {
-    id: "p12", slug: "first-cv-with-no-experience", title: "First CV With No Experience",
+    id: "p12", pack: "jd-alignment", slug: "first-cv-with-no-experience", title: "First CV With No Experience",
     outcome: "A one-page CV recruiters take seriously",
     description: "Structured prompt for students and grads — turns coursework, side-projects, and volunteer work into a credible first CV.",
     category: "grad", price: 0, rating: 4.9, reviews: 1620, uses: 44210, beginner: true,
@@ -212,6 +228,116 @@ export const prompts: Prompt[] = [
     body: "I'm a student / recent grad with no formal work experience. Build a one-page CV with these sections in this order: Summary (3 lines), Education, Projects (3, with outcomes), Coursework + Skills, Volunteer / Leadership, Languages.\n\nFor each project, write 3 bullets in the format: action + tool + outcome. No fluff.\n\nBackground: <PASTE major + projects + volunteering>",
     examples: [{ input: "CS undergrad, 2 side projects, club lead", output: "One-page CV, projects in outcome-bullet format." }],
     instructions: ["List every project and club role", "Run the prompt", "Save as PDF, single column", "Tailor per application with prompt #1"],
+  },
+  {
+    id: "p13", pack: "jd-alignment", slug: "jd-to-cv-line-by-line-alignment", title: "JD → CV Line-by-Line Alignment Matrix",
+    outcome: "A requirement-by-requirement match table for your CV",
+    description: "Claude reads the job description, extracts every stated and implied requirement, then maps each one to evidence in your CV — flagging gaps and drafting the missing bullets.",
+    category: "cv", price: 0, rating: 4.9, reviews: 740, uses: 21400, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["job description", "alignment", "matrix", "cv"],
+    creatorId: "c2", cover: g[2],
+    body: "You are a hiring manager who screens 200 CVs a week.\n\nStep 1 — Extract every requirement from the job description into a table: requirement | type (must-have / nice-to-have / implied) | exact phrasing used.\nStep 2 — For each requirement, quote the strongest evidence from my CV. If none exists, write MISSING.\nStep 3 — For each MISSING or WEAK row, draft one honest CV bullet I could add based on my real experience (ask me a clarifying question if you need facts).\nStep 4 — Give an overall alignment score /100 and the 3 changes with the biggest impact.\n\nJob description: <PASTE JD>\nMy CV: <PASTE CV>",
+    examples: [{ input: "Senior Backend Engineer JD + 4-page CV", output: "18-row alignment table, 5 MISSING rows, 5 drafted bullets, score 68 → plan to 88." }],
+    instructions: ["Paste the full JD (not the summary)", "Paste your complete CV", "Answer Claude's clarifying questions honestly", "Apply the top 3 changes first, then re-run"],
+  },
+  {
+    id: "p14", pack: "jd-alignment", slug: "decode-the-hidden-requirements-in-a-job-ad", title: "Decode the Hidden Requirements in a Job Ad",
+    outcome: "Know what they actually want before you apply",
+    description: "Reads between the lines of a job ad — seniority signals, team pain points, the real must-haves vs filler — so you tailor to the job behind the job description.",
+    category: "ats", price: 0, rating: 4.8, reviews: 520, uses: 16800, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["job description", "research", "strategy"],
+    creatorId: "c1", cover: g[5],
+    body: "Analyse this job ad like a recruiter who wrote it.\n\nReturn:\n1. The real problem this hire is meant to solve (1 paragraph).\n2. Must-haves vs nice-to-haves vs boilerplate — three lists, with the evidence phrase for each.\n3. Seniority signals: what level are they truly hiring at, and why.\n4. The 5 keywords a screener will search for.\n5. Three things I should emphasise in my CV, and two I should cut.\n6. Two smart questions to ask them in the interview.\n\nJob ad: <PASTE>",
+    examples: [{ input: "Growth Marketer job ad", output: "Hidden brief: fix paid CAC. 5 keywords, 3 emphasis points, 2 interview questions." }],
+    instructions: ["Paste the full ad including 'about us'", "Note the 5 keywords", "Feed them into the CV alignment prompt", "Save the interview questions"],
+  },
+  {
+    id: "p15", pack: "jd-alignment", slug: "rewrite-cv-bullets-with-jd-language", title: "Rewrite CV Bullets in the JD's Own Language",
+    outcome: "Bullets that mirror the ad without lying",
+    description: "Takes your existing bullets and rewrites each one using the employer's exact vocabulary, keeping every claim true and adding measurable outcomes.",
+    category: "cv", price: 4, rating: 4.8, reviews: 460, uses: 13900, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["bullets", "keywords", "rewrite"],
+    creatorId: "c1", cover: g[0],
+    body: "Rewrite each of my CV bullets so it uses the job description's terminology while staying 100% factually true.\n\nRules:\n- Formula: strong verb + scope + method/tool + measurable outcome.\n- Reuse the JD's exact nouns for tools, methods and metrics where they genuinely apply.\n- Never invent numbers. If a metric is missing, mark it [ADD METRIC] and tell me what to look up.\n- Max 2 lines per bullet.\n\nOutput a two-column list: Original → Rewritten, then a short note on which JD keywords are now covered.\n\nJD: <PASTE>\nMy bullets: <PASTE>",
+    examples: [{ input: "12 bullets + Data Engineer JD", output: "12 rewritten bullets, 9 JD keywords covered, 3 [ADD METRIC] flags." }],
+    instructions: ["Paste the JD, then your bullets", "Fill in the [ADD METRIC] flags", "Re-run for a second pass", "Keep the originals for other applications"],
+  },
+  {
+    id: "p16", pack: "cover-letter-lab", slug: "jd-anchored-cover-letter-with-claude", title: "JD-Anchored Cover Letter (Claude)",
+    outcome: "A letter built from the JD's top three priorities",
+    description: "Claude picks the three priorities the employer cares about most, then writes a 250-word letter where each paragraph proves one of them with evidence from your CV.",
+    category: "cover-letter", price: 0, rating: 4.9, reviews: 880, uses: 26700, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["cover letter", "job description", "evidence"],
+    creatorId: "c3", cover: g[3],
+    body: "Act as a cover letter writer who only makes evidence-backed claims.\n\nStep 1 — From the JD, name the employer's top 3 priorities for this hire, in their words.\nStep 2 — For each priority, pick the single strongest proof point from my CV.\nStep 3 — Write a 250-word letter: hook tied to the company (specific, not flattery), one short paragraph per priority with its proof point, then a confident one-line close with a next step.\n\nBanned: 'I am writing to apply', 'passionate', 'team player', 'fast-paced environment'.\nTone: <warm / direct / formal>.\n\nJD: <PASTE>\nMy CV: <PASTE>",
+    examples: [{ input: "Product Designer at a fintech", output: "3 priorities identified, 248-word letter with one proof point each." }],
+    instructions: ["Paste JD then CV", "Check the 3 priorities look right before accepting the letter", "Ask for a shorter or blunter variant", "Read it aloud before sending"],
+  },
+  {
+    id: "p17", pack: "cover-letter-lab", slug: "cover-letter-variants-ab-test", title: "Three Cover Letter Variants to A/B Test",
+    outcome: "Three angles on the same role — pick the one that fits",
+    description: "Generates a story-led, a metrics-led and a problem-solving-led version of your cover letter for the same job, plus guidance on which to send where.",
+    category: "cover-letter", price: 4, rating: 4.7, reviews: 310, uses: 9600, beginner: false,
+    tools: ["Claude", "ChatGPT"], tags: ["cover letter", "variants", "testing"],
+    creatorId: "c3", cover: g[1],
+    body: "Write three distinct cover letters (max 250 words each) for the same role:\nA) Story-led — opens with a specific moment from my career.\nB) Metrics-led — opens with my single most impressive quantified result.\nC) Problem-led — opens by naming the problem the company is likely hiring to solve, then how I have solved it before.\n\nAfter the three, add a short table: variant | best for (company type / culture) | main risk.\n\nJD: <PASTE>\nMy CV: <PASTE>",
+    examples: [{ input: "Ops Manager role at a scale-up", output: "3 letters + a table recommending the problem-led version." }],
+    instructions: ["Paste JD and CV", "Pick the variant matching the company culture", "Reuse the other openings for outreach DMs", "Track which variant gets replies"],
+  },
+  {
+    id: "p18", pack: "cover-letter-lab", slug: "post-interview-thank-you-and-follow-up", title: "Post-Interview Thank-You & Follow-Up Sequence",
+    outcome: "Stay top of mind without being annoying",
+    description: "A same-day thank-you note, a one-week nudge and a polite final follow-up — each referencing something concrete from your interview.",
+    category: "outreach", price: 0, rating: 4.8, reviews: 380, uses: 12100, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["follow-up", "thank you", "interview"],
+    creatorId: "c2", cover: g[4],
+    body: "Write a three-message follow-up sequence after my interview:\n1. Same-day thank-you (max 120 words): reference one specific thing discussed, add one short idea or resource that shows thinking.\n2. Day-7 nudge (max 70 words): warm, no pressure, restate fit in one line.\n3. Day-14 close (max 60 words): ask for a decision or a clear timeline, leave the door open.\n\nTone: confident, human, zero grovelling.\n\nRole & company: <X>\nInterviewer: <NAME / ROLE>\nWhat we discussed: <NOTES>",
+    examples: [{ input: "Final round, Head of Data role", output: "3 timed messages, each referencing the pipeline discussion." }],
+    instructions: ["Write your interview notes right after the call", "Send message 1 within 12 hours", "Schedule messages 2 and 3", "Stop after the third"],
+  },
+  {
+    id: "p19", pack: "ats-audit", slug: "ats-parser-simulation-and-fix-list", title: "ATS Parser Simulation & Fix List",
+    outcome: "See your CV the way the software sees it",
+    description: "Simulates how an applicant tracking system parses your CV — section detection, dates, job titles, skills — and lists every formatting fix in priority order.",
+    category: "ats", price: 5, rating: 4.8, reviews: 420, uses: 11800, beginner: false,
+    tools: ["Claude", "ChatGPT"], tags: ["ats", "parsing", "formatting"],
+    creatorId: "c2", cover: g[5],
+    body: "Simulate an ATS parsing my CV text. Return:\n1. Parsed fields: name, contact, each role (title / company / dates), education, skills — showing anything the parser would mangle or miss.\n2. Structural risks: tables, columns, headers/footers, graphics, non-standard section names, date formats, acronyms without expansions.\n3. A prioritised fix list (highest impact first) with the exact replacement text.\n4. A cleaned, ATS-safe plain-text version of the CV.\n\nCV text: <PASTE>\nTarget role: <ROLE>",
+    examples: [{ input: "Two-column designer CV", output: "6 parsing failures, 9 prioritised fixes, clean single-column rewrite." }],
+    instructions: ["Copy your CV as plain text from the PDF", "Paste it exactly as copied", "Apply the fix list top-down", "Re-export as single-column PDF and re-run"],
+  },
+  {
+    id: "p20", pack: "ats-audit", slug: "keyword-coverage-score-before-you-apply", title: "Keyword Coverage Score Before You Apply",
+    outcome: "A go / no-go call in two minutes",
+    description: "Scores your fit against the ad across hard skills, tools, domain and seniority — then tells you whether to apply now, tailor first, or skip it.",
+    category: "ats", price: 0, rating: 4.9, reviews: 690, uses: 20400, beginner: true,
+    tools: ["Claude", "ChatGPT"], tags: ["ats", "score", "keywords", "fit"],
+    creatorId: "c2", cover: g[6],
+    body: "Score my fit for this role. Return a table with four dimensions — hard skills, tools/tech, domain knowledge, seniority — each with score /25, matched terms, and missing terms.\n\nThen give:\n- Total /100 and a verdict: APPLY NOW / TAILOR FIRST / SKIP, with one sentence of reasoning.\n- If TAILOR FIRST: the 5 specific edits that raise the score the most, with expected new score.\n- The 3 missing items I genuinely cannot fake, and how to address them in the cover letter.\n\nJD: <PASTE>\nCV: <PASTE>",
+    examples: [{ input: "Platform Engineer JD vs my CV", output: "Total 72/100 — TAILOR FIRST, 5 edits, projected 89." }],
+    instructions: ["Run this before writing anything", "Only tailor for roles scoring 65+", "Apply the 5 edits", "Address the 3 real gaps in the cover letter"],
+  },
+  {
+    id: "p21", pack: "interview-sprint", slug: "mock-interview-from-the-job-description", title: "Mock Interview Built From the Job Description",
+    outcome: "The 15 questions they will actually ask",
+    description: "Claude role-plays the hiring manager, generating questions derived from the JD, grading each answer against their criteria and coaching you on the weak ones.",
+    category: "interview", price: 5, rating: 4.9, reviews: 560, uses: 17200, beginner: false,
+    tools: ["Claude", "ChatGPT"], tags: ["mock interview", "job description", "coaching"],
+    creatorId: "c4", cover: g[0],
+    body: "You are the hiring manager for the role below. Run a mock interview.\n\n1. Derive 15 questions directly from the JD: 5 behavioural, 5 role-specific technical, 3 about my CV's weak spots, 2 about motivation.\n2. Ask them ONE at a time and wait for my answer.\n3. After each answer: score /5 against what this JD implies you'd look for, name the single biggest improvement, and show a stronger 60-second version.\n4. At the end: overall readiness score, my three strongest stories, and what to rehearse tonight.\n\nJD: <PASTE>\nMy CV: <PASTE>",
+    examples: [{ input: "Engineering Manager JD", output: "15 tailored questions, per-answer scoring, readiness 7.5/10 with a rehearsal list." }],
+    instructions: ["Paste JD and CV", "Answer out loud, then type a summary", "Do not skip the weak-spot questions", "Re-run the low-scoring questions the next day"],
+  },
+  {
+    id: "p22", pack: "career-switch", slug: "transferable-skill-bridge-to-a-new-role", title: "Transferable Skill Bridge to a New Role",
+    outcome: "Map what you have to what they want",
+    description: "Builds a bridge table from your current experience to the target JD's requirements, with proof points, honest gaps and a 30-day plan to close them.",
+    category: "career-change", price: 5, rating: 4.8, reviews: 260, uses: 8300, beginner: false,
+    tools: ["Claude", "ChatGPT"], tags: ["pivot", "transferable", "gap plan"],
+    creatorId: "c1", cover: g[7],
+    body: "I want to move into the role in the JD below. Build:\n1. A bridge table: JD requirement | closest thing I have done | how to phrase it truthfully | strength (strong / partial / none).\n2. The 3 genuine gaps, ranked by how much they'd block an offer.\n3. A 30-day plan to close them (course, side project, or evidence I already have but haven't written down).\n4. A 4-sentence 'why the switch' answer I can use in interviews.\n\nJD: <PASTE>\nMy background: <PASTE>",
+    examples: [{ input: "Consultant → Product Manager", output: "14-row bridge table, 3 gaps, 30-day plan, switch narrative." }],
+    instructions: ["Paste the target JD and your background", "Be honest in the 'none' rows", "Start the 30-day plan this week", "Rehearse the switch narrative"],
   },
 ];
 
