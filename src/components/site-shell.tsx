@@ -157,6 +157,11 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                     <LayoutDashboard className="h-4 w-4" /> Dashboard
                   </a>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a href={href("/account")} className="flex items-center gap-2 cursor-pointer">
+                    <Settings className="h-4 w-4" /> Account settings
+                  </a>
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
                   <LogOut className="h-4 w-4" /> Sign out
                 </DropdownMenuItem>
