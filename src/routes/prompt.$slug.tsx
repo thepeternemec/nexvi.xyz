@@ -11,6 +11,7 @@ import { SiteShell } from "@/components/site-shell";
 import { PromptCard, isPremium } from "@/components/prompt-card";
 import { getCategory, getCreator, getPrompt, prompts, reviews, type Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
+import { openUpgradeDialog } from "@/components/upgrade-dialog";
 
 export const Route = createFileRoute("/prompt/$slug")({
   component: PromptDetail,
