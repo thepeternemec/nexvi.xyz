@@ -1,5 +1,8 @@
-import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram } from "lucide-react";
+import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/use-auth";
 
 function XLogo({ className }: { className?: string }) {
   return (
@@ -112,6 +115,17 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   const locale = useActiveLocale(explicitLocale);
   const [open, setOpen] = useState(false);
   const href = (p: string) => alternateHref(locale, p);
+  const { isAuthenticated } = useAuth();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await queryClient.cancelQueries();
+    queryClient.clear();
+    await supabase.auth.signOut();
+    navigate({ to: href("/login"), replace: true });
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
       <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
@@ -130,7 +144,27 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
           <a href={href("/pricing")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Pricing</Button></a>
-          <a href={href("/login")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Sign in</Button></a>
+          {isAuthenticated ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 gap-1.5 rounded-lg text-[13px]">
+                  <User className="h-4 w-4" /> Account
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="min-w-[10rem]">
+                <DropdownMenuItem asChild>
+                  <a href={href("/dashboard")} className="flex items-center gap-2 cursor-pointer">
+                    <LayoutDashboard className="h-4 w-4" /> Dashboard
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
+                  <LogOut className="h-4 w-4" /> Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <a href={href("/login")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Sign in</Button></a>
+          )}
 
         </div>
         <div className="flex items-center gap-2 lg:hidden">
@@ -147,9 +181,18 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
             {NAV.map((n) => (
               <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
             ))}
-            <div className="mt-2 flex gap-2">
-              <a href={href("/pricing")} className="flex-1"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
-              <a href={href("/login")} className="flex-1"><Button size="sm" className="w-full">Sign in</Button></a>
+            <div className="mt-2 flex flex-col gap-2">
+              {isAuthenticated ? (
+                <>
+                  <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="w-full">Dashboard</Button></a>
+                  <Button size="sm" variant="outline" className="w-full" onClick={handleSignOut}>Sign out</Button>
+                </>
+              ) : (
+                <>
+                  <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
+                  <a href={href("/login")} className="w-full"><Button size="sm" className="w-full">Sign in</Button></a>
+                </>
+              )}
 
             </div>
           </div>
