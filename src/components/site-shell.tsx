@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -190,6 +190,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               {isAuthenticated ? (
                 <>
                   <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="w-full">Dashboard</Button></a>
+                  <a href={href("/account")} className="w-full"><Button variant="outline" size="sm" className="w-full">Account settings</Button></a>
                   <Button size="sm" variant="outline" className="w-full" onClick={handleSignOut}>Sign out</Button>
                 </>
               ) : (
