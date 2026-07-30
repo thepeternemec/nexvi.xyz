@@ -73,6 +73,15 @@ export function Marketplace() {
     return list;
   }, [search]);
 
+  const groups = useMemo(() => {
+    if (search.sort !== "tier") return null;
+    return [
+      { key: "beginner", label: "Beginner-friendly", hint: "Zero setup — paste and go", items: filtered.filter(p => p.beginner) },
+      { key: "free", label: "Free", hint: "Full prompt, no subscription", items: filtered.filter(p => !p.beginner && p.price === 0) },
+      { key: "paid", label: "Premium", hint: "Pro-only, deeper workflows", items: filtered.filter(p => !p.beginner && p.price > 0) },
+    ].filter(g => g.items.length > 0);
+  }, [filtered, search.sort]);
+
   const update = (patch: Partial<Search>) => (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }) });
 
   return (
