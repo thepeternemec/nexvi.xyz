@@ -71,20 +71,20 @@ export function Marketplace() {
     if (search.price === "free") list = list.filter(p => p.price === 0);
     if (search.price === "paid") list = list.filter(p => p.price > 0);
     if (search.beginner === "1") list = list.filter(p => p.beginner);
-    if (search.q) {
-      const needle = search.q.toLowerCase();
-      list = list.filter(p =>
-        p.title.toLowerCase().includes(needle) ||
-        p.outcome.toLowerCase().includes(needle) ||
-        p.description.toLowerCase().includes(needle) ||
-        p.tags.some(t => t.includes(needle))
-      );
-    }
+    if (search.q) list = list.filter(p => matchesQuery(p, search.q as string));
     if (search.sort === "rating") list.sort((a, b) => b.rating - a.rating);
     else if (search.sort === "newest") list.reverse();
     else list.sort((a, b) => b.uses - a.uses);
     return list;
   }, [search]);
+
+  // How many prompts the same query would match across the whole library —
+  // used to offer an escape hatch out of the active pack scope.
+  const matchesOutsidePack = useMemo(() => {
+    if (!search.q || !search.pack) return 0;
+    return prompts.filter(p => p.pack !== search.pack && matchesQuery(p, search.q as string)).length;
+  }, [search.q, search.pack]);
+
 
   const groups = useMemo(() => {
     if (search.sort !== "tier") return null;
