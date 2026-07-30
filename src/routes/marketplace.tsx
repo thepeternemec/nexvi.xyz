@@ -4,7 +4,7 @@ import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
 import { packs, prompts } from "@/lib/mock-data";
