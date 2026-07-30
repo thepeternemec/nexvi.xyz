@@ -2,6 +2,7 @@ import {
   createFileRoute,
   useRouterState,
   useSearch,
+  useNavigate,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -10,7 +11,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
-import { AlertCircle, LogIn, Mail, RotateCcw } from "lucide-react";
+import {
+  AlertCircle,
+  KeyRound,
+  LogIn,
+  Mail,
+  RotateCcw,
+} from "lucide-react";
 
 type LoginSearch = { next?: string };
 
@@ -63,7 +70,7 @@ export function AuthShell({
   altCta: string;
   signup?: boolean;
 }) {
-  
+  const navigate = useNavigate();
   const search = useSearch({ strict: false }) as LoginSearch;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
@@ -79,6 +86,9 @@ export function AuthShell({
 
   const [resendLoading, setResendLoading] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
+
+  const [mode, setMode] = useState<"auth" | "forgot" | "forgot-sent">("auth");
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
@@ -166,6 +176,40 @@ export function AuthShell({
     }
   }
 
+  async function sendResetLink(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+    setForgotLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}${href("/reset-password")}`,
+      });
+      if (error) throw error;
+      toast.success("Reset link sent — check your inbox (and spam).");
+      setMode("forgot-sent");
+    } catch (err) {
+      toast.error(
+        err instanceof Error ? err.message : "Could not send reset link"
+      );
+    } finally {
+      setForgotLoading(false);
+    }
+  }
+
+  const pageTitle =
+    mode === "forgot-sent"
+      ? "Reset link sent"
+      : mode === "forgot"
+      ? "Reset your password"
+      : title;
+
+  const pageSubtitle =
+    mode === "forgot-sent"
+      ? "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password."
+      : mode === "forgot"
+      ? "Enter your email and we'll send you a link to reset your password."
+      : subtitle;
+
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
       <div className="relative hidden overflow-hidden bg-aurora lg:block">
@@ -191,8 +235,8 @@ export function AuthShell({
           <a href={href("/")} className="mb-8 inline-flex items-center gap-2 lg:hidden">
             <span className="font-display text-xl">ApplyWise</span>
           </a>
-          <h1 className="font-display text-4xl tracking-tight">{title}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{subtitle}</p>
+          <h1 className="font-display text-4xl tracking-tight">{pageTitle}</h1>
+          <p className="mt-2 text-sm text-muted-foreground">{pageSubtitle}</p>
 
           {existingAccount ? (
             <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
@@ -268,6 +312,61 @@ export function AuthShell({
                 Back to {signup ? "sign up" : "sign in"}
               </button>
             </div>
+          ) : mode === "forgot-sent" ? (
+            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <KeyRound className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-display text-xl tracking-tight">
+                  Reset link sent
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  A password reset link was sent to your email. Please check
+                  your inbox and spam folders, then click it to set a new
+                  password.
+                </p>
+              </div>
+              <Button
+                asChild
+                size="lg"
+                className="w-full rounded-full"
+              >
+                <a href={`${href("/login")}?next=${encodeURIComponent(nextPath)}`}>
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Back to sign in
+                </a>
+              </Button>
+            </div>
+          ) : mode === "forgot" ? (
+            <form className="mt-8 space-y-4" onSubmit={sendResetLink}>
+              <div className="space-y-1.5">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                />
+              </div>
+              <Button
+                type="submit"
+                size="lg"
+                disabled={forgotLoading}
+                className="w-full rounded-full"
+              >
+                {forgotLoading ? "Please wait…" : "Send reset link"}
+              </Button>
+              <button
+                type="button"
+                onClick={() => setMode("auth")}
+                className="block w-full text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Back to sign in
+              </button>
+            </form>
           ) : (
             <form className="mt-8 space-y-4" onSubmit={onSubmit}>
               {signup && (
@@ -304,6 +403,20 @@ export function AuthShell({
                   placeholder="••••••••"
                 />
               </div>
+              {!signup && (
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMode("forgot");
+                      setPassword("");
+                    }}
+                    className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+              )}
               <Button
                 type="submit"
                 size="lg"
@@ -315,7 +428,7 @@ export function AuthShell({
             </form>
           )}
 
-          {!existingAccount && !showVerify && (
+          {!existingAccount && !showVerify && mode === "auth" && (
             <p className="mt-6 text-center text-sm text-muted-foreground">
               {alt}{" "}
               <a
