@@ -2,7 +2,6 @@ import {
   createFileRoute,
   useRouterState,
   useSearch,
-  useNavigate,
 } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
