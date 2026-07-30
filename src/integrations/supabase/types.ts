@@ -130,6 +130,42 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          avatar_path: string | null
+          bio: string | null
+          created_at: string
+          full_name: string | null
+          headline: string | null
+          id: string
+          location: string | null
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          avatar_path?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          headline?: string | null
+          id: string
+          location?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          avatar_path?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          headline?: string | null
+          id?: string
+          location?: string | null
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       prompts: {
         Row: {
           audience: string[]
