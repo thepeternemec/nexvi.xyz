@@ -11,6 +11,7 @@ import { SiteShell } from "@/components/site-shell";
 import { PromptCard, isPremium } from "@/components/prompt-card";
 import { getCategory, getCreator, getPrompt, prompts, reviews, type Prompt } from "@/lib/mock-data";
 import { useSubscription } from "@/hooks/use-subscription";
+import { openUpgradeDialog } from "@/components/upgrade-dialog";
 
 export const Route = createFileRoute("/prompt/$slug")({
   component: PromptDetail,
@@ -88,7 +89,7 @@ export function PromptDetail() {
     setShareOpen(true);
   };
   const onCopy = async () => {
-    if (locked) return;
+    if (locked) { openUpgradeDialog({ title: prompt.title, reason: "Copying is part of Premium. Start a free 7-day trial to copy the full prompt — cancel anytime." }); return; }
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(prompt.body);
@@ -141,7 +142,7 @@ export function PromptDetail() {
                   <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {locked ? "Free preview" : "The prompt"}
                   </div>
-                  <Button size="sm" onClick={onCopy} disabled={locked} className="rounded-full">
+                  <Button size="sm" onClick={onCopy} className="rounded-full">
                     {locked ? <><Lock className="mr-1.5 h-3.5 w-3.5" /> Locked</>
                       : copied ? <><Check className="mr-1.5 h-3.5 w-3.5" /> Copied</>
                       : <><Copy className="mr-1.5 h-3.5 w-3.5" /> Copy prompt</>}
@@ -176,7 +177,7 @@ export function PromptDetail() {
                             <li className="flex items-start gap-1.5"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" /> Cancel anytime</li>
                           </ul>
                           <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center">
-                            <Button asChild className="rounded-full sm:flex-1"><Link to="/pricing">Unlock full prompt</Link></Button>
+                            <Button onClick={() => openUpgradeDialog({ title: prompt.title })} className="rounded-full sm:flex-1">Unlock full prompt</Button>
                             {!isAuthenticated && (
                               <Button asChild variant="ghost" size="sm" className="rounded-full"><Link to="/login">I have an account</Link></Button>
                             )}
@@ -242,8 +243,8 @@ export function PromptDetail() {
 
               <div className="mt-5 grid gap-2">
                 {locked ? (
-                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
-                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock</Link>
+                  <Button size="lg" onClick={() => openUpgradeDialog({ title: prompt.title })} className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
+                    <Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock
                   </Button>
                 ) : premium ? (
                   <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this Premium prompt"}</Button>

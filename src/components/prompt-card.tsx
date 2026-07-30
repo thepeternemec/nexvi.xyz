@@ -8,6 +8,7 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { MeshGradient } from "@/components/mesh-gradient";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { buildApplyTemplate, copyToClipboard } from "@/lib/apply-template";
+import { openUpgradeDialog } from "@/components/upgrade-dialog";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
@@ -38,9 +39,16 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
     );
   };
 
+  const onCardClick = (e: React.MouseEvent) => {
+    if (!locked) return;
+    e.preventDefault();
+    openUpgradeDialog({ title: prompt.title });
+  };
+
   return (
     <a
       href={alternateHref(locale, `/prompt/${prompt.slug}`)}
+      onClick={onCardClick}
       className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-card transition-all hover:border-foreground/20 hover:shadow-[0_8px_30px_-10px_rgb(0_0_0_/0.12)]"
     >
       <div className="relative aspect-[16/10] w-full overflow-hidden">
