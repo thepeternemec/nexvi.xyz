@@ -120,7 +120,9 @@ function RootComponent() {
         <TranslationProvider>
           <AutoTranslate />
           <Outlet />
+          <UpgradeDialog />
           <Toaster richColors position="top-center" />
+
         </TranslationProvider>
       </LocaleProvider>
     </QueryClientProvider>
