@@ -15,6 +15,18 @@ import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-te
 
 type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
 
+function matchesQuery(p: (typeof prompts)[number], query: string) {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return true;
+  return (
+    p.title.toLowerCase().includes(needle) ||
+    p.outcome.toLowerCase().includes(needle) ||
+    p.description.toLowerCase().includes(needle) ||
+    p.tags.some(t => t.toLowerCase().includes(needle))
+  );
+}
+
+
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
     meta: [
@@ -71,20 +83,20 @@ export function Marketplace() {
     if (search.price === "free") list = list.filter(p => p.price === 0);
     if (search.price === "paid") list = list.filter(p => p.price > 0);
     if (search.beginner === "1") list = list.filter(p => p.beginner);
-    if (search.q) {
-      const needle = search.q.toLowerCase();
-      list = list.filter(p =>
-        p.title.toLowerCase().includes(needle) ||
-        p.outcome.toLowerCase().includes(needle) ||
-        p.description.toLowerCase().includes(needle) ||
-        p.tags.some(t => t.includes(needle))
-      );
-    }
+    if (search.q) list = list.filter(p => matchesQuery(p, search.q as string));
     if (search.sort === "rating") list.sort((a, b) => b.rating - a.rating);
     else if (search.sort === "newest") list.reverse();
     else list.sort((a, b) => b.uses - a.uses);
     return list;
   }, [search]);
+
+  // How many prompts the same query would match across the whole library —
+  // used to offer an escape hatch out of the active pack scope.
+  const matchesOutsidePack = useMemo(() => {
+    if (!search.q || !search.pack) return 0;
+    return prompts.filter(p => p.pack !== search.pack && matchesQuery(p, search.q as string)).length;
+  }, [search.q, search.pack]);
+
 
   const groups = useMemo(() => {
     if (search.sort !== "tier") return null;
@@ -112,10 +124,29 @@ export function Marketplace() {
             onSubmit={(e) => { e.preventDefault(); update({ q }); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
           >
-            <div className="flex flex-1 items-center gap-3 px-3">
-              <Search className="h-5 w-5 text-muted-foreground" />
-              <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search CV, cover letter, ATS, interview…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
+            <div className="flex flex-1 flex-wrap items-center gap-2 px-3">
+              <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
+              {activePack && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-foreground px-2.5 py-1 text-xs font-medium text-background">
+                  <span>{activePack.emoji}</span> {activePack.name}
+                  <button
+                    type="button"
+                    aria-label={`Search all packs instead of ${activePack.name}`}
+                    onClick={() => update({ pack: undefined })}
+                    className="ml-0.5 opacity-70 transition hover:opacity-100"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+              <Input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={activePack ? `Search inside ${activePack.name}…` : "Search CV, cover letter, ATS, interview…"}
+                className="h-11 min-w-[8rem] flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
+              />
             </div>
+
             <Button type="submit" className="rounded-xl">Search</Button>
           </form>
         </div>
@@ -177,12 +208,48 @@ export function Marketplace() {
           </div>
         </div>
 
-        <div className="mt-3 text-sm text-muted-foreground">
-          {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
+        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
+          <span>
+            {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
+            {search.q ? <> matching “{search.q}”</> : null}
+            {activePack ? <> in <span className="font-medium text-foreground">{activePack.name}</span></> : null}
+          </span>
+          {search.q && activePack && matchesOutsidePack > 0 && (
+            <button
+              onClick={() => update({ pack: undefined })}
+              className="underline underline-offset-2 transition hover:text-foreground"
+            >
+              {matchesOutsidePack} more in other packs — search all
+            </button>
+          )}
         </div>
 
+        {filtered.length === 0 && (
+          <div className="mt-6 rounded-2xl border border-dashed border-border bg-muted/20 p-8 text-center">
+            <p className="text-sm font-medium">
+              {activePack ? `No prompts in ${activePack.name} match your search.` : "No prompts match your search."}
+            </p>
+            {activePack && matchesOutsidePack > 0 && (
+              <p className="mt-1 text-sm text-muted-foreground">
+                {matchesOutsidePack} prompt{matchesOutsidePack === 1 ? "" : "s"} elsewhere in the library match “{search.q}”.
+              </p>
+            )}
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {activePack && (
+                <Button size="sm" className="rounded-lg" onClick={() => update({ pack: undefined })}>
+                  Search all packs
+                </Button>
+              )}
+              <Button size="sm" variant="secondary" className="rounded-lg" onClick={() => { setQ(""); (navigate as any)({ search: {} }); }}>
+                Clear filters
+              </Button>
+            </div>
+          </div>
+        )}
 
-        {groups ? (
+
+
+        {filtered.length > 0 && (groups ? (
           <div className="mt-6 space-y-10">
             {groups.map(g => (
               <div key={g.key}>
@@ -199,7 +266,8 @@ export function Marketplace() {
           <div className="mt-6">
             <PromptGrid items={filtered} />
           </div>
-        )}
+        ))}
+
       </section>
     </SiteShell>
   );
