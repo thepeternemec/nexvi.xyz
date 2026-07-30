@@ -262,6 +262,21 @@ export function PromptDetail() {
               </div>
             </div>
 
+            {!hasPremium && (
+              <div className="rounded-3xl border border-border/70 bg-gradient-to-br from-neutral-900 to-neutral-700 p-6 text-white dark:from-neutral-100 dark:to-neutral-300 dark:text-black">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider opacity-80">
+                  <Sparkles className="h-3.5 w-3.5" /> Go Pro
+                </div>
+                <div className="font-display mt-2 text-xl leading-snug">Stop rewriting your CV for every job.</div>
+                <p className="mt-2 text-sm opacity-80">Unlock every premium prompt plus AI CV, cover letter, ATS scoring and Humanizer tools — cancel anytime.</p>
+                <Button asChild className="mt-4 w-full rounded-full bg-white text-black hover:bg-white/90 dark:bg-black dark:text-white dark:hover:bg-black/90">
+                  <Link to="/pricing">Subscribe to Pro</Link>
+                </Button>
+              </div>
+            )}
+
+
+
           </aside>
         </div>
 
