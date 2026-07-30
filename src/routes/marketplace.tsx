@@ -249,7 +249,7 @@ export function Marketplace() {
 
 
 
-        {groups ? (
+        {filtered.length > 0 && (groups ? (
           <div className="mt-6 space-y-10">
             {groups.map(g => (
               <div key={g.key}>
@@ -266,7 +266,8 @@ export function Marketplace() {
           <div className="mt-6">
             <PromptGrid items={filtered} />
           </div>
-        )}
+        ))}
+
       </section>
     </SiteShell>
   );
