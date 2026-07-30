@@ -77,6 +77,8 @@ export function AuthShell({
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showVerify, setShowVerify] = useState(false);
+  const [existingAccount, setExistingAccount] = useState(false);
+
 
   const [resendLoading, setResendLoading] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
