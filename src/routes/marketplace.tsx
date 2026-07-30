@@ -4,10 +4,11 @@ import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+
 import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
-import { categories, packs, prompts } from "@/lib/mock-data";
+import { packs, prompts } from "@/lib/mock-data";
+
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
@@ -142,14 +143,6 @@ export function Marketplace() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 overflow-x-auto pb-4">
-          <button onClick={() => update({ category: undefined })} className={`rounded-full border px-3 py-1.5 text-sm transition ${!search.category ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/30"}`}>All</button>
-          {categories.map(c => (
-            <button key={c.slug} onClick={() => update({ category: c.slug })} className={`whitespace-nowrap rounded-full border px-3 py-1.5 text-sm transition ${search.category === c.slug ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/30"}`}>
-              <span className="mr-1">{c.emoji}</span>{c.name}
-            </button>
-          ))}
-        </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y border-border/60 py-4 text-sm">
           <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
@@ -174,8 +167,8 @@ export function Marketplace() {
 
         <div className="mt-3 text-sm text-muted-foreground">
           {filtered.length} prompt{filtered.length === 1 ? "" : "s"}
-          {search.category && <> in <Badge variant="secondary" className="rounded-full">{categories.find(c => c.slug === search.category)?.name}</Badge></>}
         </div>
+
 
         {groups ? (
           <div className="mt-6 space-y-10">
