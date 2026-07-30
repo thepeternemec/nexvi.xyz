@@ -215,26 +215,18 @@ export function PromptDetail() {
             </section>
 
             <section className="mt-10">
-              <h2 className="font-display text-2xl tracking-tight">Reviews</h2>
-              <div className="mt-4 space-y-4">
-                {promptReviews.length === 0 && <div className="rounded-2xl border border-dashed border-border bg-muted/30 p-6 text-sm text-muted-foreground">Be the first to leave a review.</div>}
-                {promptReviews.map(r => (
-                  <div key={r.id} className="rounded-2xl border border-border/70 bg-card p-5">
-                    <div className="flex items-center gap-3">
-                      <div className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-xs font-semibold text-white">{r.avatar}</div>
-                      <div className="text-sm">
-                        <div className="font-medium">{r.author}</div>
-                        <div className="text-xs text-muted-foreground">{r.date}</div>
-                      </div>
-                      <div className="ml-auto flex items-center gap-0.5">
-                        {Array.from({ length: 5 }).map((_, i) => <Star key={i} className={`h-3.5 w-3.5 ${i < r.rating ? "fill-amber-400 text-amber-400" : "text-muted-foreground/40"}`} />)}
-                      </div>
-                    </div>
-                    <p className="mt-3 text-sm text-foreground/80">{r.body}</p>
-                  </div>
-                ))}
+              <h2 className="font-display text-2xl tracking-tight">Run this prompt</h2>
+              <p className="mt-2 text-sm text-muted-foreground">Copy the prompt above, then open your favourite AI assistant and paste it in.</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <Button asChild variant="outline" className="rounded-full">
+                  <a href="https://chatgpt.com/" target="_blank" rel="noreferrer">Go to ChatGPT</a>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full">
+                  <a href="https://claude.ai/new" target="_blank" rel="noreferrer">Go to Claude</a>
+                </Button>
               </div>
             </section>
+
           </div>
 
           {/* SIDEBAR */}
