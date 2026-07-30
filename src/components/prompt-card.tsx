@@ -8,6 +8,7 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { MeshGradient } from "@/components/mesh-gradient";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { buildApplyTemplate, copyToClipboard } from "@/lib/apply-template";
+import { openUpgradeDialog } from "@/components/upgrade-dialog";
 
 export function isPremium(p: Pick<Prompt, "price">) {
   return p.price > 0;
