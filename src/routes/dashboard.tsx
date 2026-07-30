@@ -1,10 +1,12 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
-import { FileText, Mail, Target, Crown, Sparkles, ArrowRight } from "lucide-react";
+import { FileText, Mail, Target, Crown, Sparkles, ArrowRight, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
+import { useAuth } from "@/hooks/use-auth";
+import { useSubscription } from "@/hooks/use-subscription";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
