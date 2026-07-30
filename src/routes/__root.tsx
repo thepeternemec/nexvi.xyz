@@ -77,12 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "getHeired — AI CVs, Cover Letters & ATS Optimization" },
+      { title: "ApplyWise — AI CVs, Cover Letters & ATS Optimization" },
       { name: "description", content: "Paste any job description. Generate an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds." },
-      { property: "og:title", content: "getHeired" },
+      { property: "og:site_name", content: "ApplyWise" },
+      { property: "og:title", content: "ApplyWise" },
       { property: "og:description", content: "AI CVs, cover letters and ATS scoring tailored to every job description." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -90,7 +92,35 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "ApplyWise",
+          url: "/",
+          email: "hello@applywise.eu",
+          description: "AI tools for job seekers: ATS-optimized CVs, tailored cover letters, humanized writing and match scoring.",
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "ApplyWise",
+          url: "/",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "/marketplace?q={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
+    ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
