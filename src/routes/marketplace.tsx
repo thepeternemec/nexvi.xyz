@@ -167,6 +167,7 @@ export function Marketplace() {
               <option value="popular">Popular</option>
               <option value="newest">Newest</option>
               <option value="rating">Top rated</option>
+              <option value="tier">Free / Premium / Beginner</option>
             </select>
           </div>
         </div>
@@ -176,9 +177,24 @@ export function Marketplace() {
           {search.category && <> in <Badge variant="secondary" className="rounded-full">{categories.find(c => c.slug === search.category)?.name}</Badge></>}
         </div>
 
-        <div className="mt-6">
-          <PromptGrid items={filtered} />
-        </div>
+        {groups ? (
+          <div className="mt-6 space-y-10">
+            {groups.map(g => (
+              <div key={g.key}>
+                <div className="mb-4 flex items-baseline gap-3 border-b border-border/60 pb-2">
+                  <h3 className="text-lg font-semibold tracking-tight">{g.label}</h3>
+                  <span className="text-xs text-muted-foreground">{g.hint}</span>
+                  <span className="ml-auto text-xs text-muted-foreground">{g.items.length}</span>
+                </div>
+                <PromptGrid items={g.items} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-6">
+            <PromptGrid items={filtered} />
+          </div>
+        )}
       </section>
     </SiteShell>
   );
