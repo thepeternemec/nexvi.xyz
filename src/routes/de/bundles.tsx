@@ -1,12 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { BundlesPage } from "@/routes/bundles";
-import { queryOptions } from "@tanstack/react-query";
-import { listBundles } from "@/lib/bundles.functions";
-
-const bundlesQueryOptions = queryOptions({ queryKey: ["bundles"], queryFn: () => listBundles() });
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/de/bundles")({
-  head: () => ({ meta: [{ title: "Bundles — ApplyWise" }] }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(bundlesQueryOptions),
-  component: BundlesPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/de/marketplace" });
+  },
+  component: () => null,
 });

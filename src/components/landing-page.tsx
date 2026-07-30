@@ -243,7 +243,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href={href("/library")}><Button size="lg" className="rounded-full">{c.browseLibrary} <ArrowRight className="h-4 w-4" /></Button></a>
-                <a href={href("/bundles")}><Button size="lg" variant="outline" className="rounded-full">{c.seeBundles}</Button></a>
+                
               </div>
             </div>
             <div className="rounded-3xl border border-border/70 bg-background p-6 shadow-sm">
