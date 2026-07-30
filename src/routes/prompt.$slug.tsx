@@ -242,8 +242,8 @@ export function PromptDetail() {
 
               <div className="mt-5 grid gap-2">
                 {locked ? (
-                  <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
-                    <Link to="/pricing"><Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock</Link>
+                  <Button size="lg" onClick={() => openUpgradeDialog({ title: prompt.title })} className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
+                    <Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock
                   </Button>
                 ) : premium ? (
                   <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this Premium prompt"}</Button>
