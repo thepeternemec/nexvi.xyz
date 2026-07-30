@@ -27,6 +27,7 @@ import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as GerIndexRouteImport } from './routes/ger/index'
@@ -188,6 +189,11 @@ const AtsRoute = AtsRouteImport.update({
 const AssistantRoute = AssistantRouteImport.update({
   id: '/assistant',
   path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -556,6 +562,7 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
@@ -648,6 +655,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
@@ -741,6 +749,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/account': typeof AccountRoute
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
@@ -835,6 +844,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/account'
     | '/assistant'
     | '/ats'
     | '/bundles'
@@ -927,6 +937,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/account'
     | '/assistant'
     | '/ats'
     | '/bundles'
@@ -1019,6 +1030,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/account'
     | '/assistant'
     | '/ats'
     | '/bundles'
@@ -1112,6 +1124,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccountRoute: typeof AccountRoute
   AssistantRoute: typeof AssistantRoute
   AtsRoute: typeof AtsRoute
   BundlesRoute: typeof BundlesRoute
@@ -1329,6 +1342,13 @@ declare module '@tanstack/react-router' {
       path: '/assistant'
       fullPath: '/assistant'
       preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -1840,6 +1860,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccountRoute: AccountRoute,
   AssistantRoute: AssistantRoute,
   AtsRoute: AtsRoute,
   BundlesRoute: BundlesRoute,
