@@ -232,12 +232,9 @@ export function PromptDetail() {
           {/* SIDEBAR */}
           <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-border/70 bg-card p-6">
-              <div className="flex items-center gap-1 text-sm">
-                <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                <span className="font-medium">{prompt.rating}</span>
-                <span className="text-muted-foreground">({prompt.reviews.toLocaleString()} reviews)</span>
-              </div>
-              <div className="mt-1 text-xs text-muted-foreground">{prompt.uses.toLocaleString()} people used this prompt</div>
+              <div className="text-sm font-medium">{prompt.uses.toLocaleString()} job seekers used this prompt</div>
+              <div className="mt-1 text-xs text-muted-foreground">Pro members get every premium prompt, the CV & cover letter generators, ATS scoring and the Humanizer.</div>
+
               <div className="mt-5 grid gap-2">
                 {locked ? (
                   <Button asChild size="lg" className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
