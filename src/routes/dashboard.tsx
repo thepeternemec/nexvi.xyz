@@ -51,7 +51,7 @@ export function Dashboard() {
             { label: "CVs generated", v: "0" },
             { label: "Cover letters", v: "0" },
             { label: "ATS reports", v: "0" },
-            { label: "Plan", v: "Free" },
+            { label: "Plan", v: planLoading ? "…" : plan.charAt(0).toUpperCase() + plan.slice(1) },
           ].map(s => (
             <div key={s.label} className="rounded-2xl border border-border/70 bg-card p-5">
               <div className="text-xs text-muted-foreground">{s.label}</div>
@@ -59,6 +59,26 @@ export function Dashboard() {
             </div>
           ))}
         </div>
+
+        {isAuthenticated && user && (
+          <div className="mt-6 rounded-2xl border border-border/70 bg-card p-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-4">
+                <div className="grid h-12 w-12 place-items-center rounded-full bg-foreground/5 text-foreground">
+                  <User className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Signed in as</div>
+                  <div className="font-display text-lg font-medium">{user.email}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">{planLoading ? "…" : plan.charAt(0).toUpperCase() + plan.slice(1)}</span>
+                <a href={href("/pricing")}><Button variant="outline" size="sm" className="rounded-full">Upgrade</Button></a>
+              </div>
+            </div>
+          </div>
+        )}
 
         <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
