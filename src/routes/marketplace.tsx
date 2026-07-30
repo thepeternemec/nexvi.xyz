@@ -163,7 +163,7 @@ export function Marketplace() {
           </div>
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">Sort</span>
-            <select value={search.sort} onChange={(e) => update({ sort: e.target.value as Search["sort"] })} className="rounded-lg border border-border bg-background px-2 py-1 text-sm">
+            <select value={(search.sort as string) ?? "popular"} onChange={(e) => update({ sort: e.target.value as Search["sort"] })} className="rounded-lg border border-border bg-background px-2 py-1 text-sm">
               <option value="popular">Popular</option>
               <option value="newest">Newest</option>
               <option value="rating">Top rated</option>
