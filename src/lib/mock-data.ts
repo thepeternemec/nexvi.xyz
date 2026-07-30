@@ -98,7 +98,7 @@ const g = [
 
 export const prompts: Prompt[] = [
   {
-    id: "p1", slug: "tailored-cv-for-any-job-description", title: "Tailored CV for Any Job Description",
+    id: "p1", pack: "jd-alignment", slug: "tailored-cv-for-any-job-description", title: "Tailored CV for Any Job Description",
     outcome: "An ATS-ready CV in under 60 seconds",
     description: "Paste the JD and your background. Get a rewritten CV with outcome-driven bullets, keyword coverage, and a clean ATS-safe structure.",
     category: "cv", price: 0, rating: 4.9, reviews: 1840, uses: 78310, beginner: true,
@@ -109,7 +109,7 @@ export const prompts: Prompt[] = [
     instructions: ["Open ChatGPT or Claude", "Paste the prompt", "Paste the job description, then your background", "Iterate one bullet at a time until it sounds like you"],
   },
   {
-    id: "p2", slug: "personalized-cover-letter-that-sounds-human", title: "Cover Letter That Sounds Human",
+    id: "p2", pack: "cover-letter-lab", slug: "personalized-cover-letter-that-sounds-human", title: "Cover Letter That Sounds Human",
     outcome: "A cover letter recruiters actually read",
     description: "Generate a one-page cover letter that connects your story to the company's mission — without sounding like a template.",
     category: "cover-letter", price: 0, rating: 4.8, reviews: 1290, uses: 42400, beginner: true,
@@ -120,7 +120,7 @@ export const prompts: Prompt[] = [
     instructions: ["Copy the prompt", "Paste the JD and your CV", "Pick the tone (warm / formal / direct)", "Iterate until the hook feels like you"],
   },
   {
-    id: "p3", slug: "ats-keyword-gap-analyzer", title: "ATS Keyword Gap Analyzer",
+    id: "p3", pack: "ats-audit", slug: "ats-keyword-gap-analyzer", title: "ATS Keyword Gap Analyzer",
     outcome: "See exactly which keywords you're missing",
     description: "Compares your CV against the JD and returns a match score, the keywords you have, the ones you're missing, and concrete rewrites.",
     category: "ats", price: 4, rating: 4.9, reviews: 980, uses: 34020, beginner: false,
@@ -131,7 +131,7 @@ export const prompts: Prompt[] = [
     instructions: ["Open Claude or ChatGPT", "Paste prompt + JD + CV", "Apply the rewrites", "Re-run until score ≥ 85"],
   },
   {
-    id: "p4", slug: "star-method-interview-stories", title: "STAR Interview Stories from Your CV",
+    id: "p4", pack: "interview-sprint", slug: "star-method-interview-stories", title: "STAR Interview Stories from Your CV",
     outcome: "10 polished stories you can reuse in any interview",
     description: "Pulls 10 STAR-formatted stories from your resume — covering leadership, conflict, failure, ambiguity, and impact.",
     category: "interview", price: 0, rating: 4.9, reviews: 2210, uses: 58900, beginner: true,
@@ -164,7 +164,7 @@ export const prompts: Prompt[] = [
     instructions: ["Paste prompt", "Add the recruiter, role, and your 1-line pitch", "Send within 24h of seeing the role", "Follow up once after 5 business days"],
   },
   {
-    id: "p7", slug: "career-change-positioning-narrative", title: "Career Change Positioning Narrative",
+    id: "p7", pack: "career-switch", slug: "career-change-positioning-narrative", title: "Career Change Positioning Narrative",
     outcome: "Sound like you belong in the new industry",
     description: "Builds a 90-second pitch that reframes your past experience for a new role, plus 5 CV bullets translated into the new industry's language.",
     category: "career-change", price: 7, rating: 4.8, reviews: 421, uses: 14210, beginner: false,
@@ -219,7 +219,7 @@ export const prompts: Prompt[] = [
     instructions: ["Pick your voice", "Paste your background", "Use the 100w version on LinkedIn About header", "Put the 600w version on your site"],
   },
   {
-    id: "p12", slug: "first-cv-with-no-experience", title: "First CV With No Experience",
+    id: "p12", pack: "jd-alignment", slug: "first-cv-with-no-experience", title: "First CV With No Experience",
     outcome: "A one-page CV recruiters take seriously",
     description: "Structured prompt for students and grads — turns coursework, side-projects, and volunteer work into a credible first CV.",
     category: "grad", price: 0, rating: 4.9, reviews: 1620, uses: 44210, beginner: true,
