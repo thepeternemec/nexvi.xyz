@@ -69,7 +69,6 @@ export function AuthShell({
   altCta: string;
   signup?: boolean;
 }) {
-  const navigate = useNavigate();
   const search = useSearch({ strict: false }) as LoginSearch;
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
