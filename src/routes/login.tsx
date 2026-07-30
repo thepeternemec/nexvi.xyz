@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate, useRouterState, useSearch } from "@tanstack/react-router";
-import { Sparkles } from "lucide-react";
+
 import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,6 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
         <div className="absolute inset-0 bg-grain opacity-50" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <a href={href("/")} className="flex items-center gap-2">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
             <span className="font-display text-xl">ApplyWise</span>
           </a>
           <div>
@@ -84,7 +83,6 @@ export function AuthShell({ title, subtitle, cta, alt, altLink, altCta, signup }
       <div className="flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-sm">
           <a href={href("/")} className="mb-8 inline-flex items-center gap-2 lg:hidden">
-            <div className="grid h-8 w-8 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-4 w-4" /></div>
             <span className="font-display text-xl">ApplyWise</span>
           </a>
           <h1 className="font-display text-4xl tracking-tight">{title}</h1>
