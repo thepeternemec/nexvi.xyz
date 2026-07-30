@@ -95,7 +95,7 @@ export function AuthShell({
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}${nextPath}`,
+            emailRedirectTo: `${window.location.origin}/verify-email?next=${encodeURIComponent(nextPath)}`,
             data: { name },
           },
         });
