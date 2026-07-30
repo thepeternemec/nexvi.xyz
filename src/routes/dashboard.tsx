@@ -31,6 +31,8 @@ export function Dashboard() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
+  const { user, isAuthenticated } = useAuth();
+  const { plan, loading: planLoading } = useSubscription();
 
   return (
     <SiteShell>
