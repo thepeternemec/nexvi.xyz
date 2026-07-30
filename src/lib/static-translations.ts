@@ -159,6 +159,23 @@ const de = {
   "A bio that works on LinkedIn, X, and your site": "Eine Bio, die auf LinkedIn, X und deiner Website funktioniert",
   "First CV With No Experience": "Erster CV ohne Erfahrung",
   "A one-page CV recruiters take seriously": "Ein einseitiger CV, den Recruiter ernst nehmen",
+
+  "Forgot password?": "Passwort vergessen?",
+  "Reset your password": "Passwort zurücksetzen",
+  "Enter your email and we'll send you a link to reset your password.": "Gib deine E-Mail ein und wir senden dir einen Link zum Zurücksetzen deines Passworts.",
+  "Send reset link": "Link zum Zurücksetzen senden",
+  "Reset link sent": "Link zum Zurücksetzen gesendet",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Ein Link zum Zurücksetzen wurde an deine E-Mail gesendet. Bitte überprüfe deinen Posteingang und Spam-Ordner, dann klicke darauf, um ein neues Passwort zu setzen.",
+  "Back to sign in": "Zurück zur Anmeldung",
+  "New password": "Neues Passwort",
+  "Confirm new password": "Neues Passwort bestätigen",
+  "Update password": "Passwort aktualisieren",
+  "Password updated": "Passwort aktualisiert",
+  "Your password has been updated.": "Dein Passwort wurde aktualisiert.",
+  "Redirecting to sign in…": "Weiterleitung zur Anmeldung…",
+  "Reset link is invalid or expired.": "Link zum Zurücksetzen ist ungültig oder abgelaufen.",
+  "Enter your email to request a new one.": "Gib deine E-Mail ein, um einen neuen Link anzufordern.",
+  "Continue to sign in": "Weiter zur Anmeldung",
 } satisfies Record<string, string>;
 
 const es = {
@@ -301,6 +318,23 @@ const es = {
   "A bio that works on LinkedIn, X, and your site": "Una bio que funciona en LinkedIn, X y tu web",
   "First CV With No Experience": "Primer CV sin experiencia",
   "A one-page CV recruiters take seriously": "Un CV de una página que los reclutadores toman en serio",
+
+  "Forgot password?": "¿Olvidaste tu contraseña?",
+  "Reset your password": "Restablecer tu contraseña",
+  "Enter your email and we'll send you a link to reset your password.": "Introduce tu correo y te enviaremos un enlace para restablecer tu contraseña.",
+  "Send reset link": "Enviar enlace de restablecimiento",
+  "Reset link sent": "Enlace de restablecimiento enviado",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Se envió un enlace de restablecimiento a tu correo. Revisa tu bandeja de entrada y spam, luego haz clic para establecer una nueva contraseña.",
+  "Back to sign in": "Volver a iniciar sesión",
+  "New password": "Nueva contraseña",
+  "Confirm new password": "Confirmar nueva contraseña",
+  "Update password": "Actualizar contraseña",
+  "Password updated": "Contraseña actualizada",
+  "Your password has been updated.": "Tu contraseña ha sido actualizada.",
+  "Redirecting to sign in…": "Redirigiendo a iniciar sesión…",
+  "Reset link is invalid or expired.": "El enlace de restablecimiento no es válido o ha caducado.",
+  "Enter your email to request a new one.": "Introduce tu correo para solicitar uno nuevo.",
+  "Continue to sign in": "Continuar a iniciar sesión",
 } satisfies Record<string, string>;
 
 const it = {
@@ -441,6 +475,23 @@ const it = {
   "A bio that works on LinkedIn, X, and your site": "Una bio efficace su LinkedIn, X e sito",
   "First CV With No Experience": "Primo CV senza esperienza",
   "A one-page CV recruiters take seriously": "Un CV di una pagina che i recruiter prendono sul serio",
+
+  "Forgot password?": "Password dimenticata?",
+  "Reset your password": "Reimposta la password",
+  "Enter your email and we'll send you a link to reset your password.": "Inserisci la tua email e ti invieremo un link per reimpostare la password.",
+  "Send reset link": "Invia link di reimpostazione",
+  "Reset link sent": "Link di reimpostazione inviato",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Un link di reimpostazione password è stato inviato alla tua email. Controlla la casella di posta e la cartella spam, poi clicca per impostare una nuova password.",
+  "Back to sign in": "Torna all'accesso",
+  "New password": "Nuova password",
+  "Confirm new password": "Conferma nuova password",
+  "Update password": "Aggiorna password",
+  "Password updated": "Password aggiornata",
+  "Your password has been updated.": "La tua password è stata aggiornata.",
+  "Redirecting to sign in…": "Reindirizzamento all'accesso…",
+  "Reset link is invalid or expired.": "Il link di reimpostazione non è valido o è scaduto.",
+  "Enter your email to request a new one.": "Inserisci la tua email per richiederne uno nuovo.",
+  "Continue to sign in": "Continua l'accesso",
 } satisfies Record<string, string>;
 
 const fr = {
@@ -581,6 +632,23 @@ const fr = {
   "A bio that works on LinkedIn, X, and your site": "Une bio efficace sur LinkedIn, X et votre site",
   "First CV With No Experience": "Premier CV sans expérience",
   "A one-page CV recruiters take seriously": "Un CV d'une page que les recruteurs prennent au sérieux",
+
+  "Forgot password?": "Mot de passe oublié ?",
+  "Reset your password": "Réinitialiser votre mot de passe",
+  "Enter your email and we'll send you a link to reset your password.": "Entrez votre e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+  "Send reset link": "Envoyer le lien de réinitialisation",
+  "Reset link sent": "Lien de réinitialisation envoyé",
+  "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password.": "Un lien de réinitialisation a été envoyé à votre e-mail. Veuillez vérifier votre boîte de réception et vos spams, puis cliquez pour définir un nouveau mot de passe.",
+  "Back to sign in": "Retour à la connexion",
+  "New password": "Nouveau mot de passe",
+  "Confirm new password": "Confirmer le nouveau mot de passe",
+  "Update password": "Mettre à jour le mot de passe",
+  "Password updated": "Mot de passe mis à jour",
+  "Your password has been updated.": "Votre mot de passe a été mis à jour.",
+  "Redirecting to sign in…": "Redirection vers la connexion…",
+  "Reset link is invalid or expired.": "Le lien de réinitialisation est invalide ou expiré.",
+  "Enter your email to request a new one.": "Entrez votre e-mail pour en demander un nouveau.",
+  "Continue to sign in": "Continuer la connexion",
 } satisfies Record<string, string>;
 
 export const staticTranslations: StaticTranslations = { de, es, it, fr };
