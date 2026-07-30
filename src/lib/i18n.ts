@@ -88,7 +88,7 @@ type Copy = {
 
 export const copy: Record<Locale, Copy> = {
   en: {
-    badge: "AI-powered • ATS-optimized • Tailored to every role",
+    badge: "Resume generation built from the latest AI models",
     heroTitleA: "Get hired with CVs that",
     heroTitleEm: "actually",
     heroTitleB: "beat the bots.",
@@ -142,7 +142,7 @@ export const copy: Record<Locale, Copy> = {
     metaDesc: "Paste a job description. Get an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds.",
   },
   de: {
-    badge: "KI-gestützt • ATS-optimiert • Auf jede Rolle zugeschnitten",
+    badge: "Lebenslauf-Erstellung mit den neuesten KI-Modellen",
     heroTitleA: "Werde eingestellt mit Lebensläufen, die",
     heroTitleEm: "wirklich",
     heroTitleB: "die Bots schlagen.",
@@ -196,7 +196,7 @@ export const copy: Record<Locale, Copy> = {
     metaDesc: "Füge eine Stellenbeschreibung ein. Erhalte einen ATS-optimierten Lebenslauf, ein passgenaues Anschreiben und einen Match-Score in 60 Sekunden.",
   },
   es: {
-    badge: "Con IA • Optimizado para ATS • Adaptado a cada puesto",
+    badge: "Generación de CV construida con los últimos modelos de IA",
     heroTitleA: "Consigue empleo con CVs que",
     heroTitleEm: "realmente",
     heroTitleB: "superan a los bots.",
@@ -250,7 +250,7 @@ export const copy: Record<Locale, Copy> = {
     metaDesc: "Pega una descripción de puesto. Obtén un CV optimizado para ATS, una carta a medida y una puntuación con mejoras concretas — en 60 segundos.",
   },
   it: {
-    badge: "AI • Ottimizzato ATS • Su misura per ogni ruolo",
+    badge: "Generazione di CV basata sui modelli AI più recenti",
     heroTitleA: "Vieni assunto con CV che",
     heroTitleEm: "davvero",
     heroTitleB: "battono i bot.",
@@ -304,7 +304,7 @@ export const copy: Record<Locale, Copy> = {
     metaDesc: "Incolla una descrizione di lavoro. Ottieni un CV ottimizzato ATS, una lettera su misura e un punteggio con miglioramenti concreti — in 60 secondi.",
   },
   fr: {
-    badge: "IA • Optimisé ATS • Sur mesure pour chaque poste",
+    badge: "Génération de CV reposant sur les derniers modèles d'IA",
     heroTitleA: "Décrochez un emploi avec des CV qui",
     heroTitleEm: "vraiment",
     heroTitleB: "battent les robots.",
