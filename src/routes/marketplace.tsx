@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { PromptGrid } from "@/components/prompt-card";
-import { categories, packs, prompts } from "@/lib/mock-data";
+import { packs, prompts } from "@/lib/mock-data";
+
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
