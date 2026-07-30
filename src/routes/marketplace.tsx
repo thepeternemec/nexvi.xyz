@@ -124,10 +124,29 @@ export function Marketplace() {
             onSubmit={(e) => { e.preventDefault(); update({ q }); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
           >
-            <div className="flex flex-1 items-center gap-3 px-3">
-              <Search className="h-5 w-5 text-muted-foreground" />
-              <Input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search CV, cover letter, ATS, interview…" className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0" />
+            <div className="flex flex-1 flex-wrap items-center gap-2 px-3">
+              <Search className="h-5 w-5 shrink-0 text-muted-foreground" />
+              {activePack && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-foreground px-2.5 py-1 text-xs font-medium text-background">
+                  <span>{activePack.emoji}</span> {activePack.name}
+                  <button
+                    type="button"
+                    aria-label={`Search all packs instead of ${activePack.name}`}
+                    onClick={() => update({ pack: undefined })}
+                    className="ml-0.5 opacity-70 transition hover:opacity-100"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+              <Input
+                value={q}
+                onChange={(e) => setQ(e.target.value)}
+                placeholder={activePack ? `Search inside ${activePack.name}…` : "Search CV, cover letter, ATS, interview…"}
+                className="h-11 min-w-[8rem] flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
+              />
             </div>
+
             <Button type="submit" className="rounded-xl">Search</Button>
           </form>
         </div>
