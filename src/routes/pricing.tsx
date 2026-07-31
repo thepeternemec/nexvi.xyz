@@ -96,21 +96,20 @@ export function Pricing() {
 
                   {isPremiumCard ? (
                     owned ? (
-                      <Button onClick={onCancel} disabled={busy === "cancel"} variant="outline" className="mt-7 w-full rounded-full" size="lg">
-                        {busy === "cancel" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                        Cancel Premium
-                      </Button>
+                      <a href={href("/subscription")} className="mt-7 inline-flex w-full">
+                        <Button variant="outline" className="w-full rounded-full" size="lg">
+                          <ExternalLink className="mr-2 h-4 w-4" /> Manage subscription
+                        </Button>
+                      </a>
                     ) : (
                       <div className="mt-7 grid gap-2">
-                        <Button onClick={() => onUpgrade("premium_monthly")} disabled={!!busy} className="w-full rounded-full" size="lg">
-                          {busy === "premium_monthly" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Crown className="mr-2 h-4 w-4" />}
-                          {sub.isAuthenticated ? "Start Premium" : "Sign up to start"}
+                        <Button onClick={() => onUpgrade("premium_monthly")} className="w-full rounded-full" size="lg">
+                          <Crown className="mr-2 h-4 w-4" />
+                          {sub.isAuthenticated ? "Start Premium — $9/mo" : "Sign up to start"}
                         </Button>
-                        {sub.isAuthenticated && (
-                          <Button onClick={() => onUpgrade("trial")} disabled={!!busy} variant="ghost" size="sm" className="rounded-full">
-                            Start 14-day free trial
-                          </Button>
-                        )}
+                        <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
+                          Or $90 / year (save 2 months)
+                        </Button>
                       </div>
                     )
                   ) : (
