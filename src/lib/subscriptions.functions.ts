@@ -57,13 +57,20 @@ export const getMySubscription = createServerFn({ method: "GET" }).handler(async
 export const getMySubscriptionAuthed = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    const { data, error } = await supabaseAdmin
-      .from("subscriptions")
-      .select("plan, status, current_period_end, cancel_at_period_end")
-      .eq("user_id", context.userId)
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
-    if (error) throw new Error(error.message);
-    return snapshotFrom(data);
+    try {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      const { data, error } = await supabaseAdmin
+        .from("subscriptions")
+        .select("plan, status, current_period_end, cancel_at_period_end")
+        .eq("user_id", context.userId)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (error) throw new Error(error.message);
+      return snapshotFrom(data);
+    } catch {
+      // Never blank-screen the app on a transient backend/token error —
+      // fall back to the free snapshot.
+      return snapshotFrom(null);
+    }
   });
