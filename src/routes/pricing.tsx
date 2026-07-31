@@ -122,6 +122,23 @@ export function Pricing() {
               );
             })}
           </div>
+
+          {checkoutPrice && (
+            <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm font-medium">
+                  Checkout · {checkoutPrice === "premium_yearly" ? "Premium yearly" : "Premium monthly"}
+                </div>
+                <Button variant="ghost" size="sm" className="rounded-full" onClick={() => setCheckoutPrice(null)}>
+                  Cancel
+                </Button>
+              </div>
+              <StripeEmbeddedCheckout
+                priceId={checkoutPrice}
+                returnUrl={`${window.location.origin}/subscription?checkout=success`}
+              />
+            </div>
+          )}
           <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted-foreground">
             Cancel anytime. No-questions-asked refunds within 14 days.
           </p>
