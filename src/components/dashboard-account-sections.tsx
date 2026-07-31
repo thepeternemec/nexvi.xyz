@@ -3,14 +3,12 @@ import { useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import {
-  CalendarClock,
   CreditCard,
   Crown,
   ExternalLink,
   Loader2,
   Mail,
   Settings,
-  ShieldCheck,
   User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,6 +19,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
 import { createPortalSession } from "@/utils/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
+import { getSubscriptionStatusConfig, formatSubscriptionPeriod } from "@/lib/subscription-ui";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 type Profile = {
