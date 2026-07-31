@@ -54,38 +54,14 @@ export function Pricing() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
-  const start = useServerFn(startSubscription);
-  const cancel = useServerFn(cancelSubscription);
-  const [busy, setBusy] = useState<string | null>(null);
+  const [checkoutPrice, setCheckoutPrice] = useState<string | null>(null);
 
-  async function onUpgrade(plan: "premium_monthly" | "trial") {
+  function onUpgrade(priceId: "premium_monthly" | "premium_yearly") {
     if (!sub.isAuthenticated) {
       navigate({ to: "/signup" });
       return;
     }
-    setBusy(plan);
-    try {
-      await start({ data: { plan } });
-      await sub.refresh();
-      toast.success(plan === "trial" ? "Your free trial is active." : "Welcome to Premium!");
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not start subscription");
-    } finally {
-      setBusy(null);
-    }
-  }
-
-  async function onCancel() {
-    setBusy("cancel");
-    try {
-      await cancel();
-      await sub.refresh();
-      toast.success("Subscription canceled.");
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not cancel");
-    } finally {
-      setBusy(null);
-    }
+    setCheckoutPrice(priceId);
   }
 
   return (
