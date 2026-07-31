@@ -82,7 +82,7 @@ export function Dashboard() {
         )}
 
         <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
-        <div className="mt-5 grid gap-5 md:grid-cols-3">
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {tools.map(t => (
             <a key={t.href} href={href(t.href)} className="group flex flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg">
               <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
