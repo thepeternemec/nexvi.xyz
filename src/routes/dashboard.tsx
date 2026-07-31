@@ -40,7 +40,7 @@ export function Dashboard() {
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{isAuthenticated ? (user?.email ? `Signed in as ${user.email}` : "Your account") : "Your job search HQ"}</div>
+          
           <h1 className="font-display mt-2 text-4xl tracking-tight sm:text-5xl">{isAuthenticated ? `Welcome back${user?.name ? `, ${user.name}` : ""}.` : "Welcome back."}</h1>
           <p className="mt-2 max-w-xl text-muted-foreground">{isAuthenticated ? "Here is everything you need to land your next role." : "Pick a tool, paste a JD, ship the application."}</p>
         </div>
