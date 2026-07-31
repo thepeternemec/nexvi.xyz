@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
-import { FileText, Mail, Target, Crown, Sparkles, ArrowRight, User } from "lucide-react";
+import { FileText, Mail, Target, Crown, Sparkles, ArrowRight, User, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
