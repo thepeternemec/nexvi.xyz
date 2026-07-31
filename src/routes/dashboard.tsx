@@ -1,8 +1,10 @@
 import { createFileRoute, Link, useRouterState } from "@tanstack/react-router";
-import { FileText, Mail, Target, Crown, Sparkles, ArrowRight, User, Wand2 } from "lucide-react";
+import { FileText, Mail, Target, Crown, Sparkles, ArrowRight, Wand2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
+import { DashboardAccountSections } from "@/components/dashboard-account-sections";
+
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useAuth } from "@/hooks/use-auth";
@@ -89,25 +91,8 @@ export function Dashboard() {
           ))}
         </div>
 
-        {isAuthenticated && user && (
-          <div className="mt-6 rounded-2xl border border-border/70 bg-card p-6">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-4">
-                <div className="grid h-12 w-12 place-items-center rounded-full bg-foreground/5 text-foreground">
-                  <User className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Signed in as</div>
-                  <div className="font-display text-lg font-medium">{user.email}</div>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">{planLoading ? "…" : plan.charAt(0).toUpperCase() + plan.slice(1)}</span>
-                <a href={href("/pricing")}><Button variant="outline" size="sm" className="rounded-full">Upgrade</Button></a>
-              </div>
-            </div>
-          </div>
-        )}
+        <DashboardAccountSections />
+
 
         <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
