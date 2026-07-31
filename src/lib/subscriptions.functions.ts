@@ -6,7 +6,7 @@ export type SubscriptionSnapshot = {
   isAuthenticated: boolean;
   isPremium: boolean;
   plan: "free" | "premium";
-  status: "active" | "trialing" | "canceled" | "inactive";
+  status: "active" | "trialing" | "past_due" | "canceled" | "inactive";
   currentPeriodEnd: string | null;
   cancelAtPeriodEnd: boolean;
 };
@@ -27,7 +27,9 @@ function snapshotFrom(row: {
       cancelAtPeriodEnd: false,
     };
   }
-  const active = (row.status === "active" || row.status === "trialing") &&
+  // Stripe retries past_due payments automatically; keep access until it resolves or cancels.
+  const activeStatuses = ["active", "trialing", "past_due"];
+  const active = activeStatuses.includes(row.status) &&
     (!row.current_period_end || new Date(row.current_period_end).getTime() > Date.now());
   return {
     isAuthenticated: true,

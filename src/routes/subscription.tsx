@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
 import { createPortalSession } from "@/utils/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
+import { getSubscriptionStatusConfig, formatSubscriptionPeriod } from "@/lib/subscription-ui";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export const Route = createFileRoute("/subscription")({
@@ -57,15 +58,13 @@ function SubscriptionPage() {
     }
   }
 
-  const statusLabel = sub.loading
-    ? "Loading…"
-    : sub.isPremium
-      ? sub.status === "trialing"
-        ? "Trial active"
-        : "Active"
-      : sub.status === "canceled"
-        ? "Canceled"
-        : "No active plan";
+  const statusConfig = sub.loading ? null : getSubscriptionStatusConfig(sub.status);
+  const StatusIcon = statusConfig ? statusConfig.icon : null;
+  const periodText =
+    sub.loading || !sub.currentPeriodEnd
+      ? null
+      : formatSubscriptionPeriod(sub.status, sub.currentPeriodEnd, sub.cancelAtPeriodEnd);
+  const canManagePortal = ["active", "trialing", "past_due"].includes(sub.status || "");
 
   return (
     <SiteShell>
@@ -100,37 +99,72 @@ function SubscriptionPage() {
         ) : (
           <>
             <div className="rounded-3xl border border-border/70 bg-card p-7">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                <div>
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
                   <div className="text-xs text-muted-foreground">Current plan</div>
                   <div className="font-display mt-1 flex items-center gap-2 text-3xl tracking-tight">
                     {sub.loading ? "…" : sub.plan === "premium" ? "Premium" : "Free"}
                     {sub.isPremium && <Crown className="h-5 w-5 text-primary" />}
                   </div>
-                  <div className="mt-2 text-sm text-muted-foreground">
-                    {statusLabel}
-                    {sub.currentPeriodEnd && (
+                  <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+                    {sub.loading ? (
+                      <span className="text-muted-foreground">Loading…</span>
+                    ) : statusConfig && StatusIcon ? (
                       <>
-                        {" · "}
-                        {sub.cancelAtPeriodEnd ? "access ends " : "renews "}
-                        {new Date(sub.currentPeriodEnd).toLocaleDateString()}
+                        <span
+                          className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${statusConfig.badgeClass}`}
+                        >
+                          <StatusIcon className="h-3.5 w-3.5" />
+                          {statusConfig.label}
+                        </span>
+                        {periodText && (
+                          <span className="text-muted-foreground">· {periodText}</span>
+                        )}
                       </>
-                    )}
+                    ) : null}
                   </div>
                   {user?.email && (
                     <div className="mt-1 text-xs text-muted-foreground">Billed to {user.email}</div>
                   )}
+
+                  {!sub.loading && statusConfig && (
+                    <div className={`mt-4 rounded-2xl border p-4 text-sm ${statusConfig.bannerClass}`}>
+                      <div className="flex items-start gap-3">
+                        {StatusIcon && <StatusIcon className="mt-0.5 h-4 w-4 shrink-0" />}
+                        <p>{statusConfig.description}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-2 sm:items-end">
-                  <Button onClick={openPortal} disabled={busy === "portal"} className="rounded-full" size="lg">
-                    {busy === "portal" ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                    )}
-                    Open billing portal
-                  </Button>
-                  <span className="text-xs text-muted-foreground">Opens in a new tab</span>
+                  {canManagePortal ? (
+                    <Button
+                      onClick={openPortal}
+                      disabled={busy === "portal"}
+                      className="rounded-full"
+                      size="lg"
+                    >
+                      {busy === "portal" ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : (
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                      )}
+                      {sub.status === "past_due"
+                        ? "Fix payment method"
+                        : sub.status === "trialing"
+                          ? "Manage trial"
+                          : "Open billing portal"}
+                    </Button>
+                  ) : (
+                    <a href={href("/pricing")} className="inline-flex">
+                      <Button className="rounded-full" size="lg">
+                        <Crown className="mr-2 h-4 w-4" /> Upgrade to Premium
+                      </Button>
+                    </a>
+                  )}
+                  <span className="text-xs text-muted-foreground">
+                    {canManagePortal ? "Opens in a new tab" : "Unlock all tools"}
+                  </span>
                 </div>
               </div>
             </div>
