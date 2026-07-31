@@ -100,6 +100,7 @@ import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
 import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
@@ -559,6 +560,12 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPaymentsWebhookRoute =
+  ApiPublicPaymentsWebhookRouteImport.update({
+    id: '/api/public/payments/webhook',
+    path: '/api/public/payments/webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -652,6 +659,7 @@ export interface FileRoutesByFullPath {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -745,6 +753,7 @@ export interface FileRoutesByTo {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -839,6 +848,7 @@ export interface FileRoutesById {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -934,6 +944,7 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1027,6 +1038,7 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/api/public/payments/webhook'
   id:
     | '__root__'
     | '/'
@@ -1120,6 +1132,7 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1214,6 +1227,7 @@ export interface RootRouteChildren {
   EsPromptSlugRoute: typeof EsPromptSlugRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
   ItPromptSlugRoute: typeof ItPromptSlugRoute
+  ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1855,6 +1869,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/payments/webhook': {
+      id: '/api/public/payments/webhook'
+      path: '/api/public/payments/webhook'
+      fullPath: '/api/public/payments/webhook'
+      preLoaderRoute: typeof ApiPublicPaymentsWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1951,6 +1972,7 @@ const rootRouteChildren: RootRouteChildren = {
   EsPromptSlugRoute: EsPromptSlugRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
   ItPromptSlugRoute: ItPromptSlugRoute,
+  ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
