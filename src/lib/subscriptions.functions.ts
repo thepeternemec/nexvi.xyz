@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
@@ -68,43 +67,3 @@ export const getMySubscriptionAuthed = createServerFn({ method: "GET" })
     if (error) throw new Error(error.message);
     return snapshotFrom(data);
   });
-
-const PLAN_DAYS: Record<string, number> = { premium_monthly: 30, premium_yearly: 365, trial: 14 };
-
-// DEV: instantly activate Premium. Replace .handler() body with Stripe Checkout once payments are enabled.
-export const startSubscription = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
-    z.object({ plan: z.enum(["premium_monthly", "premium_yearly", "trial"]).default("premium_monthly") }).parse(input ?? {}),
-  )
-  .handler(async ({ data, context }) => {
-    const days = PLAN_DAYS[data.plan] ?? 30;
-    const periodEnd = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toISOString();
-    const { error } = await supabaseAdmin
-      .from("subscriptions")
-      .upsert(
-        {
-          user_id: context.userId,
-          plan: "premium",
-          status: data.plan === "trial" ? "trialing" : "active",
-          current_period_end: periodEnd,
-          cancel_at_period_end: false,
-          provider: "dev",
-        },
-        { onConflict: "user_id" },
-      );
-    if (error) throw new Error(error.message);
-    return { ok: true, periodEnd };
-  });
-
-export const cancelSubscription = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
-  .handler(async ({ context }) => {
-    const { error } = await supabaseAdmin
-      .from("subscriptions")
-      .update({ status: "canceled", cancel_at_period_end: true })
-      .eq("user_id", context.userId);
-    if (error) throw new Error(error.message);
-    return { ok: true };
-  });
-
