@@ -24,6 +24,7 @@ const tools = [
   { icon: FileText, title: "CV Generator", desc: "Tailor your CV to any job description.", href: "/cv" },
   { icon: Mail, title: "Cover Letter", desc: "Personalized letters in under a minute.", href: "/cover-letter" },
   { icon: Target, title: "ATS Optimizer", desc: "Score your CV, fix the gaps.", href: "/ats" },
+  { icon: Wand2, title: "Humanizer", desc: "Make AI-written text sound like you.", href: "/humanizer" },
 ];
 
 export function Dashboard() {
