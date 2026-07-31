@@ -1,13 +1,12 @@
 import { createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { toast } from "sonner";
-import { Check, Crown, Loader2 } from "lucide-react";
+import { Check, Crown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useSubscription } from "@/hooks/use-subscription";
-import { startSubscription, cancelSubscription } from "@/lib/subscriptions.functions";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export const Route = createFileRoute("/pricing")({

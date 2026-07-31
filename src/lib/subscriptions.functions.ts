@@ -62,6 +62,8 @@ export const getMySubscriptionAuthed = createServerFn({ method: "GET" })
       .from("subscriptions")
       .select("plan, status, current_period_end, cancel_at_period_end")
       .eq("user_id", context.userId)
+      .order("created_at", { ascending: false })
+      .limit(1)
       .maybeSingle();
     if (error) throw new Error(error.message);
     return snapshotFrom(data);
