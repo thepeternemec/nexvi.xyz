@@ -105,18 +105,12 @@ export function Dashboard() {
           {recommended.map(p => <PromptCard key={p.id} prompt={p} />)}
         </div>
 
-        <div className="mt-12 grid gap-5 lg:grid-cols-2">
-          <a href={href("/assistant")} className="rounded-3xl border border-border/70 bg-card p-7 hover:border-foreground/30">
+        <div className="mt-12">
+          <a href={href("/assistant")} className="block rounded-3xl border border-border/70 bg-card p-7 hover:border-foreground/30">
             <div className="flex items-center gap-2 text-sm font-medium"><Sparkles className="h-4 w-4" /> Not sure where to start?</div>
             <div className="font-display mt-3 text-2xl tracking-tight">Ask the AI career guide.</div>
             <p className="mt-2 text-sm text-muted-foreground">Tell it your target role. It picks the right prompts and walks you through them.</p>
           </a>
-          <div className="rounded-3xl border border-border/70 bg-foreground p-7 text-background">
-            <div className="flex items-center gap-2 text-sm font-medium"><Crown className="h-4 w-4" /> Upgrade to Premium</div>
-            <div className="font-display mt-3 text-2xl tracking-tight">Unlimited applications.</div>
-            <p className="mt-2 text-sm text-background/80">Unlimited CVs, cover letters, ATS rewrites and the full premium library.</p>
-            <a href={href("/pricing")}><Button variant="secondary" className="mt-5 rounded-full">See pricing</Button></a>
-          </div>
         </div>
       </section>
     </SiteShell>
