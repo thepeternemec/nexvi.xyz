@@ -47,6 +47,34 @@ export function Dashboard() {
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
+        {plan !== "premium" && (
+          <div className="relative mb-10 overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 p-8 text-neutral-50 shadow-lg sm:p-10 dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220]">
+            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+            <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+                  <Crown className="h-3.5 w-3.5" /> Upgrade to Premium
+                </div>
+                <h2 className="font-display mt-4 text-3xl tracking-tight sm:text-4xl">Apply to every job without limits.</h2>
+                <p className="mt-3 text-sm text-neutral-300">Unlimited CVs, cover letters, ATS rewrites, the Humanizer and the full premium prompt library — one plan, cancel anytime.</p>
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-200">
+                  <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Unlimited generations</li>
+                  <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Full prompt library</li>
+                  <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Priority AI models</li>
+                </ul>
+              </div>
+              <div className="flex shrink-0 flex-col items-start gap-3 sm:flex-row sm:items-center lg:flex-col lg:items-stretch">
+                <a href={href("/pricing")}>
+                  <Button size="lg" className="w-full rounded-full">
+                    Go Premium <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Button>
+                </a>
+                <a href={href("/pricing")} className="text-xs text-neutral-400 underline-offset-4 hover:text-neutral-200 hover:underline">Compare plans</a>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="grid gap-4 sm:grid-cols-4">
           {[
             { label: "CVs generated", v: "0" },
