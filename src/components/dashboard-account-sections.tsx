@@ -101,15 +101,13 @@ export function DashboardAccountSections() {
     setBusy(null);
   }
 
-  const statusLabel = sub.loading
-    ? "Loading…"
-    : sub.isPremium
-      ? sub.status === "trialing"
-        ? "Trial active"
-        : "Active"
-      : sub.status === "canceled"
-        ? "Canceled"
-        : "No active plan";
+  const statusConfig = sub.loading ? null : getSubscriptionStatusConfig(sub.status);
+  const StatusIcon = statusConfig ? statusConfig.icon : null;
+  const periodText =
+    sub.loading || !sub.currentPeriodEnd
+      ? null
+      : formatSubscriptionPeriod(sub.status, sub.currentPeriodEnd, sub.cancelAtPeriodEnd);
+  const canManagePortal = ["active", "trialing", "past_due"].includes(sub.status || "");
 
   return (
     <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -190,21 +188,37 @@ export function DashboardAccountSections() {
         </div>
 
         <div className="mt-5 flex items-end justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <div className="font-display flex items-center gap-2 text-3xl tracking-tight">
               {sub.loading ? "…" : sub.plan === "premium" ? "Premium" : "Free"}
               {sub.isPremium && <Crown className="h-5 w-5 text-primary" />}
             </div>
-            <div className="mt-1 text-sm text-muted-foreground">
-              {statusLabel}
-              {sub.currentPeriodEnd && (
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-sm">
+              {sub.loading ? (
+                <span className="text-muted-foreground">Loading…</span>
+              ) : statusConfig && StatusIcon ? (
                 <>
-                  {" · "}
-                  {sub.cancelAtPeriodEnd ? "access ends " : "renews "}
-                  {new Date(sub.currentPeriodEnd).toLocaleDateString()}
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium ${statusConfig.badgeClass}`}
+                  >
+                    <StatusIcon className="h-3.5 w-3.5" />
+                    {statusConfig.label}
+                  </span>
+                  {periodText && (
+                    <span className="text-muted-foreground">· {periodText}</span>
+                  )}
                 </>
-              )}
+              ) : null}
             </div>
+
+            {!sub.loading && statusConfig && (
+              <div className={`mt-4 rounded-2xl border p-4 text-sm ${statusConfig.bannerClass}`}>
+                <div className="flex items-start gap-3">
+                  {StatusIcon && <StatusIcon className="mt-0.5 h-4 w-4 shrink-0" />}
+                  <p>{statusConfig.description}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -225,28 +239,35 @@ export function DashboardAccountSections() {
         </ul>
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
-          <Button onClick={openPortal} disabled={busy === "portal"} className="rounded-full">
-            {busy === "portal" ? (
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            ) : (
-              <ExternalLink className="mr-2 h-4 w-4" />
-            )}
-            Update payment details
-          </Button>
+          {canManagePortal ? (
+            <Button onClick={openPortal} disabled={busy === "portal"} className="rounded-full">
+              {busy === "portal" ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : (
+                <ExternalLink className="mr-2 h-4 w-4" />
+              )}
+              {sub.status === "past_due"
+                ? "Fix payment method"
+                : sub.status === "trialing"
+                  ? "Manage trial"
+                  : "Update payment details"}
+            </Button>
+          ) : (
+            <a href={href("/pricing")}>
+              <Button className="rounded-full">
+                <Crown className="mr-2 h-4 w-4" /> Go Premium
+              </Button>
+            </a>
+          )}
           <a href={href("/subscription")}>
             <Button variant="outline" className="rounded-full">
               Billing overview
             </Button>
           </a>
-          {!sub.isPremium && (
-            <a href={href("/pricing")}>
-              <Button variant="ghost" className="rounded-full">
-                Go Premium
-              </Button>
-            </a>
-          )}
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">The billing portal opens in a new tab.</p>
+        {canManagePortal && (
+          <p className="mt-2 text-xs text-muted-foreground">The billing portal opens in a new tab.</p>
+        )}
       </section>
     </div>
   );
