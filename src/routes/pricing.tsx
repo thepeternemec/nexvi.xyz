@@ -1,13 +1,12 @@
 import { createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
-import { toast } from "sonner";
-import { Check, Crown, Loader2 } from "lucide-react";
+import { Check, Crown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
+import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useSubscription } from "@/hooks/use-subscription";
-import { startSubscription, cancelSubscription } from "@/lib/subscriptions.functions";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
 export const Route = createFileRoute("/pricing")({
@@ -55,42 +54,19 @@ export function Pricing() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
-  const start = useServerFn(startSubscription);
-  const cancel = useServerFn(cancelSubscription);
-  const [busy, setBusy] = useState<string | null>(null);
+  const [checkoutPrice, setCheckoutPrice] = useState<string | null>(null);
 
-  async function onUpgrade(plan: "premium_monthly" | "trial") {
+  function onUpgrade(priceId: "premium_monthly" | "premium_yearly") {
     if (!sub.isAuthenticated) {
       navigate({ to: "/signup" });
       return;
     }
-    setBusy(plan);
-    try {
-      await start({ data: { plan } });
-      await sub.refresh();
-      toast.success(plan === "trial" ? "Your free trial is active." : "Welcome to Premium!");
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not start subscription");
-    } finally {
-      setBusy(null);
-    }
-  }
-
-  async function onCancel() {
-    setBusy("cancel");
-    try {
-      await cancel();
-      await sub.refresh();
-      toast.success("Subscription canceled.");
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not cancel");
-    } finally {
-      setBusy(null);
-    }
+    setCheckoutPrice(priceId);
   }
 
   return (
     <SiteShell>
+      <PaymentTestModeBanner />
       <section className="bg-aurora">
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
@@ -121,21 +97,20 @@ export function Pricing() {
 
                   {isPremiumCard ? (
                     owned ? (
-                      <Button onClick={onCancel} disabled={busy === "cancel"} variant="outline" className="mt-7 w-full rounded-full" size="lg">
-                        {busy === "cancel" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                        Cancel Premium
-                      </Button>
+                      <a href={href("/subscription")} className="mt-7 inline-flex w-full">
+                        <Button variant="outline" className="w-full rounded-full" size="lg">
+                          <ExternalLink className="mr-2 h-4 w-4" /> Manage subscription
+                        </Button>
+                      </a>
                     ) : (
                       <div className="mt-7 grid gap-2">
-                        <Button onClick={() => onUpgrade("premium_monthly")} disabled={!!busy} className="w-full rounded-full" size="lg">
-                          {busy === "premium_monthly" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Crown className="mr-2 h-4 w-4" />}
-                          {sub.isAuthenticated ? "Start Premium" : "Sign up to start"}
+                        <Button onClick={() => onUpgrade("premium_monthly")} className="w-full rounded-full" size="lg">
+                          <Crown className="mr-2 h-4 w-4" />
+                          {sub.isAuthenticated ? "Start Premium — $9/mo" : "Sign up to start"}
                         </Button>
-                        {sub.isAuthenticated && (
-                          <Button onClick={() => onUpgrade("trial")} disabled={!!busy} variant="ghost" size="sm" className="rounded-full">
-                            Start 14-day free trial
-                          </Button>
-                        )}
+                        <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
+                          Or $90 / year (save 2 months)
+                        </Button>
                       </div>
                     )
                   ) : (
@@ -147,6 +122,23 @@ export function Pricing() {
               );
             })}
           </div>
+
+          {checkoutPrice && (
+            <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm font-medium">
+                  Checkout · {checkoutPrice === "premium_yearly" ? "Premium yearly" : "Premium monthly"}
+                </div>
+                <Button variant="ghost" size="sm" className="rounded-full" onClick={() => setCheckoutPrice(null)}>
+                  Cancel
+                </Button>
+              </div>
+              <StripeEmbeddedCheckout
+                priceId={checkoutPrice}
+                returnUrl={`${window.location.origin}/subscription?checkout=success`}
+              />
+            </div>
+          )}
           <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted-foreground">
             Cancel anytime. No-questions-asked refunds within 14 days.
           </p>
