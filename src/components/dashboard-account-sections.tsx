@@ -3,12 +3,14 @@ import { useRouterState } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import {
+  CalendarClock,
   CreditCard,
   Crown,
   ExternalLink,
   Loader2,
   Mail,
   Settings,
+  ShieldCheck,
   User,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
