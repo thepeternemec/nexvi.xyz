@@ -154,6 +154,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-[15rem] p-0">
                 <NavCredits />
+                <div className="p-1">
                 <DropdownMenuItem asChild>
                   <a href={href("/dashboard")} className="flex items-center gap-2 cursor-pointer">
                     <LayoutDashboard className="h-4 w-4" /> Dashboard
@@ -172,6 +173,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                 <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
                   <LogOut className="h-4 w-4" /> Sign out
                 </DropdownMenuItem>
+                </div>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
