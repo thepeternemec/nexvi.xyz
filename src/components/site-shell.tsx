@@ -292,6 +292,13 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <a href={href("/terms")} className="underline-offset-4 transition hover:text-white hover:underline">Terms &amp; Privacy</a>
             <a href={href("/sitemap")} className="underline-offset-4 transition hover:text-white hover:underline">Sitemap</a>
             <a href={href("/cookies")} className="underline-offset-4 transition hover:text-white hover:underline">Cookies</a>
+            <button
+              type="button"
+              onClick={() => openCookiePreferences()}
+              className="underline-offset-4 transition hover:text-white hover:underline"
+            >
+              Cookie settings
+            </button>
           </nav>
         </div>
       </div>
