@@ -8,6 +8,7 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { humanizeText } from "@/lib/career.functions";
+import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 
 export const Route = createFileRoute("/humanizer")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/humanizer")({
 
 function HumanizerPage() {
   const run = useServerFn(humanizeText);
+  const gate = useToolGate("humanizer");
   const [input, setInput] = useState("");
   const [out, setOut] = useState("");
   const [original, setOriginal] = useState("");
@@ -54,12 +56,14 @@ function HumanizerPage() {
       toast.error("Paste at least a short paragraph to humanize.");
       return;
     }
+    if (!(await gate.before())) return;
     setLoading(true); setOut("");
     try {
       const res = await run({ data: { text: input, strength } });
       setOriginal(input);
       setOut(res.text);
-      toast.success("Humanized.");
+      toast.success("Humanized. 🎉");
+      await gate.after();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Failed";
       toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited — try again shortly." : "Failed to humanize");
@@ -106,6 +110,7 @@ function HumanizerPage() {
                     ))}
                   </div>
                 </div>
+                <div className="mb-4"><ToolCreditBar tool="humanizer" /></div>
                 <Button onClick={onRun} disabled={loading} className="w-full rounded-full" size="lg">
                   {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Humanizing…</> : <><ArrowRightLeft className="h-4 w-4" /> Humanize text</>}
                 </Button>
@@ -156,6 +161,7 @@ function HumanizerPage() {
 
         </div>
       </section>
+      {gate.gates}
     </SiteShell>
   );
 }

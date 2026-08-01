@@ -374,6 +374,42 @@ export type Database = {
         }
         Relationships: []
       }
+      tool_usage: {
+        Row: {
+          anonymous_generation_used: boolean
+          ats_used: number
+          cover_letter_used: number
+          created_at: string
+          cv_used: number
+          humanizer_used: number
+          plan: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          anonymous_generation_used?: boolean
+          ats_used?: number
+          cover_letter_used?: number
+          created_at?: string
+          cv_used?: number
+          humanizer_used?: number
+          plan?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          anonymous_generation_used?: boolean
+          ats_used?: number
+          cover_letter_used?: number
+          created_at?: string
+          cv_used?: number
+          humanizer_used?: number
+          plan?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       translations_cache: {
         Row: {
           created_at: string
@@ -463,6 +499,11 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_tool_credit: {
+        Args: { _limit: number; _tool: string }
+        Returns: Json
+      }
+      get_tool_usage: { Args: never; Returns: Json }
       has_active_subscription: { Args: { _user_id: string }; Returns: boolean }
       has_role: {
         Args: {

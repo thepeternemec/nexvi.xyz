@@ -34,12 +34,13 @@ const plans = [
     key: "free",
     name: "Free",
     price: "$0",
-    desc: "3 generations per month across any tool.",
+    desc: "3 free generations on every tool.",
     cta: "Get started free",
     features: [
-      "3 generations / month — use them on any tool",
-      "CV Generator, Cover Letter, Humanizer, ATS Optimizer",
-      "Basic ATS score",
+      "3 CVs",
+      "3 Cover Letters",
+      "3 ATS Scores",
+      "3 Humanizer Generations",
       "Free prompt library",
     ],
   },
@@ -52,11 +53,13 @@ const plans = [
     highlight: true,
     cta: "Start Premium",
     features: [
-      "Unlimited CV, cover letter & humanizer runs",
-      "Full ATS optimizer with keyword rewrites",
-      "Saved CVs, letters & reports",
-      "Entire premium prompt library",
-      "Priority AI models",
+      "Unlimited CV Generator",
+      "Unlimited Cover Letters",
+      "Unlimited ATS Scoring",
+      "Unlimited AI Humanizer",
+      "Faster AI generation",
+      "Priority support",
+      "Access to future premium features",
     ],
   },
 ];
@@ -89,7 +92,7 @@ export function Pricing() {
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
             <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Start free. Go unlimited when you're ready.</h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Every account gets 3 generations per month to spend on any tool. Need more? Premium unlocks unlimited runs.
+              Every free account gets 3 generations on each tool — CVs, cover letters, ATS scores and the Humanizer. Premium unlocks unlimited runs.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {tools.map((t) => (
@@ -107,7 +110,7 @@ export function Pricing() {
           </div>
 
           <TrustedBy
-            ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
+            ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations per tool"}
             ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
           />
 
@@ -117,7 +120,7 @@ export function Pricing() {
               const owned = isPremiumCard && sub.isPremium;
               return (
                 <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
-                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Most loved</Badge>}
+                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Best value</Badge>}
                   <div className="font-medium">{p.name}</div>
                   <div className="font-display mt-2 flex items-baseline gap-1 text-5xl tracking-tight">{p.price}{p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}</div>
                   <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
