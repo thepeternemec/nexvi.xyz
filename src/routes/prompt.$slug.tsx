@@ -71,7 +71,7 @@ export function PromptDetail() {
   const promptReviews = reviews.filter(r => r.promptId === prompt.id);
   const { isPremium: hasPremium, isAuthenticated, loading: subLoading } = useSubscription();
   const premium = isPremium(prompt);
-  const locked = premium && !hasPremium;
+  const locked = premium && !hasPremium && !subLoading;
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
