@@ -153,6 +153,8 @@ function RootComponent() {
           <AutoTranslate />
           <Outlet />
           <UpgradeDialog />
+          <CookieConsentBanner />
+
           <Toaster richColors position="top-center" />
 
         </TranslationProvider>
