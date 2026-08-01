@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, FileText, Copy, Download } from "lucide-react";
+import { Loader2, FileText, Copy, Download, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
-import { downloadDocumentPdf } from "@/lib/document-pdf";
+import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
+
 
 
 
