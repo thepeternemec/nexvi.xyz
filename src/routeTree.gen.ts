@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SubscriptionRouteImport } from './routes/subscription'
+import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -25,6 +28,7 @@ import { Route as CvRouteImport } from './routes/cv'
 import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
@@ -108,14 +112,29 @@ const VerifyEmailRoute = VerifyEmailRouteImport.update({
   path: '/verify-email',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SubscriptionRoute = SubscriptionRouteImport.update({
   id: '/subscription',
   path: '/subscription',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatusRoute = StatusRouteImport.update({
+  id: '/status',
+  path: '/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -181,6 +200,11 @@ const CreatorRoute = CreatorRouteImport.update({
 const CoverLetterRoute = CoverLetterRouteImport.update({
   id: '/cover-letter',
   path: '/cover-letter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BundlesRoute = BundlesRouteImport.update({
@@ -579,6 +603,7 @@ export interface FileRoutesByFullPath {
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cookies': typeof CookiesRoute
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
@@ -592,8 +617,11 @@ export interface FileRoutesByFullPath {
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
+  '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -674,6 +702,7 @@ export interface FileRoutesByTo {
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cookies': typeof CookiesRoute
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
@@ -687,8 +716,11 @@ export interface FileRoutesByTo {
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
+  '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -770,6 +802,7 @@ export interface FileRoutesById {
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/cookies': typeof CookiesRoute
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
@@ -783,8 +816,11 @@ export interface FileRoutesById {
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
+  '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
+  '/terms': typeof TermsRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -867,6 +903,7 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/ats'
     | '/bundles'
+    | '/cookies'
     | '/cover-letter'
     | '/creator'
     | '/creators'
@@ -880,8 +917,11 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/reset-password'
     | '/signup'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/status'
     | '/subscription'
+    | '/terms'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -962,6 +1002,7 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/ats'
     | '/bundles'
+    | '/cookies'
     | '/cover-letter'
     | '/creator'
     | '/creators'
@@ -975,8 +1016,11 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/reset-password'
     | '/signup'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/status'
     | '/subscription'
+    | '/terms'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1057,6 +1101,7 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/ats'
     | '/bundles'
+    | '/cookies'
     | '/cover-letter'
     | '/creator'
     | '/creators'
@@ -1070,8 +1115,11 @@ export interface FileRouteTypes {
     | '/pricing'
     | '/reset-password'
     | '/signup'
+    | '/sitemap'
     | '/sitemap.xml'
+    | '/status'
     | '/subscription'
+    | '/terms'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1153,6 +1201,7 @@ export interface RootRouteChildren {
   AssistantRoute: typeof AssistantRoute
   AtsRoute: typeof AtsRoute
   BundlesRoute: typeof BundlesRoute
+  CookiesRoute: typeof CookiesRoute
   CoverLetterRoute: typeof CoverLetterRoute
   CreatorRoute: typeof CreatorRoute
   CreatorsRoute: typeof CreatorsRoute
@@ -1166,8 +1215,11 @@ export interface RootRouteChildren {
   PricingRoute: typeof PricingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
+  SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StatusRoute: typeof StatusRoute
   SubscriptionRoute: typeof SubscriptionRoute
+  TermsRoute: typeof TermsRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -1252,6 +1304,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerifyEmailRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/subscription': {
       id: '/subscription'
       path: '/subscription'
@@ -1259,11 +1318,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SubscriptionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/status': {
+      id: '/status'
+      path: '/status'
+      fullPath: '/status'
+      preLoaderRoute: typeof StatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -1355,6 +1428,13 @@ declare module '@tanstack/react-router' {
       path: '/cover-letter'
       fullPath: '/cover-letter'
       preLoaderRoute: typeof CoverLetterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bundles': {
@@ -1905,6 +1985,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssistantRoute: AssistantRoute,
   AtsRoute: AtsRoute,
   BundlesRoute: BundlesRoute,
+  CookiesRoute: CookiesRoute,
   CoverLetterRoute: CoverLetterRoute,
   CreatorRoute: CreatorRoute,
   CreatorsRoute: CreatorsRoute,
@@ -1918,8 +1999,11 @@ const rootRouteChildren: RootRouteChildren = {
   PricingRoute: PricingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
+  SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StatusRoute: StatusRoute,
   SubscriptionRoute: SubscriptionRoute,
+  TermsRoute: TermsRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
