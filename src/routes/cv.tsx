@@ -106,9 +106,9 @@ export function CVPage() {
   function downloadPdf() {
     try {
       downloadDocumentPdf(out, "tailored-cv.pdf");
-      toast.success("Downloaded PDF");
+      toast.success("PDF ready — check your downloads or the new tab");
     } catch {
-      toast.error("PDF export failed");
+      toast.error("Your browser blocked the download. Use “Open PDF in a new tab”.");
     }
   }
 
