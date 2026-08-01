@@ -3,8 +3,23 @@ import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Librar
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
+import { prompts, categories } from "@/lib/mock-data";
 
 const ICONS = [Library, FileText, Mail, Target, Wand2];
+
+const FEATURED_SLUGS = [
+  "tailored-cv-for-any-job-description",
+  "personalized-cover-letter-that-sounds-human",
+  "ats-keyword-gap-analyzer",
+  "star-method-interview-stories",
+  "recruiter-cold-message-that-gets-replies",
+  "salary-negotiation-counter-offer-script",
+];
+
+const featured = FEATURED_SLUGS
+  .map((s) => prompts.find((p) => p.slug === s))
+  .filter((p): p is (typeof prompts)[number] => Boolean(p));
+
 
 export function LandingPage({ locale = "en" }: { locale?: Locale }) {
   const c = copy[locale];
