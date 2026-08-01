@@ -116,7 +116,7 @@ const g = [
 ];
 
 
-export const prompts: Prompt[] = [
+const rawPrompts: Prompt[] = [
   {
     id: "p1", pack: "jd-alignment", slug: "tailored-cv-for-any-job-description", title: "Tailored CV for Any Job Description",
     outcome: "An ATS-ready CV in under 60 seconds",
