@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
+
 
 
 export const Route = createFileRoute("/cv")({
@@ -71,14 +73,15 @@ export function CVPage() {
       toast.error("Copy failed");
     }
   }
-  function download(kind: "txt" | "md") {
-    const content = kind === "md" ? out : toPlainText(out);
-    const blob = new Blob([content], { type: kind === "md" ? "text/markdown" : "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = `tailored-cv.${kind}`; a.click(); URL.revokeObjectURL(url);
-    toast.success(`Downloaded .${kind}`);
+  function downloadPdf() {
+    try {
+      downloadDocumentPdf(out, "tailored-cv.pdf");
+      toast.success("Downloaded PDF");
+    } catch {
+      toast.error("PDF export failed");
+    }
   }
+
 
 
   return (
