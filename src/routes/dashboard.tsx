@@ -111,6 +111,8 @@ export function Dashboard() {
 
         <DashboardAccountSections />
 
+        <UsageHistory />
+
 
         <h2 className="font-display mt-12 text-2xl tracking-tight">Jump back in</h2>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
