@@ -100,27 +100,52 @@ export function buildDocumentPdf(md: string) {
 
 /**
  * Render markdown-ish CV/letter text as a clean, paginated A4 PDF and download it.
- * Uses an explicit anchor click (works inside sandboxed preview iframes) and falls
- * back to opening the PDF in a new tab when downloads are blocked.
+ * Sandboxed preview iframes commonly block `<a download>` navigations, so when we
+ * are framed we open the PDF in a top-level tab (still inside the user gesture),
+ * where the browser's own PDF viewer offers a download button.
  */
 export function downloadDocumentPdf(md: string, filename: string) {
   const blob = buildDocumentPdf(md).output("blob");
-  const url = URL.createObjectURL(blob);
-  try {
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    a.rel = "noopener";
-    a.style.display = "none";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-  } catch {
-    window.open(url, "_blank", "noopener");
-  }
+  const file = new Blob([blob], { type: "application/pdf" });
+  const url = URL.createObjectURL(file);
+
+  const framed = (() => {
+    try {
+      return window.self !== window.top;
+    } catch {
+      return true;
+    }
+  })();
+
+  const openTab = () => {
+    const w = window.open(url, "_blank", "noopener,noreferrer");
+    return !!w;
+  };
+
+  const anchorDownload = () => {
+    try {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.rel = "noopener";
+      a.target = "_blank";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const ok = framed ? openTab() || anchorDownload() : anchorDownload() || openTab();
+  if (!ok) throw new Error("Download blocked by the browser");
+
   // Give the browser time to start the download before revoking.
-  setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
 }
+
 
 /** Object URL for an inline PDF preview. Revoke it when done. */
 export function createDocumentPdfUrl(md: string): string {
