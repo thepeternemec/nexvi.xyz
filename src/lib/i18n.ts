@@ -89,7 +89,7 @@ type Copy = {
 export const copy: Record<Locale, Copy> = {
   en: {
     badge: "Resume generation built from the latest AI models",
-    heroTitleA: "Get hired with CVs that",
+    heroTitleA: "Get hired with CV that",
     heroTitleEm: "actually",
     heroTitleB: "beat the bots.",
     heroSub: "Paste any job description. We generate a tailored CV and cover letter, score it against the ATS, and tell you exactly what to fix.",
