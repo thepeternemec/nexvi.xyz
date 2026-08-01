@@ -1,14 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, FileText, Copy, Download } from "lucide-react";
+import { Loader2, FileText, Copy, Download, Eye } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
-import { downloadDocumentPdf } from "@/lib/document-pdf";
+import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
+
 
 
 
@@ -48,6 +49,23 @@ export function CVPage() {
   const [tone, setTone] = useState<"professional" | "confident" | "friendly" | "concise">("professional");
   const [out, setOut] = useState("");
   const [loading, setLoading] = useState(false);
+  const [view, setView] = useState<"document" | "pdf">("document");
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+
+  // Live PDF preview: rebuild whenever the output or view changes.
+  useEffect(() => {
+    if (view !== "pdf" || !out) { setPdfUrl(null); return; }
+    let url: string | null = null;
+    try {
+      url = createDocumentPdfUrl(out);
+      setPdfUrl(url);
+    } catch {
+      setPdfUrl(null);
+      toast.error("PDF preview failed");
+    }
+    return () => { if (url) URL.revokeObjectURL(url); };
+  }, [out, view]);
+
 
   async function onGenerate() {
     if (jd.trim().length < 20 || bg.trim().length < 20) {
@@ -119,21 +137,45 @@ export function CVPage() {
           </div>
 
           <div className="rounded-3xl border border-border/70 bg-card p-5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="text-sm font-semibold">Your tailored CV</div>
               {out && (
                 <div className="flex flex-wrap items-center gap-1">
+                  <div className="mr-1 flex items-center rounded-full border border-border p-0.5">
+                    {(["document", "pdf"] as const).map((v) => (
+                      <button
+                        key={v}
+                        onClick={() => setView(v)}
+                        className={`rounded-full px-2.5 py-1 text-xs transition ${view === v ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                      >
+                        {v === "document" ? "Document" : "PDF preview"}
+                      </button>
+                    ))}
+                  </div>
                   <Button size="sm" variant="ghost" onClick={copy} className="gap-1.5 text-xs"><Copy className="h-3.5 w-3.5" /> Copy</Button>
                   <Button size="sm" variant="outline" onClick={downloadPdf} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> Download PDF</Button>
-
                 </div>
               )}
             </div>
-            <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
-              {out ? <DocumentRender text={out} /> : <span className="text-sm text-muted-foreground">Your generated CV will appear here.</span>}
-            </div>
-
+            {out && view === "pdf" ? (
+              <div className="mt-3 overflow-hidden rounded-2xl border border-border/60 bg-muted">
+                {pdfUrl ? (
+                  <iframe src={pdfUrl} title="CV PDF preview" className="h-[720px] w-full" />
+                ) : (
+                  <div className="grid h-[720px] place-items-center text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" /></div>
+                )}
+              </div>
+            ) : (
+              <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
+                {out ? (
+                  <DocumentRender text={out} />
+                ) : (
+                  <span className="flex items-center gap-2 text-sm text-muted-foreground"><Eye className="h-4 w-4" /> Your generated CV will appear here, with a live PDF preview before you download.</span>
+                )}
+              </div>
+            )}
           </div>
+
         </div>
       </section>
     </SiteShell>
