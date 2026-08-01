@@ -1,54 +1,50 @@
-import { useCallback, useState, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const STORAGE_KEY = "theme";
 
 type Theme = "light" | "dark";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-    if (stored) return stored;
-  } catch {}
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
+const listeners = new Set<() => void>();
 
-function subscribe(callback: () => void) {
-  const handler = () => callback();
-  window.addEventListener("storage", handler);
-  return () => window.removeEventListener("storage", handler);
-}
-
-function getSnapshot(): Theme {
-  if (typeof window === "undefined") return "light";
+function readDomTheme(): Theme {
+  if (typeof document === "undefined") return "light";
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-function getServerSnapshot(): Theme {
-  return "light";
+function applyTheme(next: Theme) {
+  const root = document.documentElement;
+  if (next === "dark") root.classList.add("dark");
+  else root.classList.remove("dark");
+  try {
+    localStorage.setItem(STORAGE_KEY, next);
+  } catch {
+    /* ignore */
+  }
+  listeners.forEach((l) => l());
 }
 
 export function useTheme() {
-  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  // Start with "light" so SSR and first client render agree; sync after mount.
+  const [theme, setThemeState] = useState<Theme>("light");
+
+  useEffect(() => {
+    const sync = () => setThemeState(readDomTheme());
+    sync();
+    listeners.add(sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      listeners.delete(sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
 
   const setTheme = useCallback((next: Theme) => {
-    const root = document.documentElement;
-    if (next === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {}
-    window.dispatchEvent(new StorageEvent("storage"));
+    applyTheme(next);
   }, []);
 
   const toggleTheme = useCallback(() => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  }, [theme, setTheme]);
+    applyTheme(readDomTheme() === "dark" ? "light" : "dark");
+  }, []);
 
   return { theme, setTheme, toggleTheme, isDark: theme === "dark" };
 }
