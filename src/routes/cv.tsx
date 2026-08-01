@@ -61,13 +61,23 @@ export function CVPage() {
     } finally { setLoading(false); }
   }
 
-  function copy() { navigator.clipboard.writeText(out); toast.success("Copied to clipboard"); }
-  function download() {
-    const blob = new Blob([out], { type: "text/markdown" });
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(toPlainText(out));
+      toast.success("Copied as clean text");
+    } catch {
+      toast.error("Copy failed");
+    }
+  }
+  function download(kind: "txt" | "md") {
+    const content = kind === "md" ? out : toPlainText(out);
+    const blob = new Blob([content], { type: kind === "md" ? "text/markdown" : "text/plain" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "cv.md"; a.click(); URL.revokeObjectURL(url);
+    a.href = url; a.download = `tailored-cv.${kind}`; a.click(); URL.revokeObjectURL(url);
+    toast.success(`Downloaded .${kind}`);
   }
+
 
   return (
     <SiteShell>
