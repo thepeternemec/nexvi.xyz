@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { generateCoverLetter } from "@/lib/career.functions";
+import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
@@ -27,6 +28,7 @@ export const Route = createFileRoute("/cover-letter")({
 
 export function CoverLetterPage() {
   const run = useServerFn(generateCoverLetter);
+  const gate = useToolGate("coverLetter");
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");
   const [company, setCompany] = useState("");
@@ -47,6 +49,7 @@ export function CoverLetterPage() {
     // Pad short inputs so server-side min-length validation passes; the model still gets the raw text.
     const jdPayload = jd.trim().length < 20 ? jd.trim() + "\n\n(Short job description provided by user.)" : jd;
     const bgPayload = bg.trim().length < 20 ? bg.trim() + "\n\n(Brief candidate background provided by user.)" : bg;
+    if (!(await gate.before())) return;
     setLoading(true); setOut("");
     try {
       const res = await run({ data: { jobDescription: jdPayload, background: bgPayload, companyName: company || undefined, roleTitle: role || undefined, tone } });
@@ -55,7 +58,8 @@ export function CoverLetterPage() {
         .replace(/(^|[^*])\*(?!\s)([^*\n]+?)\*(?!\w)/g, "$1$2")
         .replace(/^\s*[-*]\s+/gm, "• ");
       setOut(cleaned);
-      toast.success("Cover letter generated.");
+      toast.success("Cover letter generated. 🎉");
+      await gate.after();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
       toast.error(msg.includes("402") ? "AI credits exhausted." : "Generation failed");
@@ -123,6 +127,7 @@ export function CoverLetterPage() {
           </div>
         </div>
       </section>
+      {gate.gates}
     </SiteShell>
   );
 }

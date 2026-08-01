@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
 import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
+import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 
 
 
@@ -44,6 +45,7 @@ export const Route = createFileRoute("/cv")({
 
 export function CVPage() {
   const run = useServerFn(generateCV);
+  const gate = useToolGate("cv");
   const [jd, setJd] = useState("");
   const [bg, setBg] = useState("");
   const [tone, setTone] = useState<"professional" | "confident" | "friendly" | "concise">("professional");
@@ -84,11 +86,13 @@ export function CVPage() {
       toast.error("Add at least a short job description and a short background.");
       return;
     }
+    if (!(await gate.before())) return;
     setLoading(true); setOut("");
     try {
       const res = await run({ data: { jobDescription: jd, background: bg, tone } });
       setOut(res.text);
-      toast.success("CV generated.");
+      toast.success("CV generated. 🎉");
+      await gate.after();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
       toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited — try again shortly." : "Generation failed");
@@ -143,6 +147,7 @@ export function CVPage() {
                 ))}
               </div>
             </div>
+            <ToolCreditBar tool="cv" />
             <Button onClick={onGenerate} disabled={loading} size="lg" className="w-full rounded-full">
               {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Tailoring your CV…</> : "Generate my CV"}
             </Button>
@@ -207,6 +212,7 @@ export function CVPage() {
 
         </div>
       </section>
+      {gate.gates}
     </SiteShell>
   );
 }

@@ -7,6 +7,7 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { scoreATS } from "@/lib/career.functions";
+import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 
 export const Route = createFileRoute("/ats")({
   head: () => ({
@@ -41,6 +42,7 @@ type Report = {
 
 export function ATSPage() {
   const run = useServerFn(scoreATS);
+  const gate = useToolGate("ats");
   const [jd, setJd] = useState("");
   const [cv, setCv] = useState("");
   const [report, setReport] = useState<Report | null>(null);
@@ -58,11 +60,13 @@ export function ATSPage() {
     }
     const jdPayload = jd.trim().length < 20 ? jd.trim() + "\n\n(Short job description provided by user.)" : jd;
     const cvPayload = cv.trim().length < 20 ? cv.trim() + "\n\n(Brief CV provided by user.)" : cv;
+    if (!(await gate.before())) return;
     setLoading(true); setReport(null);
     try {
       const r = await run({ data: { jobDescription: jdPayload, cv: cvPayload } });
       setReport(r as Report);
-      toast.success("ATS analysis complete.");
+      toast.success("ATS analysis complete. 🎉");
+      await gate.after();
     } catch (e) {
       console.error("ATS scoring error:", e);
       setReport(createLocalATSReport(jdPayload, cvPayload));
@@ -97,6 +101,7 @@ export function ATSPage() {
               <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-2 min-h-[200px]" />
             </div>
           </div>
+          <ToolCreditBar tool="ats" />
           <Button type="submit" disabled={loading} size="lg" className="rounded-full">
             {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : "Score my CV"}
           </Button>
@@ -229,6 +234,7 @@ export function ATSPage() {
           </div>
         )}
       </section>
+      {gate.gates}
     </SiteShell>
   );
 }
