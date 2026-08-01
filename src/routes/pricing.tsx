@@ -4,6 +4,7 @@ import { Check, Crown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
+import { TrustedBy } from "@/components/trusted-by";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useSubscription } from "@/hooks/use-subscription";
@@ -25,26 +26,40 @@ export const Route = createFileRoute("/pricing")({
 });
 
 
+const tools = ["CV Generator", "Cover Letter", "Humanizer", "ATS Optimizer"];
+
 const plans = [
   {
     key: "free",
     name: "Free",
     price: "$0",
-    desc: "Land your first interview.",
-    cta: "Get started",
-    features: ["3 CV generations / month", "3 cover letters / month", "Basic ATS score", "Free prompt library"],
+    desc: "3 generations per month across any tool.",
+    cta: "Get started free",
+    features: [
+      "3 generations / month — use them on any tool",
+      "CV Generator, Cover Letter, Humanizer, ATS Optimizer",
+      "Basic ATS score",
+      "Free prompt library",
+    ],
   },
   {
     key: "premium",
     name: "Premium",
     price: "$9",
     per: "/mo",
-    desc: "Run a real job search.",
+    desc: "Unlimited generations on every tool.",
     highlight: true,
     cta: "Start Premium",
-    features: ["Unlimited CV & cover letter generations", "Full ATS optimizer with rewrites", "Saved CVs, letters & reports", "Entire premium prompt library", "Priority AI models"],
+    features: [
+      "Unlimited CV, cover letter & humanizer runs",
+      "Full ATS optimizer with keyword rewrites",
+      "Saved CVs, letters & reports",
+      "Entire premium prompt library",
+      "Priority AI models",
+    ],
   },
 ];
+
 
 
 
@@ -71,8 +86,17 @@ export function Pricing() {
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
-            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Pay once you're getting interviews.</h1>
-            <p className="mt-4 text-lg text-muted-foreground">Free to try every tool. Upgrade when you're applying for real.</p>
+            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">3 free generations a month. Unlimited on Premium.</h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Every account gets 3 generations per month to spend on any tool. Need more? Premium unlocks unlimited runs.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {tools.map((t) => (
+                <span key={t} className="rounded-full border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+                  {t}
+                </span>
+              ))}
+            </div>
             {sub.isPremium && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
                 <Crown className="h-4 w-4" /> You're on Premium
@@ -80,6 +104,7 @@ export function Pricing() {
               </div>
             )}
           </div>
+
 
           <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
@@ -139,11 +164,31 @@ export function Pricing() {
               />
             </div>
           )}
+          <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-3xl border border-border/70 bg-card">
+            <div className="grid grid-cols-3 border-b border-border/70 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <div>Tool</div>
+              <div className="text-center">Free</div>
+              <div className="text-center">Premium</div>
+            </div>
+            {tools.map((t) => (
+              <div key={t} className="grid grid-cols-3 items-center border-b border-border/50 px-5 py-3.5 text-sm last:border-0">
+                <div className="font-medium">{t}</div>
+                <div className="text-center text-muted-foreground">3 / month (shared)</div>
+                <div className="text-center font-medium">Unlimited</div>
+              </div>
+            ))}
+          </div>
+
           <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted-foreground">
             Cancel anytime. No-questions-asked refunds within 14 days.
           </p>
         </div>
       </section>
+      <TrustedBy
+        ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
+        ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
+      />
     </SiteShell>
   );
+
 }
