@@ -46,5 +46,4 @@ export const brands: { key: string; name: string }[] = [
   { key: "nvidia", name: "NVIDIA" },
   { key: "sap", name: "SAP" },
   { key: "accenture", name: "Accenture" },
-  { key: "uber", name: "Uber" },
 ];
