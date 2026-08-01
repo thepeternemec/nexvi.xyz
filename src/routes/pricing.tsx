@@ -87,7 +87,7 @@ export function Pricing() {
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
-            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">3 free generations a month. Unlimited on Premium.</h1>
+            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Start free. Go unlimited when you're ready.</h1>
             <p className="mt-4 text-lg text-muted-foreground">
               Every account gets 3 generations per month to spend on any tool. Need more? Premium unlocks unlimited runs.
             </p>
