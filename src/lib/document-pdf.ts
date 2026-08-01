@@ -34,9 +34,10 @@ function parse(md: string): Block[] {
   return out;
 }
 
-/** Render markdown-ish CV/letter text as a clean, paginated A4 PDF. */
-export function downloadDocumentPdf(md: string, filename: string) {
+/** Build the paginated A4 PDF document for markdown-ish CV/letter text. */
+export function buildDocumentPdf(md: string) {
   const doc = new jsPDF({ unit: "pt", format: "a4" });
+
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
   const margin = 56;
@@ -94,5 +95,16 @@ export function downloadDocumentPdf(md: string, filename: string) {
     y += lines.length * 13.5 + (b.kind === "li" ? 2 : 5);
   }
 
-  doc.save(filename);
+  return doc;
 }
+
+/** Render markdown-ish CV/letter text as a clean, paginated A4 PDF and download it. */
+export function downloadDocumentPdf(md: string, filename: string) {
+  buildDocumentPdf(md).save(filename);
+}
+
+/** Object URL for an inline PDF preview. Revoke it when done. */
+export function createDocumentPdfUrl(md: string): string {
+  return URL.createObjectURL(buildDocumentPdf(md).output("blob"));
+}
+
