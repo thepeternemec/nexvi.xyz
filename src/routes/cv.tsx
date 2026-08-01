@@ -137,21 +137,45 @@ export function CVPage() {
           </div>
 
           <div className="rounded-3xl border border-border/70 bg-card p-5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="text-sm font-semibold">Your tailored CV</div>
               {out && (
                 <div className="flex flex-wrap items-center gap-1">
+                  <div className="mr-1 flex items-center rounded-full border border-border p-0.5">
+                    {(["document", "pdf"] as const).map((v) => (
+                      <button
+                        key={v}
+                        onClick={() => setView(v)}
+                        className={`rounded-full px-2.5 py-1 text-xs transition ${view === v ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+                      >
+                        {v === "document" ? "Document" : "PDF preview"}
+                      </button>
+                    ))}
+                  </div>
                   <Button size="sm" variant="ghost" onClick={copy} className="gap-1.5 text-xs"><Copy className="h-3.5 w-3.5" /> Copy</Button>
                   <Button size="sm" variant="outline" onClick={downloadPdf} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> Download PDF</Button>
-
                 </div>
               )}
             </div>
-            <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
-              {out ? <DocumentRender text={out} /> : <span className="text-sm text-muted-foreground">Your generated CV will appear here.</span>}
-            </div>
-
+            {out && view === "pdf" ? (
+              <div className="mt-3 overflow-hidden rounded-2xl border border-border/60 bg-muted">
+                {pdfUrl ? (
+                  <iframe src={pdfUrl} title="CV PDF preview" className="h-[720px] w-full" />
+                ) : (
+                  <div className="grid h-[720px] place-items-center text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" /></div>
+                )}
+              </div>
+            ) : (
+              <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
+                {out ? (
+                  <DocumentRender text={out} />
+                ) : (
+                  <span className="flex items-center gap-2 text-sm text-muted-foreground"><Eye className="h-4 w-4" /> Your generated CV will appear here, with a live PDF preview before you download.</span>
+                )}
+              </div>
+            )}
           </div>
+
         </div>
       </section>
     </SiteShell>
