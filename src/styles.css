@@ -155,3 +155,19 @@
     color: transparent;
   }
 }
+
+@keyframes logo-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer utilities {
+  .animate-logo-marquee {
+    animation: logo-marquee 32s linear infinite;
+  }
+  .logo-marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+}
+
