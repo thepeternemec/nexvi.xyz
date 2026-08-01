@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2, FileText, Copy, Download, Eye } from "lucide-react";
 import { toast } from "sonner";
@@ -52,19 +52,31 @@ export function CVPage() {
   const [view, setView] = useState<"document" | "pdf">("document");
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
 
-  // Live PDF preview: rebuild whenever the output or view changes.
+  // Cache the generated blob URL per CV text so toggling views never re-renders the PDF.
+  const pdfCache = useRef<{ text: string; url: string } | null>(null);
+
   useEffect(() => {
-    if (view !== "pdf" || !out) { setPdfUrl(null); return; }
-    let url: string | null = null;
+    if (view !== "pdf" || !out) return;
+    if (pdfCache.current?.text === out) {
+      setPdfUrl(pdfCache.current.url);
+      return;
+    }
     try {
-      url = createDocumentPdfUrl(out);
+      const url = createDocumentPdfUrl(out);
+      if (pdfCache.current) URL.revokeObjectURL(pdfCache.current.url);
+      pdfCache.current = { text: out, url };
       setPdfUrl(url);
     } catch {
       setPdfUrl(null);
       toast.error("PDF preview failed");
     }
-    return () => { if (url) URL.revokeObjectURL(url); };
   }, [out, view]);
+
+  // Revoke the cached blob URL only when the component unmounts.
+  useEffect(() => () => {
+    if (pdfCache.current) URL.revokeObjectURL(pdfCache.current.url);
+    pdfCache.current = null;
+  }, []);
 
 
   async function onGenerate() {
