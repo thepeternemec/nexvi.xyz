@@ -190,5 +190,4 @@ export function Pricing() {
     </SiteShell>
   );
 
-  );
 }
