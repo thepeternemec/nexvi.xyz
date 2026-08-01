@@ -105,6 +105,10 @@ export function Pricing() {
             )}
           </div>
 
+          <TrustedBy
+            ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
+            ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
+          />
 
           <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
@@ -184,10 +188,6 @@ export function Pricing() {
           </p>
         </div>
       </section>
-      <TrustedBy
-        ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
-        ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
-      />
     </SiteShell>
   );
 
