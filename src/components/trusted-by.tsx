@@ -58,10 +58,6 @@ export function TrustedBy({
           </div>
         )}
 
-        <p className="mx-auto mt-8 max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          * We respect user privacy and don't track employment details. The companies shown
-          represent professionals who have chosen our platform for building their resumes.
-        </p>
       </div>
     </section>
   );
