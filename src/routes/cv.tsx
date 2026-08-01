@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
+
 
 
 export const Route = createFileRoute("/cv")({
@@ -71,14 +73,15 @@ export function CVPage() {
       toast.error("Copy failed");
     }
   }
-  function download(kind: "txt" | "md") {
-    const content = kind === "md" ? out : toPlainText(out);
-    const blob = new Blob([content], { type: kind === "md" ? "text/markdown" : "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url; a.download = `tailored-cv.${kind}`; a.click(); URL.revokeObjectURL(url);
-    toast.success(`Downloaded .${kind}`);
+  function downloadPdf() {
+    try {
+      downloadDocumentPdf(out, "tailored-cv.pdf");
+      toast.success("Downloaded PDF");
+    } catch {
+      toast.error("PDF export failed");
+    }
   }
+
 
 
   return (
@@ -121,8 +124,8 @@ export function CVPage() {
               {out && (
                 <div className="flex flex-wrap items-center gap-1">
                   <Button size="sm" variant="ghost" onClick={copy} className="gap-1.5 text-xs"><Copy className="h-3.5 w-3.5" /> Copy</Button>
-                  <Button size="sm" variant="ghost" onClick={() => download("txt")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .txt</Button>
-                  <Button size="sm" variant="ghost" onClick={() => download("md")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .md</Button>
+                  <Button size="sm" variant="outline" onClick={downloadPdf} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> Download PDF</Button>
+
                 </div>
               )}
             </div>
