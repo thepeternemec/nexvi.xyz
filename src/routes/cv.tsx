@@ -7,6 +7,8 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { generateCV } from "@/lib/career.functions";
+import { DocumentRender, toPlainText } from "@/components/document-render";
+
 
 export const Route = createFileRoute("/cv")({
   head: () => ({
