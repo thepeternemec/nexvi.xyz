@@ -1,15 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-
-const companies = [
-  { name: "ServiceNow", className: "font-sans font-semibold tracking-tight" },
-  { name: "Apple", className: "font-sans font-normal tracking-tight" },
-  { name: "Bloomberg", className: "font-sans font-bold tracking-tighter" },
-  { name: "BNP PARIBAS", className: "font-sans font-semibold tracking-wide text-sm" },
-  { name: "Google", className: "font-sans font-normal tracking-tight" },
-  { name: "JPMorganChase", className: "font-serif font-medium tracking-tight" },
-  { name: "Siemens", className: "font-sans font-medium tracking-widest text-sm" },
-];
+import { BrandMark, brands } from "@/components/brand-logos";
 
 export function TrustedBy({
   ctaLabel,
@@ -28,18 +19,21 @@ export function TrustedBy({
         </div>
 
         <div className="logo-marquee-mask group mt-8 overflow-hidden">
-          <div className="animate-logo-marquee flex w-max items-center gap-x-16 opacity-70 grayscale group-hover:[animation-play-state:paused]">
-            {[...companies, ...companies].map((c, i) => (
+          <div className="animate-logo-marquee flex w-max items-center gap-x-14 opacity-70 grayscale group-hover:[animation-play-state:paused]">
+            {[...brands, ...brands].map((b, i) => (
               <span
-                key={`${c.name}-${i}`}
-                className={`shrink-0 whitespace-nowrap text-lg text-foreground/70 ${c.className}`}
-                aria-hidden={i >= companies.length}
+                key={`${b.key}-${i}`}
+                className="flex shrink-0 items-center gap-2 whitespace-nowrap text-foreground/75"
+                aria-hidden={i >= brands.length}
+                title={b.name}
               >
-                {c.name}
+                <BrandMark brand={b.key} className="h-6 w-6" />
+                <span className="text-lg font-semibold tracking-tight">{b.name}</span>
               </span>
             ))}
           </div>
         </div>
+
 
 
         {ctaLabel && (
