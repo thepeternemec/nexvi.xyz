@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { DashboardAccountSections } from "@/components/dashboard-account-sections";
+import { UsageHistory } from "@/components/usage-history";
 
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
