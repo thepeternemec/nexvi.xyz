@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
+import { Button } from "@/components/ui/button";
+import { clearConsent, openCookiePreferences } from "@/lib/cookie-consent";
 
 export const Route = createFileRoute("/cookies")({
   head: () => ({
