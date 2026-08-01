@@ -280,6 +280,22 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
         </div>
       </div>
       <div className="border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <a href={href("/status")} className="inline-flex items-center gap-2 text-slate-300 transition hover:text-white">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            All Systems Operational
+          </a>
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <a href={href("/terms")} className="underline-offset-4 transition hover:text-white hover:underline">Terms &amp; Privacy</a>
+            <a href={href("/sitemap")} className="underline-offset-4 transition hover:text-white hover:underline">Sitemap</a>
+            <a href={href("/cookies")} className="underline-offset-4 transition hover:text-white hover:underline">Cookies</a>
+          </nav>
+        </div>
+      </div>
+      <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-400 sm:flex-row sm:px-6">
           <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers with ❤️ in Berlin</div>
           <div>We help you land your dream jobs in weeks.</div>
