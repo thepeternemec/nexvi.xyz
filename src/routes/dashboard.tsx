@@ -89,7 +89,7 @@ export function Dashboard() {
               <div key={t} className="rounded-2xl border border-border/70 bg-card p-5">
                 <div className="text-xs text-muted-foreground">{TOOL_META[t].plural}</div>
                 <div className="font-display mt-2 text-3xl tracking-tight tabular-nums">
-                  {usage.isPremium ? "∞" : `${left} / ${limit}`}
+                  {usage.isPremium ? `${usage.used[t]} used` : `${left} / ${limit}`}
                 </div>
                 <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-muted">
                   <div
