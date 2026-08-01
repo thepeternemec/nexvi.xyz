@@ -49,6 +49,23 @@ export function CVPage() {
   const [tone, setTone] = useState<"professional" | "confident" | "friendly" | "concise">("professional");
   const [out, setOut] = useState("");
   const [loading, setLoading] = useState(false);
+  const [view, setView] = useState<"document" | "pdf">("document");
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+
+  // Live PDF preview: rebuild whenever the output or view changes.
+  useEffect(() => {
+    if (view !== "pdf" || !out) { setPdfUrl(null); return; }
+    let url: string | null = null;
+    try {
+      url = createDocumentPdfUrl(out);
+      setPdfUrl(url);
+    } catch {
+      setPdfUrl(null);
+      toast.error("PDF preview failed");
+    }
+    return () => { if (url) URL.revokeObjectURL(url); };
+  }, [out, view]);
+
 
   async function onGenerate() {
     if (jd.trim().length < 20 || bg.trim().length < 20) {
