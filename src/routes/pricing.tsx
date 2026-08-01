@@ -85,8 +85,17 @@ export function Pricing() {
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
             <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
-            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Pay once you're getting interviews.</h1>
-            <p className="mt-4 text-lg text-muted-foreground">Free to try every tool. Upgrade when you're applying for real.</p>
+            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">3 free generations a month. Unlimited on Premium.</h1>
+            <p className="mt-4 text-lg text-muted-foreground">
+              Every account gets 3 generations per month to spend on any tool. Need more? Premium unlocks unlimited runs.
+            </p>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {tools.map((t) => (
+                <span key={t} className="rounded-full border border-border/70 bg-card px-3 py-1 text-xs text-muted-foreground">
+                  {t}
+                </span>
+              ))}
+            </div>
             {sub.isPremium && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
                 <Crown className="h-4 w-4" /> You're on Premium
@@ -94,6 +103,7 @@ export function Pricing() {
               </div>
             )}
           </div>
+
 
           <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
