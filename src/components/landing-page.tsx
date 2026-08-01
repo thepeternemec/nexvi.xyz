@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
 import { prompts, categories } from "@/lib/mock-data";
+import { TrustedBy } from "@/components/trusted-by";
+
 
 const ICONS = [Library, FileText, Mail, Target, Wand2];
 
@@ -85,6 +87,10 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
           </div>
         </div>
       </section>
+
+      <TrustedBy />
+
+
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
