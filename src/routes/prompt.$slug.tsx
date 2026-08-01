@@ -175,8 +175,9 @@ export function PromptDetail() {
                   <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {locked ? "Free preview" : "The prompt"}
                   </div>
-                  <Button size="sm" onClick={onCopy} className="rounded-full">
-                    {locked ? <><Lock className="mr-1.5 h-3.5 w-3.5" /> Locked</>
+                  <Button size="sm" onClick={onCopy} disabled={subLoading} className="rounded-full">
+                    {subLoading ? "Loading…"
+                      : locked ? <><Lock className="mr-1.5 h-3.5 w-3.5" /> Locked</>
                       : copied ? <><Check className="mr-1.5 h-3.5 w-3.5" /> Copied</>
                       : <><Copy className="mr-1.5 h-3.5 w-3.5" /> Copy prompt</>}
                   </Button>
