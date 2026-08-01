@@ -428,6 +428,13 @@ const rawPrompts: Prompt[] = [
   },
 ];
 
+export const prompts: Prompt[] = rawPrompts.map(p => ({
+  ...p,
+  pack: packByCategory[p.category] ?? p.pack,
+}));
+
+
+
 export const reviews = [
   { id: "r1", promptId: "p1", author: "Jamie L.", avatar: "JL", rating: 5, body: "3 interviews in 2 weeks after using this. The bullets finally sound like real impact.", date: "2 weeks ago" },
   { id: "r2", promptId: "p1", author: "Priya S.", avatar: "PS", rating: 5, body: "Got me past the ATS for the first time in months. Worth every minute.", date: "1 month ago" },
