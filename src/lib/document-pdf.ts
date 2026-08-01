@@ -98,13 +98,33 @@ export function buildDocumentPdf(md: string) {
   return doc;
 }
 
-/** Render markdown-ish CV/letter text as a clean, paginated A4 PDF and download it. */
+/**
+ * Render markdown-ish CV/letter text as a clean, paginated A4 PDF and download it.
+ * Uses an explicit anchor click (works inside sandboxed preview iframes) and falls
+ * back to opening the PDF in a new tab when downloads are blocked.
+ */
 export function downloadDocumentPdf(md: string, filename: string) {
-  buildDocumentPdf(md).save(filename);
+  const blob = buildDocumentPdf(md).output("blob");
+  const url = URL.createObjectURL(blob);
+  try {
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.rel = "noopener";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  } catch {
+    window.open(url, "_blank", "noopener");
+  }
+  // Give the browser time to start the download before revoking.
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
 /** Object URL for an inline PDF preview. Revoke it when done. */
 export function createDocumentPdfUrl(md: string): string {
   return URL.createObjectURL(buildDocumentPdf(md).output("blob"));
 }
+
 

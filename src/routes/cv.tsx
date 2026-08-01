@@ -158,14 +158,31 @@ export function CVPage() {
               )}
             </div>
             {out && view === "pdf" ? (
-              <div className="mt-3 overflow-hidden rounded-2xl border border-border/60 bg-muted">
-                {pdfUrl ? (
-                  <iframe src={pdfUrl} title="CV PDF preview" className="h-[720px] w-full" />
-                ) : (
-                  <div className="grid h-[720px] place-items-center text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" /></div>
+              <div className="mt-3 space-y-2">
+                <div className="overflow-hidden rounded-2xl border border-border/60 bg-muted">
+                  {pdfUrl ? (
+                    <object data={pdfUrl} type="application/pdf" className="h-[720px] w-full">
+                      <div className="grid h-[720px] place-items-center px-6 text-center text-sm text-muted-foreground">
+                        Your browser can’t display PDFs inline here. Open it in a new tab or download it.
+                      </div>
+                    </object>
+                  ) : (
+                    <div className="grid h-[720px] place-items-center text-sm text-muted-foreground"><Loader2 className="h-4 w-4 animate-spin" /></div>
+                  )}
+                </div>
+                {pdfUrl && (
+                  <a
+                    href={pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-xs text-muted-foreground underline hover:text-foreground"
+                  >
+                    Open PDF in a new tab
+                  </a>
                 )}
               </div>
             ) : (
+
               <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
                 {out ? (
                   <DocumentRender text={out} />
