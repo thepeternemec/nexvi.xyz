@@ -163,11 +163,32 @@ export function Pricing() {
               />
             </div>
           )}
+          <div className="mx-auto mt-16 max-w-3xl overflow-hidden rounded-3xl border border-border/70 bg-card">
+            <div className="grid grid-cols-3 border-b border-border/70 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <div>Tool</div>
+              <div className="text-center">Free</div>
+              <div className="text-center">Premium</div>
+            </div>
+            {tools.map((t) => (
+              <div key={t} className="grid grid-cols-3 items-center border-b border-border/50 px-5 py-3.5 text-sm last:border-0">
+                <div className="font-medium">{t}</div>
+                <div className="text-center text-muted-foreground">3 / month (shared)</div>
+                <div className="text-center font-medium">Unlimited</div>
+              </div>
+            ))}
+          </div>
+
           <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted-foreground">
             Cancel anytime. No-questions-asked refunds within 14 days.
           </p>
         </div>
       </section>
+      <TrustedBy
+        ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
+        ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
+      />
     </SiteShell>
+  );
+
   );
 }
