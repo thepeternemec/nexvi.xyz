@@ -251,23 +251,19 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                 <Search className="h-4 w-4" /> "prompts that actually land interviews"
               </div>
               <div className="mt-4 grid gap-3">
-                {[
-                  { tag: "CV", title: "Tailored CV for any job description", meta: "Free", slug: "tailored-cv-for-any-job-description" },
-                  { tag: "Cover Letter", title: "Cover letter that sounds human", meta: "Free", slug: "personalized-cover-letter-that-sounds-human" },
-                  { tag: "ATS", title: "ATS keyword gap analyzer", meta: "Premium", slug: "ats-keyword-gap-analyzer" },
-                  { tag: "Interview", title: "STAR interview stories from your CV", meta: "Premium", slug: "star-method-interview-stories" },
-                  { tag: "Outreach", title: "Recruiter cold message that gets replies", meta: "Free", slug: "recruiter-cold-message-that-gets-replies" },
-                  { tag: "Negotiation", title: "Salary counter-offer script", meta: "Premium", slug: "salary-negotiation-counter-offer-script" },
-                ].map((p) => (
-                  <a key={p.slug} href={href(`/prompt/${p.slug}`)} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
-                    <div>
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{p.tag}</div>
-                      <div className="text-sm font-medium">{p.title}</div>
+                {featured.map((p) => (
+                  <a key={p.slug} href={href(`/prompt/${p.slug}`)} className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
+                    <div className="min-w-0">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        {categories.find((c2) => c2.slug === p.category)?.name ?? p.category}
+                      </div>
+                      <div className="truncate text-sm font-medium">{p.title}</div>
                     </div>
-                    <div className="text-xs text-muted-foreground">{p.meta}</div>
+                    <div className="shrink-0 text-xs text-muted-foreground">{p.price === 0 ? "Free" : "Premium"}</div>
                   </a>
                 ))}
               </div>
+
             </div>
           </div>
         </div>
