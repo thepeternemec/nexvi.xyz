@@ -124,8 +124,8 @@ export function CVPage() {
               {out && (
                 <div className="flex flex-wrap items-center gap-1">
                   <Button size="sm" variant="ghost" onClick={copy} className="gap-1.5 text-xs"><Copy className="h-3.5 w-3.5" /> Copy</Button>
-                  <Button size="sm" variant="ghost" onClick={() => download("txt")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .txt</Button>
-                  <Button size="sm" variant="ghost" onClick={() => download("md")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .md</Button>
+                  <Button size="sm" variant="outline" onClick={downloadPdf} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> Download PDF</Button>
+
                 </div>
               )}
             </div>
