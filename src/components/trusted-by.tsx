@@ -27,16 +27,20 @@ export function TrustedBy({
           Trusted by professionals from
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-70 grayscale">
-          {companies.map((c) => (
-            <span
-              key={c.name}
-              className={`text-lg text-foreground/70 transition-opacity hover:opacity-100 ${c.className}`}
-            >
-              {c.name}
-            </span>
-          ))}
+        <div className="logo-marquee-mask group mt-8 overflow-hidden">
+          <div className="animate-logo-marquee flex w-max items-center gap-x-16 opacity-70 grayscale group-hover:[animation-play-state:paused]">
+            {[...companies, ...companies].map((c, i) => (
+              <span
+                key={`${c.name}-${i}`}
+                className={`shrink-0 whitespace-nowrap text-lg text-foreground/70 ${c.className}`}
+                aria-hidden={i >= companies.length}
+              >
+                {c.name}
+              </span>
+            ))}
+          </div>
         </div>
+
 
         {ctaLabel && (
           <div className="mt-10">
