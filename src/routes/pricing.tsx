@@ -25,26 +25,40 @@ export const Route = createFileRoute("/pricing")({
 });
 
 
+const tools = ["CV Generator", "Cover Letter", "Humanizer", "ATS Optimizer"];
+
 const plans = [
   {
     key: "free",
     name: "Free",
     price: "$0",
-    desc: "Land your first interview.",
-    cta: "Get started",
-    features: ["3 CV generations / month", "3 cover letters / month", "Basic ATS score", "Free prompt library"],
+    desc: "3 generations per month across any tool.",
+    cta: "Get started free",
+    features: [
+      "3 generations / month — use them on any tool",
+      "CV Generator, Cover Letter, Humanizer, ATS Optimizer",
+      "Basic ATS score",
+      "Free prompt library",
+    ],
   },
   {
     key: "premium",
     name: "Premium",
     price: "$9",
     per: "/mo",
-    desc: "Run a real job search.",
+    desc: "Unlimited generations on every tool.",
     highlight: true,
     cta: "Start Premium",
-    features: ["Unlimited CV & cover letter generations", "Full ATS optimizer with rewrites", "Saved CVs, letters & reports", "Entire premium prompt library", "Priority AI models"],
+    features: [
+      "Unlimited CV, cover letter & humanizer runs",
+      "Full ATS optimizer with keyword rewrites",
+      "Saved CVs, letters & reports",
+      "Entire premium prompt library",
+      "Priority AI models",
+    ],
   },
 ];
+
 
 
 
