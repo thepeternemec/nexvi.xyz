@@ -188,10 +188,6 @@ export function Pricing() {
           </p>
         </div>
       </section>
-      <TrustedBy
-        ctaLabel={sub.isPremium ? "Open your dashboard" : "Start free — 3 generations"}
-        ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
-      />
     </SiteShell>
   );
 
