@@ -70,11 +70,31 @@ export type Pack = {
 
 export const packs: Pack[] = [
   { slug: "jd-alignment", name: "JD Alignment Pack", emoji: "🎯", description: "Match your CV line-by-line to any job description" },
-  { slug: "cover-letter-lab", name: "Cover Letter Lab", emoji: "✉️", description: "Cover letters, follow-ups and thank-you notes that land" },
+  { slug: "cover-letter-lab", name: "Cover Letter Lab", emoji: "✉️", description: "Cover letters that land — for every application box" },
   { slug: "ats-audit", name: "ATS Audit Pack", emoji: "🤖", description: "Scores, keyword gaps and parser-safe rewrites" },
-  { slug: "interview-sprint", name: "Interview Sprint", emoji: "🎤", description: "Stories, mock questions and closing scripts" },
+  { slug: "interview-sprint", name: "Interview Sprint", emoji: "🎤", description: "Stories, mock questions and offer negotiation scripts" },
   { slug: "career-switch", name: "Career Switch Kit", emoji: "🔄", description: "Reposition your experience for a new industry" },
+  { slug: "outreach-referrals", name: "Outreach & Referrals", emoji: "🤝", description: "Recruiter messages, follow-ups and warm intros" },
+  { slug: "profile-brand", name: "Profile & Personal Brand", emoji: "💼", description: "LinkedIn, portfolio and personal brand positioning" },
 ];
+
+// Every prompt belongs to the pack that matches its category, so pack filters
+// and category always agree.
+const packByCategory: Record<string, string> = {
+  cv: "jd-alignment",
+  grad: "jd-alignment",
+  "cover-letter": "cover-letter-lab",
+  ats: "ats-audit",
+  interview: "interview-sprint",
+  negotiation: "interview-sprint",
+  "career-change": "career-switch",
+  outreach: "outreach-referrals",
+  networking: "outreach-referrals",
+  linkedin: "profile-brand",
+  portfolio: "profile-brand",
+  "personal-brand": "profile-brand",
+};
+
 
 const g = [
   // Interview prep — deep indigo dusk
