@@ -434,6 +434,33 @@ export type Database = {
         }
         Relationships: []
       }
+      usage_events: {
+        Row: {
+          counted_against_free: boolean
+          created_at: string
+          id: string
+          plan: string
+          tool: string
+          user_id: string
+        }
+        Insert: {
+          counted_against_free?: boolean
+          created_at?: string
+          id?: string
+          plan?: string
+          tool: string
+          user_id: string
+        }
+        Update: {
+          counted_against_free?: boolean
+          created_at?: string
+          id?: string
+          plan?: string
+          tool?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_documents: {
         Row: {
           created_at: string
