@@ -54,7 +54,9 @@ export function useUsage() {
   useEffect(() => {
     const l = () => force((n) => n + 1);
     listeners.add(l);
-    return () => listeners.delete(l);
+    return () => {
+      listeners.delete(l);
+    };
   }, []);
 
   const refresh = useCallback(async () => {
