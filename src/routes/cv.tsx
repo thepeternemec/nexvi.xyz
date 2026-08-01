@@ -119,15 +119,17 @@ export function CVPage() {
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold">Your tailored CV</div>
               {out && (
-                <div className="flex gap-1">
-                  <Button size="sm" variant="ghost" onClick={copy}><Copy className="h-4 w-4" /></Button>
-                  <Button size="sm" variant="ghost" onClick={download}><Download className="h-4 w-4" /></Button>
+                <div className="flex flex-wrap items-center gap-1">
+                  <Button size="sm" variant="ghost" onClick={copy} className="gap-1.5 text-xs"><Copy className="h-3.5 w-3.5" /> Copy</Button>
+                  <Button size="sm" variant="ghost" onClick={() => download("txt")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .txt</Button>
+                  <Button size="sm" variant="ghost" onClick={() => download("md")} className="gap-1.5 text-xs"><Download className="h-3.5 w-3.5" /> .md</Button>
                 </div>
               )}
             </div>
-            <div className="mt-3 min-h-[400px] whitespace-pre-wrap rounded-2xl bg-muted/30 p-4 font-mono text-xs leading-relaxed">
-              {out || <span className="text-muted-foreground">Your generated CV will appear here.</span>}
+            <div className="mt-3 min-h-[400px] rounded-2xl border border-border/60 bg-background p-6">
+              {out ? <DocumentRender text={out} /> : <span className="text-sm text-muted-foreground">Your generated CV will appear here.</span>}
             </div>
+
           </div>
         </div>
       </section>
