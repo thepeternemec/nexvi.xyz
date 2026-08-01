@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { Toaster } from "@/components/ui/sonner";
 import { UpgradeDialog } from "@/components/upgrade-dialog";
+import { CookieConsentBanner } from "@/components/cookie-consent";
 import { getInitialThemeScript } from "@/hooks/use-theme";
 import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
 import { LocaleProvider } from "@/lib/locale-context";
@@ -152,6 +153,8 @@ function RootComponent() {
           <AutoTranslate />
           <Outlet />
           <UpgradeDialog />
+          <CookieConsentBanner />
+
           <Toaster richColors position="top-center" />
 
         </TranslationProvider>

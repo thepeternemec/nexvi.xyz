@@ -4,6 +4,7 @@ import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, Layo
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
 import { NavCredits } from "@/components/nav-credits";
+import { openCookiePreferences } from "@/lib/cookie-consent";
 
 function XLogo({ className }: { className?: string }) {
   return (
@@ -292,6 +293,13 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <a href={href("/terms")} className="underline-offset-4 transition hover:text-white hover:underline">Terms &amp; Privacy</a>
             <a href={href("/sitemap")} className="underline-offset-4 transition hover:text-white hover:underline">Sitemap</a>
             <a href={href("/cookies")} className="underline-offset-4 transition hover:text-white hover:underline">Cookies</a>
+            <button
+              type="button"
+              onClick={() => openCookiePreferences()}
+              className="underline-offset-4 transition hover:text-white hover:underline"
+            >
+              Cookie settings
+            </button>
           </nav>
         </div>
       </div>

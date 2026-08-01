@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteShell } from "@/components/site-shell";
+import { Button } from "@/components/ui/button";
+import { clearConsent, openCookiePreferences } from "@/lib/cookie-consent";
 
 export const Route = createFileRoute("/cookies")({
   head: () => ({
@@ -59,11 +61,27 @@ function CookiesPage() {
 
         <h2 className="mt-10 text-lg font-semibold tracking-tight">Managing cookies</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          You can clear or block cookies in your browser settings at any time. Blocking essential cookies will sign you
+          You can update your consent at any time — your choice is stored on this device and reused on future visits.
+          You can also clear or block cookies in your browser settings. Blocking essential cookies will sign you
           out and reset your theme and language preferences. For anything else, see our{" "}
           <a className="underline hover:text-foreground" href="/terms">Terms &amp; Privacy</a> page or email{" "}
           <a className="underline hover:text-foreground" href="mailto:hello@applywise.eu">hello@applywise.eu</a>.
         </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Button size="sm" onClick={() => openCookiePreferences()}>
+            Manage cookie preferences
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => {
+              clearConsent();
+              openCookiePreferences();
+            }}
+          >
+            Reset my choice
+          </Button>
+        </div>
       </div>
     </SiteShell>
   );
