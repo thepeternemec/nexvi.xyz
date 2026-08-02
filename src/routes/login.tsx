@@ -12,10 +12,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import {
   AlertCircle,
+  ArrowRight,
+  Check,
   KeyRound,
   LogIn,
   Mail,
   RotateCcw,
+  ShieldCheck,
 } from "lucide-react";
 
 type LoginSearch = { next?: string };
@@ -208,33 +211,76 @@ export function AuthShell({
       ? "Enter your email and we'll send you a link to reset your password."
       : subtitle;
 
+  const perks = signup
+    ? [
+        "Tailored CVs scored against the real job description",
+        "ATS keyword coverage and formatting checks",
+        "Cover letters and Humanizer included, free to start",
+      ]
+    : [
+        "Pick up your saved prompts and documents",
+        "Track your ATS scores over time",
+        "Credits and plan usage in one dashboard",
+      ];
+
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="relative hidden overflow-hidden bg-aurora lg:block">
-        <div className="absolute inset-0 bg-grain opacity-50" />
-        <div className="relative flex h-full flex-col justify-between p-12">
-          <a href={href("/")} className="flex items-center gap-2">
-            <span className="font-display text-xl">ApplyWise</span>
+    <div className="grid min-h-screen lg:grid-cols-[1.05fr_1fr]">
+      {/* Left: Stripe-style signal panel */}
+      <div className="relative hidden overflow-hidden border-r border-border/60 lg:block">
+        <div className="absolute inset-0 -z-10 bg-signal" />
+        <div className="absolute inset-0 -z-10 bg-grid opacity-[0.55] mask-fade-b" />
+        <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
+          <a href={href("/")} className="inline-flex items-center gap-2">
+            <span className="font-display text-lg tracking-tight">ApplyWise</span>
           </a>
-          <div>
-            <h2 className="font-display text-5xl leading-tight tracking-tight">
-              AI prompts that help you actually land the job.
+
+          <div className="max-w-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[11px] font-medium tracking-wide text-muted-foreground backdrop-blur">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+              </span>
+              Built on the latest Claude &amp; GPT models
+            </div>
+            <h2 className="mt-6 font-display text-[2.75rem] leading-[1.05] tracking-tight">
+              Align your CV to the job,
+              <br />
+              <span className="text-gradient">not to a template.</span>
             </h2>
-            <p className="mt-4 max-w-md text-muted-foreground">
-              Loved by 50,000+ candidates preparing tailored CVs, cover
-              letters, and interviews.
-            </p>
+            <ul className="mt-8 space-y-3">
+              {perks.map((p) => (
+                <li key={p} className="flex items-start gap-3 text-sm text-muted-foreground">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/10 text-primary">
+                    <Check className="h-3 w-3" />
+                  </span>
+                  {p}
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="text-xs text-muted-foreground">© ApplyWise</div>
+
+          <div className="flex items-center justify-between border-t border-border/60 pt-6 text-xs text-muted-foreground">
+            <span>© ApplyWise</span>
+            <span className="inline-flex items-center gap-1.5">
+              <ShieldCheck className="h-3.5 w-3.5" />
+              Encrypted &amp; private by default
+            </span>
+          </div>
         </div>
       </div>
-      <div className="flex items-center justify-center p-6 sm:p-10">
-        <div className="w-full max-w-sm">
+
+      {/* Right: form */}
+      <div className="relative flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-[26rem]">
           <a href={href("/")} className="mb-8 inline-flex items-center gap-2 lg:hidden">
-            <span className="font-display text-xl">ApplyWise</span>
+            <span className="font-display text-xl tracking-tight">ApplyWise</span>
           </a>
-          <h1 className="font-display text-4xl tracking-tight">{pageTitle}</h1>
-          <p className="mt-2 text-sm text-muted-foreground">{pageSubtitle}</p>
+          <div className="rounded-2xl border border-border/70 bg-card/70 p-7 shadow-[0_24px_60px_-40px_color-mix(in_oklab,var(--primary)_45%,transparent)] backdrop-blur-xl sm:p-8">
+            <h1 className="font-display text-3xl tracking-tight">{pageTitle}</h1>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {pageSubtitle}
+            </p>
+
 
           {existingAccount ? (
             <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
@@ -419,26 +465,36 @@ export function AuthShell({
                 type="submit"
                 size="lg"
                 disabled={loading}
-                className="w-full rounded-full"
+                className="cta-sheen w-full rounded-full"
               >
                 {loading ? "Please wait…" : cta}
+                {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
               </Button>
             </form>
           )}
 
-          {!existingAccount && !showVerify && mode === "auth" && (
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              {alt}{" "}
-              <a
-                href={`${href(altLink)}?next=${encodeURIComponent(nextPath)}`}
-                className="font-medium text-foreground hover:underline"
-              >
-                {altCta}
-              </a>
-            </p>
-          )}
+            {!existingAccount && !showVerify && mode === "auth" && (
+              <p className="mt-6 border-t border-border/60 pt-5 text-center text-sm text-muted-foreground">
+                {alt}{" "}
+                <a
+                  href={`${href(altLink)}?next=${encodeURIComponent(nextPath)}`}
+                  className="font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {altCta}
+                </a>
+              </p>
+            )}
+          </div>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            By continuing you agree to our{" "}
+            <a href={href("/terms")} className="underline underline-offset-4 hover:text-foreground">
+              Terms &amp; Privacy
+            </a>
+            .
+          </p>
         </div>
       </div>
     </div>
+
   );
 }
