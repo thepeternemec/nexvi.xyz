@@ -245,6 +245,35 @@ export function ATSPage() {
               )}
             </div>
 
+            {/* Rebuild CTA — shown when the score won't clear a screener */}
+            {report.score < 80 && (
+              <div className="overflow-hidden rounded-2xl border border-primary/25 bg-[linear-gradient(135deg,rgba(79,70,229,0.10),rgba(34,211,238,0.08))] p-6 sm:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-6">
+                  <div className="max-w-2xl">
+                    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-primary">
+                      <Sparkles className="h-3.5 w-3.5" /> {report.score < 60 ? "Low ATS score" : "Borderline ATS score"}
+                    </div>
+                    <h3 className="mt-2 font-display text-[1.35rem] leading-tight tracking-tight sm:text-[1.6rem]">
+                      Low score? Don't edit line by line — <em className="not-italic text-primary">rebuild it.</em>
+                    </h3>
+                    <p className="mt-2 text-[14px] leading-relaxed text-muted-foreground">
+                      Patching single bullets rarely moves the score. Regenerate the whole CV against this exact job description so the
+                      missing keywords, structure and phrasing are aligned in one pass — then re-scan it here.
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Button asChild size="lg" className="rounded-full">
+                      <Link to="/cv">Rebuild my CV</Link>
+                    </Button>
+                    <Button asChild size="lg" variant="outline" className="rounded-full">
+                      <Link to="/cover-letter">Rebuild cover letter</Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+
             {/* Fix recommendations */}
             {fixes.length > 0 && (
               <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_0_rgba(15,23,64,0.06)]">
