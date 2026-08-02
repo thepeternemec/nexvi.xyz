@@ -465,26 +465,36 @@ export function AuthShell({
                 type="submit"
                 size="lg"
                 disabled={loading}
-                className="w-full rounded-full"
+                className="cta-sheen w-full rounded-full"
               >
                 {loading ? "Please wait…" : cta}
+                {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
               </Button>
             </form>
           )}
 
-          {!existingAccount && !showVerify && mode === "auth" && (
-            <p className="mt-6 text-center text-sm text-muted-foreground">
-              {alt}{" "}
-              <a
-                href={`${href(altLink)}?next=${encodeURIComponent(nextPath)}`}
-                className="font-medium text-foreground hover:underline"
-              >
-                {altCta}
-              </a>
-            </p>
-          )}
+            {!existingAccount && !showVerify && mode === "auth" && (
+              <p className="mt-6 border-t border-border/60 pt-5 text-center text-sm text-muted-foreground">
+                {alt}{" "}
+                <a
+                  href={`${href(altLink)}?next=${encodeURIComponent(nextPath)}`}
+                  className="font-medium text-foreground underline-offset-4 hover:underline"
+                >
+                  {altCta}
+                </a>
+              </p>
+            )}
+          </div>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            By continuing you agree to our{" "}
+            <a href={href("/terms")} className="underline underline-offset-4 hover:text-foreground">
+              Terms &amp; Privacy
+            </a>
+            .
+          </p>
         </div>
       </div>
     </div>
+
   );
 }
