@@ -117,6 +117,11 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   const locale = useActiveLocale(explicitLocale);
   const [open, setOpen] = useState(false);
   const href = (p: string) => alternateHref(locale, p);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const barePath = (() => {
+    const m = pathname.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
+    return m ? (m[2] || "/") : pathname || "/";
+  })();
   const { isAuthenticated } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
