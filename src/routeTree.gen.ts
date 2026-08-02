@@ -42,63 +42,99 @@ import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
+import { Route as ItVerifyEmailRouteImport } from './routes/it/verify-email'
+import { Route as ItTermsRouteImport } from './routes/it/terms'
+import { Route as ItSubscriptionRouteImport } from './routes/it/subscription'
+import { Route as ItStatusRouteImport } from './routes/it/status'
+import { Route as ItSitemapRouteImport } from './routes/it/sitemap'
 import { Route as ItSignupRouteImport } from './routes/it/signup'
 import { Route as ItResetPasswordRouteImport } from './routes/it/reset-password'
 import { Route as ItPricingRouteImport } from './routes/it/pricing'
 import { Route as ItMarketplaceRouteImport } from './routes/it/marketplace'
 import { Route as ItLoginRouteImport } from './routes/it/login'
 import { Route as ItLibraryRouteImport } from './routes/it/library'
+import { Route as ItHumanizerRouteImport } from './routes/it/humanizer'
 import { Route as ItDashboardRouteImport } from './routes/it/dashboard'
 import { Route as ItCvRouteImport } from './routes/it/cv'
 import { Route as ItCreatorsRouteImport } from './routes/it/creators'
 import { Route as ItCreatorRouteImport } from './routes/it/creator'
 import { Route as ItCoverLetterRouteImport } from './routes/it/cover-letter'
+import { Route as ItCookiesRouteImport } from './routes/it/cookies'
 import { Route as ItBundlesRouteImport } from './routes/it/bundles'
 import { Route as ItAtsRouteImport } from './routes/it/ats'
 import { Route as ItAssistantRouteImport } from './routes/it/assistant'
+import { Route as ItAccountRouteImport } from './routes/it/account'
+import { Route as ItAboutRouteImport } from './routes/it/about'
 import { Route as GuidesHowToWriteAResumeRouteImport } from './routes/guides/how-to-write-a-resume'
+import { Route as FrVerifyEmailRouteImport } from './routes/fr/verify-email'
+import { Route as FrTermsRouteImport } from './routes/fr/terms'
+import { Route as FrSubscriptionRouteImport } from './routes/fr/subscription'
+import { Route as FrStatusRouteImport } from './routes/fr/status'
+import { Route as FrSitemapRouteImport } from './routes/fr/sitemap'
 import { Route as FrSignupRouteImport } from './routes/fr/signup'
 import { Route as FrResetPasswordRouteImport } from './routes/fr/reset-password'
 import { Route as FrPricingRouteImport } from './routes/fr/pricing'
 import { Route as FrMarketplaceRouteImport } from './routes/fr/marketplace'
 import { Route as FrLoginRouteImport } from './routes/fr/login'
 import { Route as FrLibraryRouteImport } from './routes/fr/library'
+import { Route as FrHumanizerRouteImport } from './routes/fr/humanizer'
 import { Route as FrDashboardRouteImport } from './routes/fr/dashboard'
 import { Route as FrCvRouteImport } from './routes/fr/cv'
 import { Route as FrCreatorsRouteImport } from './routes/fr/creators'
 import { Route as FrCreatorRouteImport } from './routes/fr/creator'
 import { Route as FrCoverLetterRouteImport } from './routes/fr/cover-letter'
+import { Route as FrCookiesRouteImport } from './routes/fr/cookies'
 import { Route as FrBundlesRouteImport } from './routes/fr/bundles'
 import { Route as FrAtsRouteImport } from './routes/fr/ats'
 import { Route as FrAssistantRouteImport } from './routes/fr/assistant'
+import { Route as FrAccountRouteImport } from './routes/fr/account'
+import { Route as FrAboutRouteImport } from './routes/fr/about'
+import { Route as EsVerifyEmailRouteImport } from './routes/es/verify-email'
+import { Route as EsTermsRouteImport } from './routes/es/terms'
+import { Route as EsSubscriptionRouteImport } from './routes/es/subscription'
+import { Route as EsStatusRouteImport } from './routes/es/status'
+import { Route as EsSitemapRouteImport } from './routes/es/sitemap'
 import { Route as EsSignupRouteImport } from './routes/es/signup'
 import { Route as EsResetPasswordRouteImport } from './routes/es/reset-password'
 import { Route as EsPricingRouteImport } from './routes/es/pricing'
 import { Route as EsMarketplaceRouteImport } from './routes/es/marketplace'
 import { Route as EsLoginRouteImport } from './routes/es/login'
 import { Route as EsLibraryRouteImport } from './routes/es/library'
+import { Route as EsHumanizerRouteImport } from './routes/es/humanizer'
 import { Route as EsDashboardRouteImport } from './routes/es/dashboard'
 import { Route as EsCvRouteImport } from './routes/es/cv'
 import { Route as EsCreatorsRouteImport } from './routes/es/creators'
 import { Route as EsCreatorRouteImport } from './routes/es/creator'
 import { Route as EsCoverLetterRouteImport } from './routes/es/cover-letter'
+import { Route as EsCookiesRouteImport } from './routes/es/cookies'
 import { Route as EsBundlesRouteImport } from './routes/es/bundles'
 import { Route as EsAtsRouteImport } from './routes/es/ats'
 import { Route as EsAssistantRouteImport } from './routes/es/assistant'
+import { Route as EsAccountRouteImport } from './routes/es/account'
+import { Route as EsAboutRouteImport } from './routes/es/about'
+import { Route as DeVerifyEmailRouteImport } from './routes/de/verify-email'
+import { Route as DeTermsRouteImport } from './routes/de/terms'
+import { Route as DeSubscriptionRouteImport } from './routes/de/subscription'
+import { Route as DeStatusRouteImport } from './routes/de/status'
+import { Route as DeSitemapRouteImport } from './routes/de/sitemap'
 import { Route as DeSignupRouteImport } from './routes/de/signup'
 import { Route as DeResetPasswordRouteImport } from './routes/de/reset-password'
 import { Route as DePricingRouteImport } from './routes/de/pricing'
 import { Route as DeMarketplaceRouteImport } from './routes/de/marketplace'
 import { Route as DeLoginRouteImport } from './routes/de/login'
 import { Route as DeLibraryRouteImport } from './routes/de/library'
+import { Route as DeHumanizerRouteImport } from './routes/de/humanizer'
 import { Route as DeDashboardRouteImport } from './routes/de/dashboard'
 import { Route as DeCvRouteImport } from './routes/de/cv'
 import { Route as DeCreatorsRouteImport } from './routes/de/creators'
 import { Route as DeCreatorRouteImport } from './routes/de/creator'
 import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
+import { Route as DeCookiesRouteImport } from './routes/de/cookies'
 import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
+import { Route as DeAccountRouteImport } from './routes/de/account'
+import { Route as DeAboutRouteImport } from './routes/de/about'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -277,6 +313,31 @@ const PromptSlugRoute = PromptSlugRouteImport.update({
   path: '/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItVerifyEmailRoute = ItVerifyEmailRouteImport.update({
+  id: '/it/verify-email',
+  path: '/it/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItTermsRoute = ItTermsRouteImport.update({
+  id: '/it/terms',
+  path: '/it/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItSubscriptionRoute = ItSubscriptionRouteImport.update({
+  id: '/it/subscription',
+  path: '/it/subscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItStatusRoute = ItStatusRouteImport.update({
+  id: '/it/status',
+  path: '/it/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItSitemapRoute = ItSitemapRouteImport.update({
+  id: '/it/sitemap',
+  path: '/it/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItSignupRoute = ItSignupRouteImport.update({
   id: '/it/signup',
   path: '/it/signup',
@@ -307,6 +368,11 @@ const ItLibraryRoute = ItLibraryRouteImport.update({
   path: '/it/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItHumanizerRoute = ItHumanizerRouteImport.update({
+  id: '/it/humanizer',
+  path: '/it/humanizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItDashboardRoute = ItDashboardRouteImport.update({
   id: '/it/dashboard',
   path: '/it/dashboard',
@@ -332,6 +398,11 @@ const ItCoverLetterRoute = ItCoverLetterRouteImport.update({
   path: '/it/cover-letter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItCookiesRoute = ItCookiesRouteImport.update({
+  id: '/it/cookies',
+  path: '/it/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItBundlesRoute = ItBundlesRouteImport.update({
   id: '/it/bundles',
   path: '/it/bundles',
@@ -347,9 +418,44 @@ const ItAssistantRoute = ItAssistantRouteImport.update({
   path: '/it/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItAccountRoute = ItAccountRouteImport.update({
+  id: '/it/account',
+  path: '/it/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItAboutRoute = ItAboutRouteImport.update({
+  id: '/it/about',
+  path: '/it/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuidesHowToWriteAResumeRoute = GuidesHowToWriteAResumeRouteImport.update({
   id: '/guides/how-to-write-a-resume',
   path: '/guides/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrVerifyEmailRoute = FrVerifyEmailRouteImport.update({
+  id: '/fr/verify-email',
+  path: '/fr/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrTermsRoute = FrTermsRouteImport.update({
+  id: '/fr/terms',
+  path: '/fr/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrSubscriptionRoute = FrSubscriptionRouteImport.update({
+  id: '/fr/subscription',
+  path: '/fr/subscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrStatusRoute = FrStatusRouteImport.update({
+  id: '/fr/status',
+  path: '/fr/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrSitemapRoute = FrSitemapRouteImport.update({
+  id: '/fr/sitemap',
+  path: '/fr/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrSignupRoute = FrSignupRouteImport.update({
@@ -382,6 +488,11 @@ const FrLibraryRoute = FrLibraryRouteImport.update({
   path: '/fr/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrHumanizerRoute = FrHumanizerRouteImport.update({
+  id: '/fr/humanizer',
+  path: '/fr/humanizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrDashboardRoute = FrDashboardRouteImport.update({
   id: '/fr/dashboard',
   path: '/fr/dashboard',
@@ -407,6 +518,11 @@ const FrCoverLetterRoute = FrCoverLetterRouteImport.update({
   path: '/fr/cover-letter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrCookiesRoute = FrCookiesRouteImport.update({
+  id: '/fr/cookies',
+  path: '/fr/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FrBundlesRoute = FrBundlesRouteImport.update({
   id: '/fr/bundles',
   path: '/fr/bundles',
@@ -420,6 +536,41 @@ const FrAtsRoute = FrAtsRouteImport.update({
 const FrAssistantRoute = FrAssistantRouteImport.update({
   id: '/fr/assistant',
   path: '/fr/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrAccountRoute = FrAccountRouteImport.update({
+  id: '/fr/account',
+  path: '/fr/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrAboutRoute = FrAboutRouteImport.update({
+  id: '/fr/about',
+  path: '/fr/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsVerifyEmailRoute = EsVerifyEmailRouteImport.update({
+  id: '/es/verify-email',
+  path: '/es/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsTermsRoute = EsTermsRouteImport.update({
+  id: '/es/terms',
+  path: '/es/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSubscriptionRoute = EsSubscriptionRouteImport.update({
+  id: '/es/subscription',
+  path: '/es/subscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsStatusRoute = EsStatusRouteImport.update({
+  id: '/es/status',
+  path: '/es/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsSitemapRoute = EsSitemapRouteImport.update({
+  id: '/es/sitemap',
+  path: '/es/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EsSignupRoute = EsSignupRouteImport.update({
@@ -452,6 +603,11 @@ const EsLibraryRoute = EsLibraryRouteImport.update({
   path: '/es/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsHumanizerRoute = EsHumanizerRouteImport.update({
+  id: '/es/humanizer',
+  path: '/es/humanizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsDashboardRoute = EsDashboardRouteImport.update({
   id: '/es/dashboard',
   path: '/es/dashboard',
@@ -477,6 +633,11 @@ const EsCoverLetterRoute = EsCoverLetterRouteImport.update({
   path: '/es/cover-letter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsCookiesRoute = EsCookiesRouteImport.update({
+  id: '/es/cookies',
+  path: '/es/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EsBundlesRoute = EsBundlesRouteImport.update({
   id: '/es/bundles',
   path: '/es/bundles',
@@ -490,6 +651,41 @@ const EsAtsRoute = EsAtsRouteImport.update({
 const EsAssistantRoute = EsAssistantRouteImport.update({
   id: '/es/assistant',
   path: '/es/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAccountRoute = EsAccountRouteImport.update({
+  id: '/es/account',
+  path: '/es/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsAboutRoute = EsAboutRouteImport.update({
+  id: '/es/about',
+  path: '/es/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeVerifyEmailRoute = DeVerifyEmailRouteImport.update({
+  id: '/de/verify-email',
+  path: '/de/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeTermsRoute = DeTermsRouteImport.update({
+  id: '/de/terms',
+  path: '/de/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeSubscriptionRoute = DeSubscriptionRouteImport.update({
+  id: '/de/subscription',
+  path: '/de/subscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeStatusRoute = DeStatusRouteImport.update({
+  id: '/de/status',
+  path: '/de/status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeSitemapRoute = DeSitemapRouteImport.update({
+  id: '/de/sitemap',
+  path: '/de/sitemap',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeSignupRoute = DeSignupRouteImport.update({
@@ -522,6 +718,11 @@ const DeLibraryRoute = DeLibraryRouteImport.update({
   path: '/de/library',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeHumanizerRoute = DeHumanizerRouteImport.update({
+  id: '/de/humanizer',
+  path: '/de/humanizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DeDashboardRoute = DeDashboardRouteImport.update({
   id: '/de/dashboard',
   path: '/de/dashboard',
@@ -547,6 +748,11 @@ const DeCoverLetterRoute = DeCoverLetterRouteImport.update({
   path: '/de/cover-letter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeCookiesRoute = DeCookiesRouteImport.update({
+  id: '/de/cookies',
+  path: '/de/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DeBundlesRoute = DeBundlesRouteImport.update({
   id: '/de/bundles',
   path: '/de/bundles',
@@ -560,6 +766,16 @@ const DeAtsRoute = DeAtsRouteImport.update({
 const DeAssistantRoute = DeAssistantRouteImport.update({
   id: '/de/assistant',
   path: '/de/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeAccountRoute = DeAccountRouteImport.update({
+  id: '/de/account',
+  path: '/de/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeAboutRoute = DeAboutRouteImport.update({
+  id: '/de/about',
+  path: '/de/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
@@ -660,63 +876,99 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/de/about': typeof DeAboutRoute
+  '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
+  '/de/cookies': typeof DeCookiesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
   '/de/dashboard': typeof DeDashboardRoute
+  '/de/humanizer': typeof DeHumanizerRoute
   '/de/library': typeof DeLibraryRoute
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
+  '/de/sitemap': typeof DeSitemapRoute
+  '/de/status': typeof DeStatusRoute
+  '/de/subscription': typeof DeSubscriptionRoute
+  '/de/terms': typeof DeTermsRoute
+  '/de/verify-email': typeof DeVerifyEmailRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
+  '/es/cookies': typeof EsCookiesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
   '/es/dashboard': typeof EsDashboardRoute
+  '/es/humanizer': typeof EsHumanizerRoute
   '/es/library': typeof EsLibraryRoute
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
+  '/es/sitemap': typeof EsSitemapRoute
+  '/es/status': typeof EsStatusRoute
+  '/es/subscription': typeof EsSubscriptionRoute
+  '/es/terms': typeof EsTermsRoute
+  '/es/verify-email': typeof EsVerifyEmailRoute
+  '/fr/about': typeof FrAboutRoute
+  '/fr/account': typeof FrAccountRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cookies': typeof FrCookiesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
   '/fr/dashboard': typeof FrDashboardRoute
+  '/fr/humanizer': typeof FrHumanizerRoute
   '/fr/library': typeof FrLibraryRoute
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/fr/sitemap': typeof FrSitemapRoute
+  '/fr/status': typeof FrStatusRoute
+  '/fr/subscription': typeof FrSubscriptionRoute
+  '/fr/terms': typeof FrTermsRoute
+  '/fr/verify-email': typeof FrVerifyEmailRoute
   '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
+  '/it/about': typeof ItAboutRoute
+  '/it/account': typeof ItAccountRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
+  '/it/cookies': typeof ItCookiesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
   '/it/dashboard': typeof ItDashboardRoute
+  '/it/humanizer': typeof ItHumanizerRoute
   '/it/library': typeof ItLibraryRoute
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
+  '/it/sitemap': typeof ItSitemapRoute
+  '/it/status': typeof ItStatusRoute
+  '/it/subscription': typeof ItSubscriptionRoute
+  '/it/terms': typeof ItTermsRoute
+  '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
@@ -764,63 +1016,99 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/de/about': typeof DeAboutRoute
+  '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
+  '/de/cookies': typeof DeCookiesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
   '/de/dashboard': typeof DeDashboardRoute
+  '/de/humanizer': typeof DeHumanizerRoute
   '/de/library': typeof DeLibraryRoute
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
+  '/de/sitemap': typeof DeSitemapRoute
+  '/de/status': typeof DeStatusRoute
+  '/de/subscription': typeof DeSubscriptionRoute
+  '/de/terms': typeof DeTermsRoute
+  '/de/verify-email': typeof DeVerifyEmailRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
+  '/es/cookies': typeof EsCookiesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
   '/es/dashboard': typeof EsDashboardRoute
+  '/es/humanizer': typeof EsHumanizerRoute
   '/es/library': typeof EsLibraryRoute
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
+  '/es/sitemap': typeof EsSitemapRoute
+  '/es/status': typeof EsStatusRoute
+  '/es/subscription': typeof EsSubscriptionRoute
+  '/es/terms': typeof EsTermsRoute
+  '/es/verify-email': typeof EsVerifyEmailRoute
+  '/fr/about': typeof FrAboutRoute
+  '/fr/account': typeof FrAccountRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cookies': typeof FrCookiesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
   '/fr/dashboard': typeof FrDashboardRoute
+  '/fr/humanizer': typeof FrHumanizerRoute
   '/fr/library': typeof FrLibraryRoute
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/fr/sitemap': typeof FrSitemapRoute
+  '/fr/status': typeof FrStatusRoute
+  '/fr/subscription': typeof FrSubscriptionRoute
+  '/fr/terms': typeof FrTermsRoute
+  '/fr/verify-email': typeof FrVerifyEmailRoute
   '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
+  '/it/about': typeof ItAboutRoute
+  '/it/account': typeof ItAccountRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
+  '/it/cookies': typeof ItCookiesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
   '/it/dashboard': typeof ItDashboardRoute
+  '/it/humanizer': typeof ItHumanizerRoute
   '/it/library': typeof ItLibraryRoute
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
+  '/it/sitemap': typeof ItSitemapRoute
+  '/it/status': typeof ItStatusRoute
+  '/it/subscription': typeof ItSubscriptionRoute
+  '/it/terms': typeof ItTermsRoute
+  '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog': typeof BlogIndexRoute
   '/de': typeof DeIndexRoute
@@ -869,63 +1157,99 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/de/about': typeof DeAboutRoute
+  '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
+  '/de/cookies': typeof DeCookiesRoute
   '/de/cover-letter': typeof DeCoverLetterRoute
   '/de/creator': typeof DeCreatorRoute
   '/de/creators': typeof DeCreatorsRoute
   '/de/cv': typeof DeCvRoute
   '/de/dashboard': typeof DeDashboardRoute
+  '/de/humanizer': typeof DeHumanizerRoute
   '/de/library': typeof DeLibraryRoute
   '/de/login': typeof DeLoginRoute
   '/de/marketplace': typeof DeMarketplaceRoute
   '/de/pricing': typeof DePricingRoute
   '/de/reset-password': typeof DeResetPasswordRoute
   '/de/signup': typeof DeSignupRoute
+  '/de/sitemap': typeof DeSitemapRoute
+  '/de/status': typeof DeStatusRoute
+  '/de/subscription': typeof DeSubscriptionRoute
+  '/de/terms': typeof DeTermsRoute
+  '/de/verify-email': typeof DeVerifyEmailRoute
+  '/es/about': typeof EsAboutRoute
+  '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
   '/es/ats': typeof EsAtsRoute
   '/es/bundles': typeof EsBundlesRoute
+  '/es/cookies': typeof EsCookiesRoute
   '/es/cover-letter': typeof EsCoverLetterRoute
   '/es/creator': typeof EsCreatorRoute
   '/es/creators': typeof EsCreatorsRoute
   '/es/cv': typeof EsCvRoute
   '/es/dashboard': typeof EsDashboardRoute
+  '/es/humanizer': typeof EsHumanizerRoute
   '/es/library': typeof EsLibraryRoute
   '/es/login': typeof EsLoginRoute
   '/es/marketplace': typeof EsMarketplaceRoute
   '/es/pricing': typeof EsPricingRoute
   '/es/reset-password': typeof EsResetPasswordRoute
   '/es/signup': typeof EsSignupRoute
+  '/es/sitemap': typeof EsSitemapRoute
+  '/es/status': typeof EsStatusRoute
+  '/es/subscription': typeof EsSubscriptionRoute
+  '/es/terms': typeof EsTermsRoute
+  '/es/verify-email': typeof EsVerifyEmailRoute
+  '/fr/about': typeof FrAboutRoute
+  '/fr/account': typeof FrAccountRoute
   '/fr/assistant': typeof FrAssistantRoute
   '/fr/ats': typeof FrAtsRoute
   '/fr/bundles': typeof FrBundlesRoute
+  '/fr/cookies': typeof FrCookiesRoute
   '/fr/cover-letter': typeof FrCoverLetterRoute
   '/fr/creator': typeof FrCreatorRoute
   '/fr/creators': typeof FrCreatorsRoute
   '/fr/cv': typeof FrCvRoute
   '/fr/dashboard': typeof FrDashboardRoute
+  '/fr/humanizer': typeof FrHumanizerRoute
   '/fr/library': typeof FrLibraryRoute
   '/fr/login': typeof FrLoginRoute
   '/fr/marketplace': typeof FrMarketplaceRoute
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/fr/sitemap': typeof FrSitemapRoute
+  '/fr/status': typeof FrStatusRoute
+  '/fr/subscription': typeof FrSubscriptionRoute
+  '/fr/terms': typeof FrTermsRoute
+  '/fr/verify-email': typeof FrVerifyEmailRoute
   '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
+  '/it/about': typeof ItAboutRoute
+  '/it/account': typeof ItAccountRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
+  '/it/cookies': typeof ItCookiesRoute
   '/it/cover-letter': typeof ItCoverLetterRoute
   '/it/creator': typeof ItCreatorRoute
   '/it/creators': typeof ItCreatorsRoute
   '/it/cv': typeof ItCvRoute
   '/it/dashboard': typeof ItDashboardRoute
+  '/it/humanizer': typeof ItHumanizerRoute
   '/it/library': typeof ItLibraryRoute
   '/it/login': typeof ItLoginRoute
   '/it/marketplace': typeof ItMarketplaceRoute
   '/it/pricing': typeof ItPricingRoute
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
+  '/it/sitemap': typeof ItSitemapRoute
+  '/it/status': typeof ItStatusRoute
+  '/it/subscription': typeof ItSubscriptionRoute
+  '/it/terms': typeof ItTermsRoute
+  '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
@@ -975,63 +1299,99 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/de/about'
+    | '/de/account'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
+    | '/de/cookies'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
     | '/de/dashboard'
+    | '/de/humanizer'
     | '/de/library'
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
     | '/de/reset-password'
     | '/de/signup'
+    | '/de/sitemap'
+    | '/de/status'
+    | '/de/subscription'
+    | '/de/terms'
+    | '/de/verify-email'
+    | '/es/about'
+    | '/es/account'
     | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
+    | '/es/cookies'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
     | '/es/dashboard'
+    | '/es/humanizer'
     | '/es/library'
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
     | '/es/reset-password'
     | '/es/signup'
+    | '/es/sitemap'
+    | '/es/status'
+    | '/es/subscription'
+    | '/es/terms'
+    | '/es/verify-email'
+    | '/fr/about'
+    | '/fr/account'
     | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
+    | '/fr/cookies'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
     | '/fr/dashboard'
+    | '/fr/humanizer'
     | '/fr/library'
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/fr/sitemap'
+    | '/fr/status'
+    | '/fr/subscription'
+    | '/fr/terms'
+    | '/fr/verify-email'
     | '/guides/how-to-write-a-resume'
+    | '/it/about'
+    | '/it/account'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
+    | '/it/cookies'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
     | '/it/dashboard'
+    | '/it/humanizer'
     | '/it/library'
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
     | '/it/reset-password'
     | '/it/signup'
+    | '/it/sitemap'
+    | '/it/status'
+    | '/it/subscription'
+    | '/it/terms'
+    | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog/'
     | '/de/'
@@ -1079,63 +1439,99 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/de/about'
+    | '/de/account'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
+    | '/de/cookies'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
     | '/de/dashboard'
+    | '/de/humanizer'
     | '/de/library'
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
     | '/de/reset-password'
     | '/de/signup'
+    | '/de/sitemap'
+    | '/de/status'
+    | '/de/subscription'
+    | '/de/terms'
+    | '/de/verify-email'
+    | '/es/about'
+    | '/es/account'
     | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
+    | '/es/cookies'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
     | '/es/dashboard'
+    | '/es/humanizer'
     | '/es/library'
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
     | '/es/reset-password'
     | '/es/signup'
+    | '/es/sitemap'
+    | '/es/status'
+    | '/es/subscription'
+    | '/es/terms'
+    | '/es/verify-email'
+    | '/fr/about'
+    | '/fr/account'
     | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
+    | '/fr/cookies'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
     | '/fr/dashboard'
+    | '/fr/humanizer'
     | '/fr/library'
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/fr/sitemap'
+    | '/fr/status'
+    | '/fr/subscription'
+    | '/fr/terms'
+    | '/fr/verify-email'
     | '/guides/how-to-write-a-resume'
+    | '/it/about'
+    | '/it/account'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
+    | '/it/cookies'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
     | '/it/dashboard'
+    | '/it/humanizer'
     | '/it/library'
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
     | '/it/reset-password'
     | '/it/signup'
+    | '/it/sitemap'
+    | '/it/status'
+    | '/it/subscription'
+    | '/it/terms'
+    | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog'
     | '/de'
@@ -1183,63 +1579,99 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/de/about'
+    | '/de/account'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
+    | '/de/cookies'
     | '/de/cover-letter'
     | '/de/creator'
     | '/de/creators'
     | '/de/cv'
     | '/de/dashboard'
+    | '/de/humanizer'
     | '/de/library'
     | '/de/login'
     | '/de/marketplace'
     | '/de/pricing'
     | '/de/reset-password'
     | '/de/signup'
+    | '/de/sitemap'
+    | '/de/status'
+    | '/de/subscription'
+    | '/de/terms'
+    | '/de/verify-email'
+    | '/es/about'
+    | '/es/account'
     | '/es/assistant'
     | '/es/ats'
     | '/es/bundles'
+    | '/es/cookies'
     | '/es/cover-letter'
     | '/es/creator'
     | '/es/creators'
     | '/es/cv'
     | '/es/dashboard'
+    | '/es/humanizer'
     | '/es/library'
     | '/es/login'
     | '/es/marketplace'
     | '/es/pricing'
     | '/es/reset-password'
     | '/es/signup'
+    | '/es/sitemap'
+    | '/es/status'
+    | '/es/subscription'
+    | '/es/terms'
+    | '/es/verify-email'
+    | '/fr/about'
+    | '/fr/account'
     | '/fr/assistant'
     | '/fr/ats'
     | '/fr/bundles'
+    | '/fr/cookies'
     | '/fr/cover-letter'
     | '/fr/creator'
     | '/fr/creators'
     | '/fr/cv'
     | '/fr/dashboard'
+    | '/fr/humanizer'
     | '/fr/library'
     | '/fr/login'
     | '/fr/marketplace'
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/fr/sitemap'
+    | '/fr/status'
+    | '/fr/subscription'
+    | '/fr/terms'
+    | '/fr/verify-email'
     | '/guides/how-to-write-a-resume'
+    | '/it/about'
+    | '/it/account'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
+    | '/it/cookies'
     | '/it/cover-letter'
     | '/it/creator'
     | '/it/creators'
     | '/it/cv'
     | '/it/dashboard'
+    | '/it/humanizer'
     | '/it/library'
     | '/it/login'
     | '/it/marketplace'
     | '/it/pricing'
     | '/it/reset-password'
     | '/it/signup'
+    | '/it/sitemap'
+    | '/it/status'
+    | '/it/subscription'
+    | '/it/terms'
+    | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog/'
     | '/de/'
@@ -1288,63 +1720,99 @@ export interface RootRouteChildren {
   AdminImportRoute: typeof AdminImportRoute
   BlogAtsOptimizationAndAiHumanizerRoute: typeof BlogAtsOptimizationAndAiHumanizerRoute
   BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
+  DeAboutRoute: typeof DeAboutRoute
+  DeAccountRoute: typeof DeAccountRoute
   DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
   DeBundlesRoute: typeof DeBundlesRoute
+  DeCookiesRoute: typeof DeCookiesRoute
   DeCoverLetterRoute: typeof DeCoverLetterRoute
   DeCreatorRoute: typeof DeCreatorRoute
   DeCreatorsRoute: typeof DeCreatorsRoute
   DeCvRoute: typeof DeCvRoute
   DeDashboardRoute: typeof DeDashboardRoute
+  DeHumanizerRoute: typeof DeHumanizerRoute
   DeLibraryRoute: typeof DeLibraryRoute
   DeLoginRoute: typeof DeLoginRoute
   DeMarketplaceRoute: typeof DeMarketplaceRoute
   DePricingRoute: typeof DePricingRoute
   DeResetPasswordRoute: typeof DeResetPasswordRoute
   DeSignupRoute: typeof DeSignupRoute
+  DeSitemapRoute: typeof DeSitemapRoute
+  DeStatusRoute: typeof DeStatusRoute
+  DeSubscriptionRoute: typeof DeSubscriptionRoute
+  DeTermsRoute: typeof DeTermsRoute
+  DeVerifyEmailRoute: typeof DeVerifyEmailRoute
+  EsAboutRoute: typeof EsAboutRoute
+  EsAccountRoute: typeof EsAccountRoute
   EsAssistantRoute: typeof EsAssistantRoute
   EsAtsRoute: typeof EsAtsRoute
   EsBundlesRoute: typeof EsBundlesRoute
+  EsCookiesRoute: typeof EsCookiesRoute
   EsCoverLetterRoute: typeof EsCoverLetterRoute
   EsCreatorRoute: typeof EsCreatorRoute
   EsCreatorsRoute: typeof EsCreatorsRoute
   EsCvRoute: typeof EsCvRoute
   EsDashboardRoute: typeof EsDashboardRoute
+  EsHumanizerRoute: typeof EsHumanizerRoute
   EsLibraryRoute: typeof EsLibraryRoute
   EsLoginRoute: typeof EsLoginRoute
   EsMarketplaceRoute: typeof EsMarketplaceRoute
   EsPricingRoute: typeof EsPricingRoute
   EsResetPasswordRoute: typeof EsResetPasswordRoute
   EsSignupRoute: typeof EsSignupRoute
+  EsSitemapRoute: typeof EsSitemapRoute
+  EsStatusRoute: typeof EsStatusRoute
+  EsSubscriptionRoute: typeof EsSubscriptionRoute
+  EsTermsRoute: typeof EsTermsRoute
+  EsVerifyEmailRoute: typeof EsVerifyEmailRoute
+  FrAboutRoute: typeof FrAboutRoute
+  FrAccountRoute: typeof FrAccountRoute
   FrAssistantRoute: typeof FrAssistantRoute
   FrAtsRoute: typeof FrAtsRoute
   FrBundlesRoute: typeof FrBundlesRoute
+  FrCookiesRoute: typeof FrCookiesRoute
   FrCoverLetterRoute: typeof FrCoverLetterRoute
   FrCreatorRoute: typeof FrCreatorRoute
   FrCreatorsRoute: typeof FrCreatorsRoute
   FrCvRoute: typeof FrCvRoute
   FrDashboardRoute: typeof FrDashboardRoute
+  FrHumanizerRoute: typeof FrHumanizerRoute
   FrLibraryRoute: typeof FrLibraryRoute
   FrLoginRoute: typeof FrLoginRoute
   FrMarketplaceRoute: typeof FrMarketplaceRoute
   FrPricingRoute: typeof FrPricingRoute
   FrResetPasswordRoute: typeof FrResetPasswordRoute
   FrSignupRoute: typeof FrSignupRoute
+  FrSitemapRoute: typeof FrSitemapRoute
+  FrStatusRoute: typeof FrStatusRoute
+  FrSubscriptionRoute: typeof FrSubscriptionRoute
+  FrTermsRoute: typeof FrTermsRoute
+  FrVerifyEmailRoute: typeof FrVerifyEmailRoute
   GuidesHowToWriteAResumeRoute: typeof GuidesHowToWriteAResumeRoute
+  ItAboutRoute: typeof ItAboutRoute
+  ItAccountRoute: typeof ItAccountRoute
   ItAssistantRoute: typeof ItAssistantRoute
   ItAtsRoute: typeof ItAtsRoute
   ItBundlesRoute: typeof ItBundlesRoute
+  ItCookiesRoute: typeof ItCookiesRoute
   ItCoverLetterRoute: typeof ItCoverLetterRoute
   ItCreatorRoute: typeof ItCreatorRoute
   ItCreatorsRoute: typeof ItCreatorsRoute
   ItCvRoute: typeof ItCvRoute
   ItDashboardRoute: typeof ItDashboardRoute
+  ItHumanizerRoute: typeof ItHumanizerRoute
   ItLibraryRoute: typeof ItLibraryRoute
   ItLoginRoute: typeof ItLoginRoute
   ItMarketplaceRoute: typeof ItMarketplaceRoute
   ItPricingRoute: typeof ItPricingRoute
   ItResetPasswordRoute: typeof ItResetPasswordRoute
   ItSignupRoute: typeof ItSignupRoute
+  ItSitemapRoute: typeof ItSitemapRoute
+  ItStatusRoute: typeof ItStatusRoute
+  ItSubscriptionRoute: typeof ItSubscriptionRoute
+  ItTermsRoute: typeof ItTermsRoute
+  ItVerifyEmailRoute: typeof ItVerifyEmailRoute
   PromptSlugRoute: typeof PromptSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
   DeIndexRoute: typeof DeIndexRoute
@@ -1594,6 +2062,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/verify-email': {
+      id: '/it/verify-email'
+      path: '/it/verify-email'
+      fullPath: '/it/verify-email'
+      preLoaderRoute: typeof ItVerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/terms': {
+      id: '/it/terms'
+      path: '/it/terms'
+      fullPath: '/it/terms'
+      preLoaderRoute: typeof ItTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/subscription': {
+      id: '/it/subscription'
+      path: '/it/subscription'
+      fullPath: '/it/subscription'
+      preLoaderRoute: typeof ItSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/status': {
+      id: '/it/status'
+      path: '/it/status'
+      fullPath: '/it/status'
+      preLoaderRoute: typeof ItStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/sitemap': {
+      id: '/it/sitemap'
+      path: '/it/sitemap'
+      fullPath: '/it/sitemap'
+      preLoaderRoute: typeof ItSitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/signup': {
       id: '/it/signup'
       path: '/it/signup'
@@ -1636,6 +2139,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/humanizer': {
+      id: '/it/humanizer'
+      path: '/it/humanizer'
+      fullPath: '/it/humanizer'
+      preLoaderRoute: typeof ItHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/dashboard': {
       id: '/it/dashboard'
       path: '/it/dashboard'
@@ -1671,6 +2181,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItCoverLetterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/cookies': {
+      id: '/it/cookies'
+      path: '/it/cookies'
+      fullPath: '/it/cookies'
+      preLoaderRoute: typeof ItCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/bundles': {
       id: '/it/bundles'
       path: '/it/bundles'
@@ -1692,11 +2209,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/account': {
+      id: '/it/account'
+      path: '/it/account'
+      fullPath: '/it/account'
+      preLoaderRoute: typeof ItAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/about': {
+      id: '/it/about'
+      path: '/it/about'
+      fullPath: '/it/about'
+      preLoaderRoute: typeof ItAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guides/how-to-write-a-resume': {
       id: '/guides/how-to-write-a-resume'
       path: '/guides/how-to-write-a-resume'
       fullPath: '/guides/how-to-write-a-resume'
       preLoaderRoute: typeof GuidesHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/verify-email': {
+      id: '/fr/verify-email'
+      path: '/fr/verify-email'
+      fullPath: '/fr/verify-email'
+      preLoaderRoute: typeof FrVerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/terms': {
+      id: '/fr/terms'
+      path: '/fr/terms'
+      fullPath: '/fr/terms'
+      preLoaderRoute: typeof FrTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/subscription': {
+      id: '/fr/subscription'
+      path: '/fr/subscription'
+      fullPath: '/fr/subscription'
+      preLoaderRoute: typeof FrSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/status': {
+      id: '/fr/status'
+      path: '/fr/status'
+      fullPath: '/fr/status'
+      preLoaderRoute: typeof FrStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/sitemap': {
+      id: '/fr/sitemap'
+      path: '/fr/sitemap'
+      fullPath: '/fr/sitemap'
+      preLoaderRoute: typeof FrSitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fr/signup': {
@@ -1741,6 +2307,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/humanizer': {
+      id: '/fr/humanizer'
+      path: '/fr/humanizer'
+      fullPath: '/fr/humanizer'
+      preLoaderRoute: typeof FrHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/dashboard': {
       id: '/fr/dashboard'
       path: '/fr/dashboard'
@@ -1776,6 +2349,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrCoverLetterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/cookies': {
+      id: '/fr/cookies'
+      path: '/fr/cookies'
+      fullPath: '/fr/cookies'
+      preLoaderRoute: typeof FrCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/bundles': {
       id: '/fr/bundles'
       path: '/fr/bundles'
@@ -1795,6 +2375,55 @@ declare module '@tanstack/react-router' {
       path: '/fr/assistant'
       fullPath: '/fr/assistant'
       preLoaderRoute: typeof FrAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/account': {
+      id: '/fr/account'
+      path: '/fr/account'
+      fullPath: '/fr/account'
+      preLoaderRoute: typeof FrAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/about': {
+      id: '/fr/about'
+      path: '/fr/about'
+      fullPath: '/fr/about'
+      preLoaderRoute: typeof FrAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/verify-email': {
+      id: '/es/verify-email'
+      path: '/es/verify-email'
+      fullPath: '/es/verify-email'
+      preLoaderRoute: typeof EsVerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/terms': {
+      id: '/es/terms'
+      path: '/es/terms'
+      fullPath: '/es/terms'
+      preLoaderRoute: typeof EsTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/subscription': {
+      id: '/es/subscription'
+      path: '/es/subscription'
+      fullPath: '/es/subscription'
+      preLoaderRoute: typeof EsSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/status': {
+      id: '/es/status'
+      path: '/es/status'
+      fullPath: '/es/status'
+      preLoaderRoute: typeof EsStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/sitemap': {
+      id: '/es/sitemap'
+      path: '/es/sitemap'
+      fullPath: '/es/sitemap'
+      preLoaderRoute: typeof EsSitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/signup': {
@@ -1839,6 +2468,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/humanizer': {
+      id: '/es/humanizer'
+      path: '/es/humanizer'
+      fullPath: '/es/humanizer'
+      preLoaderRoute: typeof EsHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/dashboard': {
       id: '/es/dashboard'
       path: '/es/dashboard'
@@ -1874,6 +2510,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsCoverLetterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/cookies': {
+      id: '/es/cookies'
+      path: '/es/cookies'
+      fullPath: '/es/cookies'
+      preLoaderRoute: typeof EsCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/es/bundles': {
       id: '/es/bundles'
       path: '/es/bundles'
@@ -1893,6 +2536,55 @@ declare module '@tanstack/react-router' {
       path: '/es/assistant'
       fullPath: '/es/assistant'
       preLoaderRoute: typeof EsAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/account': {
+      id: '/es/account'
+      path: '/es/account'
+      fullPath: '/es/account'
+      preLoaderRoute: typeof EsAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/about': {
+      id: '/es/about'
+      path: '/es/about'
+      fullPath: '/es/about'
+      preLoaderRoute: typeof EsAboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/verify-email': {
+      id: '/de/verify-email'
+      path: '/de/verify-email'
+      fullPath: '/de/verify-email'
+      preLoaderRoute: typeof DeVerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/terms': {
+      id: '/de/terms'
+      path: '/de/terms'
+      fullPath: '/de/terms'
+      preLoaderRoute: typeof DeTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/subscription': {
+      id: '/de/subscription'
+      path: '/de/subscription'
+      fullPath: '/de/subscription'
+      preLoaderRoute: typeof DeSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/status': {
+      id: '/de/status'
+      path: '/de/status'
+      fullPath: '/de/status'
+      preLoaderRoute: typeof DeStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/sitemap': {
+      id: '/de/sitemap'
+      path: '/de/sitemap'
+      fullPath: '/de/sitemap'
+      preLoaderRoute: typeof DeSitemapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/de/signup': {
@@ -1937,6 +2629,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/de/humanizer': {
+      id: '/de/humanizer'
+      path: '/de/humanizer'
+      fullPath: '/de/humanizer'
+      preLoaderRoute: typeof DeHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/dashboard': {
       id: '/de/dashboard'
       path: '/de/dashboard'
@@ -1972,6 +2671,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeCoverLetterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/de/cookies': {
+      id: '/de/cookies'
+      path: '/de/cookies'
+      fullPath: '/de/cookies'
+      preLoaderRoute: typeof DeCookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/bundles': {
       id: '/de/bundles'
       path: '/de/bundles'
@@ -1991,6 +2697,20 @@ declare module '@tanstack/react-router' {
       path: '/de/assistant'
       fullPath: '/de/assistant'
       preLoaderRoute: typeof DeAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/account': {
+      id: '/de/account'
+      path: '/de/account'
+      fullPath: '/de/account'
+      preLoaderRoute: typeof DeAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/about': {
+      id: '/de/about'
+      path: '/de/about'
+      fullPath: '/de/about'
+      preLoaderRoute: typeof DeAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/how-to-write-a-resume': {
@@ -2114,63 +2834,99 @@ const rootRouteChildren: RootRouteChildren = {
   BlogAtsOptimizationAndAiHumanizerRoute:
     BlogAtsOptimizationAndAiHumanizerRoute,
   BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
+  DeAboutRoute: DeAboutRoute,
+  DeAccountRoute: DeAccountRoute,
   DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
   DeBundlesRoute: DeBundlesRoute,
+  DeCookiesRoute: DeCookiesRoute,
   DeCoverLetterRoute: DeCoverLetterRoute,
   DeCreatorRoute: DeCreatorRoute,
   DeCreatorsRoute: DeCreatorsRoute,
   DeCvRoute: DeCvRoute,
   DeDashboardRoute: DeDashboardRoute,
+  DeHumanizerRoute: DeHumanizerRoute,
   DeLibraryRoute: DeLibraryRoute,
   DeLoginRoute: DeLoginRoute,
   DeMarketplaceRoute: DeMarketplaceRoute,
   DePricingRoute: DePricingRoute,
   DeResetPasswordRoute: DeResetPasswordRoute,
   DeSignupRoute: DeSignupRoute,
+  DeSitemapRoute: DeSitemapRoute,
+  DeStatusRoute: DeStatusRoute,
+  DeSubscriptionRoute: DeSubscriptionRoute,
+  DeTermsRoute: DeTermsRoute,
+  DeVerifyEmailRoute: DeVerifyEmailRoute,
+  EsAboutRoute: EsAboutRoute,
+  EsAccountRoute: EsAccountRoute,
   EsAssistantRoute: EsAssistantRoute,
   EsAtsRoute: EsAtsRoute,
   EsBundlesRoute: EsBundlesRoute,
+  EsCookiesRoute: EsCookiesRoute,
   EsCoverLetterRoute: EsCoverLetterRoute,
   EsCreatorRoute: EsCreatorRoute,
   EsCreatorsRoute: EsCreatorsRoute,
   EsCvRoute: EsCvRoute,
   EsDashboardRoute: EsDashboardRoute,
+  EsHumanizerRoute: EsHumanizerRoute,
   EsLibraryRoute: EsLibraryRoute,
   EsLoginRoute: EsLoginRoute,
   EsMarketplaceRoute: EsMarketplaceRoute,
   EsPricingRoute: EsPricingRoute,
   EsResetPasswordRoute: EsResetPasswordRoute,
   EsSignupRoute: EsSignupRoute,
+  EsSitemapRoute: EsSitemapRoute,
+  EsStatusRoute: EsStatusRoute,
+  EsSubscriptionRoute: EsSubscriptionRoute,
+  EsTermsRoute: EsTermsRoute,
+  EsVerifyEmailRoute: EsVerifyEmailRoute,
+  FrAboutRoute: FrAboutRoute,
+  FrAccountRoute: FrAccountRoute,
   FrAssistantRoute: FrAssistantRoute,
   FrAtsRoute: FrAtsRoute,
   FrBundlesRoute: FrBundlesRoute,
+  FrCookiesRoute: FrCookiesRoute,
   FrCoverLetterRoute: FrCoverLetterRoute,
   FrCreatorRoute: FrCreatorRoute,
   FrCreatorsRoute: FrCreatorsRoute,
   FrCvRoute: FrCvRoute,
   FrDashboardRoute: FrDashboardRoute,
+  FrHumanizerRoute: FrHumanizerRoute,
   FrLibraryRoute: FrLibraryRoute,
   FrLoginRoute: FrLoginRoute,
   FrMarketplaceRoute: FrMarketplaceRoute,
   FrPricingRoute: FrPricingRoute,
   FrResetPasswordRoute: FrResetPasswordRoute,
   FrSignupRoute: FrSignupRoute,
+  FrSitemapRoute: FrSitemapRoute,
+  FrStatusRoute: FrStatusRoute,
+  FrSubscriptionRoute: FrSubscriptionRoute,
+  FrTermsRoute: FrTermsRoute,
+  FrVerifyEmailRoute: FrVerifyEmailRoute,
   GuidesHowToWriteAResumeRoute: GuidesHowToWriteAResumeRoute,
+  ItAboutRoute: ItAboutRoute,
+  ItAccountRoute: ItAccountRoute,
   ItAssistantRoute: ItAssistantRoute,
   ItAtsRoute: ItAtsRoute,
   ItBundlesRoute: ItBundlesRoute,
+  ItCookiesRoute: ItCookiesRoute,
   ItCoverLetterRoute: ItCoverLetterRoute,
   ItCreatorRoute: ItCreatorRoute,
   ItCreatorsRoute: ItCreatorsRoute,
   ItCvRoute: ItCvRoute,
   ItDashboardRoute: ItDashboardRoute,
+  ItHumanizerRoute: ItHumanizerRoute,
   ItLibraryRoute: ItLibraryRoute,
   ItLoginRoute: ItLoginRoute,
   ItMarketplaceRoute: ItMarketplaceRoute,
   ItPricingRoute: ItPricingRoute,
   ItResetPasswordRoute: ItResetPasswordRoute,
   ItSignupRoute: ItSignupRoute,
+  ItSitemapRoute: ItSitemapRoute,
+  ItStatusRoute: ItStatusRoute,
+  ItSubscriptionRoute: ItSubscriptionRoute,
+  ItTermsRoute: ItTermsRoute,
+  ItVerifyEmailRoute: ItVerifyEmailRoute,
   PromptSlugRoute: PromptSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
   DeIndexRoute: DeIndexRoute,

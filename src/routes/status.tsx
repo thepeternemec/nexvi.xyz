@@ -25,7 +25,7 @@ const services = [
   { name: "Accounts & billing", note: "Sign-in, subscriptions, payments" },
 ];
 
-function StatusPage() {
+export function StatusPage() {
   return (
     <SiteShell>
       <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">

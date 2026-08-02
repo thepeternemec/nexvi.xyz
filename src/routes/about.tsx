@@ -82,7 +82,7 @@ const TIMELINE = [
   ],
 ];
 
-function AboutPage() {
+export function AboutPage() {
   return (
     <SiteShell>
       {/* Hero */}

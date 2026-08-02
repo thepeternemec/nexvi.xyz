@@ -33,7 +33,7 @@ export const Route = createFileRoute("/subscription")({
   component: SubscriptionPage,
 });
 
-function SubscriptionPage() {
+export function SubscriptionPage() {
   const { user, isAuthenticated } = useAuth();
   const sub = useSubscription();
   const pathname = useRouterState({ select: (s) => s.location.pathname });

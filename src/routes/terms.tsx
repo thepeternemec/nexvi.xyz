@@ -25,7 +25,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function TermsPage() {
+export function TermsPage() {
   return (
     <SiteShell>
       <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">

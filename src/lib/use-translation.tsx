@@ -187,11 +187,20 @@ export function AutoTranslate() {
       raf = requestAnimationFrame(scan);
     });
 
+    // Theme changes toggle a class on <html>, which re-renders large parts of the
+    // tree with fresh (English) text nodes — rescan when that happens too.
+    const themeObserver = new MutationObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(scan);
+    });
+
     const initialScan = window.setTimeout(scan, 300);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => {
       observer.disconnect();
+      themeObserver.disconnect();
       window.clearTimeout(initialScan);
       cancelAnimationFrame(raf);
     };

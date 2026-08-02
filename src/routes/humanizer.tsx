@@ -27,7 +27,7 @@ export const Route = createFileRoute("/humanizer")({
   component: HumanizerPage,
 });
 
-function HumanizerPage() {
+export function HumanizerPage() {
   const run = useServerFn(humanizeText);
   const gate = useToolGate("humanizer");
   const [input, setInput] = useState("");

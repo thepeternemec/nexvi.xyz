@@ -26,7 +26,7 @@ const cookies = [
   { name: "Checkout session", purpose: "Links your payment back to your account", type: "Essential", life: "Minutes" },
 ];
 
-function CookiesPage() {
+export function CookiesPage() {
   return (
     <SiteShell>
       <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
