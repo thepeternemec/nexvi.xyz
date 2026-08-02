@@ -546,17 +546,60 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <Reveal className="lift rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-2xl tracking-tight sm:text-[2rem]">{c.ctaBigTitle}</h2>
-            <p className="mt-4 text-white/70">{c.ctaBigSub}</p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={href("/library")}><Button size="lg" variant="secondary" className="pill-hover rounded-full">{c.browseLibrary}</Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="cta-sheen rounded-full border-white/30 bg-transparent text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-neutral-900 active:translate-y-0">{c.ctaGenerate}</Button></a>
+        <Reveal className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
+          {/* Stripe-style light signal wash — token driven, works in both themes */}
+          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,color-mix(in_oklab,var(--primary)_10%,transparent)_0%,transparent_45%,color-mix(in_oklab,var(--primary)_7%,transparent)_100%)]" />
+          <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)] blur-2xl" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
+          <div className="relative grid gap-10 p-8 sm:p-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:p-16">
+            <div>
+              <div className="pill-hover inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+                <Sparkles className="h-3 w-3 text-primary" /> Start free — no card
+              </div>
+              <h2 className="font-display mt-5 text-[1.85rem] leading-[1.1] tracking-tight sm:text-[2.5rem]">
+                {c.ctaBigTitle}
+              </h2>
+              <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground">{c.ctaBigSub}</p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href={href("/cv")}>
+                  <Button size="lg" className="cta-sheen h-11 rounded-xl px-6 text-[14px] font-medium transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
+                    {c.ctaGenerate} <ArrowRight className="ml-1.5 h-4 w-4" />
+                  </Button>
+                </a>
+                <a href={href("/library")}>
+                  <Button size="lg" variant="outline" className="pill-hover h-11 rounded-xl border-border/70 bg-background/70 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+                    {c.browseLibrary}
+                  </Button>
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-border/70 bg-background/70 p-6 backdrop-blur sm:p-7">
+              <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">What you get in 60 seconds</div>
+              <ul className="mt-5 grid gap-4">
+                {[
+                  { t: "A CV rewritten for one job", d: "Keyword-matched to the description you paste." },
+                  { t: "A cover letter that sounds human", d: "Specific, short, and never generic." },
+                  { t: "An ATS score with fixes", d: "Keywords, formatting and length, line by line." },
+                ].map((item) => (
+                  <li key={item.t} className="group flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary transition-transform duration-300 group-hover:scale-110" />
+                    <div>
+                      <div className="text-[14px] font-medium leading-snug">{item.t}</div>
+                      <div className="mt-0.5 text-[13px] leading-relaxed text-muted-foreground">{item.d}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 flex items-center gap-2 border-t border-border/60 pt-4 text-[12px] text-muted-foreground">
+                <ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your CV data stays yours — never sold, never trained on.
+              </div>
             </div>
           </div>
         </Reveal>
       </section>
+
 
     </SiteShell>
   );
