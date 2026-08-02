@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { BrandMark, brands } from "@/components/brand-logos";
+import { BrandMarkColor, brands } from "@/components/brand-logos";
 
 export function TrustedBy({
   ctaLabel,
