@@ -232,7 +232,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
           </a>
           <a href={href("/humanizer")}>
             <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
-              Try the Claude Humanizer
+              Try AI text Humanizer
             </Button>
           </a>
         </div>
