@@ -188,25 +188,40 @@ export function Marketplace() {
               </div>
             )}
           </div>
-          <div className="flex flex-wrap gap-2 px-6 py-5">
+          <div className="grid gap-px bg-border/50 sm:grid-cols-2 lg:grid-cols-4">
             {packs.map(pk => {
               const active = search.pack === pk.slug;
+              const count = prompts.filter(p => p.pack === pk.slug).length;
               return (
                 <button
                   key={pk.slug}
                   onClick={() => update({ pack: active ? undefined : pk.slug })}
                   title={pk.description}
-                  className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] transition ${active ? "border-primary/40 bg-primary/10 text-primary shadow-[0_0_0_1px_color-mix(in_oklab,var(--primary)_25%,transparent)]" : "border-border/70 bg-background/70 text-foreground hover:border-foreground/25 hover:bg-background"}`}
+                  className={`group relative flex h-full flex-col items-start gap-2 px-5 py-4 text-left transition ${active ? "bg-primary/[0.07]" : "bg-card hover:bg-background"}`}
                 >
-                  <span className="text-[13px] leading-none">{pk.emoji}</span>
-                  {pk.name}
-                  <span className={`rounded-full px-1.5 py-0.5 text-[10px] tabular-nums ${active ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"}`}>
-                    {prompts.filter(p => p.pack === pk.slug).length}
+                  <span
+                    aria-hidden
+                    className={`absolute inset-x-0 top-0 h-[2px] transition-opacity ${active ? "bg-primary opacity-100" : "bg-primary opacity-0 group-hover:opacity-40"}`}
+                  />
+                  <span className="flex w-full items-center justify-between gap-3">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-border/70 bg-background/80 text-[14px] leading-none">
+                      {pk.emoji}
+                    </span>
+                    <span className={`text-[10px] uppercase tracking-[0.18em] tabular-nums ${active ? "text-primary" : "text-muted-foreground"}`}>
+                      {count} prompts
+                    </span>
+                  </span>
+                  <span className={`font-display text-[14px] leading-snug tracking-tight ${active ? "text-primary" : "text-foreground"}`}>
+                    {pk.name}
+                  </span>
+                  <span className="line-clamp-2 text-[12px] leading-relaxed text-muted-foreground">
+                    {pk.description}
                   </span>
                 </button>
               );
             })}
           </div>
+
         </div>
 
 
