@@ -33,6 +33,103 @@ export function BrandMark({ brand, className }: LogoProps & { brand: string }) {
   );
 }
 
+/**
+ * Full-colour brand logomarks (symbol only, no wordmark) — Stripe-style logo row.
+ * Monochrome brands use `currentColor` so they stay legible in dark mode.
+ */
+export function BrandMarkColor({ brand, className }: LogoProps & { brand: string }) {
+  const common = { viewBox: "0 0 24 24", role: "img" as const, "aria-hidden": true, className };
+
+  switch (brand) {
+    case "google":
+      return (
+        <svg {...common}>
+          <path
+            fill="#4285F4"
+            d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.46a5.53 5.53 0 0 1-2.4 3.63v3.01h3.88c2.27-2.09 3.58-5.17 3.58-8.83z"
+          />
+          <path
+            fill="#34A853"
+            d="M12 24c3.24 0 5.96-1.08 7.94-2.9l-3.88-3.01c-1.08.72-2.45 1.15-4.06 1.15-3.13 0-5.78-2.11-6.72-4.96H1.28v3.13A11.99 11.99 0 0 0 12 24z"
+          />
+          <path fill="#FBBC05" d="M5.28 14.28A7.2 7.2 0 0 1 4.9 12c0-.79.14-1.56.38-2.28V6.59H1.28A11.99 11.99 0 0 0 0 12c0 1.94.46 3.77 1.28 5.41l4-3.13z" />
+          <path
+            fill="#EA4335"
+            d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.59l4 3.13C6.22 6.86 8.87 4.75 12 4.75z"
+          />
+        </svg>
+      );
+    case "apple":
+      return (
+        <svg {...common} fill="currentColor">
+          <path d={paths.apple} />
+        </svg>
+      );
+    case "amazon":
+      return (
+        <svg {...common} fill="#FF9900">
+          <path d={paths.amazon} />
+        </svg>
+      );
+    case "meta":
+      return (
+        <svg {...common}>
+          <defs>
+            <linearGradient id="brand-meta-g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#0064E0" />
+              <stop offset="100%" stopColor="#0082FB" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#brand-meta-g)" d={paths.meta} />
+        </svg>
+      );
+    case "netflix":
+      return (
+        <svg {...common} fill="#E50914">
+          <path d={paths.netflix} />
+        </svg>
+      );
+    case "salesforce":
+      return (
+        <svg {...common} fill="#00A1E0">
+          <path d={paths.salesforce} />
+        </svg>
+      );
+    case "adobe":
+      return (
+        <svg {...common} fill="#EB1000">
+          <path d={paths.adobe} />
+        </svg>
+      );
+    case "nvidia":
+      return (
+        <svg {...common} fill="#76B900">
+          <path d={paths.nvidia} />
+        </svg>
+      );
+    case "sap":
+      return (
+        <svg {...common}>
+          <defs>
+            <linearGradient id="brand-sap-g" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#00AEEF" />
+              <stop offset="100%" stopColor="#0056A0" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#brand-sap-g)" d={paths.sap} />
+        </svg>
+      );
+    case "accenture":
+      return (
+        <svg {...common} fill="#A100FF">
+          <path d={paths.accenture} />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export const brands: { key: string; name: string }[] = [
   { key: "google", name: "Google" },
   { key: "apple", name: "Apple" },
