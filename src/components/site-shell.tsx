@@ -280,21 +280,33 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b1230] text-slate-200">
+      {/* light-theme gradient: indigo/blue signal */}
       <div
-        className="pointer-events-none absolute inset-0 -z-0"
+        className="pointer-events-none absolute inset-0 -z-0 dark:hidden"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 60% at 12% 0%, rgba(79,70,229,0.35), transparent 65%), radial-gradient(ellipse 60% 55% at 88% 5%, rgba(37,99,235,0.28), transparent 62%), linear-gradient(180deg, #101a44 0%, #0b1230 55%, #070c20 100%)",
+            "radial-gradient(ellipse 75% 65% at 8% -10%, rgba(99,102,241,0.45), transparent 62%), radial-gradient(ellipse 65% 55% at 92% 0%, rgba(56,189,248,0.28), transparent 60%), linear-gradient(180deg, #16215c 0%, #0d1540 48%, #080d24 100%)",
         }}
       />
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-4">
+      {/* dark-theme gradient: near-black graphite */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-0 hidden dark:block"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 70% 60% at 15% -10%, rgba(99,102,241,0.20), transparent 60%), radial-gradient(ellipse 60% 50% at 90% 0%, rgba(148,163,184,0.10), transparent 58%), linear-gradient(180deg, #14141a 0%, #0c0c11 55%, #06060a 100%)",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-4">
+
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-lg tracking-tight text-white">ApplyWise</span>
+            <span className="font-display text-[1.35rem] tracking-tight text-white">ApplyWise</span>
           </div>
-          <p className="mt-4 max-w-sm text-sm text-slate-300/80">
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-slate-300/75">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
+
           <a
             href="mailto:hello@applywise.eu"
             className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.12] hover:text-white"
@@ -336,23 +348,26 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         </div>
         <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Tools</div>
-          <ul className="mt-3 space-y-2 text-sm text-slate-300/70">
-            <li><a href={href("/cv")} className="hover:text-white">CV Generator</a></li>
-            <li><a href={href("/cover-letter")} className="hover:text-white">Cover Letter Generator</a></li>
-            <li><a href={href("/humanizer")} className="hover:text-white">Humanizer</a></li>
-            <li><a href={href("/ats")} className="hover:text-white">ATS Optimizer</a></li>
-            <li><a href={href("/library")} className="hover:text-white">Prompt Library</a></li>
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400/80">Tools</div>
+          <ul className="mt-4 space-y-2.5 text-[14px] text-slate-300/70">
+            {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"]].map(([to, label]) => (
+              <li key={to}>
+                <a href={href(to)} className="inline-block transition-colors hover:text-white">{label}</a>
+              </li>
+            ))}
           </ul>
         </div>
         <div>
-          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Company</div>
-          <ul className="mt-3 space-y-2 text-sm text-slate-300/70">
-            <li><a href={href("/pricing")} className="hover:text-white">Pricing</a></li>
-            <li><a href={href("/login")} className="hover:text-white">Sign in</a></li>
-            <li><a href={href("/signup")} className="hover:text-white">Create account</a></li>
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400/80">Company</div>
+          <ul className="mt-4 space-y-2.5 text-[14px] text-slate-300/70">
+            {[["/pricing", "Pricing"], ["/login", "Sign in"], ["/signup", "Create account"]].map(([to, label]) => (
+              <li key={to}>
+                <a href={href(to)} className="inline-block transition-colors hover:text-white">{label}</a>
+              </li>
+            ))}
           </ul>
         </div>
+
       </div>
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-slate-300/70 sm:flex-row sm:items-center sm:justify-between sm:px-6">
