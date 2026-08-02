@@ -352,11 +352,16 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Company</div>
           <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
-            {[["/about", "About"], ["/guides/how-to-write-a-resume", "Resume guide"], ["/pricing", "Pricing"], ["/login", "Sign in"], ["/signup", "Create account"]].map(([to, label]) => (
+            {[["/about", "About"], ["/pricing", "Pricing"], ["/login", "Sign in"], ["/signup", "Create account"]].map(([to, label]) => (
               <li key={to}>
                 <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>
             ))}
+            <li>
+              <a href="/guides/how-to-write-a-resume" className="inline-block transition-colors hover:text-primary">
+                How to write a resume
+              </a>
+            </li>
           </ul>
         </div>
 
