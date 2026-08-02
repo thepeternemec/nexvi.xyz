@@ -196,9 +196,9 @@ function AboutPage() {
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">How we got here</div>
           </Reveal>
           <div className="mt-10 space-y-px overflow-hidden rounded-2xl border border-border bg-border">
-            {TIMELINE.map(([year, title, body], i) => (
-              <Reveal key={year} delay={i * 80} className="grid gap-2 bg-background px-7 py-7 sm:grid-cols-[110px_minmax(0,1fr)] sm:gap-8">
-                <div className="font-mono text-[12px] tracking-[0.14em] text-primary">{year}</div>
+            {TIMELINE.map(([title, body], i) => (
+              <Reveal key={title} delay={i * 80} className="grid gap-2 bg-background px-7 py-7 sm:grid-cols-[110px_minmax(0,1fr)] sm:gap-8">
+                <div className="font-mono text-[12px] tracking-[0.14em] text-primary">0{i + 1}</div>
                 <div>
                   <div className="text-[15px] font-semibold tracking-tight">{title}</div>
                   <p className="mt-1.5 text-[14px] leading-relaxed text-muted-foreground">{body}</p>
