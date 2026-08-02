@@ -228,16 +228,17 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         </div>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={href("/cv")}>
-            <Button size="lg" className="h-11 rounded-xl px-6 text-[14px] font-medium shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_24px_-14px_rgba(79,70,229,0.7)]">
-              Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4" />
+            <Button size="lg" className="cta-sheen h-11 rounded-xl px-6 text-[14px] font-medium shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_24px_-14px_rgba(79,70,229,0.7)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
+              Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Button>
           </a>
           <a href={href("/humanizer")}>
-            <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+            <Button size="lg" variant="outline" className="pill-hover h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
               Try AI text Humanizer
             </Button>
           </a>
         </div>
+
         <p className="mt-3 text-center text-[12px] text-muted-foreground">No card required · First generation on us</p>
       </section>
 
