@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
-import { NavCredits } from "@/components/nav-credits";
+
 import { openCookiePreferences } from "@/lib/cookie-consent";
 
 function XLogo({ className }: { className?: string }) {
@@ -154,7 +154,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-[15rem] p-0">
-                <NavCredits />
+                
                 <div className="p-1">
                 <DropdownMenuItem asChild>
                   <a href={href("/dashboard")} className="flex items-center gap-2 cursor-pointer">
