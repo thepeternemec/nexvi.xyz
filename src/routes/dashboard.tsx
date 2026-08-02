@@ -54,16 +54,16 @@ export function Dashboard() {
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
         {plan !== "premium" && (
-          <div className="relative mb-10 overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 p-8 text-neutral-50 shadow-lg sm:p-10 dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220]">
-            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/25 blur-3xl" />
+          <div className="relative mb-10 overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-background via-muted/40 to-primary/[0.06] p-8 text-foreground shadow-sm sm:p-10 dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220] dark:text-neutral-50 dark:shadow-lg">
+            <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-primary/20 blur-3xl" />
             <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-xl">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-3 py-1 text-xs font-semibold uppercase tracking-wider dark:border-white/15 dark:bg-white/10">
                   <Crown className="h-3.5 w-3.5" /> Upgrade to Premium
                 </div>
                 <h2 className="font-display mt-4 text-3xl tracking-tight sm:text-4xl">Apply to every job without limits.</h2>
-                <p className="mt-3 text-sm text-neutral-300">Unlimited CVs, cover letters, ATS rewrites, the Humanizer and the full premium prompt library — one plan, cancel anytime.</p>
-                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-neutral-200">
+                <p className="mt-3 text-sm text-muted-foreground dark:text-neutral-300">Unlimited CVs, cover letters, ATS rewrites, the Humanizer and the full premium prompt library — one plan, cancel anytime.</p>
+                <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-foreground/80 dark:text-neutral-200">
                   <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Unlimited generations</li>
                   <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Full prompt library</li>
                   <li className="inline-flex items-center gap-1.5"><Sparkles className="h-3.5 w-3.5 text-primary" /> Priority AI models</li>
