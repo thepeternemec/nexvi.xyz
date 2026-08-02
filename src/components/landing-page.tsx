@@ -190,11 +190,6 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                   }`}
                 >
                   <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  {isClaude && (
-                    <span className="absolute right-5 top-5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
-                      Claude
-                    </span>
-                  )}
                   {!isClaude && t.badge && (
                     <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
                       {t.badge}
