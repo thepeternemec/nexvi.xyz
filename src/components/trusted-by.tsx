@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { BrandMarkColor, brands } from "@/components/brand-logos";
+import { BrandLogo, brands } from "@/components/brand-logos";
 
 export function TrustedBy({
   ctaLabel,
@@ -27,7 +27,7 @@ export function TrustedBy({
                 aria-hidden={i >= brands.length}
                 title={b.name}
               >
-                <BrandMarkColor brand={b.key} className="h-9 w-9" />
+                <BrandLogo brand={b} height={b.key === "apple" ? 26 : 24} />
               </span>
             ))}
           </div>

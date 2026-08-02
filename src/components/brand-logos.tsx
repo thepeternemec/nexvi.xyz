@@ -1,144 +1,70 @@
-type LogoProps = { className?: string };
+import googleAsset from "@/assets/brands/google.svg.asset.json";
+import microsoftAsset from "@/assets/brands/microsoft.svg.asset.json";
+import appleAsset from "@/assets/brands/apple.svg.asset.json";
+import metaAsset from "@/assets/brands/meta.svg.asset.json";
+import netflixAsset from "@/assets/brands/netflix.svg.asset.json";
+import adobeAsset from "@/assets/brands/adobe.svg.asset.json";
+import salesforceAsset from "@/assets/brands/salesforce.svg.asset.json";
+import nvidiaAsset from "@/assets/brands/nvidia.svg.asset.json";
+import sapAsset from "@/assets/brands/sap.svg.asset.json";
+import ibmAsset from "@/assets/brands/ibm.svg.asset.json";
+import spotifyAsset from "@/assets/brands/spotify.svg.asset.json";
+import airbnbAsset from "@/assets/brands/airbnb.svg.asset.json";
 
-const paths: Record<string, string> = {
-  apple:
-    "M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701",
-  google:
-    "M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z",
-  amazon:
-    "M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a17.617 17.617 0 01-10.951-.577 17.88 17.88 0 01-5.43-3.35c-.1-.074-.151-.15-.151-.22 0-.047.021-.09.051-.13zm6.565-6.218c0-1.005.247-1.863.743-2.577.495-.71 1.17-1.25 2.04-1.615.796-.335 1.756-.575 2.912-.72.39-.046 1.033-.103 1.92-.174v-.37c0-.93-.105-1.558-.3-1.875-.302-.43-.78-.65-1.44-.65h-.182c-.48.046-.896.196-1.246.46-.35.27-.575.63-.675 1.096-.06.3-.206.465-.435.51l-2.52-.315c-.248-.06-.372-.18-.372-.39 0-.046.007-.09.022-.15.247-1.29.855-2.25 1.82-2.88.976-.616 2.1-.975 3.39-1.05h.54c1.65 0 2.957.434 3.888 1.29.135.15.27.3.405.48.12.165.224.314.283.45.075.134.15.33.195.57.06.254.105.42.135.51.03.104.062.3.076.615.01.313.02.493.02.553v5.28c0 .376.06.72.165 1.036.105.313.21.54.315.674l.51.674c.09.136.136.256.136.36 0 .12-.06.226-.18.314-1.2 1.05-1.86 1.62-1.963 1.71-.165.135-.375.15-.63.045a6.062 6.062 0 01-.526-.496l-.31-.347a9.391 9.391 0 01-.317-.42l-.3-.435c-.81.886-1.603 1.44-2.4 1.665-.494.15-1.093.227-1.83.227-1.11 0-2.04-.343-2.76-1.034-.72-.69-1.08-1.665-1.08-2.94l-.05-.076zm3.753-.438c0 .566.14 1.02.425 1.364.285.34.675.512 1.155.512.045 0 .106-.007.195-.02.09-.016.134-.023.166-.023.614-.16 1.08-.553 1.424-1.178.165-.28.285-.58.36-.91.09-.32.12-.59.135-.8.015-.195.015-.54.015-1.005v-.54c-.84 0-1.484.06-1.92.18-1.275.36-1.92 1.17-1.92 2.43l-.035-.02zm9.162 7.027c.03-.06.075-.11.132-.17.362-.243.714-.41 1.05-.5a8.094 8.094 0 011.612-.24c.14-.012.28 0 .41.03.65.06 1.05.168 1.172.33.063.09.099.228.099.39v.15c0 .51-.149 1.11-.424 1.8-.278.69-.664 1.248-1.156 1.68-.073.06-.14.09-.197.09-.03 0-.06 0-.09-.012-.09-.044-.107-.12-.064-.24.54-1.26.806-2.143.806-2.64 0-.15-.03-.27-.087-.344-.145-.166-.55-.257-1.224-.257-.243 0-.533.016-.87.046-.363.045-.7.09-1 .135-.09 0-.148-.014-.18-.044-.03-.03-.036-.047-.02-.077 0-.017.006-.03.02-.063v-.06z",
-  meta:
-    "M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.987 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-3.053 1.308-.652.57-1.257 1.29-1.82 2.05-.69-.875-1.335-1.547-1.958-2.056-1.182-.966-2.315-1.303-3.454-1.303zm10.16 2.053c1.147 0 2.188.758 2.992 1.999 1.132 1.748 1.647 4.195 1.647 6.4 0 1.548-.368 2.9-1.839 2.9-.58 0-1.027-.23-1.664-1.004-.496-.601-1.343-1.878-2.832-4.358l-.617-1.028a44.908 44.908 0 0 0-1.255-1.98c.07-.109.141-.224.211-.327 1.12-1.667 2.118-2.602 3.358-2.602zm-10.201.553c1.265 0 2.058.791 2.675 1.446.307.327.737.871 1.234 1.579l-1.02 1.566c-.757 1.163-1.882 3.017-2.837 4.338-1.191 1.649-1.81 1.817-2.486 1.817-.524 0-1.038-.237-1.383-.794-.263-.426-.464-1.13-.464-2.046 0-2.221.63-4.535 1.66-6.088.454-.687.964-1.226 1.533-1.533a2.264 2.264 0 0 1 1.088-.285z",
-  netflix:
-    "M5.398 0v.006c3.028 8.556 5.37 15.175 8.348 23.596 2.344.058 4.85.398 4.854.398-2.8-7.924-5.923-16.747-8.487-24zm8.489 0v9.63L18.6 22.951c-.043-7.86-.004-15.913.002-22.95zM5.398 1.05V24c1.873-.225 2.81-.312 4.715-.398v-9.22z",
-  salesforce:
-    "M10.006 5.415a4.195 4.195 0 013.045-1.306c1.56 0 2.954.9 3.69 2.205.63-.3 1.35-.45 2.1-.45 2.85 0 5.159 2.34 5.159 5.22s-2.31 5.22-5.176 5.22c-.345 0-.69-.044-1.02-.104a3.75 3.75 0 01-3.3 1.95c-.6 0-1.155-.15-1.65-.375A4.314 4.314 0 018.88 20.4a4.302 4.302 0 01-4.05-2.82c-.27.062-.54.076-.825.076-2.204 0-4.005-1.8-4.005-4.05 0-1.5.811-2.805 2.01-3.51-.255-.57-.39-1.2-.39-1.846 0-2.58 2.1-4.65 4.65-4.65 1.53 0 2.85.705 3.72 1.8",
-  adobe: "M13.966 22.624l-1.69-4.281H8.122l3.892-9.144 5.662 13.425zM8.884 1.376H0v21.248zm15.116 0h-8.884L24 22.624Z",
-  nvidia:
-    "M8.948 8.798v-1.43a6.7 6.7 0 0 1 .424-.018c3.922-.124 6.493 3.374 6.493 3.374s-2.774 3.851-5.75 3.851c-.398 0-.787-.062-1.158-.185v-4.346c1.528.185 1.837.857 2.747 2.385l2.04-1.714s-1.492-1.952-4-1.952a6.016 6.016 0 0 0-.796.035m0-4.735v2.138l.424-.027c5.45-.185 9.01 4.47 9.01 4.47s-4.08 4.964-8.33 4.964c-.37 0-.733-.035-1.095-.097v1.325c.3.035.61.062.91.062 3.957 0 6.82-2.023 9.593-4.408.459.371 2.34 1.263 2.73 1.652-2.633 2.208-8.772 3.984-12.253 3.984-.335 0-.653-.018-.971-.053v1.864H24V4.063zm0 10.326v1.131c-3.657-.654-4.673-4.46-4.673-4.46s1.758-1.944 4.673-2.262v1.237H8.94c-1.528-.186-2.73 1.245-2.73 1.245s.68 2.412 2.739 3.11M2.456 10.9s2.164-3.197 6.5-3.533V6.201C4.153 6.59 0 10.653 0 10.653s2.35 6.802 8.948 7.42v-1.237c-4.84-.6-6.492-5.936-6.492-5.936z",
-  accenture: "m.66 16.95 13.242-4.926L.66 6.852V0l22.68 9.132v5.682L.66 24Z",
-  sap:
-    "M0 6.064v11.872h12.13L24 6.064zm3.264 2.208h.005c.863.001 1.915.245 2.676.633l-.82 1.43c-.835-.404-1.255-.442-1.73-.467-.708-.038-1.064.215-1.069.488-.007.332.669.633 1.305.838.964.306 2.19.715 2.377 1.9L7.77 8.437h2.046l2.064 5.576-.007-5.575h2.37c2.257 0 3.318.764 3.318 2.519 0 1.575-1.09 2.514-2.936 2.514h-.763l-.01 2.094-3.588-.003-.25-.908c-.37.122-.787.189-1.23.189-.456 0-.885-.071-1.263-.2l-.358.919-2 .006.09-.462c-.029.025-.057.05-.087.074-.535.43-1.208.629-2.037.644l-.213.002a5.075 5.075 0 0 1-2.581-.675l.73-1.448c.79.467 1.286.572 1.956.558.347-.007.598-.07.761-.239a.557.557 0 0 0 .156-.369c.007-.376-.53-.553-1.185-.756-.531-.164-1.135-.389-1.606-.735-.559-.41-.825-.924-.812-1.65a1.99 1.99 0 0 1 .566-1.377c.519-.537 1.357-.863 2.363-.863zm10.597 1.67v1.904h.521c.694 0 1.247-.23 1.248-.964 0-.709-.554-.94-1.248-.94zm-5.087.767l-.748 2.362c.223.085.481.133.757.133.268 0 .52-.047.742-.126l-.736-2.37z",
+export type Brand = {
+  key: string;
+  name: string;
+  url: string;
+  /** intrinsic aspect ratio (width / height) of the official logo file */
+  ratio: number;
+  /** monochrome logo — invert it in dark mode so it stays legible */
+  mono?: boolean;
 };
 
-export type BrandKey = keyof typeof paths;
+/**
+ * Official brand logos (real logo files, wordmark included where the brand has one).
+ * Rendered as <img> so the original artwork and colours stay untouched.
+ */
+export const brands: Brand[] = [
+  { key: "google", name: "Google", url: googleAsset.url, ratio: 512 / 168 },
+  { key: "microsoft", name: "Microsoft", url: microsoftAsset.url, ratio: 512 / 110 },
+  { key: "meta", name: "Meta", url: metaAsset.url, ratio: 512 / 104 },
+  { key: "netflix", name: "Netflix", url: netflixAsset.url, ratio: 512 / 138 },
+  { key: "adobe", name: "Adobe", url: adobeAsset.url, ratio: 512 / 134 },
+  { key: "salesforce", name: "Salesforce", url: salesforceAsset.url, ratio: 256 / 180 },
+  { key: "nvidia", name: "NVIDIA", url: nvidiaAsset.url, ratio: 512 / 98 },
+  { key: "sap", name: "SAP", url: sapAsset.url, ratio: 512 / 254 },
+  { key: "ibm", name: "IBM", url: ibmAsset.url, ratio: 512 / 205, mono: true },
+  { key: "spotify", name: "Spotify", url: spotifyAsset.url, ratio: 512 / 160 },
+  { key: "airbnb", name: "Airbnb", url: airbnbAsset.url, ratio: 512 / 161 },
+  { key: "apple", name: "Apple", url: appleAsset.url, ratio: 256 / 315, mono: true },
+];
 
-export function BrandMark({ brand, className }: LogoProps & { brand: string }) {
-  const d = paths[brand];
-  if (!d) return null;
-  return (
-    <svg viewBox="0 0 24 24" role="img" aria-hidden="true" fill="currentColor" className={className}>
-      <path d={d} />
-    </svg>
-  );
-}
+export const brandByKey = Object.fromEntries(brands.map((b) => [b.key, b]));
 
 /**
- * Full-colour brand logomarks (symbol only, no wordmark) — Stripe-style logo row.
- * Monochrome brands use `currentColor` so they stay legible in dark mode.
+ * Renders an official brand logo at a fixed height, width derived from the
+ * logo's own aspect ratio so nothing is squashed.
  */
-export function BrandMarkColor({ brand, className }: LogoProps & { brand: string }) {
-  const common = { viewBox: "0 0 24 24", role: "img" as const, "aria-hidden": true, className };
-
-  switch (brand) {
-    case "google":
-      return (
-        <svg {...common}>
-          <path
-            fill="#4285F4"
-            d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.46a5.53 5.53 0 0 1-2.4 3.63v3.01h3.88c2.27-2.09 3.58-5.17 3.58-8.83z"
-          />
-          <path
-            fill="#34A853"
-            d="M12 24c3.24 0 5.96-1.08 7.94-2.9l-3.88-3.01c-1.08.72-2.45 1.15-4.06 1.15-3.13 0-5.78-2.11-6.72-4.96H1.28v3.13A11.99 11.99 0 0 0 12 24z"
-          />
-          <path fill="#FBBC05" d="M5.28 14.28A7.2 7.2 0 0 1 4.9 12c0-.79.14-1.56.38-2.28V6.59H1.28A11.99 11.99 0 0 0 0 12c0 1.94.46 3.77 1.28 5.41l4-3.13z" />
-          <path
-            fill="#EA4335"
-            d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.44-3.44C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.28 6.59l4 3.13C6.22 6.86 8.87 4.75 12 4.75z"
-          />
-        </svg>
-      );
-    case "apple":
-      return (
-        <svg {...common} fill="currentColor">
-          <path d={paths.apple} />
-        </svg>
-      );
-    case "amazon":
-      return (
-        <svg {...common} fill="#FF9900">
-          <path d={paths.amazon} />
-        </svg>
-      );
-    case "meta":
-      return (
-        <svg {...common}>
-          <defs>
-            <linearGradient id="brand-meta-g" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#0064E0" />
-              <stop offset="100%" stopColor="#0082FB" />
-            </linearGradient>
-          </defs>
-          <path fill="url(#brand-meta-g)" d={paths.meta} />
-        </svg>
-      );
-    case "netflix":
-      return (
-        <svg {...common} fill="#E50914">
-          <path d={paths.netflix} />
-        </svg>
-      );
-    case "salesforce":
-      return (
-        <svg {...common} fill="#00A1E0">
-          <path d={paths.salesforce} />
-        </svg>
-      );
-    case "adobe":
-      return (
-        <svg {...common} fill="#EB1000">
-          <path d={paths.adobe} />
-        </svg>
-      );
-    case "nvidia":
-      return (
-        <svg {...common} fill="#76B900">
-          <path d={paths.nvidia} />
-        </svg>
-      );
-    case "sap":
-      return (
-        <svg {...common}>
-          <defs>
-            <linearGradient id="brand-sap-g" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#00AEEF" />
-              <stop offset="100%" stopColor="#0056A0" />
-            </linearGradient>
-          </defs>
-          <path fill="url(#brand-sap-g)" d={paths.sap} />
-        </svg>
-      );
-    case "accenture":
-      return (
-        <svg {...common} fill="#A100FF">
-          <path d={paths.accenture} />
-        </svg>
-      );
-    default:
-      return null;
-  }
+export function BrandLogo({
+  brand,
+  height = 28,
+  className,
+}: {
+  brand: string | Brand;
+  height?: number;
+  className?: string;
+}) {
+  const b = typeof brand === "string" ? brandByKey[brand] : brand;
+  if (!b) return null;
+  return (
+    <img
+      src={b.url}
+      alt={`${b.name} logo`}
+      loading="lazy"
+      decoding="async"
+      style={{ height, width: height * b.ratio }}
+      className={`${b.mono ? "dark:invert" : ""} ${className ?? ""}`.trim()}
+    />
+  );
 }
-
-export const brands: { key: string; name: string }[] = [
-  { key: "google", name: "Google" },
-  { key: "apple", name: "Apple" },
-  { key: "amazon", name: "Amazon" },
-  { key: "meta", name: "Meta" },
-  { key: "netflix", name: "Netflix" },
-  { key: "salesforce", name: "Salesforce" },
-  { key: "adobe", name: "Adobe" },
-  { key: "nvidia", name: "NVIDIA" },
-  { key: "sap", name: "SAP" },
-  { key: "accenture", name: "Accenture" },
-];
