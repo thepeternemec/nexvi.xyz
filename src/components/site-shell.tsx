@@ -280,14 +280,25 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b1230] text-slate-200">
+      {/* light-theme gradient: indigo/blue signal */}
       <div
-        className="pointer-events-none absolute inset-0 -z-0"
+        className="pointer-events-none absolute inset-0 -z-0 dark:hidden"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 70% 60% at 12% 0%, rgba(79,70,229,0.35), transparent 65%), radial-gradient(ellipse 60% 55% at 88% 5%, rgba(37,99,235,0.28), transparent 62%), linear-gradient(180deg, #101a44 0%, #0b1230 55%, #070c20 100%)",
+            "radial-gradient(ellipse 75% 65% at 8% -10%, rgba(99,102,241,0.45), transparent 62%), radial-gradient(ellipse 65% 55% at 92% 0%, rgba(56,189,248,0.28), transparent 60%), linear-gradient(180deg, #16215c 0%, #0d1540 48%, #080d24 100%)",
         }}
       />
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-4">
+      {/* dark-theme gradient: near-black graphite */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-0 hidden dark:block"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 70% 60% at 15% -10%, rgba(99,102,241,0.20), transparent 60%), radial-gradient(ellipse 60% 50% at 90% 0%, rgba(148,163,184,0.10), transparent 58%), linear-gradient(180deg, #14141a 0%, #0c0c11 55%, #06060a 100%)",
+        }}
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-4">
+
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
             <span className="font-display text-lg tracking-tight text-white">ApplyWise</span>
