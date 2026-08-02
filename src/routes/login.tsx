@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandMark } from "@/components/brand-mark";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import {
   AlertCircle,
@@ -231,7 +232,7 @@ export function AuthShell({
         <div className="absolute inset-0 -z-10 bg-grid opacity-[0.55] mask-fade-b" />
         <div className="relative flex h-full flex-col justify-between p-12 xl:p-16">
           <a href={href("/")} className="inline-flex items-center gap-2">
-            <span className="font-display text-lg tracking-tight">ApplyWise</span>
+            <BrandMark size="md" />
           </a>
 
           <div className="max-w-md">
@@ -273,7 +274,7 @@ export function AuthShell({
       <div className="relative flex items-center justify-center p-6 sm:p-10">
         <div className="w-full max-w-[26rem]">
           <a href={href("/")} className="mb-8 inline-flex items-center gap-2 lg:hidden">
-            <span className="font-display text-xl tracking-tight">ApplyWise</span>
+            <BrandMark size="lg" />
           </a>
           <div className="rounded-2xl border border-border/70 bg-card/70 p-7 shadow-[0_24px_60px_-40px_color-mix(in_oklab,var(--primary)_45%,transparent)] backdrop-blur-xl sm:p-8">
             <h1 className="font-display text-3xl tracking-tight">{pageTitle}</h1>

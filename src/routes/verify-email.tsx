@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate, useSearch } from "@tanstack/react-router"
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -124,7 +125,7 @@ function VerifyEmailPage() {
     <div className="flex min-h-screen items-center justify-center bg-background p-6">
       <div className="w-full max-w-sm space-y-6 text-center">
         <a href="/" className="inline-flex items-center justify-center gap-2">
-          <span className="font-display text-xl">ApplyWise</span>
+          <BrandMark size="lg" />
         </a>
 
         {status === "verifying" && (

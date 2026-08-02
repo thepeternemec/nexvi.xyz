@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandMark } from "@/components/brand-mark";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { AlertCircle, CheckCircle2, KeyRound, Loader2, Lock } from "lucide-react";
 
@@ -151,7 +152,7 @@ export function ResetPasswordPage() {
         <div className="absolute inset-0 bg-grain opacity-50" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <a href={alternateHref(locale, "/")} className="flex items-center gap-2">
-            <span className="font-display text-xl">ApplyWise</span>
+            <BrandMark size="lg" />
           </a>
           <div>
             <h2 className="font-display text-5xl leading-tight tracking-tight">
@@ -172,7 +173,7 @@ export function ResetPasswordPage() {
             href={alternateHref(locale, "/")}
             className="mb-8 inline-flex items-center gap-2 lg:hidden"
           >
-            <span className="font-display text-xl">ApplyWise</span>
+            <BrandMark size="lg" />
           </a>
 
           {status === "loading" && (
