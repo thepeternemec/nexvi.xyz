@@ -145,11 +145,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
       <div className="mx-auto flex h-13 w-full max-w-6xl items-center justify-between gap-4 rounded-[18px] border border-border/50 bg-background/60 px-2 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.65)_inset,0_1px_2px_rgba(16,24,64,0.04),0_12px_32px_-16px_rgba(16,24,64,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/50 dark:shadow-[0_1px_0_rgba(255,255,255,0.07)_inset,0_12px_32px_-16px_rgba(0,0,0,0.6)] sm:px-3 sm:pl-6">
-        <a href={href("/")} className="group flex shrink-0 items-center gap-2">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-primary/40 transition group-hover:animate-ping" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
+        <a href={href("/")} className="group flex shrink-0 items-center">
           <span className="font-display text-[15px] font-medium tracking-tight transition-opacity group-hover:opacity-70">ApplyWise</span>
         </a>
         <nav className="hidden items-center gap-0.5 lg:flex">
