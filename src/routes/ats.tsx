@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle } from "lucide-react";
+import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle, Copy, Download, RotateCcw, Eraser } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { scoreATS } from "@/lib/career.functions";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+
 
 export const Route = createFileRoute("/ats")({
   head: () => ({
