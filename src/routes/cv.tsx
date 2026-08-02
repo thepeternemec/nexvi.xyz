@@ -10,6 +10,7 @@ import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
 import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
+import { ToolHero, ToolOutro } from "@/components/tool-hero";
 
 
 
@@ -219,6 +220,14 @@ export function CVPage() {
 
         </div>
       </section>
+      <ToolOutro
+        title="A tailored CV is step one. Match the whole application."
+        text="Recruiters compare your CV, your cover letter and your ATS score together. Generate the letter next, then score the pair against the posting before you hit send."
+        primaryLabel="Write my cover letter"
+        primaryHref="/cover-letter"
+        secondaryLabel="Score my CV against the job"
+        secondaryHref="/ats"
+      />
       {gate.gates}
     </SiteShell>
   );
