@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { humanizeText } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
+import { ToolHero, ToolOutro } from "@/components/tool-hero";
 
 export const Route = createFileRoute("/humanizer")({
   head: () => ({
@@ -79,14 +80,20 @@ function HumanizerPage() {
 
   return (
     <SiteShell>
+      <ToolHero
+        eyebrow="Humanizer • see every change"
+        title="Keep the AI speed. Lose the"
+        titleEm="AI tells."
+        sub="Recruiters spot the patterns: hollow superlatives, tricolons, \u201cdelve\u201d, \u201crobust\u201d, sentences that say nothing twice. The Humanizer rewrites those away and shows you a word-level diff, so you stay in control of every edit."
+        bullets={["Word-level diff view", "Three editing strengths", "Works on any text"]}
+        icon={Sparkles}
+        steps={[
+          { label: "Paste your text", text: "A CV summary, a cover letter, a LinkedIn About section — anything that reads machine-made." },
+          { label: "Choose an editing strength", text: "Light keeps your structure; strong rebuilds the rhythm of the sentences." },
+          { label: "Review the diff", text: "Green is added, red is cut. Accept the version that still sounds like you." },
+        ]}
+      />
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground text-background"><Sparkles className="h-5 w-5" /></div>
-          <div>
-            <h1 className="font-display text-3xl tracking-tight sm:text-4xl">Humanizer</h1>
-            <p className="text-sm text-muted-foreground">Strip AI tells from your text — see exactly what changed.</p>
-          </div>
-        </div>
 
         <div className="mt-8 space-y-4">
           <div className="grid gap-6 lg:grid-cols-2">
@@ -161,6 +168,14 @@ function HumanizerPage() {
 
         </div>
       </section>
+      <ToolOutro
+        title="Now put that voice into a full application."
+        text="Humanized text works hardest inside a document that's already aligned to the role. Generate a tailored CV or cover letter, then run it back through here for the final pass."
+        primaryLabel="Generate a tailored CV"
+        primaryHref="/cv"
+        secondaryLabel="Write a cover letter"
+        secondaryHref="/cover-letter"
+      />
       {gate.gates}
     </SiteShell>
   );

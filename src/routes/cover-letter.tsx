@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { generateCoverLetter } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
+import { ToolHero, ToolOutro } from "@/components/tool-hero";
 
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
@@ -75,14 +76,21 @@ export function CoverLetterPage() {
 
   return (
     <SiteShell>
+      <ToolHero
+        eyebrow="Cover Letter Lab • one letter, one role"
+        title="A cover letter written for"
+        titleEm="this job"
+        titleAfter="— not for everyone."
+        sub="Generic letters read like templates because they are. This one pulls the company's language, the role's real priorities and your actual experience into a short, specific letter a hiring manager will finish reading."
+        bullets={["Company- and role-aware", "Four tones to pick from", "Copy or download instantly"]}
+        icon={Mail}
+        steps={[
+          { label: "Add the company and role", text: "Optional, but it makes the opening line land instead of hedging." },
+          { label: "Paste the job description", text: "The model finds the two or three things they actually care about." },
+          { label: "Pick your tone", text: "Professional, enthusiastic, warm or concise — same substance, different voice." },
+        ]}
+      />
       <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground text-background"><Mail className="h-5 w-5" /></div>
-          <div>
-            <h1 className="font-display text-3xl tracking-tight sm:text-4xl">Cover Letter Generator</h1>
-            <p className="text-sm text-muted-foreground">Personalized, specific, never generic.</p>
-          </div>
-        </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="space-y-4">
@@ -127,6 +135,14 @@ export function CoverLetterPage() {
           </div>
         </div>
       </section>
+      <ToolOutro
+        title="Make sure the letter and the CV tell the same story."
+        text="A sharp letter loses its power next to a CV that still uses your old wording. Regenerate the CV for this role, or run both through the ATS Optimizer to see what a screener sees."
+        primaryLabel="Tailor my CV for this role"
+        primaryHref="/cv"
+        secondaryLabel="Check my ATS score"
+        secondaryHref="/ats"
+      />
       {gate.gates}
     </SiteShell>
   );

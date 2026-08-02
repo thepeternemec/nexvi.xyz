@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { scoreATS } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
+import { ToolHero, ToolOutro } from "@/components/tool-hero";
 
 export const Route = createFileRoute("/ats")({
   head: () => ({
@@ -81,14 +82,20 @@ export function ATSPage() {
 
   return (
     <SiteShell>
+      <ToolHero
+        eyebrow="ATS Optimizer • see what the screener sees"
+        title="Find out why your CV never"
+        titleEm="reaches a human."
+        sub="Applicant tracking systems rank you before anyone reads you. Paste your CV and the job description to get a match score, the exact keywords you're missing, formatting checks and the rewrites that move the number."
+        bullets={["Match score out of 100", "Matched and missing keywords", "Formatting and section checks"]}
+        icon={Target}
+        steps={[
+          { label: "Paste the job description", text: "The posting defines the keyword set the screener is scoring you against." },
+          { label: "Paste your current CV", text: "Plain text is fine — that's roughly what the parser reads anyway." },
+          { label: "Fix what the report flags", text: "Work through the missing keywords and rewrite suggestions, then re-score." },
+        ]}
+      />
       <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground text-background"><Target className="h-5 w-5" /></div>
-          <div>
-            <h1 className="font-display text-3xl tracking-tight sm:text-4xl">ATS Optimizer</h1>
-            <p className="text-sm text-muted-foreground">See how your CV stacks up. Get specific, actionable fixes.</p>
-          </div>
-        </div>
 
         <form onSubmit={onScore} className="mt-8 space-y-4">
           <div className="grid gap-4 lg:grid-cols-2">
@@ -234,6 +241,14 @@ export function ATSPage() {
           </div>
         )}
       </section>
+      <ToolOutro
+        title="Low score? Don't edit line by line — rebuild it."
+        text="When too many keywords are missing, rewriting by hand takes hours. Regenerate the CV against this exact posting, then come back and score it again to confirm the jump."
+        primaryLabel="Rebuild my CV for this job"
+        primaryHref="/cv"
+        secondaryLabel="Browse ATS prompts"
+        secondaryHref="/marketplace"
+      />
       {gate.gates}
     </SiteShell>
   );

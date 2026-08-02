@@ -10,6 +10,7 @@ import { generateCV } from "@/lib/career.functions";
 import { DocumentRender, toPlainText } from "@/components/document-render";
 import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
+import { ToolHero, ToolOutro } from "@/components/tool-hero";
 
 
 
@@ -120,14 +121,21 @@ export function CVPage() {
 
   return (
     <SiteShell>
+      <ToolHero
+        eyebrow="CV Generator • built on the latest AI models"
+        title="Turn any job description into a"
+        titleEm="CV that beats the bots."
+        sub="Most CVs are rejected before a human reads them. Paste the posting and your background — the model rewrites your experience in the recruiter's own language, keeps the structure ATS parsers expect, and hands you a clean PDF in under a minute."
+        bullets={["3 free generations", "No credit card", "ATS-safe formatting"]}
+        icon={FileText}
+        steps={[
+          { label: "Paste the job description", text: "Any posting, any language. The model reads the requirements, seniority and tone." },
+          { label: "Add your background", text: "Rough notes are fine — bullet points, an old CV, or a LinkedIn dump." },
+          { label: "Download your tailored CV", text: "Keyword-aligned, quantified, recruiter-readable. Preview it, then export a PDF." },
+        ]}
+      />
       <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6">
-        <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground text-background"><FileText className="h-5 w-5" /></div>
-          <div>
-            <h1 className="font-display text-3xl tracking-tight sm:text-4xl">AI CV Generator</h1>
-            <p className="text-sm text-muted-foreground">Paste a job description and your background. Get a tailored, ATS-ready CV.</p>
-          </div>
-        </div>
+
 
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="space-y-4">
@@ -212,6 +220,14 @@ export function CVPage() {
 
         </div>
       </section>
+      <ToolOutro
+        title="A tailored CV is step one. Match the whole application."
+        text="Recruiters compare your CV, your cover letter and your ATS score together. Generate the letter next, then score the pair against the posting before you hit send."
+        primaryLabel="Write my cover letter"
+        primaryHref="/cover-letter"
+        secondaryLabel="Score my CV against the job"
+        secondaryHref="/ats"
+      />
       {gate.gates}
     </SiteShell>
   );
