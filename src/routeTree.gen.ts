@@ -40,6 +40,7 @@ import { Route as GerIndexRouteImport } from './routes/ger/index'
 import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as ItSignupRouteImport } from './routes/it/signup'
 import { Route as ItResetPasswordRouteImport } from './routes/it/reset-password'
@@ -263,6 +264,11 @@ const EsIndexRoute = EsIndexRouteImport.update({
 const DeIndexRoute = DeIndexRouteImport.update({
   id: '/de/',
   path: '/de/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromptSlugRoute = PromptSlugRouteImport.update({
@@ -704,6 +710,7 @@ export interface FileRoutesByFullPath {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -806,6 +813,7 @@ export interface FileRoutesByTo {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
   '/fr': typeof FrIndexRoute
@@ -909,6 +917,7 @@ export interface FileRoutesById {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -1013,6 +1022,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1115,6 +1125,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog'
     | '/de'
     | '/es'
     | '/fr'
@@ -1217,6 +1228,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1320,6 +1332,7 @@ export interface RootRouteChildren {
   ItResetPasswordRoute: typeof ItResetPasswordRoute
   ItSignupRoute: typeof ItSignupRoute
   PromptSlugRoute: typeof PromptSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
   FrIndexRoute: typeof FrIndexRoute
@@ -1551,6 +1564,13 @@ declare module '@tanstack/react-router' {
       path: '/de'
       fullPath: '/de/'
       preLoaderRoute: typeof DeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prompt/$slug': {
@@ -2129,6 +2149,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItResetPasswordRoute: ItResetPasswordRoute,
   ItSignupRoute: ItSignupRoute,
   PromptSlugRoute: PromptSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,
   FrIndexRoute: FrIndexRoute,
