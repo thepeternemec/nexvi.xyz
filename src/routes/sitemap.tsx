@@ -61,7 +61,7 @@ const groups: { title: string; links: { href: string; label: string }[] }[] = [
   },
 ];
 
-function SitemapPage() {
+export function SitemapPage() {
   return (
     <SiteShell>
       <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">

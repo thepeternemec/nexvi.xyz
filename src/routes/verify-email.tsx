@@ -32,7 +32,7 @@ function parseHashToken(name: string): string | null {
   return match?.[1] ? decodeURIComponent(match[1]) : null;
 }
 
-function VerifyEmailPage() {
+export function VerifyEmailPage() {
   const navigate = useNavigate();
   const search = useSearch({ strict: false }) as VerifySearch;
   const nextPath =
