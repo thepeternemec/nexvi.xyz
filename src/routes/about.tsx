@@ -68,9 +68,18 @@ const PRINCIPLES = [
 ];
 
 const TIMELINE = [
-  ["2024", "The first prompt", "A shared prompt doc for tailoring CVs quietly turned into hundreds of interview invites."],
-  ["2025", "ApplyWise launches", "The prompt library, CV generator and cover letter lab ship as one product."],
-  ["2026", "ATS scoring & Humanizer", "Category-level ATS breakdowns and AI-text humanizing land for every plan."],
+  [
+    "It started open source",
+    "We released our first prompt library for free as promptacademia.com. By April 2026 thousands of job seekers were using it to rewrite their CVs — proof that the demand was for alignment, not another template.",
+  ],
+  [
+    "From prompts to products",
+    "In June we put frontier AI models behind the best-performing prompts, turning them into two real tools: a CV generator that optimises your experience against the job text, and a cover letter writer that references the actual role.",
+  ],
+  [
+    "Beating the bots",
+    "The same story kept appearing in our inbox and across social feeds: strong candidates filtered out before a human ever looked. So through June and July we used the top AI models to build the ATS Optimizer and the Humanizer — one shows exactly why you are being screened out, the other makes the writing sound like you again.",
+  ],
 ];
 
 function AboutPage() {
@@ -187,9 +196,9 @@ function AboutPage() {
             <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">How we got here</div>
           </Reveal>
           <div className="mt-10 space-y-px overflow-hidden rounded-2xl border border-border bg-border">
-            {TIMELINE.map(([year, title, body], i) => (
-              <Reveal key={year} delay={i * 80} className="grid gap-2 bg-background px-7 py-7 sm:grid-cols-[110px_minmax(0,1fr)] sm:gap-8">
-                <div className="font-mono text-[12px] tracking-[0.14em] text-primary">{year}</div>
+            {TIMELINE.map(([title, body], i) => (
+              <Reveal key={title} delay={i * 80} className="grid gap-2 bg-background px-7 py-7 sm:grid-cols-[110px_minmax(0,1fr)] sm:gap-8">
+                <div className="font-mono text-[12px] tracking-[0.14em] text-primary">0{i + 1}</div>
                 <div>
                   <div className="text-[15px] font-semibold tracking-tight">{title}</div>
                   <p className="mt-1.5 text-[14px] leading-relaxed text-muted-foreground">{body}</p>
