@@ -333,7 +333,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
