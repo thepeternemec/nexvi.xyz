@@ -23,7 +23,6 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/humanizer", changefreq: "weekly", priority: "0.8" },
           { path: "/ats", changefreq: "weekly", priority: "0.8" },
           { path: "/marketplace", changefreq: "daily", priority: "0.9" },
-          { path: "/library", changefreq: "daily", priority: "0.9" },
           { path: "/guides/how-to-write-a-resume", changefreq: "monthly", priority: "0.9" },
           { path: "/about", changefreq: "monthly", priority: "0.6" },
           { path: "/assistant", changefreq: "weekly", priority: "0.6" },
@@ -40,7 +39,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         }
 
         for (const l of LOCALES) {
-          for (const path of ["", "/cv", "/cover-letter", "/ats", "/marketplace", "/library", "/pricing"]) {
+          for (const path of ["", "/cv", "/cover-letter", "/ats", "/marketplace", "/pricing"]) {
             entries.push({ path: `/${l}${path}`, changefreq: "weekly", priority: "0.5" });
           }
           for (const p of prompts) {

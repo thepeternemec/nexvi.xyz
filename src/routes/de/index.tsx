@@ -27,4 +27,4 @@ function make(locale: Locale, path: string, ogLocale: string) {
   };
 }
 
-export const Route = createFileRoute("/de/")(make("de", "/de", "de_DE"));
+export const Route = createFileRoute("/de/")(make("de", "https://applywise.eu/de", "de_DE"));
