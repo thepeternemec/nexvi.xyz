@@ -128,9 +128,6 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
                   <span className="block truncate text-[13px] font-medium text-foreground" data-no-translate>
                     {localeLabel[l]}
                   </span>
-                  <span className="block text-[11px] uppercase tracking-wide text-muted-foreground" data-no-translate>
-                    {l}
-                  </span>
                 </span>
                 {l === locale && <Check className="h-3.5 w-3.5 shrink-0 text-primary" />}
               </a>
