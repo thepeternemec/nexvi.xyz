@@ -160,8 +160,8 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
         <div className="text-center">
-          <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.toolsKicker}</div>
-          <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.toolsTitle}</h2>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
+          <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
         </div>
         <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
           <div className="flex gap-5 snap-x snap-mandatory">
@@ -170,7 +170,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               const Icon = ICONS[i];
               const link = ["/library", "/cv", "/cover-letter", "/ats", "/humanizer"][i];
               return (
-                <a key={link} data-tool-card href={href(link)} className="group relative flex w-[280px] shrink-0 snap-start flex-col rounded-3xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg sm:w-[320px]">
+                <a key={link} data-tool-card href={href(link)} className="group relative flex w-[280px] shrink-0 snap-start flex-col rounded-2xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg sm:w-[320px]">
                   {t.badge && (
                     <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
                       {t.badge}
@@ -179,7 +179,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                   <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold">{t.title}</h3>
+                  <h3 className="mt-5 text-[15px] font-medium">{t.title}</h3>
                   <p className="mt-2 flex-1 text-sm text-muted-foreground">{t.desc}</p>
                   <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
                     {c.open} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
@@ -212,8 +212,8 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.howKicker}</div>
-              <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">{c.howTitle}</h2>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.howKicker}</div>
+              <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.howTitle}</h2>
               <p className="mt-4 text-muted-foreground">{c.howSub}</p>
               <ul className="mt-8 space-y-5">
                 {c.howSteps.map(([t, d], i) => (
@@ -227,7 +227,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                 ))}
               </ul>
             </div>
-            <div className="rounded-3xl border border-border/70 bg-background p-6 shadow-sm">
+            <div className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm">
               <div className="rounded-xl bg-muted/40 p-4 font-mono text-xs">
                 <div className="text-muted-foreground">// Job description</div>
                 <div className="mt-1 line-clamp-3">Senior Product Designer at Linear. Lead end-to-end design for new B2B SaaS workflows. Ship fast. Collaborate with PMs and eng…</div>
@@ -254,7 +254,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
       {/* HUMANIZER SPOTLIGHT */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div className="order-2 lg:order-1 rounded-3xl border border-border/70 bg-card p-6 shadow-sm">
+          <div className="order-2 lg:order-1 rounded-2xl border border-border/70 bg-card p-6 shadow-sm">
             <div className="grid grid-cols-2 gap-3 text-xs">
               <div className="rounded-2xl border border-border/60 bg-muted/30 p-4">
                 <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -288,7 +288,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
             <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
               <Wand2 className="h-3.5 w-3.5" /> Humanizer
             </div>
-            <h2 className="font-display mt-4 text-3xl tracking-tight sm:text-5xl">
+            <h2 className="font-display mt-4 text-2xl tracking-tight sm:text-[2rem]">
               Sound like <em className="italic text-muted-foreground">you</em>, not a chatbot.
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -320,7 +320,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
                 <Library className="h-3.5 w-3.5" /> {c.librarySpotBadge}
               </div>
-              <h2 className="font-display mt-4 text-3xl tracking-tight sm:text-5xl">{c.librarySpotTitle}</h2>
+              <h2 className="font-display mt-4 text-2xl tracking-tight sm:text-[2rem]">{c.librarySpotTitle}</h2>
               <p className="mt-4 text-muted-foreground">{c.librarySpotSub}</p>
               <ul className="mt-6 space-y-3 text-sm">
                 {c.librarySpotBullets.map((t) => (
@@ -332,7 +332,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                 
               </div>
             </div>
-            <div className="rounded-3xl border border-border/70 bg-background p-6 shadow-sm">
+            <div className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm">
               <div className="flex items-center gap-2 rounded-full border border-border/70 bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
                 <Search className="h-4 w-4" /> "prompts that actually land interviews"
               </div>
@@ -360,8 +360,8 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
       <section className="border-y border-border/60 bg-muted/20">
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Everything in one place</div>
-            <h2 className="font-display mt-3 text-3xl tracking-tight sm:text-4xl">One toolkit for the whole job hunt.</h2>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Everything in one place</div>
+            <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">One toolkit for the whole job hunt.</h2>
             <p className="mt-4 text-muted-foreground">From the first prompt to the signed offer — every step of the modern job search, powered by AI you can actually trust.</p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -376,11 +376,11 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
               { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
             ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-3xl border border-border/70 bg-background p-6 transition hover:border-foreground/30 hover:shadow-sm">
+              <div key={title} className="rounded-2xl border border-border/70 bg-background p-6 transition hover:border-foreground/30 hover:shadow-sm">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-4 text-base font-semibold">{title}</h3>
+                <h3 className="mt-4 text-[15px] font-medium">{title}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{desc}</p>
               </div>
             ))}
@@ -392,13 +392,13 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
 
         <div className="text-center">
-          <h2 className="font-display text-3xl tracking-tight sm:text-4xl">{c.socialTitle}</h2>
+          <h2 className="font-display text-2xl tracking-tight sm:text-[1.75rem]">{c.socialTitle}</h2>
           <p className="mt-3 text-muted-foreground">{c.socialSub}</p>
         </div>
         <div className="mt-12 grid gap-5 sm:grid-cols-3">
           {c.stats.map(([n, d]) => (
-            <div key={n} className="rounded-3xl border border-border/70 bg-card p-8 text-center">
-              <div className="font-display text-5xl tracking-tight">{n}</div>
+            <div key={n} className="rounded-2xl border border-border/70 bg-card p-8 text-center">
+              <div className="font-display text-4xl tracking-tight">{n}</div>
               <div className="mt-3 text-sm text-muted-foreground">{d}</div>
             </div>
           ))}
@@ -407,9 +407,9 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="rounded-3xl bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900 p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
+        <div className="rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-4xl tracking-tight sm:text-5xl">{c.ctaBigTitle}</h2>
+            <h2 className="font-display text-2xl tracking-tight sm:text-[2rem]">{c.ctaBigTitle}</h2>
             <p className="mt-4 text-white/70">{c.ctaBigSub}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <a href={href("/library")}><Button size="lg" variant="secondary" className="rounded-full">{c.browseLibrary}</Button></a>
