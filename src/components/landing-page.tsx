@@ -292,7 +292,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                     <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
                     <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
                   </div>
-                  <div className="ml-2 font-mono text-[11px] text-muted-foreground">applywise / tailor.run</div>
+                  <div className="ml-2 font-mono text-[11px] text-muted-foreground">applywise / ATS optimizer</div>
                   <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> live
                   </span>
