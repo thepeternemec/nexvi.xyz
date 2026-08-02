@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
 import { BrandMark } from "@/components/brand-mark";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import {
@@ -91,6 +92,27 @@ export function AuthShell({
 
   const [mode, setMode] = useState<"auth" | "forgot" | "forgot-sent">("auth");
   const [forgotLoading, setForgotLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  async function signInWithGoogle() {
+    setGoogleLoading(true);
+    try {
+      sessionStorage.setItem("applywise:next", nextPath);
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        toast.error(result.error.message ?? "Could not sign in with Google");
+        return;
+      }
+      if (result.redirected) return;
+      window.location.href = nextPath;
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not sign in with Google");
+    } finally {
+      setGoogleLoading(false);
+    }
+  }
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
@@ -413,7 +435,31 @@ export function AuthShell({
               </button>
             </form>
           ) : (
-            <form className="mt-8 space-y-4" onSubmit={onSubmit}>
+            <>
+            <div className="mt-8 space-y-4">
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={signInWithGoogle}
+                disabled={googleLoading}
+                className="w-full rounded-full"
+              >
+                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.2-2.27H12v4.51h6.47a5.54 5.54 0 0 1-2.4 3.63v3h3.86c2.26-2.08 3.56-5.15 3.56-8.87Z" />
+                  <path fill="#34A853" d="M12 24c3.24 0 5.96-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09A11.99 11.99 0 0 0 12 24Z" />
+                  <path fill="#FBBC05" d="M5.27 14.29a7.19 7.19 0 0 1 0-4.58V6.62H1.29a11.99 11.99 0 0 0 0 10.76l3.98-3.09Z" />
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z" />
+                </svg>
+                {googleLoading ? "Please wait…" : "Continue with Google"}
+              </Button>
+              <div className="flex items-center gap-3">
+                <span className="h-px flex-1 bg-border/70" />
+                <span className="text-xs uppercase tracking-wide text-muted-foreground">or</span>
+                <span className="h-px flex-1 bg-border/70" />
+              </div>
+            </div>
+            <form className="mt-4 space-y-4" onSubmit={onSubmit}>
               {signup && (
                 <div className="space-y-1.5">
                   <Label htmlFor="name">Your name</Label>
@@ -472,6 +518,7 @@ export function AuthShell({
                 {!loading && <ArrowRight className="ml-2 h-4 w-4" />}
               </Button>
             </form>
+            </>
           )}
 
             {!existingAccount && !showVerify && mode === "auth" && (
