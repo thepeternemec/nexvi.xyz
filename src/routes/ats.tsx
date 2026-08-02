@@ -127,47 +127,48 @@ export function ATSPage() {
       />
       <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
 
-        <form onSubmit={onScore} className="relative overflow-hidden rounded-3xl border border-border/70 bg-[#0b1230] p-5 text-white shadow-[0_30px_80px_-40px_rgba(15,23,64,0.9)] sm:p-8">
-          <div className="pointer-events-none absolute inset-0 opacity-70" style={{ background: "radial-gradient(600px 220px at 12% 0%, rgba(79,70,229,0.35), transparent 70%), radial-gradient(500px 220px at 92% 100%, rgba(34,211,238,0.18), transparent 70%)" }} />
+        <form onSubmit={onScore} className="relative overflow-hidden rounded-3xl border border-border/70 bg-card p-5 text-foreground shadow-[0_1px_2px_rgba(15,23,64,0.06),0_24px_60px_-40px_rgba(15,23,64,0.35)] dark:border-border/70 dark:bg-[#0b1230] dark:text-white dark:shadow-[0_30px_80px_-40px_rgba(15,23,64,0.9)] sm:p-8">
+          <div className="pointer-events-none absolute inset-0 opacity-60 dark:hidden" style={{ background: "radial-gradient(600px 220px at 12% 0%, rgba(79,70,229,0.10), transparent 70%), radial-gradient(500px 220px at 92% 100%, rgba(34,211,238,0.08), transparent 70%)" }} />
+          <div className="pointer-events-none absolute inset-0 hidden opacity-70 dark:block" style={{ background: "radial-gradient(600px 220px at 12% 0%, rgba(79,70,229,0.35), transparent 70%), radial-gradient(500px 220px at 92% 100%, rgba(34,211,238,0.18), transparent 70%)" }} />
           <div className="relative">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-muted-foreground dark:text-white/60">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 </span>
                 Scanner input
               </div>
-              <div className="text-[11px] text-white/50 tabular-nums">{jd.trim().split(/\s+/).filter(Boolean).length} JD words · {cv.trim().split(/\s+/).filter(Boolean).length} CV words</div>
+              <div className="text-[11px] tabular-nums text-muted-foreground dark:text-white/50">{jd.trim().split(/\s+/).filter(Boolean).length} JD words · {cv.trim().split(/\s+/).filter(Boolean).length} CV words</div>
             </div>
 
             <div className="mt-5 grid gap-4 lg:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
-                <label htmlFor="ats-job-description" className="flex items-center justify-between text-xs font-medium text-white/80">
+              <div className="rounded-2xl border border-border/70 bg-muted/30 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+                <label htmlFor="ats-job-description" className="flex items-center justify-between text-xs font-medium text-foreground dark:text-white/80">
                   <span>Job description</span>
-                  <span className="rounded-full border border-white/15 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">target</span>
+                  <span className="rounded-full border border-border/70 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground dark:border-white/15 dark:text-white/50">target</span>
                 </label>
-                <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-white placeholder:text-white/30 focus-visible:ring-0" />
+                <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 dark:text-white dark:placeholder:text-white/30" />
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
-                <label htmlFor="ats-cv" className="flex items-center justify-between text-xs font-medium text-white/80">
+              <div className="rounded-2xl border border-border/70 bg-muted/30 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
+                <label htmlFor="ats-cv" className="flex items-center justify-between text-xs font-medium text-foreground dark:text-white/80">
                   <span>Your CV</span>
-                  <span className="rounded-full border border-white/15 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">candidate</span>
+                  <span className="rounded-full border border-border/70 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground dark:border-white/15 dark:text-white/50">candidate</span>
                 </label>
-                <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-white placeholder:text-white/30 focus-visible:ring-0" />
+                <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 dark:text-white dark:placeholder:text-white/30" />
               </div>
             </div>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <Button type="submit" disabled={loading} size="lg" className="rounded-full bg-white text-[#0b1230] hover:bg-white/90">
+              <Button type="submit" disabled={loading} size="lg" className="rounded-full dark:bg-white dark:text-[#0b1230] dark:hover:bg-white/90">
                 {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Scanning…</> : report ? <><RotateCcw className="h-4 w-4" /> Re-score my CV</> : "Run the scan"}
               </Button>
               {(jd || cv || report) && (
-                <Button type="button" variant="ghost" size="lg" className="rounded-full text-white/70 hover:bg-white/10 hover:text-white" onClick={clearAll}>
+                <Button type="button" variant="ghost" size="lg" className="rounded-full text-muted-foreground hover:text-foreground dark:text-white/70 dark:hover:bg-white/10 dark:hover:text-white" onClick={clearAll}>
                   <Eraser className="h-4 w-4" /> Clear
                 </Button>
               )}
-              <span className="text-xs text-white/45">Nothing is stored — the scan runs on the text you paste.</span>
+              <span className="text-xs text-muted-foreground dark:text-white/45">Nothing is stored — the scan runs on the text you paste.</span>
             </div>
           </div>
         </form>
