@@ -279,15 +279,10 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
 export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b1230] text-slate-200">
-      {/* light-theme gradient: Stripe-style deep slate with cyan → indigo diagonal sweep */}
-      <div
-        className="pointer-events-none absolute inset-0 -z-0 dark:hidden"
-        style={{
-          backgroundImage:
-            "radial-gradient(ellipse 55% 80% at 0% 0%, rgba(45,212,191,0.20), transparent 58%), radial-gradient(ellipse 60% 70% at 30% -20%, rgba(56,189,248,0.22), transparent 60%), radial-gradient(ellipse 70% 90% at 100% 10%, rgba(99,102,241,0.26), transparent 62%), linear-gradient(160deg, #0f2544 0%, #0d1c38 45%, #0a1226 100%)",
-        }}
-      />
+    <footer className="relative overflow-hidden border-t border-border bg-background text-foreground">
+      {/* light-theme: same soft signal wash as the hero */}
+      <div className="pointer-events-none absolute inset-0 -z-0 bg-signal dark:hidden" />
+      <div className="pointer-events-none absolute inset-0 -z-0 bg-grid opacity-60 dark:hidden" />
       {/* dark-theme gradient: near-black graphite */}
       <div
         className="pointer-events-none absolute inset-0 -z-0 hidden dark:block"
@@ -296,20 +291,20 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             "radial-gradient(ellipse 70% 60% at 15% -10%, rgba(99,102,241,0.20), transparent 60%), radial-gradient(ellipse 60% 50% at 90% 0%, rgba(148,163,184,0.10), transparent 58%), linear-gradient(180deg, #14141a 0%, #0c0c11 55%, #06060a 100%)",
         }}
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       <div className="relative mx-auto grid w-full max-w-7xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-4">
 
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-[1.35rem] tracking-tight text-white">ApplyWise</span>
+            <span className="font-display text-[1.35rem] tracking-tight text-foreground">ApplyWise</span>
           </div>
-          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-slate-300/75">
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted-foreground">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
 
           <a
             href="mailto:hello@applywise.eu"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.12] hover:text-white"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-3.5 py-2 text-xs text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
           >
             <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on ApplyWise.
           </a>
@@ -317,21 +312,21 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <a
               href="#"
               aria-label="LinkedIn"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <LinkedinLogo className="h-4 w-4" />
             </a>
             <a
               href="#"
               aria-label="Instagram"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <Instagram className="h-4 w-4" />
             </a>
             <a
               href="#"
               aria-label="X"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <XLogo className="h-4 w-4" />
             </a>
@@ -340,7 +335,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               target="_blank"
               rel="noreferrer"
               aria-label="Threads"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <ThreadsLogo className="h-4 w-4" />
             </a>
@@ -348,30 +343,30 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         </div>
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400/80">Tools</div>
-          <ul className="mt-4 space-y-2.5 text-[14px] text-slate-300/70">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Tools</div>
+          <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
             {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"]].map(([to, label]) => (
               <li key={to}>
-                <a href={href(to)} className="inline-block transition-colors hover:text-white">{label}</a>
+                <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400/80">Company</div>
-          <ul className="mt-4 space-y-2.5 text-[14px] text-slate-300/70">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Company</div>
+          <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
             {[["/pricing", "Pricing"], ["/login", "Sign in"], ["/signup", "Create account"]].map(([to, label]) => (
               <li key={to}>
-                <a href={href(to)} className="inline-block transition-colors hover:text-white">{label}</a>
+                <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>
             ))}
           </ul>
         </div>
 
       </div>
-      <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-slate-300/70 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <a href={href("/status")} className="inline-flex items-center gap-2 text-slate-300 transition hover:text-white">
+      <div className="relative border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <a href={href("/status")} className="inline-flex items-center gap-2 text-foreground transition hover:text-primary">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -379,21 +374,21 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             All Systems Operational
           </a>
           <nav className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            <a href={href("/terms")} className="underline-offset-4 transition hover:text-white hover:underline">Terms &amp; Privacy</a>
-            <a href={href("/sitemap")} className="underline-offset-4 transition hover:text-white hover:underline">Sitemap</a>
-            <a href={href("/cookies")} className="underline-offset-4 transition hover:text-white hover:underline">Cookies</a>
+            <a href={href("/terms")} className="underline-offset-4 transition hover:text-primary hover:underline">Terms &amp; Privacy</a>
+            <a href={href("/sitemap")} className="underline-offset-4 transition hover:text-primary hover:underline">Sitemap</a>
+            <a href={href("/cookies")} className="underline-offset-4 transition hover:text-primary hover:underline">Cookies</a>
             <button
               type="button"
               onClick={() => openCookiePreferences()}
-              className="underline-offset-4 transition hover:text-white hover:underline"
+              className="underline-offset-4 transition hover:text-primary hover:underline"
             >
               Cookie settings
             </button>
           </nav>
         </div>
       </div>
-      <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-300/70 sm:flex-row sm:px-6">
+      <div className="relative border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6">
           <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers with ❤️ in Berlin</div>
           <div>We help you land your dream jobs in weeks.</div>
         </div>
