@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search, Wand2, ShieldCheck, Bot, Gauge, Scan, Languages, Lock } from "lucide-react";
+import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Wand2, ShieldCheck, Bot, Gauge, Scan, Languages, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
