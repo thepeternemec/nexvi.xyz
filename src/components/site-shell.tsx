@@ -94,10 +94,11 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
       <DropdownMenuTrigger asChild>
         <button
           aria-label="Change language"
+          data-no-translate
           className="inline-flex h-9 items-center gap-1.5 rounded-full border border-border/70 dark:border-border/90 bg-background/60 dark:bg-background/80 px-3 text-[12px] font-medium text-muted-foreground transition hover:bg-background hover:text-foreground"
         >
           <Globe className="h-3.5 w-3.5" />
-          <span className="uppercase">{locale}</span>
+          <span className="uppercase" data-no-translate>{locale}</span>
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[10rem]">
