@@ -384,6 +384,136 @@ function Panel({ title, icon, children }: { title: string; icon: React.ReactNode
   );
 }
 
+type Category = { label: string; score: number; note: string; meta: string };
+type Fix = { title: string; detail: string; area: string; impact: "high" | "medium" | "low" };
+
+function band(score: number) {
+  return score >= 80 ? "strong" : score >= 60 ? "needs work" : "at risk";
+}
+function bandChip(score: number) {
+  return score >= 80
+    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+    : score >= 60
+      ? "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300"
+      : "border-rose-500/30 bg-rose-500/10 text-rose-700 dark:text-rose-300";
+}
+function barColor(score: number) {
+  return score >= 80 ? "bg-emerald-500" : score >= 60 ? "bg-amber-500" : "bg-rose-500";
+}
+
+function lengthScore(words: number) {
+  if (words === 0) return 0;
+  if (words < 200) return 35;
+  if (words < 350) return 65;
+  if (words <= 900) return 92;
+  if (words <= 1200) return 70;
+  return 45;
+}
+
+function ScoreDial({ score }: { score: number }) {
+  const r = 34;
+  const c = 2 * Math.PI * r;
+  const stroke = score >= 80 ? "stroke-emerald-500" : score >= 60 ? "stroke-amber-500" : "stroke-rose-500";
+  return (
+    <div className="relative h-24 w-24 shrink-0">
+      <svg viewBox="0 0 80 80" className="h-24 w-24 -rotate-90">
+        <circle cx="40" cy="40" r={r} className="fill-none stroke-muted" strokeWidth="6" />
+        <circle
+          cx="40" cy="40" r={r}
+          className={`fill-none ${stroke} transition-all duration-700`}
+          strokeWidth="6" strokeLinecap="round"
+          strokeDasharray={c} strokeDashoffset={c - (c * Math.min(100, Math.max(0, score))) / 100}
+        />
+      </svg>
+      <div className="absolute inset-0 grid place-items-center">
+        <span className="font-display text-[1.6rem] leading-none tabular-nums">{score}</span>
+      </div>
+    </div>
+  );
+}
+
+function buildCategories(r: Report, cvWords: number): Category[] {
+  const subs = r.subScores ?? [];
+  const kwSub = subs.find((s) => /keyword/i.test(s.label));
+  const fmtSub = subs.find((s) => /format|parse/i.test(s.label));
+  const checks = r.formattingChecks ?? [];
+  const passed = checks.filter((c) => c.passed).length;
+  const kw = r.keywordCoverage;
+  const kwScore = kwSub?.score ?? kw?.coveragePct ?? 0;
+  const fmtScore = fmtSub?.score ?? (checks.length ? Math.round((passed / checks.length) * 100) : 0);
+  const lenScore = lengthScore(cvWords);
+
+  return [
+    {
+      label: "Keywords",
+      score: kwScore,
+      note: kwSub?.note ?? (kw ? `${kw.matchedCount} of ${kw.totalCount} priority terms from the posting appear in your CV.` : "Keyword overlap with the job description."),
+      meta: kw ? `${kw.coveragePct}% coverage · ${r.missingKeywords?.length ?? 0} missing` : "",
+    },
+    {
+      label: "Formatting",
+      score: fmtScore,
+      note: fmtSub?.note ?? "How cleanly a parser can read your structure, headings and bullets.",
+      meta: checks.length ? `${passed}/${checks.length} checks passed` : "",
+    },
+    {
+      label: "Length",
+      score: lenScore,
+      note: cvWords === 0
+        ? "Paste your CV to measure length."
+        : lenScore >= 90
+          ? "Length sits in the range recruiters and parsers handle best."
+          : cvWords < 350
+            ? "Too short — screeners have little evidence to score."
+            : "Too long — key evidence gets buried past the first screen.",
+      meta: cvWords ? `${cvWords} words · target 350–900` : "",
+    },
+  ];
+}
+
+function buildFixes(r: Report, cvWords: number): Fix[] {
+  const fixes: Fix[] = [];
+  const critical = (r.keywordCoverage?.keywords ?? []).filter((k) => !k.inCV && k.importance === "critical").map((k) => k.keyword);
+  const important = (r.keywordCoverage?.keywords ?? []).filter((k) => !k.inCV && k.importance === "important").map((k) => k.keyword);
+
+  if (critical.length) {
+    fixes.push({
+      area: "Keywords", impact: "high",
+      title: `Add ${critical.length} critical term${critical.length === 1 ? "" : "s"} the screener looks for`,
+      detail: `Work these into real achievements, not a keyword list: ${critical.slice(0, 8).join(", ")}.`,
+    });
+  }
+  if (important.length) {
+    fixes.push({
+      area: "Keywords", impact: "medium",
+      title: "Cover the secondary terms in your skills and bullets",
+      detail: `Where truthful, mirror the posting's wording for: ${important.slice(0, 8).join(", ")}.`,
+    });
+  }
+  for (const c of (r.formattingChecks ?? []).filter((x) => !x.passed)) {
+    fixes.push({ area: "Formatting", impact: "medium", title: `Fix: ${c.name}`, detail: c.detail });
+  }
+  for (const s of (r.sectionCoverage ?? []).filter((x) => x.quality === "missing" || x.quality === "weak")) {
+    fixes.push({ area: "Sections", impact: s.quality === "missing" ? "medium" : "low", title: `${s.quality === "missing" ? "Add" : "Strengthen"} the ${s.section} section`, detail: s.note });
+  }
+  const lenS = lengthScore(cvWords);
+  if (cvWords && lenS < 90) {
+    fixes.push({
+      area: "Length", impact: lenS < 60 ? "high" : "medium",
+      title: cvWords < 350 ? "Expand the CV with more evidence" : "Trim the CV back to the essentials",
+      detail: cvWords < 350
+        ? `At ${cvWords} words there isn't enough scoreable content. Add 3–5 achievement bullets with action verb + keyword + measurable outcome.`
+        : `At ${cvWords} words the relevant work is buried. Cut older or off-target roles down to one line each and aim for 350–900 words.`,
+    });
+  }
+  for (const tip of (r.rewriteTips ?? []).slice(0, 3)) {
+    fixes.push({ area: "Rewrite", impact: "low", title: tip.length > 90 ? tip.slice(0, 88) + "…" : tip, detail: "Apply this rewrite, then re-run the scan to confirm the score moved." });
+  }
+  const order = { high: 0, medium: 1, low: 2 } as const;
+  return fixes.sort((a, b) => order[a.impact] - order[b.impact]).slice(0, 10);
+}
+
+
 function createLocalATSReport(jobDescription: string, cv: string): Report {
   const jobTerms = extractKeywords(jobDescription);
   const cvLower = cv.toLowerCase();
