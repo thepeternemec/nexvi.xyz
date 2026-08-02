@@ -103,6 +103,12 @@ export function ATSPage() {
 
   const scoreColor = (s: number) => s >= 80 ? "text-emerald-600 dark:text-emerald-400" : s >= 60 ? "text-amber-600 dark:text-amber-400" : "text-rose-600 dark:text-rose-400";
 
+  const cvWords = cv.trim().split(/\s+/).filter(Boolean).length;
+  const categories = report ? buildCategories(report, cvWords) : [];
+  const otherScores = report ? (report.subScores ?? []).filter((s) => !/keyword|format|parse/i.test(s.label)) : [];
+  const fixes = report ? buildFixes(report, cvWords) : [];
+
+
 
   return (
     <SiteShell>
