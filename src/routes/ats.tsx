@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle } from "lucide-react";
+import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle, Copy, Download, RotateCcw, Eraser } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { scoreATS } from "@/lib/career.functions";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+
 
 export const Route = createFileRoute("/ats")({
   head: () => ({
@@ -75,10 +77,32 @@ export function ATSPage() {
       toast.error(msg.includes("402") ? "AI credits exhausted. Showing an estimated ATS score." : msg.includes("429") ? "Rate limited. Showing an estimated ATS score." : "Showing an estimated ATS score.");
     } finally { setLoading(false); }
   }
+  async function copyReport() {
+    if (!report) return;
+    try {
+      await navigator.clipboard.writeText(reportToText(report));
+      toast.success("Report copied as clean text");
+    } catch {
+      toast.error("Copy failed");
+    }
+  }
 
+  function downloadReport() {
+    if (!report) return;
+    try {
+      downloadDocumentPdf(reportToText(report), "ats-report.pdf");
+      toast.success("PDF ready — check your downloads or the new tab");
+    } catch {
+      toast.error("Your browser blocked the download.");
+    }
+  }
 
+  function clearAll() {
+    setJd(""); setCv(""); setReport(null);
+  }
 
   const scoreColor = (s: number) => s >= 80 ? "text-emerald-600 dark:text-emerald-400" : s >= 60 ? "text-amber-600 dark:text-amber-400" : "text-rose-600 dark:text-rose-400";
+
 
   return (
     <SiteShell>
@@ -109,13 +133,29 @@ export function ATSPage() {
             </div>
           </div>
           <ToolCreditBar tool="ats" />
-          <Button type="submit" disabled={loading} size="lg" className="rounded-full">
-            {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : "Score my CV"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button type="submit" disabled={loading} size="lg" className="rounded-full">
+              {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : report ? <><RotateCcw className="h-4 w-4" /> Re-score my CV</> : "Score my CV"}
+            </Button>
+            {(jd || cv || report) && (
+              <Button type="button" variant="ghost" size="lg" className="rounded-full" onClick={clearAll}>
+                <Eraser className="h-4 w-4" /> Clear
+              </Button>
+            )}
+          </div>
         </form>
 
         {report && (
           <div className="mt-10 space-y-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={copyReport}>
+                <Copy className="h-4 w-4" /> Copy report
+              </Button>
+              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={downloadReport}>
+                <Download className="h-4 w-4" /> Download PDF
+              </Button>
+            </div>
+
             {/* Overall */}
             <div className="rounded-3xl border border-border/70 bg-card p-8">
               <div className="flex flex-wrap items-end gap-6">
@@ -338,4 +378,35 @@ function extractKeywords(text: string) {
 function sectionStatus(section: string, cv: string, pattern: RegExp): SectionCov {
   const present = pattern.test(cv);
   return { section, present, quality: present ? "adequate" : "missing", note: present ? `${section} section appears present.` : `Add a clear ${section} section if relevant.` };
+}
+
+function reportToText(r: Report) {
+  const lines: string[] = [];
+  lines.push("# ATS Match Report", "", `## Overall score: ${r.score}/100`, r.verdict, "");
+  if (r.subScores?.length) {
+    lines.push("## Score breakdown");
+    for (const s of r.subScores) lines.push(`- ${s.label}: ${s.score}/100 (weight ${s.weight}%) — ${s.note}`);
+    lines.push("");
+  }
+  if (r.keywordCoverage) {
+    lines.push(`## Keyword coverage: ${r.keywordCoverage.matchedCount}/${r.keywordCoverage.totalCount} (${r.keywordCoverage.coveragePct}%)`);
+    for (const k of r.keywordCoverage.keywords) lines.push(`- ${k.keyword} — ${k.importance} — ${k.inCV ? `in CV (${k.frequency}x)` : "missing"}`);
+    lines.push("");
+  }
+  if (r.formattingChecks?.length) {
+    lines.push("## Formatting & parseability");
+    for (const c of r.formattingChecks) lines.push(`- ${c.passed ? "PASS" : "FIX"}: ${c.name} — ${c.detail}`);
+    lines.push("");
+  }
+  if (r.sectionCoverage?.length) {
+    lines.push("## Section coverage");
+    for (const s of r.sectionCoverage) lines.push(`- ${s.section}: ${s.quality} — ${s.note}`);
+    lines.push("");
+  }
+  if (r.matchedKeywords?.length) lines.push("## Matched keywords", r.matchedKeywords.join(", "), "");
+  if (r.missingKeywords?.length) lines.push("## Missing keywords", r.missingKeywords.join(", "), "");
+  if (r.strengths?.length) { lines.push("## Strengths"); for (const s of r.strengths) lines.push(`- ${s}`); lines.push(""); }
+  if (r.improvements?.length) { lines.push("## Improvements"); for (const s of r.improvements) lines.push(`- ${s}`); lines.push(""); }
+  if (r.rewriteTips?.length) { lines.push("## Rewrite tips"); r.rewriteTips.forEach((s, i) => lines.push(`${i + 1}. ${s}`)); }
+  return lines.join("\n");
 }
