@@ -244,48 +244,95 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
 
       {/* HOW IT WORKS */}
-      <section className="border-y border-border/60 bg-muted/20">
-        <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+      <section className="relative border-y border-border/60 bg-muted/20">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+        <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6">
+          <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center">
             <div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.howKicker}</div>
-              <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.howTitle}</h2>
-              <p className="mt-4 text-muted-foreground">{c.howSub}</p>
-              <ul className="mt-8 space-y-5">
+              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+                <Zap className="h-3 w-3 text-primary" /> {c.howKicker}
+              </div>
+              <h2 className="font-display mt-5 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2.25rem]">{c.howTitle}</h2>
+              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">{c.howSub}</p>
+
+              <ol className="relative mt-10">
+                <div className="absolute left-[15px] top-3 bottom-3 w-px bg-gradient-to-b from-primary/50 via-border to-transparent" />
                 {c.howSteps.map(([t, d], i) => (
-                  <li key={t} className="flex gap-4">
-                    <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-foreground text-sm font-semibold text-background">{i + 1}</div>
-                    <div>
-                      <div className="font-medium">{t}</div>
-                      <div className="text-sm text-muted-foreground">{d}</div>
+                  <li key={t} className="group relative flex gap-5 pb-8 last:pb-0">
+                    <div className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-border/70 bg-background text-[12px] font-semibold tabular-nums text-foreground shadow-sm transition-colors group-hover:border-primary/50 group-hover:text-primary">
+                      {i + 1}
+                    </div>
+                    <div className="pt-0.5">
+                      <div className="text-[15px] font-semibold tracking-tight">{t}</div>
+                      <div className="mt-1 text-sm leading-relaxed text-muted-foreground">{d}</div>
                     </div>
                   </li>
                 ))}
-              </ul>
+              </ol>
+
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-6 text-[12px] text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-primary" /> No card required</span>
+                <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your data stays yours</span>
+                <span className="inline-flex items-center gap-1.5"><Gauge className="h-3.5 w-3.5 text-primary" /> ~60s per document</span>
+              </div>
             </div>
-            <div className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm">
-              <div className="rounded-xl bg-muted/40 p-4 font-mono text-xs">
-                <div className="text-muted-foreground">// Job description</div>
-                <div className="mt-1 line-clamp-3">Senior Product Designer at Linear. Lead end-to-end design for new B2B SaaS workflows. Ship fast. Collaborate with PMs and eng…</div>
-              </div>
-              <div className="mt-3 rounded-xl bg-muted/40 p-4 font-mono text-xs">
-                <div className="text-muted-foreground">// Your background</div>
-                <div className="mt-1 line-clamp-2">5 years product design, fintech &amp; SaaS. Led design systems at Stripe-style startups…</div>
-              </div>
-              <div className="mt-5 rounded-2xl border border-foreground/20 bg-foreground/[0.03] p-5">
-                <div className="flex items-center gap-2 text-sm font-semibold"><Zap className="h-4 w-4" /> {c.atsScore}</div>
-                <div className="mt-3 flex items-end gap-3">
-                  <div className="font-display text-5xl">92</div>
-                  <div className="pb-1 text-xs text-muted-foreground">{c.atsExcellent}</div>
+
+            {/* Product mock */}
+            <div className="relative">
+              <div className="pointer-events-none absolute -inset-x-6 -top-8 bottom-0 rounded-[2rem] bg-[radial-gradient(60%_50%_at_70%_0%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent)]" />
+              <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)]">
+                <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
+                  <div className="flex gap-1.5">
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                    <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/25" />
+                  </div>
+                  <div className="ml-2 font-mono text-[11px] text-muted-foreground">applywise / tailor.run</div>
+                  <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" /> live
+                  </span>
                 </div>
-                <div className="mt-4 h-2 overflow-hidden rounded-full bg-muted">
-                  <div className="h-full w-[92%] bg-foreground" />
+
+                <div className="space-y-3 p-5">
+                  <div className="rounded-xl border border-border/60 bg-muted/30 p-4">
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Job description</div>
+                    <div className="mt-1.5 text-[13px] leading-relaxed line-clamp-3">Senior Product Designer at Linear. Lead end-to-end design for new B2B SaaS workflows. Ship fast. Collaborate with PMs and eng…</div>
+                  </div>
+                  <div className="rounded-xl border border-border/60 bg-muted/30 p-4">
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Your background</div>
+                    <div className="mt-1.5 text-[13px] leading-relaxed line-clamp-2">5 years product design, fintech &amp; SaaS. Led design systems at Stripe-style startups…</div>
+                  </div>
+                </div>
+
+                <div className="border-t border-border/60 bg-muted/20 p-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{c.atsScore}</div>
+                      <div className="mt-2 flex items-end gap-2">
+                        <div className="font-display text-[2.75rem] leading-none tabular-nums">92</div>
+                        <div className="pb-1.5 text-[12px] text-muted-foreground">{c.atsExcellent}</div>
+                      </div>
+                    </div>
+                    <Scan className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-border/70">
+                    <div className="h-full w-[92%] rounded-full bg-gradient-to-r from-primary/70 to-primary" />
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-3 border-t border-border/60 pt-4">
+                    {[["Keywords", "96"], ["Formatting", "90"], ["Length", "88"]].map(([k, v]) => (
+                      <div key={k}>
+                        <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{k}</div>
+                        <div className="mt-0.5 text-[15px] font-semibold tabular-nums">{v}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* HUMANIZER SPOTLIGHT */}
       <section className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
