@@ -151,9 +151,16 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <div className="text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
+          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Humanizer runs on the latest Claude model
+          </div>
         </div>
         <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
           <div className="flex gap-5 snap-x snap-mandatory">
@@ -161,20 +168,39 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               const t = c.tools[i];
               const Icon = ICONS[i];
               const link = ["/library", "/cv", "/cover-letter", "/ats", "/humanizer"][i];
+              const isClaude = i === 4;
               return (
-                <a key={link} data-tool-card href={href(link)} className="group relative flex w-[280px] shrink-0 snap-start flex-col rounded-2xl border border-border/70 bg-card p-7 transition hover:border-foreground/30 hover:shadow-lg sm:w-[320px]">
-                  {t.badge && (
+                <a
+                  key={link}
+                  data-tool-card
+                  href={href(link)}
+                  className={`group relative flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-card/70 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 sm:w-[320px] ${
+                    isClaude
+                      ? "border-primary/30 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-24px_rgba(79,70,229,0.45)] hover:border-primary/50"
+                      : "border-border/60 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset,0_12px_32px_-24px_rgba(16,24,64,0.35)] hover:border-foreground/25"
+                  }`}
+                >
+                  <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  {isClaude && (
+                    <span className="absolute right-5 top-5 rounded-full border border-primary/30 bg-primary/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-primary">
+                      Claude
+                    </span>
+                  )}
+                  {!isClaude && t.badge && (
                     <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
                       {t.badge}
                     </span>
                   )}
-                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-foreground/5 text-foreground">
+                  <div className={`grid h-11 w-11 place-items-center rounded-xl transition-colors ${isClaude ? "bg-primary/10 text-primary" : "bg-foreground/[0.06] text-foreground group-hover:bg-primary/10 group-hover:text-primary"}`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-5 text-[15px] font-medium">{t.title}</h3>
-                  <p className="mt-2 flex-1 text-sm text-muted-foreground">{t.desc}</p>
-                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
-                    {c.open} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  <h3 className="mt-5 text-[15px] font-medium tracking-tight">{t.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{t.desc}</p>
+                  {isClaude && (
+                    <p className="mt-3 text-[11px] uppercase tracking-[0.14em] text-primary/80">Powered by the newest Claude model</p>
+                  )}
+                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-foreground group-hover:text-primary">
+                    {c.open} <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </div>
                 </a>
               );
@@ -190,11 +216,25 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               aria-selected={activeIdx === i}
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => scrollToIdx(i)}
-              className={`h-1.5 rounded-full transition-all ${activeIdx === i ? "w-6 bg-foreground" : "w-1.5 bg-foreground/25 hover:bg-foreground/40"}`}
+              className={`h-1.5 rounded-full transition-all ${activeIdx === i ? "w-6 bg-primary" : "w-1.5 bg-foreground/20 hover:bg-foreground/40"}`}
             />
           ))}
         </div>
+        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <a href={href("/cv")}>
+            <Button size="lg" className="h-11 rounded-xl px-6 text-[14px] font-medium shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_24px_-14px_rgba(79,70,229,0.7)]">
+              Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4" />
+            </Button>
+          </a>
+          <a href={href("/humanizer")}>
+            <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+              Try the Claude Humanizer
+            </Button>
+          </a>
+        </div>
+        <p className="mt-3 text-center text-[12px] text-muted-foreground">No card required · First generation on us</p>
       </section>
+
 
 
 
