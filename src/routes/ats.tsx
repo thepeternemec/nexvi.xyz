@@ -379,3 +379,34 @@ function sectionStatus(section: string, cv: string, pattern: RegExp): SectionCov
   const present = pattern.test(cv);
   return { section, present, quality: present ? "adequate" : "missing", note: present ? `${section} section appears present.` : `Add a clear ${section} section if relevant.` };
 }
+
+function reportToText(r: Report) {
+  const lines: string[] = [];
+  lines.push("# ATS Match Report", "", `## Overall score: ${r.score}/100`, r.verdict, "");
+  if (r.subScores?.length) {
+    lines.push("## Score breakdown");
+    for (const s of r.subScores) lines.push(`- ${s.label}: ${s.score}/100 (weight ${s.weight}%) — ${s.note}`);
+    lines.push("");
+  }
+  if (r.keywordCoverage) {
+    lines.push(`## Keyword coverage: ${r.keywordCoverage.matchedCount}/${r.keywordCoverage.totalCount} (${r.keywordCoverage.coveragePct}%)`);
+    for (const k of r.keywordCoverage.keywords) lines.push(`- ${k.keyword} — ${k.importance} — ${k.inCV ? `in CV (${k.frequency}x)` : "missing"}`);
+    lines.push("");
+  }
+  if (r.formattingChecks?.length) {
+    lines.push("## Formatting & parseability");
+    for (const c of r.formattingChecks) lines.push(`- ${c.passed ? "PASS" : "FIX"}: ${c.name} — ${c.detail}`);
+    lines.push("");
+  }
+  if (r.sectionCoverage?.length) {
+    lines.push("## Section coverage");
+    for (const s of r.sectionCoverage) lines.push(`- ${s.section}: ${s.quality} — ${s.note}`);
+    lines.push("");
+  }
+  if (r.matchedKeywords?.length) lines.push("## Matched keywords", r.matchedKeywords.join(", "), "");
+  if (r.missingKeywords?.length) lines.push("## Missing keywords", r.missingKeywords.join(", "), "");
+  if (r.strengths?.length) { lines.push("## Strengths"); for (const s of r.strengths) lines.push(`- ${s}`); lines.push(""); }
+  if (r.improvements?.length) { lines.push("## Improvements"); for (const s of r.improvements) lines.push(`- ${s}`); lines.push(""); }
+  if (r.rewriteTips?.length) { lines.push("## Rewrite tips"); r.rewriteTips.forEach((s, i) => lines.push(`${i + 1}. ${s}`)); }
+  return lines.join("\n");
+}
