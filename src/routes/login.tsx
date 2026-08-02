@@ -12,10 +12,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import {
   AlertCircle,
+  ArrowRight,
+  Check,
   KeyRound,
   LogIn,
   Mail,
   RotateCcw,
+  ShieldCheck,
 } from "lucide-react";
 
 type LoginSearch = { next?: string };
