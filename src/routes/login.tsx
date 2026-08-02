@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
+import { lovable } from "@/integrations/lovable/index";
 import { BrandMark } from "@/components/brand-mark";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import {
