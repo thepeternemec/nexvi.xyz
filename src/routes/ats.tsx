@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle, Copy, Download, RotateCcw, Eraser } from "lucide-react";
+import { Loader2, Target, CheckCircle2, XCircle, Lightbulb, AlertTriangle, MinusCircle, Copy, Download, RotateCcw, Eraser, Wrench } from "lucide-react";
 import { toast } from "sonner";
 import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
