@@ -505,39 +505,40 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6">
           <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+            <Reveal>
+              <div className="pill-hover inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
                 <Scan className="h-3 w-3 text-primary" /> The numbers
               </div>
               <h2 className="font-display mt-5 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2.25rem]">{c.socialTitle}</h2>
               <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground">{c.socialSub}</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a href={href("/ats")}>
-                  <Button size="lg" className="h-11 rounded-xl px-6 text-[14px] font-medium">
+                  <Button size="lg" className="cta-sheen h-11 rounded-xl px-6 text-[14px] font-medium transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
                     Score my CV against a job <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Button>
                 </a>
                 <a href={href("/cv")}>
-                  <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+                  <Button size="lg" variant="outline" className="pill-hover h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
                     {c.ctaGenerate}
                   </Button>
                 </a>
               </div>
               <p className="mt-3 text-[12px] text-muted-foreground">Free to start · No card · Results in under a minute</p>
-            </div>
+            </Reveal>
 
-            <div className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            <Reveal delay={120} className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {c.stats.map(([n, d], i) => (
-                <div key={n} className="group relative p-7">
+                <div key={n} className="group relative p-7 transition-colors duration-300 hover:bg-muted/40">
                   <div className="font-mono text-[10px] tracking-widest text-muted-foreground">0{i + 1}</div>
-                  <div className="font-display mt-3 text-[2.5rem] leading-none tabular-nums tracking-tight">{n}</div>
+                  <div className="font-display mt-3 text-[2.5rem] leading-none tabular-nums tracking-tight transition-transform duration-300 group-hover:-translate-y-0.5">{n}</div>
                   <div className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{d}</div>
                   <div className="mt-5 h-px w-full bg-border/70">
                     <div className="h-px w-0 bg-primary transition-all duration-500 group-hover:w-full" />
                   </div>
                 </div>
               ))}
-            </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
