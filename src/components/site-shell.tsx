@@ -301,11 +301,12 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-lg tracking-tight text-white">ApplyWise</span>
+            <span className="font-display text-[1.35rem] tracking-tight text-white">ApplyWise</span>
           </div>
-          <p className="mt-4 max-w-sm text-sm text-slate-300/80">
+          <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-slate-300/75">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
+
           <a
             href="mailto:hello@applywise.eu"
             className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.12] hover:text-white"
