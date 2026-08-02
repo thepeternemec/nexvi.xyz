@@ -222,18 +222,25 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
 export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
-    <footer className="border-t border-white/5 bg-[#1a1a1a] text-slate-200">
-      <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b1230] text-slate-200">
+      <div
+        className="pointer-events-none absolute inset-0 -z-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(ellipse 70% 60% at 12% 0%, rgba(79,70,229,0.35), transparent 65%), radial-gradient(ellipse 60% 55% at 88% 5%, rgba(37,99,235,0.28), transparent 62%), linear-gradient(180deg, #101a44 0%, #0b1230 55%, #070c20 100%)",
+        }}
+      />
+      <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
             <span className="font-display text-lg tracking-tight text-white">ApplyWise</span>
           </div>
-          <p className="mt-4 max-w-sm text-sm text-slate-400">
+          <p className="mt-4 max-w-sm text-sm text-slate-300/80">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
           </p>
           <a
             href="mailto:hello@applywise.eu"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-300 transition hover:bg-white/10 hover:text-white"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-2 text-xs text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.12] hover:text-white"
           >
             <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on ApplyWise.
           </a>
@@ -241,29 +248,29 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
             <a
               href="#"
               aria-label="LinkedIn"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
             >
               <LinkedinLogo className="h-4 w-4" />
             </a>
             <a
               href="#"
               aria-label="Instagram"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
             >
               <Instagram className="h-4 w-4" />
             </a>
             <a
               href="#"
               aria-label="X"
-              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/[0.07] text-slate-200 backdrop-blur transition hover:border-white/30 hover:bg-white/[0.14] hover:text-white"
             >
               <XLogo className="h-4 w-4" />
             </a>
           </div>
         </div>
         <div>
-          <div className="text-sm font-medium text-white">Tools</div>
-          <ul className="mt-3 space-y-2 text-sm text-slate-400">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Tools</div>
+          <ul className="mt-3 space-y-2 text-sm text-slate-300/70">
             <li><a href={href("/cv")} className="hover:text-white">CV Generator</a></li>
             <li><a href={href("/cover-letter")} className="hover:text-white">Cover Letter Generator</a></li>
             <li><a href={href("/humanizer")} className="hover:text-white">Humanizer</a></li>
@@ -272,16 +279,16 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </ul>
         </div>
         <div>
-          <div className="text-sm font-medium text-white">Company</div>
-          <ul className="mt-3 space-y-2 text-sm text-slate-400">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-slate-400">Company</div>
+          <ul className="mt-3 space-y-2 text-sm text-slate-300/70">
             <li><a href={href("/pricing")} className="hover:text-white">Pricing</a></li>
             <li><a href={href("/login")} className="hover:text-white">Sign in</a></li>
             <li><a href={href("/signup")} className="hover:text-white">Create account</a></li>
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="relative border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 text-xs text-slate-300/70 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <a href={href("/status")} className="inline-flex items-center gap-2 text-slate-300 transition hover:text-white">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
@@ -303,8 +310,8 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </nav>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-400 sm:flex-row sm:px-6">
+      <div className="relative border-t border-white/10">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-slate-300/70 sm:flex-row sm:px-6">
           <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers with ❤️ in Berlin</div>
           <div>We help you land your dream jobs in weeks.</div>
         </div>
