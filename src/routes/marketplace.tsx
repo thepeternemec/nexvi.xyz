@@ -278,11 +278,12 @@ export function Marketplace() {
           <div className="mt-6 space-y-10">
             {groups.map(g => (
               <div key={g.key}>
-                <div className="mb-4 flex items-baseline gap-3 border-b border-border/60 pb-2">
-                  <h3 className="text-lg font-semibold tracking-tight">{g.label}</h3>
-                  <span className="text-xs text-muted-foreground">{g.hint}</span>
-                  <span className="ml-auto text-xs text-muted-foreground">{g.items.length}</span>
+                <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border/60 pb-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{g.label}</div>
+                  <h3 className="font-display text-[1.1rem] tracking-tight">{g.hint}</h3>
+                  <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">{g.items.length}</span>
                 </div>
+
                 <PromptGrid items={g.items} />
               </div>
             ))}
