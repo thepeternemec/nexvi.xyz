@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
 import { prompts, categories } from "@/lib/mock-data";
 import { TrustedBy } from "@/components/trusted-by";
+import { Reveal } from "@/components/reveal";
 
 
 const ICONS = [Library, FileText, Mail, Target, Wand2];
@@ -160,18 +161,19 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
+          <div className="pill-hover mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
             Tools built on top of Claude and ChatGPT models
           </div>
-        </div>
+        </Reveal>
         <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
+
           <div className="flex gap-5 snap-x snap-mandatory">
             {order.map((i) => {
               const t = c.tools[i];
@@ -226,16 +228,17 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         </div>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={href("/cv")}>
-            <Button size="lg" className="h-11 rounded-xl px-6 text-[14px] font-medium shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_24px_-14px_rgba(79,70,229,0.7)]">
-              Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4" />
+            <Button size="lg" className="cta-sheen h-11 rounded-xl px-6 text-[14px] font-medium shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_10px_24px_-14px_rgba(79,70,229,0.7)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
+              Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Button>
           </a>
           <a href={href("/humanizer")}>
-            <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+            <Button size="lg" variant="outline" className="pill-hover h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
               Try AI text Humanizer
             </Button>
           </a>
         </div>
+
         <p className="mt-3 text-center text-[12px] text-muted-foreground">No card required · First generation on us</p>
       </section>
 
@@ -248,10 +251,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+            <Reveal>
+              <div className="pill-hover inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
                 <Zap className="h-3 w-3 text-primary" /> {c.howKicker}
               </div>
+
               <h2 className="font-display mt-5 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2.25rem]">{c.howTitle}</h2>
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">{c.howSub}</p>
 
@@ -275,10 +279,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                 <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your data stays yours</span>
                 <span className="inline-flex items-center gap-1.5"><Gauge className="h-3.5 w-3.5 text-primary" /> ~60s per document</span>
               </div>
-            </div>
+            </Reveal>
 
             {/* Product mock */}
-            <div className="relative">
+            <Reveal delay={120} className="relative">
+
               <div className="pointer-events-none absolute -inset-x-6 -top-8 bottom-0 rounded-[2rem] bg-[radial-gradient(60%_50%_at_70%_0%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent)]" />
               <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)]">
                 <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
@@ -328,7 +333,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                   </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -466,11 +471,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
       {/* FEATURE OVERVIEW */}
       <section className="border-y border-border/60 bg-muted/20">
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Everything in one place</div>
             <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">One toolkit for the whole job hunt.</h2>
             <p className="mt-4 text-muted-foreground">From the first prompt to the signed offer — every step of the modern job search, powered by AI you can actually trust.</p>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: Library, title: "Prompt Library", desc: "Hundreds of curated prompts for CVs, interviews, outreach and negotiation — written by career coaches." },
@@ -482,14 +487,14 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               { icon: Gauge, title: "60-Second Turnaround", desc: "Go from blank page to interview-ready docs in under a minute — for every role you apply to." },
               { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
               { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-border/70 bg-background p-6 transition hover:border-foreground/30 hover:shadow-sm">
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground">
-                  <Icon className="h-5 w-5" />
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <Reveal key={title} delay={(i % 3) * 90} className="group lift rounded-2xl border border-border/70 bg-background p-6">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                  <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <h3 className="mt-4 text-[15px] font-medium">{title}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -500,39 +505,40 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6">
           <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+            <Reveal>
+              <div className="pill-hover inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
                 <Scan className="h-3 w-3 text-primary" /> The numbers
               </div>
               <h2 className="font-display mt-5 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2.25rem]">{c.socialTitle}</h2>
               <p className="mt-4 max-w-md text-[15px] leading-relaxed text-muted-foreground">{c.socialSub}</p>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <a href={href("/ats")}>
-                  <Button size="lg" className="h-11 rounded-xl px-6 text-[14px] font-medium">
+                  <Button size="lg" className="cta-sheen h-11 rounded-xl px-6 text-[14px] font-medium transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0">
                     Score my CV against a job <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Button>
                 </a>
                 <a href={href("/cv")}>
-                  <Button size="lg" variant="outline" className="h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
+                  <Button size="lg" variant="outline" className="pill-hover h-11 rounded-xl border-border/70 bg-background/60 px-6 text-[14px] font-medium backdrop-blur hover:bg-background">
                     {c.ctaGenerate}
                   </Button>
                 </a>
               </div>
               <p className="mt-3 text-[12px] text-muted-foreground">Free to start · No card · Results in under a minute</p>
-            </div>
+            </Reveal>
 
-            <div className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            <Reveal delay={120} className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {c.stats.map(([n, d], i) => (
-                <div key={n} className="group relative p-7">
+                <div key={n} className="group relative p-7 transition-colors duration-300 hover:bg-muted/40">
                   <div className="font-mono text-[10px] tracking-widest text-muted-foreground">0{i + 1}</div>
-                  <div className="font-display mt-3 text-[2.5rem] leading-none tabular-nums tracking-tight">{n}</div>
+                  <div className="font-display mt-3 text-[2.5rem] leading-none tabular-nums tracking-tight transition-transform duration-300 group-hover:-translate-y-0.5">{n}</div>
                   <div className="mt-3 text-[13px] leading-relaxed text-muted-foreground">{d}</div>
                   <div className="mt-5 h-px w-full bg-border/70">
                     <div className="h-px w-0 bg-primary transition-all duration-500 group-hover:w-full" />
                   </div>
                 </div>
               ))}
-            </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
@@ -540,17 +546,18 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
+        <Reveal className="lift rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-2xl tracking-tight sm:text-[2rem]">{c.ctaBigTitle}</h2>
             <p className="mt-4 text-white/70">{c.ctaBigSub}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={href("/library")}><Button size="lg" variant="secondary" className="rounded-full">{c.browseLibrary}</Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white hover:text-neutral-900">{c.ctaGenerate}</Button></a>
+              <a href={href("/library")}><Button size="lg" variant="secondary" className="pill-hover rounded-full">{c.browseLibrary}</Button></a>
+              <a href={href("/cv")}><Button size="lg" variant="outline" className="cta-sheen rounded-full border-white/30 bg-transparent text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-neutral-900 active:translate-y-0">{c.ctaGenerate}</Button></a>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
+
     </SiteShell>
   );
 }
