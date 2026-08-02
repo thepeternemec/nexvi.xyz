@@ -93,26 +93,33 @@ export function AuthShell({
   const [mode, setMode] = useState<"auth" | "forgot" | "forgot-sent">("auth");
   const [forgotLoading, setForgotLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
 
-  async function signInWithGoogle() {
-    setGoogleLoading(true);
+  async function signInWithProvider(provider: "google" | "apple") {
+    const setBusy = provider === "google" ? setGoogleLoading : setAppleLoading;
+    const label = provider === "google" ? "Google" : "Apple";
+    setBusy(true);
     try {
       sessionStorage.setItem("applywise:next", nextPath);
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
       if (result.error) {
-        toast.error(result.error.message ?? "Could not sign in with Google");
+        toast.error(result.error.message ?? `Could not sign in with ${label}`);
         return;
       }
       if (result.redirected) return;
       window.location.href = nextPath;
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not sign in with Google");
+      toast.error(err instanceof Error ? err.message : `Could not sign in with ${label}`);
     } finally {
-      setGoogleLoading(false);
+      setBusy(false);
     }
   }
+
+  const signInWithGoogle = () => signInWithProvider("google");
+  const signInWithApple = () => signInWithProvider("apple");
+
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
