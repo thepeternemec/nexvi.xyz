@@ -75,7 +75,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
               </span>
               {c.badge}
             </div>
-            <h1 className="mt-6 font-display text-[2.1rem] leading-[1.08] tracking-tight sm:text-[2.6rem] lg:text-[3rem]">
+            <h1 className="mt-6 font-display text-[1.9rem] leading-[1.12] tracking-tight sm:text-[2.25rem] lg:text-[2.6rem]">
               {c.heroTitleA} <span className="text-primary">{c.heroTitleEm}</span> {c.heroTitleB}
             </h1>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted-foreground">{c.heroSub}</p>
@@ -107,24 +107,16 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                 <div className="border-b border-border/60 p-5 sm:border-b-0 sm:border-r">
                   <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Job description</div>
                   <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground">
-                    Senior Product Designer — own{" "}
-                    <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end design</mark> for B2B
-                    workflows, build a{" "}
-                    <mark className="rounded bg-primary/12 px-1 text-foreground">design system</mark>, partner with{" "}
-                    <mark className="rounded bg-primary/12 px-1 text-foreground">PM and engineering</mark>, ship weekly.
+Senior Product Designer — own <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end design</mark> for B2B workflows, build a <mark className="rounded bg-primary/12 px-1 text-foreground">design system</mark>, partner with <mark className="rounded bg-primary/12 px-1 text-foreground">PM and engineering</mark>, ship weekly.
                   </p>
                 </div>
                 <div className="p-5">
                   <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Your CV, rewritten</div>
-                  <p className="mt-3 text-[13px] leading-relaxed line-through decoration-border">
+                  <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground/70 line-through decoration-muted-foreground/40">
                     Responsible for various design tasks across the company.
                   </p>
                   <p className="mt-2.5 text-[13px] leading-relaxed">
-                    Led{" "}
-                    <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end design</mark> of a B2B
-                    workflow suite and its{" "}
-                    <mark className="rounded bg-primary/12 px-1 text-foreground">design system</mark>, shipping weekly
-                    with <mark className="rounded bg-primary/12 px-1 text-foreground">PM and engineering</mark>.
+Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end design</mark> of a B2B workflow suite and its <mark className="rounded bg-primary/12 px-1 text-foreground">design system</mark>, shipping weekly with <mark className="rounded bg-primary/12 px-1 text-foreground">PM and engineering</mark>.
                   </p>
                 </div>
               </div>
@@ -135,7 +127,7 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
                     <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{c.atsScore}</div>
                     <div className="mt-1 flex items-baseline gap-2">
                       <span className="font-display text-3xl tracking-tight">92</span>
-                      <span className="text-[11px] text-muted-foreground">/ 100 · {c.atsExcellent}</span>
+                      <span className="text-[11px] text-muted-foreground">{c.atsExcellent}</span>
                     </div>
                   </div>
                   <div className="text-right text-[11px] text-muted-foreground">

@@ -132,7 +132,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
       <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
         <a href={href("/")} className="flex shrink-0 items-center gap-2">
-          <span className="font-display text-[15px] font-semibold tracking-tight">ApplyWise</span>
+          <span className="font-display text-[15px] font-medium tracking-tight">ApplyWise</span>
         </a>
         <nav className="hidden items-center gap-5 lg:flex">
           {NAV.filter((n) => !n.mobileOnly).map((n) => (
@@ -226,7 +226,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-xl tracking-tight text-white">ApplyWise</span>
+            <span className="font-display text-lg tracking-tight text-white">ApplyWise</span>
           </div>
           <p className="mt-4 max-w-sm text-sm text-slate-400">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
