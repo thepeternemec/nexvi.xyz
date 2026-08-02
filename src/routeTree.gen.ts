@@ -98,6 +98,7 @@ import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
 import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
+import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -554,6 +555,11 @@ const DeAssistantRoute = DeAssistantRouteImport.update({
   path: '/de/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
+  id: '/blog/how-to-write-a-resume',
+  path: '/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -639,6 +645,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -740,6 +747,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -842,6 +850,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -945,6 +954,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1046,6 +1056,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1147,6 +1158,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1249,6 +1261,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
+  BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
   DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
   DeBundlesRoute: typeof DeBundlesRoute
@@ -1946,6 +1959,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/how-to-write-a-resume': {
+      id: '/blog/how-to-write-a-resume'
+      path: '/blog/how-to-write-a-resume'
+      fullPath: '/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof BlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -2050,6 +2070,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
+  BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
   DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
   DeBundlesRoute: DeBundlesRoute,
