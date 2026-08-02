@@ -358,8 +358,8 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               </li>
             ))}
             <li>
-              <a href="/guides/how-to-write-a-resume" className="inline-block transition-colors hover:text-primary">
-                How to write a resume
+              <a href="/blog" className="inline-block transition-colors hover:text-primary">
+                Blog
               </a>
             </li>
           </ul>

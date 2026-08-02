@@ -40,6 +40,7 @@ import { Route as GerIndexRouteImport } from './routes/ger/index'
 import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as ItSignupRouteImport } from './routes/it/signup'
 import { Route as ItResetPasswordRouteImport } from './routes/it/reset-password'
@@ -98,6 +99,7 @@ import { Route as DeCoverLetterRouteImport } from './routes/de/cover-letter'
 import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
+import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -262,6 +264,11 @@ const EsIndexRoute = EsIndexRouteImport.update({
 const DeIndexRoute = DeIndexRouteImport.update({
   id: '/de/',
   path: '/de/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromptSlugRoute = PromptSlugRouteImport.update({
@@ -554,6 +561,11 @@ const DeAssistantRoute = DeAssistantRouteImport.update({
   path: '/de/assistant',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
+  id: '/blog/how-to-write-a-resume',
+  path: '/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -639,6 +651,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -697,6 +710,7 @@ export interface FileRoutesByFullPath {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -740,6 +754,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -798,6 +813,7 @@ export interface FileRoutesByTo {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
   '/fr': typeof FrIndexRoute
@@ -842,6 +858,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
   '/de/bundles': typeof DeBundlesRoute
@@ -900,6 +917,7 @@ export interface FileRoutesById {
   '/it/reset-password': typeof ItResetPasswordRoute
   '/it/signup': typeof ItSignupRoute
   '/prompt/$slug': typeof PromptSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -945,6 +963,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1003,6 +1022,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1046,6 +1066,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1104,6 +1125,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog'
     | '/de'
     | '/es'
     | '/fr'
@@ -1147,6 +1169,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
     | '/de/bundles'
@@ -1205,6 +1228,7 @@ export interface FileRouteTypes {
     | '/it/reset-password'
     | '/it/signup'
     | '/prompt/$slug'
+    | '/blog/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1249,6 +1273,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
+  BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
   DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
   DeBundlesRoute: typeof DeBundlesRoute
@@ -1307,6 +1332,7 @@ export interface RootRouteChildren {
   ItResetPasswordRoute: typeof ItResetPasswordRoute
   ItSignupRoute: typeof ItSignupRoute
   PromptSlugRoute: typeof PromptSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   DeIndexRoute: typeof DeIndexRoute
   EsIndexRoute: typeof EsIndexRoute
   FrIndexRoute: typeof FrIndexRoute
@@ -1538,6 +1564,13 @@ declare module '@tanstack/react-router' {
       path: '/de'
       fullPath: '/de/'
       preLoaderRoute: typeof DeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/prompt/$slug': {
@@ -1946,6 +1979,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeAssistantRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/how-to-write-a-resume': {
+      id: '/blog/how-to-write-a-resume'
+      path: '/blog/how-to-write-a-resume'
+      fullPath: '/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof BlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -2050,6 +2090,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
+  BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
   DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
   DeBundlesRoute: DeBundlesRoute,
@@ -2108,6 +2149,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItResetPasswordRoute: ItResetPasswordRoute,
   ItSignupRoute: ItSignupRoute,
   PromptSlugRoute: PromptSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
   DeIndexRoute: DeIndexRoute,
   EsIndexRoute: EsIndexRoute,
   FrIndexRoute: FrIndexRoute,
