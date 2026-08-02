@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Search, Wand2, ShieldCheck, Bot, Gauge, Scan, Languages, Lock } from "lucide-react";
+import { ArrowRight, FileText, Mail, Target, Sparkles, CheckCircle2, Zap, Library, Wand2, ShieldCheck, Bot, Gauge, Scan, Languages, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
@@ -415,25 +415,49 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                 
               </div>
             </div>
-            <div className="rounded-2xl border border-border/70 bg-background p-6 shadow-sm">
-              <div className="flex items-center gap-2 rounded-full border border-border/70 bg-muted/40 px-3 py-2 text-sm text-muted-foreground">
-                <Search className="h-4 w-4" /> "prompts that actually land interviews"
-              </div>
-              <div className="mt-4 grid gap-3">
-                {featured.map((p) => (
-                  <a key={p.slug} href={href(`/prompt/${p.slug}`)} className="flex items-center justify-between gap-3 rounded-xl border border-border/60 bg-card p-3 transition hover:border-foreground/20 hover:shadow-sm">
-                    <div className="min-w-0">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                        {categories.find((c2) => c2.slug === p.category)?.name ?? p.category}
+            <div className="relative">
+              <div className="pointer-events-none absolute -inset-x-6 -top-8 bottom-0 rounded-[2rem] bg-[radial-gradient(60%_50%_at_70%_0%,color-mix(in_oklab,var(--primary)_14%,transparent),transparent)]" />
+              <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)]">
+                <div className="flex items-center justify-between gap-2 border-b border-border/60 px-5 py-3">
+                  <div className="inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                    <Library className="h-3.5 w-3.5 text-primary" /> Top prompts
+                  </div>
+                  <span className="font-mono text-[11px] text-muted-foreground">{prompts.length}+ total</span>
+                </div>
+                <div className="divide-y divide-border/60">
+                  {featured.map((p) => (
+                    <a
+                      key={p.slug}
+                      href={href(`/prompt/${p.slug}`)}
+                      className="group flex items-center gap-4 px-5 py-3.5 transition-colors hover:bg-muted/40"
+                    >
+                      <div className="min-w-0 flex-1">
+                        <div className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                          {categories.find((c2) => c2.slug === p.category)?.name ?? p.category}
+                        </div>
+                        <div className="mt-0.5 truncate text-[14px] font-medium tracking-tight group-hover:text-primary">{p.title}</div>
                       </div>
-                      <div className="truncate text-sm font-medium">{p.title}</div>
-                    </div>
-                    <div className="shrink-0 text-xs text-muted-foreground">{p.price === 0 ? "Free" : "Premium"}</div>
+                      <span
+                        className={
+                          p.price === 0
+                            ? "shrink-0 rounded-full border border-border/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground"
+                            : "shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary"
+                        }
+                      >
+                        {p.price === 0 ? "Free" : "Premium"}
+                      </span>
+                      <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
+                    </a>
+                  ))}
+                </div>
+                <div className="border-t border-border/60 bg-muted/20 px-5 py-3">
+                  <a href={href("/library")} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-primary hover:underline">
+                    Browse the full library <ArrowRight className="h-3.5 w-3.5" />
                   </a>
-                ))}
+                </div>
               </div>
-
             </div>
+
           </div>
         </div>
       </section>
