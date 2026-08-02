@@ -167,53 +167,63 @@ export function Marketplace() {
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
-        <div className="mb-6 rounded-2xl border border-border/70 bg-muted/30 p-4">
-          <div className="flex items-center justify-between gap-3">
+        <div className="mb-6 overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-[0_1px_2px_0_rgba(15,23,64,0.06)] backdrop-blur-xl">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-border/60 px-6 py-5">
             <div>
-              <h2 className="text-sm font-semibold">Prompt Packs</h2>
-              <p className="text-xs text-muted-foreground">Curated sets — save a whole pack or copy an apply-ready template in one click.</p>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Curated packs</div>
+              <h2 className="mt-2 font-display text-[1.15rem] tracking-tight sm:text-[1.3rem]">Start from a pack, not a blank prompt</h2>
+              <p className="mt-1.5 max-w-lg text-[13px] leading-relaxed text-muted-foreground">
+                Each pack is a sequence that fits one moment in the hunt — save the whole set or copy an apply-ready workflow in one click.
+              </p>
             </div>
             {activePack && (
               <div className="flex flex-wrap items-center gap-2">
-                <Button size="sm" variant="secondary" className="h-8 rounded-lg" onClick={savePack}>
+                <Button size="sm" variant="outline" className="h-8 rounded-full px-3 text-[12px] font-normal" onClick={savePack}>
                   <Bookmark className="mr-1.5 h-3.5 w-3.5" /> Save pack
                 </Button>
-                <Button size="sm" className="h-8 rounded-lg" onClick={copyPackTemplate}>
+                <Button size="sm" className="h-8 rounded-full px-3 text-[12px]" onClick={copyPackTemplate}>
                   <FileDown className="mr-1.5 h-3.5 w-3.5" /> Apply-ready template
                 </Button>
-                <button onClick={() => update({ pack: undefined })} className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear</button>
+                <button onClick={() => update({ pack: undefined })} className="inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition hover:text-foreground"><X className="h-3 w-3" /> Clear</button>
               </div>
             )}
           </div>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {packs.map(pk => (
-              <button
-                key={pk.slug}
-                onClick={() => update({ pack: search.pack === pk.slug ? undefined : pk.slug })}
-                title={pk.description}
-                className={`whitespace-nowrap rounded-xl border px-3 py-2 text-sm transition ${search.pack === pk.slug ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground/30"}`}
-              >
-                <span className="mr-1.5">{pk.emoji}</span>{pk.name}
-                <span className="ml-2 text-xs opacity-60">{prompts.filter(p => p.pack === pk.slug).length}</span>
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-2 px-6 py-5">
+            {packs.map(pk => {
+              const active = search.pack === pk.slug;
+              return (
+                <button
+                  key={pk.slug}
+                  onClick={() => update({ pack: active ? undefined : pk.slug })}
+                  title={pk.description}
+                  className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full border px-3.5 py-2 text-[13px] transition ${active ? "border-primary/40 bg-primary/10 text-primary shadow-[0_0_0_1px_color-mix(in_oklab,var(--primary)_25%,transparent)]" : "border-border/70 bg-background/70 text-foreground hover:border-foreground/25 hover:bg-background"}`}
+                >
+                  <span className="text-[13px] leading-none">{pk.emoji}</span>
+                  {pk.name}
+                  <span className={`rounded-full px-1.5 py-0.5 text-[10px] tabular-nums ${active ? "bg-primary/15 text-primary" : "bg-muted text-muted-foreground"}`}>
+                    {prompts.filter(p => p.pack === pk.slug).length}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y border-border/60 py-4 text-sm">
           <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
-            <SlidersHorizontal className="h-4 w-4" />
+            <SlidersHorizontal className="h-3.5 w-3.5" />
+            <span className="mr-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Filter</span>
             <FilterChip label="Free" active={search.price === "free"} onClick={() => update({ price: search.price === "free" ? "all" : "free" })} />
             <FilterChip label="Premium" active={search.price === "paid"} onClick={() => update({ price: search.price === "paid" ? "all" : "paid" })} />
             <FilterChip label="Beginner-friendly" active={search.beginner === "1"} onClick={() => update({ beginner: search.beginner === "1" ? undefined : "1" })} />
             {(search.q || search.category || search.pack || search.price !== "all" || search.beginner) && (
-              <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
+              <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
             )}
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground">Sort</span>
-            <select value={(search.sort as string) ?? "popular"} onChange={(e) => update({ sort: e.target.value as Search["sort"] })} className="rounded-lg border border-border bg-background px-2 py-1 text-sm">
+            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Sort</span>
+            <select value={(search.sort as string) ?? "popular"} onChange={(e) => update({ sort: e.target.value as Search["sort"] })} className="rounded-full border border-border/70 bg-background/70 px-3 py-1.5 text-[13px] transition hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40">
               <option value="popular">Popular</option>
               <option value="newest">Newest</option>
               <option value="rating">Top rated</option>
@@ -221,6 +231,7 @@ export function Marketplace() {
             </select>
           </div>
         </div>
+
 
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
           <span>
@@ -267,11 +278,12 @@ export function Marketplace() {
           <div className="mt-6 space-y-10">
             {groups.map(g => (
               <div key={g.key}>
-                <div className="mb-4 flex items-baseline gap-3 border-b border-border/60 pb-2">
-                  <h3 className="text-lg font-semibold tracking-tight">{g.label}</h3>
-                  <span className="text-xs text-muted-foreground">{g.hint}</span>
-                  <span className="ml-auto text-xs text-muted-foreground">{g.items.length}</span>
+                <div className="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border/60 pb-3">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{g.label}</div>
+                  <h3 className="font-display text-[1.1rem] tracking-tight">{g.hint}</h3>
+                  <span className="ml-auto text-[11px] tabular-nums text-muted-foreground">{g.items.length}</span>
                 </div>
+
                 <PromptGrid items={g.items} />
               </div>
             ))}
@@ -297,6 +309,6 @@ export function Marketplace() {
 
 function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
-    <button onClick={onClick} className={`rounded-full border px-3 py-1 text-xs transition ${active ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground/30"}`}>{label}</button>
+    <button onClick={onClick} className={`rounded-full border px-3 py-1.5 text-[12px] transition ${active ? "border-primary/40 bg-primary/10 text-primary" : "border-border/70 bg-background/70 text-foreground/80 hover:border-foreground/25 hover:text-foreground"}`}>{label}</button>
   );
 }
