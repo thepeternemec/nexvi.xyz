@@ -487,14 +487,14 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               { icon: Gauge, title: "60-Second Turnaround", desc: "Go from blank page to interview-ready docs in under a minute — for every role you apply to." },
               { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
               { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
-            ].map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="rounded-2xl border border-border/70 bg-background p-6 transition hover:border-foreground/30 hover:shadow-sm">
-                <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground">
-                  <Icon className="h-5 w-5" />
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <Reveal key={title} delay={(i % 3) * 90} className="group lift rounded-2xl border border-border/70 bg-background p-6">
+                <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
+                  <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 <h3 className="mt-4 text-[15px] font-medium">{title}</h3>
                 <p className="mt-1.5 text-sm text-muted-foreground">{desc}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
