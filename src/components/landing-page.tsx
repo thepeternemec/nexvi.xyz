@@ -161,18 +161,19 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
-          <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
+          <div className="pill-hover mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
             Tools built on top of Claude and ChatGPT models
           </div>
-        </div>
+        </Reveal>
         <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
+
           <div className="flex gap-5 snap-x snap-mandatory">
             {order.map((i) => {
               const t = c.tools[i];
