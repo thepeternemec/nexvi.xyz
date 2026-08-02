@@ -25,6 +25,78 @@ export const Route = createFileRoute("/")({
       { rel: "alternate", hrefLang: "fr", href: "https://applywise.eu/fr" },
       { rel: "alternate", hrefLang: "x-default", href: "https://applywise.eu/" },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "ApplyWise",
+          url: "https://applywise.eu",
+          applicationCategory: "BusinessApplication",
+          operatingSystem: "Web",
+          description:
+            "AI tools that tailor your CV and cover letter to a specific job description, score it against ATS filters and humanize AI-written text.",
+          featureList: [
+            "AI CV generator tailored to a job description",
+            "Cover letter writer",
+            "ATS match score with keyword, formatting and length breakdown",
+            "AI text humanizer",
+            "Job-search prompt library",
+          ],
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What is ApplyWise?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "ApplyWise is an AI platform that aligns your CV and cover letter with a specific job description, scores the result against ATS filters and shows exactly what to fix before you apply.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How does the ATS match score work?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Paste your CV and the job description. ApplyWise returns a match percentage broken down into keyword coverage, formatting checks, section coverage and length, plus specific rewrite recommendations.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Is ApplyWise free?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Free accounts get three generations on every tool each month, with no credit card required. Pro unlocks unlimited generations and the full prompt library.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Which AI models does ApplyWise use?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "ApplyWise runs on frontier Claude and GPT models, so generated CVs and cover letters read naturally instead of like template text.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Which languages are supported?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "English, German, Spanish, Italian and French, both in the interface and in generated documents.",
+              },
+            },
+          ],
+        }),
+      },
+    ],
   }),
   component: () => <LandingPage locale="en" />,
 });
