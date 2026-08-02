@@ -75,7 +75,7 @@ export function Dashboard() {
                     Go Premium <ArrowRight className="ml-1.5 h-4 w-4" />
                   </Button>
                 </a>
-                <a href={href("/pricing")} className="text-xs text-neutral-400 underline-offset-4 hover:text-neutral-200 hover:underline">Compare plans</a>
+                <a href={href("/pricing")} className="text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline dark:text-neutral-400 dark:hover:text-neutral-200">Compare plans</a>
               </div>
             </div>
           </div>
