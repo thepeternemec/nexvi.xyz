@@ -25,6 +25,14 @@ export function Reveal({
       setShown(true);
       return;
     }
+    const inView = () => {
+      const r = el.getBoundingClientRect();
+      return r.top < window.innerHeight * 0.9 && r.bottom > 0;
+    };
+    if (inView()) {
+      setShown(true);
+      return;
+    }
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -37,8 +45,21 @@ export function Reveal({
       { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    // Safety net: programmatic jumps (anchor links, restored scroll) can skip observer callbacks.
+    const onScroll = () => {
+      if (inView()) {
+        setShown(true);
+        io.disconnect();
+        window.removeEventListener("scroll", onScroll);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
 
   return (
     <Tag
