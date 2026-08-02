@@ -2,6 +2,7 @@ import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-ro
 import { useQueryClient } from "@tanstack/react-query";
 import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { BrandMark } from "@/components/brand-mark";
 import { useAuth } from "@/hooks/use-auth";
 
 import { openCookiePreferences } from "@/lib/cookie-consent";
@@ -146,7 +147,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
       <div className="mx-auto flex h-13 w-full max-w-6xl items-center justify-between gap-4 rounded-[18px] border border-border/50 bg-background/60 px-2 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.65)_inset,0_1px_2px_rgba(16,24,64,0.04),0_12px_32px_-16px_rgba(16,24,64,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/50 dark:shadow-[0_1px_0_rgba(255,255,255,0.07)_inset,0_12px_32px_-16px_rgba(0,0,0,0.6)] sm:px-3 sm:pl-6">
         <a href={href("/")} className="group flex shrink-0 items-center">
-          <span className="font-display text-[15px] font-medium tracking-tight transition-opacity group-hover:opacity-70">ApplyWise</span>
+          <BrandMark size="sm" className="transition-opacity group-hover:opacity-70" />
         </a>
         <nav className="hidden items-center gap-0.5 lg:flex">
           {NAV.filter((n) => !n.mobileOnly).map((n) => {
@@ -292,7 +293,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         <div className="md:col-span-2">
           <div className="flex items-center gap-2">
-            <span className="font-display text-[1.35rem] tracking-tight text-foreground">ApplyWise</span>
+            <BrandMark size="lg" className="text-foreground" />
           </div>
           <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted-foreground">
             Land more interviews with AI-tailored CVs, cover letters, and ATS scoring — built for every job description, in 60 seconds.
