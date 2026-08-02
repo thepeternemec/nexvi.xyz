@@ -55,6 +55,7 @@ import { Route as ItCoverLetterRouteImport } from './routes/it/cover-letter'
 import { Route as ItBundlesRouteImport } from './routes/it/bundles'
 import { Route as ItAtsRouteImport } from './routes/it/ats'
 import { Route as ItAssistantRouteImport } from './routes/it/assistant'
+import { Route as GuidesHowToWriteAResumeRouteImport } from './routes/guides/how-to-write-a-resume'
 import { Route as FrSignupRouteImport } from './routes/fr/signup'
 import { Route as FrResetPasswordRouteImport } from './routes/fr/reset-password'
 import { Route as FrPricingRouteImport } from './routes/fr/pricing'
@@ -336,6 +337,11 @@ const ItAtsRoute = ItAtsRouteImport.update({
 const ItAssistantRoute = ItAssistantRouteImport.update({
   id: '/it/assistant',
   path: '/it/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesHowToWriteAResumeRoute = GuidesHowToWriteAResumeRouteImport.update({
+  id: '/guides/how-to-write-a-resume',
+  path: '/guides/how-to-write-a-resume',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrSignupRoute = FrSignupRouteImport.update({
@@ -675,6 +681,7 @@ export interface FileRoutesByFullPath {
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
@@ -775,6 +782,7 @@ export interface FileRoutesByTo {
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
@@ -876,6 +884,7 @@ export interface FileRoutesById {
   '/fr/pricing': typeof FrPricingRoute
   '/fr/reset-password': typeof FrResetPasswordRoute
   '/fr/signup': typeof FrSignupRoute
+  '/guides/how-to-write-a-resume': typeof GuidesHowToWriteAResumeRoute
   '/it/assistant': typeof ItAssistantRoute
   '/it/ats': typeof ItAtsRoute
   '/it/bundles': typeof ItBundlesRoute
@@ -978,6 +987,7 @@ export interface FileRouteTypes {
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/guides/how-to-write-a-resume'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
@@ -1078,6 +1088,7 @@ export interface FileRouteTypes {
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/guides/how-to-write-a-resume'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
@@ -1178,6 +1189,7 @@ export interface FileRouteTypes {
     | '/fr/pricing'
     | '/fr/reset-password'
     | '/fr/signup'
+    | '/guides/how-to-write-a-resume'
     | '/it/assistant'
     | '/it/ats'
     | '/it/bundles'
@@ -1279,6 +1291,7 @@ export interface RootRouteChildren {
   FrPricingRoute: typeof FrPricingRoute
   FrResetPasswordRoute: typeof FrResetPasswordRoute
   FrSignupRoute: typeof FrSignupRoute
+  GuidesHowToWriteAResumeRoute: typeof GuidesHowToWriteAResumeRoute
   ItAssistantRoute: typeof ItAssistantRoute
   ItAtsRoute: typeof ItAtsRoute
   ItBundlesRoute: typeof ItBundlesRoute
@@ -1630,6 +1643,13 @@ declare module '@tanstack/react-router' {
       path: '/it/assistant'
       fullPath: '/it/assistant'
       preLoaderRoute: typeof ItAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/how-to-write-a-resume': {
+      id: '/guides/how-to-write-a-resume'
+      path: '/guides/how-to-write-a-resume'
+      fullPath: '/guides/how-to-write-a-resume'
+      preLoaderRoute: typeof GuidesHowToWriteAResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fr/signup': {
@@ -2072,6 +2092,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrPricingRoute: FrPricingRoute,
   FrResetPasswordRoute: FrResetPasswordRoute,
   FrSignupRoute: FrSignupRoute,
+  GuidesHowToWriteAResumeRoute: GuidesHowToWriteAResumeRoute,
   ItAssistantRoute: ItAssistantRoute,
   ItAtsRoute: ItAtsRoute,
   ItBundlesRoute: ItBundlesRoute,
