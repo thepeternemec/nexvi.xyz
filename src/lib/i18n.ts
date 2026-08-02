@@ -127,7 +127,7 @@ export const copy: Record<Locale, Copy> = {
       ["Add your background", "Past roles, skills, education, or your existing CV — however you have it."],
       ["Get tailored, ATS-ready docs", "A CV, a cover letter, and an ATS score with concrete fixes."],
     ],
-    atsScore: "ATS Match Score",
+    atsScore: "CV Match Score",
     atsExcellent: "/ 100 — Excellent match",
     socialTitle: "Built for the modern job hunt.",
     socialSub: "Most CVs get filtered before a human sees them. We fix that.",
