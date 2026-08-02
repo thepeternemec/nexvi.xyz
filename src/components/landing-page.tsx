@@ -279,10 +279,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                 <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-primary" /> Your data stays yours</span>
                 <span className="inline-flex items-center gap-1.5"><Gauge className="h-3.5 w-3.5 text-primary" /> ~60s per document</span>
               </div>
-            </div>
+            </Reveal>
 
             {/* Product mock */}
-            <div className="relative">
+            <Reveal delay={120} className="relative">
+
               <div className="pointer-events-none absolute -inset-x-6 -top-8 bottom-0 rounded-[2rem] bg-[radial-gradient(60%_50%_at_70%_0%,color-mix(in_oklab,var(--primary)_16%,transparent),transparent)]" />
               <div className="relative overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-24px_rgba(15,23,42,0.28)]">
                 <div className="flex items-center gap-2 border-b border-border/60 px-4 py-3">
