@@ -108,8 +108,8 @@ export function ATSPage() {
     <SiteShell>
       <ToolHero
         eyebrow="ATS Optimizer • see what the screener sees"
-        title="Find out why your CV never"
-        titleEm="reaches a human."
+        title="Score your CV against the job before"
+        titleEm="the screener does."
         sub="Applicant tracking systems rank you before anyone reads you. Paste your CV and the job description to get a match score, the exact keywords you're missing, formatting checks and the rewrites that move the number."
         bullets={["Match score out of 100", "Matched and missing keywords", "Formatting and section checks"]}
         icon={Target}
