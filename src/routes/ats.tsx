@@ -77,10 +77,32 @@ export function ATSPage() {
       toast.error(msg.includes("402") ? "AI credits exhausted. Showing an estimated ATS score." : msg.includes("429") ? "Rate limited. Showing an estimated ATS score." : "Showing an estimated ATS score.");
     } finally { setLoading(false); }
   }
+  async function copyReport() {
+    if (!report) return;
+    try {
+      await navigator.clipboard.writeText(reportToText(report));
+      toast.success("Report copied as clean text");
+    } catch {
+      toast.error("Copy failed");
+    }
+  }
 
+  function downloadReport() {
+    if (!report) return;
+    try {
+      downloadDocumentPdf(reportToText(report), "ats-report.pdf");
+      toast.success("PDF ready — check your downloads or the new tab");
+    } catch {
+      toast.error("Your browser blocked the download.");
+    }
+  }
 
+  function clearAll() {
+    setJd(""); setCv(""); setReport(null);
+  }
 
   const scoreColor = (s: number) => s >= 80 ? "text-emerald-600 dark:text-emerald-400" : s >= 60 ? "text-amber-600 dark:text-amber-400" : "text-rose-600 dark:text-rose-400";
+
 
   return (
     <SiteShell>
