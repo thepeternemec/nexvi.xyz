@@ -460,6 +460,19 @@ export function AuthShell({
                 </svg>
                 {googleLoading ? "Please wait…" : "Continue with Google"}
               </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={signInWithApple}
+                disabled={appleLoading}
+                className="w-full rounded-full"
+              >
+                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path d="M16.36 12.79c.02 2.63 2.3 3.5 2.33 3.51-.02.06-.37 1.26-1.21 2.5-.73 1.07-1.49 2.13-2.69 2.15-1.18.02-1.56-.7-2.91-.7-1.35 0-1.77.68-2.89.72-1.15.04-2.03-1.15-2.77-2.21-1.6-2.32-2.83-6.56-1.18-9.42.82-1.42 2.28-2.32 3.87-2.35 1.14-.02 2.21.77 2.91.77.69 0 2-.95 3.37-.81.57.02 2.18.21 3.21 1.73-.08.05-1.92 1.12-1.9 3.35M14.4 4.2c.62-.75 1.04-1.79.93-2.83-.89.04-1.98.6-2.62 1.34-.58.66-1.08 1.72-.95 2.74.99.08 2.01-.5 2.64-1.25" />
+                </svg>
+                {appleLoading ? "Please wait…" : "Continue with Apple"}
+              </Button>
               <div className="flex items-center gap-3">
                 <span className="h-px flex-1 bg-border/70" />
                 <span className="text-xs uppercase tracking-wide text-muted-foreground">or</span>
