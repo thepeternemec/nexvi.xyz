@@ -57,9 +57,9 @@ export function ToolHero({
             <div className="relative">
               <div className="overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-[0_24px_60px_-40px_rgba(15,15,40,0.45)] backdrop-blur-xl">
                 <div className="flex items-center justify-between border-b border-border/60 px-4 py-2.5">
-                  <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  <h2 className="inline-flex items-center gap-2 text-[10px] font-normal uppercase tracking-[0.18em] text-muted-foreground">
                     {Icon && <Icon className="h-3.5 w-3.5" />} how it works
-                  </div>
+                  </h2>
                   <span className="rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] tracking-wide text-primary">
                     ~60s
                   </span>
