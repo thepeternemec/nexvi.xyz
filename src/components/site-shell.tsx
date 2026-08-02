@@ -280,12 +280,12 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
   const href = (p: string) => alternateHref(locale, p);
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-[#0b1230] text-slate-200">
-      {/* light-theme gradient: indigo/blue signal */}
+      {/* light-theme gradient: Stripe-style deep slate with cyan → indigo diagonal sweep */}
       <div
         className="pointer-events-none absolute inset-0 -z-0 dark:hidden"
         style={{
           backgroundImage:
-            "radial-gradient(ellipse 75% 65% at 8% -10%, rgba(99,102,241,0.45), transparent 62%), radial-gradient(ellipse 65% 55% at 92% 0%, rgba(56,189,248,0.28), transparent 60%), linear-gradient(180deg, #16215c 0%, #0d1540 48%, #080d24 100%)",
+            "radial-gradient(ellipse 55% 80% at 0% 0%, rgba(45,212,191,0.20), transparent 58%), radial-gradient(ellipse 60% 70% at 30% -20%, rgba(56,189,248,0.22), transparent 60%), radial-gradient(ellipse 70% 90% at 100% 10%, rgba(99,102,241,0.26), transparent 62%), linear-gradient(160deg, #0f2544 0%, #0d1c38 45%, #0a1226 100%)",
         }}
       />
       {/* dark-theme gradient: near-black graphite */}
