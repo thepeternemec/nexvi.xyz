@@ -11,6 +11,7 @@ import { packs, prompts } from "@/lib/mock-data";
 
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
+import { ToolOutro } from "@/components/tool-hero";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
 
 type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
@@ -115,11 +116,24 @@ export function Marketplace() {
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
           <a href={alternateHref(locale, "/")} className="text-xs text-muted-foreground">← Back</a>
-          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-3 py-1.5 text-xs font-medium text-muted-foreground">
-            Prompt Library • Curated for job seekers
+          <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[11px] tracking-wide text-muted-foreground backdrop-blur">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+            </span>
+            Prompt Library • curated for job seekers
           </div>
-          <h1 className="font-display mt-4 text-5xl tracking-tight sm:text-6xl">Prompts that get you hired.</h1>
-          <p className="mt-3 max-w-xl text-muted-foreground">CVs, cover letters, interview stories, recruiter outreach, negotiation scripts — built around the job hunt.</p>
+          <h1 className="mt-6 font-display text-[1.9rem] leading-[1.12] tracking-tight sm:text-[2.25rem] lg:text-[2.5rem]">
+            Prompts that get you <span className="text-primary">hired</span> — not just answered.
+          </h1>
+          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-muted-foreground">
+            Every prompt here is written and tested for one job: getting you an interview. Tailored CVs, cover letters that sound like you, ATS keyword gap analysis, STAR interview stories, recruiter outreach and salary negotiation scripts — grouped into packs you can save or run in one click, in ChatGPT, Claude or right here.
+          </p>
+          <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-5 text-[11px] tracking-wide text-muted-foreground">
+            <span>{prompts.length} prompts</span>
+            <span>{packs.length} curated packs</span>
+            <span>Free prompts, no account needed</span>
+          </div>
           <form
             onSubmit={(e) => { e.preventDefault(); update({ q }); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
@@ -269,6 +283,14 @@ export function Marketplace() {
         ))}
 
       </section>
+      <ToolOutro
+        title="Found the right prompt? Let the tools run it for you."
+        text="Prompts are the fastest way to understand what a strong application looks like. When you want the finished document, the CV Generator, Cover Letter Lab and ATS Optimizer apply the same thinking automatically."
+        primaryLabel="Generate my CV"
+        primaryHref="/cv"
+        secondaryLabel="Score my CV against a job"
+        secondaryHref="/ats"
+      />
     </SiteShell>
   );
 }
