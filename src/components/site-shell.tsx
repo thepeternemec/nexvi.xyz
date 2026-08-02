@@ -130,22 +130,42 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
 
   return (
     <header className="sticky top-0 z-50 w-full px-3 pt-3">
-      <div className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border border-border/60 bg-background/70 px-3 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.5)_inset,0_8px_24px_-12px_rgba(0,0,0,0.18)] backdrop-blur-2xl dark:bg-background/60 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset,0_8px_24px_-12px_rgba(0,0,0,0.5)] sm:px-4 sm:pl-6">
-        <a href={href("/")} className="flex shrink-0 items-center gap-2">
-          <span className="font-display text-[15px] font-medium tracking-tight">ApplyWise</span>
+      <div className="mx-auto flex h-13 w-full max-w-6xl items-center justify-between gap-4 rounded-[18px] border border-border/50 bg-background/60 px-2 pl-5 shadow-[0_1px_0_rgba(255,255,255,0.65)_inset,0_1px_2px_rgba(16,24,64,0.04),0_12px_32px_-16px_rgba(16,24,64,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/50 dark:shadow-[0_1px_0_rgba(255,255,255,0.07)_inset,0_12px_32px_-16px_rgba(0,0,0,0.6)] sm:px-3 sm:pl-6">
+        <a href={href("/")} className="group flex shrink-0 items-center gap-2">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-primary/40 transition group-hover:animate-ping" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
+          </span>
+          <span className="font-display text-[15px] font-medium tracking-tight transition-opacity group-hover:opacity-70">ApplyWise</span>
         </a>
-        <nav className="hidden items-center gap-5 lg:flex">
-          {NAV.filter((n) => !n.mobileOnly).map((n) => (
-            <a key={n.href} href={href(n.href)} className="whitespace-nowrap text-[13px] text-muted-foreground transition-colors hover:text-foreground">
-              {n.label}
-            </a>
-          ))}
+        <nav className="hidden items-center gap-0.5 lg:flex">
+          {NAV.filter((n) => !n.mobileOnly).map((n) => {
+            const active = barePath === n.href || barePath.startsWith(n.href + "/");
+            return (
+              <a
+                key={n.href}
+                href={href(n.href)}
+                aria-current={active ? "page" : undefined}
+                className={`group relative whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {n.label}
+                <span
+                  className={`pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] rounded-full bg-primary transition-transform duration-200 ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
+              </a>
+            );
+          })}
 
         </nav>
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
-          <a href={href("/pricing")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px]">Pricing</Button></a>
+          <span className="mx-1 h-5 w-px bg-border/70" aria-hidden="true" />
+          <a href={href("/pricing")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px] font-medium text-muted-foreground hover:text-foreground">Pricing</Button></a>
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
