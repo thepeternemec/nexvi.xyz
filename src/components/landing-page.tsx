@@ -546,17 +546,18 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <div className="rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
+        <Reveal className="lift rounded-2xl bg-gradient-to-br from-[#141432] via-[#0f0f28] to-[#0a0a1a] p-12 text-white sm:p-16 dark:from-neutral-800 dark:via-neutral-900 dark:to-black">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-2xl tracking-tight sm:text-[2rem]">{c.ctaBigTitle}</h2>
             <p className="mt-4 text-white/70">{c.ctaBigSub}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={href("/library")}><Button size="lg" variant="secondary" className="rounded-full">{c.browseLibrary}</Button></a>
-              <a href={href("/cv")}><Button size="lg" variant="outline" className="rounded-full border-white/30 bg-transparent text-white hover:bg-white hover:text-neutral-900">{c.ctaGenerate}</Button></a>
+              <a href={href("/library")}><Button size="lg" variant="secondary" className="pill-hover rounded-full">{c.browseLibrary}</Button></a>
+              <a href={href("/cv")}><Button size="lg" variant="outline" className="cta-sheen rounded-full border-white/30 bg-transparent text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white hover:text-neutral-900 active:translate-y-0">{c.ctaGenerate}</Button></a>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
+
     </SiteShell>
   );
 }
