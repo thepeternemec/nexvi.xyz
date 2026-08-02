@@ -10,9 +10,9 @@ export const Route = createFileRoute("/sitemap")({
       { property: "og:title", content: "ApplyWise Sitemap" },
       { property: "og:description", content: "Every page on ApplyWise in one place." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/sitemap" },
+      { property: "og:url", content: "https://applywise.eu/sitemap" },
     ],
-    links: [{ rel: "canonical", href: "/sitemap" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/sitemap" }],
   }),
   component: SitemapPage,
 });

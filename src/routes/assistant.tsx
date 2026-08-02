@@ -15,9 +15,9 @@ export const Route = createFileRoute("/assistant")({
       { name: "description", content: "Describe your job search goal and get the right ApplyWise prompt or tool for it." },
       { property: "og:title", content: "AI Job Application Assistant — ApplyWise" },
       { property: "og:description", content: "Get matched to the right prompt for your job search task." },
-      { property: "og:url", content: "/assistant" },
+      { property: "og:url", content: "https://applywise.eu/assistant" },
     ],
-    links: [{ rel: "canonical", href: "/assistant" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/assistant" }],
   }),
   component: Assistant,
 });

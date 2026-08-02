@@ -11,9 +11,9 @@ export const Route = createFileRoute("/cookies")({
       { property: "og:title", content: "ApplyWise Cookie Policy" },
       { property: "og:description", content: "The cookies ApplyWise sets for sign-in, preferences and analytics — and how to control them." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/cookies" },
+      { property: "og:url", content: "https://applywise.eu/cookies" },
     ],
-    links: [{ rel: "canonical", href: "/cookies" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/cookies" }],
   }),
   component: CookiesPage,
 });

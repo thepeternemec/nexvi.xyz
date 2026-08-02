@@ -19,10 +19,10 @@ export const Route = createFileRoute("/about")({
         content: "Why we build AI tools that align CVs and cover letters to the job description, not generic resume templates.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://applywise.eu/about" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/about" }],
   }),
   component: AboutPage,
 });

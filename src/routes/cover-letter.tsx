@@ -19,9 +19,9 @@ export const Route = createFileRoute("/cover-letter")({
       { property: "og:title", content: "AI Cover Letter Generator — ApplyWise" },
       { property: "og:description", content: "Personalized cover letters tailored to any job description, in seconds." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/cover-letter" },
+      { property: "og:url", content: "https://applywise.eu/cover-letter" },
     ],
-    links: [{ rel: "canonical", href: "/cover-letter" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/cover-letter" }],
   }),
 
   component: CoverLetterPage,

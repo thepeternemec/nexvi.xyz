@@ -19,9 +19,9 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: "ApplyWise Pricing — Free & Pro" },
       { property: "og:description", content: "Free forever plan, plus Pro for unlimited AI job application tools." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/pricing" },
+      { property: "og:url", content: "https://applywise.eu/pricing" },
     ],
-    links: [{ rel: "canonical", href: "/pricing" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/pricing" }],
   }),
   component: Pricing,
 });

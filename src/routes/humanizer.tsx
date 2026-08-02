@@ -19,9 +19,9 @@ export const Route = createFileRoute("/humanizer")({
       { property: "og:title", content: "AI Humanizer — ApplyWise" },
       { property: "og:description", content: "Rewrite AI text so it sounds like you wrote it. Based on Wikipedia's Signs of AI Writing guide." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/humanizer" },
+      { property: "og:url", content: "https://applywise.eu/humanizer" },
     ],
-    links: [{ rel: "canonical", href: "/humanizer" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/humanizer" }],
   }),
 
   component: HumanizerPage,
