@@ -21,44 +21,66 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (typeof IntersectionObserver === "undefined") {
-      setShown(true);
-      return;
-    }
+
     const inView = () => {
       const r = el.getBoundingClientRect();
       return r.top < window.innerHeight * 0.9 && r.bottom > 0;
     };
-    if (inView()) {
+
+    let done = false;
+    const timers: number[] = [];
+    let io: IntersectionObserver | null = null;
+
+    const reveal = () => {
+      if (done) return;
+      done = true;
       setShown(true);
+      io?.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      for (const t of timers) window.clearTimeout(t);
+    };
+
+    const onScroll = () => {
+      if (inView()) reveal();
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      reveal();
       return;
     }
-    const io = new IntersectionObserver(
+
+    io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setShown(true);
-            io.disconnect();
-          }
+          if (entry.isIntersecting) reveal();
         }
       },
       { rootMargin: "0px 0px -12% 0px", threshold: 0.08 },
     );
     io.observe(el);
-    // Safety net: programmatic jumps (anchor links, restored scroll) can skip observer callbacks.
-    const onScroll = () => {
-      if (inView()) {
-        setShown(true);
-        io.disconnect();
-        window.removeEventListener("scroll", onScroll);
-      }
-    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    // Layout can still be settling during hydration (fonts, streamed markup), so the
+    // observer's first callback may report "not intersecting" and never fire again.
+    // Re-check a few times after mount to catch anything already in the viewport.
+    onScroll();
+    timers.push(
+      window.setTimeout(onScroll, 60),
+      window.setTimeout(onScroll, 250),
+      window.setTimeout(onScroll, 800),
+    );
+
     return () => {
-      io.disconnect();
+      io?.disconnect();
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      for (const t of timers) window.clearTimeout(t);
     };
   }, []);
+
 
 
   return (
