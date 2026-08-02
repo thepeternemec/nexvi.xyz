@@ -100,6 +100,7 @@ import { Route as DeBundlesRouteImport } from './routes/de/bundles'
 import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
+import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -566,6 +567,12 @@ const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
   path: '/blog/how-to-write-a-resume',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogAtsOptimizationAndAiHumanizerRoute =
+  BlogAtsOptimizationAndAiHumanizerRouteImport.update({
+    id: '/blog/ats-optimization-and-ai-humanizer',
+    path: '/blog/ats-optimization-and-ai-humanizer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -651,6 +658,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
@@ -754,6 +762,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
@@ -858,6 +867,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/de/assistant': typeof DeAssistantRoute
   '/de/ats': typeof DeAtsRoute
@@ -963,6 +973,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
@@ -1066,6 +1077,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
@@ -1169,6 +1181,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/de/assistant'
     | '/de/ats'
@@ -1273,6 +1286,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
+  BlogAtsOptimizationAndAiHumanizerRoute: typeof BlogAtsOptimizationAndAiHumanizerRoute
   BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
   DeAssistantRoute: typeof DeAssistantRoute
   DeAtsRoute: typeof DeAtsRoute
@@ -1986,6 +2000,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogHowToWriteAResumeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/ats-optimization-and-ai-humanizer': {
+      id: '/blog/ats-optimization-and-ai-humanizer'
+      path: '/blog/ats-optimization-and-ai-humanizer'
+      fullPath: '/blog/ats-optimization-and-ai-humanizer'
+      preLoaderRoute: typeof BlogAtsOptimizationAndAiHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -2090,6 +2111,8 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
+  BlogAtsOptimizationAndAiHumanizerRoute:
+    BlogAtsOptimizationAndAiHumanizerRoute,
   BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
   DeAssistantRoute: DeAssistantRoute,
   DeAtsRoute: DeAtsRoute,
