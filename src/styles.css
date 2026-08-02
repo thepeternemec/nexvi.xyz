@@ -131,7 +131,20 @@
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    /* Global white → blue ambient gradient */
+    background-image:
+      radial-gradient(ellipse 90% 55% at 12% -5%, oklch(0.93 0.06 250 / 0.85), transparent 65%),
+      radial-gradient(ellipse 80% 50% at 92% 4%, oklch(0.92 0.08 275 / 0.7), transparent 62%),
+      linear-gradient(180deg, oklch(0.985 0.012 250) 0%, oklch(0.965 0.022 255) 38%, oklch(1 0 0) 100%);
+    background-attachment: fixed;
   }
+  .dark body {
+    background-image:
+      radial-gradient(ellipse 90% 55% at 12% -5%, oklch(0.35 0.09 265 / 0.55), transparent 65%),
+      radial-gradient(ellipse 80% 50% at 92% 4%, oklch(0.32 0.1 285 / 0.45), transparent 62%),
+      linear-gradient(180deg, oklch(0.17 0.035 265) 0%, oklch(0.14 0.03 275) 45%, oklch(0.115 0.022 285) 100%);
+  }
+
   .font-display {
     font-family: var(--font-display);
     font-weight: 400;
