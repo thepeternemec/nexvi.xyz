@@ -101,23 +101,42 @@ function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
           <span className="uppercase" data-no-translate>{locale}</span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="min-w-[10rem]">
-        {locales.map((l) => (
-          <DropdownMenuItem key={l} asChild>
-            <a
-              href={alternateHref(l, barePath)}
-              onClick={handleSelect(l)}
-              className="flex items-center justify-between gap-3"
-              data-no-translate
-            >
-              <span className="flex items-center gap-2" data-no-translate>
-                <span data-no-translate>{localeFlag[l]}</span>
-                <span data-no-translate>{localeLabel[l]}</span>
-              </span>
-              {l === locale && <Check className="h-3.5 w-3.5" />}
-            </a>
-          </DropdownMenuItem>
-        ))}
+      <DropdownMenuContent
+        align="end"
+        sideOffset={10}
+        className="w-[15rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
+      >
+        <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
+          <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Language</div>
+        </div>
+        <div className="p-1.5">
+          {locales.map((l) => (
+            <DropdownMenuItem key={l} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+              <a
+                href={alternateHref(l, barePath)}
+                onClick={handleSelect(l)}
+                className="flex cursor-pointer items-center gap-2.5"
+                data-no-translate
+              >
+                <span
+                  data-no-translate
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-[13px]"
+                >
+                  {localeFlag[l]}
+                </span>
+                <span className="min-w-0 flex-1" data-no-translate>
+                  <span className="block truncate text-[13px] font-medium text-foreground" data-no-translate>
+                    {localeLabel[l]}
+                  </span>
+                  <span className="block text-[11px] uppercase tracking-wide text-muted-foreground" data-no-translate>
+                    {l}
+                  </span>
+                </span>
+                {l === locale && <Check className="h-3.5 w-3.5 shrink-0 text-primary" />}
+              </a>
+            </DropdownMenuItem>
+          ))}
+        </div>
       </DropdownMenuContent>
     </DropdownMenu>
   );
