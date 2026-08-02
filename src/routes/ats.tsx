@@ -133,13 +133,29 @@ export function ATSPage() {
             </div>
           </div>
           <ToolCreditBar tool="ats" />
-          <Button type="submit" disabled={loading} size="lg" className="rounded-full">
-            {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : "Score my CV"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button type="submit" disabled={loading} size="lg" className="rounded-full">
+              {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : report ? <><RotateCcw className="h-4 w-4" /> Re-score my CV</> : "Score my CV"}
+            </Button>
+            {(jd || cv || report) && (
+              <Button type="button" variant="ghost" size="lg" className="rounded-full" onClick={clearAll}>
+                <Eraser className="h-4 w-4" /> Clear
+              </Button>
+            )}
+          </div>
         </form>
 
         {report && (
           <div className="mt-10 space-y-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={copyReport}>
+                <Copy className="h-4 w-4" /> Copy report
+              </Button>
+              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={downloadReport}>
+                <Download className="h-4 w-4" /> Download PDF
+              </Button>
+            </div>
+
             {/* Overall */}
             <div className="rounded-3xl border border-border/70 bg-card p-8">
               <div className="flex flex-wrap items-end gap-6">
