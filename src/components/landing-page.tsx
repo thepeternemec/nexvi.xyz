@@ -312,7 +312,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                 <div className="border-t border-border/60 bg-muted/20 p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{c.atsScore}</div>
+                      <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">ATS Match Score</div>
                       <div className="mt-2 flex items-end gap-2">
                         <div className="font-display text-[2.75rem] leading-none tabular-nums">92</div>
                         <div className="pb-1.5 text-[12px] text-muted-foreground">{c.atsExcellent}</div>
