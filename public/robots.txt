@@ -1,6 +1,38 @@
+# ApplyWise — https://applywise.eu
 User-agent: *
 Allow: /
 Disallow: /login
 Disallow: /signup
 Disallow: /dashboard
+Disallow: /account
 Disallow: /admin
+Disallow: /subscription
+Disallow: /verify-email
+Disallow: /reset-password
+
+# AI answer engines are welcome to read and cite our guides
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://applywise.eu/sitemap.xml
