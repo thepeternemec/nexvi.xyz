@@ -307,28 +307,34 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </a>
           <div className="mt-6 flex items-center gap-3">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/in-applywise/"
+              target="_blank"
+              rel="noreferrer"
               aria-label="LinkedIn"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <LinkedinLogo className="h-4 w-4" />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/applywise.eu/"
+              target="_blank"
+              rel="noreferrer"
               aria-label="Instagram"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <Instagram className="h-4 w-4" />
             </a>
             <a
-              href="#"
+              href="https://x.com/applywise_"
+              target="_blank"
+              rel="noreferrer"
               aria-label="X"
               className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-foreground/[0.04] text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
             >
               <XLogo className="h-4 w-4" />
             </a>
             <a
-              href="https://www.threads.com/"
+              href="https://www.threads.com/@applywise_"
               target="_blank"
               rel="noreferrer"
               aria-label="Threads"
