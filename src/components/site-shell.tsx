@@ -131,7 +131,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
     const m = pathname.match(/^\/(de|ger|es|it|fr)(\/.*)?$/);
     return m ? (m[2] || "/") : pathname || "/";
   })();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -187,29 +187,52 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                   <User className="h-4 w-4" /> Account
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="min-w-[15rem] p-0">
-                
-                <div className="p-1">
-                <DropdownMenuItem asChild>
-                  <a href={href("/dashboard")} className="flex items-center gap-2 cursor-pointer">
-                    <LayoutDashboard className="h-4 w-4" /> Dashboard
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href={href("/account")} className="flex items-center gap-2 cursor-pointer">
-                    <Settings className="h-4 w-4" /> Account settings
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <a href={href("/subscription")} className="flex items-center gap-2 cursor-pointer">
-                    <CreditCard className="h-4 w-4" /> Subscription
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
-                  <LogOut className="h-4 w-4" /> Sign out
-                </DropdownMenuItem>
+              <DropdownMenuContent
+                align="end"
+                sideOffset={10}
+                className="w-[17.5rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
+              >
+                <div className="border-b border-border/60 bg-muted/40 px-3.5 py-3">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Signed in as</div>
+                  <div className="mt-1 truncate text-[13px] font-medium text-foreground">
+                    {user?.name ?? user?.email ?? "Your account"}
+                  </div>
+                  {user?.email && user?.name ? (
+                    <div className="truncate text-[11px] text-muted-foreground">{user.email}</div>
+                  ) : null}
+                </div>
+                <div className="p-1.5">
+                  {[
+                    { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard", hint: "Usage & activity" },
+                    { to: "/account", icon: Settings, label: "Account settings", hint: "Profile & security" },
+                    { to: "/subscription", icon: CreditCard, label: "Subscription", hint: "Plan & billing" },
+                  ].map((item) => (
+                    <DropdownMenuItem key={item.to} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+                      <a href={href(item.to)} className="flex cursor-pointer items-center gap-2.5">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                          <item.icon className="h-3.5 w-3.5" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block truncate text-[13px] font-medium text-foreground">{item.label}</span>
+                          <span className="block truncate text-[11px] text-muted-foreground">{item.hint}</span>
+                        </span>
+                      </a>
+                    </DropdownMenuItem>
+                  ))}
+                </div>
+                <div className="border-t border-border/60 p-1.5">
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    className="flex cursor-pointer items-center gap-2.5 rounded-lg px-2 py-2 text-[13px] focus:bg-muted/70"
+                  >
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                      <LogOut className="h-3.5 w-3.5" />
+                    </span>
+                    Sign out
+                  </DropdownMenuItem>
                 </div>
               </DropdownMenuContent>
+
             </DropdownMenu>
           ) : (
             <a href={href("/login")}><Button size="sm" className="h-8 whitespace-nowrap rounded-lg bg-primary px-3 text-[13px] font-medium text-primary-foreground shadow-[0_1px_0_rgba(255,255,255,0.4)_inset,0_1px_2px_rgba(0,0,0,0.12)] hover:bg-primary/90">Sign in</Button></a>
