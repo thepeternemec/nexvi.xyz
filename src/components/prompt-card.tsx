@@ -52,8 +52,8 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
     >
       {/* Signal band — quiet gradient strip, not a hero image */}
       <div className="relative aspect-[16/6] w-full overflow-hidden border-b border-border/60">
-        <MeshGradient seed={prompt.id} className="absolute inset-0 h-full w-full opacity-90 transition duration-500 group-hover:scale-[1.03]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent,color-mix(in_oklab,var(--card)_70%,transparent))]" />
+        <MeshGradient seed={prompt.id} className="absolute inset-0 h-full w-full opacity-70 saturate-[0.55] transition duration-500 group-hover:scale-[1.03] group-hover:opacity-90" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--primary)_10%,transparent),color-mix(in_oklab,var(--card)_75%,transparent))]" />
 
         <div className="absolute right-3 top-3 flex gap-1.5">
           <button
