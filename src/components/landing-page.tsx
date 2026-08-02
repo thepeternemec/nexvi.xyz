@@ -36,19 +36,24 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
     const onScroll = () => {
       const cards = el.querySelectorAll<HTMLElement>("[data-tool-card]");
       if (!cards.length) return;
-      const center = el.scrollLeft + el.clientWidth / 2;
+      const box = el.getBoundingClientRect();
+      const center = box.left + box.width / 2;
       let best = 0;
       let bestDist = Infinity;
       cards.forEach((card, i) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const d = Math.abs(cardCenter - center);
+        const r = card.getBoundingClientRect();
+        const d = Math.abs(r.left + r.width / 2 - center);
         if (d < bestDist) { bestDist = d; best = i; }
       });
       setActiveIdx(best);
     };
     onScroll();
     el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const scrollToIdx = (i: number) => {
@@ -56,8 +61,12 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
     if (!el) return;
     const card = el.querySelectorAll<HTMLElement>("[data-tool-card]")[i];
     if (!card) return;
-    el.scrollTo({ left: card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2, behavior: "smooth" });
+    const left =
+      card.getBoundingClientRect().left - el.getBoundingClientRect().left + el.scrollLeft
+      - (el.clientWidth - card.offsetWidth) / 2;
+    el.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   };
+
 
   return (
     <SiteShell locale={locale}>
