@@ -172,67 +172,116 @@ export function ATSPage() {
 
 
         {report && (
-          <div className="mt-10 space-y-6">
-            <div className="flex flex-wrap items-center gap-2">
-              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={copyReport}>
-                <Copy className="h-4 w-4" /> Copy report
-              </Button>
-              <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={downloadReport}>
-                <Download className="h-4 w-4" /> Download PDF
-              </Button>
+          <div className="mt-12 space-y-5">
+            {/* Header row */}
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Scan result</div>
+                <h2 className="mt-1 font-display text-[1.35rem] tracking-tight sm:text-[1.5rem]">Your score, broken down by category</h2>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={copyReport}>
+                  <Copy className="h-4 w-4" /> Copy report
+                </Button>
+                <Button type="button" variant="outline" size="sm" className="rounded-full" onClick={downloadReport}>
+                  <Download className="h-4 w-4" /> Download PDF
+                </Button>
+              </div>
             </div>
 
-            {/* Overall */}
-            <div className="rounded-3xl border border-border/70 bg-card p-8">
-              <div className="flex flex-wrap items-end gap-6">
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">ATS Match Score</div>
-                  <div className={`font-display text-7xl leading-none ${scoreColor(report.score)}`}>{report.score}</div>
-                  <div className="text-xs text-muted-foreground">/ 100</div>
-                </div>
-                <div className="flex-1 min-w-[240px]">
-                  <p className="text-base">{report.verdict}</p>
-                  <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-muted">
-                    <div className={`h-full transition-all ${report.score >= 80 ? "bg-emerald-500" : report.score >= 60 ? "bg-amber-500" : "bg-rose-500"}`} style={{ width: `${report.score}%` }} />
+            {/* Overall + category breakdown */}
+            <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_0_rgba(15,23,64,0.06),0_12px_40px_-28px_rgba(15,23,64,0.35)]">
+              <div className="grid gap-8 border-b border-border/60 p-6 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-center sm:p-8">
+                <div className="flex items-center gap-5">
+                  <ScoreDial score={report.score} />
+                  <div>
+                    <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">Overall match</div>
+                    <div className="mt-1 text-[13px] text-muted-foreground">
+                      {report.score >= 80 ? "Likely to clear most screeners" : report.score >= 60 ? "Borderline — fixable today" : "Likely filtered out"}
+                    </div>
                   </div>
                 </div>
+                <p className="max-w-xl text-[14px] leading-relaxed text-muted-foreground">{report.verdict}</p>
               </div>
 
-              {/* Sub-scores */}
-              {report.subScores?.length > 0 && (
-                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                  {report.subScores.map((s) => (
-                    <div key={s.label} className="rounded-2xl border border-border/60 bg-background/60 p-4">
-                      <div className="flex items-baseline justify-between">
-                        <div className="text-sm font-medium">{s.label}</div>
-                        <div className={`text-lg font-semibold ${scoreColor(s.score)}`}>{s.score}<span className="text-xs text-muted-foreground">/100</span></div>
+              <div className="grid divide-y divide-border/60 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+                {categories.map((c) => (
+                  <div key={c.label} className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{c.label}</div>
+                      <span className={`rounded-full border px-2 py-0.5 text-[10px] tracking-wide ${bandChip(c.score)}`}>{band(c.score)}</span>
+                    </div>
+                    <div className="mt-3 flex items-baseline gap-1">
+                      <span className={`font-display text-[2rem] leading-none tabular-nums ${scoreColor(c.score)}`}>{c.score}</span>
+                      <span className="text-[11px] text-muted-foreground">/100</span>
+                    </div>
+                    <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+                      <div className={`h-full transition-all ${barColor(c.score)}`} style={{ width: `${c.score}%` }} />
+                    </div>
+                    <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground">{c.note}</p>
+                    <div className="mt-2 text-[11px] text-muted-foreground/70">{c.meta}</div>
+                  </div>
+                ))}
+              </div>
+
+              {otherScores.length > 0 && (
+                <div className="grid gap-x-8 gap-y-3 border-t border-border/60 bg-background/40 p-6 sm:grid-cols-2">
+                  {otherScores.map((s) => (
+                    <div key={s.label} className="flex items-center gap-3">
+                      <div className="w-40 shrink-0 text-[12px] text-muted-foreground">{s.label}</div>
+                      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted">
+                        <div className={`h-full ${barColor(s.score)}`} style={{ width: `${s.score}%` }} />
                       </div>
-                      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-muted">
-                        <div className={`h-full ${s.score >= 80 ? "bg-emerald-500" : s.score >= 60 ? "bg-amber-500" : "bg-rose-500"}`} style={{ width: `${s.score}%` }} />
-                      </div>
-                      <div className="mt-2 text-xs text-muted-foreground">Weight {s.weight}% · {s.note}</div>
+                      <div className="w-14 shrink-0 text-right text-[12px] tabular-nums">{s.score}<span className="text-muted-foreground">/100</span></div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
 
+            {/* Fix recommendations */}
+            {fixes.length > 0 && (
+              <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-[0_1px_2px_0_rgba(15,23,64,0.06)]">
+                <div className="flex items-center justify-between border-b border-border/60 px-6 py-4">
+                  <div className="flex items-center gap-2 text-[13px]">
+                    <Wrench className="h-4 w-4 text-primary" /> Recommended fixes
+                  </div>
+                  <span className="text-[11px] text-muted-foreground">{fixes.length} action{fixes.length === 1 ? "" : "s"} · highest impact first</span>
+                </div>
+                <ol className="divide-y divide-border/60">
+                  {fixes.map((f, i) => (
+                    <li key={`${f.title}-${i}`} className="flex gap-4 px-6 py-4">
+                      <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full border border-border/70 text-[11px] tabular-nums text-muted-foreground">{i + 1}</span>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="text-[13px]">{f.title}</span>
+                          <span className="rounded-full border border-border/60 bg-background/60 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">{f.area}</span>
+                          <span className={`rounded-full border px-2 py-0.5 text-[10px] tracking-wide ${f.impact === "high" ? "border-rose-500/30 bg-rose-500/10 text-rose-600 dark:text-rose-300" : f.impact === "medium" ? "border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-300" : "border-border/60 text-muted-foreground"}`}>{f.impact} impact</span>
+                        </div>
+                        <p className="mt-1 text-[12.5px] leading-relaxed text-muted-foreground">{f.detail}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
             {/* Keyword coverage */}
             {report.keywordCoverage && (
-              <Panel title={`Keyword coverage · ${report.keywordCoverage.matchedCount}/${report.keywordCoverage.totalCount} (${report.keywordCoverage.coveragePct}%)`} icon={<Target className="h-4 w-4 text-foreground" />}>
-                <div className="mb-4 h-2 overflow-hidden rounded-full bg-muted">
-                  <div className="h-full bg-foreground" style={{ width: `${report.keywordCoverage.coveragePct}%` }} />
+              <Panel title={`Keyword coverage · ${report.keywordCoverage.matchedCount}/${report.keywordCoverage.totalCount} (${report.keywordCoverage.coveragePct}%)`} icon={<Target className="h-4 w-4 text-primary" />}>
+                <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-muted">
+                  <div className="h-full bg-primary" style={{ width: `${report.keywordCoverage.coveragePct}%` }} />
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead className="text-xs uppercase tracking-wider text-muted-foreground">
-                      <tr className="border-b border-border/60"><th className="py-2 text-left font-medium">Keyword</th><th className="py-2 text-left font-medium">Importance</th><th className="py-2 text-left font-medium">In CV</th><th className="py-2 text-right font-medium">Frequency</th></tr>
+                  <table className="w-full text-[13px]">
+                    <thead className="text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+                      <tr className="border-b border-border/60"><th className="py-2 text-left font-normal">Keyword</th><th className="py-2 text-left font-normal">Importance</th><th className="py-2 text-left font-normal">In CV</th><th className="py-2 text-right font-normal">Frequency</th></tr>
                     </thead>
                     <tbody>
                       {report.keywordCoverage.keywords.map((k) => (
-                        <tr key={k.keyword} className="border-b border-border/30">
-                          <td className="py-2 font-medium">{k.keyword}</td>
-                          <td className="py-2"><span className={`rounded-full px-2 py-0.5 text-xs ${k.importance === "critical" ? "bg-rose-500/10 text-rose-700 dark:text-rose-300" : k.importance === "important" ? "bg-amber-500/10 text-amber-700 dark:text-amber-300" : "bg-muted text-muted-foreground"}`}>{k.importance}</span></td>
+                        <tr key={k.keyword} className="border-b border-border/40">
+                          <td className="py-2">{k.keyword}</td>
+                          <td className="py-2"><span className={`rounded-full px-2 py-0.5 text-[11px] ${k.importance === "critical" ? "bg-rose-500/10 text-rose-700 dark:text-rose-300" : k.importance === "important" ? "bg-amber-500/10 text-amber-700 dark:text-amber-300" : "bg-muted text-muted-foreground"}`}>{k.importance}</span></td>
                           <td className="py-2">{k.inCV ? <CheckCircle2 className="h-4 w-4 text-emerald-500" /> : <XCircle className="h-4 w-4 text-rose-500" />}</td>
                           <td className="py-2 text-right tabular-nums text-muted-foreground">{k.frequency}</td>
                         </tr>
@@ -248,11 +297,11 @@ export function ATSPage() {
               <Panel title="Formatting & parseability checks" icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}>
                 <ul className="grid gap-2 sm:grid-cols-2">
                   {report.formattingChecks.map((c) => (
-                    <li key={c.name} className="flex items-start gap-2 rounded-lg border border-border/50 bg-background/40 p-3">
+                    <li key={c.name} className="flex items-start gap-2 rounded-xl border border-border/50 bg-background/40 p-3">
                       {c.passed ? <CheckCircle2 className="mt-0.5 h-4 w-4 flex-none text-emerald-500" /> : <AlertTriangle className="mt-0.5 h-4 w-4 flex-none text-amber-500" />}
                       <div>
-                        <div className="text-sm font-medium">{c.name}</div>
-                        <div className="text-xs text-muted-foreground">{c.detail}</div>
+                        <div className="text-[13px]">{c.name}</div>
+                        <div className="text-[12px] text-muted-foreground">{c.detail}</div>
                       </div>
                     </li>
                   ))}
@@ -262,18 +311,18 @@ export function ATSPage() {
 
             {/* Sections */}
             {report.sectionCoverage?.length > 0 && (
-              <Panel title="Section coverage" icon={<Target className="h-4 w-4 text-foreground" />}>
+              <Panel title="Section coverage" icon={<Target className="h-4 w-4 text-primary" />}>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {report.sectionCoverage.map((s) => {
                     const q = s.quality;
                     const color = q === "strong" ? "text-emerald-600 dark:text-emerald-400" : q === "adequate" ? "text-amber-600 dark:text-amber-400" : q === "weak" ? "text-rose-600 dark:text-rose-400" : "text-muted-foreground";
                     const Icon = q === "missing" ? MinusCircle : q === "strong" ? CheckCircle2 : q === "adequate" ? AlertTriangle : XCircle;
                     return (
-                      <div key={s.section} className="flex items-start gap-2 rounded-lg border border-border/50 bg-background/40 p-3">
+                      <div key={s.section} className="flex items-start gap-2 rounded-xl border border-border/50 bg-background/40 p-3">
                         <Icon className={`mt-0.5 h-4 w-4 flex-none ${color}`} />
                         <div>
-                          <div className="text-sm font-medium">{s.section} <span className={`ml-1 text-xs ${color}`}>· {q}</span></div>
-                          <div className="text-xs text-muted-foreground">{s.note}</div>
+                          <div className="text-[13px]">{s.section} <span className={`ml-1 text-[11px] ${color}`}>· {q}</span></div>
+                          <div className="text-[12px] text-muted-foreground">{s.note}</div>
                         </div>
                       </div>
                     );
@@ -285,24 +334,24 @@ export function ATSPage() {
             <div className="grid gap-4 md:grid-cols-2">
               <Panel title="Matched keywords" icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}>
                 <div className="flex flex-wrap gap-1.5">
-                  {report.matchedKeywords.map((k) => <span key={k} className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-700 dark:text-emerald-300">{k}</span>)}
+                  {report.matchedKeywords.map((k) => <span key={k} className="rounded-full bg-emerald-500/10 px-2.5 py-1 text-[11px] text-emerald-700 dark:text-emerald-300">{k}</span>)}
                 </div>
               </Panel>
               <Panel title="Missing keywords" icon={<XCircle className="h-4 w-4 text-rose-500" />}>
                 <div className="flex flex-wrap gap-1.5">
-                  {report.missingKeywords.map((k) => <span key={k} className="rounded-full bg-rose-500/10 px-2.5 py-1 text-xs text-rose-700 dark:text-rose-300">{k}</span>)}
+                  {report.missingKeywords.map((k) => <span key={k} className="rounded-full bg-rose-500/10 px-2.5 py-1 text-[11px] text-rose-700 dark:text-rose-300">{k}</span>)}
                 </div>
               </Panel>
               <Panel title="Strengths" icon={<CheckCircle2 className="h-4 w-4 text-emerald-500" />}>
-                <ul className="space-y-2 text-sm">{report.strengths.map((s, i) => <li key={i}>• {s}</li>)}</ul>
+                <ul className="space-y-2 text-[13px] text-muted-foreground">{report.strengths.map((s, i) => <li key={i}>• {s}</li>)}</ul>
               </Panel>
               <Panel title="Improvements" icon={<Lightbulb className="h-4 w-4 text-amber-500" />}>
-                <ul className="space-y-2 text-sm">{report.improvements.map((s, i) => <li key={i}>• {s}</li>)}</ul>
+                <ul className="space-y-2 text-[13px] text-muted-foreground">{report.improvements.map((s, i) => <li key={i}>• {s}</li>)}</ul>
               </Panel>
             </div>
 
             <Panel title="Concrete rewrite tips" icon={<Lightbulb className="h-4 w-4 text-amber-500" />}>
-              <ul className="space-y-2 text-sm">{report.rewriteTips.map((s, i) => <li key={i}>{i + 1}. {s}</li>)}</ul>
+              <ul className="space-y-2 text-[13px] text-muted-foreground">{report.rewriteTips.map((s, i) => <li key={i}>{i + 1}. {s}</li>)}</ul>
             </Panel>
           </div>
         )}
