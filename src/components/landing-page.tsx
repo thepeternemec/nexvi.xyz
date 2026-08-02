@@ -5,6 +5,7 @@ import { SiteShell } from "@/components/site-shell";
 import { copy, type Locale, alternateHref } from "@/lib/i18n";
 import { prompts, categories } from "@/lib/mock-data";
 import { TrustedBy } from "@/components/trusted-by";
+import { Reveal } from "@/components/reveal";
 
 
 const ICONS = [Library, FileText, Mail, Target, Wand2];
