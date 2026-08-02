@@ -93,26 +93,33 @@ export function AuthShell({
   const [mode, setMode] = useState<"auth" | "forgot" | "forgot-sent">("auth");
   const [forgotLoading, setForgotLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
 
-  async function signInWithGoogle() {
-    setGoogleLoading(true);
+  async function signInWithProvider(provider: "google" | "apple") {
+    const setBusy = provider === "google" ? setGoogleLoading : setAppleLoading;
+    const label = provider === "google" ? "Google" : "Apple";
+    setBusy(true);
     try {
       sessionStorage.setItem("applywise:next", nextPath);
-      const result = await lovable.auth.signInWithOAuth("google", {
+      const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
       if (result.error) {
-        toast.error(result.error.message ?? "Could not sign in with Google");
+        toast.error(result.error.message ?? `Could not sign in with ${label}`);
         return;
       }
       if (result.redirected) return;
       window.location.href = nextPath;
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not sign in with Google");
+      toast.error(err instanceof Error ? err.message : `Could not sign in with ${label}`);
     } finally {
-      setGoogleLoading(false);
+      setBusy(false);
     }
   }
+
+  const signInWithGoogle = () => signInWithProvider("google");
+  const signInWithApple = () => signInWithProvider("apple");
+
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
@@ -452,6 +459,19 @@ export function AuthShell({
                   <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.7 0 3.99 2.47 1.29 6.62l3.98 3.09C6.22 6.86 8.87 4.75 12 4.75Z" />
                 </svg>
                 {googleLoading ? "Please wait…" : "Continue with Google"}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                onClick={signInWithApple}
+                disabled={appleLoading}
+                className="w-full rounded-full"
+              >
+                <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path d="M16.36 12.79c.02 2.63 2.3 3.5 2.33 3.51-.02.06-.37 1.26-1.21 2.5-.73 1.07-1.49 2.13-2.69 2.15-1.18.02-1.56-.7-2.91-.7-1.35 0-1.77.68-2.89.72-1.15.04-2.03-1.15-2.77-2.21-1.6-2.32-2.83-6.56-1.18-9.42.82-1.42 2.28-2.32 3.87-2.35 1.14-.02 2.21.77 2.91.77.69 0 2-.95 3.37-.81.57.02 2.18.21 3.21 1.73-.08.05-1.92 1.12-1.9 3.35M14.4 4.2c.62-.75 1.04-1.79.93-2.83-.89.04-1.98.6-2.62 1.34-.58.66-1.08 1.72-.95 2.74.99.08 2.01-.5 2.64-1.25" />
+                </svg>
+                {appleLoading ? "Please wait…" : "Continue with Apple"}
               </Button>
               <div className="flex items-center gap-3">
                 <span className="h-px flex-1 bg-border/70" />
