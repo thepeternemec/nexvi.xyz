@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      anon_ai_usage: {
+        Row: {
+          fingerprint: string
+          id: string
+          updated_at: string
+          used: number
+          window_start: string
+        }
+        Insert: {
+          fingerprint: string
+          id?: string
+          updated_at?: string
+          used?: number
+          window_start?: string
+        }
+        Update: {
+          fingerprint?: string
+          id?: string
+          updated_at?: string
+          used?: number
+          window_start?: string
+        }
+        Relationships: []
+      }
       bundle_prompts: {
         Row: {
           bundle_id: string
