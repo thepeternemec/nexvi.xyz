@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { BrandMark, brands } from "@/components/brand-logos";
+import { BrandMarkColor, brands } from "@/components/brand-logos";
 
 export function TrustedBy({
   ctaLabel,
@@ -19,20 +19,20 @@ export function TrustedBy({
         </div>
 
         <div className="logo-marquee-mask group mt-8 overflow-hidden">
-          <div className="animate-logo-marquee flex w-max items-center gap-x-14 opacity-70 grayscale group-hover:[animation-play-state:paused]">
+          <div className="animate-logo-marquee flex w-max items-center gap-x-16 group-hover:[animation-play-state:paused]">
             {[...brands, ...brands].map((b, i) => (
               <span
                 key={`${b.key}-${i}`}
-                className="flex shrink-0 items-center gap-2 whitespace-nowrap text-foreground/75"
+                className="flex shrink-0 items-center"
                 aria-hidden={i >= brands.length}
                 title={b.name}
               >
-                <BrandMark brand={b.key} className="h-6 w-6" />
-                <span className="text-lg font-semibold tracking-tight">{b.name}</span>
+                <BrandMarkColor brand={b.key} className="h-9 w-9" />
               </span>
             ))}
           </div>
         </div>
+
 
 
 
