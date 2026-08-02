@@ -121,29 +121,55 @@ export function ATSPage() {
       />
       <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
 
-        <form onSubmit={onScore} className="mt-8 space-y-4">
-          <div className="grid gap-4 lg:grid-cols-2">
-            <div>
-              <label htmlFor="ats-job-description" className="text-sm font-medium">Job description</label>
-              <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-2 min-h-[200px]" />
+        <form onSubmit={onScore} className="relative overflow-hidden rounded-3xl border border-border/70 bg-[#0b1230] p-5 text-white shadow-[0_30px_80px_-40px_rgba(15,23,64,0.9)] sm:p-8">
+          <div className="pointer-events-none absolute inset-0 opacity-70" style={{ background: "radial-gradient(600px 220px at 12% 0%, rgba(79,70,229,0.35), transparent 70%), radial-gradient(500px 220px at 92% 100%, rgba(34,211,238,0.18), transparent 70%)" }} />
+          <div className="relative">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/60">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                </span>
+                Scanner input
+              </div>
+              <div className="text-[11px] text-white/50 tabular-nums">{jd.trim().split(/\s+/).filter(Boolean).length} JD words · {cv.trim().split(/\s+/).filter(Boolean).length} CV words</div>
             </div>
-            <div>
-              <label htmlFor="ats-cv" className="text-sm font-medium">Your CV</label>
-              <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-2 min-h-[200px]" />
+
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
+                <label htmlFor="ats-job-description" className="flex items-center justify-between text-xs font-medium text-white/80">
+                  <span>Job description</span>
+                  <span className="rounded-full border border-white/15 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">target</span>
+                </label>
+                <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-white placeholder:text-white/30 focus-visible:ring-0" />
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur">
+                <label htmlFor="ats-cv" className="flex items-center justify-between text-xs font-medium text-white/80">
+                  <span>Your CV</span>
+                  <span className="rounded-full border border-white/15 px-2 py-0.5 text-[10px] uppercase tracking-wider text-white/50">candidate</span>
+                </label>
+                <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-white placeholder:text-white/30 focus-visible:ring-0" />
+              </div>
             </div>
-          </div>
-          <ToolCreditBar tool="ats" />
-          <div className="flex flex-wrap items-center gap-3">
-            <Button type="submit" disabled={loading} size="lg" className="rounded-full">
-              {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Analyzing…</> : report ? <><RotateCcw className="h-4 w-4" /> Re-score my CV</> : "Score my CV"}
-            </Button>
-            {(jd || cv || report) && (
-              <Button type="button" variant="ghost" size="lg" className="rounded-full" onClick={clearAll}>
-                <Eraser className="h-4 w-4" /> Clear
+
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <Button type="submit" disabled={loading} size="lg" className="rounded-full bg-white text-[#0b1230] hover:bg-white/90">
+                {loading ? <><Loader2 className="h-4 w-4 animate-spin" /> Scanning…</> : report ? <><RotateCcw className="h-4 w-4" /> Re-score my CV</> : "Run the scan"}
               </Button>
-            )}
+              {(jd || cv || report) && (
+                <Button type="button" variant="ghost" size="lg" className="rounded-full text-white/70 hover:bg-white/10 hover:text-white" onClick={clearAll}>
+                  <Eraser className="h-4 w-4" /> Clear
+                </Button>
+              )}
+              <span className="text-xs text-white/45">Nothing is stored — the scan runs on the text you paste.</span>
+            </div>
           </div>
         </form>
+
+        <div className="mt-6">
+          <ToolCreditBar tool="ats" />
+        </div>
+
 
         {report && (
           <div className="mt-10 space-y-6">
