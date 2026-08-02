@@ -248,12 +248,13 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
       {open && (
         <div className="border-t border-border/60 bg-background lg:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4">
-            {NAV.map((n) => (
+            {NAV.filter((n) => !n.mobileOnly).map((n) => (
               <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
             ))}
             <div className="mt-2 flex flex-col gap-2">
               {isAuthenticated ? (
                 <>
+                  <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
                   <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="w-full">Dashboard</Button></a>
                   <a href={href("/account")} className="w-full"><Button variant="outline" size="sm" className="w-full">Account settings</Button></a>
                   <a href={href("/subscription")} className="w-full"><Button variant="outline" size="sm" className="w-full">Subscription</Button></a>
