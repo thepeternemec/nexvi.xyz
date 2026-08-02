@@ -309,6 +309,6 @@ export function Marketplace() {
 
 function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
   return (
-    <button onClick={onClick} className={`rounded-full border px-3 py-1 text-xs transition ${active ? "border-foreground bg-foreground text-background" : "border-border bg-background hover:border-foreground/30"}`}>{label}</button>
+    <button onClick={onClick} className={`rounded-full border px-3 py-1.5 text-[12px] transition ${active ? "border-primary/40 bg-primary/10 text-primary" : "border-border/70 bg-background/70 text-foreground/80 hover:border-foreground/25 hover:text-foreground"}`}>{label}</button>
   );
 }
