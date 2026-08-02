@@ -1,6 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
-const faqs = [
+export const faqs = [
   {
     question: "What counts as one generation?",
     answer:
