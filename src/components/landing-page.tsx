@@ -471,11 +471,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
       {/* FEATURE OVERVIEW */}
       <section className="border-y border-border/60 bg-muted/20">
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
-          <div className="mx-auto max-w-2xl text-center">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Everything in one place</div>
             <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">One toolkit for the whole job hunt.</h2>
             <p className="mt-4 text-muted-foreground">From the first prompt to the signed offer — every step of the modern job search, powered by AI you can actually trust.</p>
-          </div>
+          </Reveal>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { icon: Library, title: "Prompt Library", desc: "Hundreds of curated prompts for CVs, interviews, outreach and negotiation — written by career coaches." },
