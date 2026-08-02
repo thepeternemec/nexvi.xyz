@@ -271,50 +271,73 @@ export function PromptDetail() {
 
           {/* SIDEBAR */}
           <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-            <div className="rounded-3xl border border-border/70 bg-card p-6">
-              <div className="text-sm font-medium">{prompt.uses.toLocaleString()} job seekers used this prompt</div>
-              <div className="mt-1 text-xs text-muted-foreground">Pro members get every premium prompt, the CV & cover letter generators, ATS scoring and the Humanizer.</div>
+            <div className="overflow-hidden rounded-2xl border border-border/70 bg-card/80 shadow-[0_1px_2px_0_rgba(15,23,64,0.06)] backdrop-blur-xl">
+              <div className="border-b border-border/60 px-5 py-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Usage</div>
+                <div className="mt-1.5 font-display text-[1.05rem] tracking-tight tabular-nums">
+                  {prompt.uses.toLocaleString()} job seekers
+                </div>
+                <p className="mt-1 text-[12px] leading-relaxed text-muted-foreground">
+                  Pro unlocks every premium prompt, the CV &amp; cover letter generators, ATS scoring and the Humanizer.
+                </p>
+              </div>
 
-              <div className="mt-5 grid gap-2">
+              <div className="grid gap-2 px-5 py-5">
                 {locked ? (
-                  <Button size="lg" onClick={() => openUpgradeDialog({ title: prompt.title })} className="rounded-full bg-gradient-to-r from-black to-neutral-800 text-white hover:opacity-95 dark:from-white dark:to-neutral-200 dark:text-black">
+                  <Button onClick={() => openUpgradeDialog({ title: prompt.title })} className="h-10 rounded-xl text-[13px]">
                     <Crown className="mr-1.5 h-4 w-4" /> Upgrade to unlock
                   </Button>
-                ) : premium ? (
-                  <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this Premium prompt"}</Button>
                 ) : (
-                  <Button size="lg" className="rounded-full" onClick={onCopy}>{copied ? "Copied!" : "Use this prompt — free"}</Button>
+                  <Button className="h-10 rounded-xl text-[13px]" onClick={onCopy}>
+                    {copied ? "Copied" : premium ? "Use this Premium prompt" : "Use this prompt — free"}
+                  </Button>
                 )}
                 <div className="flex gap-2">
-                  <Button variant={saved ? "default" : "outline"} onClick={onToggleSave} aria-pressed={saved} className="flex-1 rounded-full">
-                    {saved ? <><BookmarkCheck className="mr-1.5 h-4 w-4" /> Saved</> : <><Bookmark className="mr-1.5 h-4 w-4" /> Save</>}
+                  <Button
+                    variant={saved ? "secondary" : "outline"}
+                    onClick={onToggleSave}
+                    aria-pressed={saved}
+                    className="h-9 flex-1 rounded-xl text-[12px] font-normal"
+                  >
+                    {saved ? <><BookmarkCheck className="mr-1.5 h-3.5 w-3.5" /> Saved</> : <><Bookmark className="mr-1.5 h-3.5 w-3.5" /> Save</>}
                   </Button>
-                  <Button variant="outline" onClick={onShareClick} className="flex-1 rounded-full"><Share2 className="mr-1.5 h-4 w-4" /> Share</Button>
+                  <Button variant="outline" onClick={onShareClick} className="h-9 flex-1 rounded-xl text-[12px] font-normal">
+                    <Share2 className="mr-1.5 h-3.5 w-3.5" /> Share
+                  </Button>
                 </div>
               </div>
             </div>
 
 
-            <div className="rounded-3xl border border-border/70 bg-card p-6">
-              <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Tags</div>
+            <div className="rounded-2xl border border-border/70 bg-card/80 px-5 py-4 shadow-[0_1px_2px_0_rgba(15,23,64,0.06)] backdrop-blur-xl">
+              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Tags</div>
               <div className="mt-3 flex flex-wrap gap-1.5">
-                {prompt.tags.map(t => <span key={t} className="rounded-full bg-muted px-3 py-1 text-xs">#{t}</span>)}
+                {prompt.tags.map(t => (
+                  <span key={t} className="rounded-full border border-border/70 bg-background/70 px-2.5 py-1 text-[11px] text-muted-foreground">
+                    #{t}
+                  </span>
+                ))}
               </div>
             </div>
 
             {!hasPremium && (
-              <div className="rounded-3xl border border-border/70 bg-gradient-to-br from-neutral-900 to-neutral-700 p-6 text-white dark:border-border dark:from-card dark:to-background dark:text-card-foreground">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider opacity-80">
-                  <Sparkles className="h-3.5 w-3.5" /> Go Pro
+              <div className="relative overflow-hidden rounded-2xl border border-primary/25 bg-primary/[0.06] px-5 py-5 backdrop-blur-xl">
+                <span aria-hidden className="absolute inset-x-0 top-0 h-[2px] bg-primary" />
+                <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-primary">
+                  <Sparkles className="h-3 w-3" /> Go Pro
                 </div>
-                <div className="font-display mt-2 text-xl leading-snug">Stop rewriting your CV for every job.</div>
-                <p className="mt-2 text-sm opacity-80">Unlock every premium prompt plus AI CV, cover letter, ATS scoring and Humanizer tools — cancel anytime.</p>
-                <Button asChild className="mt-4 w-full rounded-full bg-white text-black hover:bg-white/90">
+                <div className="mt-2.5 font-display text-[1.1rem] leading-snug tracking-tight">
+                  Stop rewriting your CV for every job.
+                </div>
+                <p className="mt-1.5 text-[12px] leading-relaxed text-muted-foreground">
+                  Every premium prompt plus AI CV, cover letter, ATS scoring and Humanizer tools — cancel anytime.
+                </p>
+                <Button asChild className="mt-4 h-10 w-full rounded-xl text-[13px]">
                   <Link to="/pricing">Subscribe to Pro</Link>
                 </Button>
-
               </div>
             )}
+
 
 
 
