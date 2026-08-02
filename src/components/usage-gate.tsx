@@ -208,12 +208,14 @@ export function useToolGate(tool: ToolKey) {
       return;
     }
     if (usage.isPremium) return;
+    // The credit itself is consumed server-side inside the AI handler
+    // (src/lib/ai-guard.server.ts); this only re-syncs the displayed counters.
     try {
-      await usage.consume(tool);
+      await usage.refresh();
     } catch {
       /* usage tracking must never break a successful generation */
     }
-  }, [tool, usage]);
+  }, [usage]);
 
   const gates = (
     <>

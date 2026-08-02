@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { generateText, Output } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
+import { consumeAiCredit } from "@/lib/ai-guard.server";
 
 const MODEL = "google/gemini-3-flash-preview";
 
@@ -21,6 +22,7 @@ const CVInput = z.object({
 export const generateCV = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => CVInput.parse(d))
   .handler(async ({ data }) => {
+    await consumeAiCredit("cv");
     const system =
       "You are an elite resume writer and ATS expert. Produce CVs that are tailored, keyword-optimized for ATS, truthful (never invent facts), and ready to paste into a document. Use clear sections: Summary, Skills, Experience, Education. Use action verbs, quantified results, and mirror the job description's keywords naturally.";
     const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE BACKGROUND:\n${data.background}\n\nTone: ${data.tone ?? "professional"}.\n\nWrite a complete tailored CV in clean Markdown. Start with the candidate name placeholder if not given. Keep to one page worth.`;
@@ -40,6 +42,7 @@ const CoverInput = z.object({
 export const generateCoverLetter = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => CoverInput.parse(d))
   .handler(async ({ data }) => {
+    await consumeAiCredit("coverLetter");
     const system =
       "You are an expert cover letter writer. Produce concise, specific, personable cover letters that connect the candidate's real experience to the job's needs. Never fabricate. 250-350 words. Markdown.";
     const prompt = `COMPANY: ${data.companyName ?? "(not provided)"}\nROLE: ${data.roleTitle ?? "(not provided)"}\nTONE: ${data.tone ?? "professional"}\n\nJOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE BACKGROUND:\n${data.background}\n\nWrite the cover letter.`;
@@ -100,6 +103,7 @@ const ATSSchema = z.object({
 export const scoreATS = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => ATSInput.parse(d))
   .handler(async ({ data }) => {
+    await consumeAiCredit("ats");
     const system =
       "You are a strict ATS (Applicant Tracking System) analyzer. Compare a CV against a job description and produce a detailed, objective breakdown. Base every judgement strictly on the CV text provided; never invent. Respond with ONE JSON object only (no prose, no markdown code fences). The JSON must have these keys: score (0-100), verdict (short string), subScores (array of {label, score, weight, note} for Keyword Match, Skills Alignment, Experience Relevance, Formatting/Parseability, Impact & Metrics; weights sum to 100), keywordCoverage {matchedCount, totalCount, coveragePct, keywords: [{keyword, importance:'critical'|'important'|'nice-to-have', inCV, frequency}]}, formattingChecks [{name, passed, detail}] (contact info, standard section headings, bullet usage, date formats, no tables/columns/images, ATS-safe fonts, length, action verbs, quantified achievements), sectionCoverage [{section, present, quality:'strong'|'adequate'|'weak'|'missing', note}] for Summary/Skills/Experience/Education/Certifications, matchedKeywords[], missingKeywords[], strengths[], improvements[], rewriteTips[]. score must equal weighted average of subScores. coveragePct = round(matchedCount/totalCount*100).";
     const prompt = `JOB DESCRIPTION:\n${data.jobDescription}\n\nCANDIDATE CV:\n${data.cv}`;
@@ -126,6 +130,7 @@ const HumanizeInput = z.object({
 export const humanizeText = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => HumanizeInput.parse(d))
   .handler(async ({ data }) => {
+    await consumeAiCredit("humanizer");
     const system =
       "You are the Humanizer editor, based on Wikipedia's 'Signs of AI writing' guide. Rewrite the given text so it no longer reads as AI-generated, while preserving every factual claim. Rules: (1) Cut inflated symbolism, promotional adjectives ('vibrant', 'rich', 'seamless', 'transformative'), and hollow -ing analyses ('underscoring', 'highlighting', 'reflecting'). (2) Remove vague attributions ('many experts say', 'it is widely believed'). (3) Kill em dash overuse — replace with commas, periods, or parentheses where natural. (4) Break the rule-of-three cadence; vary list length. (5) Avoid AI vocabulary: delve, tapestry, testament, navigate, landscape, realm, robust, leverage, crucial, pivotal, foster, underscore, moreover, furthermore, in conclusion, in today's world. (6) Prefer active voice. (7) Drop negative parallelisms ('not just X but Y'). (8) Cut filler ('it is important to note', 'it's worth mentioning'). (9) Vary sentence length — mix short and long. (10) Preserve information, not shape: merge/split paragraphs freely. Output ONLY the rewritten text, no preamble, no explanation, no markdown fences.";
     const strength = data.strength ?? "balanced";
