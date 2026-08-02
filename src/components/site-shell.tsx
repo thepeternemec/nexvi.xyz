@@ -154,7 +154,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="min-w-[15rem] p-0">
-                <NavCredits />
+                
                 <div className="p-1">
                 <DropdownMenuItem asChild>
                   <a href={href("/dashboard")} className="flex items-center gap-2 cursor-pointer">
