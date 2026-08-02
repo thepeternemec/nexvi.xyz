@@ -251,10 +251,11 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
         <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6">
           <div className="grid gap-14 lg:grid-cols-[1fr_1.05fr] lg:items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
+            <Reveal>
+              <div className="pill-hover inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-muted-foreground backdrop-blur">
                 <Zap className="h-3 w-3 text-primary" /> {c.howKicker}
               </div>
+
               <h2 className="font-display mt-5 text-[1.75rem] leading-[1.15] tracking-tight sm:text-[2.25rem]">{c.howTitle}</h2>
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted-foreground">{c.howSub}</p>
 
