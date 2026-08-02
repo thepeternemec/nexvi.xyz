@@ -91,6 +91,27 @@ export function AuthShell({
 
   const [mode, setMode] = useState<"auth" | "forgot" | "forgot-sent">("auth");
   const [forgotLoading, setForgotLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
+  async function signInWithGoogle() {
+    setGoogleLoading(true);
+    try {
+      sessionStorage.setItem("applywise:next", nextPath);
+      const result = await lovable.auth.signInWithOAuth("google", {
+        redirect_uri: window.location.origin,
+      });
+      if (result.error) {
+        toast.error(result.error.message ?? "Could not sign in with Google");
+        return;
+      }
+      if (result.redirected) return;
+      window.location.href = nextPath;
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Could not sign in with Google");
+    } finally {
+      setGoogleLoading(false);
+    }
+  }
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
