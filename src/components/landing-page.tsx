@@ -168,7 +168,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
             </span>
-            Humanizer runs on the latest Claude model
+            Tools built on top of Claude and ChatGPT models
           </div>
         </div>
         <div ref={scrollerRef} className="mt-10 -mx-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 [scrollbar-width:thin]">
