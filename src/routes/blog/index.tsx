@@ -47,6 +47,7 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndexPage() {
   return (
+    <SiteShell>
     <div className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-signal" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-grid opacity-[0.5] mask-fade-b" />
@@ -105,5 +106,6 @@ function BlogIndexPage() {
         </section>
       </div>
     </div>
+    </SiteShell>
   );
 }
