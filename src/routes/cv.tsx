@@ -23,9 +23,9 @@ export const Route = createFileRoute("/cv")({
       { property: "og:title", content: "AI CV Generator — ATS-Optimized Resumes" },
       { property: "og:description", content: "Turn any job description into a tailored, ATS-ready CV in 60 seconds." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/cv" },
+      { property: "og:url", content: "https://applywise.eu/cv" },
     ],
-    links: [{ rel: "canonical", href: "/cv" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/cv" }],
     scripts: [
       {
         type: "application/ld+json",

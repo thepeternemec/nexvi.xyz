@@ -20,9 +20,9 @@ export const Route = createFileRoute("/ats")({
       { property: "og:title", content: "ATS Resume Checker & Score — ApplyWise" },
       { property: "og:description", content: "Check how your CV scores against a job description and fix what's missing." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/ats" },
+      { property: "og:url", content: "https://applywise.eu/ats" },
     ],
-    links: [{ rel: "canonical", href: "/ats" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/ats" }],
   }),
 
   component: ATSPage,

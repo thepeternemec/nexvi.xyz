@@ -9,9 +9,9 @@ export const Route = createFileRoute("/terms")({
       { property: "og:title", content: "ApplyWise Terms & Privacy" },
       { property: "og:description", content: "How ApplyWise handles your data, AI processing and subscriptions." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/terms" },
+      { property: "og:url", content: "https://applywise.eu/terms" },
     ],
-    links: [{ rel: "canonical", href: "/terms" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/terms" }],
   }),
   component: TermsPage,
 });

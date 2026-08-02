@@ -36,9 +36,9 @@ export const Route = createFileRoute("/marketplace")({
       { property: "og:title", content: "Job Search Prompt Library — ApplyWise" },
       { property: "og:description", content: "Curated AI prompts for CVs, cover letters, ATS and interviews." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/marketplace" },
+      { property: "og:url", content: "https://applywise.eu/marketplace" },
     ],
-    links: [{ rel: "canonical", href: "/marketplace" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/marketplace" }],
   }),
   component: Marketplace,
 

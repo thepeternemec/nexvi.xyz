@@ -23,7 +23,7 @@ export const Route = createFileRoute("/prompt/$slug")({
   head: ({ params, loaderData }) => {
     const p = loaderData?.prompt;
     if (!p) return { meta: [] };
-    const url = `/prompt/${params.slug}`;
+    const url = `https://applywise.eu/prompt/${params.slug}`;
     return {
       meta: [
         { title: `${p.title} — AI Prompt | ApplyWise` },

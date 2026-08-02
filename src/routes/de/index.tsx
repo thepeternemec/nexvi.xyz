@@ -15,16 +15,16 @@ function make(locale: Locale, path: string, ogLocale: string) {
       ],
       links: [
         { rel: "canonical", href: path },
-        { rel: "alternate", hrefLang: "en", href: "/" },
-        { rel: "alternate", hrefLang: "de", href: "/de" },
-        { rel: "alternate", hrefLang: "es", href: "/es" },
-        { rel: "alternate", hrefLang: "it", href: "/it" },
-        { rel: "alternate", hrefLang: "fr", href: "/fr" },
-        { rel: "alternate", hrefLang: "x-default", href: "/" },
+        { rel: "alternate", hrefLang: "en", href: "https://applywise.eu/" },
+        { rel: "alternate", hrefLang: "de", href: "https://applywise.eu/de" },
+        { rel: "alternate", hrefLang: "es", href: "https://applywise.eu/es" },
+        { rel: "alternate", hrefLang: "it", href: "https://applywise.eu/it" },
+        { rel: "alternate", hrefLang: "fr", href: "https://applywise.eu/fr" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://applywise.eu/" },
       ],
     }),
     component: () => <LandingPage locale={locale} />,
   };
 }
 
-export const Route = createFileRoute("/de/")(make("de", "/de", "de_DE"));
+export const Route = createFileRoute("/de/")(make("de", "https://applywise.eu/de", "de_DE"));

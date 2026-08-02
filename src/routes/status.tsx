@@ -9,9 +9,9 @@ export const Route = createFileRoute("/status")({
       { property: "og:title", content: "ApplyWise System Status" },
       { property: "og:description", content: "Real-time operational status for all ApplyWise AI career tools." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/status" },
+      { property: "og:url", content: "https://applywise.eu/status" },
     ],
-    links: [{ rel: "canonical", href: "/status" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/status" }],
   }),
   component: StatusPage,
 });

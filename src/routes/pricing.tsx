@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
 import { TrustedBy } from "@/components/trusted-by";
-import { FaqSection } from "@/components/faq-section";
+import { FaqSection, faqs } from "@/components/faq-section";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useSubscription } from "@/hooks/use-subscription";
@@ -19,9 +19,37 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: "ApplyWise Pricing — Free & Pro" },
       { property: "og:description", content: "Free forever plan, plus Pro for unlimited AI job application tools." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/pricing" },
+      { property: "og:url", content: "https://applywise.eu/pricing" },
     ],
-    links: [{ rel: "canonical", href: "/pricing" }],
+    links: [{ rel: "canonical", href: "https://applywise.eu/pricing" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "ApplyWise Pro",
+          description: "Unlimited AI CV generation, cover letters, ATS scoring and humanizing for job seekers.",
+          brand: { "@type": "Brand", name: "ApplyWise" },
+          offers: [
+            { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", url: "https://applywise.eu/pricing" },
+            { "@type": "Offer", name: "Pro", priceCurrency: "USD", url: "https://applywise.eu/pricing", availability: "https://schema.org/InStock" },
+          ],
+        }),
+      },
+    ],
   }),
   component: Pricing,
 });

@@ -2,8 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { prompts } from "@/lib/mock-data";
 
-// TODO: replace with your project URL once a project name or custom domain is set.
-const BASE_URL = "";
+const BASE_URL = "https://applywise.eu";
 
 const LOCALES = ["de", "es", "it", "fr"] as const;
 
@@ -24,6 +23,10 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/humanizer", changefreq: "weekly", priority: "0.8" },
           { path: "/ats", changefreq: "weekly", priority: "0.8" },
           { path: "/marketplace", changefreq: "daily", priority: "0.9" },
+          { path: "/guides/how-to-write-a-resume", changefreq: "monthly", priority: "0.9" },
+          { path: "/about", changefreq: "monthly", priority: "0.6" },
+          { path: "/assistant", changefreq: "weekly", priority: "0.6" },
+          { path: "/creators", changefreq: "monthly", priority: "0.4" },
           { path: "/pricing", changefreq: "monthly", priority: "0.7" },
           { path: "/sitemap", changefreq: "weekly", priority: "0.4" },
           { path: "/terms", changefreq: "yearly", priority: "0.3" },

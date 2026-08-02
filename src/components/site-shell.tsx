@@ -357,6 +357,11 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
                 <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>
             ))}
+            <li>
+              <a href="/guides/how-to-write-a-resume" className="inline-block transition-colors hover:text-primary">
+                How to write a resume
+              </a>
+            </li>
           </ul>
         </div>
 
