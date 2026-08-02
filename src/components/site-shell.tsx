@@ -265,27 +265,47 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
         </div>
       </div>
       {open && (
-        <div className="border-t border-border/60 bg-background lg:hidden">
-          <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4">
-            {NAV.filter((n) => !n.mobileOnly).map((n) => (
-              <a key={n.href} href={href(n.href)} onClick={() => setOpen(false)} className="text-sm">{n.label}</a>
-            ))}
-            <div className="mt-2 flex flex-col gap-2">
-              {isAuthenticated ? (
-                <>
-                  <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
-                  <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="w-full">Dashboard</Button></a>
-                  <a href={href("/account")} className="w-full"><Button variant="outline" size="sm" className="w-full">Account settings</Button></a>
-                  <a href={href("/subscription")} className="w-full"><Button variant="outline" size="sm" className="w-full">Subscription</Button></a>
-                  <Button size="sm" variant="outline" className="w-full" onClick={handleSignOut}>Sign out</Button>
-                </>
-              ) : (
-                <>
-                  <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="w-full">Pricing</Button></a>
-                  <a href={href("/login")} className="w-full"><Button size="sm" className="w-full">Sign in</Button></a>
-                </>
-              )}
-
+        <div className="px-3 pt-2 lg:hidden">
+          <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-[18px] border border-border/60 bg-card/95 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_16px_40px_-12px_rgba(16,24,40,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/90">
+            <div className="border-b border-border/60 bg-muted/40 px-4 py-2.5">
+              <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Products</div>
+            </div>
+            <div className="p-1.5">
+              {NAV.filter((n) => !n.mobileOnly).map((n) => {
+                const active = barePath === n.href || barePath.startsWith(n.href + "/");
+                return (
+                  <a
+                    key={n.href}
+                    href={href(n.href)}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex items-center justify-between rounded-lg px-2.5 py-2.5 text-[14px] font-medium transition-colors ${
+                      active ? "bg-muted/60 text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                    }`}
+                  >
+                    {n.label}
+                    {active && <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />}
+                  </a>
+                );
+              })}
+            </div>
+            <div className="border-t border-border/60 p-3">
+              <div className="flex flex-col gap-2">
+                {isAuthenticated ? (
+                  <>
+                    <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="h-9 w-full rounded-lg text-[13px]">Pricing</Button></a>
+                    <a href={href("/dashboard")} className="w-full"><Button variant="outline" size="sm" className="h-9 w-full rounded-lg text-[13px]">Dashboard</Button></a>
+                    <a href={href("/account")} className="w-full"><Button variant="outline" size="sm" className="h-9 w-full rounded-lg text-[13px]">Account settings</Button></a>
+                    <a href={href("/subscription")} className="w-full"><Button variant="outline" size="sm" className="h-9 w-full rounded-lg text-[13px]">Subscription</Button></a>
+                    <Button size="sm" variant="ghost" className="h-9 w-full justify-center rounded-lg text-[13px] text-muted-foreground hover:text-foreground" onClick={handleSignOut}>Sign out</Button>
+                  </>
+                ) : (
+                  <>
+                    <a href={href("/pricing")} className="w-full"><Button variant="outline" size="sm" className="h-9 w-full rounded-lg text-[13px]">Pricing</Button></a>
+                    <a href={href("/login")} className="w-full"><Button size="sm" className="h-9 w-full rounded-lg text-[13px] font-medium">Sign in</Button></a>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
