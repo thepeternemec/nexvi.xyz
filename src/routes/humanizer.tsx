@@ -84,7 +84,7 @@ export function HumanizerPage() {
         eyebrow="Humanizer • see every change"
         title="Keep the AI speed. Lose the"
         titleEm="AI tells."
-        sub="Recruiters spot the patterns: hollow superlatives, tricolons, \u201cdelve\u201d, \u201crobust\u201d, sentences that say nothing twice. The Humanizer rewrites those away and shows you a word-level diff, so you stay in control of every edit."
+        sub="Recruiters spot the patterns: hollow superlatives, tricolons, “delve”, “robust”, sentences that say nothing twice. The Humanizer rewrites those away and shows you a word-level diff, so you stay in control of every edit."
         bullets={["Word-level diff view", "Three editing strengths", "Works on any text"]}
         icon={Sparkles}
         steps={[
