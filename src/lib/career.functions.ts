@@ -12,6 +12,29 @@ function gateway() {
   return createLovableAiGatewayProvider(key)(MODEL);
 }
 
+/**
+ * Turns AI gateway transport errors into short, user-safe messages so the UI
+ * shows a toast instead of an unhandled runtime error / blank screen.
+ * 402 = workspace AI credits exhausted, 429 = rate limited.
+ */
+async function runAi<T>(fn: () => Promise<T>): Promise<T> {
+  try {
+    return await fn();
+  } catch (err) {
+    const status = (err as { statusCode?: number; status?: number } | null)?.statusCode
+      ?? (err as { status?: number } | null)?.status;
+    const raw = err instanceof Error ? err.message : String(err);
+    if (status === 402 || /payment required/i.test(raw)) {
+      throw new Error("402: AI credits exhausted. Please add credits to continue generating.");
+    }
+    if (status === 429 || /too many requests|rate limit/i.test(raw)) {
+      throw new Error("429: Rate limited — please try again in a moment.");
+    }
+    throw new Error(raw || "AI request failed. Please try again.");
+  }
+}
+
+
 /* ---------- CV ---------- */
 const CVInput = z.object({
   jobDescription: z.string().min(20).max(15000),
