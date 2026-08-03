@@ -63,7 +63,7 @@ export function CoverLetterPage() {
       await gate.after();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
-      toast.error(msg.includes("402") ? "AI credits exhausted." : "Generation failed");
+      toast.error(msg.includes("402") ? "AI credits exhausted." : msg.includes("429") ? "Rate limited — try again shortly." : "Generation failed");
     } finally { setLoading(false); }
   }
 
