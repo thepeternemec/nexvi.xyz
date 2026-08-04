@@ -25,7 +25,6 @@ import { Route as LibraryRouteImport } from './routes/library'
 import { Route as HumanizerRouteImport } from './routes/humanizer'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CvRouteImport } from './routes/cv'
-import { Route as CtestDotxmlRouteImport } from './routes/ctest[.]xml'
 import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
@@ -228,11 +227,6 @@ const DashboardRoute = DashboardRouteImport.update({
 const CvRoute = CvRouteImport.update({
   id: '/cv',
   path: '/cv',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CtestDotxmlRoute = CtestDotxmlRouteImport.update({
-  id: '/ctest.xml',
-  path: '/ctest.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreatorsRoute = CreatorsRouteImport.update({
@@ -868,7 +862,6 @@ export interface FileRoutesByFullPath {
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
-  '/ctest.xml': typeof CtestDotxmlRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
   '/humanizer': typeof HumanizerRoute
@@ -1010,7 +1003,6 @@ export interface FileRoutesByTo {
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
-  '/ctest.xml': typeof CtestDotxmlRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
   '/humanizer': typeof HumanizerRoute
@@ -1153,7 +1145,6 @@ export interface FileRoutesById {
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
   '/creators': typeof CreatorsRoute
-  '/ctest.xml': typeof CtestDotxmlRoute
   '/cv': typeof CvRoute
   '/dashboard': typeof DashboardRoute
   '/humanizer': typeof HumanizerRoute
@@ -1297,7 +1288,6 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/creator'
     | '/creators'
-    | '/ctest.xml'
     | '/cv'
     | '/dashboard'
     | '/humanizer'
@@ -1439,7 +1429,6 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/creator'
     | '/creators'
-    | '/ctest.xml'
     | '/cv'
     | '/dashboard'
     | '/humanizer'
@@ -1581,7 +1570,6 @@ export interface FileRouteTypes {
     | '/cover-letter'
     | '/creator'
     | '/creators'
-    | '/ctest.xml'
     | '/cv'
     | '/dashboard'
     | '/humanizer'
@@ -1724,7 +1712,6 @@ export interface RootRouteChildren {
   CoverLetterRoute: typeof CoverLetterRoute
   CreatorRoute: typeof CreatorRoute
   CreatorsRoute: typeof CreatorsRoute
-  CtestDotxmlRoute: typeof CtestDotxmlRoute
   CvRoute: typeof CvRoute
   DashboardRoute: typeof DashboardRoute
   HumanizerRoute: typeof HumanizerRoute
@@ -1968,13 +1955,6 @@ declare module '@tanstack/react-router' {
       path: '/cv'
       fullPath: '/cv'
       preLoaderRoute: typeof CvRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ctest.xml': {
-      id: '/ctest.xml'
-      path: '/ctest.xml'
-      fullPath: '/ctest.xml'
-      preLoaderRoute: typeof CtestDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/creators': {
@@ -2852,7 +2832,6 @@ const rootRouteChildren: RootRouteChildren = {
   CoverLetterRoute: CoverLetterRoute,
   CreatorRoute: CreatorRoute,
   CreatorsRoute: CreatorsRoute,
-  CtestDotxmlRoute: CtestDotxmlRoute,
   CvRoute: CvRoute,
   DashboardRoute: DashboardRoute,
   HumanizerRoute: HumanizerRoute,
