@@ -39,6 +39,30 @@ export const Route = createFileRoute("/marketplace")({
       { property: "og:url", content: "https://applywise.eu/marketplace" },
     ],
     links: [{ rel: "canonical", href: "https://applywise.eu/marketplace" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Job Search Prompt Library",
+          url: "https://applywise.eu/marketplace",
+          description:
+            "A curated library of AI prompts for job seekers: CV tailoring, cover letters, ATS optimization and interview prep.",
+          mainEntity: {
+            "@type": "ItemList",
+            name: "Job search prompts",
+            numberOfItems: prompts.length,
+            itemListElement: prompts.slice(0, 50).map((p, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `https://applywise.eu/prompt/${p.slug}`,
+              name: p.title,
+            })),
+          },
+        }),
+      },
+    ],
   }),
   component: Marketplace,
 
