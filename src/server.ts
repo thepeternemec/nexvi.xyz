@@ -72,14 +72,18 @@ async function localizeHtmlResponse(request: Request, response: Response): Promi
     const contentType = response.headers.get("content-type") ?? "";
     if (!contentType.includes("text/html")) return response;
 
+    const pathname = new URL(request.url).pathname;
     const { localeFromPathname, translateSsrHtml } = await import("./lib/ssr-translate.server");
-    const locale = localeFromPathname(new URL(request.url).pathname);
-    if (!locale) return response;
+    const { injectSeoAlternates } = await import("./lib/seo-alternates.server");
+    const locale = localeFromPathname(pathname);
 
-    const html = await response.text();
+    let html = await response.text();
+    if (locale) html = translateSsrHtml(html, locale);
+    html = injectSeoAlternates(html, pathname);
+
     const headers = new Headers(response.headers);
     headers.delete("content-length");
-    return new Response(translateSsrHtml(html, locale), {
+    return new Response(html, {
       status: response.status,
       statusText: response.statusText,
       headers,
@@ -89,6 +93,7 @@ async function localizeHtmlResponse(request: Request, response: Response): Promi
     return response;
   }
 }
+
 
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
