@@ -69,7 +69,7 @@ export function UpgradeDialog() {
             onClick={() => setOpen(false)}
             className="mt-1 inline-flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
           >
-            <Lock className="h-3 w-3" /> Keep browsing free prompts
+            Keep browsing free prompts
           </button>
         </div>
       </DialogContent>
