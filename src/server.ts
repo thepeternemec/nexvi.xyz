@@ -121,6 +121,7 @@ export default {
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);
       const typed = await fixXmlContentType(request, normalized);
+      typed.headers.set("x-entry-probe", "1");
       return await localizeHtmlResponse(request, typed);
     } catch (error) {
       console.error(error);
