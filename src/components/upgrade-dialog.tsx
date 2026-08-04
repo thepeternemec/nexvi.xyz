@@ -41,10 +41,8 @@ export function UpgradeDialog() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-md rounded-2xl">
         <DialogHeader>
-          <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <Crown className="h-5 w-5" />
-          </div>
           <DialogTitle className="font-display text-2xl leading-tight">
+
             {ctx.title ? `“${ctx.title}” is a Premium prompt` : "This prompt is Premium"}
           </DialogTitle>
           <DialogDescription>
