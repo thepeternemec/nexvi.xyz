@@ -85,7 +85,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:description", content: "Paste any job description. Generate an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "google-site-verification", content: "google9a6422268a2ff82e.html" },
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "twitter:title", content: "ApplyWise — AI CVs, Cover Letters & ATS Optimization" },
       { name: "twitter:description", content: "Paste any job description. Generate an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds." },
