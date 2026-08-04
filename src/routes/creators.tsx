@@ -3,7 +3,53 @@ import { SiteShell } from "@/components/site-shell";
 import { creators, prompts } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 
-export const Route = createFileRoute("/creators")({ component: Creators });
+const CREATORS_TITLE = "Career Coaches Behind ApplyWise Prompts";
+const CREATORS_DESC =
+  "Meet the ex-recruiters, career coaches and interview psychologists who write the CV, cover letter and ATS prompts in the ApplyWise library.";
+
+export const Route = createFileRoute("/creators")({
+  head: () => ({
+    meta: [
+      { title: CREATORS_TITLE },
+      { name: "description", content: CREATORS_DESC },
+      { property: "og:title", content: CREATORS_TITLE },
+      { property: "og:description", content: CREATORS_DESC },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://applywise.eu/creators" },
+      { name: "twitter:title", content: CREATORS_TITLE },
+      { name: "twitter:description", content: CREATORS_DESC },
+    ],
+    links: [{ rel: "canonical", href: "https://applywise.eu/creators" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: CREATORS_TITLE,
+          url: "https://applywise.eu/creators",
+          description: CREATORS_DESC,
+          mainEntity: {
+            "@type": "ItemList",
+            name: "ApplyWise career coaches",
+            numberOfItems: creators.length,
+            itemListElement: creators.map((c, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: {
+                "@type": "Person",
+                name: c.name,
+                description: c.bio,
+                jobTitle: "Career coach",
+              },
+            })),
+          },
+        }),
+      },
+    ],
+  }),
+  component: Creators,
+});
 
 export function Creators() {
   return (
