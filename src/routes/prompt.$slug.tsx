@@ -193,10 +193,7 @@ export function PromptDetail() {
                     {!subLoading && (
                       <div className="absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-background via-background/95 to-transparent px-4 pb-4 pt-16 sm:px-6">
                         <div className="mx-auto max-w-md rounded-2xl border border-border/70 bg-background/80 p-4 shadow-lg backdrop-blur-md sm:p-5">
-                          <div className="flex items-start gap-3">
-                            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground">
-                              <Crown className="h-4 w-4" />
-                            </div>
+                          <div>
                             <div className="min-w-0">
                               <div className="font-display text-base leading-snug">Unlock the full prompt</div>
                               <p className="mt-0.5 text-xs text-muted-foreground">
@@ -204,6 +201,7 @@ export function PromptDetail() {
                               </p>
                             </div>
                           </div>
+
                           <ul className="mt-3 grid gap-1.5 text-xs text-muted-foreground sm:grid-cols-2">
                             <li className="flex items-start gap-1.5"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" /> Every Premium prompt</li>
                             <li className="flex items-start gap-1.5"><Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" /> Examples & variables</li>
