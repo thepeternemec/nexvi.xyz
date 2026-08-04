@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Crown, Check, Lock } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
