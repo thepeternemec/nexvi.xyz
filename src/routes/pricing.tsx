@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, Crown, ExternalLink } from "lucide-react";
+import { Check, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
@@ -131,7 +131,7 @@ export function Pricing() {
             </div>
             {sub.isPremium && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
-                <Crown className="h-4 w-4" /> You're on Premium
+                You're on Premium
                 {sub.currentPeriodEnd && <span className="text-amber-900/70 dark:text-amber-100/70">· renews {new Date(sub.currentPeriodEnd).toLocaleDateString()}</span>}
               </div>
             )}
@@ -166,7 +166,6 @@ export function Pricing() {
                     ) : (
                       <div className="mt-7 grid gap-2">
                         <Button onClick={() => onUpgrade("premium_monthly")} className="w-full rounded-full" size="lg">
-                          <Crown className="mr-2 h-4 w-4" />
                           {sub.isAuthenticated ? "Start Premium — $9/mo" : "Sign up to start"}
                         </Button>
                         <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
