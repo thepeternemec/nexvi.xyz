@@ -66,12 +66,37 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   return brandedErrorResponse();
 }
 
+async function localizeHtmlResponse(request: Request, response: Response): Promise<Response> {
+  try {
+    if (response.status !== 200) return response;
+    const contentType = response.headers.get("content-type") ?? "";
+    if (!contentType.includes("text/html")) return response;
+
+    const { localeFromPathname, translateSsrHtml } = await import("./lib/ssr-translate.server");
+    const locale = localeFromPathname(new URL(request.url).pathname);
+    if (!locale) return response;
+
+    const html = await response.text();
+    const headers = new Headers(response.headers);
+    headers.delete("content-length");
+    return new Response(translateSsrHtml(html, locale), {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  } catch (error) {
+    console.error("SSR localization failed", error);
+    return response;
+  }
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      const normalized = await normalizeCatastrophicSsrResponse(response);
+      return await localizeHtmlResponse(request, normalized);
     } catch (error) {
       console.error(error);
       return brandedErrorResponse();
