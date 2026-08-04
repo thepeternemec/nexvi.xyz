@@ -163,6 +163,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  React.useEffect(() => {
+    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
+    if (gtag) gtag("event", "page_view", { page_path: pathname });
+  }, [pathname]);
+
+
 
   return (
     <QueryClientProvider client={queryClient}>
