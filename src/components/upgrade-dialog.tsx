@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Crown, Check, Lock } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
@@ -69,7 +69,7 @@ export function UpgradeDialog() {
             onClick={() => setOpen(false)}
             className="mt-1 inline-flex items-center justify-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
           >
-            <Lock className="h-3 w-3" /> Keep browsing free prompts
+            Keep browsing free prompts
           </button>
         </div>
       </DialogContent>
