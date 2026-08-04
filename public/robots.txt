@@ -9,6 +9,13 @@ Disallow: /admin
 Disallow: /subscription
 Disallow: /verify-email
 Disallow: /reset-password
+Disallow: /*/login
+Disallow: /*/signup
+Disallow: /*/dashboard
+Disallow: /*/account
+Disallow: /*/subscription
+Disallow: /*/verify-email
+Disallow: /*/reset-password
 
 # AI answer engines are welcome to read and cite our guides
 User-agent: GPTBot
