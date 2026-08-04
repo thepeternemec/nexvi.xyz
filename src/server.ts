@@ -66,6 +66,25 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
   return brandedErrorResponse();
 }
 
+// The h3 layer rewrites non-HTML handler responses to text/html, which makes Google
+// reject /sitemap.xml as "an HTML page". Restore the real content type from the body.
+async function fixXmlContentType(request: Request, response: Response): Promise<Response> {
+  try {
+    if (response.status !== 200) return response;
+    const pathname = new URL(request.url).pathname;
+    if (!pathname.endsWith(".xml")) return response;
+    const body = await response.clone().text();
+    if (!body.trimStart().startsWith("<?xml")) return response;
+    const headers = new Headers(response.headers);
+    headers.set("content-type", "application/xml; charset=utf-8");
+    headers.delete("content-length");
+    return new Response(body, { status: 200, statusText: response.statusText, headers });
+  } catch (error) {
+    console.error("XML content-type fix failed", error);
+    return response;
+  }
+}
+
 async function localizeHtmlResponse(request: Request, response: Response): Promise<Response> {
   try {
     if (response.status !== 200) return response;
@@ -101,7 +120,8 @@ export default {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);
-      return await localizeHtmlResponse(request, normalized);
+      const typed = await fixXmlContentType(request, normalized);
+      return await localizeHtmlResponse(request, typed);
     } catch (error) {
       console.error(error);
       return brandedErrorResponse();
