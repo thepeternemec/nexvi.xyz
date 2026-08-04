@@ -41,19 +41,38 @@ export const Route = createFileRoute("/sitemap.xml")({
           entries.push({ path: `/prompt/${p.slug}`, changefreq: "monthly", priority: "0.6" });
         }
 
+        // Every public English path also exists under each locale prefix.
+        const localizable = entries.map((e) => e.path);
         for (const l of LOCALES) {
-          for (const path of ["", "/cv", "/cover-letter", "/ats", "/marketplace", "/pricing"]) {
-            entries.push({ path: `/${l}${path}`, changefreq: "weekly", priority: "0.5" });
-          }
-          for (const p of prompts) {
-            entries.push({ path: `/${l}/prompt/${p.slug}`, changefreq: "monthly", priority: "0.4" });
+          for (const path of localizable) {
+            entries.push({
+              path: path === "/" ? `/${l}` : `/${l}${path}`,
+              changefreq: "weekly",
+              priority: "0.5",
+            });
           }
         }
+
+        const alternatesFor = (path: string) => {
+          const enPath = LOCALES.some((l) => path === `/${l}` || path.startsWith(`/${l}/`))
+            ? path.replace(/^\/[a-z]{2}/, "") || "/"
+            : path;
+          const href = (loc: string | null) =>
+            loc ? `${BASE_URL}/${loc}${enPath === "/" ? "" : enPath}` : `${BASE_URL}${enPath}`;
+          return [
+            `    <xhtml:link rel="alternate" hreflang="en" href="${href(null)}"/>`,
+            ...LOCALES.map(
+              (l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${href(l)}"/>`,
+            ),
+            `    <xhtml:link rel="alternate" hreflang="x-default" href="${href(null)}"/>`,
+          ].join("\n");
+        };
 
         const urls = entries.map((e) =>
           [
             `  <url>`,
             `    <loc>${BASE_URL}${e.path}</loc>`,
+            alternatesFor(e.path),
             e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
             e.priority ? `    <priority>${e.priority}</priority>` : null,
             `  </url>`,
@@ -61,6 +80,7 @@ export const Route = createFileRoute("/sitemap.xml")({
             .filter(Boolean)
             .join("\n"),
         );
+
 
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
