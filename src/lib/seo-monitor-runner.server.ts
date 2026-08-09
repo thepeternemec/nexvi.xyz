@@ -80,3 +80,17 @@ export async function runAndRecordSeoChecks(triggerSource: string): Promise<Reco
     triggerSource,
   };
 }
+
+/** Post-deploy hook: runs at most once every 10 minutes across all isolates. */
+export async function runDeploySeoCheck(): Promise<RecordedRun | null> {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { data: recent } = await supabaseAdmin
+    .from("seo_check_runs")
+    .select("created_at")
+    .gte("created_at", new Date(Date.now() - 10 * 60 * 1000).toISOString())
+    .limit(1)
+    .maybeSingle();
+
+  if (recent) return null;
+  return runAndRecordSeoChecks("deploy");
+}
