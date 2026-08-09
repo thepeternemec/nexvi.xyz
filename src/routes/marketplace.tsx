@@ -132,7 +132,18 @@ export function Marketplace() {
     ].filter(g => g.items.length > 0);
   }, [filtered, search.sort]);
 
-  const update = (patch: Partial<Search>) => (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }) });
+  const update = (patch: Partial<Search>) =>
+    (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }), resetScroll: false });
+
+  const selectPack = (slug: string | undefined) => {
+    update({ pack: slug });
+    if (typeof window === "undefined") return;
+    requestAnimationFrame(() => {
+      const el = document.getElementById("library-results");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
 
   return (
     <SiteShell>
