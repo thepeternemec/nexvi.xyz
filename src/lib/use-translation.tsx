@@ -199,6 +199,10 @@ export function AutoTranslate() {
       raf = requestAnimationFrame(scan);
     });
 
+    // Non-English locales: translate synchronously before the first paint so the
+    // English literals React hydrated with are never visible. A later pass still
+    // runs for content that mounts after hydration.
+    if (locale !== "en") scan();
     const initialScan = window.setTimeout(scan, 300);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
@@ -211,7 +215,7 @@ export function AutoTranslate() {
     };
   }, [locale, t]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
 
