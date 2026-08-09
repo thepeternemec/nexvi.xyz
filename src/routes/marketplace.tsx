@@ -1,5 +1,5 @@
 import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
