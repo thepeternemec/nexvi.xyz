@@ -16,6 +16,7 @@ import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SeoMonitorRouteImport } from './routes/seo-monitor'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -144,6 +145,7 @@ import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
 import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
 import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
 import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
+import { Route as ApiPublicSeoMonitorRouteImport } from './routes/api/public/seo-monitor'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -182,6 +184,11 @@ const SitemapRoute = SitemapRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeoMonitorRoute = SeoMonitorRouteImport.update({
+  id: '/seo-monitor',
+  path: '/seo-monitor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -827,6 +834,11 @@ const DePromptSlugRoute = DePromptSlugRouteImport.update({
   path: '/de/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSeoMonitorRoute = ApiPublicSeoMonitorRouteImport.update({
+  id: '/api/public/seo-monitor',
+  path: '/api/public/seo-monitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -871,6 +883,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -985,6 +998,7 @@ export interface FileRoutesByFullPath {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1012,6 +1026,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1126,6 +1141,7 @@ export interface FileRoutesByTo {
   '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1154,6 +1170,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1268,6 +1285,7 @@ export interface FileRoutesById {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1297,6 +1315,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1411,6 +1430,7 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1438,6 +1458,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1552,6 +1573,7 @@ export interface FileRouteTypes {
     | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1579,6 +1601,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1693,6 +1716,7 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1721,6 +1745,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   PricingRoute: typeof PricingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SeoMonitorRoute: typeof SeoMonitorRoute
   SignupRoute: typeof SignupRoute
   SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -1835,6 +1860,7 @@ export interface RootRouteChildren {
   ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiPublicSeoMonitorRoute: typeof ApiPublicSeoMonitorRoute
   DePromptSlugRoute: typeof DePromptSlugRoute
   EsPromptSlugRoute: typeof EsPromptSlugRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
@@ -1892,6 +1918,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seo-monitor': {
+      id: '/seo-monitor'
+      path: '/seo-monitor'
+      fullPath: '/seo-monitor'
+      preLoaderRoute: typeof SeoMonitorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -2790,6 +2823,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DePromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/seo-monitor': {
+      id: '/api/public/seo-monitor'
+      path: '/api/public/seo-monitor'
+      fullPath: '/api/public/seo-monitor'
+      preLoaderRoute: typeof ApiPublicSeoMonitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -2841,6 +2881,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   PricingRoute: PricingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SeoMonitorRoute: SeoMonitorRoute,
   SignupRoute: SignupRoute,
   SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
@@ -2957,6 +2998,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiPublicSeoMonitorRoute: ApiPublicSeoMonitorRoute,
   DePromptSlugRoute: DePromptSlugRoute,
   EsPromptSlugRoute: EsPromptSlugRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
