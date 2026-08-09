@@ -16,6 +16,7 @@ import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as SeoMonitorRouteImport } from './routes/seo-monitor'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as McpRouteImport } from './routes/mcp'
@@ -183,6 +184,11 @@ const SitemapRoute = SitemapRouteImport.update({
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeoMonitorRoute = SeoMonitorRouteImport.update({
+  id: '/seo-monitor',
+  path: '/seo-monitor',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResetPasswordRoute = ResetPasswordRouteImport.update({
@@ -877,6 +883,7 @@ export interface FileRoutesByFullPath {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1019,6 +1026,7 @@ export interface FileRoutesByTo {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1162,6 +1170,7 @@ export interface FileRoutesById {
   '/mcp': typeof McpRoute
   '/pricing': typeof PricingRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -1306,6 +1315,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1448,6 +1458,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1590,6 +1601,7 @@ export interface FileRouteTypes {
     | '/mcp'
     | '/pricing'
     | '/reset-password'
+    | '/seo-monitor'
     | '/signup'
     | '/sitemap'
     | '/sitemap.xml'
@@ -1733,6 +1745,7 @@ export interface RootRouteChildren {
   McpRoute: typeof McpRoute
   PricingRoute: typeof PricingRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  SeoMonitorRoute: typeof SeoMonitorRoute
   SignupRoute: typeof SignupRoute
   SitemapRoute: typeof SitemapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -1905,6 +1918,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seo-monitor': {
+      id: '/seo-monitor'
+      path: '/seo-monitor'
+      fullPath: '/seo-monitor'
+      preLoaderRoute: typeof SeoMonitorRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reset-password': {
@@ -2861,6 +2881,7 @@ const rootRouteChildren: RootRouteChildren = {
   McpRoute: McpRoute,
   PricingRoute: PricingRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  SeoMonitorRoute: SeoMonitorRoute,
   SignupRoute: SignupRoute,
   SitemapRoute: SitemapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
