@@ -73,6 +73,14 @@ async function fixXmlContentType(request: Request, response: Response): Promise<
     if (response.status !== 200) return response;
     const pathname = new URL(request.url).pathname;
     if (!pathname.endsWith(".xml")) return response;
+
+    // HEAD responses have no body to sniff, but the path is authoritative.
+    if (request.method === "HEAD") {
+      const headHeaders = new Headers(response.headers);
+      headHeaders.set("content-type", "application/xml; charset=utf-8");
+      return new Response(null, { status: 200, statusText: response.statusText, headers: headHeaders });
+    }
+
     const body = await response.clone().text();
     if (!body.trimStart().startsWith("<?xml")) return response;
     const headers = new Headers(response.headers);
@@ -84,6 +92,7 @@ async function fixXmlContentType(request: Request, response: Response): Promise<
     return response;
   }
 }
+
 
 async function localizeHtmlResponse(request: Request, response: Response): Promise<Response> {
   try {
