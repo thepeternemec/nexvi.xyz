@@ -145,14 +145,30 @@ export function Marketplace() {
   const update = (patch: Partial<Search>) =>
     (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }), resetScroll: false });
 
-  const selectPack = (slug: string | undefined) => {
-    update({ pack: slug });
+  // Live search: push the typed query into the URL (debounced) so results filter as you type.
+  useEffect(() => {
+    const next = q.trim();
+    if (next === urlQ.trim()) return;
+    const t = setTimeout(() => {
+      lastUrlQ.current = next;
+      update({ q: next || undefined });
+    }, 250);
+    return () => clearTimeout(t);
+  }, [q, urlQ]);
+
+  const scrollToResults = () => {
     if (typeof window === "undefined") return;
     requestAnimationFrame(() => {
       const el = document.getElementById("library-results");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+
+  const selectPack = (slug: string | undefined) => {
+    update({ pack: slug });
+    scrollToResults();
+  };
+
 
 
   return (
