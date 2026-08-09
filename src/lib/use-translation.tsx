@@ -1,4 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import { useServerFn } from "@tanstack/react-start";
 import { translateBatch } from "./translate.functions";
 import { type Locale } from "./i18n";
