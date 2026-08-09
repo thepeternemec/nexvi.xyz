@@ -437,6 +437,42 @@ export type Database = {
           },
         ]
       }
+      seo_check_runs: {
+        Row: {
+          alerted: boolean
+          checks: Json
+          created_at: string
+          failed: number
+          id: string
+          passed: number
+          status: string
+          trigger_source: string
+          warned: number
+        }
+        Insert: {
+          alerted?: boolean
+          checks?: Json
+          created_at?: string
+          failed?: number
+          id?: string
+          passed?: number
+          status: string
+          trigger_source?: string
+          warned?: number
+        }
+        Update: {
+          alerted?: boolean
+          checks?: Json
+          created_at?: string
+          failed?: number
+          id?: string
+          passed?: number
+          status?: string
+          trigger_source?: string
+          warned?: number
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           cancel_at_period_end: boolean
