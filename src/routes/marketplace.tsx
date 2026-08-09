@@ -82,6 +82,16 @@ export function Marketplace() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const [q, setQ] = useState(search.q ?? "");
+
+  // Keep the input in sync when the URL changes (back/forward, "clear all", pack links).
+  const urlQ = (search.q as string | undefined) ?? "";
+  const lastUrlQ = useRef(urlQ);
+  useEffect(() => {
+    if (urlQ !== lastUrlQ.current) {
+      lastUrlQ.current = urlQ;
+      setQ(urlQ);
+    }
+  }, [urlQ]);
   const { saveMany } = useSavedPrompts();
 
   const activePack = packs.find(pk => pk.slug === search.pack);
