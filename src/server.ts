@@ -114,11 +114,37 @@ async function localizeHtmlResponse(request: Request, response: Response): Promi
 }
 
 
+// SEO monitoring: the first request served by a fresh isolate (i.e. right after a
+// deploy) kicks off the check suite in the background. Throttled in the DB so ordinary
+// cold starts don't re-run it.
+let deployCheckStarted = false;
+
+function maybeRunDeploySeoCheck(request: Request, ctx: unknown): void {
+  if (deployCheckStarted) return;
+  deployCheckStarted = true;
+
+  const host = new URL(request.url).hostname;
+  if (host === "localhost" || host === "127.0.0.1") return;
+
+  const task = (async () => {
+    try {
+      const { runDeploySeoCheck } = await import("./lib/seo-monitor-runner.server");
+      await runDeploySeoCheck();
+    } catch (error) {
+      console.error("Post-deploy SEO check failed", error);
+    }
+  })();
+
+  const waitUntil = (ctx as { waitUntil?: (p: Promise<unknown>) => void } | undefined)?.waitUntil;
+  if (typeof waitUntil === "function") waitUntil.call(ctx, task);
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
+      maybeRunDeploySeoCheck(request, ctx);
       const normalized = await normalizeCatastrophicSsrResponse(response);
       const typed = await fixXmlContentType(request, normalized);
       return await localizeHtmlResponse(request, typed);
@@ -128,3 +154,4 @@ export default {
     }
   },
 };
+
