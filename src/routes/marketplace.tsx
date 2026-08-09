@@ -196,7 +196,7 @@ export function Marketplace() {
             <span>Free prompts, no account needed</span>
           </div>
           <form
-            onSubmit={(e) => { e.preventDefault(); update({ q }); }}
+            onSubmit={(e) => { e.preventDefault(); update({ q: q.trim() || undefined }); scrollToResults(); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
           >
             <div className="flex flex-1 flex-wrap items-center gap-2 px-3">
@@ -217,13 +217,25 @@ export function Marketplace() {
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
+                aria-label="Search prompts"
                 placeholder={activePack ? `Search inside ${activePack.name}…` : "Search CV, cover letter, ATS, interview…"}
                 className="h-11 min-w-[8rem] flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
               />
+              {q && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  onClick={() => setQ("")}
+                  className="shrink-0 text-muted-foreground transition hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
             </div>
 
             <Button type="submit" className="rounded-xl">Search</Button>
           </form>
+
         </div>
       </section>
 
