@@ -132,7 +132,18 @@ export function Marketplace() {
     ].filter(g => g.items.length > 0);
   }, [filtered, search.sort]);
 
-  const update = (patch: Partial<Search>) => (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }) });
+  const update = (patch: Partial<Search>) =>
+    (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }), resetScroll: false });
+
+  const selectPack = (slug: string | undefined) => {
+    update({ pack: slug });
+    if (typeof window === "undefined") return;
+    requestAnimationFrame(() => {
+      const el = document.getElementById("library-results");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
 
   return (
     <SiteShell>
@@ -219,7 +230,7 @@ export function Marketplace() {
               return (
                 <button
                   key={pk.slug}
-                  onClick={() => update({ pack: active ? undefined : pk.slug })}
+                  onClick={() => selectPack(active ? undefined : pk.slug)}
                   title={pk.description}
                   className={`group relative flex h-full flex-col items-start gap-2 px-5 py-4 text-left transition ${active ? "bg-primary/[0.07]" : "bg-card hover:bg-background"}`}
                 >
@@ -249,7 +260,7 @@ export function Marketplace() {
         </div>
 
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y border-border/60 py-4 text-sm">
+        <div id="library-results" className="mt-4 flex flex-wrap items-center justify-between gap-3 scroll-mt-24 border-y border-border/60 py-4 text-sm">
           <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
             <SlidersHorizontal className="h-3.5 w-3.5" />
             <span className="mr-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Filter</span>
