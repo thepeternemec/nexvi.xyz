@@ -144,6 +144,7 @@ import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
 import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
 import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
 import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
+import { Route as ApiPublicSeoMonitorRouteImport } from './routes/api/public/seo-monitor'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
@@ -827,6 +828,11 @@ const DePromptSlugRoute = DePromptSlugRouteImport.update({
   path: '/de/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicSeoMonitorRoute = ApiPublicSeoMonitorRouteImport.update({
+  id: '/api/public/seo-monitor',
+  path: '/api/public/seo-monitor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91DotmcpChar93InvokeToolToolRoute =
   Char91DotmcpChar93InvokeToolToolRouteImport.update({
     id: '/.mcp/invoke-tool/$tool',
@@ -985,6 +991,7 @@ export interface FileRoutesByFullPath {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1126,6 +1133,7 @@ export interface FileRoutesByTo {
   '/it': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1268,6 +1276,7 @@ export interface FileRoutesById {
   '/it/': typeof ItIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
+  '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
@@ -1411,6 +1420,7 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1552,6 +1562,7 @@ export interface FileRouteTypes {
     | '/it'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1693,6 +1704,7 @@ export interface FileRouteTypes {
     | '/it/'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
+    | '/api/public/seo-monitor'
     | '/de/prompt/$slug'
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
@@ -1835,6 +1847,7 @@ export interface RootRouteChildren {
   ItIndexRoute: typeof ItIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
+  ApiPublicSeoMonitorRoute: typeof ApiPublicSeoMonitorRoute
   DePromptSlugRoute: typeof DePromptSlugRoute
   EsPromptSlugRoute: typeof EsPromptSlugRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
@@ -2790,6 +2803,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DePromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/seo-monitor': {
+      id: '/api/public/seo-monitor'
+      path: '/api/public/seo-monitor'
+      fullPath: '/api/public/seo-monitor'
+      preLoaderRoute: typeof ApiPublicSeoMonitorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/.mcp/invoke-tool/$tool': {
       id: '/.mcp/invoke-tool/$tool'
       path: '/.mcp/invoke-tool/$tool'
@@ -2957,6 +2977,7 @@ const rootRouteChildren: RootRouteChildren = {
   ItIndexRoute: ItIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
+  ApiPublicSeoMonitorRoute: ApiPublicSeoMonitorRoute,
   DePromptSlugRoute: DePromptSlugRoute,
   EsPromptSlugRoute: EsPromptSlugRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
