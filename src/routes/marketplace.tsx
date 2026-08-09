@@ -230,7 +230,7 @@ export function Marketplace() {
               return (
                 <button
                   key={pk.slug}
-                  onClick={() => update({ pack: active ? undefined : pk.slug })}
+                  onClick={() => selectPack(active ? undefined : pk.slug)}
                   title={pk.description}
                   className={`group relative flex h-full flex-col items-start gap-2 px-5 py-4 text-left transition ${active ? "bg-primary/[0.07]" : "bg-card hover:bg-background"}`}
                 >
@@ -260,7 +260,7 @@ export function Marketplace() {
         </div>
 
 
-        <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-y border-border/60 py-4 text-sm">
+        <div id="library-results" className="mt-4 flex flex-wrap items-center justify-between gap-3 scroll-mt-24 border-y border-border/60 py-4 text-sm">
           <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
             <SlidersHorizontal className="h-3.5 w-3.5" />
             <span className="mr-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Filter</span>
