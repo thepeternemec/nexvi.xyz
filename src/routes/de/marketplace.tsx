@@ -6,12 +6,12 @@ import { Marketplace } from "@/routes/marketplace";
 
 export const Route = createFileRoute("/de/marketplace")({
   head: () => ({ meta: [{ title: "Marketplace — ApplyWise" }] }),
-  validateSearch: (s) => ({
+  validateSearch: (s: Record<string, unknown>) => ({
     q: typeof s.q === "string" ? s.q : undefined,
     category: typeof s.category === "string" ? s.category : undefined,
     pack: typeof s.pack === "string" ? s.pack : undefined,
-    sort: (s.sort) ?? "popular",
-    price: (s.price) ?? "all",
+    sort: (s.sort as string | undefined) ?? "popular",
+    price: (s.price as string | undefined) ?? "all",
     beginner: s.beginner === "1" ? "1" : undefined,
   }),
   component: Marketplace,
