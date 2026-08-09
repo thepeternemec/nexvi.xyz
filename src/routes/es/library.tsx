@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/es/library")({
   beforeLoad: () => {
-    throw redirect({ to: "/es/marketplace" });
+    throw redirect({ to: "/es/marketplace", search: {} });
   },
   component: () => null,
 });
