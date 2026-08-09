@@ -125,7 +125,10 @@ const originalAttrs = new WeakMap<HTMLElement, Record<string, string>>();
 /** Auto-translates all visible text nodes on the current page. */
 export function AutoTranslate() {
   const { locale, t } = useT();
-  useEffect(() => {
+  // Run before paint on the client: the server already ships translated HTML for
+  // locale routes, and hydration replaces it with the English literals. A
+  // post-paint effect would show a visible English flash.
+  useIsomorphicLayoutEffect(() => {
     let raf = 0;
 
     const scan = () => {
