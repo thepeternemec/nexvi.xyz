@@ -9,6 +9,8 @@ Disallow: /admin
 Disallow: /subscription
 Disallow: /verify-email
 Disallow: /reset-password
+Disallow: /seo-monitor
+
 Disallow: /*/login
 Disallow: /*/signup
 Disallow: /*/dashboard
