@@ -1,4 +1,6 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import { useServerFn } from "@tanstack/react-start";
 import { translateBatch } from "./translate.functions";
 import { type Locale } from "./i18n";
@@ -125,7 +127,10 @@ const originalAttrs = new WeakMap<HTMLElement, Record<string, string>>();
 /** Auto-translates all visible text nodes on the current page. */
 export function AutoTranslate() {
   const { locale, t } = useT();
-  useEffect(() => {
+  // Run before paint on the client: the server already ships translated HTML for
+  // locale routes, and hydration replaces it with the English literals. A
+  // post-paint effect would show a visible English flash.
+  useIsomorphicLayoutEffect(() => {
     let raf = 0;
 
     const scan = () => {
@@ -194,6 +199,10 @@ export function AutoTranslate() {
       raf = requestAnimationFrame(scan);
     });
 
+    // Non-English locales: translate synchronously before the first paint so the
+    // English literals React hydrated with are never visible. A later pass still
+    // runs for content that mounts after hydration.
+    if (locale !== "en") scan();
     const initialScan = window.setTimeout(scan, 300);
     observer.observe(document.body, { childList: true, subtree: true, characterData: true });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
@@ -206,7 +215,7 @@ export function AutoTranslate() {
     };
   }, [locale, t]);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
 
