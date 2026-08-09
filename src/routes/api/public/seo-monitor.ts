@@ -9,7 +9,8 @@ export const Route = createFileRoute('/api/public/seo-monitor')({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const expected = process.env['SUPABASE_PUBLISHABLE_KEY']
+        const expected =
+          process.env['SUPABASE_PUBLISHABLE_KEY'] ?? import.meta.env['VITE_SUPABASE_PUBLISHABLE_KEY']
         const provided = request.headers.get('apikey') ?? request.headers.get('authorization')?.replace('Bearer ', '')
         if (!expected || provided !== expected) {
           return new Response(JSON.stringify({ error: 'Unauthorized' }), {
