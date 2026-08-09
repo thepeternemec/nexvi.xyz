@@ -1,5 +1,5 @@
 import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
@@ -82,6 +82,16 @@ export function Marketplace() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const [q, setQ] = useState(search.q ?? "");
+
+  // Keep the input in sync when the URL changes (back/forward, "clear all", pack links).
+  const urlQ = (search.q as string | undefined) ?? "";
+  const lastUrlQ = useRef(urlQ);
+  useEffect(() => {
+    if (urlQ !== lastUrlQ.current) {
+      lastUrlQ.current = urlQ;
+      setQ(urlQ);
+    }
+  }, [urlQ]);
   const { saveMany } = useSavedPrompts();
 
   const activePack = packs.find(pk => pk.slug === search.pack);
@@ -135,14 +145,30 @@ export function Marketplace() {
   const update = (patch: Partial<Search>) =>
     (navigate as any)({ search: (prev: Search) => ({ ...prev, ...patch }), resetScroll: false });
 
-  const selectPack = (slug: string | undefined) => {
-    update({ pack: slug });
+  // Live search: push the typed query into the URL (debounced) so results filter as you type.
+  useEffect(() => {
+    const next = q.trim();
+    if (next === urlQ.trim()) return;
+    const t = setTimeout(() => {
+      lastUrlQ.current = next;
+      update({ q: next || undefined });
+    }, 250);
+    return () => clearTimeout(t);
+  }, [q, urlQ]);
+
+  const scrollToResults = () => {
     if (typeof window === "undefined") return;
     requestAnimationFrame(() => {
       const el = document.getElementById("library-results");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+
+  const selectPack = (slug: string | undefined) => {
+    update({ pack: slug });
+    scrollToResults();
+  };
+
 
 
   return (
@@ -170,7 +196,7 @@ export function Marketplace() {
             <span>Free prompts, no account needed</span>
           </div>
           <form
-            onSubmit={(e) => { e.preventDefault(); update({ q }); }}
+            onSubmit={(e) => { e.preventDefault(); update({ q: q.trim() || undefined }); scrollToResults(); }}
             className="mt-8 flex max-w-2xl items-center gap-2 rounded-2xl border border-border bg-background/90 p-2 shadow-sm backdrop-blur"
           >
             <div className="flex flex-1 flex-wrap items-center gap-2 px-3">
@@ -191,13 +217,25 @@ export function Marketplace() {
               <Input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
+                aria-label="Search prompts"
                 placeholder={activePack ? `Search inside ${activePack.name}…` : "Search CV, cover letter, ATS, interview…"}
                 className="h-11 min-w-[8rem] flex-1 border-0 bg-transparent shadow-none focus-visible:ring-0"
               />
+              {q && (
+                <button
+                  type="button"
+                  aria-label="Clear search"
+                  onClick={() => setQ("")}
+                  className="shrink-0 text-muted-foreground transition hover:text-foreground"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              )}
             </div>
 
             <Button type="submit" className="rounded-xl">Search</Button>
           </form>
+
         </div>
       </section>
 
