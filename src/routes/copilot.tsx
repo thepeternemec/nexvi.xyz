@@ -4,7 +4,7 @@ import { SiteHeader } from "@/components/site-shell";
 import { ChatSidebar } from "@/components/chat/chat-sidebar";
 import { ChatSidebarContext } from "@/components/chat/chat-sidebar-context";
 
-export const Route = createFileRoute("/chat")({
+export const Route = createFileRoute("/copilot")({
   head: () => ({
     meta: [
       { title: "ApplyWise Workspace — CV, Cover Letter, ATS & Humanizer in one chat" },
