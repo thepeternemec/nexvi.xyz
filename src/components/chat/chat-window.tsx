@@ -141,7 +141,7 @@ export function ChatWindow({
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [mode, setMode] = useState<ChatMode>(initialMode);
+  const [mode] = useState<ChatMode>(initialMode);
   const [messages, setMessages] = useState<ChatMsg[]>(initialMessages);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
