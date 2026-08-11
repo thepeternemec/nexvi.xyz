@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown, Library, Newspaper, BookOpen, Info, Activity, type LucideIcon } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown, Library, Newspaper, Info, Activity, type LucideIcon } from "lucide-react";
 import { CHAT_MODES } from "@/lib/chat-modes";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandMark } from "@/components/brand-mark";
@@ -78,7 +78,7 @@ const MENUS: MenuSection[] = [
     items: [
       { to: "/marketplace", label: "Prompt Library", hint: "Curated job-search prompts", icon: Library },
       { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
-      { to: "/guides/how-to-write-a-resume", label: "Resume guide", hint: "Step-by-step walkthrough", icon: BookOpen },
+      
       { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
       { to: "/status", label: "System status", hint: "Live uptime and incidents", icon: Activity },
     ],
