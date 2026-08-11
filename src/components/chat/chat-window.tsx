@@ -29,7 +29,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/use-auth";
 import { useToolGate } from "@/components/usage-gate";
-import { CHAT_MODES, modeMeta, type ChatMode } from "@/lib/chat-modes";
+import { modeMeta, type ChatMode } from "@/lib/chat-modes";
 import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
 import { generateCV, generateCoverLetter, scoreATS, humanizeText } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
