@@ -1,0 +1,515 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQueryClient } from "@tanstack/react-query";
+import { ChevronDown, Copy, Download, PanelRightOpen } from "lucide-react";
+import { toast } from "sonner";
+import {
+  Conversation,
+  ConversationContent,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation";
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+  MessageActions,
+  MessageAction,
+} from "@/components/ai-elements/message";
+import {
+  PromptInput,
+  PromptInputTextarea,
+  PromptInputFooter,
+  PromptInputTools,
+  PromptInputSubmit,
+} from "@/components/ai-elements/prompt-input";
+import { Shimmer } from "@/components/ai-elements/shimmer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useAuth } from "@/hooks/use-auth";
+import { useToolGate } from "@/components/usage-gate";
+import { CHAT_MODES, modeMeta, type ChatMode } from "@/lib/chat-modes";
+import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
+import { generateCV, generateCoverLetter, scoreATS, humanizeText } from "@/lib/career.functions";
+import { prompts } from "@/lib/mock-data";
+
+type ChatContext = {
+  jobDescription: string;
+  background: string;
+  company: string;
+  role: string;
+};
+
+const CTX_KEY = "applywise.chat.context";
+const EMPTY_CTX: ChatContext = { jobDescription: "", background: "", company: "", role: "" };
+
+function loadCtx(): ChatContext {
+  if (typeof window === "undefined") return EMPTY_CTX;
+  try {
+    const raw = window.localStorage.getItem(CTX_KEY);
+    return raw ? { ...EMPTY_CTX, ...(JSON.parse(raw) as Partial<ChatContext>) } : EMPTY_CTX;
+  } catch {
+    return EMPTY_CTX;
+  }
+}
+
+function clean(text: string) {
+  return text
+    .replace(/```[a-z]*\n?/gi, "")
+    .replace(/```/g, "")
+    .trim();
+}
+
+function pad(text: string, label: string) {
+  const t = text.trim();
+  return t.length < 20 ? `${t}\n\n(${label})` : t;
+}
+
+function atsMarkdown(r: Awaited<ReturnType<typeof scoreATS>>) {
+  const lines: string[] = [];
+  lines.push(`## ATS match: ${Math.round(r.score)}/100`);
+  if (r.verdict) lines.push(`_${r.verdict}_`);
+  if (r.subScores.length) {
+    lines.push("", "| Area | Score | Weight |", "| --- | --- | --- |");
+    for (const s of r.subScores) lines.push(`| ${s.label} | ${Math.round(s.score)} | ${s.weight}% |`);
+  }
+  lines.push(
+    "",
+    `**Keyword coverage:** ${r.keywordCoverage.matchedCount}/${r.keywordCoverage.totalCount} (${Math.round(r.keywordCoverage.coveragePct)}%)`,
+  );
+  if (r.missingKeywords.length) lines.push("", `**Missing keywords:** ${r.missingKeywords.slice(0, 18).join(", ")}`);
+  const failed = r.formattingChecks.filter((c) => !c.passed);
+  if (failed.length) {
+    lines.push("", "**Formatting issues**");
+    for (const c of failed) lines.push(`- ${c.name}${c.detail ? ` — ${c.detail}` : ""}`);
+  }
+  if (r.improvements.length) {
+    lines.push("", "**Fix these first**");
+    for (const i of r.improvements.slice(0, 8)) lines.push(`- ${i}`);
+  }
+  if (r.strengths.length) {
+    lines.push("", "**Working well**");
+    for (const s of r.strengths.slice(0, 6)) lines.push(`- ${s}`);
+  }
+  return lines.join("\n");
+}
+
+function recommendPrompts(input: string) {
+  const text = input.toLowerCase();
+  const pick = (kw: string[]) =>
+    prompts.filter(
+      (p) =>
+        kw.some(
+          (k) =>
+            p.title.toLowerCase().includes(k) ||
+            p.category.includes(k) ||
+            p.tags.some((t) => t.includes(k)),
+        ),
+    );
+  let r: typeof prompts = [];
+  if (/(cv|resume)/.test(text)) r = pick(["cv", "resume", "ats"]);
+  else if (/(cover letter|letter)/.test(text)) r = pick(["cover-letter", "cover letter"]);
+  else if (/(ats|keyword|score)/.test(text)) r = pick(["ats", "keyword"]);
+  else if (/(interview|behavioral|star)/.test(text)) r = pick(["interview", "star"]);
+  else if (/(linkedin|profile|headline)/.test(text)) r = pick(["linkedin"]);
+  else if (/(recruiter|outreach|cold)/.test(text)) r = pick(["outreach", "recruiter"]);
+  else if (/(negotiat|offer|salary|comp)/.test(text)) r = pick(["negotiation", "comp"]);
+  else if (/(switch|change|pivot)/.test(text)) r = pick(["career-change", "pivot"]);
+  else if (/(network|referral|intro)/.test(text)) r = pick(["networking", "referral"]);
+  else r = prompts.slice(0, 3);
+  const list = (r.length ? r : prompts).slice(0, 3);
+  return [
+    "Here are the prompts I'd reach for:",
+    "",
+    ...list.map((p) => `- [${p.title}](/prompt/${p.slug}) — ${p.outcome}`),
+  ].join("\n");
+}
+
+export function ChatWindow({
+  threadId,
+  initialMode = "cv",
+  initialMessages = [],
+  onOpenSidebar,
+}: {
+  threadId?: string;
+  initialMode?: ChatMode;
+  initialMessages?: ChatMsg[];
+  onOpenSidebar?: () => void;
+}) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const [mode, setMode] = useState<ChatMode>(initialMode);
+  const [messages, setMessages] = useState<ChatMsg[]>(initialMessages);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [ctx, setCtx] = useState<ChatContext>(EMPTY_CTX);
+  const [ctxOpen, setCtxOpen] = useState(false);
+  const activeThread = useRef<string | undefined>(threadId);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const meta = modeMeta(mode);
+  const gate = useToolGate(meta.tool ?? "cv");
+
+  useEffect(() => {
+    setCtx(loadCtx());
+  }, []);
+
+  // Both chat routes remount this component via `key`, so thread/message
+  // props are only ever read as initial state — no re-sync effect needed.
+
+
+  useEffect(() => {
+    textareaRef.current?.focus();
+  }, [threadId, busy]);
+
+  function updateCtx(patch: Partial<ChatContext>) {
+    setCtx((prev) => {
+      const next = { ...prev, ...patch };
+      try {
+        window.localStorage.setItem(CTX_KEY, JSON.stringify(next));
+      } catch {
+        /* storage unavailable — context stays in memory */
+      }
+      return next;
+    });
+  }
+
+  const ready = useMemo(() => {
+    if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
+    if (meta.needs.includes("background") && !ctx.background.trim()) return false;
+    return true;
+  }, [ctx.background, ctx.jobDescription, meta.needs]);
+
+  const runCV = useServerFn(generateCV);
+  const runCover = useServerFn(generateCoverLetter);
+  const runATS = useServerFn(scoreATS);
+  const runHumanize = useServerFn(humanizeText);
+
+  function push(msg: ChatMsg) {
+    setMessages((m) => [...m, msg]);
+  }
+
+  async function persist(role: "user" | "assistant", content: string, data?: unknown) {
+    if (!user) return;
+    let id = activeThread.current;
+    if (!id) {
+      const created = await createThread(user.id, content || meta.label, mode);
+      id = created.id;
+      activeThread.current = id;
+    }
+    await addMessage({ threadId: id, userId: user.id, role, content, mode, data });
+    await queryClient.invalidateQueries({ queryKey: ["chat-threads"] });
+  }
+
+  async function send(raw: string) {
+    const text = raw.trim();
+    if (busy) return;
+
+    if (mode === "humanizer" && !text && !ctx.background.trim()) {
+      toast.error("Paste the text you want humanized.");
+      return;
+    }
+    if (mode !== "humanizer" && mode !== "prompts" && !ready) {
+      setCtxOpen(true);
+      push({
+        id: `local-${Date.now()}`,
+        role: "assistant",
+        content:
+          "I need two things first: the **job description** and **your background / current CV**. Add them in the context panel and I'll get to work.",
+        mode,
+      });
+      return;
+    }
+    if (mode === "prompts") {
+      const q = text || "job search";
+      push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
+      push({ id: `a-${Date.now()}`, role: "assistant", content: recommendPrompts(q), mode });
+      setInput("");
+      try {
+        await persist("user", q);
+        await persist("assistant", recommendPrompts(q));
+      } catch {
+        /* history is best-effort */
+      }
+      return;
+    }
+
+    if (!(await gate.before())) return;
+
+    const userContent =
+      text ||
+      (mode === "ats"
+        ? "Score my CV against this job description."
+        : mode === "cv"
+          ? "Write my tailored CV for this role."
+          : "Write my cover letter for this role.");
+
+    push({ id: `u-${Date.now()}`, role: "user", content: userContent, mode });
+    setInput("");
+    setBusy(true);
+
+    try {
+      await persist("user", userContent);
+
+      let content = "";
+      let data: unknown;
+
+      if (mode === "cv") {
+        const res = await runCV({
+          data: {
+            jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
+            background: pad(`${ctx.background}\n\n${text}`.trim(), "Brief background provided by user."),
+          },
+        });
+        content = clean(res.text);
+      } else if (mode === "coverLetter") {
+        const res = await runCover({
+          data: {
+            jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
+            background: pad(`${ctx.background}\n\n${text}`.trim(), "Brief background provided by user."),
+            companyName: ctx.company || undefined,
+            roleTitle: ctx.role || undefined,
+          },
+        });
+        content = clean(res.text);
+      } else if (mode === "ats") {
+        const res = await runATS({
+          data: {
+            jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
+            cv: pad(ctx.background, "Brief CV provided by user."),
+          },
+        });
+        content = atsMarkdown(res);
+        data = res;
+      } else {
+        const res = await runHumanize({
+          data: { text: pad(text || ctx.background, "Short text provided by user.") },
+        });
+        content = clean(res.text);
+      }
+
+      push({ id: `a-${Date.now()}`, role: "assistant", content, mode, data });
+      await persist("assistant", content, data);
+      await gate.after();
+
+      if (!threadId && activeThread.current) {
+        navigate({
+          to: "/chat/$threadId",
+          params: { threadId: activeThread.current },
+          replace: true,
+        }).catch(() => undefined);
+      }
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Generation failed";
+      toast.error(
+        msg.includes("402")
+          ? "AI credits exhausted."
+          : msg.includes("429")
+            ? "Rate limited — try again shortly."
+            : msg,
+      );
+      push({
+        id: `e-${Date.now()}`,
+        role: "assistant",
+        content: "That request didn't go through. Try again in a moment.",
+        mode,
+      });
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function copy(text: string) {
+    navigator.clipboard.writeText(text).then(
+      () => toast.success("Copied"),
+      () => toast.error("Copy failed"),
+    );
+  }
+
+  function download(text: string) {
+    const blob = new Blob([text], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${mode}.md`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      {/* Mode bar */}
+      <div className="flex items-center gap-2 border-b border-border/60 px-3 py-2.5 sm:px-5">
+        {onOpenSidebar && (
+          <Button variant="ghost" size="icon-sm" className="lg:hidden" onClick={onOpenSidebar} aria-label="Open menu">
+            <PanelRightOpen className="h-4 w-4" />
+          </Button>
+        )}
+        <div className="-mx-1 flex flex-1 items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {CHAT_MODES.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => setMode(m.id)}
+              className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[12.5px] font-medium transition-colors ${
+                mode === m.id
+                  ? "border-foreground/15 bg-muted text-foreground"
+                  : "border-transparent text-muted-foreground hover:bg-muted/60 hover:text-foreground"
+              }`}
+            >
+              <m.icon className="h-3.5 w-3.5" />
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Context panel */}
+      {meta.needs.length > 0 && (
+        <div className="border-b border-border/60 bg-muted/20">
+          <button
+            onClick={() => setCtxOpen((o) => !o)}
+            className="flex w-full items-center justify-between px-3 py-2 text-left text-[12.5px] font-medium sm:px-5"
+          >
+            <span className="text-muted-foreground">
+              Context ·{" "}
+              <span className={ready ? "text-primary" : "text-foreground"}>
+                {ready ? "ready" : "job description + your background needed"}
+              </span>
+            </span>
+            <ChevronDown className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`} />
+          </button>
+          {ctxOpen && (
+            <div className="grid gap-3 px-3 pb-4 sm:px-5 lg:grid-cols-2">
+              {mode === "coverLetter" && (
+                <div className="grid grid-cols-2 gap-3 lg:col-span-2">
+                  <Input
+                    value={ctx.company}
+                    onChange={(e) => updateCtx({ company: e.target.value })}
+                    placeholder="Company (optional)"
+                  />
+                  <Input
+                    value={ctx.role}
+                    onChange={(e) => updateCtx({ role: e.target.value })}
+                    placeholder="Role title (optional)"
+                  />
+                </div>
+              )}
+              {meta.needs.includes("jobDescription") && (
+                <div>
+                  <label className="text-[12px] font-medium text-muted-foreground">Job description</label>
+                  <Textarea
+                    value={ctx.jobDescription}
+                    onChange={(e) => updateCtx({ jobDescription: e.target.value })}
+                    placeholder="Paste the job posting…"
+                    className="mt-1.5 min-h-[110px]"
+                  />
+                </div>
+              )}
+              {meta.needs.includes("background") && (
+                <div>
+                  <label className="text-[12px] font-medium text-muted-foreground">Your CV / background</label>
+                  <Textarea
+                    value={ctx.background}
+                    onChange={(e) => updateCtx({ background: e.target.value })}
+                    placeholder="Paste your CV or summarise your experience…"
+                    className="mt-1.5 min-h-[110px]"
+                  />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Transcript */}
+      <Conversation className="min-h-0 flex-1">
+        <ConversationContent className="mx-auto w-full max-w-3xl">
+          {messages.length === 0 ? (
+            <div className="py-14 text-center">
+              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card">
+                <meta.icon className="h-5 w-5 text-primary" />
+              </div>
+              <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
+              <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
+              <div className="mt-6 flex flex-wrap justify-center gap-2">
+                {meta.starters.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => send(s)}
+                    className="rounded-full border border-border/70 bg-background px-3 py-1.5 text-[12.5px] text-muted-foreground transition hover:border-foreground/25 hover:text-foreground"
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            messages.map((m) => (
+              <Message from={m.role} key={m.id}>
+                <MessageContent>
+                  <MessageResponse>{m.content}</MessageResponse>
+                  {m.role === "assistant" && (
+                    <MessageActions className="mt-2">
+                      <MessageAction label="Copy" onClick={() => copy(m.content)}>
+                        <Copy className="h-3.5 w-3.5" />
+                      </MessageAction>
+                      <MessageAction label="Download" onClick={() => download(m.content)}>
+                        <Download className="h-3.5 w-3.5" />
+                      </MessageAction>
+                    </MessageActions>
+                  )}
+                </MessageContent>
+              </Message>
+            ))
+          )}
+          {busy && (
+            <Message from="assistant">
+              <MessageContent>
+                <Shimmer>Working on it…</Shimmer>
+              </MessageContent>
+            </Message>
+          )}
+        </ConversationContent>
+        <ConversationScrollButton />
+      </Conversation>
+
+      {/* Composer */}
+      <div className="border-t border-border/60 px-3 py-3 sm:px-5">
+        <div className="mx-auto w-full max-w-3xl">
+          <PromptInput
+            onSubmit={(message, event) => {
+              event.preventDefault();
+              void send(message.text || input);
+            }}
+          >
+            <PromptInputTextarea
+              key={mode}
+              ref={textareaRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder={meta.placeholder}
+            />
+            <PromptInputFooter className="justify-between">
+              <PromptInputTools>
+                <span key={mode} className="inline-flex items-center gap-1.5 px-1 text-[11.5px] text-muted-foreground">
+                  <meta.icon className="h-3.5 w-3.5" /> {meta.label}
+                </span>
+
+              </PromptInputTools>
+              <PromptInputSubmit status={busy ? "submitted" : undefined} disabled={busy} />
+            </PromptInputFooter>
+          </PromptInput>
+          {!user && (
+            <p className="mt-2 text-center text-[11.5px] text-muted-foreground">
+              Sign in to keep your conversations and history.
+            </p>
+          )}
+        </div>
+      </div>
+      {gate.gates}
+    </div>
+  );
+}

@@ -30,6 +30,7 @@ import { Route as CreatorsRouteImport } from './routes/creators'
 import { Route as CreatorRouteImport } from './routes/creator'
 import { Route as CoverLetterRouteImport } from './routes/cover-letter'
 import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as ChatRouteImport } from './routes/chat'
 import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as AtsRouteImport } from './routes/ats'
 import { Route as AssistantRouteImport } from './routes/assistant'
@@ -41,6 +42,7 @@ import { Route as GerIndexRouteImport } from './routes/ger/index'
 import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as EsIndexRouteImport } from './routes/es/index'
 import { Route as DeIndexRouteImport } from './routes/de/index'
+import { Route as ChatIndexRouteImport } from './routes/chat.index'
 import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as PromptSlugRouteImport } from './routes/prompt.$slug'
 import { Route as ItVerifyEmailRouteImport } from './routes/it/verify-email'
@@ -136,6 +138,7 @@ import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
 import { Route as DeAccountRouteImport } from './routes/de/account'
 import { Route as DeAboutRouteImport } from './routes/de/about'
+import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -256,6 +259,11 @@ const CookiesRoute = CookiesRouteImport.update({
   path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatRoute = ChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BundlesRoute = BundlesRouteImport.update({
   id: '/bundles',
   path: '/bundles',
@@ -310,6 +318,11 @@ const DeIndexRoute = DeIndexRouteImport.update({
   id: '/de/',
   path: '/de/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ChatIndexRoute = ChatIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ChatRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -786,6 +799,11 @@ const DeAboutRoute = DeAboutRouteImport.update({
   path: '/de/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => ChatRoute,
+} as any)
 const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
   id: '/blog/how-to-write-a-resume',
   path: '/blog/how-to-write-a-resume',
@@ -870,6 +888,7 @@ export interface FileRoutesByFullPath {
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/chat': typeof ChatRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
@@ -896,6 +915,7 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -991,6 +1011,7 @@ export interface FileRoutesByFullPath {
   '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/chat/': typeof ChatIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -1039,6 +1060,7 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -1134,6 +1156,7 @@ export interface FileRoutesByTo {
   '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/chat': typeof ChatIndexRoute
   '/de': typeof DeIndexRoute
   '/es': typeof EsIndexRoute
   '/fr': typeof FrIndexRoute
@@ -1157,6 +1180,7 @@ export interface FileRoutesById {
   '/assistant': typeof AssistantRoute
   '/ats': typeof AtsRoute
   '/bundles': typeof BundlesRoute
+  '/chat': typeof ChatRouteWithChildren
   '/cookies': typeof CookiesRoute
   '/cover-letter': typeof CoverLetterRoute
   '/creator': typeof CreatorRoute
@@ -1183,6 +1207,7 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -1278,6 +1303,7 @@ export interface FileRoutesById {
   '/it/verify-email': typeof ItVerifyEmailRoute
   '/prompt/$slug': typeof PromptSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/chat/': typeof ChatIndexRoute
   '/de/': typeof DeIndexRoute
   '/es/': typeof EsIndexRoute
   '/fr/': typeof FrIndexRoute
@@ -1302,6 +1328,7 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/ats'
     | '/bundles'
+    | '/chat'
     | '/cookies'
     | '/cover-letter'
     | '/creator'
@@ -1328,6 +1355,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/chat/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1423,6 +1451,7 @@ export interface FileRouteTypes {
     | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog/'
+    | '/chat/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1471,6 +1500,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/chat/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1566,6 +1596,7 @@ export interface FileRouteTypes {
     | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog'
+    | '/chat'
     | '/de'
     | '/es'
     | '/fr'
@@ -1588,6 +1619,7 @@ export interface FileRouteTypes {
     | '/assistant'
     | '/ats'
     | '/bundles'
+    | '/chat'
     | '/cookies'
     | '/cover-letter'
     | '/creator'
@@ -1614,6 +1646,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/chat/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1709,6 +1742,7 @@ export interface FileRouteTypes {
     | '/it/verify-email'
     | '/prompt/$slug'
     | '/blog/'
+    | '/chat/'
     | '/de/'
     | '/es/'
     | '/fr/'
@@ -1732,6 +1766,7 @@ export interface RootRouteChildren {
   AssistantRoute: typeof AssistantRoute
   AtsRoute: typeof AtsRoute
   BundlesRoute: typeof BundlesRoute
+  ChatRoute: typeof ChatRouteWithChildren
   CookiesRoute: typeof CookiesRoute
   CoverLetterRoute: typeof CoverLetterRoute
   CreatorRoute: typeof CreatorRoute
@@ -2018,6 +2053,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat': {
+      id: '/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof ChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bundles': {
       id: '/bundles'
       path: '/bundles'
@@ -2094,6 +2136,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/de/'
       preLoaderRoute: typeof DeIndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/chat/': {
+      id: '/chat/'
+      path: '/'
+      fullPath: '/chat/'
+      preLoaderRoute: typeof ChatIndexRouteImport
+      parentRoute: typeof ChatRoute
     }
     '/blog/': {
       id: '/blog/'
@@ -2760,6 +2809,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chat/$threadId': {
+      id: '/chat/$threadId'
+      path: '/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
+      parentRoute: typeof ChatRoute
+    }
     '/blog/how-to-write-a-resume': {
       id: '/blog/how-to-write-a-resume'
       path: '/blog/how-to-write-a-resume'
@@ -2861,6 +2917,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ChatRouteChildren {
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
+  ChatIndexRoute: typeof ChatIndexRoute
+}
+
+const ChatRouteChildren: ChatRouteChildren = {
+  ChatThreadIdRoute: ChatThreadIdRoute,
+  ChatIndexRoute: ChatIndexRoute,
+}
+
+const ChatRouteWithChildren = ChatRoute._addFileChildren(ChatRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -2868,6 +2936,7 @@ const rootRouteChildren: RootRouteChildren = {
   AssistantRoute: AssistantRoute,
   AtsRoute: AtsRoute,
   BundlesRoute: BundlesRoute,
+  ChatRoute: ChatRouteWithChildren,
   CookiesRoute: CookiesRoute,
   CoverLetterRoute: CoverLetterRoute,
   CreatorRoute: CreatorRoute,

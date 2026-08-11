@@ -62,11 +62,7 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { href: "/cv", label: "CV Generator" },
-  { href: "/cover-letter", label: "Cover Letter" },
-  { href: "/humanizer", label: "Humanizer" },
-  { href: "/ats", label: "ATS Optimizer" },
-  { href: "/library", label: "Prompt Library" },
+  { href: "/chat", label: "Workspace" },
   { href: "/pricing", label: "Pricing", mobileOnly: true },
 ];
 
