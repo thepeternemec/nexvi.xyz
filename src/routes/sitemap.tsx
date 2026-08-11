@@ -19,30 +19,31 @@ export const Route = createFileRoute("/sitemap")({
 
 const groups: { title: string; links: { href: string; label: string }[] }[] = [
   {
-    title: "Tools",
+    title: "Products",
     links: [
       { href: "/cv", label: "CV Generator" },
       { href: "/cover-letter", label: "Cover Letter Generator" },
       { href: "/humanizer", label: "Humanizer" },
       { href: "/ats", label: "ATS Optimizer" },
-      { href: "/library", label: "Prompt Library" },
-      { href: "/marketplace", label: "Browse all prompts" },
+      { href: "/copilot", label: "Copilot" },
+      { href: "/marketplace", label: "Prompt Library" },
     ],
   },
   {
-    title: "Account",
+    title: "Resources",
     links: [
-      { href: "/login", label: "Sign in" },
-      { href: "/signup", label: "Create account" },
-      { href: "/dashboard", label: "Dashboard" },
-      { href: "/account", label: "Account settings" },
-      { href: "/subscription", label: "Subscription" },
+      { href: "/blog", label: "Blog" },
+      { href: "/blog/how-to-write-a-resume", label: "How to write a resume" },
+      { href: "/blog/ats-optimization-and-ai-humanizer", label: "ATS optimization guide" },
+      { href: "/creators", label: "Career coaches" },
+      { href: "/assistant", label: "AI Assistant" },
     ],
   },
   {
     title: "Company",
     links: [
       { href: "/", label: "Home" },
+      { href: "/about", label: "About" },
       { href: "/pricing", label: "Pricing" },
       { href: "/status", label: "System status" },
       { href: "/terms", label: "Terms & Privacy" },
