@@ -63,7 +63,6 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { href: "/chat", label: "Workspace" },
   { href: "/pricing", label: "Pricing", mobileOnly: true },
 ];
 
