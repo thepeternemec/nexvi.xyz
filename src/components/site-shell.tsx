@@ -245,7 +245,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
           <span className="mx-1 h-5 w-px bg-border/70" aria-hidden="true" />
-          <a href={href("/pricing")}><Button variant="ghost" size="sm" className="h-8 rounded-lg text-[13px] font-medium text-muted-foreground hover:text-foreground">Pricing</Button></a>
+          
           {isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
