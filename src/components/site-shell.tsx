@@ -1,6 +1,7 @@
 import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown } from "lucide-react";
+import { CHAT_MODES } from "@/lib/chat-modes";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandMark } from "@/components/brand-mark";
 import { useAuth } from "@/hooks/use-auth";
@@ -184,6 +185,42 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
             );
           })}
 
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+                  barePath.startsWith("/chat") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Tools
+                <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="start"
+              sideOffset={10}
+              className="w-[19rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
+            >
+              <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
+                <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Tools</div>
+              </div>
+              <div className="p-1.5">
+                {CHAT_MODES.map((m) => (
+                  <DropdownMenuItem key={m.id} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+                    <a href={`${href("/chat")}?mode=${m.id}`} className="flex cursor-pointer items-center gap-2.5">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                        <m.icon className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block truncate text-[13px] font-medium text-foreground">{m.label}</span>
+                        <span className="block truncate text-[11px] text-muted-foreground">{m.blurb}</span>
+                      </span>
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
@@ -281,6 +318,17 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                   </a>
                 );
               })}
+              {CHAT_MODES.map((m) => (
+                <a
+                  key={m.id}
+                  href={`${href("/chat")}?mode=${m.id}`}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
+                >
+                  <m.icon className="h-4 w-4 shrink-0" />
+                  {m.label}
+                </a>
+              ))}
             </div>
             <div className="border-t border-border/60 p-3">
               <div className="flex flex-col gap-2">
