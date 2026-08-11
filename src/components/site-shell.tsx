@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown, Target, Gauge, Sparkles, Compass, Users, Library, Newspaper, BookOpen, Info, Activity, type LucideIcon } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown, Library, Newspaper, BookOpen, Info, Activity, type LucideIcon } from "lucide-react";
 import { CHAT_MODES } from "@/lib/chat-modes";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandMark } from "@/components/brand-mark";
@@ -67,21 +67,11 @@ type MenuSection = { label: string; hint: string; items: MenuItem[] };
 
 const MENUS: MenuSection[] = [
   {
-    label: "Tools",
+    label: "Products",
     hint: "Run the AI that tailors your application",
     items: CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
   },
-  {
-    label: "Solutions",
-    hint: "Built for every stage of the job hunt",
-    items: [
-      { to: "/cv", label: "Land a specific role", hint: "One CV, matched to one job description", icon: Target },
-      { to: "/ats", label: "Pass the ATS filter", hint: "Score, keywords and formatting checks", icon: Gauge },
-      { to: "/humanizer", label: "Sound human, not AI", hint: "Rewrite drafts in your own voice", icon: Sparkles },
-      { to: "/marketplace", label: "Career switch", hint: "Prompts for repositioning your story", icon: Compass },
-      { to: "/creators", label: "For creators & coaches", hint: "Share prompt packs with your audience", icon: Users },
-    ],
-  },
+
   {
     label: "Resources",
     hint: "Guides, prompts and product updates",
@@ -450,7 +440,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         </div>
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Tools</div>
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Products</div>
           <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
             {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"], ["/chat", "Workspace"]].map(([to, label]) => (
               <li key={to}>
