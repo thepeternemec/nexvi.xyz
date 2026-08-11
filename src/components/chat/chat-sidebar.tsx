@@ -24,7 +24,7 @@ export function ChatSidebar({ open, onClose }: { open: boolean; onClose: () => v
     try {
       await deleteThread(id);
       await queryClient.invalidateQueries({ queryKey: ["chat-threads"] });
-      if (params.threadId === id) navigate({ to: "/chat" }).catch(() => undefined);
+      if (params.threadId === id) navigate({ to: "/copilot" }).catch(() => undefined);
     } catch {
       toast.error("Could not delete that conversation.");
     }
@@ -45,13 +45,13 @@ export function ChatSidebar({ open, onClose }: { open: boolean; onClose: () => v
         } fixed inset-y-0 left-0 z-50 flex w-[17rem] flex-col gap-4 overflow-y-auto border-r border-border/60 bg-card p-4 transition-transform lg:static lg:z-auto lg:mr-3 lg:translate-x-0 lg:rounded-[18px] lg:border lg:bg-card/40`}
       >
         <div className="flex items-center justify-between lg:hidden">
-          <span className="text-[13px] font-semibold">Workspace</span>
+          <span className="text-[13px] font-semibold">Copilot</span>
           <Button variant="ghost" size="icon-sm" onClick={onClose} aria-label="Close">
             <X className="h-4 w-4" />
           </Button>
         </div>
 
-        <Link to="/chat" onClick={onClose} className="block">
+        <Link to="/copilot" onClick={onClose} className="block">
           <Button className="w-full justify-start gap-2 rounded-xl text-[13px]">
             <MessageSquarePlus className="h-4 w-4" /> New chat
           </Button>
@@ -63,7 +63,7 @@ export function ChatSidebar({ open, onClose }: { open: boolean; onClose: () => v
             {CHAT_MODES.map((m) => (
               <Link
                 key={m.id}
-                to="/chat"
+                to="/copilot"
                 search={{ mode: m.id }}
                 onClick={onClose}
                 className="flex items-center gap-2.5 rounded-lg px-2 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
@@ -93,7 +93,7 @@ export function ChatSidebar({ open, onClose }: { open: boolean; onClose: () => v
           ) : (
             <ul className="mt-2 space-y-0.5">
               {(threads.data ?? []).map((t) => {
-                const active = pathname.endsWith(`/chat/${t.id}`);
+                const active = pathname.endsWith(`/copilot/${t.id}`);
                 return (
                   <li
                     key={t.id}
@@ -102,7 +102,7 @@ export function ChatSidebar({ open, onClose }: { open: boolean; onClose: () => v
                     }`}
                   >
                     <Link
-                      to="/chat/$threadId"
+                      to="/copilot/$threadId"
                       params={{ threadId: t.id }}
                       onClick={onClose}
                       className="min-w-0 flex-1 truncate px-2 py-2 text-[12.5px] text-foreground/90"

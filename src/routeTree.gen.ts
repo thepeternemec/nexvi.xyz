@@ -138,7 +138,7 @@ import { Route as DeAtsRouteImport } from './routes/de/ats'
 import { Route as DeAssistantRouteImport } from './routes/de/assistant'
 import { Route as DeAccountRouteImport } from './routes/de/account'
 import { Route as DeAboutRouteImport } from './routes/de/about'
-import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
+import { Route as CopilotThreadIdRouteImport } from './routes/copilot.$threadId'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
@@ -799,10 +799,10 @@ const DeAboutRoute = DeAboutRouteImport.update({
   path: '/de/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
-  id: '/chat/$threadId',
-  path: '/chat/$threadId',
-  getParentRoute: () => rootRouteImport,
+const CopilotThreadIdRoute = CopilotThreadIdRouteImport.update({
+  id: '/$threadId',
+  path: '/$threadId',
+  getParentRoute: () => CopilotRoute,
 } as any)
 const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
   id: '/blog/how-to-write-a-resume',
@@ -915,7 +915,7 @@ export interface FileRoutesByFullPath {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
-  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -1060,7 +1060,7 @@ export interface FileRoutesByTo {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
-  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -1207,7 +1207,7 @@ export interface FileRoutesById {
   '/admin/import': typeof AdminImportRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
-  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
   '/de/assistant': typeof DeAssistantRoute
@@ -1355,7 +1355,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
-    | '/chat/$threadId'
+    | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1500,7 +1500,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
-    | '/chat/$threadId'
+    | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1646,7 +1646,7 @@ export interface FileRouteTypes {
     | '/admin/import'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
-    | '/chat/$threadId'
+    | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
     | '/de/assistant'
@@ -1793,7 +1793,6 @@ export interface RootRouteChildren {
   AdminImportRoute: typeof AdminImportRoute
   BlogAtsOptimizationAndAiHumanizerRoute: typeof BlogAtsOptimizationAndAiHumanizerRoute
   BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
-  ChatThreadIdRoute: typeof ChatThreadIdRoute
   DeAboutRoute: typeof DeAboutRoute
   DeAccountRoute: typeof DeAccountRoute
   DeAssistantRoute: typeof DeAssistantRoute
@@ -2810,12 +2809,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/chat/$threadId': {
-      id: '/chat/$threadId'
-      path: '/chat/$threadId'
-      fullPath: '/chat/$threadId'
-      preLoaderRoute: typeof ChatThreadIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/copilot/$threadId': {
+      id: '/copilot/$threadId'
+      path: '/$threadId'
+      fullPath: '/copilot/$threadId'
+      preLoaderRoute: typeof CopilotThreadIdRouteImport
+      parentRoute: typeof CopilotRoute
     }
     '/blog/how-to-write-a-resume': {
       id: '/blog/how-to-write-a-resume'
@@ -2919,10 +2918,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface CopilotRouteChildren {
+  CopilotThreadIdRoute: typeof CopilotThreadIdRoute
   CopilotIndexRoute: typeof CopilotIndexRoute
 }
 
 const CopilotRouteChildren: CopilotRouteChildren = {
+  CopilotThreadIdRoute: CopilotThreadIdRoute,
   CopilotIndexRoute: CopilotIndexRoute,
 }
 
@@ -2965,7 +2966,6 @@ const rootRouteChildren: RootRouteChildren = {
   BlogAtsOptimizationAndAiHumanizerRoute:
     BlogAtsOptimizationAndAiHumanizerRoute,
   BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
-  ChatThreadIdRoute: ChatThreadIdRoute,
   DeAboutRoute: DeAboutRoute,
   DeAccountRoute: DeAccountRoute,
   DeAssistantRoute: DeAssistantRoute,
