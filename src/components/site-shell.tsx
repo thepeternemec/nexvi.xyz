@@ -76,7 +76,7 @@ const MENUS: MenuSection[] = [
     label: "Resources",
     hint: "Guides, prompts and product updates",
     items: [
-      { to: "/chat", label: "Workspace", hint: "One chat for every ApplyWise tool", icon: Library },
+      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library },
       { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
       { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
       { to: "/signup", label: "Create account", hint: "Start free, no card needed", icon: UserPlus },
@@ -442,7 +442,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Products</div>
           <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
-            {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"], ["/chat", "Workspace"]].map(([to, label]) => (
+            {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"], ["/copilot", "Copilot"]].map(([to, label]) => (
               <li key={to}>
                 <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>

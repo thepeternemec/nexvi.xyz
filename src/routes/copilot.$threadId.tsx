@@ -5,7 +5,7 @@ import { useChatSidebar } from "@/components/chat/chat-sidebar-context";
 import { listMessages } from "@/lib/chat-store";
 import { isChatMode } from "@/lib/chat-modes";
 
-export const Route = createFileRoute("/chat/$threadId")({
+export const Route = createFileRoute("/copilot/$threadId")({
   component: ThreadChat,
 });
 

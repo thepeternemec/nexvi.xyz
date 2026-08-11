@@ -297,7 +297,7 @@ export function ChatWindow({
 
       if (!threadId && activeThread.current) {
         navigate({
-          to: "/chat/$threadId",
+          to: "/copilot/$threadId",
           params: { threadId: activeThread.current },
           replace: true,
         }).catch(() => undefined);
