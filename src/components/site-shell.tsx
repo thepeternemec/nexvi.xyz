@@ -163,64 +163,64 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
           <BrandMark size="sm" className="transition-opacity group-hover:opacity-70" />
         </a>
         <nav className="hidden items-center gap-0.5 lg:flex">
-          {NAV.filter((n) => !n.mobileOnly).map((n) => {
-            const active = barePath === n.href || barePath.startsWith(n.href + "/");
+          {MENUS.map((section) => {
+            const sectionActive = section.items.some((i) => barePath === i.to);
             return (
-              <a
-                key={n.href}
-                href={href(n.href)}
-                aria-current={active ? "page" : undefined}
-                className={`group relative whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
-                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {n.label}
-                <span
-                  className={`pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] rounded-full bg-primary transition-transform duration-200 ${
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </a>
+              <DropdownMenu key={section.label}>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+                      sectionActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {section.label}
+                    <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  sideOffset={10}
+                  className="w-[21rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
+                >
+                  <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
+                    <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{section.label}</div>
+                    <div className="mt-0.5 text-[11px] text-muted-foreground/80">{section.hint}</div>
+                  </div>
+                  <div className="p-1.5">
+                    {section.items.map((item) => (
+                      <DropdownMenuItem key={item.to + item.label} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+                        <a href={href(item.to)} className="flex cursor-pointer items-center gap-2.5">
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                            <item.icon className="h-3.5 w-3.5" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block truncate text-[13px] font-medium text-foreground">{item.label}</span>
+                            <span className="block truncate text-[11px] text-muted-foreground">{item.hint}</span>
+                          </span>
+                        </a>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             );
           })}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
-                  ["/cv","/cover-letter","/ats","/humanizer","/library"].some((t) => barePath === t) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Tools
-                <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              sideOffset={10}
-              className="w-[19rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
-            >
-              <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
-                <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Tools</div>
-              </div>
-              <div className="p-1.5">
-                {CHAT_MODES.map((m) => (
-                  <DropdownMenuItem key={m.id} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
-                    <a href={href(m.page)} className="flex cursor-pointer items-center gap-2.5">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
-                        <m.icon className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block truncate text-[13px] font-medium text-foreground">{m.label}</span>
-                        <span className="block truncate text-[11px] text-muted-foreground">{m.blurb}</span>
-                      </span>
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <a
+            href={href("/pricing")}
+            aria-current={barePath === "/pricing" ? "page" : undefined}
+            className={`group relative whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+              barePath === "/pricing" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Pricing
+            <span
+              className={`pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] rounded-full bg-primary transition-transform duration-200 ${
+                barePath === "/pricing" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              }`}
+            />
+          </a>
         </nav>
+
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
