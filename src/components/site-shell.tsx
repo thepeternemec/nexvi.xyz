@@ -63,7 +63,6 @@ function ThemeToggle() {
 }
 
 const NAV = [
-  { href: "/chat", label: "Workspace" },
   { href: "/pricing", label: "Pricing", mobileOnly: true },
 ];
 
@@ -189,7 +188,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
             <DropdownMenuTrigger asChild>
               <button
                 className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
-                  barePath.startsWith("/chat") ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  ["/cv","/cover-letter","/ats","/humanizer","/library"].some((t) => barePath === t) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 Tools
@@ -207,7 +206,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               <div className="p-1.5">
                 {CHAT_MODES.map((m) => (
                   <DropdownMenuItem key={m.id} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
-                    <a href={`${href("/chat")}?mode=${m.id}`} className="flex cursor-pointer items-center gap-2.5">
+                    <a href={href(m.page)} className="flex cursor-pointer items-center gap-2.5">
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
                         <m.icon className="h-3.5 w-3.5" />
                       </span>
@@ -321,7 +320,7 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
               {CHAT_MODES.map((m) => (
                 <a
                   key={m.id}
-                  href={`${href("/chat")}?mode=${m.id}`}
+                  href={href(m.page)}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
                 >
@@ -430,7 +429,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Tools</div>
           <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
-            {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"]].map(([to, label]) => (
+            {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"], ["/chat", "Workspace"]].map(([to, label]) => (
               <li key={to}>
                 <a href={href(to)} className="inline-block transition-colors hover:text-primary">{label}</a>
               </li>
