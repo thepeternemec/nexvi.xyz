@@ -304,19 +304,25 @@ export function ChatWindow({
       }
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Generation failed";
+      const quota = /free preview|free limit|credits|sign in again/i.test(msg);
       toast.error(
-        msg.includes("402")
-          ? "AI credits exhausted."
-          : msg.includes("429")
-            ? "Rate limited — try again shortly."
-            : msg,
+        quota
+          ? msg
+          : msg.includes("402")
+            ? "AI credits exhausted."
+            : msg.includes("429")
+              ? "Rate limited — try again shortly."
+              : msg,
       );
       push({
         id: `e-${Date.now()}`,
         role: "assistant",
-        content: "That request didn't go through. Try again in a moment.",
+        content: quota
+          ? `${msg}\n\nCreate a free account to keep generating — it takes a few seconds.`
+          : "That request didn't go through. Try again in a moment.",
         mode,
       });
+
     } finally {
       setBusy(false);
     }
