@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouter, useRouterState } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Globe, Check, Instagram, User, LogOut, LayoutDashboard, Settings, CreditCard, ChevronDown, Target, Gauge, Sparkles, Compass, Users, Library, Newspaper, BookOpen, Info, Activity, type LucideIcon } from "lucide-react";
 import { CHAT_MODES } from "@/lib/chat-modes";
 import { supabase } from "@/integrations/supabase/client";
 import { BrandMark } from "@/components/brand-mark";
@@ -62,9 +62,39 @@ function ThemeToggle() {
   );
 }
 
-const NAV = [
-  { href: "/pricing", label: "Pricing", mobileOnly: true },
+type MenuItem = { to: string; label: string; hint: string; icon: LucideIcon };
+type MenuSection = { label: string; hint: string; items: MenuItem[] };
+
+const MENUS: MenuSection[] = [
+  {
+    label: "Tools",
+    hint: "Run the AI that tailors your application",
+    items: CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+  },
+  {
+    label: "Solutions",
+    hint: "Built for every stage of the job hunt",
+    items: [
+      { to: "/cv", label: "Land a specific role", hint: "One CV, matched to one job description", icon: Target },
+      { to: "/ats", label: "Pass the ATS filter", hint: "Score, keywords and formatting checks", icon: Gauge },
+      { to: "/humanizer", label: "Sound human, not AI", hint: "Rewrite drafts in your own voice", icon: Sparkles },
+      { to: "/marketplace", label: "Career switch", hint: "Prompts for repositioning your story", icon: Compass },
+      { to: "/creators", label: "For creators & coaches", hint: "Share prompt packs with your audience", icon: Users },
+    ],
+  },
+  {
+    label: "Resources",
+    hint: "Guides, prompts and product updates",
+    items: [
+      { to: "/marketplace", label: "Prompt Library", hint: "Curated job-search prompts", icon: Library },
+      { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
+      { to: "/guides/how-to-write-a-resume", label: "Resume guide", hint: "Step-by-step walkthrough", icon: BookOpen },
+      { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
+      { to: "/status", label: "System status", hint: "Live uptime and incidents", icon: Activity },
+    ],
+  },
 ];
+
 
 
 function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
@@ -163,64 +193,64 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
           <BrandMark size="sm" className="transition-opacity group-hover:opacity-70" />
         </a>
         <nav className="hidden items-center gap-0.5 lg:flex">
-          {NAV.filter((n) => !n.mobileOnly).map((n) => {
-            const active = barePath === n.href || barePath.startsWith(n.href + "/");
+          {MENUS.map((section) => {
+            const sectionActive = section.items.some((i) => barePath === i.to);
             return (
-              <a
-                key={n.href}
-                href={href(n.href)}
-                aria-current={active ? "page" : undefined}
-                className={`group relative whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
-                  active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {n.label}
-                <span
-                  className={`pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] rounded-full bg-primary transition-transform duration-200 ${
-                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </a>
+              <DropdownMenu key={section.label}>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+                      sectionActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {section.label}
+                    <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="start"
+                  sideOffset={10}
+                  className="w-[21rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
+                >
+                  <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
+                    <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{section.label}</div>
+                    <div className="mt-0.5 text-[11px] text-muted-foreground/80">{section.hint}</div>
+                  </div>
+                  <div className="p-1.5">
+                    {section.items.map((item) => (
+                      <DropdownMenuItem key={item.to + item.label} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+                        <a href={href(item.to)} className="flex cursor-pointer items-center gap-2.5">
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                            <item.icon className="h-3.5 w-3.5" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block truncate text-[13px] font-medium text-foreground">{item.label}</span>
+                            <span className="block truncate text-[11px] text-muted-foreground">{item.hint}</span>
+                          </span>
+                        </a>
+                      </DropdownMenuItem>
+                    ))}
+                  </div>
+                </DropdownMenuContent>
+              </DropdownMenu>
             );
           })}
-
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button
-                className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
-                  ["/cv","/cover-letter","/ats","/humanizer","/library"].some((t) => barePath === t) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                Tools
-                <ChevronDown className="h-3.5 w-3.5 opacity-60 transition-transform group-data-[state=open]:rotate-180" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              sideOffset={10}
-              className="w-[19rem] overflow-hidden rounded-xl border border-border/70 bg-card p-0 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_12px_32px_-8px_rgba(16,24,40,0.18)]"
-            >
-              <div className="border-b border-border/60 bg-muted/40 px-3.5 py-2.5">
-                <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Tools</div>
-              </div>
-              <div className="p-1.5">
-                {CHAT_MODES.map((m) => (
-                  <DropdownMenuItem key={m.id} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
-                    <a href={href(m.page)} className="flex cursor-pointer items-center gap-2.5">
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
-                        <m.icon className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block truncate text-[13px] font-medium text-foreground">{m.label}</span>
-                        <span className="block truncate text-[11px] text-muted-foreground">{m.blurb}</span>
-                      </span>
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <a
+            href={href("/pricing")}
+            aria-current={barePath === "/pricing" ? "page" : undefined}
+            className={`group relative whitespace-nowrap rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors ${
+              barePath === "/pricing" ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Pricing
+            <span
+              className={`pointer-events-none absolute inset-x-2.5 -bottom-0.5 h-[1.5px] rounded-full bg-primary transition-transform duration-200 ${
+                barePath === "/pricing" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+              }`}
+            />
+          </a>
         </nav>
+
         <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
           <LanguageSwitcher locale={locale} />
           <ThemeToggle />
@@ -296,39 +326,32 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
       {open && (
         <div className="px-3 pt-2 lg:hidden">
           <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-[18px] border border-border/60 bg-card/95 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_16px_40px_-12px_rgba(16,24,40,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/90">
-            <div className="border-b border-border/60 bg-muted/40 px-4 py-2.5">
-              <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Products</div>
-            </div>
-            <div className="p-1.5">
-              {NAV.filter((n) => !n.mobileOnly).map((n) => {
-                const active = barePath === n.href || barePath.startsWith(n.href + "/");
-                return (
-                  <a
-                    key={n.href}
-                    href={href(n.href)}
-                    onClick={() => setOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={`flex items-center justify-between rounded-lg px-2.5 py-2.5 text-[14px] font-medium transition-colors ${
-                      active ? "bg-muted/60 text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                    }`}
-                  >
-                    {n.label}
-                    {active && <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />}
-                  </a>
-                );
-              })}
-              {CHAT_MODES.map((m) => (
-                <a
-                  key={m.id}
-                  href={href(m.page)}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
-                >
-                  <m.icon className="h-4 w-4 shrink-0" />
-                  {m.label}
-                </a>
-              ))}
-            </div>
+            {MENUS.map((section) => (
+              <div key={section.label}>
+                <div className="border-b border-border/60 bg-muted/40 px-4 py-2.5">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{section.label}</div>
+                </div>
+                <div className="p-1.5">
+                  {section.items.map((item) => {
+                    const active = barePath === item.to;
+                    return (
+                      <a
+                        key={item.to + item.label}
+                        href={href(item.to)}
+                        onClick={() => setOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium transition-colors ${
+                          active ? "bg-muted/60 text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                        }`}
+                      >
+                        <item.icon className="h-4 w-4 shrink-0" />
+                        {item.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
             <div className="border-t border-border/60 p-3">
               <div className="flex flex-col gap-2">
                 {isAuthenticated ? (
