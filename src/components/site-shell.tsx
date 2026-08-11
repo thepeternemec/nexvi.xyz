@@ -62,9 +62,39 @@ function ThemeToggle() {
   );
 }
 
-const NAV = [
-  { href: "/pricing", label: "Pricing", mobileOnly: true },
+type MenuItem = { to: string; label: string; hint: string; icon: LucideIcon };
+type MenuSection = { label: string; hint: string; items: MenuItem[] };
+
+const MENUS: MenuSection[] = [
+  {
+    label: "Tools",
+    hint: "Run the AI that tailors your application",
+    items: CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+  },
+  {
+    label: "Solutions",
+    hint: "Built for every stage of the job hunt",
+    items: [
+      { to: "/cv", label: "Land a specific role", hint: "One CV, matched to one job description", icon: Target },
+      { to: "/ats", label: "Pass the ATS filter", hint: "Score, keywords and formatting checks", icon: Gauge },
+      { to: "/humanizer", label: "Sound human, not AI", hint: "Rewrite drafts in your own voice", icon: Sparkles },
+      { to: "/marketplace", label: "Career switch", hint: "Prompts for repositioning your story", icon: Compass },
+      { to: "/creators", label: "For creators & coaches", hint: "Share prompt packs with your audience", icon: Users },
+    ],
+  },
+  {
+    label: "Resources",
+    hint: "Guides, prompts and product updates",
+    items: [
+      { to: "/marketplace", label: "Prompt Library", hint: "Curated job-search prompts", icon: Library },
+      { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
+      { to: "/guides/how-to-write-a-resume", label: "Resume guide", hint: "Step-by-step walkthrough", icon: BookOpen },
+      { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
+      { to: "/status", label: "System status", hint: "Live uptime and incidents", icon: Activity },
+    ],
+  },
 ];
+
 
 
 function LanguageSwitcher({ locale = "en" }: { locale?: Locale }) {
