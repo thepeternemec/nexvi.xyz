@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { BrandLogo, brands } from "@/components/brand-logos";
 
+/** Temporarily hidden from the UI — flip to true to bring the logo wall back. */
+const SHOW_TRUSTED_BY = false;
+
 export function TrustedBy({
   ctaLabel,
   ctaHref,
@@ -11,6 +14,8 @@ export function TrustedBy({
   ctaHref?: string;
   onCta?: () => void;
 }) {
+  if (!SHOW_TRUSTED_BY) return null;
+
   return (
     <section className="border-t border-border/60 bg-muted/30">
       <div className="mx-auto w-full max-w-6xl px-4 py-14 text-center sm:px-6">
