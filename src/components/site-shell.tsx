@@ -67,21 +67,11 @@ type MenuSection = { label: string; hint: string; items: MenuItem[] };
 
 const MENUS: MenuSection[] = [
   {
-    label: "Tools",
+    label: "Products",
     hint: "Run the AI that tailors your application",
     items: CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
   },
-  {
-    label: "Solutions",
-    hint: "Built for every stage of the job hunt",
-    items: [
-      { to: "/cv", label: "Land a specific role", hint: "One CV, matched to one job description", icon: Target },
-      { to: "/ats", label: "Pass the ATS filter", hint: "Score, keywords and formatting checks", icon: Gauge },
-      { to: "/humanizer", label: "Sound human, not AI", hint: "Rewrite drafts in your own voice", icon: Sparkles },
-      { to: "/marketplace", label: "Career switch", hint: "Prompts for repositioning your story", icon: Compass },
-      { to: "/creators", label: "For creators & coaches", hint: "Share prompt packs with your audience", icon: Users },
-    ],
-  },
+
   {
     label: "Resources",
     hint: "Guides, prompts and product updates",
