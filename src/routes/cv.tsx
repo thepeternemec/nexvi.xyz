@@ -140,18 +140,18 @@ export function CVPage() {
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium">Job description</label>
-              <Textarea value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the full job posting here…" className="mt-2 min-h-[180px]" />
+              <label htmlFor="cv-job-description" className="text-sm font-medium">Job description</label>
+              <Textarea id="cv-job-description" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the full job posting here…" className="mt-2 min-h-[180px]" />
             </div>
             <div>
-              <label className="text-sm font-medium">Your background</label>
-              <Textarea value={bg} onChange={(e) => setBg(e.target.value)} placeholder="Past roles, skills, education, achievements — or paste your existing CV." className="mt-2 min-h-[180px]" />
+              <label htmlFor="cv-background" className="text-sm font-medium">Your background</label>
+              <Textarea id="cv-background" value={bg} onChange={(e) => setBg(e.target.value)} placeholder="Past roles, skills, education, achievements — or paste your existing CV." className="mt-2 min-h-[180px]" />
             </div>
             <div>
-              <label className="text-sm font-medium">Tone</label>
-              <div className="mt-2 flex flex-wrap gap-2">
+              <span id="cv-tone-label" className="text-sm font-medium">Tone</span>
+              <div className="mt-2 flex flex-wrap gap-2" role="group" aria-labelledby="cv-tone-label">
                 {(["professional", "confident", "friendly", "concise"] as const).map((t) => (
-                  <button key={t} onClick={() => setTone(t)} className={`rounded-full border px-3 py-1.5 text-xs transition ${tone === t ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
+                  <button key={t} type="button" aria-pressed={tone === t} onClick={() => setTone(t)} className={`rounded-full border px-3 py-1.5 text-xs transition ${tone === t ? "border-foreground bg-foreground text-background" : "border-border text-muted-foreground hover:text-foreground"}`}>{t}</button>
                 ))}
               </div>
             </div>
