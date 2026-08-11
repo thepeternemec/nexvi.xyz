@@ -296,39 +296,32 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
       {open && (
         <div className="px-3 pt-2 lg:hidden">
           <div className="mx-auto w-full max-w-6xl overflow-hidden rounded-[18px] border border-border/60 bg-card/95 shadow-[0_1px_2px_rgba(16,24,40,0.06),0_16px_40px_-12px_rgba(16,24,40,0.22)] backdrop-blur-2xl dark:border-white/10 dark:bg-background/90">
-            <div className="border-b border-border/60 bg-muted/40 px-4 py-2.5">
-              <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">Products</div>
-            </div>
-            <div className="p-1.5">
-              {NAV.filter((n) => !n.mobileOnly).map((n) => {
-                const active = barePath === n.href || barePath.startsWith(n.href + "/");
-                return (
-                  <a
-                    key={n.href}
-                    href={href(n.href)}
-                    onClick={() => setOpen(false)}
-                    aria-current={active ? "page" : undefined}
-                    className={`flex items-center justify-between rounded-lg px-2.5 py-2.5 text-[14px] font-medium transition-colors ${
-                      active ? "bg-muted/60 text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
-                    }`}
-                  >
-                    {n.label}
-                    {active && <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />}
-                  </a>
-                );
-              })}
-              {CHAT_MODES.map((m) => (
-                <a
-                  key={m.id}
-                  href={href(m.page)}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
-                >
-                  <m.icon className="h-4 w-4 shrink-0" />
-                  {m.label}
-                </a>
-              ))}
-            </div>
+            {MENUS.map((section) => (
+              <div key={section.label}>
+                <div className="border-b border-border/60 bg-muted/40 px-4 py-2.5">
+                  <div className="text-[10px] uppercase tracking-[0.16em] text-muted-foreground">{section.label}</div>
+                </div>
+                <div className="p-1.5">
+                  {section.items.map((item) => {
+                    const active = barePath === item.to;
+                    return (
+                      <a
+                        key={item.to + item.label}
+                        href={href(item.to)}
+                        onClick={() => setOpen(false)}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center gap-2.5 rounded-lg px-2.5 py-2.5 text-[14px] font-medium transition-colors ${
+                          active ? "bg-muted/60 text-foreground" : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                        }`}
+                      >
+                        <item.icon className="h-4 w-4 shrink-0" />
+                        {item.label}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
             <div className="border-t border-border/60 p-3">
               <div className="flex flex-col gap-2">
                 {isAuthenticated ? (
