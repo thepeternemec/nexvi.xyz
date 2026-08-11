@@ -341,30 +341,21 @@ export function ChatWindow({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      {/* Mode bar */}
+      {/* Header */}
       <div className="flex items-center gap-2 border-b border-border/60 px-3 py-2.5 sm:px-5">
         {onOpenSidebar && (
           <Button variant="ghost" size="icon-sm" className="lg:hidden" onClick={onOpenSidebar} aria-label="Open menu">
             <PanelRightOpen className="h-4 w-4" />
           </Button>
         )}
-        <div className="-mx-1 flex flex-1 items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          {CHAT_MODES.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setMode(m.id)}
-              className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[12.5px] font-medium transition-colors ${
-                mode === m.id
-                  ? "border-foreground/15 bg-muted text-foreground"
-                  : "border-transparent text-muted-foreground hover:bg-muted/60 hover:text-foreground"
-              }`}
-            >
-              <m.icon className="h-3.5 w-3.5" />
-              {m.label}
-            </button>
-          ))}
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background">
+            <meta.icon className="h-3.5 w-3.5" />
+          </span>
+          <span className="truncate text-[13px] font-semibold">{meta.label}</span>
         </div>
       </div>
+
 
       {/* Context panel */}
       {meta.needs.length > 0 && (
