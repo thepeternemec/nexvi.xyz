@@ -76,10 +76,10 @@ const MENUS: MenuSection[] = [
     label: "Resources",
     hint: "Guides, prompts and product updates",
     items: [
-      { to: "/marketplace", label: "Prompt Library", hint: "Curated job-search prompts", icon: Library },
-      { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
-      
+      { to: "/chat", label: "Workspace", hint: "One chat for every ApplyWise tool", icon: Library },
       { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
+      { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
+      { to: "/signup", label: "Create account", hint: "Start free, no card needed", icon: UserPlus },
       { to: "/status", label: "System status", hint: "Live uptime and incidents", icon: Activity },
     ],
   },
