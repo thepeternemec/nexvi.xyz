@@ -176,7 +176,7 @@ export function Marketplace() {
       <section className="relative overflow-hidden border-b border-border/60">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-foreground/[0.04] via-background to-background dark:from-foreground/[0.08]" />
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 sm:py-16">
-          <a href={alternateHref(locale, "/")} className="text-xs text-muted-foreground">← Back</a>
+          
           <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/70 px-3 py-1 text-[11px] tracking-wide text-muted-foreground backdrop-blur">
             <span className="relative flex h-1.5 w-1.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary/70" />
