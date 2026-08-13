@@ -48,6 +48,10 @@ function getDataLayer(): unknown[] {
 
 function push(args: DataLayerArgs) {
   const dl = getDataLayer();
+  const [, eventName, eventParams] = args;
+  // GTM triggers match on the `event` key of an object push.
+  dl.push({ event: eventName, ...(eventParams ?? {}) });
+  // Also keep the gtag-style tuple for any direct gtag consumers.
   dl.push(args);
 }
 
