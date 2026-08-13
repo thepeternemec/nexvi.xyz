@@ -71,7 +71,9 @@ export function PromptDetail() {
   const promptReviews = reviews.filter(r => r.promptId === prompt.id);
   const { isPremium: hasPremium, isAuthenticated, loading: subLoading } = useSubscription();
   const premium = isPremium(prompt);
-  const locked = premium && (!hasPremium || subLoading);
+  // While the subscription is still resolving we must not treat the user as free —
+  // that flashed the Premium paywall at signed-in trial/premium members.
+  const locked = premium && !subLoading && !hasPremium;
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
