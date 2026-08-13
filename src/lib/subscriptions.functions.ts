@@ -11,36 +11,6 @@ export type SubscriptionSnapshot = {
   cancelAtPeriodEnd: boolean;
 };
 
-function snapshotFrom(row: {
-  plan: string;
-  status: string;
-  current_period_end: string | null;
-  cancel_at_period_end: boolean;
-} | null): SubscriptionSnapshot {
-  if (!row) {
-    return {
-      isAuthenticated: true,
-      isPremium: false,
-      plan: "free",
-      status: "inactive",
-      currentPeriodEnd: null,
-      cancelAtPeriodEnd: false,
-    };
-  }
-  // Stripe retries past_due payments automatically; keep access until it resolves or cancels.
-  const activeStatuses = ["active", "trialing", "past_due"];
-  const active = activeStatuses.includes(row.status) &&
-    (!row.current_period_end || new Date(row.current_period_end).getTime() > Date.now());
-  return {
-    isAuthenticated: true,
-    isPremium: active,
-    plan: (row.plan === "premium" ? "premium" : "free"),
-    status: row.status as SubscriptionSnapshot["status"],
-    currentPeriodEnd: row.current_period_end,
-    cancelAtPeriodEnd: row.cancel_at_period_end,
-  };
-}
-
 // Public — anyone (signed in or out) can ask. Returns the user's premium status if signed in.
 export const getMySubscription = createServerFn({ method: "GET" }).handler(async () => {
   // Try auth; if absent, return anonymous snapshot
@@ -59,20 +29,44 @@ export const getMySubscription = createServerFn({ method: "GET" }).handler(async
 export const getMySubscriptionAuthed = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    const freeSnapshot: SubscriptionSnapshot = {
+      isAuthenticated: true,
+      isPremium: false,
+      plan: "free",
+      status: "inactive",
+      currentPeriodEnd: null,
+      cancelAtPeriodEnd: false,
+    };
+
     try {
-      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-      const { data, error } = await supabaseAdmin
+      const { data, error } = await context.supabase
         .from("subscriptions")
         .select("plan, status, current_period_end, cancel_at_period_end")
         .eq("user_id", context.userId)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .order("updated_at", { ascending: false });
       if (error) throw new Error(error.message);
-      return snapshotFrom(data);
+
+      const now = Date.now();
+      const activeStatuses = new Set(["active", "trialing", "past_due"]);
+      const entitled = data?.find((row) =>
+        activeStatuses.has(row.status) &&
+        (!row.current_period_end || new Date(row.current_period_end).getTime() > now),
+      );
+      const row = entitled ?? data?.[0];
+      if (!row) return freeSnapshot;
+
+      const isPremium = Boolean(entitled);
+      return {
+        isAuthenticated: true,
+        isPremium,
+        plan: isPremium ? "premium" : "free",
+        status: row.status as SubscriptionSnapshot["status"],
+        currentPeriodEnd: row.current_period_end,
+        cancelAtPeriodEnd: row.cancel_at_period_end,
+      } satisfies SubscriptionSnapshot;
     } catch {
       // Never blank-screen the app on a transient backend/token error —
       // fall back to the free snapshot.
-      return snapshotFrom(null);
+      return freeSnapshot;
     }
   });
