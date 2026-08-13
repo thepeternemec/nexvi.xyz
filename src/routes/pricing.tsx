@@ -75,10 +75,11 @@ const plans = [
   {
     key: "premium",
     name: "Premium",
-    price: "$9",
+    price: "$7",
     per: "/mo",
-    desc: "Unlimited generations on every tool.",
+    desc: "Unlimited generations on every tool — less than a coffee a week.",
     highlight: true,
+
     cta: "Start Premium",
     features: [
       "Unlimited CV Generator",
