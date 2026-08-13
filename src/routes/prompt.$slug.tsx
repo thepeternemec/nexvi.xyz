@@ -72,6 +72,7 @@ export function PromptDetail() {
   const related = prompts.filter(p => p.category === prompt.category && p.id !== prompt.id).slice(0, 3);
   const promptReviews = reviews.filter(r => r.promptId === prompt.id);
   const { isPremium: hasPremium, isAuthenticated, loading: subLoading } = useSubscription();
+  const { locale } = useLocale();
   const premium = isPremium(prompt);
   // While the subscription is still resolving we must not treat the user as free —
   // that flashed the Premium paywall at signed-in trial/premium members.
@@ -80,6 +81,20 @@ export function PromptDetail() {
   const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const SAVED_KEY = "applywise:saved-prompts";
+
+  const plan = hasPremium ? "premium" : "free";
+  const promptTracking = {
+    id: prompt.id,
+    slug: prompt.slug,
+    title: prompt.title,
+    premium,
+    category: category?.slug ?? prompt.category,
+  };
+
+  useEffect(() => {
+    gtmPromptAction("view", promptTracking, { plan, locale });
+  }, [prompt.id, hasPremium, locale]);
+
   useEffect(() => {
     try {
       const raw = localStorage.getItem(SAVED_KEY);
@@ -87,6 +102,7 @@ export function PromptDetail() {
       setSaved(list.includes(prompt.id));
     } catch { /* ignore */ }
   }, [prompt.id]);
+
   const onToggleSave = () => {
     try {
       const raw = localStorage.getItem(SAVED_KEY);
@@ -95,6 +111,7 @@ export function PromptDetail() {
       localStorage.setItem(SAVED_KEY, JSON.stringify(next));
       const nowSaved = next.includes(prompt.id);
       setSaved(nowSaved);
+      gtmPromptAction(nowSaved ? "save" : "unsave", promptTracking, { plan, locale });
       toast.success(nowSaved ? "Prompt saved" : "Removed from saved");
     } catch { toast.error("Couldn't update saved prompts"); }
   };
@@ -112,6 +129,7 @@ export function PromptDetail() {
         document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta);
       }
       setLinkCopied(true);
+      gtmPromptAction("share", promptTracking, { plan, locale });
       toast.success("Link copied to clipboard");
       setTimeout(() => setLinkCopied(false), 1500);
     } catch { toast.error("Couldn't copy link"); }
@@ -120,13 +138,18 @@ export function PromptDetail() {
     if (typeof navigator !== "undefined" && (navigator as Navigator & { share?: (d: ShareData) => Promise<void> }).share) {
       try {
         await (navigator as Navigator & { share: (d: ShareData) => Promise<void> }).share({ title: shareTitle, text: shareText, url: shareUrl });
+        gtmPromptAction("share", promptTracking, { plan, locale, method: "native" });
         return;
       } catch { /* fall through to dialog */ }
     }
     setShareOpen(true);
   };
   const onCopy = async () => {
-    if (locked) { openUpgradeDialog({ title: prompt.title, reason: "Copying is part of Premium. Start a free 7-day trial to copy the full prompt — cancel anytime." }); return; }
+    if (locked) {
+      openUpgradeDialog({ title: prompt.title, reason: "Copying is part of Premium. Start a free 7-day trial to copy the full prompt — cancel anytime." });
+      gtmUpgrade("cta_click", { source: "prompt_copy_locked", prompt_title: prompt.title, prompt_slug: prompt.slug, plan, locale });
+      return;
+    }
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(prompt.body);
@@ -142,6 +165,7 @@ export function PromptDetail() {
         document.body.removeChild(ta);
       }
       setCopied(true);
+      gtmPromptAction("copy", promptTracking, { plan, locale });
       toast.success("Prompt copied to clipboard");
       setTimeout(() => setCopied(false), 1500);
     } catch (err) {
