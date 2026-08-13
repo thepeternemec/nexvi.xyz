@@ -92,7 +92,7 @@ export function gtmGeneration(
 export function gtmPromptAction(
   action: "view" | "copy" | "share" | "save" | "unsave",
   prompt: { id: string; slug: string; title: string; premium?: boolean; category?: string },
-  options: { plan?: string; locale?: string } = {},
+  options: { plan?: string; locale?: string; method?: string } = {},
 ) {
   const map: Record<typeof action, GTMEventName> = {
     view: "prompt_view",
