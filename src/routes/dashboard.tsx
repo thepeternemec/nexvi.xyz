@@ -5,13 +5,12 @@ import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { DashboardAccountSections } from "@/components/dashboard-account-sections";
 import { UsageHistory } from "@/components/usage-history";
+import { UsageMeters } from "@/components/usage-meters";
 
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
-import { useUsage } from "@/hooks/use-usage";
-import { TOOL_META } from "@/lib/plan-limits";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -39,7 +38,6 @@ export function Dashboard() {
   const href = (p: string) => alternateHref(locale, p);
   const { user, isAuthenticated } = useAuth();
   const { plan, loading: planLoading } = useSubscription();
-  const usage = useUsage();
 
   return (
     <SiteShell>
@@ -81,33 +79,11 @@ export function Dashboard() {
           </div>
         )}
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {usage.tools.map((t) => {
-            const limit = usage.limits[t];
-            const left = Math.max(0, limit - usage.used[t]);
-            const pct = usage.isPremium ? 100 : Math.min(100, Math.round((usage.used[t] / limit) * 100));
-            return (
-              <div key={t} className="rounded-2xl border border-border/70 bg-card p-5">
-                <div className="text-xs text-muted-foreground">{TOOL_META[t].plural}</div>
-                <div className="font-display mt-2 text-3xl tracking-tight tabular-nums">
-                  {usage.isPremium ? `${usage.used[t]} used` : `${left} / ${limit}`}
-                </div>
-                <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ease-out ${usage.isPremium ? "bg-primary" : left === 0 ? "bg-rose-500" : "bg-foreground"}`}
-                    style={{ width: `${pct}%` }}
-                  />
-                </div>
-                <div className="mt-2 text-[11px] text-muted-foreground">
-                  {usage.isPremium ? "Unlimited on Premium" : left === 0 ? "Limit reached — upgrade for unlimited" : `${usage.used[t]} used`}
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <UsageMeters />
         <div className="mt-4 text-xs text-muted-foreground">
           Plan: <span className="font-medium text-foreground">{planLoading ? "…" : plan.charAt(0).toUpperCase() + plan.slice(1)}</span>
         </div>
+
 
         <DashboardAccountSections />
 
