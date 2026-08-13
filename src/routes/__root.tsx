@@ -14,7 +14,10 @@ import { UpgradeDialog } from "@/components/upgrade-dialog";
 import { CookieConsentBanner } from "@/components/cookie-consent";
 import { getInitialThemeScript } from "@/hooks/use-theme";
 import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
-import { LocaleProvider } from "@/lib/locale-context";
+import { LocaleProvider, useLocale } from "@/lib/locale-context";
+import { gtmPageView, gtmSetUser, gtmClearUser } from "@/lib/gtm";
+import { useAuth } from "@/hooks/use-auth";
+import { useSubscription } from "@/hooks/use-subscription";
 
 import appCss from "../styles.css?url";
 
