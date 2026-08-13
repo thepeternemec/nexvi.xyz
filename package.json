@@ -109,5 +109,10 @@
   "overrides": {
     "seroval": "^1.5.6",
     "seroval-plugins": "^1.5.6"
+  },
+  "pnpm": {
+    "overrides": {
+      "entities": "4.5.0"
+    }
   }
 }
