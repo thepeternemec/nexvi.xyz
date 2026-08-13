@@ -25,7 +25,8 @@ export function CreateAccountModal({ open, onClose }: { open: boolean; onClose: 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-lg overflow-hidden rounded-3xl p-0">
-        <div className="bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 p-7 text-neutral-50 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220]">
+        <div className="border-b border-border/60 bg-gradient-to-br from-background via-muted/50 to-primary/[0.06] p-7 text-foreground dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220] dark:text-neutral-50">
+
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
             <Sparkles className="h-3.5 w-3.5" /> Free preview used
           </div>
