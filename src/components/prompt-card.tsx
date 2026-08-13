@@ -14,11 +14,13 @@ export function isPremium(p: Pick<Prompt, "price">) {
 }
 
 export function PromptCard({ prompt }: { prompt: Prompt }) {
-  const { isPremium: hasPremium } = useSubscription();
+  const { isPremium: hasPremium, loading: subLoading } = useSubscription();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const locale = detectLocaleFromPath(pathname);
   const premium = isPremium(prompt);
-  const locked = premium && !hasPremium;
+  // Don't gate until we actually know the plan, otherwise premium/trial members
+  // get the upsell popup on first click.
+  const locked = premium && !subLoading && !hasPremium;
   const { isSaved, toggle } = useSavedPrompts();
   const saved = isSaved(prompt.slug);
 
