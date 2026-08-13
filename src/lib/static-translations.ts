@@ -1427,7 +1427,7 @@ const it = {
   // --- exported from runtime AI translation cache ---
   "Career Coaches": "Consulenti di Carriera",
   "People who've helped thousands get hired.": "Persone che hanno aiutato migliaia di candidati a essere assunti.",
-  "Ex-recruiters, career coaches, and interview psychologists building the prompts that power getHeired.": "Ex recruiter, consulenti di carriera e psicologi del lavoro che creano i prompt che alimentano getHeired.",
+  "Ex-recruiters, career coaches, and interview psychologists building the prompts that power ApplyWise.": "Ex recruiter, consulenti di carriera e psicologi del lavoro che creano i prompt che alimentano ApplyWise.",
   "Career coach. Helped 10k+ land interviews at FAANG, Stripe & Linear.": "Consulente di carriera. Ha aiutato oltre 10.000 persone a ottenere colloqui in FAANG, Stripe e Linear.",
   "prompts": "prompt",
   "k followers": "mila follower",
@@ -1437,7 +1437,7 @@ const it = {
   "Dr. Amelia Vance": "Dr.ssa Amelia Vance",
   "Interview psychologist. STAR stories that stick.": "Psicologa del lavoro. Storie STAR che lasciano il segno.",
   "Are you a career coach?": "Sei un consulente di carriera?",
-  "Publish your prompts on getHeired and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.": "Pubblica i tuoi prompt su getHeired e raggiungi migliaia di persone in cerca di lavoro. Noi gestiamo la piattaforma; a te resta l'80% di ogni vendita.",
+  "Publish your prompts on ApplyWise and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.": "Pubblica i tuoi prompt su ApplyWise e raggiungi migliaia di persone in cerca di lavoro. Noi gestiamo la piattaforma; a te resta l'80% di ogni vendita.",
   "Apply to become a coach": "Candidati come consulente",
   "ApplyWise. Built for job seekers.": "ApplyWise. Creato per chi cerca lavoro.",
   "Change language": "Cambia lingua",

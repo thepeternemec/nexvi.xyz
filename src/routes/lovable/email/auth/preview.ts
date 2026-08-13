@@ -18,7 +18,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "beta-applywise"
+const SITE_NAME = "ApplyWise"
 const ROOT_DOMAIN = "applywise.eu"
 
 // Sample data for preview mode ONLY (not used in actual email sending).
