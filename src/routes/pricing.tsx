@@ -118,10 +118,12 @@ export function Pricing() {
       <section className="bg-aurora">
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
-            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Start free. Go unlimited when you're ready.</h1>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <Sparkles className="h-3.5 w-3.5" /> Launch price — $7/mo
+            </div>
+            <h1 className="font-display mt-4 text-5xl tracking-tight sm:text-6xl">Land more interviews for the price of a coffee.</h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Every free account gets 3 generations on each tool — CVs, cover letters, ATS scores and the Humanizer. Premium unlocks unlimited runs.
+              Every free account gets 3 generations on each tool — CVs, cover letters, ATS scores and the Humanizer. Premium unlocks unlimited runs for just $7 a month.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {tools.map((t) => (
@@ -130,6 +132,12 @@ export function Pricing() {
                 </span>
               ))}
             </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-primary" /> 14-day refund</span>
+              <span className="inline-flex items-center gap-1.5"><Zap className="h-4 w-4 text-primary" /> Cancel anytime</span>
+              <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" /> No credit card to start</span>
+            </div>
+
             {sub.isPremium && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
                 You're on Premium
