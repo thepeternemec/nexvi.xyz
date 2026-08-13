@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { Check, ExternalLink } from "lucide-react";
+import { Check, ExternalLink, Sparkles, ArrowRight, ShieldCheck, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { SiteShell } from "@/components/site-shell";
@@ -75,10 +75,11 @@ const plans = [
   {
     key: "premium",
     name: "Premium",
-    price: "$9",
+    price: "$7",
     per: "/mo",
-    desc: "Unlimited generations on every tool.",
+    desc: "Unlimited generations on every tool — less than a coffee a week.",
     highlight: true,
+
     cta: "Start Premium",
     features: [
       "Unlimited CV Generator",
@@ -117,10 +118,12 @@ export function Pricing() {
       <section className="bg-aurora">
         <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Pricing</div>
-            <h1 className="font-display mt-3 text-5xl tracking-tight sm:text-6xl">Start free. Go unlimited when you're ready.</h1>
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+              <Sparkles className="h-3.5 w-3.5" /> Launch price — $7/mo
+            </div>
+            <h1 className="font-display mt-4 text-5xl tracking-tight sm:text-6xl">Land more interviews for the price of a coffee.</h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              Every free account gets 3 generations on each tool — CVs, cover letters, ATS scores and the Humanizer. Premium unlocks unlimited runs.
+              Every free account gets 3 generations on each tool — CVs, cover letters, ATS scores and the Humanizer. Premium unlocks unlimited runs for just $7 a month.
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-2">
               {tools.map((t) => (
@@ -129,6 +132,12 @@ export function Pricing() {
                 </span>
               ))}
             </div>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-primary" /> 14-day refund</span>
+              <span className="inline-flex items-center gap-1.5"><Zap className="h-4 w-4 text-primary" /> Cancel anytime</span>
+              <span className="inline-flex items-center gap-1.5"><Check className="h-4 w-4 text-primary" /> No credit card to start</span>
+            </div>
+
             {sub.isPremium && (
               <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-50 px-4 py-2 text-sm text-amber-900 dark:border-amber-300/30 dark:bg-amber-500/10 dark:text-amber-100">
                 You're on Premium
@@ -148,12 +157,16 @@ export function Pricing() {
               const owned = isPremiumCard && sub.isPremium;
               return (
                 <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
-                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Best value</Badge>}
+                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Most popular</Badge>}
                   <div className="font-medium">{p.name}</div>
-                  <div className="font-display mt-2 flex items-baseline gap-1 text-5xl tracking-tight">{p.price}{p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}</div>
+                  <div className="font-display mt-2 flex items-baseline gap-2 text-5xl tracking-tight">
+                    {p.highlight && <span className="text-2xl text-muted-foreground line-through">$9</span>}
+                    {p.price}
+                    {p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}
+                  </div>
                   <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
                   <ul className="mt-6 space-y-2.5 text-sm">
-                    {p.features.map(f => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-violet-600" /> {f}</li>)}
+                    {p.features.map(f => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-primary" /> {f}</li>)}
                   </ul>
 
                   {isPremiumCard ? (
@@ -165,14 +178,23 @@ export function Pricing() {
                       </a>
                     ) : (
                       <div className="mt-7 grid gap-2">
-                        <Button onClick={() => onUpgrade("premium_monthly")} className="w-full rounded-full" size="lg">
-                          {sub.isAuthenticated ? "Start Premium — $9/mo" : "Sign up to start"}
+                        <Button
+                          onClick={() => onUpgrade("premium_monthly")}
+                          className="group w-full rounded-full shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35"
+                          size="lg"
+                        >
+                          {sub.isAuthenticated ? "Go unlimited — $7/mo" : "Unlock unlimited for $7/mo"}
+                          <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
                         </Button>
                         <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
-                          Or $90 / year (save 2 months)
+                          Or $70 / year — save 2 months
                         </Button>
+                        <p className="text-center text-xs text-muted-foreground">
+                          Cancel anytime · 14-day refund · secure Stripe checkout
+                        </p>
                       </div>
                     )
+
                   ) : (
         <a href={href("/signup")} className="mt-7 inline-flex w-full">
                       <Button className="w-full rounded-full" variant={p.highlight ? "default" : "outline"} size="lg">{p.cta}</Button>
