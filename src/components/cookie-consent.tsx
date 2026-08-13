@@ -17,6 +17,7 @@ import {
   saveConsent,
   useCookieConsent,
 } from "@/lib/cookie-consent";
+import { gtmConsent } from "@/lib/gtm";
 
 type Prefs = { functional: boolean; analytics: boolean };
 
