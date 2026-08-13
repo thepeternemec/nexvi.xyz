@@ -206,6 +206,8 @@ export function Pricing() {
             })}
           </div>
 
+          <PricingComparison />
+
           {checkoutPrice && (
             <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
               <div className="mb-4 flex items-center justify-between">
