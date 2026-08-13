@@ -161,19 +161,54 @@ export function Pricing() {
             ctaHref={href(sub.isPremium ? "/dashboard" : "/signup")}
           />
 
-          <div className="mx-auto mt-14 grid max-w-3xl gap-5 md:grid-cols-2">
+          <div className="mt-12 flex flex-col items-center gap-3">
+            <div className="inline-flex items-center rounded-full border border-border/70 bg-card p-1">
+              <button
+                type="button"
+                onClick={() => setBilling("monthly")}
+                aria-pressed={!isYearly}
+                className={`rounded-full px-5 py-2 text-sm font-medium transition ${!isYearly ? "bg-primary text-primary-foreground shadow" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Monthly
+              </button>
+              <button
+                type="button"
+                onClick={() => setBilling("yearly")}
+                aria-pressed={isYearly}
+                className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-medium transition ${isYearly ? "bg-primary text-primary-foreground shadow" : "text-muted-foreground hover:text-foreground"}`}
+              >
+                Yearly
+                <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${isYearly ? "bg-primary-foreground/20" : "bg-primary/10 text-primary"}`}>
+                  Save {savingsPct}%
+                </span>
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {isYearly
+                ? `$${yearlyPrice} billed once a year — you save $${savings} vs $${monthlyTotal} paying monthly (2 months free).`
+                : `$7 billed monthly — $${monthlyTotal} a year. Switch to yearly and pay $${yearlyPrice}, saving $${savings}.`}
+            </p>
+          </div>
+
+          <div className="mx-auto mt-8 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
               const isPremiumCard = p.key === "premium";
               const owned = isPremiumCard && sub.isPremium;
+              const showYearly = isPremiumCard && isYearly;
               return (
                 <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
                   {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Most popular</Badge>}
                   <div className="font-medium">{p.name}</div>
                   <div className="font-display mt-2 flex items-baseline gap-2 text-5xl tracking-tight">
-                    {p.highlight && <span className="text-2xl text-muted-foreground line-through">$9</span>}
-                    {p.price}
-                    {p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}
+                    {p.highlight && <span className="text-2xl text-muted-foreground line-through">{showYearly ? `$${monthlyTotal}` : "$9"}</span>}
+                    {showYearly ? `$${yearlyPrice}` : p.price}
+                    {p.per && <span className="text-base font-sans text-muted-foreground">{showYearly ? "/yr" : p.per}</span>}
                   </div>
+                  {showYearly && (
+                    <div className="mt-1 text-sm font-medium text-primary">
+                      ${(yearlyPrice / 12).toFixed(2)}/mo — save ${savings} ({savingsPct}%)
+                    </div>
+                  )}
                   <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
                   <ul className="mt-6 space-y-2.5 text-sm">
                     {p.features.map(f => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-primary" /> {f}</li>)}
@@ -189,16 +224,23 @@ export function Pricing() {
                     ) : (
                       <div className="mt-7 grid gap-2">
                         <Button
-                          onClick={() => onUpgrade("premium_monthly")}
+                          onClick={() => onUpgrade(isYearly ? "premium_yearly" : "premium_monthly")}
                           className="group w-full rounded-full shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35"
                           size="lg"
                         >
-                          {sub.isAuthenticated ? "Go unlimited — $7/mo" : "Unlock unlimited for $7/mo"}
+                          {isYearly ? `Go unlimited — $${yearlyPrice}/yr` : sub.isAuthenticated ? "Go unlimited — $7/mo" : "Unlock unlimited for $7/mo"}
                           <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
                         </Button>
-                        <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
-                          Or $70 / year — save 2 months
+                        <Button
+                          onClick={() => setBilling(isYearly ? "monthly" : "yearly")}
+                          variant="ghost"
+                          size="sm"
+                          className="rounded-full"
+                        >
+                          {isYearly ? "Or pay $7 monthly" : `Or $${yearlyPrice} / year — save $${savings}`}
                         </Button>
+                        <p className="text-center text-xs text-muted-foreground">
+
                         <p className="text-center text-xs text-muted-foreground">
                           Cancel anytime · 14-day refund · secure Stripe checkout
                         </p>
