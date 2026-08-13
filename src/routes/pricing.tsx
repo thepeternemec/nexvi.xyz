@@ -8,6 +8,7 @@ import { TrustedBy } from "@/components/trusted-by";
 import { FaqSection, faqs } from "@/components/faq-section";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
+import { PricingComparison } from "@/components/pricing-comparison";
 import { useSubscription } from "@/hooks/use-subscription";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
