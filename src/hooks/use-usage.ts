@@ -62,7 +62,7 @@ export function useUsage() {
   const refresh = useCallback(async () => {
     const { data } = await supabase.auth.getSession();
     if (!data.session) {
-      set({ loading: false, isAuthenticated: false, anonUsed: readAnonUsed() });
+      set({ loading: false, isAuthenticated: false, anonUsed: readAnonUsed(), snapshot: initial.snapshot });
       return;
     }
     set({ loading: true, isAuthenticated: true });
@@ -79,8 +79,18 @@ export function useUsage() {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
       refresh();
     });
-    return () => subscription.unsubscribe();
+    const onVisible = () => {
+      if (document.visibilityState === "visible") refresh();
+    };
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener("focus", refresh);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, [refresh]);
+
 
   const isPremium = state.snapshot.plan === "premium";
 
