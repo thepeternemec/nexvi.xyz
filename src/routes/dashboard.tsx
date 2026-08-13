@@ -5,13 +5,12 @@ import { SiteShell } from "@/components/site-shell";
 import { PromptCard } from "@/components/prompt-card";
 import { DashboardAccountSections } from "@/components/dashboard-account-sections";
 import { UsageHistory } from "@/components/usage-history";
+import { UsageMeters } from "@/components/usage-meters";
 
 import { prompts } from "@/lib/mock-data";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
-import { useUsage } from "@/hooks/use-usage";
-import { TOOL_META } from "@/lib/plan-limits";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -39,7 +38,6 @@ export function Dashboard() {
   const href = (p: string) => alternateHref(locale, p);
   const { user, isAuthenticated } = useAuth();
   const { plan, loading: planLoading } = useSubscription();
-  const usage = useUsage();
 
   return (
     <SiteShell>
