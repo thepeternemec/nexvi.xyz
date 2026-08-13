@@ -241,7 +241,6 @@ export function Pricing() {
                         </Button>
                         <p className="text-center text-xs text-muted-foreground">
 
-                        <p className="text-center text-xs text-muted-foreground">
                           Cancel anytime · 14-day refund · secure Stripe checkout
                         </p>
                       </div>
