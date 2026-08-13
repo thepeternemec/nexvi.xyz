@@ -22,12 +22,14 @@ export default defineConfig({
   vite: {
     plugins: [mcpPlugin()],
     resolve: {
-      alias: {
-        "entities/lib/decode.js": path.join(entitiesDir, "lib/decode.js"),
-        "entities/lib/encode.js": path.join(entitiesDir, "lib/encode.js"),
-        entities: entitiesDir,
-      },
+      alias: [
+        // Pin only the legacy deep imports to entities v4.5.0; leave modern
+        // subpath exports (e.g. entities/escape) to normal resolution.
+        { find: /^entities\/lib\/decode\.js$/, replacement: path.join(entitiesDir, "lib/decode.js") },
+        { find: /^entities\/lib\/encode\.js$/, replacement: path.join(entitiesDir, "lib/encode.js") },
+      ],
     },
+
   },
 });
 
