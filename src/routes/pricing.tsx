@@ -8,6 +8,7 @@ import { TrustedBy } from "@/components/trusted-by";
 import { FaqSection, faqs } from "@/components/faq-section";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
+import { PricingComparison } from "@/components/pricing-comparison";
 import { useSubscription } from "@/hooks/use-subscription";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
@@ -204,6 +205,8 @@ export function Pricing() {
               );
             })}
           </div>
+
+          <PricingComparison />
 
           {checkoutPrice && (
             <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
