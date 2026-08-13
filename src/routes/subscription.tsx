@@ -199,14 +199,14 @@ export function SubscriptionPage() {
                 ) : (
                   <div className="mt-6 flex flex-wrap gap-3">
                     <Button className="rounded-full" onClick={() => setCheckoutPrice("premium_monthly")}>
-                      <Crown className="mr-2 h-4 w-4" /> $9 / month
+                      <Crown className="mr-2 h-4 w-4" /> $7 / month
                     </Button>
                     <Button
                       variant="outline"
                       className="rounded-full"
                       onClick={() => setCheckoutPrice("premium_yearly")}
                     >
-                      $90 / year
+                      $70 / year
                     </Button>
                     <a href={href("/pricing")} className="inline-flex">
                       <Button variant="ghost" className="rounded-full">
