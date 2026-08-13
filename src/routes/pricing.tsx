@@ -104,6 +104,14 @@ export function Pricing() {
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
   const [checkoutPrice, setCheckoutPrice] = useState<string | null>(null);
+  const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
+  const isYearly = billing === "yearly";
+
+  // Exact savings: 12 × $7 = $84 vs $70 yearly
+  const monthlyTotal = 84;
+  const yearlyPrice = 70;
+  const savings = monthlyTotal - yearlyPrice; // $14
+  const savingsPct = Math.round((savings / monthlyTotal) * 100); // 17%
 
   function onUpgrade(priceId: "premium_monthly" | "premium_yearly") {
     if (!sub.isAuthenticated) {
@@ -112,6 +120,7 @@ export function Pricing() {
     }
     setCheckoutPrice(priceId);
   }
+
 
   return (
     <SiteShell>
