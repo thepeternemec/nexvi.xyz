@@ -157,12 +157,16 @@ export function Pricing() {
               const owned = isPremiumCard && sub.isPremium;
               return (
                 <div key={p.name} className={`relative rounded-3xl border p-7 ${p.highlight ? "border-foreground/20 bg-gradient-to-br from-violet-50 to-amber-50 shadow-xl dark:border-foreground/30 dark:from-violet-500/15 dark:to-amber-500/10 dark:shadow-2xl dark:shadow-violet-900/30" : "border-border/70 bg-card"}`}>
-                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Best value</Badge>}
+                  {p.highlight && <Badge className="absolute -top-3 left-7 rounded-full">Most popular</Badge>}
                   <div className="font-medium">{p.name}</div>
-                  <div className="font-display mt-2 flex items-baseline gap-1 text-5xl tracking-tight">{p.price}{p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}</div>
+                  <div className="font-display mt-2 flex items-baseline gap-2 text-5xl tracking-tight">
+                    {p.highlight && <span className="text-2xl text-muted-foreground line-through">$9</span>}
+                    {p.price}
+                    {p.per && <span className="text-base font-sans text-muted-foreground">{p.per}</span>}
+                  </div>
                   <div className="mt-1 text-sm text-muted-foreground">{p.desc}</div>
                   <ul className="mt-6 space-y-2.5 text-sm">
-                    {p.features.map(f => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-violet-600" /> {f}</li>)}
+                    {p.features.map(f => <li key={f} className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 text-primary" /> {f}</li>)}
                   </ul>
 
                   {isPremiumCard ? (
@@ -174,14 +178,23 @@ export function Pricing() {
                       </a>
                     ) : (
                       <div className="mt-7 grid gap-2">
-                        <Button onClick={() => onUpgrade("premium_monthly")} className="w-full rounded-full" size="lg">
-                          {sub.isAuthenticated ? "Start Premium — $9/mo" : "Sign up to start"}
+                        <Button
+                          onClick={() => onUpgrade("premium_monthly")}
+                          className="group w-full rounded-full shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35"
+                          size="lg"
+                        >
+                          {sub.isAuthenticated ? "Go unlimited — $7/mo" : "Unlock unlimited for $7/mo"}
+                          <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
                         </Button>
                         <Button onClick={() => onUpgrade("premium_yearly")} variant="ghost" size="sm" className="rounded-full">
-                          Or $90 / year (save 2 months)
+                          Or $70 / year — save 2 months
                         </Button>
+                        <p className="text-center text-xs text-muted-foreground">
+                          Cancel anytime · 14-day refund · secure Stripe checkout
+                        </p>
                       </div>
                     )
+
                   ) : (
         <a href={href("/signup")} className="mt-7 inline-flex w-full">
                       <Button className="w-full rounded-full" variant={p.highlight ? "default" : "outline"} size="lg">{p.cta}</Button>
