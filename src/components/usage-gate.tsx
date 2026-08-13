@@ -27,19 +27,19 @@ export function CreateAccountModal({ open, onClose }: { open: boolean; onClose: 
       <DialogContent className="max-w-lg overflow-hidden rounded-3xl p-0">
         <div className="border-b border-border/60 bg-gradient-to-br from-background via-muted/50 to-primary/[0.06] p-7 text-foreground dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220] dark:text-neutral-50">
 
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 dark:border-white/15 dark:bg-white/10 text-xs font-semibold uppercase tracking-wider">
             <Sparkles className="h-3.5 w-3.5" /> Free preview used
           </div>
           <DialogHeader className="mt-4 space-y-2 text-left">
-            <DialogTitle className="font-display text-2xl tracking-tight text-neutral-50">
+            <DialogTitle className="font-display text-2xl tracking-tight text-foreground dark:text-neutral-50">
               Create your free account
             </DialogTitle>
-            <DialogDescription className="text-sm text-neutral-300">
+            <DialogDescription className="text-sm text-muted-foreground dark:text-neutral-300">
               You&apos;ve unlocked your free preview. Create a free account to continue building
               professional CVs, cover letters, ATS analyses, and AI-humanized content.
             </DialogDescription>
           </DialogHeader>
-          <ul className="mt-5 grid gap-2 text-sm text-neutral-200">
+          <ul className="mt-5 grid gap-2 text-sm text-foreground/80 dark:text-neutral-200">
             {(["cv", "coverLetter", "ats", "humanizer"] as ToolKey[]).map((t) => (
               <li key={t} className="inline-flex items-center gap-2">
                 <Check className="h-4 w-4 text-primary" /> {FREE_LIMITS[t]} free {TOOL_META[t].plural}
@@ -77,15 +77,15 @@ export function PremiumPaywall({
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-2xl overflow-hidden rounded-3xl p-0">
-        <div className="bg-gradient-to-br from-neutral-900 via-neutral-900 to-neutral-800 p-7 text-neutral-50 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220]">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider">
+        <div className="border-b border-border/60 bg-gradient-to-br from-background via-muted/50 to-primary/[0.06] p-7 text-foreground dark:border-white/10 dark:from-[#0b1220] dark:via-[#111a2e] dark:to-[#0b1220] dark:text-neutral-50">
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/60 px-3 py-1 dark:border-white/15 dark:bg-white/10 text-xs font-semibold uppercase tracking-wider">
             <Lock className="h-3.5 w-3.5" /> {TOOL_META[tool].label}
           </div>
           <DialogHeader className="mt-4 space-y-2 text-left">
-            <DialogTitle className="font-display text-3xl tracking-tight text-neutral-50">
+            <DialogTitle className="font-display text-3xl tracking-tight text-foreground dark:text-neutral-50">
               You&apos;ve reached your free limit.
             </DialogTitle>
-            <DialogDescription className="text-sm text-neutral-300">
+            <DialogDescription className="text-sm text-muted-foreground dark:text-neutral-300">
               Upgrade to Premium for unlimited AI-powered career tools.
             </DialogDescription>
           </DialogHeader>
@@ -93,7 +93,7 @@ export function PremiumPaywall({
             {PREMIUM_BENEFITS.map((b) => (
               <div
                 key={b}
-                className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-neutral-100 transition hover:bg-white/10"
+                className="flex items-center gap-2 rounded-xl border border-border/70 bg-card/70 px-3 py-2 text-sm text-foreground transition hover:bg-muted dark:border-white/10 dark:bg-white/5 dark:text-neutral-100 dark:hover:bg-white/10"
               >
                 <Check className="h-4 w-4 shrink-0 text-primary" /> {b}
               </div>
