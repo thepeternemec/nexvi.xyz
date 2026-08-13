@@ -65,7 +65,8 @@ export function CookieConsentBanner() {
   const showBanner = hydrated && !consent && !dismissed;
 
   function decide(choice: Prefs) {
-    saveConsent(choice);
+    const consent = saveConsent(choice);
+    gtmConsent(consent);
     setOpen(false);
   }
 
