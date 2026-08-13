@@ -18,7 +18,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "beta-applywise"
+const SITE_NAME = "ApplyWise"
 const ROOT_DOMAIN = "applywise.eu"
 
 // Sample data for preview mode ONLY (not used in actual email sending).
@@ -26,7 +26,7 @@ const ROOT_DOMAIN = "applywise.eu"
 // The sample email uses a fixed placeholder (RFC 6761 .test TLD) so the Go backend
 // can always find-and-replace it with the actual recipient when sending test emails,
 // even if the project's domain has changed since the template was scaffolded.
-const SAMPLE_PROJECT_URL = "https://beta-applywise.lovable.app"
+const SAMPLE_PROJECT_URL = "https://applywise.eu"
 const SAMPLE_EMAIL = "user@example.test"
 const SAMPLE_DATA: Record<string, object> = {
   signup: {

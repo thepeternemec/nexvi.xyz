@@ -31,7 +31,7 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "beta-applywise"
+const SITE_NAME = "ApplyWise"
 const SENDER_DOMAIN = "notify.applywise.eu"
 const ROOT_DOMAIN = "applywise.eu"
 const FROM_DOMAIN = "applywise.eu"
