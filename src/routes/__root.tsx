@@ -14,7 +14,10 @@ import { UpgradeDialog } from "@/components/upgrade-dialog";
 import { CookieConsentBanner } from "@/components/cookie-consent";
 import { getInitialThemeScript } from "@/hooks/use-theme";
 import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
-import { LocaleProvider } from "@/lib/locale-context";
+import { LocaleProvider, useLocale } from "@/lib/locale-context";
+import { gtmPageView, gtmSetUser, gtmClearUser } from "@/lib/gtm";
+import { useAuth } from "@/hooks/use-auth";
+import { useSubscription } from "@/hooks/use-subscription";
 
 import appCss from "../styles.css?url";
 
@@ -181,28 +184,49 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
-
-  React.useEffect(() => {
-    const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-    if (gtag) gtag("event", "page_view", { page_path: pathname });
-  }, [pathname]);
-
-
 
   return (
     <QueryClientProvider client={queryClient}>
       <LocaleProvider>
         <TranslationProvider>
           <AutoTranslate />
-          <Outlet />
-          <UpgradeDialog />
-          <CookieConsentBanner />
-
-          <Toaster richColors position="top-center" />
-
+          <App />
         </TranslationProvider>
       </LocaleProvider>
     </QueryClientProvider>
+  );
+}
+
+function App() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { locale } = useLocale();
+  const { user } = useAuth();
+  const { isPremium, status } = useSubscription();
+
+  React.useEffect(() => {
+    gtmPageView(pathname, document.title, locale);
+  }, [pathname, locale]);
+
+  React.useEffect(() => {
+    if (user) {
+      gtmSetUser({
+        user_id: user.id,
+        user_email: user.email,
+        user_plan: isPremium ? "premium" : "free",
+        user_status: status,
+        language: locale,
+      });
+    } else {
+      gtmClearUser();
+    }
+  }, [user, isPremium, status, locale]);
+
+  return (
+    <>
+      <Outlet />
+      <UpgradeDialog />
+      <CookieConsentBanner />
+      <Toaster richColors position="top-center" />
+    </>
   );
 }

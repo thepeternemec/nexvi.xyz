@@ -17,6 +17,7 @@ import {
   saveConsent,
   useCookieConsent,
 } from "@/lib/cookie-consent";
+import { gtmConsent } from "@/lib/gtm";
 
 type Prefs = { functional: boolean; analytics: boolean };
 
@@ -64,7 +65,8 @@ export function CookieConsentBanner() {
   const showBanner = hydrated && !consent && !dismissed;
 
   function decide(choice: Prefs) {
-    saveConsent(choice);
+    const consent = saveConsent(choice);
+    gtmConsent(consent);
     setOpen(false);
   }
 
