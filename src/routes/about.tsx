@@ -70,7 +70,7 @@ const PRINCIPLES = [
 const TIMELINE = [
   [
     "It started open source",
-    "We released our first prompt library for free as promptacademia.com. By April 2026 thousands of job seekers were using it to rewrite their CVs — proof that the demand was for alignment, not another template.",
+    "We released our first prompt library for free. By April 2026 thousands of job seekers were using it to rewrite their CVs — proof that the demand was for alignment, not another template.",
   ],
   [
     "From prompts to products",
