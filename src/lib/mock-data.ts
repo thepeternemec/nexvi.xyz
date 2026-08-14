@@ -77,6 +77,7 @@ export const packs: Pack[] = [
   { slug: "career-switch", name: "Career Switch Kit", emoji: "🔄", description: "Reposition your experience for a new industry" },
   { slug: "outreach-referrals", name: "Outreach & Referrals", emoji: "🤝", description: "Recruiter messages, follow-ups and warm intros" },
   { slug: "profile-brand", name: "Profile & Personal Brand", emoji: "💼", description: "LinkedIn, portfolio and personal brand positioning" },
+  { slug: "humanizer", name: "Humanizer Pack", emoji: "🧑‍🎨", description: "Turn robotic text into warm, natural, human-sounding copy" },
 ];
 
 // Every prompt belongs to the pack that matches its category, so pack filters
@@ -94,6 +95,7 @@ const packByCategory: Record<string, string> = {
   linkedin: "profile-brand",
   portfolio: "profile-brand",
   "personal-brand": "profile-brand",
+  humanizer: "humanizer",
 };
 
 
@@ -114,6 +116,8 @@ const g = [
   "from-violet-900 via-purple-950 to-slate-950 dark:from-violet-950 dark:via-purple-950 dark:to-black",
   // Personal branding — moss & ink
   "from-teal-900 via-emerald-950 to-neutral-950 dark:from-teal-950 dark:via-emerald-950 dark:to-black",
+  // Humanizer — warm amber creative glow
+  "from-amber-700 via-rose-900 to-neutral-950 dark:from-amber-900 dark:via-rose-950 dark:to-black",
 ];
 
 
