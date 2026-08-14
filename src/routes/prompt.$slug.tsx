@@ -256,42 +256,8 @@ export function PromptDetail() {
               </div>
             </div>
 
-            <section className="mt-10">
-              <h2 className="font-display text-2xl tracking-tight">How to use it</h2>
-              <ol className="mt-4 space-y-3">
-                {prompt.instructions.map((step, i) => (
-                  <li key={i} className="flex gap-3 rounded-2xl border border-border/70 bg-card p-4">
-                    <div className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">{i + 1}</div>
-                    <div className="text-sm">{step}</div>
-                  </li>
-                ))}
-              </ol>
-            </section>
 
-            <section className="mt-10">
-              <h2 className="font-display text-2xl tracking-tight">Example outputs</h2>
-              <div className="mt-4 grid gap-4">
-                {prompt.examples.map((ex, i) => (
-                  <div key={i} className="overflow-hidden rounded-2xl border border-border/70">
-                    <div className="border-b border-border/60 bg-muted/50 p-4 text-sm"><span className="text-xs uppercase tracking-wider text-muted-foreground">You</span><div className="mt-1">{ex.input}</div></div>
-                    <div className="bg-card p-4 text-sm"><span className="text-xs uppercase tracking-wider text-muted-foreground">AI</span><div className="mt-1">{ex.output}</div></div>
-                  </div>
-                ))}
-              </div>
-            </section>
 
-            <section className="mt-10">
-              <h2 className="font-display text-2xl tracking-tight">Run this prompt</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Copy the prompt above, then open your favourite AI assistant and paste it in.</p>
-              <div className="mt-4 flex flex-wrap gap-3">
-                <Button asChild variant="outline" className="rounded-full">
-                  <a href="https://chatgpt.com/" target="_blank" rel="noreferrer">Go to ChatGPT</a>
-                </Button>
-                <Button asChild variant="outline" className="rounded-full">
-                  <a href="https://claude.ai/new" target="_blank" rel="noreferrer">Go to Claude</a>
-                </Button>
-              </div>
-            </section>
 
           </div>
 
