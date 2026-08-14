@@ -4,7 +4,7 @@
  */
 import { runSeoChecks, buildAlertEmail, type SeoRunResult } from "@/lib/seo-monitor.server";
 
-const ALERT_TO = process.env["SEO_ALERT_EMAIL"] ?? "hello@applywise.eu";
+const ALERT_TO = process.env["SEO_ALERT_EMAIL"] ?? "info@applywise.eu";
 const SENDER_DOMAIN = "notify.applywise.eu";
 
 export interface RecordedRun extends SeoRunResult {

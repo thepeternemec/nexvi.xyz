@@ -394,7 +394,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </p>
 
           <a
-            href="mailto:hello@applywise.eu"
+            href="mailto:info@applywise.eu"
             className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-3.5 py-2 text-xs text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
           >
             <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on ApplyWise.

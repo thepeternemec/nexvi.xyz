@@ -241,10 +241,10 @@ export function AboutPage() {
                 We read every message and ship a surprising amount of what people ask for.
               </p>
               <a
-                href="mailto:hello@applywise.eu"
+                href="mailto:info@applywise.eu"
                 className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-4 py-2 text-[13px] text-foreground transition hover:border-foreground/30 hover:text-primary"
               >
-                hello@applywise.eu <ArrowRight className="h-3.5 w-3.5" />
+                info@applywise.eu <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </Reveal>
           </div>

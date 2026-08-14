@@ -39,7 +39,7 @@ export function StatusPage() {
         <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight">System status</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Current availability of every ApplyWise service. If something looks wrong on your side, email{" "}
-          <a className="underline hover:text-foreground" href="mailto:hello@applywise.eu">hello@applywise.eu</a>.
+          <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a>.
         </p>
 
         <ul className="mt-8 divide-y divide-border rounded-2xl border border-border/70 bg-card">

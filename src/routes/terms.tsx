@@ -63,7 +63,7 @@ export function TermsPage() {
         <Section title="Your rights">
           <p>
             You can access, correct, export or delete your data at any time — edit your details on the Account page or
-            email <a className="underline hover:text-foreground" href="mailto:hello@applywise.eu">hello@applywise.eu</a> to
+            email <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a> to
             request a full export or deletion. We respond within 30 days as required by GDPR.
           </p>
         </Section>
@@ -78,7 +78,7 @@ export function TermsPage() {
         <Section title="Contact">
           <p>
             Questions about these terms? Email{" "}
-            <a className="underline hover:text-foreground" href="mailto:hello@applywise.eu">hello@applywise.eu</a>.
+            <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a>.
           </p>
         </Section>
       </div>
