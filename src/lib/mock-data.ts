@@ -19,6 +19,7 @@ export const categories: Category[] = [
   { slug: "networking", name: "Networking", emoji: "🤝", description: "Intros, coffee chats, referral asks", gradient: "from-fuchsia-500/20 to-rose-500/20" },
   { slug: "personal-brand", name: "Personal Brand", emoji: "✨", description: "Bio, About page, narrative arc", gradient: "from-pink-400/20 to-rose-500/20" },
   { slug: "grad", name: "Students & Grads", emoji: "🎓", description: "First-CV, internships, no-experience moves", gradient: "from-indigo-400/20 to-violet-500/20" },
+  { slug: "humanizer", name: "Humanizer prompts", emoji: "🧑‍🎨", description: "Make AI-generated text sound natural, personal, and human", gradient: "from-amber-400/20 to-rose-500/20" },
 ];
 
 export type Creator = {
@@ -76,6 +77,7 @@ export const packs: Pack[] = [
   { slug: "career-switch", name: "Career Switch Kit", emoji: "🔄", description: "Reposition your experience for a new industry" },
   { slug: "outreach-referrals", name: "Outreach & Referrals", emoji: "🤝", description: "Recruiter messages, follow-ups and warm intros" },
   { slug: "profile-brand", name: "Profile & Personal Brand", emoji: "💼", description: "LinkedIn, portfolio and personal brand positioning" },
+  { slug: "humanizer", name: "Humanizer Pack", emoji: "🧑‍🎨", description: "Turn robotic text into warm, natural, human-sounding copy" },
 ];
 
 // Every prompt belongs to the pack that matches its category, so pack filters
@@ -93,6 +95,7 @@ const packByCategory: Record<string, string> = {
   linkedin: "profile-brand",
   portfolio: "profile-brand",
   "personal-brand": "profile-brand",
+  humanizer: "humanizer",
 };
 
 
@@ -113,6 +116,8 @@ const g = [
   "from-violet-900 via-purple-950 to-slate-950 dark:from-violet-950 dark:via-purple-950 dark:to-black",
   // Personal branding — moss & ink
   "from-teal-900 via-emerald-950 to-neutral-950 dark:from-teal-950 dark:via-emerald-950 dark:to-black",
+  // Humanizer — warm amber creative glow
+  "from-amber-700 via-rose-900 to-neutral-950 dark:from-amber-900 dark:via-rose-950 dark:to-black",
 ];
 
 
@@ -425,6 +430,72 @@ const rawPrompts: Prompt[] = [
     body: "I want to move into the role in the JD below. Build:\n1. A bridge table: JD requirement | closest thing I have done | how to phrase it truthfully | strength (strong / partial / none).\n2. The 3 genuine gaps, ranked by how much they'd block an offer.\n3. A 30-day plan to close them (course, side project, or evidence I already have but haven't written down).\n4. A 4-sentence 'why the switch' answer I can use in interviews.\n\nJD: <PASTE>\nMy background: <PASTE>",
     examples: [{ input: "Consultant → Product Manager", output: "14-row bridge table, 3 gaps, 30-day plan, switch narrative." }],
     instructions: ["Paste the target JD and your background", "Be honest in the 'none' rows", "Start the 30-day plan this week", "Rehearse the switch narrative"],
+  },
+  {
+    id: "p29", pack: "humanizer", slug: "humanizer-prompt", title: "Humanizer Prompt",
+    outcome: "Make any text sound like a real person wrote it",
+    description: "Rewrite stiff, AI-generated or overly formal text into warm, conversational language that reads naturally.",
+    category: "humanizer", price: 0, rating: 4.9, reviews: 620, uses: 18500, beginner: true,
+    tools: ["ChatGPT", "Claude"], tags: ["humanizer", "natural", "rewrite"],
+    creatorId: "c3", cover: g[8],
+    body: "Rewrite the text below to sound natural and conversational. Remove robotic phrasing, corporate jargon, and overly formal language. Keep the meaning exactly the same, but make it feel like a real person wrote it.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "We are pleased to inform you that your application has been received.", output: "Thanks — we got your application and we'll be in touch soon." }],
+    instructions: ["Paste the text you want to humanize", "Run the prompt", "Read the output out loud", "Tweak anything that still sounds robotic"],
+  },
+  {
+    id: "p30", pack: "humanizer", slug: "tone-matcher", title: "Tone Matcher",
+    outcome: "Rewrite text in your exact voice",
+    description: "Match your personal writing style — casual, bold, witty, direct — while keeping the original message intact.",
+    category: "humanizer", price: 0, rating: 4.8, reviews: 480, uses: 14200, beginner: true,
+    tools: ["ChatGPT", "Claude"], tags: ["tone", "voice", "rewrite"],
+    creatorId: "c3", cover: g[8],
+    body: "Rewrite the text below in my voice. I write <DESCRIBE YOUR STYLE: casual / bold / witty / direct / warm / sarcastic>. Match that energy while keeping the same message and facts. Do not add new information.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "We regret to inform you that the position has been filled.", output: "Direct/warm: 'The role's been filled, but thanks for your interest — we'll keep you in mind for what's next.'" }],
+    instructions: ["Describe your style in a few words", "Paste the text", "Review the tone match", "Ask for a slightly different angle if needed"],
+  },
+  {
+    id: "p31", pack: "humanizer", slug: "simplicity-filter", title: "Simplicity Filter",
+    outcome: "Make complex text easy to scan and understand",
+    description: "Strip unnecessary complexity: shorter sentences, simpler words, and crystal-clear structure.",
+    category: "humanizer", price: 0, rating: 4.9, reviews: 540, uses: 15900, beginner: true,
+    tools: ["ChatGPT", "Claude"], tags: ["simplicity", "clarity", "rewrite"],
+    creatorId: "c1", cover: g[8],
+    body: "Remove all unnecessary complexity from the text below. Use shorter sentences, simpler words, and make every line easy to scan and understand. Preserve the original meaning completely.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "In the event that you are unable to attend, kindly provide notification at your earliest convenience.", output: "If you can't make it, please let us know as soon as you can." }],
+    instructions: ["Paste the dense or wordy text", "Run the prompt", "Check that no meaning was lost", "Use the simplified version in emails, CVs or cover letters"],
+  },
+  {
+    id: "p32", pack: "humanizer", slug: "flow-fixer", title: "Flow Fixer",
+    outcome: "Smooth writing that reads effortlessly",
+    description: "Improve rhythm, vary sentence length, and add natural transitions so your writing flows.",
+    category: "humanizer", price: 0, rating: 4.8, reviews: 390, uses: 11800, beginner: true,
+    tools: ["ChatGPT", "Claude"], tags: ["flow", "rhythm", "readability"],
+    creatorId: "c3", cover: g[8],
+    body: "Improve the rhythm and flow of the writing below. Vary sentence length, add natural transitions, and make it feel smooth to read out loud. Do not change the meaning.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "I led the project. It was successful. The team worked hard. We delivered on time.", output: "I led the project, and the team worked hard to deliver it on time — the result was a success." }],
+    instructions: ["Paste the choppy or repetitive text", "Run the prompt", "Read the result out loud", "Adjust any transitions that feel too formal"],
+  },
+  {
+    id: "p33", pack: "humanizer", slug: "personality-injector", title: "Personality Injector",
+    outcome: "Add energy and relatability without changing the message",
+    description: "Make flat text more engaging, relatable, and interesting while keeping the core message intact.",
+    category: "humanizer", price: 0, rating: 4.7, reviews: 350, uses: 10500, beginner: true,
+    tools: ["ChatGPT", "Claude"], tags: ["personality", "engagement", "rewrite"],
+    creatorId: "c1", cover: g[8],
+    body: "Add personality to the text below without changing the core message. Make it more engaging, relatable, and interesting to read. Keep it professional but human.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "Our product helps teams collaborate more effectively.", output: "Our product is built for teams who are tired of chasing updates across ten tabs — it keeps everyone on the same page, literally." }],
+    instructions: ["Paste the flat text", "Run the prompt", "Check that the message is unchanged", "Dial the personality up or down if needed"],
+  },
+  {
+    id: "p34", pack: "humanizer", slug: "ai-detection-killer", title: "AI Detection Killer",
+    outcome: "Rewrite text to read naturally and bypass AI detectors",
+    description: "Use varied sentence structure, natural phrasing, and human imperfections while keeping full clarity.",
+    category: "humanizer", price: 4, rating: 4.8, reviews: 710, uses: 22100, beginner: false,
+    tools: ["ChatGPT", "Claude"], tags: ["ai detection", "natural", "rewrite"],
+    creatorId: "c2", cover: g[8],
+    body: "Rewrite the text below so it passes AI detection tools. Use natural phrasing, varied sentence structure, and small human imperfections while keeping the meaning clear and accurate. Avoid predictable patterns and overly polished corporate language.\n\nText: <PASTE YOUR TEXT>",
+    examples: [{ input: "Leveraging cutting-edge AI, our solution drives unparalleled efficiency.", output: "We use AI to cut out the busywork — it is not magic, but it saves our team hours every week." }],
+    instructions: ["Paste the AI-sounding text", "Run the prompt", "Check with your AI detector if needed", "Tweak any remaining generic phrases"],
   },
 ];
 
