@@ -72,7 +72,7 @@ function SeoMonitorPage() {
             <h1 className="font-display text-3xl font-semibold tracking-tight">SEO monitor</h1>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">
               Automated checks for robots.txt, sitemap.xml, canonical tags, hreflang alternates and JSON-LD schema. Runs
-              after every deploy and on a schedule; you get an email at hello@applywise.eu when something breaks.
+              after every deploy and on a schedule; you get an email at info@applywise.eu when something breaks.
             </p>
           </div>
           <Button onClick={() => mutation.mutate()} disabled={mutation.isPending}>

@@ -65,7 +65,7 @@ export function CookiesPage() {
           You can also clear or block cookies in your browser settings. Blocking essential cookies will sign you
           out and reset your theme and language preferences. For anything else, see our{" "}
           <a className="underline hover:text-foreground" href="/terms">Terms &amp; Privacy</a> page or email{" "}
-          <a className="underline hover:text-foreground" href="mailto:hello@applywise.eu">hello@applywise.eu</a>.
+          <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a>.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Button size="sm" onClick={() => openCookiePreferences()}>

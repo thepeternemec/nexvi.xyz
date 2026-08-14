@@ -110,7 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "@type": "Organization",
           name: "ApplyWise",
           url: "https://applywise.eu",
-          email: "hello@applywise.eu",
+          email: "info@applywise.eu",
           sameAs: [
             "https://www.linkedin.com/company/applywise",
             "https://x.com/applywise",
