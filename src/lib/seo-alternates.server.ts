@@ -42,7 +42,9 @@ function injectOgImage(html: string, path: string): string {
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:image" content="${src}">`,
   ];
-  return out.replace(/<\/head>/i, `${tags.join("")}</head>`);
+  // Injected at the top of <head> so it wins over any later auto-injected tag.
+  return out.replace(/<head([^>]*)>/i, `<head$1>${tags.join("")}`);
+
 }
 
 
