@@ -77,6 +77,9 @@ function injectOgLocales(html: string, locale: string | null): string {
  * clustered with its translations by search engines.
  */
 export function injectSeoAlternates(html: string, pathname: string): string {
+  const { locale, path } = stripLocalePrefix(pathname);
+  html = setHtmlLang(html, locale);
+
   if (!isIndexablePath(pathname)) {
     if (/<meta[^>]+name="robots"/i.test(html)) {
       return html.replace(/<meta([^>]*?)name="robots"[^>]*>/i, `<meta$1name="robots" content="noindex, nofollow">`);
@@ -84,7 +87,8 @@ export function injectSeoAlternates(html: string, pathname: string): string {
     return html.replace(/<head([^>]*)>/i, `<head$1><meta name="robots" content="noindex, nofollow">`);
   }
 
-  const { locale, path } = stripLocalePrefix(pathname);
+  html = injectOgLocales(html, locale);
+
   const self = localeHref(locale, path);
 
   const tags: string[] = [];
@@ -108,3 +112,4 @@ export function injectSeoAlternates(html: string, pathname: string): string {
   if (!tags.length) return html;
   return html.replace(/<\/head>/i, `${tags.join("")}</head>`);
 }
+
