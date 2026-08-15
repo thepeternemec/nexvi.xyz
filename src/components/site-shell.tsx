@@ -62,7 +62,7 @@ function ThemeToggle() {
   );
 }
 
-type MenuItem = { to: string; label: string; hint: string; icon: LucideIcon };
+type MenuItem = { to: string; label: string; hint: string; icon: LucideIcon; featured?: boolean };
 type MenuSection = { label: string; hint: string; items: MenuItem[] };
 
 const MENUS: MenuSection[] = [
@@ -70,8 +70,8 @@ const MENUS: MenuSection[] = [
     label: "Products",
     hint: "Run the AI that tailors your application",
     items: [
-      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library },
       ...CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library, featured: true },
     ],
   },
 
