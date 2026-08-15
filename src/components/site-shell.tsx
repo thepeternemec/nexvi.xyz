@@ -210,14 +210,26 @@ export function SiteHeader({ locale: explicitLocale }: { locale?: Locale }) {
                   </div>
                   <div className="p-1.5">
                     {section.items.map((item) => (
-                      <DropdownMenuItem key={item.to + item.label} asChild className="rounded-lg px-2 py-2 focus:bg-muted/70">
+                      <DropdownMenuItem
+                        key={item.to + item.label}
+                        asChild
+                        className={`rounded-lg px-2 py-2 focus:bg-muted/70 ${
+                          item.featured ? "mt-1 border-t border-border/60 bg-primary/[0.04] focus:bg-primary/[0.08]" : ""
+                        }`}
+                      >
                         <a href={href(item.to)} className="flex cursor-pointer items-center gap-2.5">
-                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border/70 bg-background text-muted-foreground">
+                          <span className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md border text-muted-foreground ${
+                            item.featured ? "border-primary/30 bg-primary/10 text-primary" : "border-border/70 bg-background"
+                          }`}>
                             <item.icon className="h-3.5 w-3.5" />
                           </span>
                           <span className="min-w-0">
-                            <span className="block truncate text-[13px] font-medium text-foreground">{item.label}</span>
-                            <span className="block truncate text-[11px] text-muted-foreground">{item.hint}</span>
+                            <span className={`block truncate text-[13px] font-medium ${item.featured ? "text-foreground" : "text-foreground"}`}>
+                              {item.label}
+                            </span>
+                            <span className={`block truncate text-[11px] ${item.featured ? "text-primary/80" : "text-muted-foreground"}`}>
+                              {item.hint}
+                            </span>
                           </span>
                         </a>
                       </DropdownMenuItem>
