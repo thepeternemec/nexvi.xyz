@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { History, Crown, Loader2, RefreshCw } from "lucide-react";
+import { History, Loader2, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { TOOL_META } from "@/lib/plan-limits";
@@ -92,8 +92,8 @@ export function UsageHistory() {
                 </div>
                 <div className="flex shrink-0 items-center gap-2">
                   {e.plan === "premium" ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-foreground px-2.5 py-1 text-[11px] font-semibold text-background">
-                      <Crown className="h-3 w-3" /> Premium — unlimited
+                    <span className="inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-1 text-[11px] font-normal text-muted-foreground">
+                      Premium — unlimited
                     </span>
                   ) : (
                     <span className="inline-flex items-center rounded-full border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
