@@ -39,6 +39,38 @@ function localeHref(locale: string | null, path: string) {
   return locale ? `${BASE_URL}/${locale}${suffix}` : `${BASE_URL}${suffix || "/"}`;
 }
 
+/** BCP-47 / Open Graph locale codes for every language the product ships in. */
+const OG_LOCALES: Record<string, string> = {
+  en: "en_US",
+  de: "de_DE",
+  es: "es_ES",
+  it: "it_IT",
+  fr: "fr_FR",
+};
+
+/** Sets <html lang> to the served locale so assistive tech and crawlers agree. */
+function setHtmlLang(html: string, locale: string | null): string {
+  const lang = locale ?? "en";
+  return html.replace(/<html([^>]*)\slang="[^"]*"/i, `<html$1 lang="${lang}"`);
+}
+
+/**
+ * Route-level head() entries are deduped by property, so repeated
+ * og:locale:alternate tags collapse to a single one. Emit the full set here
+ * from the raw HTML instead, after stripping whatever survived.
+ */
+function injectOgLocales(html: string, locale: string | null): string {
+  const current = OG_LOCALES[locale ?? "en"];
+  let out = html.replace(/<meta[^>]+property="og:locale(?::alternate)?"[^>]*>/gi, "");
+  const tags = [`<meta property="og:locale" content="${current}">`];
+  for (const [code, og] of Object.entries(OG_LOCALES)) {
+    if (og !== current) tags.push(`<meta property="og:locale:alternate" content="${og}">`);
+  }
+  tags.push(`<meta http-equiv="content-language" content="${locale ?? "en"}">`);
+  return out.replace(/<\/head>/i, `${tags.join("")}</head>`);
+}
+
+
 /**
  * Injects self-referencing canonical + full hreflang alternate set into the
  * server-rendered <head>, so every localized page is indexable and correctly
