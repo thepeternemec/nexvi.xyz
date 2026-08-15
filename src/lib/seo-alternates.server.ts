@@ -1,52 +1,4 @@
-import ogHome from "@/assets/og/og-home.jpg.asset.json";
-import ogTools from "@/assets/og/og-tools.jpg.asset.json";
-import ogContent from "@/assets/og/og-content.jpg.asset.json";
-
 const BASE_URL = "https://applywise.eu";
-
-/** Designed 1200x630 share cards, one per page type. */
-const OG_TOOLS_PATHS = new Set([
-  "/cv",
-  "/cover-letter",
-  "/humanizer",
-  "/ats",
-  "/marketplace",
-  "/library",
-  "/copilot",
-  "/assistant",
-  "/bundles",
-]);
-
-function ogImageForPath(path: string): string {
-  if (path === "/") return `${BASE_URL}${ogHome.url}`;
-  const first = `/${path.split("/")[1] ?? ""}`;
-  if (OG_TOOLS_PATHS.has(first) || first === "/prompt") return `${BASE_URL}${ogTools.url}`;
-  return `${BASE_URL}${ogContent.url}`;
-}
-
-/**
- * Replaces any inherited/auto-injected preview image (e.g. a hosting
- * screenshot) with the branded ApplyWise card for this page type.
- */
-function injectOgImage(html: string, path: string): string {
-  const src = ogImageForPath(path);
-  let out = html
-    .replace(/<meta[^>]+property="og:image(?::\w+)?"[^>]*>/gi, "")
-    .replace(/<meta[^>]+name="twitter:image"[^>]*>/gi, "")
-    .replace(/<meta[^>]+name="twitter:card"[^>]*>/gi, "");
-  const tags = [
-    `<meta property="og:image" content="${src}">`,
-    `<meta property="og:image:width" content="1200">`,
-    `<meta property="og:image:height" content="630">`,
-    `<meta property="og:image:alt" content="ApplyWise — AI that tailors your CV and cover letter to the job">`,
-    `<meta name="twitter:card" content="summary_large_image">`,
-    `<meta name="twitter:image" content="${src}">`,
-  ];
-  // Injected at the top of <head> so it wins over any later auto-injected tag.
-  return out.replace(/<head([^>]*)>/i, `<head$1>${tags.join("")}`);
-
-}
-
 
 /** Locales that have their own URL prefix. English lives at the unprefixed root. */
 export const SEO_LOCALES = ["de", "es", "it", "fr"] as const;
@@ -136,8 +88,6 @@ export function injectSeoAlternates(html: string, pathname: string): string {
   }
 
   html = injectOgLocales(html, locale);
-  html = injectOgImage(html, path);
-
 
   const self = localeHref(locale, path);
 
