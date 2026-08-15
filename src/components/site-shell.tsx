@@ -69,14 +69,16 @@ const MENUS: MenuSection[] = [
   {
     label: "Products",
     hint: "Run the AI that tailors your application",
-    items: CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+    items: [
+      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library },
+      ...CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+    ],
   },
 
   {
     label: "Resources",
     hint: "Guides, prompts and product updates",
     items: [
-      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library },
       { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
       { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
       { to: "/signup", label: "Create account", hint: "Start free, no card needed", icon: UserPlus },
