@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { History, Crown, Loader2, RefreshCw } from "lucide-react";
+import { History, Loader2, RefreshCw } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { TOOL_META } from "@/lib/plan-limits";
