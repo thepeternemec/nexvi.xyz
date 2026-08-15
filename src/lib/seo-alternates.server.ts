@@ -134,6 +134,8 @@ export function injectSeoAlternates(html: string, pathname: string): string {
   }
 
   html = injectOgLocales(html, locale);
+  html = injectOgImage(html, path);
+
 
   const self = localeHref(locale, path);
 
