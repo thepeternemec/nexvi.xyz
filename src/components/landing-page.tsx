@@ -547,7 +547,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <Reveal className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
+        <Reveal variant="scale" className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
           {/* Stripe-style light signal wash — token driven, works in both themes */}
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,color-mix(in_oklab,var(--primary)_10%,transparent)_0%,transparent_45%,color-mix(in_oklab,var(--primary)_7%,transparent)_100%)]" />
           <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)] blur-2xl" />
