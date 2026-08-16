@@ -161,7 +161,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="reveal-stagger mx-auto max-w-2xl text-center">
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
           <div className="pill-hover mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
@@ -471,7 +471,8 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
       {/* FEATURE OVERVIEW */}
       <section className="border-y border-border/60 bg-muted/20">
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6">
-          <Reveal className="mx-auto max-w-2xl text-center">
+          <Reveal className="reveal-stagger mx-auto max-w-2xl text-center">
+
             <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Everything in one place</div>
             <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">One toolkit for the whole job hunt.</h2>
             <p className="mt-4 text-muted-foreground">From the first prompt to the signed offer — every step of the modern job search, powered by AI you can actually trust.</p>
@@ -488,7 +489,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
               { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
             ].map(({ icon: Icon, title, desc }, i) => (
-              <Reveal key={title} delay={(i % 3) * 90} className="group lift rounded-2xl border border-border/70 bg-background p-6">
+              <Reveal key={title} delay={(i % 3) * 110} variant="scale" className="group lift rounded-2xl border border-border/70 bg-background p-6">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
                   <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </div>
@@ -526,7 +527,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               <p className="mt-3 text-[12px] text-muted-foreground">Free to start · No card · Results in under a minute</p>
             </Reveal>
 
-            <Reveal delay={120} className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            <Reveal delay={120} className="reveal-stagger grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {c.stats.map(([n, d], i) => (
                 <div key={n} className="group relative p-7 transition-colors duration-300 hover:bg-muted/40">
                   <div className="font-mono text-[10px] tracking-widest text-muted-foreground">0{i + 1}</div>
@@ -546,7 +547,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* CTA */}
       <section className="mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6">
-        <Reveal className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
+        <Reveal variant="scale" className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
           {/* Stripe-style light signal wash — token driven, works in both themes */}
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,color-mix(in_oklab,var(--primary)_10%,transparent)_0%,transparent_45%,color-mix(in_oklab,var(--primary)_7%,transparent)_100%)]" />
           <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)] blur-2xl" />

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
 
+type RevealVariant = "up" | "blur" | "scale" | "fade";
+
 /**
  * Scroll-reveal wrapper: fades + lifts its children into view once.
  * Falls back to visible content when IntersectionObserver is unavailable.
@@ -8,13 +10,16 @@ export function Reveal({
   children,
   as: Tag = "div",
   delay = 0,
+  variant = "up",
   className = "",
 }: {
   children: ReactNode;
   as?: ElementType;
   delay?: number;
+  variant?: RevealVariant;
   className?: string;
 }) {
+
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
 
@@ -88,9 +93,11 @@ export function Reveal({
       ref={ref as never}
       className={`reveal ${className}`}
       data-revealed={shown ? "true" : "false"}
+      data-reveal-variant={variant}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>
   );
 }
+
