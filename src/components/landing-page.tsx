@@ -551,7 +551,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
         <Reveal variant="scale" className="lift relative overflow-hidden rounded-3xl border border-border/70 bg-background shadow-[0_30px_80px_-40px_color-mix(in_oklab,var(--primary)_35%,transparent)]">
           {/* Stripe-style light signal wash — token driven, works in both themes */}
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,color-mix(in_oklab,var(--primary)_10%,transparent)_0%,transparent_45%,color-mix(in_oklab,var(--primary)_7%,transparent)_100%)]" />
-          <div className="pointer-events-none absolute -left-24 -top-28 h-72 w-72 rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--primary)_22%,transparent),transparent_70%)] blur-2xl" />
+          <div className="bg-aurora bg-aurora-soft" aria-hidden="true"><span /><span /><span /></div>
           <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
 
           <div className="relative grid gap-10 p-8 sm:p-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:p-16">
