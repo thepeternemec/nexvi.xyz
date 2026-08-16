@@ -527,7 +527,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               <p className="mt-3 text-[12px] text-muted-foreground">Free to start · No card · Results in under a minute</p>
             </Reveal>
 
-            <Reveal delay={120} className="grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+            <Reveal delay={120} className="reveal-stagger grid divide-y divide-border/60 overflow-hidden rounded-2xl border border-border/70 bg-background shadow-[0_24px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
               {c.stats.map(([n, d], i) => (
                 <div key={n} className="group relative p-7 transition-colors duration-300 hover:bg-muted/40">
                   <div className="font-mono text-[10px] tracking-widest text-muted-foreground">0{i + 1}</div>
