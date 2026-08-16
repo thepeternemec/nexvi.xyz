@@ -333,3 +333,64 @@
 
 
 
+
+/* ---- Stripe-like animated background gradients ---- */
+@keyframes aurora-a {
+  0%   { transform: translate3d(-6%, -4%, 0) scale(1.05) rotate(0deg); }
+  33%  { transform: translate3d(8%, 6%, 0) scale(1.18) rotate(8deg); }
+  66%  { transform: translate3d(-4%, 10%, 0) scale(1.1) rotate(-6deg); }
+  100% { transform: translate3d(-6%, -4%, 0) scale(1.05) rotate(0deg); }
+}
+@keyframes aurora-b {
+  0%   { transform: translate3d(6%, 8%, 0) scale(1.12) rotate(0deg); }
+  50%  { transform: translate3d(-10%, -6%, 0) scale(1.25) rotate(-10deg); }
+  100% { transform: translate3d(6%, 8%, 0) scale(1.12) rotate(0deg); }
+}
+@keyframes aurora-c {
+  0%   { transform: translate3d(0%, 0%, 0) scale(1); opacity: 0.75; }
+  40%  { transform: translate3d(10%, -8%, 0) scale(1.2); opacity: 0.5; }
+  100% { transform: translate3d(0%, 0%, 0) scale(1); opacity: 0.75; }
+}
+@keyframes aurora-hue {
+  0%, 100% { filter: blur(60px) hue-rotate(0deg); }
+  50%      { filter: blur(70px) hue-rotate(14deg); }
+}
+
+@layer utilities {
+  .bg-aurora {
+    position: absolute;
+    inset: -20%;
+    pointer-events: none;
+    overflow: hidden;
+    filter: blur(60px);
+    animation: aurora-hue 22s ease-in-out infinite;
+    will-change: filter;
+  }
+  .bg-aurora > span {
+    position: absolute;
+    display: block;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+  .bg-aurora > span:nth-child(1) {
+    inset: 0% 45% 40% 5%;
+    background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-primary) 42%, transparent), transparent 68%);
+    animation: aurora-a 26s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  .bg-aurora > span:nth-child(2) {
+    inset: 10% 6% 30% 48%;
+    background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-accent) 40%, transparent), transparent 68%);
+    animation: aurora-b 32s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  }
+  .bg-aurora > span:nth-child(3) {
+    inset: 35% 22% 0% 22%;
+    background: radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-primary) 26%, transparent), transparent 70%);
+    animation: aurora-c 38s ease-in-out infinite;
+  }
+  .bg-aurora-soft { opacity: 0.55; }
+  .dark .bg-aurora { opacity: 0.5; }
+  .dark .bg-aurora-soft { opacity: 0.35; }
+  @media (prefers-reduced-motion: reduce) {
+    .bg-aurora, .bg-aurora > span { animation: none !important; }
+  }
+}
