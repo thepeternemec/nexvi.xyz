@@ -93,9 +93,11 @@ export function Reveal({
       ref={ref as never}
       className={`reveal ${className}`}
       data-revealed={shown ? "true" : "false"}
+      data-reveal-variant={variant}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
     </Tag>
   );
 }
+
