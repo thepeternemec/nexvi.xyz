@@ -489,7 +489,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
               { icon: Languages, title: "5 Languages", desc: "Full experience in English, German, Spanish, Italian and French — write in the market's language." },
               { icon: Lock, title: "Free & Private", desc: "Use the core tools with no sign-up. Your CV data stays yours — never sold, never trained on." },
             ].map(({ icon: Icon, title, desc }, i) => (
-              <Reveal key={title} delay={(i % 3) * 90} className="group lift rounded-2xl border border-border/70 bg-background p-6">
+              <Reveal key={title} delay={(i % 3) * 110} variant="scale" className="group lift rounded-2xl border border-border/70 bg-background p-6">
                 <div className="grid h-10 w-10 place-items-center rounded-xl bg-foreground/5 text-foreground transition-colors duration-300 group-hover:bg-primary/10 group-hover:text-primary">
                   <Icon className="h-5 w-5 transition-transform duration-300 group-hover:scale-110" />
                 </div>
