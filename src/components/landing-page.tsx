@@ -161,7 +161,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
 
       {/* TOOLS */}
       <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="reveal-stagger mx-auto max-w-2xl text-center">
           <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">{c.toolsKicker}</div>
           <h2 className="font-display mt-3 text-2xl tracking-tight sm:text-[1.75rem]">{c.toolsTitle}</h2>
           <div className="pill-hover mt-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/[0.06] px-3 py-1.5 text-[11px] font-medium text-primary backdrop-blur">
