@@ -73,8 +73,9 @@ export function LandingPage({ locale = "en" }: { locale?: Locale }) {
     <SiteShell locale={locale}>
       {/* HERO */}
       <section className="relative overflow-hidden border-b border-border/60">
+        <div className="bg-aurora -z-30" aria-hidden="true"><span /><span /><span /></div>
         <div className="absolute inset-0 -z-20 bg-grid mask-fade-b opacity-70" />
-        <div className="absolute inset-0 -z-10 bg-signal" />
+        <div className="absolute inset-0 -z-10 bg-signal opacity-70" />
         <div className="mx-auto grid w-full max-w-6xl items-center gap-14 px-4 py-20 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16 lg:py-28">
           {/* Copy */}
           <div>
