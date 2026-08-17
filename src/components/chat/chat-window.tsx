@@ -184,6 +184,7 @@ export function ChatWindow({
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+  const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
 
   const meta = modeMeta(mode);
@@ -192,6 +193,21 @@ export function ChatWindow({
   useEffect(() => {
     setCtx(loadCtx());
   }, []);
+
+  // Pull the workspace resume in so tools never need a fresh copy/paste.
+  useEffect(() => {
+    let alive = true;
+    getResume(user?.id)
+      .then((rec) => {
+        if (!alive || !rec?.content?.trim()) return;
+        setSavedResume(rec);
+        setCtx((prev) => (prev.background.trim() ? prev : { ...prev, background: rec.content }));
+      })
+      .catch(() => undefined);
+    return () => {
+      alive = false;
+    };
+  }, [user?.id]);
 
   // Both chat routes remount this component via `key`, so thread/message
   // props are only ever read as initial state — no re-sync effect needed.
