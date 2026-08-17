@@ -35,7 +35,7 @@ import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
 import { generateCV, generateCoverLetter, scoreATS, humanizeText } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
 
-type ChatContext = {
+type ComposerContext = {
   jobDescription: string;
   background: string;
   company: string;
@@ -43,13 +43,13 @@ type ChatContext = {
 };
 
 const CTX_KEY = "applywise.chat.context";
-const EMPTY_CTX: ChatContext = { jobDescription: "", background: "", company: "", role: "" };
+const EMPTY_CTX: ComposerContext = { jobDescription: "", background: "", company: "", role: "" };
 
-function loadCtx(): ChatContext {
+function loadCtx(): ComposerContext {
   if (typeof window === "undefined") return EMPTY_CTX;
   try {
     const raw = window.localStorage.getItem(CTX_KEY);
-    return raw ? { ...EMPTY_CTX, ...(JSON.parse(raw) as Partial<ChatContext>) } : EMPTY_CTX;
+    return raw ? { ...EMPTY_CTX, ...(JSON.parse(raw) as Partial<ComposerContext>) } : EMPTY_CTX;
   } catch {
     return EMPTY_CTX;
   }
