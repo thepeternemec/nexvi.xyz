@@ -443,15 +443,10 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                         </div>
                         <div className="mt-0.5 truncate text-[14px] font-medium tracking-tight group-hover:text-primary">{p.title}</div>
                       </div>
-                      <span
-                        className={
-                          p.price === 0
-                            ? "shrink-0 rounded-full border border-border/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground"
-                            : "shrink-0 rounded-full border border-primary/30 bg-primary/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary"
-                        }
-                      >
-                        {p.price === 0 ? "Free" : "Premium"}
+                      <span className="shrink-0 rounded-full border border-border/70 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        View
                       </span>
+
                       <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" />
                     </a>
                   ))}
