@@ -1,8 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/marketplace")({
-  beforeLoad: () => {
-    throw redirect({ to: "/prompts", search: {} as never });
+  beforeLoad: ({ search }) => {
+    throw redirect({ to: "/prompts", search: search as never });
   },
   component: () => null,
 });
+

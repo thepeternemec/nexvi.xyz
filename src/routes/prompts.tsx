@@ -75,7 +75,7 @@ export const Route = createFileRoute("/prompts")({
     pack: typeof s.pack === "string" ? s.pack : undefined,
     sort: (s.sort as Search["sort"]) ?? undefined,
     price: (s.price as Search["price"]) ?? undefined,
-    beginner: s.beginner === "1" ? "1" : undefined,
+    beginner: s.beginner === "1" || s.beginner === 1 ? "1" : undefined,
   }),
 });
 
