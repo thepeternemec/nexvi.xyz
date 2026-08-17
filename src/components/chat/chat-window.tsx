@@ -277,12 +277,13 @@ export function ChatWindow({
     }
     if (mode === "prompts") {
       const q = text || "job search";
+      const res = recommendPrompts(q);
       push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
-      push({ id: `a-${Date.now()}`, role: "assistant", content: recommendPrompts(q), mode });
+      push({ id: `a-${Date.now()}`, role: "assistant", content: res.content, mode, data: res.data });
       setInput("");
       try {
         await persist("user", q);
-        await persist("assistant", recommendPrompts(q));
+        await persist("assistant", res.content, res.data);
       } catch {
         /* history is best-effort */
       }
