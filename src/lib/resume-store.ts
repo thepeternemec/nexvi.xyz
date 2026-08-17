@@ -59,7 +59,7 @@ export async function saveResume(
         {
           user_id: userId,
           content,
-          updated_at: resume.updatedAt,
+          updated_at: resume.updatedAt ?? new Date().toISOString(),
           ...(fileName ? { file_name: fileName } : {}),
         },
         { onConflict: "user_id" },
