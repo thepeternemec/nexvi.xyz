@@ -209,7 +209,7 @@ export function ChatWindow({
   }, [threadId, busy]);
 
   function updateCtx(patch: Partial<ComposerContext>) {
-    setCtx((prev) => {
+    setCtx((prev: ComposerContext) => {
       const next = { ...prev, ...patch };
       try {
         window.localStorage.setItem(CTX_KEY, JSON.stringify(next));
@@ -219,6 +219,13 @@ export function ChatWindow({
       return next;
     });
   }
+
+  const insertPrompt = useCallback((slug: string) => {
+    const p = prompts.find((x) => x.slug === slug);
+    if (!p) return;
+    setInput(p.body);
+    setTimeout(() => textareaRef.current?.focus(), 0);
+  }, []);
 
   const ready = useMemo(() => {
     if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
