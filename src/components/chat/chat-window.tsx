@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronDown, Copy, Download, PanelRightOpen } from "lucide-react";
+import { Check, ChevronDown, Copy, Download, PanelRightOpen, X } from "lucide-react";
 import { toast } from "sonner";
 import {
   Conversation,
@@ -528,30 +528,60 @@ export function ChatWindow({
               ))
             )}
             {previewPrompt && (
-              <div className="mt-2 rounded-xl border border-border/70 bg-card p-4 shadow-sm">
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Prompt preview</p>
-                    <h3 className="mt-1 text-sm font-medium">{previewPrompt.title}</h3>
-                    {previewPrompt.description && (
-                      <p className="mt-1 text-[12.5px] text-muted-foreground">{previewPrompt.description}</p>
-                    )}
-
+              <div className="relative mt-5 overflow-hidden rounded-2xl border border-border/80 bg-card shadow-[0_1px_2px_rgba(0,0,0,0.02),0_8px_24px_rgba(0,0,0,0.04)]">
+                <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary via-primary/80 to-primary/40" />
+                <div className="p-5 pl-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="inline-flex items-center rounded-full border border-border/70 bg-muted/50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                          Prompt preview
+                        </span>
+                        {previewPrompt.category && (
+                          <span className="inline-flex items-center rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                            {previewPrompt.category.replace(/-/g, " ")}
+                          </span>
+                        )}
+                      </div>
+                      <h3 className="mt-2.5 text-[15px] font-semibold leading-snug tracking-tight">{previewPrompt.title}</h3>
+                      {previewPrompt.outcome && (
+                        <p className="mt-1 text-[13px] text-muted-foreground">{previewPrompt.outcome}</p>
+                      )}
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => setPreviewSlug(null)}
+                      className="shrink-0 text-muted-foreground hover:text-foreground"
+                      aria-label="Dismiss preview"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-                  <Button variant="ghost" size="sm" onClick={() => setPreviewSlug(null)}>
-                    Dismiss
-                  </Button>
-                </div>
-                <pre className="mt-3 max-h-64 overflow-auto whitespace-pre-wrap rounded-lg border border-border/60 bg-muted/40 p-3 text-[12.5px] leading-relaxed text-foreground">
-                  {previewPrompt.body}
-                </pre>
-                <div className="mt-3 flex items-center justify-end gap-2">
-                  <Button variant="outline" size="sm" onClick={() => copy(previewPrompt.body)}>
-                    Copy
-                  </Button>
-                  <Button size="sm" onClick={applyPreview}>
-                    Apply
-                  </Button>
+
+                  <div className="mt-4 overflow-hidden rounded-xl border border-border/60 bg-muted/30">
+                    <div className="max-h-56 overflow-auto p-4">
+                      <pre className="whitespace-pre-wrap font-sans text-[13px] leading-relaxed text-foreground/90">
+                        {previewPrompt.body}
+                      </pre>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between gap-3">
+                    <span className="text-[11px] tabular-nums text-muted-foreground">
+                      {previewPrompt.body.split(/\s+/).filter(Boolean).length} words · {previewPrompt.body.length} chars
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <Button variant="outline" size="sm" onClick={() => copy(previewPrompt.body)} className="h-8 gap-1.5 text-[12.5px]">
+                        <Copy className="h-3.5 w-3.5" />
+                        Copy
+                      </Button>
+                      <Button size="sm" onClick={applyPreview} className="h-8 gap-1.5 bg-primary text-[12.5px] text-primary-foreground hover:bg-primary/90">
+                        <Check className="h-3.5 w-3.5" />
+                        Apply
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
