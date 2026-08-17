@@ -327,16 +327,37 @@ export type MessageResponseProps = ComponentProps<typeof Streamdown>;
 
 const streamdownPlugins = { cjk, code, math, mermaid };
 
+const PROMPT_LINK_RE = /^\/prompt\/([^/]+)\/?$/;
+
 const MarkdownLink = forwardRef<
   HTMLAnchorElement,
   React.AnchorHTMLAttributes<HTMLAnchorElement> & { node?: unknown }
 >(({ href, children, className, target, rel, node, ...rest }, ref) => {
   if (!href) return <span className={className}>{children}</span>;
+  const { insertPrompt } = useChatContext();
   const isAbsoluteHttp = /^https?:\/\//i.test(href);
   const isSameOrigin =
     typeof window !== "undefined" &&
     isAbsoluteHttp &&
     href.startsWith(window.location.origin);
+
+  const promptMatch = !isAbsoluteHttp && PROMPT_LINK_RE.exec(href);
+  if (promptMatch && insertPrompt) {
+    return (
+      <a
+        ref={ref}
+        href={href}
+        className={className}
+        {...rest}
+        onClick={(e) => {
+          e.preventDefault();
+          insertPrompt(promptMatch[1]);
+        }}
+      >
+        {children}
+      </a>
+    );
+  }
 
   if (isAbsoluteHttp && !isSameOrigin) {
     return (
