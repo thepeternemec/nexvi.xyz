@@ -56,7 +56,12 @@ export async function saveResume(
     const { error } = await supabase
       .from("user_resumes")
       .upsert(
-        { user_id: userId, content, file_name: fileName, updated_at: resume.updatedAt },
+        {
+          user_id: userId,
+          content,
+          updated_at: resume.updatedAt,
+          ...(fileName ? { file_name: fileName } : {}),
+        },
         { onConflict: "user_id" },
       );
     if (error) throw error;
