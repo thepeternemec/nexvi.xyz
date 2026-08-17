@@ -28,6 +28,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ChatContext } from "./chat-context";
+import { PromptResultList, isPromptResults, type PromptResults } from "./prompt-results";
 import { useAuth } from "@/hooks/use-auth";
 import { useToolGate } from "@/components/usage-gate";
 import { modeMeta, type ChatMode } from "@/lib/chat-modes";
