@@ -556,7 +556,6 @@ const rawPrompts: Prompt[] = [
     examples: [{ input: "Top 10 job matches", output: "10 short LinkedIn messages, each under 90 words, with a clear question and a role-specific value point." }],
     instructions: ["Paste your top 10 matches from the job spreadsheet", "Run the prompt", "Find the right contact on LinkedIn for each role", "Send the message within 24 hours of applying"],
   },
-  },
 ];
 
 export const prompts: Prompt[] = rawPrompts.map(p => ({
