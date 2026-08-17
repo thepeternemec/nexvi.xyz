@@ -472,56 +472,58 @@ export function ChatWindow({
       )}
 
       {/* Transcript */}
-      <Conversation className="min-h-0 flex-1">
-        <ConversationContent className="mx-auto w-full max-w-3xl">
-          {messages.length === 0 ? (
-            <div className="py-14 text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card">
-                <meta.icon className="h-5 w-5 text-primary" />
+      <ChatContext.Provider value={{ insertPrompt }}>
+        <Conversation className="min-h-0 flex-1">
+          <ConversationContent className="mx-auto w-full max-w-3xl">
+            {messages.length === 0 ? (
+              <div className="py-14 text-center">
+                <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card">
+                  <meta.icon className="h-5 w-5 text-primary" />
+                </div>
+                <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
+                <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
+                  {meta.starters.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => send(s)}
+                      className="rounded-full border border-border/70 bg-background px-3 py-1.5 text-[12.5px] text-muted-foreground transition hover:border-foreground/25 hover:text-foreground"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
-              <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
-              <div className="mt-6 flex flex-wrap justify-center gap-2">
-                {meta.starters.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => send(s)}
-                    className="rounded-full border border-border/70 bg-background px-3 py-1.5 text-[12.5px] text-muted-foreground transition hover:border-foreground/25 hover:text-foreground"
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            messages.map((m) => (
-              <Message from={m.role} key={m.id}>
+            ) : (
+              messages.map((m) => (
+                <Message from={m.role} key={m.id}>
+                  <MessageContent>
+                    <MessageResponse>{m.content}</MessageResponse>
+                    {m.role === "assistant" && (
+                      <MessageActions className="mt-2">
+                        <MessageAction label="Copy" onClick={() => copy(m.content)}>
+                          <Copy className="h-3.5 w-3.5" />
+                        </MessageAction>
+                        <MessageAction label="Download" onClick={() => download(m.content)}>
+                          <Download className="h-3.5 w-3.5" />
+                        </MessageAction>
+                      </MessageActions>
+                    )}
+                  </MessageContent>
+                </Message>
+              ))
+            )}
+            {busy && (
+              <Message from="assistant">
                 <MessageContent>
-                  <MessageResponse>{m.content}</MessageResponse>
-                  {m.role === "assistant" && (
-                    <MessageActions className="mt-2">
-                      <MessageAction label="Copy" onClick={() => copy(m.content)}>
-                        <Copy className="h-3.5 w-3.5" />
-                      </MessageAction>
-                      <MessageAction label="Download" onClick={() => download(m.content)}>
-                        <Download className="h-3.5 w-3.5" />
-                      </MessageAction>
-                    </MessageActions>
-                  )}
+                  <Shimmer>Working on it…</Shimmer>
                 </MessageContent>
               </Message>
-            ))
-          )}
-          {busy && (
-            <Message from="assistant">
-              <MessageContent>
-                <Shimmer>Working on it…</Shimmer>
-              </MessageContent>
-            </Message>
-          )}
-        </ConversationContent>
-        <ConversationScrollButton />
-      </Conversation>
+            )}
+          </ConversationContent>
+          <ConversationScrollButton />
+        </Conversation>
+      </ChatContext.Provider>
 
       {/* Composer */}
       <div className="border-t border-border/60 px-3 py-3 sm:px-5">
