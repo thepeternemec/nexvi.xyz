@@ -129,7 +129,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           inLanguage: ["en", "de", "es", "it", "fr"],
           potentialAction: {
             "@type": "SearchAction",
-            target: "https://applywise.eu/marketplace?q={search_term_string}",
+            target: "https://applywise.eu/prompts?q={search_term_string}",
             "query-input": "required name=search_term_string",
           },
         }),

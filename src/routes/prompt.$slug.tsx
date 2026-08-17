@@ -54,7 +54,7 @@ export const Route = createFileRoute("/prompt/$slug")({
             "@type": "BreadcrumbList",
             itemListElement: [
               { "@type": "ListItem", position: 1, name: "Home", item: "/" },
-              { "@type": "ListItem", position: 2, name: "Prompt Library", item: "/marketplace" },
+              { "@type": "ListItem", position: 2, name: "Prompt Library", item: "/prompts" },
               { "@type": "ListItem", position: 3, name: p.title, item: url },
             ],
           }),
@@ -178,8 +178,8 @@ export function PromptDetail() {
     <SiteShell>
       <article className="mx-auto w-full max-w-5xl px-4 py-10 sm:px-6 lg:py-16">
         <nav className="mb-6 text-xs text-muted-foreground">
-          <Link to="/marketplace">Prompt Library</Link>
-          {category && <> / <Link to="/marketplace" search={{ category: category.slug } as never}>{category.name}</Link></>}
+          <Link to="/prompts">Prompt Library</Link>
+          {category && <> / <Link to="/prompts" search={{ category: category.slug } as never}>{category.name}</Link></>}
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
