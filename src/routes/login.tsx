@@ -16,6 +16,7 @@ import {
   AlertCircle,
   ArrowRight,
   Check,
+  Inbox,
   KeyRound,
   LogIn,
   Mail,
@@ -157,7 +158,7 @@ export function AuthShell({
           return;
         }
         toast.success(
-          "Email sent — please check your inbox and spam folders."
+          "Email sent — please check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu."
         );
         setShowVerify(true);
       } else {
@@ -196,7 +197,7 @@ export function AuthShell({
         },
       });
       if (error) throw error;
-      toast.success("Verification email sent — check your inbox (and spam).");
+      toast.success("Verification email sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
       setResendCountdown(30);
     } catch (err) {
       toast.error(
@@ -216,7 +217,7 @@ export function AuthShell({
         redirectTo: `${window.location.origin}${href("/reset-password")}`,
       });
       if (error) throw error;
-      toast.success("Reset link sent — check your inbox (and spam).");
+      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
       setMode("forgot-sent");
     } catch (err) {
       toast.error(
@@ -345,7 +346,7 @@ export function AuthShell({
               </button>
             </div>
           ) : showVerify ? (
-            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
+            <div className="mt-8 space-y-4 rounded-2xl border border-border/70 bg-card/70 p-6 text-center shadow-[0_24px_60px_-40px_color-mix(in_oklab,var(--primary)_45%,transparent)] backdrop-blur-xl">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Mail className="h-6 w-6" />
               </div>
@@ -358,10 +359,30 @@ export function AuthShell({
                 <p className="mt-2 text-sm text-muted-foreground">
                   A verification link was sent to{" "}
                   <span className="font-medium text-foreground">{email}</span>.
-                  Please check your inbox and spam folders, then click it to{" "}
+                  Please check your inbox and click it to{" "}
                   {signup ? "create your account" : "sign in"}.
                 </p>
               </div>
+
+              {/* Deliverability tip */}
+              <div className="rounded-xl border border-border/70 bg-muted/50 p-4 text-left">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Inbox className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      Can’t find the email?
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      Check your spam, junk, or promotions folder. Messages come from{" "}
+                      <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                      — add that address to your contacts so future emails land in your inbox.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <Button
                 variant="outline"
                 className="w-full rounded-full"
@@ -387,7 +408,7 @@ export function AuthShell({
               </button>
             </div>
           ) : mode === "forgot-sent" ? (
-            <div className="mt-8 space-y-4 rounded-2xl border border-border bg-muted/40 p-6 text-center">
+            <div className="mt-8 space-y-4 rounded-2xl border border-border/70 bg-card/70 p-6 text-center shadow-[0_24px_60px_-40px_color-mix(in_oklab,var(--primary)_45%,transparent)] backdrop-blur-xl">
               <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <KeyRound className="h-6 w-6" />
               </div>
@@ -397,10 +418,29 @@ export function AuthShell({
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   A password reset link was sent to your email. Please check
-                  your inbox and spam folders, then click it to set a new
-                  password.
+                  your inbox, then click it to set a new password.
                 </p>
               </div>
+
+              {/* Deliverability tip */}
+              <div className="rounded-xl border border-border/70 bg-muted/50 p-4 text-left">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                    <Inbox className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      Can’t find the email?
+                    </p>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                      Check your spam, junk, or promotions folder. Messages come from{" "}
+                      <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                      — add that address to your contacts so future emails land in your inbox.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               <Button
                 asChild
                 size="lg"
