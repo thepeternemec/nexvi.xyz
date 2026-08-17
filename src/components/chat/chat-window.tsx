@@ -462,12 +462,17 @@ export function ChatWindow({
               {meta.needs.includes("background") && (
                 <div>
                   <label className="text-[12px] font-medium text-muted-foreground">Your CV / background</label>
-                  <Textarea
-                    value={ctx.background}
-                    onChange={(e) => updateCtx({ background: e.target.value })}
-                    placeholder="Paste your CV or summarise your experience…"
-                    className="mt-1.5 min-h-[110px]"
-                  />
+                  <div className="mt-1.5">
+                    <ResumePanel
+                      value={ctx.background}
+                      saved={savedResume}
+                      userId={user?.id}
+                      onChange={(text, rec) => {
+                        updateCtx({ background: text });
+                        setSavedResume(rec);
+                      }}
+                    />
+                  </div>
                 </div>
               )}
             </div>
