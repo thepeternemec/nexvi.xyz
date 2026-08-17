@@ -31,12 +31,15 @@ function matchesQuery(p: (typeof prompts)[number], query: string) {
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
     meta: [
-      { title: "Job Search Prompt Library — CV, Cover Letter & ATS Prompts" },
-      { name: "description", content: "A curated library of AI prompts for job seekers: tailor your CV to a job description, write cover letters, prep interviews and beat ATS filters." },
-      { property: "og:title", content: "Job Search Prompt Library — ApplyWise" },
-      { property: "og:description", content: "Curated AI prompts for CVs, cover letters, ATS and interviews." },
+      { title: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { name: "description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
+      { property: "og:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { property: "og:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://applywise.eu/marketplace" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { name: "twitter:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
     ],
     links: [{ rel: "canonical", href: "https://applywise.eu/marketplace" }],
     scripts: [

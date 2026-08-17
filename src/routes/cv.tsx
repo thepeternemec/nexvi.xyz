@@ -18,12 +18,15 @@ import { ToolHero, ToolOutro } from "@/components/tool-hero";
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "Free AI CV Generator — ATS-Optimized Resumes | ApplyWise" },
-      { name: "description", content: "Paste a job description and get an ATS-optimized CV tailored to the role in under 60 seconds. Free AI resume generator by ApplyWise." },
-      { property: "og:title", content: "AI CV Generator — ATS-Optimized Resumes" },
-      { property: "og:description", content: "Turn any job description into a tailored, ATS-ready CV in 60 seconds." },
+      { title: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { name: "description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
+      { property: "og:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { property: "og:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://applywise.eu/cv" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { name: "twitter:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
     ],
     links: [{ rel: "canonical", href: "https://applywise.eu/cv" }],
     scripts: [

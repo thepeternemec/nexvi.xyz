@@ -14,12 +14,15 @@ import { ToolHero, ToolOutro } from "@/components/tool-hero";
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
     meta: [
-      { title: "AI Cover Letter Generator — Tailored in 60s | ApplyWise" },
-      { name: "description", content: "Generate a personalized cover letter for any job description in seconds. Matches your background, the role, and the company's tone." },
-      { property: "og:title", content: "AI Cover Letter Generator — ApplyWise" },
-      { property: "og:description", content: "Personalized cover letters tailored to any job description, in seconds." },
+      { title: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { name: "description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
+      { property: "og:title", content: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { property: "og:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://applywise.eu/cover-letter" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { name: "twitter:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
     ],
     links: [{ rel: "canonical", href: "https://applywise.eu/cover-letter" }],
   }),

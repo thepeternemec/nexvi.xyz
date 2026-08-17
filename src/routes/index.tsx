@@ -5,11 +5,15 @@ import { copy } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: copy.en.metaTitle },
-      { name: "description", content: copy.en.metaDesc },
-      { property: "og:title", content: copy.en.metaTitle },
-      { property: "og:description", content: copy.en.metaDesc },
+      { title: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { name: "description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
+      { property: "og:title", content: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { property: "og:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
+      { property: "og:type", content: "website" },
       { property: "og:url", content: "https://applywise.eu/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { name: "twitter:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "de_DE" },
       { property: "og:locale:alternate", content: "es_ES" },
