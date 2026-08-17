@@ -533,9 +533,10 @@ export function ChatWindow({
                   <div>
                     <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Prompt preview</p>
                     <h3 className="mt-1 text-sm font-medium">{previewPrompt.title}</h3>
-                    {previewPrompt.summary && (
-                      <p className="mt-1 text-[12.5px] text-muted-foreground">{previewPrompt.summary}</p>
+                    {previewPrompt.description && (
+                      <p className="mt-1 text-[12.5px] text-muted-foreground">{previewPrompt.description}</p>
                     )}
+
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => setPreviewSlug(null)}>
                     Dismiss
