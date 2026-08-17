@@ -101,8 +101,9 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         return new Response(xml, {
           headers: {
+            // No X-Robots-Tag here: a "noindex" header makes Google refuse to
+            // read the sitemap ("Sitemap could not be read").
             "Content-Type": "application/xml; charset=utf-8",
-            "X-Robots-Tag": "noindex",
             "Cache-Control": "public, max-age=3600",
           },
         });
