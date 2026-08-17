@@ -118,7 +118,7 @@ function scorePrompt(p: (typeof prompts)[number], tokens: string[]) {
   return score;
 }
 
-function recommendPrompts(input: string) {
+function recommendPrompts(input: string): { content: string; data: PromptResults } {
   const tokens = input
     .toLowerCase()
     .split(/[^a-z0-9+]+/)
@@ -127,45 +127,33 @@ function recommendPrompts(input: string) {
   const ranked = prompts
     .map((p) => ({ p, score: scorePrompt(p, tokens) }))
     .filter((x) => x.score > 0)
-    .sort((a, b) => b.score - a.score || b.p.uses - a.p.uses);
+    .sort((a, b) => b.score - a.score || b.p.uses - a.p.uses)
+    .map((x) => x.p);
 
-  const lines: string[] = [];
+  const matched = ranked.length > 0;
+  const list = matched ? ranked : [...prompts].sort((a, b) => b.uses - a.uses);
 
-  if (!tokens.length || ranked.length === 0) {
-    // No usable query: show the whole library grouped by category so nothing is hidden.
-    const byCategory = new Map<string, typeof prompts>();
-    for (const p of prompts) {
-      const list = byCategory.get(p.category) ?? [];
-      list.push(p);
-      byCategory.set(p.category, list);
-    }
-    lines.push(
-      ranked.length === 0 && tokens.length
-        ? `I couldn't match “${input.trim()}” directly — here's the full library (${prompts.length} prompts):`
-        : `All ${prompts.length} prompts in the library, by category:`,
-      "",
-    );
-    for (const [category, list] of byCategory) {
-      lines.push(`**${category.replace(/-/g, " ")}** (${list.length})`);
-      for (const p of list) lines.push(`- [${p.title}](/prompt/${p.slug}) — ${p.outcome}`);
-      lines.push("");
-    }
-    lines.push("[Browse the full Prompt Library](/prompts)");
-    return lines.join("\n");
-  }
+  const content = matched
+    ? `Here ${list.length === 1 ? "is the prompt" : `are the ${list.length} prompts`} that match your request.`
+    : tokens.length
+      ? `I couldn't match “${input.trim()}” exactly — here's the full library instead.`
+      : `Here's the full prompt library (${prompts.length} prompts).`;
 
-  const top = ranked.slice(0, 8);
-  lines.push(
-    `${ranked.length} prompt${ranked.length === 1 ? "" : "s"} match — here ${top.length === 1 ? "it is" : `are the top ${top.length}`}:`,
-    "",
-    ...top.map((x) => `- [${x.p.title}](/prompt/${x.p.slug}) — ${x.p.outcome}`),
-  );
-  if (ranked.length > top.length) {
-    lines.push("", `+ ${ranked.length - top.length} more — [see the full library](/prompts)`);
-  } else {
-    lines.push("", "[Browse the full Prompt Library](/prompts)");
-  }
-  return lines.join("\n");
+  return {
+    content,
+    data: {
+      kind: "prompt-results",
+      query: input.trim(),
+      total: matched ? list.length : 0,
+      items: list.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        outcome: p.outcome,
+        category: p.category,
+        pack: p.pack ?? null,
+      })),
+    },
+  };
 }
 
 
