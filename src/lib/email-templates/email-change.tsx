@@ -73,17 +73,6 @@ export const EmailChangeEmail = ({
           </Link>
         </Text>
 
-        <Section style={tipBox}>
-          <Text style={tipTitle}>Didn’t receive this email?</Text>
-          <Text style={tipText}>
-            Check your spam, junk, or promotions folder. To make sure you never
-            miss an update, add{' '}
-            <Link href="mailto:noreply@notify.applywise.eu" style={tipLink}>
-              noreply@notify.applywise.eu
-            </Link>{' '}
-            to your contacts.
-          </Text>
-        </Section>
 
         <Text style={footer}>
           If you didn't request this change, please secure your account
@@ -169,26 +158,6 @@ const fallback = {
   lineHeight: '1.5',
   margin: '24px 0 0',
 }
-const tipBox = {
-  backgroundColor: SURFACE,
-  border: `1px solid ${BORDER}`,
-  borderRadius: '12px',
-  padding: '18px 20px',
-  marginTop: '28px',
-}
-const tipTitle = {
-  fontSize: '13px',
-  fontWeight: 600,
-  color: FOREGROUND,
-  margin: '0 0 6px',
-}
-const tipText = {
-  fontSize: '13px',
-  color: MUTED,
-  lineHeight: '1.5',
-  margin: '0',
-}
-const tipLink = { color: PRIMARY, textDecoration: 'underline' }
 const footer = {
   fontSize: '13px',
   color: FOOTER,
