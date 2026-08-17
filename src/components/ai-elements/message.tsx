@@ -1,5 +1,6 @@
 "use client";
 
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   ButtonGroup,
@@ -21,6 +22,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import type { ComponentProps, HTMLAttributes, ReactElement } from "react";
 import {
   createContext,
+  forwardRef,
   memo,
   useCallback,
   useContext,
@@ -29,6 +31,7 @@ import {
   useState,
 } from "react";
 import { Streamdown } from "streamdown";
+
 
 export type MessageProps = HTMLAttributes<HTMLDivElement> & {
   from: UIMessage["role"];
@@ -323,6 +326,41 @@ export type MessageResponseProps = ComponentProps<typeof Streamdown>;
 
 const streamdownPlugins = { cjk, code, math, mermaid };
 
+const MarkdownLink = forwardRef<
+  HTMLAnchorElement,
+  React.AnchorHTMLAttributes<HTMLAnchorElement> & { node?: unknown }
+>(({ href, children, className, node, ...rest }, ref) => {
+  if (!href) return <span className={className}>{children}</span>;
+  const isAbsoluteHttp = /^https?:\/\//i.test(href);
+  const isSameOrigin =
+    typeof window !== "undefined" &&
+    isAbsoluteHttp &&
+    href.startsWith(window.location.origin);
+
+  if (isAbsoluteHttp && !isSameOrigin) {
+    return (
+      <a
+        ref={ref}
+        href={href}
+        className={className}
+        target="_blank"
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  const to = isSameOrigin ? href.slice(window.location.origin.length) : href;
+  return (
+    <Link ref={ref} to={to} className={className} {...rest}>
+      {children}
+    </Link>
+  );
+});
+MarkdownLink.displayName = "MarkdownLink";
+
 export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
     <Streamdown
@@ -331,6 +369,8 @@ export const MessageResponse = memo(
         className
       )}
       plugins={streamdownPlugins}
+      components={{ a: MarkdownLink }}
+      linkSafety={{ enabled: false }}
       {...props}
     />
   ),

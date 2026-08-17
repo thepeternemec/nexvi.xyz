@@ -417,7 +417,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                 ))}
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={href("/library")}><Button size="lg" className="rounded-full">{c.browseLibrary} <ArrowRight className="h-4 w-4" /></Button></a>
+                <a href={href("/prompts")}><Button size="lg" className="rounded-full">{c.browseLibrary} <ArrowRight className="h-4 w-4" /></Button></a>
                 
               </div>
             </div>
@@ -452,7 +452,7 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                   ))}
                 </div>
                 <div className="border-t border-border/60 bg-muted/20 px-5 py-3">
-                  <a href={href("/library")} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-primary hover:underline">
+                  <a href={href("/prompts")} className="inline-flex items-center gap-1.5 text-[12px] font-medium text-primary hover:underline">
                     Browse the full library <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                 </div>
