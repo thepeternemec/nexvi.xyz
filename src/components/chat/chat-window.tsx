@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
@@ -27,6 +27,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ChatContext } from "./chat-context";
 import { useAuth } from "@/hooks/use-auth";
 import { useToolGate } from "@/components/usage-gate";
 import { modeMeta, type ChatMode } from "@/lib/chat-modes";
@@ -34,7 +35,7 @@ import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
 import { generateCV, generateCoverLetter, scoreATS, humanizeText } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
 
-type ChatContext = {
+type ComposerContext = {
   jobDescription: string;
   background: string;
   company: string;
@@ -42,13 +43,13 @@ type ChatContext = {
 };
 
 const CTX_KEY = "applywise.chat.context";
-const EMPTY_CTX: ChatContext = { jobDescription: "", background: "", company: "", role: "" };
+const EMPTY_CTX: ComposerContext = { jobDescription: "", background: "", company: "", role: "" };
 
-function loadCtx(): ChatContext {
+function loadCtx(): ComposerContext {
   if (typeof window === "undefined") return EMPTY_CTX;
   try {
     const raw = window.localStorage.getItem(CTX_KEY);
-    return raw ? { ...EMPTY_CTX, ...(JSON.parse(raw) as Partial<ChatContext>) } : EMPTY_CTX;
+    return raw ? { ...EMPTY_CTX, ...(JSON.parse(raw) as Partial<ComposerContext>) } : EMPTY_CTX;
   } catch {
     return EMPTY_CTX;
   }
@@ -187,7 +188,7 @@ export function ChatWindow({
   const [messages, setMessages] = useState<ChatMsg[]>(initialMessages);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [ctx, setCtx] = useState<ChatContext>(EMPTY_CTX);
+  const [ctx, setCtx] = useState<ComposerContext>(EMPTY_CTX);
   const [ctxOpen, setCtxOpen] = useState(false);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -207,8 +208,8 @@ export function ChatWindow({
     textareaRef.current?.focus();
   }, [threadId, busy]);
 
-  function updateCtx(patch: Partial<ChatContext>) {
-    setCtx((prev) => {
+  function updateCtx(patch: Partial<ComposerContext>) {
+    setCtx((prev: ComposerContext) => {
       const next = { ...prev, ...patch };
       try {
         window.localStorage.setItem(CTX_KEY, JSON.stringify(next));
@@ -218,6 +219,13 @@ export function ChatWindow({
       return next;
     });
   }
+
+  const insertPrompt = useCallback((slug: string) => {
+    const p = prompts.find((x) => x.slug === slug);
+    if (!p) return;
+    setInput(p.body);
+    setTimeout(() => textareaRef.current?.focus(), 0);
+  }, []);
 
   const ready = useMemo(() => {
     if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
@@ -464,56 +472,58 @@ export function ChatWindow({
       )}
 
       {/* Transcript */}
-      <Conversation className="min-h-0 flex-1">
-        <ConversationContent className="mx-auto w-full max-w-3xl">
-          {messages.length === 0 ? (
-            <div className="py-14 text-center">
-              <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card">
-                <meta.icon className="h-5 w-5 text-primary" />
+      <ChatContext.Provider value={{ insertPrompt }}>
+        <Conversation className="min-h-0 flex-1">
+          <ConversationContent className="mx-auto w-full max-w-3xl">
+            {messages.length === 0 ? (
+              <div className="py-14 text-center">
+                <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-xl border border-border/70 bg-card">
+                  <meta.icon className="h-5 w-5 text-primary" />
+                </div>
+                <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
+                <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
+                <div className="mt-6 flex flex-wrap justify-center gap-2">
+                  {meta.starters.map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => send(s)}
+                      className="rounded-full border border-border/70 bg-background px-3 py-1.5 text-[12.5px] text-muted-foreground transition hover:border-foreground/25 hover:text-foreground"
+                    >
+                      {s}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
-              <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
-              <div className="mt-6 flex flex-wrap justify-center gap-2">
-                {meta.starters.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => send(s)}
-                    className="rounded-full border border-border/70 bg-background px-3 py-1.5 text-[12.5px] text-muted-foreground transition hover:border-foreground/25 hover:text-foreground"
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            messages.map((m) => (
-              <Message from={m.role} key={m.id}>
+            ) : (
+              messages.map((m) => (
+                <Message from={m.role} key={m.id}>
+                  <MessageContent>
+                    <MessageResponse>{m.content}</MessageResponse>
+                    {m.role === "assistant" && (
+                      <MessageActions className="mt-2">
+                        <MessageAction label="Copy" onClick={() => copy(m.content)}>
+                          <Copy className="h-3.5 w-3.5" />
+                        </MessageAction>
+                        <MessageAction label="Download" onClick={() => download(m.content)}>
+                          <Download className="h-3.5 w-3.5" />
+                        </MessageAction>
+                      </MessageActions>
+                    )}
+                  </MessageContent>
+                </Message>
+              ))
+            )}
+            {busy && (
+              <Message from="assistant">
                 <MessageContent>
-                  <MessageResponse>{m.content}</MessageResponse>
-                  {m.role === "assistant" && (
-                    <MessageActions className="mt-2">
-                      <MessageAction label="Copy" onClick={() => copy(m.content)}>
-                        <Copy className="h-3.5 w-3.5" />
-                      </MessageAction>
-                      <MessageAction label="Download" onClick={() => download(m.content)}>
-                        <Download className="h-3.5 w-3.5" />
-                      </MessageAction>
-                    </MessageActions>
-                  )}
+                  <Shimmer>Working on it…</Shimmer>
                 </MessageContent>
               </Message>
-            ))
-          )}
-          {busy && (
-            <Message from="assistant">
-              <MessageContent>
-                <Shimmer>Working on it…</Shimmer>
-              </MessageContent>
-            </Message>
-          )}
-        </ConversationContent>
-        <ConversationScrollButton />
-      </Conversation>
+            )}
+          </ConversationContent>
+          <ConversationScrollButton />
+        </Conversation>
+      </ChatContext.Provider>
 
       {/* Composer */}
       <div className="border-t border-border/60 px-3 py-3 sm:px-5">
