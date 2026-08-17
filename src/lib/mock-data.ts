@@ -79,6 +79,7 @@ export const packs: Pack[] = [
   { slug: "outreach-referrals", name: "Outreach & Referrals", emoji: "🤝", description: "Recruiter messages, follow-ups and warm intros" },
   { slug: "profile-brand", name: "Profile & Personal Brand", emoji: "💼", description: "LinkedIn, portfolio and personal brand positioning" },
   { slug: "humanizer", name: "Humanizer Pack", emoji: "🧑‍🎨", description: "Turn robotic text into warm, natural, human-sounding copy" },
+  { slug: "job-hunt-engine", name: "Job Hunt Engine", emoji: "🚀", description: "A 5-step Claude workflow to find titles, build a master resume, rank jobs, draft applications, and skip the ATS pile" },
 ];
 
 // Every prompt belongs to the pack that matches its category, so pack filters
