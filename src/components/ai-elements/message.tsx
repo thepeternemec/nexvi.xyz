@@ -337,7 +337,8 @@ const MarkdownLink = forwardRef<
     isAbsoluteHttp &&
     href.startsWith(window.location.origin);
 
-  if (isAbsoluteHttp && !isSameOrigin) {
+  const branch = isAbsoluteHttp && !isSameOrigin ? "external" : "internal";
+  if (branch === "external") {
     return (
       <a
         ref={ref}
@@ -345,6 +346,8 @@ const MarkdownLink = forwardRef<
         className={className}
         target="_blank"
         rel="noopener noreferrer"
+        data-branch={branch}
+        data-href={href}
         {...rest}
       >
         {children}
@@ -354,12 +357,20 @@ const MarkdownLink = forwardRef<
 
   const to = isSameOrigin ? href.slice(window.location.origin.length) : href;
   return (
-    <Link ref={ref} to={to} className={className} {...rest}>
+    <Link
+      ref={ref}
+      to={to}
+      className={className}
+      data-branch={branch}
+      data-href={href}
+      {...rest}
+    >
       {children}
     </Link>
   );
 });
 MarkdownLink.displayName = "MarkdownLink";
+
 
 export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
