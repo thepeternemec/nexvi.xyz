@@ -73,7 +73,6 @@ export const SignupEmail = ({
           </Link>
         </Text>
 
-        {/* Deliverability tip */}
 
         <Text style={footer}>
           If you didn’t create an account, you can safely ignore this email.
