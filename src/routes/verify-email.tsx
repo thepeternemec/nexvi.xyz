@@ -6,7 +6,7 @@ import { BrandMark } from "@/components/brand-mark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { AlertCircle, CheckCircle2, Loader2, Mail } from "lucide-react";
+import { AlertCircle, CheckCircle2, Loader2, Mail, Inbox } from "lucide-react";
 
 type VerifySearch = {
   next?: string;
@@ -113,7 +113,7 @@ export function VerifyEmailPage() {
         },
       });
       if (error) throw error;
-      toast.success("Verification email resent — check your inbox (and spam).");
+      toast.success("Verification email resent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not resend email");
     } finally {
@@ -160,7 +160,7 @@ export function VerifyEmailPage() {
         )}
 
         {(status === "expired" || status === "lookup") && (
-          <div className="rounded-2xl border border-border bg-muted/40 p-8">
+          <div className="rounded-2xl border border-border/70 bg-card/70 p-8 shadow-[0_24px_60px_-40px_color-mix(in_oklab,var(--primary)_45%,transparent)] backdrop-blur-xl">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Mail className="h-6 w-6" />
             </div>
@@ -192,12 +192,27 @@ export function VerifyEmailPage() {
                 {resendLoading ? "Sending…" : "Resend verification email"}
               </Button>
             </div>
+
+            {/* Deliverability tip */}
+            <div className="mt-6 rounded-xl border border-border/70 bg-muted/50 p-4 text-left">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <Inbox className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">
+                    Can’t find the email?
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    Check your spam, junk, or promotions folder. Messages come from{" "}
+                    <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                    — add that address to your contacts so future emails land in your inbox.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
-
-        <p className="text-xs text-muted-foreground">
-          Didn’t arrive? Check your spam or promotions folder.
-        </p>
       </div>
     </div>
   );

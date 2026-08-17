@@ -95,7 +95,7 @@ export function DashboardAccountSections() {
     );
     if (error) toast.error(error.message);
     else {
-      toast.success("Confirmation sent — check both inboxes to finish the change.");
+      toast.success("Confirmation sent — check both inboxes (and spam/junk). Sent from noreply@notify.applywise.eu.");
       setNewEmail("");
     }
     setBusy(null);

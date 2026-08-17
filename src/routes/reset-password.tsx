@@ -107,7 +107,7 @@ export function ResetPasswordPage() {
         redirectTo: `${window.location.origin}${alternateHref(locale, "/reset-password")}`,
       });
       if (error) throw error;
-      toast.success("Reset link sent — check your inbox (and spam).");
+      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Could not send reset link"
