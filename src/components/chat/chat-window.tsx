@@ -27,6 +27,7 @@ import { Shimmer } from "@/components/ai-elements/shimmer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { ChatContext } from "./chat-context";
 import { useAuth } from "@/hooks/use-auth";
 import { useToolGate } from "@/components/usage-gate";
 import { modeMeta, type ChatMode } from "@/lib/chat-modes";
