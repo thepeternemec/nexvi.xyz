@@ -188,7 +188,7 @@ export function ChatWindow({
   const [messages, setMessages] = useState<ChatMsg[]>(initialMessages);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [ctx, setCtx] = useState<ChatContext>(EMPTY_CTX);
+  const [ctx, setCtx] = useState<ComposerContext>(EMPTY_CTX);
   const [ctxOpen, setCtxOpen] = useState(false);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -208,7 +208,7 @@ export function ChatWindow({
     textareaRef.current?.focus();
   }, [threadId, busy]);
 
-  function updateCtx(patch: Partial<ChatContext>) {
+  function updateCtx(patch: Partial<ComposerContext>) {
     setCtx((prev) => {
       const next = { ...prev, ...patch };
       try {
