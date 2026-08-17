@@ -95,36 +95,78 @@ function atsMarkdown(r: Awaited<ReturnType<typeof scoreATS>>) {
   return lines.join("\n");
 }
 
-function recommendPrompts(input: string) {
-  const text = input.toLowerCase();
-  const pick = (kw: string[]) =>
-    prompts.filter(
-      (p) =>
-        kw.some(
-          (k) =>
-            p.title.toLowerCase().includes(k) ||
-            p.category.includes(k) ||
-            p.tags.some((t) => t.includes(k)),
-        ),
-    );
-  let r: typeof prompts = [];
-  if (/(cv|resume)/.test(text)) r = pick(["cv", "resume", "ats"]);
-  else if (/(cover letter|letter)/.test(text)) r = pick(["cover-letter", "cover letter"]);
-  else if (/(ats|keyword|score)/.test(text)) r = pick(["ats", "keyword"]);
-  else if (/(interview|behavioral|star)/.test(text)) r = pick(["interview", "star"]);
-  else if (/(linkedin|profile|headline)/.test(text)) r = pick(["linkedin"]);
-  else if (/(recruiter|outreach|cold)/.test(text)) r = pick(["outreach", "recruiter"]);
-  else if (/(negotiat|offer|salary|comp)/.test(text)) r = pick(["negotiation", "comp"]);
-  else if (/(switch|change|pivot)/.test(text)) r = pick(["career-change", "pivot"]);
-  else if (/(network|referral|intro)/.test(text)) r = pick(["networking", "referral"]);
-  else r = prompts.slice(0, 3);
-  const list = (r.length ? r : prompts).slice(0, 3);
-  return [
-    "Here are the prompts I'd reach for:",
-    "",
-    ...list.map((p) => `- [${p.title}](/prompt/${p.slug}) — ${p.outcome}`),
-  ].join("\n");
+const STOP_WORDS = new Set([
+  "the","a","an","and","or","for","with","to","of","my","me","i","in","on","how","do","can","you","please","help","need","want","best","some","give","show","find","prompt","prompts","about","that","this","get","any",
+]);
+
+function scorePrompt(p: (typeof prompts)[number], tokens: string[]) {
+  const title = p.title.toLowerCase();
+  const outcome = p.outcome.toLowerCase();
+  const desc = p.description.toLowerCase();
+  const cat = p.category.toLowerCase();
+  const pack = (p.pack ?? "").toLowerCase();
+  const tags = p.tags.map((t) => t.toLowerCase()).join(" ");
+  let score = 0;
+  for (const t of tokens) {
+    if (title.includes(t)) score += 6;
+    if (tags.includes(t)) score += 4;
+    if (cat.includes(t) || pack.includes(t)) score += 3;
+    if (outcome.includes(t)) score += 2;
+    if (desc.includes(t)) score += 1;
+  }
+  return score;
 }
+
+function recommendPrompts(input: string) {
+  const tokens = input
+    .toLowerCase()
+    .split(/[^a-z0-9+]+/)
+    .filter((t) => t.length > 2 && !STOP_WORDS.has(t));
+
+  const ranked = prompts
+    .map((p) => ({ p, score: scorePrompt(p, tokens) }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score || b.p.uses - a.p.uses);
+
+  const lines: string[] = [];
+
+  if (!tokens.length || ranked.length === 0) {
+    // No usable query: show the whole library grouped by category so nothing is hidden.
+    const byCategory = new Map<string, typeof prompts>();
+    for (const p of prompts) {
+      const list = byCategory.get(p.category) ?? [];
+      list.push(p);
+      byCategory.set(p.category, list);
+    }
+    lines.push(
+      ranked.length === 0 && tokens.length
+        ? `I couldn't match “${input.trim()}” directly — here's the full library (${prompts.length} prompts):`
+        : `All ${prompts.length} prompts in the library, by category:`,
+      "",
+    );
+    for (const [category, list] of byCategory) {
+      lines.push(`**${category.replace(/-/g, " ")}** (${list.length})`);
+      for (const p of list) lines.push(`- [${p.title}](/prompt/${p.slug}) — ${p.outcome}`);
+      lines.push("");
+    }
+    lines.push("[Browse the full Prompt Library](/prompts)");
+    return lines.join("\n");
+  }
+
+  const top = ranked.slice(0, 8);
+  lines.push(
+    `${ranked.length} prompt${ranked.length === 1 ? "" : "s"} match — here ${top.length === 1 ? "it is" : `are the top ${top.length}`}:`,
+    "",
+    ...top.map((x) => `- [${x.p.title}](/prompt/${x.p.slug}) — ${x.p.outcome}`),
+  );
+  if (ranked.length > top.length) {
+    lines.push("", `+ ${ranked.length - top.length} more — [see the full library](/prompts)`);
+  } else {
+    lines.push("", "[Browse the full Prompt Library](/prompts)");
+  }
+  return lines.join("\n");
+}
+
 
 export function ChatWindow({
   threadId,
