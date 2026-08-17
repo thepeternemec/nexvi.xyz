@@ -237,7 +237,7 @@ export function AuthShell({
 
   const pageSubtitle =
     mode === "forgot-sent"
-      ? "A password reset link was sent to your email. Please check your inbox and spam folders, then click it to set a new password."
+      ? "A password reset link was sent to your email. Please check your inbox, then click it to set a new password."
       : mode === "forgot"
       ? "Enter your email and we'll send you a link to reset your password."
       : subtitle;
