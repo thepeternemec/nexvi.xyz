@@ -192,6 +192,8 @@ export function ChatWindow({
   const [ctxOpen, setCtxOpen] = useState(false);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+
 
   const meta = modeMeta(mode);
   const gate = useToolGate(meta.tool ?? "cv");
