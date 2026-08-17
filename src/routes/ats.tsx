@@ -15,12 +15,15 @@ import { ToolHero, ToolOutro } from "@/components/tool-hero";
 export const Route = createFileRoute("/ats")({
   head: () => ({
     meta: [
-      { title: "Free ATS Resume Checker & Score — ApplyWise" },
-      { name: "description", content: "Score your CV against any job description. See match percentage, matched and missing keywords, formatting checks, and concrete rewrite fixes." },
-      { property: "og:title", content: "ATS Resume Checker & Score — ApplyWise" },
-      { property: "og:description", content: "Check how your CV scores against a job description and fix what's missing." },
+      { title: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { name: "description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
+      { property: "og:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { property: "og:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://applywise.eu/ats" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { name: "twitter:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
     ],
     links: [{ rel: "canonical", href: "https://applywise.eu/ats" }],
   }),

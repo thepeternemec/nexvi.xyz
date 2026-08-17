@@ -138,8 +138,8 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Your next job is a few clicks away.",
     ctaBigSub: "Free to use. No sign-up required. Browse the library, run a tool, get results.",
-    metaTitle: "ApplyWise — AI CVs, Cover Letters & ATS Optimization",
-    metaDesc: "Paste a job description. Get an ATS-optimized CV, tailored cover letter, and a match score with concrete fixes — in 60 seconds.",
+    metaTitle: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer",
+    metaDesc: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card.",
   },
   de: {
     badge: "Lebenslauf-Erstellung mit den neuesten KI-Modellen",
