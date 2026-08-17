@@ -508,8 +508,7 @@ const rawPrompts: Prompt[] = [
     category: "job-hunt", price: 0, rating: 4.9, reviews: 520, uses: 15400, beginner: true,
     tools: ["Claude"], tags: ["titles", "recruiter", "keywords", "ats"],
     creatorId: "c2", cover: g[4],
-    body: "Act as a senior recruiter. Based on my resume, list the 20 job titles I'm most qualified for, and the exact keywords ATS systems scan for in each one.
-\nResume: <PASTE RESUME>",
+    body: "Act as a senior recruiter. Based on my resume, list the 20 job titles I'm most qualified for, and the exact keywords ATS systems scan for in each one.\n\nResume: <PASTE RESUME>",
     examples: [{ input: "Product manager with 5 years in SaaS", output: "20 ranked titles from Senior PM to Product Lead, with ATS keyword clusters for each." }],
     instructions: ["Upload or paste your resume into the chat", "Run the prompt", "Save the 20 titles and keyword clusters", "Use them to target your job search"],
   },
@@ -520,8 +519,7 @@ const rawPrompts: Prompt[] = [
     category: "job-hunt", price: 0, rating: 4.9, reviews: 410, uses: 12800, beginner: true,
     tools: ["Claude"], tags: ["master resume", "xyz formula", "red flags"],
     creatorId: "c1", cover: g[2],
-    body: "Rewrite my resume into a master template I can tailor instantly. Use the Google XYZ formula, and strip out every red flag a hiring manager spots in under 10 seconds.
-\nResume: <PASTE RESUME>",
+    body: "Rewrite my resume into a master template I can tailor instantly. Use the Google XYZ formula, and strip out every red flag a hiring manager spots in under 10 seconds.\n\nResume: <PASTE RESUME>",
     examples: [{ input: "2-page resume with generic bullets", output: "Master resume with XYZ bullets, red flags removed, ready to tailor per JD." }],
     instructions: ["Stay in the same chat with your resume context", "Run the prompt", "Review the red flags Claude removed", "Save the master template as your base"],
   },
@@ -532,9 +530,7 @@ const rawPrompts: Prompt[] = [
     category: "job-hunt", price: 4, rating: 4.8, reviews: 380, uses: 11600, beginner: false,
     tools: ["Claude"], tags: ["job search", "linkedin", "indeed", "spreadsheet"],
     creatorId: "c2", cover: g[4],
-    body: "Go to LinkedIn and Indeed, find every job matching these titles posted in the last 7 days, and build me a spreadsheet with the link, a match score out of 100, and a tailored resume version for each one.
-\nTarget titles: <PASTE 20 TITLES>
-\nMaster resume: <PASTE MASTER RESUME>",
+    body: "Go to LinkedIn and Indeed, find every job matching these titles posted in the last 7 days, and build me a spreadsheet with the link, a match score out of 100, and a tailored resume version for each one.\n\nTarget titles: <PASTE 20 TITLES>\nMaster resume: <PASTE MASTER RESUME>",
     examples: [{ input: "20 titles + master resume", output: "Ranked spreadsheet with URLs, match scores, and tailored resume snippets for each job." }],
     instructions: ["Paste your 20 target titles and master resume", "Run the prompt", "Review the match scores and rankings", "Open the top matches and apply"],
   },
@@ -545,9 +541,7 @@ const rawPrompts: Prompt[] = [
     category: "job-hunt", price: 7, rating: 4.8, reviews: 340, uses: 10200, beginner: false,
     tools: ["Claude"], tags: ["applications", "bulk apply", "cover letters", "tailored"],
     creatorId: "c3", cover: g[3],
-    body: "For my top 50 matches, write a tailored application for each one, customised to that job description, with a short cover note. Number them so I can fire them off fast.
-\nJob spreadsheet: <PASTE TOP 50 ROWS>
-\nMaster resume: <PASTE MASTER RESUME>",
+    body: "For my top 50 matches, write a tailored application for each one, customised to that job description, with a short cover note. Number them so I can fire them off fast.\n\nJob spreadsheet: <PASTE TOP 50 ROWS>\nMaster resume: <PASTE MASTER RESUME>",
     examples: [{ input: "Top 50 job matches", output: "50 numbered applications with tailored cover notes and CV highlights for each role." }],
     instructions: ["Paste the top 50 rows from your job spreadsheet", "Run the prompt", "Review each application for accuracy", "Send them in batches of 10"],
   },
@@ -558,10 +552,10 @@ const rawPrompts: Prompt[] = [
     category: "job-hunt", price: 4, rating: 4.7, reviews: 290, uses: 8900, beginner: false,
     tools: ["Claude"], tags: ["linkedin", "recruiter", "hiring manager", "outreach"],
     creatorId: "c2", cover: g[5],
-    body: "For my top 10 matches, find the hiring manager or recruiter and write a short LinkedIn message for each. Mention I applied, name one specific thing I'd bring to that role, and end with a simple question. Under 90 words.
-\nTop 10 matches: <PASTE JOB SPREADSHEET TOP 10>",
+    body: "For my top 10 matches, find the hiring manager or recruiter and write a short LinkedIn message for each. Mention I applied, name one specific thing I'd bring to that role, and end with a simple question. Under 90 words.\n\nTop 10 matches: <PASTE JOB SPREADSHEET TOP 10>",
     examples: [{ input: "Top 10 job matches", output: "10 short LinkedIn messages, each under 90 words, with a clear question and a role-specific value point." }],
     instructions: ["Paste your top 10 matches from the job spreadsheet", "Run the prompt", "Find the right contact on LinkedIn for each role", "Send the message within 24 hours of applying"],
+  },
   },
 ];
 
