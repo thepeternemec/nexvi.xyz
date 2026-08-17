@@ -44,7 +44,10 @@ export const extractResumeText = createServerFn({ method: "POST" })
           },
           {
             role: "user",
-            content: [{ type: "text", text: "Extract the full resume text from this file." }, block],
+            content: [
+              { type: "text", text: "Extract the full resume text from this file." },
+              block,
+            ],
           },
         ],
       }),

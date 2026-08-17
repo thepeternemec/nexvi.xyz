@@ -53,17 +53,15 @@ export async function saveResume(
   const resume: SavedResume = { fileName, content, updatedAt: new Date().toISOString() };
   writeLocal(resume);
   if (userId) {
-    const { error } = await supabase
-      .from("user_resumes")
-      .upsert(
-        {
-          user_id: userId,
-          content,
-          updated_at: resume.updatedAt ?? new Date().toISOString(),
-          ...(fileName ? { file_name: fileName } : {}),
-        },
-        { onConflict: "user_id" },
-      );
+    const { error } = await supabase.from("user_resumes").upsert(
+      {
+        user_id: userId,
+        content,
+        updated_at: resume.updatedAt ?? new Date().toISOString(),
+        ...(fileName ? { file_name: fileName } : {}),
+      },
+      { onConflict: "user_id" },
+    );
     if (error) throw error;
   }
   return resume;

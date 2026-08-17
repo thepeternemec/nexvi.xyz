@@ -76,13 +76,15 @@ function atsMarkdown(r: Awaited<ReturnType<typeof scoreATS>>) {
   if (r.verdict) lines.push(`_${r.verdict}_`);
   if (r.subScores.length) {
     lines.push("", "| Area | Score | Weight |", "| --- | --- | --- |");
-    for (const s of r.subScores) lines.push(`| ${s.label} | ${Math.round(s.score)} | ${s.weight}% |`);
+    for (const s of r.subScores)
+      lines.push(`| ${s.label} | ${Math.round(s.score)} | ${s.weight}% |`);
   }
   lines.push(
     "",
     `**Keyword coverage:** ${r.keywordCoverage.matchedCount}/${r.keywordCoverage.totalCount} (${Math.round(r.keywordCoverage.coveragePct)}%)`,
   );
-  if (r.missingKeywords.length) lines.push("", `**Missing keywords:** ${r.missingKeywords.slice(0, 18).join(", ")}`);
+  if (r.missingKeywords.length)
+    lines.push("", `**Missing keywords:** ${r.missingKeywords.slice(0, 18).join(", ")}`);
   const failed = r.formattingChecks.filter((c) => !c.passed);
   if (failed.length) {
     lines.push("", "**Formatting issues**");
@@ -100,7 +102,40 @@ function atsMarkdown(r: Awaited<ReturnType<typeof scoreATS>>) {
 }
 
 const STOP_WORDS = new Set([
-  "the","a","an","and","or","for","with","to","of","my","me","i","in","on","how","do","can","you","please","help","need","want","best","some","give","show","find","prompt","prompts","about","that","this","get","any",
+  "the",
+  "a",
+  "an",
+  "and",
+  "or",
+  "for",
+  "with",
+  "to",
+  "of",
+  "my",
+  "me",
+  "i",
+  "in",
+  "on",
+  "how",
+  "do",
+  "can",
+  "you",
+  "please",
+  "help",
+  "need",
+  "want",
+  "best",
+  "some",
+  "give",
+  "show",
+  "find",
+  "prompt",
+  "prompts",
+  "about",
+  "that",
+  "this",
+  "get",
+  "any",
 ]);
 
 function scorePrompt(p: (typeof prompts)[number], tokens: string[]) {
@@ -159,7 +194,6 @@ function recommendPrompts(input: string): { content: string; data: PromptResults
   };
 }
 
-
 export function ChatWindow({
   threadId,
   initialMode = "cv",
@@ -186,7 +220,6 @@ export function ChatWindow({
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
   const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
-
   const meta = modeMeta(mode);
   const gate = useToolGate(meta.tool ?? "cv");
 
@@ -211,7 +244,6 @@ export function ChatWindow({
 
   // Both chat routes remount this component via `key`, so thread/message
   // props are only ever read as initial state — no re-sync effect needed.
-
 
   useEffect(() => {
     textareaRef.current?.focus();
@@ -246,7 +278,6 @@ export function ChatWindow({
     setPreviewSlug(null);
     setTimeout(() => textareaRef.current?.focus(), 0);
   }
-
 
   const ready = useMemo(() => {
     if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
@@ -298,7 +329,13 @@ export function ChatWindow({
       const q = text || "job search";
       const res = recommendPrompts(q);
       push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
-      push({ id: `a-${Date.now()}`, role: "assistant", content: res.content, mode, data: res.data });
+      push({
+        id: `a-${Date.now()}`,
+        role: "assistant",
+        content: res.content,
+        mode,
+        data: res.data,
+      });
       setInput("");
       try {
         await persist("user", q);
@@ -333,7 +370,10 @@ export function ChatWindow({
         const res = await runCV({
           data: {
             jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
-            background: pad(`${ctx.background}\n\n${text}`.trim(), "Brief background provided by user."),
+            background: pad(
+              `${ctx.background}\n\n${text}`.trim(),
+              "Brief background provided by user.",
+            ),
           },
         });
         content = clean(res.text);
@@ -341,7 +381,10 @@ export function ChatWindow({
         const res = await runCover({
           data: {
             jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
-            background: pad(`${ctx.background}\n\n${text}`.trim(), "Brief background provided by user."),
+            background: pad(
+              `${ctx.background}\n\n${text}`.trim(),
+              "Brief background provided by user.",
+            ),
             companyName: ctx.company || undefined,
             roleTitle: ctx.role || undefined,
           },
@@ -394,7 +437,6 @@ export function ChatWindow({
           : "That request didn't go through. Try again in a moment.",
         mode,
       });
-
     } finally {
       setBusy(false);
     }
@@ -422,7 +464,13 @@ export function ChatWindow({
       {/* Header */}
       <div className="flex items-center gap-2 border-b border-border/60 px-3 py-2.5 sm:px-5">
         {onOpenSidebar && (
-          <Button variant="ghost" size="icon-sm" className="lg:hidden" onClick={onOpenSidebar} aria-label="Open menu">
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="lg:hidden"
+            onClick={onOpenSidebar}
+            aria-label="Open menu"
+          >
             <PanelRightOpen className="h-4 w-4" />
           </Button>
         )}
@@ -433,7 +481,6 @@ export function ChatWindow({
           <span className="truncate text-[13px] font-semibold">{meta.label}</span>
         </div>
       </div>
-
 
       {/* Context panel */}
       {meta.needs.length > 0 && (
@@ -448,7 +495,9 @@ export function ChatWindow({
                 {ready ? "ready" : "job description + your background needed"}
               </span>
             </span>
-            <ChevronDown className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`} />
+            <ChevronDown
+              className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`}
+            />
           </button>
           {ctxOpen && (
             <div className="grid gap-3 px-3 pb-4 sm:px-5 lg:grid-cols-2">
@@ -468,7 +517,9 @@ export function ChatWindow({
               )}
               {meta.needs.includes("jobDescription") && (
                 <div>
-                  <label className="text-[12px] font-medium text-muted-foreground">Job description</label>
+                  <label className="text-[12px] font-medium text-muted-foreground">
+                    Job description
+                  </label>
                   <Textarea
                     value={ctx.jobDescription}
                     onChange={(e) => updateCtx({ jobDescription: e.target.value })}
@@ -479,7 +530,9 @@ export function ChatWindow({
               )}
               {meta.needs.includes("background") && (
                 <div>
-                  <label className="text-[12px] font-medium text-muted-foreground">Your CV / background</label>
+                  <label className="text-[12px] font-medium text-muted-foreground">
+                    Your CV / background
+                  </label>
                   <div className="mt-1.5">
                     <ResumePanel
                       value={ctx.background}
@@ -508,7 +561,9 @@ export function ChatWindow({
                   <meta.icon className="h-5 w-5 text-primary" />
                 </div>
                 <h2 className="font-display mt-4 text-2xl tracking-tight">{meta.label}</h2>
-                <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">{meta.blurb}</p>
+                <p className="mx-auto mt-1.5 max-w-md text-sm text-muted-foreground">
+                  {meta.blurb}
+                </p>
                 <div className="mt-6 flex flex-wrap justify-center gap-2">
                   {meta.starters.map((s) => (
                     <button
@@ -549,12 +604,15 @@ export function ChatWindow({
               <div className="mt-2 rounded-xl border border-border/70 bg-card p-4 shadow-sm">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Prompt preview</p>
+                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                      Prompt preview
+                    </p>
                     <h3 className="mt-1 text-sm font-medium">{previewPrompt.title}</h3>
                     {previewPrompt.description && (
-                      <p className="mt-1 text-[12.5px] text-muted-foreground">{previewPrompt.description}</p>
+                      <p className="mt-1 text-[12.5px] text-muted-foreground">
+                        {previewPrompt.description}
+                      </p>
                     )}
-
                   </div>
                   <Button variant="ghost" size="sm" onClick={() => setPreviewSlug(null)}>
                     Dismiss
@@ -580,7 +638,6 @@ export function ChatWindow({
                 </MessageContent>
               </Message>
             )}
-
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>
@@ -604,10 +661,12 @@ export function ChatWindow({
             />
             <PromptInputFooter className="justify-between">
               <PromptInputTools>
-                <span key={mode} className="inline-flex items-center gap-1.5 px-1 text-[11.5px] text-muted-foreground">
+                <span
+                  key={mode}
+                  className="inline-flex items-center gap-1.5 px-1 text-[11.5px] text-muted-foreground"
+                >
                   <meta.icon className="h-3.5 w-3.5" /> {meta.label}
                 </span>
-
               </PromptInputTools>
               <PromptInputSubmit status={busy ? "submitted" : undefined} disabled={busy} />
             </PromptInputFooter>
