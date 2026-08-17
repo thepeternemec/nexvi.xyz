@@ -54,7 +54,7 @@ export function getInitialThemeScript(): string {
     (function() {
       try {
         var theme = localStorage.getItem('${STORAGE_KEY}');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         }
       } catch (e) {}
