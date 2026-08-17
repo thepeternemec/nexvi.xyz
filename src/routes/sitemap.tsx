@@ -26,7 +26,7 @@ const groups: { title: string; links: { href: string; label: string }[] }[] = [
       { href: "/humanizer", label: "Humanizer" },
       { href: "/ats", label: "ATS Optimizer" },
       { href: "/copilot", label: "Copilot" },
-      { href: "/marketplace", label: "Prompt Library" },
+      { href: "/prompts", label: "Prompt Library" },
     ],
   },
   {

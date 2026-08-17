@@ -25,7 +25,7 @@ export interface SeoRunResult {
 }
 
 /** Pages whose head tags we validate on every run. */
-const PAGES_TO_CHECK = ["/", "/marketplace", "/pricing", "/about", "/humanizer"];
+const PAGES_TO_CHECK = ["/", "/prompts", "/pricing", "/about", "/humanizer"];
 
 const LOCALES = ["de", "es", "it", "fr"];
 

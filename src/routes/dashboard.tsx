@@ -108,7 +108,7 @@ export function Dashboard() {
 
         <div className="mt-12 flex items-end justify-between">
           <h2 className="font-display text-2xl tracking-tight">Recommended prompts</h2>
-          <a href={href("/marketplace")} className="text-sm text-muted-foreground hover:text-foreground">Browse library →</a>
+          <a href={href("/prompts")} className="text-sm text-muted-foreground hover:text-foreground">Browse library →</a>
         </div>
         <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {recommended.map(p => <PromptCard key={p.id} prompt={p} />)}

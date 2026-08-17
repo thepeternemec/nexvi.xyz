@@ -401,7 +401,7 @@ export function ATSPage() {
         primaryLabel="Rebuild my CV for this job"
         primaryHref="/cv"
         secondaryLabel="Browse ATS prompts"
-        secondaryHref="/marketplace"
+        secondaryHref="/prompts"
       />
       {gate.gates}
     </SiteShell>

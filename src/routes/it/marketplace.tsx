@@ -1,18 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Marketplace } from "@/routes/marketplace";
-
-
-
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/it/marketplace")({
-  head: () => ({ meta: [{ title: "Marketplace — ApplyWise" }] }),
-  validateSearch: (s: Record<string, unknown>) => ({
-    q: typeof s.q === "string" ? s.q : undefined,
-    category: typeof s.category === "string" ? s.category : undefined,
-    pack: typeof s.pack === "string" ? s.pack : undefined,
-    sort: (s.sort as string | undefined) ?? "popular",
-    price: (s.price as string | undefined) ?? "all",
-    beginner: s.beginner === "1" ? "1" : undefined,
-  }),
-  component: Marketplace,
+  beforeLoad: () => {
+    throw redirect({ to: "/it/prompts", search: {} as never });
+  },
+  component: () => null,
 });
