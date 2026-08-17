@@ -223,9 +223,21 @@ export function ChatWindow({
   const insertPrompt = useCallback((slug: string) => {
     const p = prompts.find((x) => x.slug === slug);
     if (!p) return;
-    setInput(p.body);
-    setTimeout(() => textareaRef.current?.focus(), 0);
+    setPreviewSlug(p.slug);
   }, []);
+
+  const previewPrompt = useMemo(
+    () => (previewSlug ? prompts.find((p) => p.slug === previewSlug) : undefined),
+    [previewSlug],
+  );
+
+  function applyPreview() {
+    if (!previewPrompt) return;
+    setInput(previewPrompt.body);
+    setPreviewSlug(null);
+    setTimeout(() => textareaRef.current?.focus(), 0);
+  }
+
 
   const ready = useMemo(() => {
     if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
