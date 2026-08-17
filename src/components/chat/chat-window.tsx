@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronDown, Copy, Download, PanelRightOpen } from "lucide-react";
+import { Check, ChevronDown, Copy, Download, PanelRightOpen, X } from "lucide-react";
 import { toast } from "sonner";
 import {
   Conversation,
