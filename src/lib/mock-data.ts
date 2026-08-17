@@ -20,6 +20,7 @@ export const categories: Category[] = [
   { slug: "personal-brand", name: "Personal Brand", emoji: "✨", description: "Bio, About page, narrative arc", gradient: "from-pink-400/20 to-rose-500/20" },
   { slug: "grad", name: "Students & Grads", emoji: "🎓", description: "First-CV, internships, no-experience moves", gradient: "from-indigo-400/20 to-violet-500/20" },
   { slug: "humanizer", name: "Humanizer prompts", emoji: "🧑‍🎨", description: "Make AI-generated text sound natural, personal, and human", gradient: "from-amber-400/20 to-rose-500/20" },
+  { slug: "job-hunt", name: "Job Hunt Engine", emoji: "🚀", description: "End-to-end job search workflows: titles, spreadsheets, applications, and outreach", gradient: "from-sky-400/20 to-indigo-500/20" },
 ];
 
 export type Creator = {
