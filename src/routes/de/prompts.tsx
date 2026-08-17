@@ -9,7 +9,7 @@ export const Route = createFileRoute("/de/prompts")({
     pack: typeof s.pack === "string" ? s.pack : undefined,
     sort: (s.sort as string | undefined) ?? undefined,
     price: (s.price as string | undefined) ?? undefined,
-    beginner: s.beginner === "1" || s.beginner === 1 ? "1" : undefined,
+    beginner: s.beginner === "1" || s.beginner === 1 ? 1 : undefined,
   }),
   component: PromptsPage,
 });

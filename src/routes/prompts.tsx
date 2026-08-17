@@ -14,7 +14,7 @@ import { useSavedPrompts } from "@/lib/saved-prompts";
 import { ToolOutro } from "@/components/tool-hero";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
 
-export type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" };
+export type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" | 1 };
 
 function matchesQuery(p: (typeof prompts)[number], query: string) {
   const needle = query.trim().toLowerCase();
@@ -75,7 +75,7 @@ export const Route = createFileRoute("/prompts")({
     pack: typeof s.pack === "string" ? s.pack : undefined,
     sort: (s.sort as Search["sort"]) ?? undefined,
     price: (s.price as Search["price"]) ?? undefined,
-    beginner: s.beginner === "1" || s.beginner === 1 ? "1" : undefined,
+    beginner: s.beginner === "1" || s.beginner === 1 ? 1 : undefined,
   }),
 });
 
@@ -120,7 +120,7 @@ export function PromptsPage() {
     if (search.pack) list = list.filter(p => p.pack === search.pack);
     if (search.price === "free") list = list.filter(p => p.price === 0);
     if (search.price === "paid") list = list.filter(p => p.price > 0);
-    if (search.beginner === "1") list = list.filter(p => p.beginner);
+    if (search.beginner) list = list.filter(p => p.beginner);
     if (search.q) list = list.filter(p => matchesQuery(p, search.q as string));
     if (search.sort === "rating") list.sort((a, b) => b.rating - a.rating);
     else if (search.sort === "newest") list.reverse();
@@ -307,7 +307,7 @@ export function PromptsPage() {
             <span className="mr-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Filter</span>
             <FilterChip label="Free" active={search.price === "free"} onClick={() => update({ price: search.price === "free" ? "all" : "free" })} />
             <FilterChip label="Premium" active={search.price === "paid"} onClick={() => update({ price: search.price === "paid" ? "all" : "paid" })} />
-            <FilterChip label="Beginner-friendly" active={search.beginner === "1"} onClick={() => update({ beginner: search.beginner === "1" ? undefined : "1" })} />
+            <FilterChip label="Beginner-friendly" active={search.beginner === 1 || search.beginner === "1"} onClick={() => update({ beginner: search.beginner ? undefined : 1 })} />
             {(search.q || search.category || search.pack || search.price !== "all" || search.beginner) && (
               <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
             )}
