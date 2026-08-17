@@ -192,6 +192,8 @@ export function ChatWindow({
   const [ctxOpen, setCtxOpen] = useState(false);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+
 
   const meta = modeMeta(mode);
   const gate = useToolGate(meta.tool ?? "cv");
@@ -223,9 +225,21 @@ export function ChatWindow({
   const insertPrompt = useCallback((slug: string) => {
     const p = prompts.find((x) => x.slug === slug);
     if (!p) return;
-    setInput(p.body);
-    setTimeout(() => textareaRef.current?.focus(), 0);
+    setPreviewSlug(p.slug);
   }, []);
+
+  const previewPrompt = useMemo(
+    () => (previewSlug ? prompts.find((p) => p.slug === previewSlug) : undefined),
+    [previewSlug],
+  );
+
+  function applyPreview() {
+    if (!previewPrompt) return;
+    setInput(previewPrompt.body);
+    setPreviewSlug(null);
+    setTimeout(() => textareaRef.current?.focus(), 0);
+  }
+
 
   const ready = useMemo(() => {
     if (meta.needs.includes("jobDescription") && !ctx.jobDescription.trim()) return false;
@@ -513,6 +527,34 @@ export function ChatWindow({
                 </Message>
               ))
             )}
+            {previewPrompt && (
+              <div className="mt-2 rounded-xl border border-border/70 bg-card p-4 shadow-sm">
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Prompt preview</p>
+                    <h3 className="mt-1 text-sm font-medium">{previewPrompt.title}</h3>
+                    {previewPrompt.description && (
+                      <p className="mt-1 text-[12.5px] text-muted-foreground">{previewPrompt.description}</p>
+                    )}
+
+                  </div>
+                  <Button variant="ghost" size="sm" onClick={() => setPreviewSlug(null)}>
+                    Dismiss
+                  </Button>
+                </div>
+                <pre className="mt-3 max-h-64 overflow-auto whitespace-pre-wrap rounded-lg border border-border/60 bg-muted/40 p-3 text-[12.5px] leading-relaxed text-foreground">
+                  {previewPrompt.body}
+                </pre>
+                <div className="mt-3 flex items-center justify-end gap-2">
+                  <Button variant="outline" size="sm" onClick={() => copy(previewPrompt.body)}>
+                    Copy
+                  </Button>
+                  <Button size="sm" onClick={applyPreview}>
+                    Apply
+                  </Button>
+                </div>
+              </div>
+            )}
             {busy && (
               <Message from="assistant">
                 <MessageContent>
@@ -520,6 +562,7 @@ export function ChatWindow({
                 </MessageContent>
               </Message>
             )}
+
           </ConversationContent>
           <ConversationScrollButton />
         </Conversation>
