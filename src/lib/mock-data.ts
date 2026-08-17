@@ -98,6 +98,7 @@ const packByCategory: Record<string, string> = {
   portfolio: "profile-brand",
   "personal-brand": "profile-brand",
   humanizer: "humanizer",
+  "job-hunt": "job-hunt-engine",
 };
 
 
