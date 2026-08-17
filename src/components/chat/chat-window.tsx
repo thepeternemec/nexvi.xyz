@@ -503,7 +503,12 @@ export function ChatWindow({
                 <Message from={m.role} key={m.id}>
                   <MessageContent>
                     <MessageResponse>{m.content}</MessageResponse>
-                    {m.role === "assistant" && (
+                    {isPromptResults(m.data) && (
+                      <div className="mt-3">
+                        <PromptResultList results={m.data} onSelect={insertPrompt} />
+                      </div>
+                    )}
+                    {m.role === "assistant" && !isPromptResults(m.data) && (
                       <MessageActions className="mt-2">
                         <MessageAction label="Copy" onClick={() => copy(m.content)}>
                           <Copy className="h-3.5 w-3.5" />
