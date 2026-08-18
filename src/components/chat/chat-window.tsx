@@ -477,13 +477,37 @@ export function ChatWindow({
   }
 
   function download(text: string) {
-    const blob = new Blob([text], { type: "text/markdown" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${mode}.md`;
-    a.click();
-    URL.revokeObjectURL(url);
+    const url = URL.createObjectURL(
+      new Blob([text], { type: "text/markdown;charset=utf-8" })
+    );
+    const framed = (() => {
+      try {
+        return window.self !== window.top;
+      } catch {
+        return true;
+      }
+    })();
+
+    const anchorDownload = () => {
+      try {
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `applywise-${mode}.md`;
+        a.rel = "noopener";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        return true;
+      } catch {
+        return false;
+      }
+    };
+    const openTab = () => !!window.open(url, "_blank", "noopener,noreferrer");
+
+    const ok = framed ? anchorDownload() || openTab() : anchorDownload() || openTab();
+    if (!ok) toast.error("Download blocked by your browser");
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
   }
 
   return (
