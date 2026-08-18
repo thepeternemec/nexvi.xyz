@@ -342,7 +342,12 @@ export function ChatWindow({
     // Once a prompt has been applied (or the message is clearly prompt/content
     // text rather than a search query), answer with the AI model like a normal chat.
     const looksLikeSearch = text.length <= 120 && !text.includes("\n");
-    if (mode === "prompts" && !promptApplied && looksLikeSearch) {
+    // Any real AI answer already in the thread means we're in a conversation,
+    // so follow-ups go to the model instead of the prompt recommender.
+    const chatStarted =
+      promptApplied ||
+      messages.some((m) => m.role === "assistant" && !isPromptResults(m.data));
+    if (mode === "prompts" && !chatStarted && looksLikeSearch) {
       const q = text || "job search";
       const res = recommendPrompts(q);
       push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
