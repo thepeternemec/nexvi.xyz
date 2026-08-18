@@ -165,6 +165,12 @@ export const humanizeText = createServerFn({ method: "POST" })
 /* ---------- Copilot Q&A (Gemini Flash Lite) ---------- */
 const ASK_MODEL = "google/gemini-3.1-flash-lite";
 
+function askGateway() {
+  const key = process.env.LOVABLE_API_KEY;
+  if (!key) throw new Error("AI service is not configured.");
+  return createLovableAiGatewayProvider(key)(ASK_MODEL);
+}
+
 const AskInput = z.object({
   messages: z
     .array(
@@ -206,7 +212,7 @@ export const askCopilot = createServerFn({ method: "POST" })
 
     const { text } = await runAi(() =>
       generateText({
-        model: createLovableAiGatewayProvider(process.env.LOVABLE_API_KEY ?? "")(ASK_MODEL),
+        model: askGateway(),
         system: `${system}\n\n${context}`,
         messages: data.messages.map((m) => ({ role: m.role, content: m.content })),
       }),
