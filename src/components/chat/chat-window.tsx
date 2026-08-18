@@ -447,7 +447,17 @@ export function ChatWindow({
 
       push({ id: `a-${Date.now()}`, role: "assistant", content, mode, data });
       await persist("assistant", content, data);
-      if (mode !== "ask") await gate.after();
+      if (!askMode) await gate.after();
+
+      // Hand the conversation over to the chat model right after a fresh ATS score
+      // so the user can ask for a rewrite that scores higher.
+      if (mode === "ats" && !atsFollowUp) {
+        setAtsFollowUp(true);
+        const followUp =
+          "Want to push this score higher? Ask me anything from here — for example:\n\n- **Rewrite my CV** to cover the missing keywords\n- **Rework my experience bullets** with stronger metrics\n- **Explain** why a specific check failed and how to fix it\n\nI'll keep your job description, CV and this ATS report in mind.";
+        push({ id: `a-${Date.now() + 1}`, role: "assistant", content: followUp, mode });
+        await persist("assistant", followUp);
+      }
 
       if (!threadId && activeThread.current) {
         navigate({
