@@ -220,6 +220,9 @@ export function ChatWindow({
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
   /** Once a prompt has been applied, Prompt Library chat behaves like a normal AI chat. */
   const [promptApplied, setPromptApplied] = useState(false);
+  // After an ATS score is returned, the window turns into a normal Gemini chat so
+  // the user can iterate on the CV to raise the score.
+  const [atsFollowUp, setAtsFollowUp] = useState(false);
   const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
   const meta = modeMeta(mode);
