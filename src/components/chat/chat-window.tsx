@@ -196,7 +196,7 @@ function recommendPrompts(input: string): { content: string; data: PromptResults
 
 export function ChatWindow({
   threadId,
-  initialMode = "cv",
+  initialMode = "ask",
   initialMessages = [],
   onOpenSidebar,
 }: {

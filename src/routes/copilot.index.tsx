@@ -15,5 +15,5 @@ export const Route = createFileRoute("/copilot/")({
 function NewChat() {
   const { mode } = Route.useSearch();
   const { openSidebar } = useChatSidebar();
-  return <ChatWindow key={mode ?? "cv"} initialMode={mode ?? "cv"} onOpenSidebar={openSidebar} />;
+  return <ChatWindow key={mode ?? "ask"} initialMode={mode ?? "ask"} onOpenSidebar={openSidebar} />;
 }

@@ -29,7 +29,7 @@ function ThreadChat() {
       key={threadId}
       threadId={threadId}
       initialMessages={list}
-      initialMode={lastMode ?? "cv"}
+      initialMode={lastMode ?? "ask"}
       onOpenSidebar={openSidebar}
     />
   );
