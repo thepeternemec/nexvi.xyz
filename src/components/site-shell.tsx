@@ -67,7 +67,7 @@ type MenuSection = { label: string; hint: string; items: MenuItem[] };
 
 const MENUS: MenuSection[] = [
   {
-    label: "Products",
+    label: "Tools",
     hint: "Run the AI that tailors your application",
     items: [
       ...CHAT_MODES.filter((m) => m.id !== "ask").map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
@@ -454,7 +454,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
 
         </div>
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Products</div>
+          <div className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">Tools</div>
           <ul className="mt-4 space-y-2.5 text-[14px] text-muted-foreground">
             {[["/cv", "CV Generator"], ["/cover-letter", "Cover Letter Generator"], ["/humanizer", "Humanizer"], ["/ats", "ATS Optimizer"], ["/library", "Prompt Library"], ["/copilot", "Copilot"]].map(([to, label]) => (
               <li key={to}>
