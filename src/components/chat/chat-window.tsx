@@ -35,7 +35,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { useToolGate } from "@/components/usage-gate";
 import { modeMeta, type ChatMode } from "@/lib/chat-modes";
 import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
-import { generateCV, generateCoverLetter, scoreATS, humanizeText } from "@/lib/career.functions";
+import { generateCV, generateCoverLetter, scoreATS, humanizeText, askCopilot } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
 
 type ComposerContext = {
@@ -289,6 +289,7 @@ export function ChatWindow({
   const runCover = useServerFn(generateCoverLetter);
   const runATS = useServerFn(scoreATS);
   const runHumanize = useServerFn(humanizeText);
+  const runAsk = useServerFn(askCopilot);
 
   function push(msg: ChatMsg) {
     setMessages((m) => [...m, msg]);
@@ -314,7 +315,7 @@ export function ChatWindow({
       toast.error("Paste the text you want humanized.");
       return;
     }
-    if (mode !== "humanizer" && mode !== "prompts" && !ready) {
+    if (mode !== "humanizer" && mode !== "prompts" && mode !== "ask" && !ready) {
       setCtxOpen(true);
       push({
         id: `local-${Date.now()}`,
@@ -323,6 +324,10 @@ export function ChatWindow({
           "I need two things first: the **job description** and **your background / current CV**. Add them in the context panel and I'll get to work.",
         mode,
       });
+      return;
+    }
+    if (mode === "ask" && !text) {
+      toast.error("Type a question first.");
       return;
     }
     if (mode === "prompts") {
@@ -346,7 +351,7 @@ export function ChatWindow({
       return;
     }
 
-    if (!(await gate.before())) return;
+    if (mode !== "ask" && !(await gate.before())) return;
 
     const userContent =
       text ||
@@ -366,7 +371,29 @@ export function ChatWindow({
       let content = "";
       let data: unknown;
 
-      if (mode === "cv") {
+      if (mode === "ask") {
+        const history = [
+          ...messages
+            .filter((m) => !isPromptResults(m.data))
+            .slice(-12)
+            .map((m) => ({ role: m.role, content: m.content })),
+          { role: "user" as const, content: userContent },
+        ];
+        const lastOutput = [...messages]
+          .reverse()
+          .find((m) => m.role === "assistant" && !isPromptResults(m.data))?.content;
+        const res = await runAsk({
+          data: {
+            messages: history,
+            jobDescription: ctx.jobDescription.trim() || undefined,
+            background: ctx.background.trim() || undefined,
+            company: ctx.company || undefined,
+            role: ctx.role || undefined,
+            lastOutput: lastOutput || undefined,
+          },
+        });
+        content = clean(res.text);
+      } else if (mode === "cv") {
         const res = await runCV({
           data: {
             jobDescription: pad(ctx.jobDescription, "Short job description provided by user."),
@@ -408,7 +435,7 @@ export function ChatWindow({
 
       push({ id: `a-${Date.now()}`, role: "assistant", content, mode, data });
       await persist("assistant", content, data);
-      await gate.after();
+      if (mode !== "ask") await gate.after();
 
       if (!threadId && activeThread.current) {
         navigate({
