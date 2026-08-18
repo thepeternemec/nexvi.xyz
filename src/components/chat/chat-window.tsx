@@ -678,7 +678,28 @@ export function ChatWindow({
           )}
         </div>
       </div>
+        </div>
+
+        {/* Resume sidebar */}
+        {meta.needs.includes("background") && (
+          <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-l border-border/60 bg-muted/20 px-4 py-4 xl:block">
+            <p className="text-[12px] font-medium text-muted-foreground">Your CV / background</p>
+            <div className="mt-2">
+              <ResumePanel
+                value={ctx.background}
+                saved={savedResume}
+                userId={user?.id}
+                onChange={(text, rec) => {
+                  updateCtx({ background: text });
+                  setSavedResume(rec);
+                }}
+              />
+            </div>
+          </aside>
+        )}
+      </div>
       {gate.gates}
     </div>
   );
 }
+
