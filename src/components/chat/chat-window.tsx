@@ -329,7 +329,7 @@ export function ChatWindow({
       });
       return;
     }
-    if (mode === "ask" && !text) {
+    if ((mode === "ask" || mode === "prompts") && !text && promptApplied) {
       toast.error("Type a question first.");
       return;
     }
@@ -358,7 +358,7 @@ export function ChatWindow({
       return;
     }
 
-    if (mode !== "ask" && !(await gate.before())) return;
+    if (mode !== "ask" && mode !== "prompts" && !(await gate.before())) return;
 
     const userContent =
       text ||
@@ -378,7 +378,8 @@ export function ChatWindow({
       let content = "";
       let data: unknown;
 
-      if (mode === "ask") {
+      if (mode === "ask" || mode === "prompts") {
+        setPromptApplied(true);
         const history = [
           ...messages
             .filter((m) => !isPromptResults(m.data))
