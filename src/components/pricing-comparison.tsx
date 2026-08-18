@@ -35,16 +35,6 @@ const GROUPS: ComparisonGroup[] = [
       { feature: "File uploads in Copilot", free: false, premium: true },
     ],
   },
-  {
-    title: "Library & support",
-    rows: [
-      { feature: "Free prompt library", free: true, premium: true },
-      { feature: "Premium-only prompts", hint: "Humanizer & recruiter packs", free: false, premium: true },
-      { feature: "Faster AI generation", free: false, premium: true },
-      { feature: "Priority support", free: false, premium: true },
-      { feature: "Early access to new features", free: false, premium: true },
-    ],
-  },
 ];
 
 function ValueCell({ value, emphasis }: { value: CellValue; emphasis?: boolean }) {
