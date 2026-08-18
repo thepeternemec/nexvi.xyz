@@ -321,7 +321,8 @@ export function ChatWindow({
       toast.error("Paste the text you want humanized.");
       return;
     }
-    if (mode !== "humanizer" && mode !== "prompts" && mode !== "ask" && !ready) {
+    const askMode = mode === "ask" || mode === "prompts" || (mode === "ats" && atsFollowUp);
+    if (!askMode && mode !== "humanizer" && !ready) {
       setCtxOpen(true);
       push({
         id: `local-${Date.now()}`,
@@ -332,7 +333,7 @@ export function ChatWindow({
       });
       return;
     }
-    if ((mode === "ask" || mode === "prompts") && !text && promptApplied) {
+    if (askMode && !text && (promptApplied || atsFollowUp)) {
       toast.error("Type a question first.");
       return;
     }
