@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { generateText, Output } from "ai";
 import { createLovableAiGatewayProvider } from "@/lib/ai-gateway.server";
-import { consumeAiCredit } from "@/lib/ai-guard.server";
+import { consumeAiCredit, guardChatAi } from "@/lib/ai-guard.server";
 
 const MODEL = "google/gemini-3-flash-preview";
 
@@ -160,4 +160,56 @@ export const humanizeText = createServerFn({ method: "POST" })
     const prompt = `Editing strength: ${strength}. ${strength === "light" ? "Make minimal surface changes." : strength === "strong" ? "Aggressively rewrite phrasing and cadence." : "Balance faithfulness with natural rewriting."}\n\nTEXT TO HUMANIZE:\n${data.text}`;
     const { text } = await runAi(() => generateText({ model: gateway(), system, prompt }));
     return { text: text.replace(/```[a-z]*\n?/gi, "").replace(/```/g, "").trim() };
+  });
+
+/* ---------- Copilot Q&A (Gemini Flash Lite) ---------- */
+const ASK_MODEL = "google/gemini-3.1-flash-lite";
+
+const AskInput = z.object({
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(["user", "assistant"]),
+        content: z.string().max(20000),
+      }),
+    )
+    .min(1)
+    .max(30),
+  jobDescription: z.string().max(15000).optional(),
+  background: z.string().max(15000).optional(),
+  company: z.string().max(200).optional(),
+  role: z.string().max(200).optional(),
+  /** Latest CV / cover letter / ATS output generated in this workspace. */
+  lastOutput: z.string().max(20000).optional(),
+});
+
+export const askCopilot = createServerFn({ method: "POST" })
+  .inputValidator((d: unknown) => AskInput.parse(d))
+  .handler(async ({ data }) => {
+    await guardChatAi();
+
+    const system =
+      "You are ApplyWise Copilot, a sharp, friendly career assistant. Answer questions about the user's job search, CV, cover letters, ATS results and interviews. Use the CONTEXT block (job description, the user's CV/background, and the most recent content ApplyWise generated for them) as ground truth and quote or revise it when asked. Never invent facts about the user's history. Be concise and concrete: short paragraphs, bullets where useful, Markdown. If context you need is missing, say exactly what to paste in.";
+
+    const contextParts: string[] = [];
+    if (data.role) contextParts.push(`TARGET ROLE: ${data.role}`);
+    if (data.company) contextParts.push(`TARGET COMPANY: ${data.company}`);
+    if (data.jobDescription?.trim())
+      contextParts.push(`JOB DESCRIPTION:\n${data.jobDescription.trim()}`);
+    if (data.background?.trim()) contextParts.push(`USER CV / BACKGROUND:\n${data.background.trim()}`);
+    if (data.lastOutput?.trim())
+      contextParts.push(`MOST RECENT APPLYWISE OUTPUT:\n${data.lastOutput.trim()}`);
+
+    const context = contextParts.length
+      ? `CONTEXT\n${contextParts.join("\n\n")}`
+      : "CONTEXT\n(none provided yet)";
+
+    const { text } = await runAi(() =>
+      generateText({
+        model: createLovableAiGatewayProvider(process.env.LOVABLE_API_KEY ?? "")(ASK_MODEL),
+        system: `${system}\n\n${context}`,
+        messages: data.messages.map((m) => ({ role: m.role, content: m.content })),
+      }),
+    );
+    return { text: text.trim() };
   });
