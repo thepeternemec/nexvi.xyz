@@ -11,6 +11,7 @@ import { DocumentRender, toPlainText } from "@/components/document-render";
 import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { ResumeField } from "@/components/resume-field";
 
 
 
@@ -148,6 +149,7 @@ export function CVPage() {
             </div>
             <div>
               <label htmlFor="cv-background" className="text-sm font-medium">Your background</label>
+              <ResumeField value={bg} onChange={setBg} className="mt-2" />
               <Textarea id="cv-background" value={bg} onChange={(e) => setBg(e.target.value)} placeholder="Past roles, skills, education, achievements — or paste your existing CV." className="mt-2 min-h-[180px]" />
             </div>
             <div>

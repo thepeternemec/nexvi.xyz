@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { generateCoverLetter } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { ResumeField } from "@/components/resume-field";
 
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
@@ -107,6 +108,7 @@ export function CoverLetterPage() {
             </div>
             <div>
               <label className="text-sm font-medium">Your background</label>
+              <ResumeField value={bg} onChange={setBg} className="mt-2" />
               <Textarea value={bg} onChange={(e) => setBg(e.target.value)} placeholder="Experience, skills, why you're a fit…" className="mt-2 min-h-[140px]" />
             </div>
             <div>

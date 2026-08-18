@@ -10,6 +10,7 @@ import { scoreATS } from "@/lib/career.functions";
 import { downloadDocumentPdf } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { ResumeField } from "@/components/resume-field";
 
 
 export const Route = createFileRoute("/ats")({
@@ -158,6 +159,7 @@ export function ATSPage() {
                   <span>Your CV</span>
                   <span className="rounded-full border border-border/70 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground dark:border-white/15 dark:text-white/50">candidate</span>
                 </label>
+                <ResumeField value={cv} onChange={setCv} className="mt-3" />
                 <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 dark:text-white dark:placeholder:text-white/30" />
               </div>
             </div>
