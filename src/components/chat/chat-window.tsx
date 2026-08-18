@@ -505,9 +505,9 @@ export function ChatWindow({
 
 
 
-      {/* Context panel */}
+      {/* Context panel (mobile only) */}
       {meta.needs.length > 0 && (
-        <div className="border-b border-border/60 bg-muted/20">
+        <div className="border-b border-border/60 bg-muted/20 lg:hidden">
           <button
             onClick={() => setCtxOpen((o) => !o)}
             className="flex w-full items-center justify-between px-3 py-2 text-left text-[12.5px] font-medium sm:px-5"
@@ -523,9 +523,9 @@ export function ChatWindow({
             />
           </button>
           {ctxOpen && (
-            <div className="grid gap-3 px-3 pb-4 sm:px-5 lg:grid-cols-2">
+            <div className="grid gap-3 px-3 pb-4 sm:px-5">
               {mode === "coverLetter" && (
-                <div className="grid grid-cols-2 gap-3 lg:col-span-2">
+                <div className="grid grid-cols-2 gap-3">
                   <Input
                     value={ctx.company}
                     onChange={(e) => updateCtx({ company: e.target.value })}
@@ -552,7 +552,7 @@ export function ChatWindow({
                 </div>
               )}
               {meta.needs.includes("background") && (
-                <div className="lg:hidden">
+                <div>
                   <label className="text-[12px] font-medium text-muted-foreground">
                     Your CV / background
                   </label>
@@ -569,7 +569,6 @@ export function ChatWindow({
                   </div>
                 </div>
               )}
-
             </div>
           )}
         </div>
@@ -703,7 +702,36 @@ export function ChatWindow({
         </div>
       </div>
         </div>
+
+        {/* Job description sidebar */}
+        {meta.needs.includes("jobDescription") && (
+          <aside className="hidden w-[300px] shrink-0 flex-col overflow-hidden border-l border-border/60 bg-muted/20 px-4 py-4 lg:flex">
+            <p className="text-[12px] font-medium text-muted-foreground">Job description</p>
+            {mode === "coverLetter" && (
+              <div className="mt-2 grid grid-cols-1 gap-2">
+                <Input
+                  value={ctx.company}
+                  onChange={(e) => updateCtx({ company: e.target.value })}
+                  placeholder="Company (optional)"
+                />
+                <Input
+                  value={ctx.role}
+                  onChange={(e) => updateCtx({ role: e.target.value })}
+                  placeholder="Role title (optional)"
+                />
+              </div>
+            )}
+            <Textarea
+              value={ctx.jobDescription}
+              onChange={(e) => updateCtx({ jobDescription: e.target.value })}
+              placeholder="Paste the job posting…"
+              className="mt-2 min-h-0 flex-1 resize-none"
+            />
+          </aside>
+        )}
       </div>
+    </div>
+  </div>
       {gate.gates}
     </div>
   );
