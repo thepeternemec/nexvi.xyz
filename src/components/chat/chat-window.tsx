@@ -278,6 +278,7 @@ export function ChatWindow({
     if (!previewPrompt) return;
     setInput(previewPrompt.body);
     setPreviewSlug(null);
+    setPromptApplied(true);
     setTimeout(() => textareaRef.current?.focus(), 0);
   }
 
