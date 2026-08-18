@@ -59,7 +59,8 @@ export const MessageContent = ({
   <div
     className={cn(
       "is-user:dark flex w-fit min-w-0 max-w-full flex-col gap-2 overflow-hidden text-sm",
-      "group-[.is-user]:ml-auto group-[.is-user]:rounded-lg group-[.is-user]:bg-secondary group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-foreground",
+      "group-[.is-user]:ml-auto group-[.is-user]:rounded-2xl group-[.is-user]:bg-gradient-to-br group-[.is-user]:from-[oklch(0.96_0.02_250)] group-[.is-user]:via-[oklch(0.94_0.025_265)] group-[.is-user]:to-[oklch(0.92_0.03_275)] group-[.is-user]:px-5 group-[.is-user]:py-4 group-[.is-user]:text-foreground group-[.is-user]:shadow-sm",
+      "dark:group-[.is-user]:from-[oklch(0.25_0.04_270)] dark:group-[.is-user]:via-[oklch(0.21_0.035_275)] dark:group-[.is-user]:to-[oklch(0.17_0.03_285)]",
       "group-[.is-assistant]:text-foreground",
       className
     )}
