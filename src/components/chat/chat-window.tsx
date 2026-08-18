@@ -529,7 +529,7 @@ export function ChatWindow({
                 </div>
               )}
               {meta.needs.includes("background") && (
-                <div>
+                <div className="xl:hidden">
                   <label className="text-[12px] font-medium text-muted-foreground">
                     Your CV / background
                   </label>
@@ -546,6 +546,7 @@ export function ChatWindow({
                   </div>
                 </div>
               )}
+
             </div>
           )}
         </div>
