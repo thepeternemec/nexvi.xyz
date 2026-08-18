@@ -482,6 +482,11 @@ export function ChatWindow({
         </div>
       </div>
 
+      <div className="flex min-h-0 flex-1">
+        <div className="flex min-h-0 flex-1 flex-col">
+
+
+
       {/* Context panel */}
       {meta.needs.length > 0 && (
         <div className="border-b border-border/60 bg-muted/20">
