@@ -333,7 +333,11 @@ export function ChatWindow({
       toast.error("Type a question first.");
       return;
     }
-    if (mode === "prompts") {
+    // Prompt Library: recommend prompts only while the user is still searching.
+    // Once a prompt has been applied (or the message is clearly prompt/content
+    // text rather than a search query), answer with the AI model like a normal chat.
+    const looksLikeSearch = text.length <= 120 && !text.includes("\n");
+    if (mode === "prompts" && !promptApplied && looksLikeSearch) {
       const q = text || "job search";
       const res = recommendPrompts(q);
       push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
