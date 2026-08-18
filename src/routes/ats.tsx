@@ -155,12 +155,11 @@ export function ATSPage() {
                 <Textarea id="ats-job-description" name="jobDescription" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the job posting…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 dark:text-white dark:placeholder:text-white/30" />
               </div>
               <div className="rounded-2xl border border-border/70 bg-muted/30 p-4 backdrop-blur dark:border-white/10 dark:bg-white/[0.04]">
-                <label htmlFor="ats-cv" className="flex items-center justify-between text-xs font-medium text-foreground dark:text-white/80">
+                <label className="flex items-center justify-between text-xs font-medium text-foreground dark:text-white/80">
                   <span>Your CV</span>
                   <span className="rounded-full border border-border/70 px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground dark:border-white/15 dark:text-white/50">candidate</span>
                 </label>
                 <ResumeField value={cv} onChange={setCv} className="mt-3" />
-                <Textarea id="ats-cv" name="cv" value={cv} onChange={(e) => setCv(e.target.value)} placeholder="Paste your current CV here…" className="mt-3 min-h-[210px] resize-none border-0 bg-transparent p-0 text-sm text-foreground placeholder:text-muted-foreground/70 focus-visible:ring-0 dark:text-white dark:placeholder:text-white/30" />
               </div>
             </div>
 
