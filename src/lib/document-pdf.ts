@@ -124,13 +124,13 @@ export function downloadDocumentPdf(md: string, filename: string) {
 
   const anchorDownload = () => {
     try {
-      const a = document.createElement("a");
+      const doc = framed && window.top?.document ? window.top.document : document;
+      const a = doc.createElement("a");
       a.href = url;
       a.download = filename;
       a.rel = "noopener";
-      a.target = "_blank";
       a.style.display = "none";
-      document.body.appendChild(a);
+      doc.body.appendChild(a);
       a.click();
       a.remove();
       return true;
@@ -139,7 +139,8 @@ export function downloadDocumentPdf(md: string, filename: string) {
     }
   };
 
-  const ok = framed ? openTab() || anchorDownload() : anchorDownload() || openTab();
+  // Always try a real file download first; only fall back to a viewer tab.
+  const ok = anchorDownload() || openTab();
   if (!ok) throw new Error("Download blocked by the browser");
 
   // Give the browser time to start the download before revoking.

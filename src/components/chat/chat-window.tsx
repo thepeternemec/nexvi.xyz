@@ -37,6 +37,7 @@ import { modeMeta, type ChatMode } from "@/lib/chat-modes";
 import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
 import { generateCV, generateCoverLetter, scoreATS, humanizeText, askCopilot } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
 
 type ComposerContext = {
   jobDescription: string;
@@ -499,37 +500,12 @@ export function ChatWindow({
   }
 
   function download(text: string) {
-    const url = URL.createObjectURL(
-      new Blob([text], { type: "text/markdown;charset=utf-8" })
-    );
-    const framed = (() => {
-      try {
-        return window.self !== window.top;
-      } catch {
-        return true;
-      }
-    })();
-
-    const anchorDownload = () => {
-      try {
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `applywise-${mode}.md`;
-        a.rel = "noopener";
-        a.style.display = "none";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        return true;
-      } catch {
-        return false;
-      }
-    };
-    const openTab = () => !!window.open(url, "_blank", "noopener,noreferrer");
-
-    const ok = framed ? anchorDownload() || openTab() : anchorDownload() || openTab();
-    if (!ok) toast.error("Download blocked by your browser");
-    setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    try {
+      downloadDocumentPdf(text, `applywise-${mode}-${Date.now()}.pdf`);
+      toast.success("PDF downloaded");
+    } catch {
+      toast.error("Download blocked by your browser");
+    }
   }
 
   return (
