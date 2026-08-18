@@ -362,7 +362,7 @@ export function ChatWindow({
       return;
     }
 
-    if (mode !== "ask" && mode !== "prompts" && !(await gate.before())) return;
+    if (!askMode && !(await gate.before())) return;
 
     const userContent =
       text ||
