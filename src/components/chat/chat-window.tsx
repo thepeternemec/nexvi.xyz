@@ -542,7 +542,11 @@ export function ChatWindow({
             <span className="text-muted-foreground">
               Context ·{" "}
               <span className={ready ? "text-primary" : "text-foreground"}>
-                {ready ? "ready" : "job description + your background needed"}
+                {ready
+                  ? "ready"
+                  : mode === "ask"
+                    ? "optional — add a job ad or your CV for sharper answers"
+                    : "job description + your background needed"}
               </span>
             </span>
             <ChevronDown

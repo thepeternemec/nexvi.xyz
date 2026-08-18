@@ -27,7 +27,7 @@ export const CHAT_MODES: ModeMeta[] = [
     icon: MessagesSquare,
     placeholder: "Ask anything — about your CV, a job ad, interviews…",
     tool: null,
-    needs: [],
+    needs: ["jobDescription", "background"],
     page: "/copilot",
     starters: [
       "Review my CV and tell me what's weak",
