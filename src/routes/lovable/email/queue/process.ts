@@ -56,7 +56,7 @@ async function moveToDlq(
     payload,
   })
   if (error) {
-    console.error('Failed to move message to DLQ', { queue, msg_id: msg.msg_id, reason, error })
+    console.error('Failed to move message to DLQ', { queue, msg_id: msg.msg_id, reason, code: error.code, message: error.message })
   }
 }
 
@@ -118,7 +118,7 @@ export const Route = createFileRoute("/lovable/email/queue/process")({
           })
 
           if (readError) {
-            console.error('Failed to read email batch', { queue, error: readError })
+            console.error('Failed to read email batch', { queue, code: readError.code, message: readError.message })
             continue
           }
 
@@ -147,7 +147,8 @@ export const Route = createFileRoute("/lovable/email/queue/process")({
             if (failedRowsError) {
               console.error('Failed to load failed-attempt counters', {
                 queue,
-                error: failedRowsError,
+                code: failedRowsError.code,
+                message: failedRowsError.message,
               })
             } else {
               for (const row of failedRows ?? []) {
@@ -214,7 +215,7 @@ export const Route = createFileRoute("/lovable/email/queue/process")({
                   message_id: msg.msg_id,
                 })
                 if (dupDelError) {
-                  console.error('Failed to delete duplicate message from queue', { queue, msg_id: msg.msg_id, error: dupDelError })
+                  console.error('Failed to delete duplicate message from queue', { queue, msg_id: msg.msg_id, code: dupDelError.code, message: dupDelError.message })
                 }
                 continue
               }
@@ -253,7 +254,7 @@ export const Route = createFileRoute("/lovable/email/queue/process")({
                 message_id: msg.msg_id,
               })
               if (delError) {
-                console.error('Failed to delete sent message from queue', { queue, msg_id: msg.msg_id, error: delError })
+                console.error('Failed to delete sent message from queue', { queue, msg_id: msg.msg_id, code: delError.code, message: delError.message })
               }
               totalProcessed++
             } catch (error) {
