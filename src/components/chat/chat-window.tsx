@@ -218,6 +218,8 @@ export function ChatWindow({
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+  /** Once a prompt has been applied, Prompt Library chat behaves like a normal AI chat. */
+  const [promptApplied, setPromptApplied] = useState(false);
   const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
   const meta = modeMeta(mode);
@@ -276,6 +278,7 @@ export function ChatWindow({
     if (!previewPrompt) return;
     setInput(previewPrompt.body);
     setPreviewSlug(null);
+    setPromptApplied(true);
     setTimeout(() => textareaRef.current?.focus(), 0);
   }
 
@@ -326,11 +329,15 @@ export function ChatWindow({
       });
       return;
     }
-    if (mode === "ask" && !text) {
+    if ((mode === "ask" || mode === "prompts") && !text && promptApplied) {
       toast.error("Type a question first.");
       return;
     }
-    if (mode === "prompts") {
+    // Prompt Library: recommend prompts only while the user is still searching.
+    // Once a prompt has been applied (or the message is clearly prompt/content
+    // text rather than a search query), answer with the AI model like a normal chat.
+    const looksLikeSearch = text.length <= 120 && !text.includes("\n");
+    if (mode === "prompts" && !promptApplied && looksLikeSearch) {
       const q = text || "job search";
       const res = recommendPrompts(q);
       push({ id: `u-${Date.now()}`, role: "user", content: q, mode });
@@ -351,7 +358,7 @@ export function ChatWindow({
       return;
     }
 
-    if (mode !== "ask" && !(await gate.before())) return;
+    if (mode !== "ask" && mode !== "prompts" && !(await gate.before())) return;
 
     const userContent =
       text ||
@@ -371,7 +378,8 @@ export function ChatWindow({
       let content = "";
       let data: unknown;
 
-      if (mode === "ask") {
+      if (mode === "ask" || mode === "prompts") {
+        setPromptApplied(true);
         const history = [
           ...messages
             .filter((m) => !isPromptResults(m.data))
