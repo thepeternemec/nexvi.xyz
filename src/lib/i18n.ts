@@ -138,7 +138,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Your next job is a few clicks away.",
     ctaBigSub: "Free to use. No sign-up required. Browse the library, run a tool, get results.",
-    metaTitle: "Nexvi — AI that turns your experience into better job applications",
+    metaTitle: "Nexvi — AI CV, Cover Letters & ATS Optimizer",
     metaDesc: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card.",
   },
   de: {
