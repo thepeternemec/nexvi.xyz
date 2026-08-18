@@ -148,9 +148,8 @@ export function CVPage() {
               <Textarea id="cv-job-description" value={jd} onChange={(e) => setJd(e.target.value)} placeholder="Paste the full job posting here…" className="mt-2 min-h-[180px]" />
             </div>
             <div>
-              <label htmlFor="cv-background" className="text-sm font-medium">Your background</label>
+              <label className="text-sm font-medium">Your background</label>
               <ResumeField value={bg} onChange={setBg} className="mt-2" />
-              <Textarea id="cv-background" value={bg} onChange={(e) => setBg(e.target.value)} placeholder="Past roles, skills, education, achievements — or paste your existing CV." className="mt-2 min-h-[180px]" />
             </div>
             <div>
               <span id="cv-tone-label" className="text-sm font-medium">Tone</span>
