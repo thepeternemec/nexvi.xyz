@@ -485,7 +485,7 @@ export function ChatWindow({
       <div className="flex min-h-0 flex-1">
         {/* Resume sidebar */}
         {meta.needs.includes("background") && (
-          <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-r border-border/60 bg-muted/20 px-4 py-4 xl:block">
+          <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-r border-border/60 bg-muted/20 px-4 py-4 lg:block">
             <p className="text-[12px] font-medium text-muted-foreground">Your CV / background</p>
             <div className="mt-2">
               <ResumePanel
@@ -552,7 +552,7 @@ export function ChatWindow({
                 </div>
               )}
               {meta.needs.includes("background") && (
-                <div className="xl:hidden">
+                <div className="lg:hidden">
                   <label className="text-[12px] font-medium text-muted-foreground">
                     Your CV / background
                   </label>
