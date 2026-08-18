@@ -67,7 +67,7 @@ type MenuSection = { label: string; hint: string; items: MenuItem[] };
 
 const MENUS: MenuSection[] = [
   {
-    label: "Products",
+    label: "Tools",
     hint: "Run the AI that tailors your application",
     items: [
       ...CHAT_MODES.filter((m) => m.id !== "ask").map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
