@@ -115,3 +115,13 @@ export async function consumeAiCredit(tool: ToolKey) {
   if (token) return consumeUserCredit(token, tool);
   return consumeAnonCredit();
 }
+
+/**
+ * Guard for conversational Q&A (no per-tool quota): signed-in users chat
+ * freely, anonymous visitors still burn the shared free-preview credit.
+ */
+export async function guardChatAi() {
+  const token = bearerToken();
+  if (token) return;
+  return consumeAnonCredit();
+}

@@ -1,7 +1,7 @@
-import { FileText, Mail, Sparkles, Gauge, Library, type LucideIcon } from "lucide-react";
+import { FileText, Mail, Sparkles, Gauge, Library, MessagesSquare, type LucideIcon } from "lucide-react";
 import type { ToolKey } from "@/lib/plan-limits";
 
-export type ChatMode = "cv" | "coverLetter" | "ats" | "humanizer" | "prompts";
+export type ChatMode = "cv" | "coverLetter" | "ats" | "humanizer" | "prompts" | "ask";
 
 export type ModeMeta = {
   id: ChatMode;
@@ -18,6 +18,23 @@ export type ModeMeta = {
 };
 
 export const CHAT_MODES: ModeMeta[] = [
+  {
+    id: "ask",
+    label: "Ask Copilot",
+    short: "Ask",
+    blurb:
+      "Ask anything about your job search — I can also discuss and rework the CV, letter or ATS report you just generated.",
+    icon: MessagesSquare,
+    placeholder: "Ask anything — about your CV, a job ad, interviews…",
+    tool: null,
+    needs: ["jobDescription", "background"],
+    page: "/copilot",
+    starters: [
+      "Review my CV and tell me what's weak",
+      "What should I ask at the end of an interview?",
+      "Rewrite my summary to sound more senior",
+    ],
+  },
   {
     id: "cv",
     label: "CV Generator",
