@@ -218,6 +218,8 @@ export function ChatWindow({
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
+  /** Once a prompt has been applied, Prompt Library chat behaves like a normal AI chat. */
+  const [promptApplied, setPromptApplied] = useState(false);
   const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
   const meta = modeMeta(mode);
