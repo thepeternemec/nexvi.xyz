@@ -10,6 +10,7 @@ import { scoreATS } from "@/lib/career.functions";
 import { downloadDocumentPdf } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { ResumeField } from "@/components/resume-field";
 
 
 export const Route = createFileRoute("/ats")({

@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { generateCoverLetter } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { ResumeField } from "@/components/resume-field";
 
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
