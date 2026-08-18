@@ -70,7 +70,7 @@ const MENUS: MenuSection[] = [
     label: "Products",
     hint: "Run the AI that tailors your application",
     items: [
-      ...CHAT_MODES.map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
+      ...CHAT_MODES.filter((m) => m.id !== "ask").map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
       { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library, featured: true },
     ],
   },
