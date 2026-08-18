@@ -37,6 +37,7 @@ import { modeMeta, type ChatMode } from "@/lib/chat-modes";
 import { addMessage, createThread, type ChatMsg } from "@/lib/chat-store";
 import { generateCV, generateCoverLetter, scoreATS, humanizeText, askCopilot } from "@/lib/career.functions";
 import { prompts } from "@/lib/mock-data";
+import { downloadDocumentPdf } from "@/lib/document-pdf";
 
 type ComposerContext = {
   jobDescription: string;
