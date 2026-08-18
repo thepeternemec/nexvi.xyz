@@ -6,8 +6,8 @@ type SignupSearch = { next?: string };
 export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
-      { title: "Create your account — ApplyWise" },
-      { name: "description", content: "Create a free ApplyWise account." },
+      { title: "Create your account — Nexvi" },
+      { name: "description", content: "Create a free Nexvi account." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),

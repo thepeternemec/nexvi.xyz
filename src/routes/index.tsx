@@ -5,14 +5,14 @@ import { copy } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { title: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
       { name: "description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
-      { property: "og:title", content: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { property: "og:title", content: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
       { property: "og:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/" },
+      { property: "og:url", content: "https://nexvi.xyz/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { name: "twitter:title", content: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
       { name: "twitter:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "de_DE" },
@@ -21,13 +21,13 @@ export const Route = createFileRoute("/")({
       { property: "og:locale:alternate", content: "fr_FR" },
     ],
     links: [
-      { rel: "canonical", href: "https://applywise.eu/" },
-      { rel: "alternate", hrefLang: "en", href: "https://applywise.eu/" },
-      { rel: "alternate", hrefLang: "de", href: "https://applywise.eu/de" },
-      { rel: "alternate", hrefLang: "es", href: "https://applywise.eu/es" },
-      { rel: "alternate", hrefLang: "it", href: "https://applywise.eu/it" },
-      { rel: "alternate", hrefLang: "fr", href: "https://applywise.eu/fr" },
-      { rel: "alternate", hrefLang: "x-default", href: "https://applywise.eu/" },
+      { rel: "canonical", href: "https://nexvi.xyz/" },
+      { rel: "alternate", hrefLang: "en", href: "https://nexvi.xyz/" },
+      { rel: "alternate", hrefLang: "de", href: "https://nexvi.xyz/de" },
+      { rel: "alternate", hrefLang: "es", href: "https://nexvi.xyz/es" },
+      { rel: "alternate", hrefLang: "it", href: "https://nexvi.xyz/it" },
+      { rel: "alternate", hrefLang: "fr", href: "https://nexvi.xyz/fr" },
+      { rel: "alternate", hrefLang: "x-default", href: "https://nexvi.xyz/" },
     ],
     scripts: [
       {
@@ -35,8 +35,8 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "ApplyWise",
-          url: "https://applywise.eu",
+          name: "Nexvi",
+          url: "https://nexvi.xyz",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           description:
@@ -59,10 +59,10 @@ export const Route = createFileRoute("/")({
           mainEntity: [
             {
               "@type": "Question",
-              name: "What is ApplyWise?",
+              name: "What is Nexvi?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "ApplyWise is an AI platform that aligns your CV and cover letter with a specific job description, scores the result against ATS filters and shows exactly what to fix before you apply.",
+                text: "Nexvi is an AI platform that aligns your CV and cover letter with a specific job description, scores the result against ATS filters and shows exactly what to fix before you apply.",
               },
             },
             {
@@ -70,12 +70,12 @@ export const Route = createFileRoute("/")({
               name: "How does the ATS match score work?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Paste your CV and the job description. ApplyWise returns a match percentage broken down into keyword coverage, formatting checks, section coverage and length, plus specific rewrite recommendations.",
+                text: "Paste your CV and the job description. Nexvi returns a match percentage broken down into keyword coverage, formatting checks, section coverage and length, plus specific rewrite recommendations.",
               },
             },
             {
               "@type": "Question",
-              name: "Is ApplyWise free?",
+              name: "Is Nexvi free?",
               acceptedAnswer: {
                 "@type": "Answer",
                 text: "Yes. Free accounts get three generations on every tool each month, with no credit card required. Pro unlocks unlimited generations and the full prompt library.",
@@ -83,10 +83,10 @@ export const Route = createFileRoute("/")({
             },
             {
               "@type": "Question",
-              name: "Which AI models does ApplyWise use?",
+              name: "Which AI models does Nexvi use?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "ApplyWise runs on frontier Claude and GPT models, so generated CVs and cover letters read naturally instead of like template text.",
+                text: "Nexvi runs on frontier Claude and GPT models, so generated CVs and cover letters read naturally instead of like template text.",
               },
             },
             {

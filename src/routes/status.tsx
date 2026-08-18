@@ -4,14 +4,14 @@ import { SiteShell } from "@/components/site-shell";
 export const Route = createFileRoute("/status")({
   head: () => ({
     meta: [
-      { title: "System Status — ApplyWise" },
-      { name: "description", content: "Live availability of ApplyWise services: CV generator, cover letters, ATS scoring, Humanizer and prompt library." },
-      { property: "og:title", content: "ApplyWise System Status" },
-      { property: "og:description", content: "Real-time operational status for all ApplyWise AI career tools." },
+      { title: "System Status — Nexvi" },
+      { name: "description", content: "Live availability of Nexvi services: CV generator, cover letters, ATS scoring, Humanizer and prompt library." },
+      { property: "og:title", content: "Nexvi System Status" },
+      { property: "og:description", content: "Real-time operational status for all Nexvi AI career tools." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/status" },
+      { property: "og:url", content: "https://nexvi.xyz/status" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/status" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/status" }],
   }),
   component: StatusPage,
 });
@@ -38,8 +38,8 @@ export function StatusPage() {
         </div>
         <h1 className="mt-4 font-display text-3xl font-semibold tracking-tight">System status</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Current availability of every ApplyWise service. If something looks wrong on your side, email{" "}
-          <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a>.
+          Current availability of every Nexvi service. If something looks wrong on your side, email{" "}
+          <a className="underline hover:text-foreground" href="mailto:info@nexvi.xyz">info@nexvi.xyz</a>.
         </p>
 
         <ul className="mt-8 divide-y divide-border rounded-2xl border border-border/70 bg-card">

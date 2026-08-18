@@ -5,7 +5,7 @@ import { Pricing } from "@/routes/pricing";
 
 
 export const Route = createFileRoute("/it/pricing")({
-  head: () => ({ meta: [{ title: "Pricing — ApplyWise" }] }),
+  head: () => ({ meta: [{ title: "Pricing — Nexvi" }] }),
 
   component: Pricing,
 });

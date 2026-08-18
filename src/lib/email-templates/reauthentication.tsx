@@ -31,7 +31,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
         <Section style={brand}>
           <span style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>ApplyWise</span>
+            <span style={brandName}>Nexvi</span>
           </span>
         </Section>
 

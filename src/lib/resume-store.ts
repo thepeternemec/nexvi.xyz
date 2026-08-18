@@ -6,7 +6,7 @@ export type SavedResume = {
   updatedAt: string | null;
 };
 
-const LOCAL_KEY = "applywise.resume";
+const LOCAL_KEY = "nexvi.resume";
 
 function readLocal(): SavedResume | null {
   if (typeof window === "undefined") return null;

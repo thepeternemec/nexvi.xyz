@@ -15,14 +15,14 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Free & Pro Plans | ApplyWise" },
+      { title: "Pricing — Free & Pro Plans | Nexvi" },
       { name: "description", content: "Start free with AI CVs, cover letters and ATS scoring. Upgrade to Pro for unlimited generations and the full prompt library." },
-      { property: "og:title", content: "ApplyWise Pricing — Free & Pro" },
+      { property: "og:title", content: "Nexvi Pricing — Free & Pro" },
       { property: "og:description", content: "Free forever plan, plus Pro for unlimited AI job application tools." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/pricing" },
+      { property: "og:url", content: "https://nexvi.xyz/pricing" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/pricing" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/pricing" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -41,12 +41,12 @@ export const Route = createFileRoute("/pricing")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Product",
-          name: "ApplyWise Pro",
+          name: "Nexvi Pro",
           description: "Unlimited AI CV generation, cover letters, ATS scoring and humanizing for job seekers.",
-          brand: { "@type": "Brand", name: "ApplyWise" },
+          brand: { "@type": "Brand", name: "Nexvi" },
           offers: [
-            { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", url: "https://applywise.eu/pricing" },
-            { "@type": "Offer", name: "Pro", priceCurrency: "USD", url: "https://applywise.eu/pricing", availability: "https://schema.org/InStock" },
+            { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD", url: "https://nexvi.xyz/pricing" },
+            { "@type": "Offer", name: "Pro", priceCurrency: "USD", url: "https://nexvi.xyz/pricing", availability: "https://schema.org/InStock" },
           ],
         }),
       },

@@ -6,14 +6,14 @@ import { clearConsent, openCookiePreferences } from "@/lib/cookie-consent";
 export const Route = createFileRoute("/cookies")({
   head: () => ({
     meta: [
-      { title: "Cookie Policy — ApplyWise" },
-      { name: "description", content: "Which cookies ApplyWise uses, what each one does, how long it lasts and how to control them in your browser." },
-      { property: "og:title", content: "ApplyWise Cookie Policy" },
-      { property: "og:description", content: "The cookies ApplyWise sets for sign-in, preferences and analytics — and how to control them." },
+      { title: "Cookie Policy — Nexvi" },
+      { name: "description", content: "Which cookies Nexvi uses, what each one does, how long it lasts and how to control them in your browser." },
+      { property: "og:title", content: "Nexvi Cookie Policy" },
+      { property: "og:description", content: "The cookies Nexvi sets for sign-in, preferences and analytics — and how to control them." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/cookies" },
+      { property: "og:url", content: "https://nexvi.xyz/cookies" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/cookies" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/cookies" }],
   }),
   component: CookiesPage,
 });
@@ -32,7 +32,7 @@ export function CookiesPage() {
       <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6">
         <h1 className="font-display text-3xl font-semibold tracking-tight">Cookie policy</h1>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          ApplyWise keeps cookies to a minimum. We don't sell your data and we don't use advertising trackers. Below is
+          Nexvi keeps cookies to a minimum. We don't sell your data and we don't use advertising trackers. Below is
           every cookie or local storage entry the site can set.
         </p>
 
@@ -65,7 +65,7 @@ export function CookiesPage() {
           You can also clear or block cookies in your browser settings. Blocking essential cookies will sign you
           out and reset your theme and language preferences. For anything else, see our{" "}
           <a className="underline hover:text-foreground" href="/terms">Terms &amp; Privacy</a> page or email{" "}
-          <a className="underline hover:text-foreground" href="mailto:info@applywise.eu">info@applywise.eu</a>.
+          <a className="underline hover:text-foreground" href="mailto:info@nexvi.xyz">info@nexvi.xyz</a>.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Button size="sm" onClick={() => openCookiePreferences()}>

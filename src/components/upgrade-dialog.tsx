@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 
-const EVENT = "applywise:upgrade-prompt";
+const EVENT = "nexvi:upgrade-prompt";
 
 export type UpgradeContext = { title?: string; reason?: string };
 

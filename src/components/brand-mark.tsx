@@ -19,7 +19,7 @@ export function BrandMark({ size = "md", className = "" }: { size?: Size; classN
         <span className="absolute inset-0 rounded-full bg-primary/60 motion-safe:animate-ping" />
         <span className="relative inline-block h-full w-full rounded-full bg-primary" />
       </span>
-      <span className={`font-display tracking-tight ${TEXT[size]}`}>ApplyWise</span>
+      <span className={`font-display tracking-tight ${TEXT[size]}`}>Nexvi</span>
     </span>
   );
 }

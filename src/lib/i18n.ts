@@ -138,7 +138,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Your next job is a few clicks away.",
     ctaBigSub: "Free to use. No sign-up required. Browse the library, run a tool, get results.",
-    metaTitle: "ApplyWise — AI CV Generator, Cover Letters & ATS Optimizer",
+    metaTitle: "Nexvi — AI CV, Cover Letters & ATS Optimizer",
     metaDesc: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card.",
   },
   de: {
@@ -192,7 +192,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Dein nächster Job ist nur wenige Klicks entfernt.",
     ctaBigSub: "Kostenlos. Keine Anmeldung nötig. Bibliothek durchstöbern, Tool starten, Ergebnisse bekommen.",
-    metaTitle: "ApplyWise — KI-Lebensläufe, Anschreiben & ATS-Optimierung",
+    metaTitle: "Nexvi — KI-Lebensläufe, Anschreiben & ATS-Optimierung",
     metaDesc: "Füge eine Stellenbeschreibung ein. Erhalte einen ATS-optimierten Lebenslauf, ein passgenaues Anschreiben und einen Match-Score in 60 Sekunden.",
   },
   es: {
@@ -246,7 +246,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Tu próximo empleo está a unos clics de distancia.",
     ctaBigSub: "Gratis. Sin registro. Explora la biblioteca, usa una herramienta, obtén resultados.",
-    metaTitle: "ApplyWise — CVs con IA, cartas y optimización ATS",
+    metaTitle: "Nexvi — CVs con IA, cartas y optimización ATS",
     metaDesc: "Pega una descripción de puesto. Obtén un CV optimizado para ATS, una carta a medida y una puntuación con mejoras concretas — en 60 segundos.",
   },
   it: {
@@ -300,7 +300,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Il tuo prossimo lavoro è a pochi clic di distanza.",
     ctaBigSub: "Gratis. Nessuna registrazione. Sfoglia la libreria, usa uno strumento, ottieni risultati.",
-    metaTitle: "ApplyWise — CV AI, lettere e ottimizzazione ATS",
+    metaTitle: "Nexvi — CV AI, lettere e ottimizzazione ATS",
     metaDesc: "Incolla una descrizione di lavoro. Ottieni un CV ottimizzato ATS, una lettera su misura e un punteggio con miglioramenti concreti — in 60 secondi.",
   },
   fr: {
@@ -354,7 +354,7 @@ export const copy: Record<Locale, Copy> = {
     ],
     ctaBigTitle: "Votre prochain emploi n'est qu'à quelques clics.",
     ctaBigSub: "Gratuit. Sans inscription. Parcourez la bibliothèque, utilisez un outil, obtenez des résultats.",
-    metaTitle: "ApplyWise — CV IA, lettres et optimisation ATS",
+    metaTitle: "Nexvi — CV IA, lettres et optimisation ATS",
     metaDesc: "Collez une description de poste. Obtenez un CV optimisé ATS, une lettre sur mesure et un score avec des correctifs concrets — en 60 secondes.",
   },
 };

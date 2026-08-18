@@ -10,7 +10,7 @@ export const Route = createFileRoute("/ger/")({
       { name: "description", content: copy.de.metaDesc },
       { property: "og:locale", content: "de_DE" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/de" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/de" }],
   }),
   component: () => <LandingPage locale="de" />,
 });

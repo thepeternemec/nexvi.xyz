@@ -32,7 +32,7 @@ const LOCALES = ["de", "es", "it", "fr"];
 async function fetchText(url: string): Promise<{ ok: boolean; status: number; text: string; contentType: string }> {
   try {
     const res = await fetch(url, {
-      headers: { "user-agent": "ApplyWise-SEO-Monitor/1.0" },
+      headers: { "user-agent": "Nexvi-SEO-Monitor/1.0" },
       redirect: "follow",
     });
     const text = await res.text();
@@ -279,7 +279,7 @@ async function checkLocaleRoutes(baseUrl: string): Promise<CheckResult[]> {
   return out;
 }
 
-export async function runSeoChecks(baseUrl = "https://applywise.eu"): Promise<SeoRunResult> {
+export async function runSeoChecks(baseUrl = "https://nexvi.xyz"): Promise<SeoRunResult> {
   const normalized = baseUrl.replace(/\/+$/, "");
 
   const groups = await Promise.all([
@@ -308,7 +308,7 @@ export async function runSeoChecks(baseUrl = "https://applywise.eu"): Promise<Se
 export function buildAlertEmail(run: SeoRunResult): { subject: string; html: string; text: string } {
   const broken = run.checks.filter((c) => c.status === "fail");
   const warnings = run.checks.filter((c) => c.status === "warn");
-  const subject = `[ApplyWise SEO] ${broken.length} check${broken.length === 1 ? "" : "s"} failing on ${run.baseUrl}`;
+  const subject = `[Nexvi SEO] ${broken.length} check${broken.length === 1 ? "" : "s"} failing on ${run.baseUrl}`;
 
   const row = (c: CheckResult) => `<tr><td style="padding:6px 12px;border-bottom:1px solid #eee;font:14px system-ui">${c.label}</td><td style="padding:6px 12px;border-bottom:1px solid #eee;font:13px ui-monospace,monospace;color:#444">${c.detail}</td></tr>`;
 

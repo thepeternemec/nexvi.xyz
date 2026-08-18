@@ -11,10 +11,10 @@ import type { CheckResult } from "@/lib/seo-monitor.server";
 export const Route = createFileRoute("/seo-monitor")({
   head: () => ({
     meta: [
-      { title: "SEO Monitor — ApplyWise" },
-      { name: "description", content: "Automated technical SEO health checks for ApplyWise: robots.txt, sitemap, canonical tags, hreflang and structured data." },
+      { title: "SEO Monitor — Nexvi" },
+      { name: "description", content: "Automated technical SEO health checks for Nexvi: robots.txt, sitemap, canonical tags, hreflang and structured data." },
       { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "SEO Monitor — ApplyWise" },
+      { property: "og:title", content: "SEO Monitor — Nexvi" },
       { property: "og:description", content: "Automated technical SEO health checks running on every deploy." },
       { property: "og:type", content: "website" },
     ],
@@ -72,7 +72,7 @@ function SeoMonitorPage() {
             <h1 className="font-display text-3xl font-semibold tracking-tight">SEO monitor</h1>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">
               Automated checks for robots.txt, sitemap.xml, canonical tags, hreflang alternates and JSON-LD schema. Runs
-              after every deploy and on a schedule; you get an email at info@applywise.eu when something breaks.
+              after every deploy and on a schedule; you get an email at info@nexvi.xyz when something breaks.
             </p>
           </div>
           <Button onClick={() => mutation.mutate()} disabled={mutation.isPending}>

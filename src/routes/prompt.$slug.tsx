@@ -25,12 +25,12 @@ export const Route = createFileRoute("/prompt/$slug")({
   head: ({ params, loaderData }) => {
     const p = loaderData?.prompt;
     if (!p) return { meta: [] };
-    const url = `https://applywise.eu/prompt/${params.slug}`;
+    const url = `https://nexvi.xyz/prompt/${params.slug}`;
     return {
       meta: [
-        { title: `${p.title} — AI Prompt | ApplyWise` },
+        { title: `${p.title} — AI Prompt | Nexvi` },
         { name: "description", content: p.description },
-        { property: "og:title", content: `${p.title} — ApplyWise` },
+        { property: "og:title", content: `${p.title} — Nexvi` },
         { property: "og:description", content: p.description },
         { property: "og:type", content: "article" },
         { property: "og:url", content: url },
@@ -80,7 +80,7 @@ export function PromptDetail() {
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
-  const SAVED_KEY = "applywise:saved-prompts";
+  const SAVED_KEY = "nexvi:saved-prompts";
 
   const plan = hasPremium ? "premium" : "free";
   const promptTracking = {
@@ -117,7 +117,7 @@ export function PromptDetail() {
   };
   const [linkCopied, setLinkCopied] = useState(false);
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
-  const shareTitle = `${prompt.title} — ApplyWise`;
+  const shareTitle = `${prompt.title} — Nexvi`;
   const shareText = prompt.outcome || prompt.description;
   const copyLink = async () => {
     try {

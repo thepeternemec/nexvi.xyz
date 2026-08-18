@@ -6,7 +6,7 @@ import { notFound } from "@tanstack/react-router";
 
 
 export const Route = createFileRoute("/fr/prompt/$slug")({
-  head: () => ({ meta: [{ title: "Prompt — ApplyWise" }] }),
+  head: () => ({ meta: [{ title: "Prompt — Nexvi" }] }),
   loader: ({ params }) => {
     const prompt = getPrompt(params.slug);
     if (!prompt) throw notFound();

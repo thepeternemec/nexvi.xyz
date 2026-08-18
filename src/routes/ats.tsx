@@ -16,17 +16,17 @@ import { ResumeField } from "@/components/resume-field";
 export const Route = createFileRoute("/ats")({
   head: () => ({
     meta: [
-      { title: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { title: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { name: "description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
-      { property: "og:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { property: "og:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { property: "og:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/ats" },
+      { property: "og:url", content: "https://nexvi.xyz/ats" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | ApplyWise" },
+      { name: "twitter:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { name: "twitter:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/ats" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/ats" }],
   }),
 
   component: ATSPage,

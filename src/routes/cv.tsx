@@ -19,24 +19,24 @@ import { ResumeField } from "@/components/resume-field";
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { title: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
       { name: "description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
-      { property: "og:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { property: "og:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
       { property: "og:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/cv" },
+      { property: "og:url", content: "https://nexvi.xyz/cv" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | ApplyWise" },
+      { name: "twitter:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
       { name: "twitter:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/cv" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/cv" }],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
-          name: "ApplyWise CV Generator",
+          name: "Nexvi CV Generator",
           applicationCategory: "BusinessApplication",
           operatingSystem: "Web",
           offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },

@@ -24,10 +24,10 @@ function parseHashToken(name: string): string | null {
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Reset your password — ApplyWise" },
+      { title: "Reset your password — Nexvi" },
       {
         name: "description",
-        content: "Set a new password for your ApplyWise account.",
+        content: "Set a new password for your Nexvi account.",
       },
       { name: "robots", content: "noindex, follow" },
     ],
@@ -107,7 +107,7 @@ export function ResetPasswordPage() {
         redirectTo: `${window.location.origin}${alternateHref(locale, "/reset-password")}`,
       });
       if (error) throw error;
-      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
+      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.nexvi.xyz.");
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "Could not send reset link"
@@ -164,7 +164,7 @@ export function ResetPasswordPage() {
               letters, and interviews.
             </p>
           </div>
-          <div className="text-xs text-muted-foreground">© ApplyWise</div>
+          <div className="text-xs text-muted-foreground">© Nexvi</div>
         </div>
       </div>
 

@@ -1,4 +1,4 @@
-# ApplyWise — https://applywise.eu
+# Nexvi — https://nexvi.xyz
 User-agent: *
 Allow: /
 Disallow: /login
@@ -44,4 +44,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://applywise.eu/sitemap.xml
+Sitemap: https://nexvi.xyz/sitemap.xml

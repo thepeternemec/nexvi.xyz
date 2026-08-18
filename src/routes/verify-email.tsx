@@ -19,8 +19,8 @@ type Status = "verifying" | "confirmed" | "expired" | "lookup";
 export const Route = createFileRoute("/verify-email")({
   head: () => ({
     meta: [
-      { title: "Verify your email — ApplyWise" },
-      { name: "description", content: "Verify your ApplyWise email address." },
+      { title: "Verify your email — Nexvi" },
+      { name: "description", content: "Verify your Nexvi email address." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
@@ -113,7 +113,7 @@ export function VerifyEmailPage() {
         },
       });
       if (error) throw error;
-      toast.success("Verification email resent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
+      toast.success("Verification email resent — check your inbox, spam, or junk folder. Sent from noreply@notify.nexvi.xyz.");
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not resend email");
     } finally {
@@ -205,7 +205,7 @@ export function VerifyEmailPage() {
                   </p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                     Check your spam, junk, or promotions folder. Messages come from{" "}
-                    <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                    <span className="font-medium text-foreground">noreply@notify.nexvi.xyz</span>{" "}
                     — add that address to your contacts so future emails land in your inbox.
                   </p>
                 </div>

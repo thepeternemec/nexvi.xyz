@@ -27,7 +27,7 @@ const GROUPS: ComparisonGroup[] = [
     ],
   },
   {
-    title: "ApplyWise Copilot",
+    title: "Nexvi Copilot",
     rows: [
       { feature: "Copilot chat workspace", hint: "Run every tool from one thread", free: true, premium: true },
       { feature: "Copilot messages", free: "3 / month", premium: "Unlimited" },

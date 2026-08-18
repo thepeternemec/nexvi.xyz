@@ -46,7 +46,7 @@ type ComposerContext = {
   role: string;
 };
 
-const CTX_KEY = "applywise.chat.context";
+const CTX_KEY = "nexvi.chat.context";
 const EMPTY_CTX: ComposerContext = { jobDescription: "", background: "", company: "", role: "" };
 
 function loadCtx(): ComposerContext {
@@ -506,7 +506,7 @@ export function ChatWindow({
 
   function download(text: string) {
     try {
-      downloadDocumentPdf(text, `applywise-${mode}-${Date.now()}.pdf`);
+      downloadDocumentPdf(text, `nexvi-${mode}-${Date.now()}.pdf`);
       toast.success("PDF downloaded");
     } catch {
       toast.error("Download blocked by your browser");

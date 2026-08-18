@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PromptsPage } from "@/routes/prompts";
 
 export const Route = createFileRoute("/it/prompts")({
-  head: () => ({ meta: [{ title: "Prompt Library — ApplyWise" }] }),
+  head: () => ({ meta: [{ title: "Prompt Library — Nexvi" }] }),
   validateSearch: (s: Record<string, unknown>) => ({
     q: typeof s.q === "string" ? s.q : undefined,
     category: typeof s.category === "string" ? s.category : undefined,

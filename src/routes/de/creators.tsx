@@ -5,7 +5,7 @@ import { Creators } from "@/routes/creators";
 
 
 export const Route = createFileRoute("/de/creators")({
-  head: () => ({ meta: [{ title: "Creators — ApplyWise" }] }),
+  head: () => ({ meta: [{ title: "Creators — Nexvi" }] }),
 
   component: Creators,
 });
