@@ -574,6 +574,9 @@ export function ChatWindow({
         </div>
       )}
 
+      <div className="flex min-h-0 flex-1">
+        <div className="flex min-h-0 flex-1 flex-col">
+
       {/* Transcript */}
       <ChatContext.Provider value={{ insertPrompt }}>
         <Conversation className="min-h-0 flex-1">
