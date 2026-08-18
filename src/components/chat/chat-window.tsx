@@ -220,6 +220,9 @@ export function ChatWindow({
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
   /** Once a prompt has been applied, Prompt Library chat behaves like a normal AI chat. */
   const [promptApplied, setPromptApplied] = useState(false);
+  // After an ATS score is returned, the window turns into a normal Gemini chat so
+  // the user can iterate on the CV to raise the score.
+  const [atsFollowUp, setAtsFollowUp] = useState(false);
   const [savedResume, setSavedResume] = useState<SavedResume | null>(null);
 
   const meta = modeMeta(mode);
@@ -318,7 +321,8 @@ export function ChatWindow({
       toast.error("Paste the text you want humanized.");
       return;
     }
-    if (mode !== "humanizer" && mode !== "prompts" && mode !== "ask" && !ready) {
+    const askMode = mode === "ask" || mode === "prompts" || (mode === "ats" && atsFollowUp);
+    if (!askMode && mode !== "humanizer" && !ready) {
       setCtxOpen(true);
       push({
         id: `local-${Date.now()}`,
@@ -329,7 +333,7 @@ export function ChatWindow({
       });
       return;
     }
-    if ((mode === "ask" || mode === "prompts") && !text && promptApplied) {
+    if (askMode && !text && (promptApplied || atsFollowUp)) {
       toast.error("Type a question first.");
       return;
     }
@@ -358,7 +362,7 @@ export function ChatWindow({
       return;
     }
 
-    if (mode !== "ask" && mode !== "prompts" && !(await gate.before())) return;
+    if (!askMode && !(await gate.before())) return;
 
     const userContent =
       text ||
@@ -378,7 +382,7 @@ export function ChatWindow({
       let content = "";
       let data: unknown;
 
-      if (mode === "ask" || mode === "prompts") {
+      if (askMode) {
         setPromptApplied(true);
         const history = [
           ...messages
@@ -443,7 +447,17 @@ export function ChatWindow({
 
       push({ id: `a-${Date.now()}`, role: "assistant", content, mode, data });
       await persist("assistant", content, data);
-      if (mode !== "ask") await gate.after();
+      if (!askMode) await gate.after();
+
+      // Hand the conversation over to the chat model right after a fresh ATS score
+      // so the user can ask for a rewrite that scores higher.
+      if (mode === "ats" && !atsFollowUp) {
+        setAtsFollowUp(true);
+        const followUp =
+          "Want to push this score higher? Ask me anything from here — for example:\n\n- **Rewrite my CV** to cover the missing keywords\n- **Rework my experience bullets** with stronger metrics\n- **Explain** why a specific check failed and how to fix it\n\nI'll keep your job description, CV and this ATS report in mind.";
+        push({ id: `a-${Date.now() + 1}`, role: "assistant", content: followUp, mode });
+        await persist("assistant", followUp);
+      }
 
       if (!threadId && activeThread.current) {
         navigate({
