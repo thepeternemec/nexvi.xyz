@@ -14,10 +14,10 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 export const Route = createFileRoute("/account")({
   head: () => ({
     meta: [
-      { title: "Account settings — ApplyWise" },
-      { name: "description", content: "Edit your ApplyWise profile details and update your avatar." },
-      { property: "og:title", content: "Account settings — ApplyWise" },
-      { property: "og:description", content: "Edit your ApplyWise profile details and update your avatar." },
+      { title: "Account settings — Nexvi" },
+      { name: "description", content: "Edit your Nexvi profile details and update your avatar." },
+      { property: "og:title", content: "Account settings — Nexvi" },
+      { property: "og:description", content: "Edit your Nexvi profile details and update your avatar." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
@@ -177,7 +177,7 @@ export function AccountSettings() {
         ) : !isAuthenticated ? (
           <div className="rounded-2xl border border-border/70 bg-card p-8 text-center">
             <h2 className="font-display text-2xl tracking-tight">Sign in to manage your account</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Your profile details and avatar live in your ApplyWise account.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Your profile details and avatar live in your Nexvi account.</p>
             <a href={href("/login")}>
               <Button className="mt-5 rounded-full">Sign in</Button>
             </a>

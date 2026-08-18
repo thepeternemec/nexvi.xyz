@@ -58,8 +58,8 @@ export function CookieConsentBanner() {
       });
       setOpen(true);
     };
-    window.addEventListener("applywise:open-cookie-preferences", onOpen);
-    return () => window.removeEventListener("applywise:open-cookie-preferences", onOpen);
+    window.addEventListener("nexvi:open-cookie-preferences", onOpen);
+    return () => window.removeEventListener("nexvi:open-cookie-preferences", onOpen);
   }, []);
 
   const showBanner = hydrated && !consent && !dismissed;

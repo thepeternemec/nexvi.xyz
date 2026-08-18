@@ -1,4 +1,4 @@
-# ApplyWise
+# Nexvi
 
 Build a production-ready SaaS web platform called “Prompt Academia”.
 
@@ -268,7 +268,7 @@ Generate all pages, navigation, responsive UI, database structure, and polished 
 
 This project was built with [Lovable](https://lovable.dev).
 
-**Live app**: https://applywise-eu.lovable.app
+**Live app**: https://nexvi.lovable.app
 
 ## Build with Lovable
 

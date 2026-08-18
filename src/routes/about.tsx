@@ -7,22 +7,22 @@ import { ArrowRight, Bot, Gauge, Globe2, ShieldCheck, Sparkles, Target } from "l
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About ApplyWise — AI that aligns your CV to the job" },
+      { title: "About Nexvi — AI that aligns your CV to the job" },
       {
         name: "description",
         content:
-          "ApplyWise builds AI tools that align CVs and cover letters to real job descriptions and score them against ATS filters. Meet the mission, principles and team.",
+          "Nexvi builds AI tools that align CVs and cover letters to real job descriptions and score them against ATS filters. Meet the mission, principles and team.",
       },
-      { property: "og:title", content: "About ApplyWise" },
+      { property: "og:title", content: "About Nexvi" },
       {
         property: "og:description",
         content: "Why we build AI tools that align CVs and cover letters to the job description, not generic resume templates.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/about" },
+      { property: "og:url", content: "https://nexvi.xyz/about" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/about" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/about" }],
   }),
   component: AboutPage,
 });
@@ -96,7 +96,7 @@ export function AboutPage() {
                 <span className="absolute inset-0 rounded-full bg-primary/60 motion-safe:animate-ping" />
                 <span className="relative inline-block h-1.5 w-1.5 rounded-full bg-primary" />
               </span>
-              About ApplyWise
+              About Nexvi
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -106,7 +106,7 @@ export function AboutPage() {
           </Reveal>
           <Reveal delay={160}>
             <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted-foreground">
-              ApplyWise is not a resume builder. It is an AI layer between your experience and a specific job
+              Nexvi is not a resume builder. It is an AI layer between your experience and a specific job
               description — rewriting, scoring and humanizing your application so it survives the ATS and reads like
               you at your best.
             </p>
@@ -153,7 +153,7 @@ export function AboutPage() {
               keyword overlap, structure and clarity — signals that have nothing to do with whether you can do the job.
             </p>
             <p>
-              We built ApplyWise so that gap closes in a minute instead of a weekend. Paste the job description, and our
+              We built Nexvi so that gap closes in a minute instead of a weekend. Paste the job description, and our
               tools rewrite your CV around it, draft a cover letter that references the actual role, score the result
               against ATS criteria and tell you precisely what to fix.
             </p>
@@ -241,10 +241,10 @@ export function AboutPage() {
                 We read every message and ship a surprising amount of what people ask for.
               </p>
               <a
-                href="mailto:info@applywise.eu"
+                href="mailto:info@nexvi.xyz"
                 className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-4 py-2 text-[13px] text-foreground transition hover:border-foreground/30 hover:text-primary"
               >
-                info@applywise.eu <ArrowRight className="h-3.5 w-3.5" />
+                info@nexvi.xyz <ArrowRight className="h-3.5 w-3.5" />
               </a>
             </Reveal>
           </div>

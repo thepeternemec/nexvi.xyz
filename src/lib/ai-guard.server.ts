@@ -35,7 +35,7 @@ function anonFingerprint(): string {
     request?.headers?.get("x-real-ip") ??
     "unknown";
   const ua = request?.headers?.get("user-agent") ?? "";
-  const salt = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "applywise";
+  const salt = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "nexvi";
   return createHash("sha256").update(`${salt}:${ip}:${ua}`).digest("hex");
 }
 

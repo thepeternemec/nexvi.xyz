@@ -11,9 +11,9 @@
   },
   "mcp": {
     "server": {
-      "name": "applywise-mcp",
+      "name": "nexvi-mcp",
       "version": "0.1.0",
-      "title": "ApplyWise"
+      "title": "Nexvi"
     },
     "tools": [
       {

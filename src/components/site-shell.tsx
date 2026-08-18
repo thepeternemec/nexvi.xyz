@@ -71,7 +71,7 @@ const MENUS: MenuSection[] = [
     hint: "Run the AI that tailors your application",
     items: [
       ...CHAT_MODES.filter((m) => m.id !== "ask").map((m) => ({ to: m.page, label: m.label, hint: m.blurb, icon: m.icon })),
-      { to: "/copilot", label: "Copilot", hint: "One chat for every ApplyWise tool", icon: Library, featured: true },
+      { to: "/copilot", label: "Copilot", hint: "One chat for every Nexvi tool", icon: Library, featured: true },
     ],
   },
 
@@ -79,7 +79,7 @@ const MENUS: MenuSection[] = [
     label: "Resources",
     hint: "Guides, prompts and product updates",
     items: [
-      { to: "/about", label: "About ApplyWise", hint: "Why we built this", icon: Info },
+      { to: "/about", label: "About Nexvi", hint: "Why we built this", icon: Info },
       { to: "/blog", label: "Blog", hint: "Tactics for CVs, letters and ATS", icon: Newspaper },
       { to: "/signup", label: "Create account", hint: "Start free, no card needed", icon: UserPlus },
       { to: "/status", label: "System status", hint: "Live uptime and incidents", icon: Activity },
@@ -408,14 +408,14 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </p>
 
           <a
-            href="mailto:info@applywise.eu"
+            href="mailto:info@nexvi.xyz"
             className="mt-6 inline-flex items-center gap-2 rounded-full border border-border bg-foreground/[0.04] px-3.5 py-2 text-xs text-foreground backdrop-blur transition hover:border-foreground/30 hover:bg-foreground/[0.08] hover:text-primary"
           >
-            <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on ApplyWise.
+            <Search className="h-3.5 w-3.5" /> Ask us anything you would like to see on Nexvi.
           </a>
           <div className="mt-6 flex items-center gap-3">
             <a
-              href="https://www.linkedin.com/company/in-applywise/"
+              href="https://www.linkedin.com/company/in-nexvi/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -424,7 +424,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               <LinkedinLogo className="h-4 w-4" />
             </a>
             <a
-              href="https://www.instagram.com/applywise.eu/"
+              href="https://www.instagram.com/nexvi.xyz/"
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
@@ -433,7 +433,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               <Instagram className="h-4 w-4" />
             </a>
             <a
-              href="https://x.com/applywise_"
+              href="https://x.com/nexvi_"
               target="_blank"
               rel="noreferrer"
               aria-label="X"
@@ -442,7 +442,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               <XLogo className="h-4 w-4" />
             </a>
             <a
-              href="https://www.threads.com/@applywise_"
+              href="https://www.threads.com/@nexvi_"
               target="_blank"
               rel="noreferrer"
               aria-label="Threads"
@@ -505,7 +505,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
       </div>
       <div className="relative border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:px-6">
-          <div>© {new Date().getFullYear()} ApplyWise. Built for job seekers with ❤️ in Berlin</div>
+          <div>© {new Date().getFullYear()} Nexvi. Built for job seekers with ❤️ in Berlin</div>
           <div>We help you land your dream jobs in weeks.</div>
         </div>
       </div>

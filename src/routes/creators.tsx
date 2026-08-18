@@ -3,9 +3,9 @@ import { SiteShell } from "@/components/site-shell";
 import { creators, prompts } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 
-const CREATORS_TITLE = "Career Coaches Behind ApplyWise Prompts";
+const CREATORS_TITLE = "Career Coaches Behind Nexvi Prompts";
 const CREATORS_DESC =
-  "Meet the ex-recruiters, career coaches and interview psychologists who write the CV, cover letter and ATS prompts in the ApplyWise library.";
+  "Meet the ex-recruiters, career coaches and interview psychologists who write the CV, cover letter and ATS prompts in the Nexvi library.";
 
 export const Route = createFileRoute("/creators")({
   head: () => ({
@@ -15,11 +15,11 @@ export const Route = createFileRoute("/creators")({
       { property: "og:title", content: CREATORS_TITLE },
       { property: "og:description", content: CREATORS_DESC },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/creators" },
+      { property: "og:url", content: "https://nexvi.xyz/creators" },
       { name: "twitter:title", content: CREATORS_TITLE },
       { name: "twitter:description", content: CREATORS_DESC },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/creators" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/creators" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -27,11 +27,11 @@ export const Route = createFileRoute("/creators")({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: CREATORS_TITLE,
-          url: "https://applywise.eu/creators",
+          url: "https://nexvi.xyz/creators",
           description: CREATORS_DESC,
           mainEntity: {
             "@type": "ItemList",
-            name: "ApplyWise career coaches",
+            name: "Nexvi career coaches",
             numberOfItems: creators.length,
             itemListElement: creators.map((c, i) => ({
               "@type": "ListItem",
@@ -59,7 +59,7 @@ export function Creators() {
         <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
           <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Career Coaches</div>
           <h1 className="font-display mt-2 text-5xl tracking-tight sm:text-6xl">People who've helped thousands get hired.</h1>
-          <p className="mt-3 max-w-xl text-muted-foreground">Ex-recruiters, career coaches, and interview psychologists building the prompts that power ApplyWise.</p>
+          <p className="mt-3 max-w-xl text-muted-foreground">Ex-recruiters, career coaches, and interview psychologists building the prompts that power Nexvi.</p>
         </div>
       </section>
       <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6">
@@ -87,7 +87,7 @@ export function Creators() {
 
         <div className="mt-16 rounded-3xl border border-border bg-foreground p-10 text-background">
           <h2 className="font-display text-3xl tracking-tight sm:text-4xl">Are you a career coach?</h2>
-          <p className="mt-2 max-w-xl text-background/80">Publish your prompts on ApplyWise and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.</p>
+          <p className="mt-2 max-w-xl text-background/80">Publish your prompts on Nexvi and reach thousands of job seekers. We handle the platform; you keep 80% of every sale.</p>
           <Link to="/signup"><Button size="lg" variant="secondary" className="mt-5 rounded-full">Apply to become a coach</Button></Link>
         </div>
       </section>

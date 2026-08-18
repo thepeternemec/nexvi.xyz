@@ -17,13 +17,13 @@ import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
 export const Route = createFileRoute("/subscription")({
   head: () => ({
     meta: [
-      { title: "Manage your subscription — ApplyWise" },
+      { title: "Manage your subscription — Nexvi" },
       {
         name: "description",
         content:
-          "Review your ApplyWise plan, update your payment details, switch plans or cancel anytime from your billing portal.",
+          "Review your Nexvi plan, update your payment details, switch plans or cancel anytime from your billing portal.",
       },
-      { property: "og:title", content: "Manage your ApplyWise subscription" },
+      { property: "og:title", content: "Manage your Nexvi subscription" },
       { property: "og:description", content: "Update your plan, payment method or cancel anytime." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -90,7 +90,7 @@ export function SubscriptionPage() {
           <div className="rounded-3xl border border-border/70 bg-card p-8 text-center">
             <h2 className="font-display text-2xl tracking-tight">Sign in to manage billing</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Your plan and invoices live in your ApplyWise account.
+              Your plan and invoices live in your Nexvi account.
             </p>
             <a href={href("/login")} className="mt-6 inline-flex">
               <Button className="rounded-full">Sign in</Button>

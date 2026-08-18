@@ -82,7 +82,7 @@ export const translateBatch = createServerFn({ method: "POST" })
           "- Return ONLY a JSON array of strings, same length and order as the input. No prose, no code fences, no keys.",
           "- ALWAYS translate common product nouns like: CV, resume, cover letter, generator, library, prompts, pricing, bundles, creators, dashboard, sign in, sign up, search, tools, features, pay, free, premium, upgrade, notifications, menu, home, back, next, previous, open, close, save, submit, continue.",
           "- Preserve punctuation, capitalization style, emojis, whitespace, and placeholders like {name} or %s exactly.",
-          "- Do NOT translate: the brand name ApplyWise, product names (ChatGPT, Claude, Gemini, Lovable, LinkedIn, Stripe), URLs, code, or the acronym ATS.",
+          "- Do NOT translate: the brand name Nexvi, product names (ChatGPT, Claude, Gemini, Lovable, LinkedIn, Stripe), URLs, code, or the acronym ATS.",
           "- Keep translations concise and natural; match a product marketing / SaaS UI tone.",
           "- Never return the English source unchanged unless it is a proper noun / brand / acronym listed above.",
           "",

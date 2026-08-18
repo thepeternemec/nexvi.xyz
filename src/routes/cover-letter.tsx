@@ -15,17 +15,17 @@ import { ResumeField } from "@/components/resume-field";
 export const Route = createFileRoute("/cover-letter")({
   head: () => ({
     meta: [
-      { title: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { title: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { name: "description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
-      { property: "og:title", content: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { property: "og:title", content: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { property: "og:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/cover-letter" },
+      { property: "og:url", content: "https://nexvi.xyz/cover-letter" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AI Cover Letter Generator That Sounds Human | ApplyWise" },
+      { name: "twitter:title", content: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { name: "twitter:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/cover-letter" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/cover-letter" }],
   }),
 
   component: CoverLetterPage,

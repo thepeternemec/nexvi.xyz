@@ -5,14 +5,14 @@ import { prompts } from "@/lib/mock-data";
 export const Route = createFileRoute("/sitemap")({
   head: () => ({
     meta: [
-      { title: "Sitemap — ApplyWise" },
-      { name: "description", content: "Browse every ApplyWise page: AI CV generator, cover letters, ATS optimizer, Humanizer, prompt library and account pages." },
-      { property: "og:title", content: "ApplyWise Sitemap" },
-      { property: "og:description", content: "Every page on ApplyWise in one place." },
+      { title: "Sitemap — Nexvi" },
+      { name: "description", content: "Browse every Nexvi page: AI CV generator, cover letters, ATS optimizer, Humanizer, prompt library and account pages." },
+      { property: "og:title", content: "Nexvi Sitemap" },
+      { property: "og:description", content: "Every page on Nexvi in one place." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/sitemap" },
+      { property: "og:url", content: "https://nexvi.xyz/sitemap" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/sitemap" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/sitemap" }],
   }),
   component: SitemapPage,
 });
@@ -67,7 +67,7 @@ export function SitemapPage() {
     <SiteShell>
       <div className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6">
         <h1 className="font-display text-3xl font-semibold tracking-tight">Sitemap</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Every page on ApplyWise, in one place.</p>
+        <p className="mt-2 text-sm text-muted-foreground">Every page on Nexvi, in one place.</p>
 
         <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {groups.map((g) => (

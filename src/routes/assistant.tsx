@@ -11,13 +11,13 @@ import { useLocale } from "@/lib/locale-context";
 export const Route = createFileRoute("/assistant")({
   head: () => ({
     meta: [
-      { title: "AI Job Application Assistant — ApplyWise" },
-      { name: "description", content: "Describe your job search goal and get the right ApplyWise prompt or tool for it." },
-      { property: "og:title", content: "AI Job Application Assistant — ApplyWise" },
+      { title: "AI Job Application Assistant — Nexvi" },
+      { name: "description", content: "Describe your job search goal and get the right Nexvi prompt or tool for it." },
+      { property: "og:title", content: "AI Job Application Assistant — Nexvi" },
       { property: "og:description", content: "Get matched to the right prompt for your job search task." },
-      { property: "og:url", content: "https://applywise.eu/assistant" },
+      { property: "og:url", content: "https://nexvi.xyz/assistant" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/assistant" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/assistant" }],
   }),
   component: Assistant,
 });

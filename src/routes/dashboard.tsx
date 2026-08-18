@@ -15,8 +15,8 @@ import { useSubscription } from "@/hooks/use-subscription";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
-      { title: "Your dashboard — ApplyWise" },
-      { name: "description", content: "Your ApplyWise tools, saved prompts and recent activity." },
+      { title: "Your dashboard — Nexvi" },
+      { name: "description", content: "Your Nexvi tools, saved prompts and recent activity." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),

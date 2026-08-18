@@ -1,4 +1,4 @@
-# ApplyWise — GTM setup (Custom HTML tags + GA4)
+# Nexvi — GTM setup (Custom HTML tags + GA4)
 
 Container: `GTM-5LC8WCN6`. The app pushes objects like
 `dataLayer.push({ event: "generate_cv", tool: "cv", plan: "free", ... })`.
@@ -234,6 +234,6 @@ Consent defaults (Initialization – All Pages, priority 100):
 
 ## 4. Verify
 
-1. GTM → Preview, open `https://applywise.eu`.
+1. GTM → Preview, open `https://nexvi.xyz`.
 2. Confirm `page_view` and `cookie_consent` appear in the Data Layer tab.
 3. GA4 → Admin → DebugView shows the mapped events.

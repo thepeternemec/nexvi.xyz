@@ -31,17 +31,17 @@ function matchesQuery(p: (typeof prompts)[number], query: string) {
 export const Route = createFileRoute("/prompts")({
   head: () => ({
     meta: [
-      { title: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { title: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
-      { property: "og:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { property: "og:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { property: "og:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/prompts" },
+      { property: "og:url", content: "https://nexvi.xyz/prompts" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | ApplyWise" },
+      { name: "twitter:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "twitter:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/prompts" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/prompts" }],
     scripts: [
       {
         type: "application/ld+json",
@@ -49,7 +49,7 @@ export const Route = createFileRoute("/prompts")({
           "@context": "https://schema.org",
           "@type": "CollectionPage",
           name: "Job Search Prompt Library",
-          url: "https://applywise.eu/prompts",
+          url: "https://nexvi.xyz/prompts",
           description:
             "A curated library of AI prompts for job seekers: CV tailoring, cover letters, ATS optimization and interview prep.",
           mainEntity: {
@@ -59,7 +59,7 @@ export const Route = createFileRoute("/prompts")({
             itemListElement: prompts.slice(0, 50).map((p, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `https://applywise.eu/prompt/${p.slug}`,
+              url: `https://nexvi.xyz/prompt/${p.slug}`,
               name: p.title,
             })),
           },

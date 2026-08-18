@@ -31,10 +31,10 @@ const EMAIL_TEMPLATES: Record<string, React.ComponentType<any>> = {
 }
 
 // Configuration
-const SITE_NAME = "ApplyWise"
-const SENDER_DOMAIN = "notify.applywise.eu"
-const ROOT_DOMAIN = "applywise.eu"
-const FROM_DOMAIN = "applywise.eu"
+const SITE_NAME = "Nexvi"
+const SENDER_DOMAIN = "notify.nexvi.xyz"
+const ROOT_DOMAIN = "nexvi.xyz"
+const FROM_DOMAIN = "nexvi.xyz"
 
 function redactEmail(email: string | null | undefined): string {
   if (!email) return '***'

@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { blogPosts } from "@/lib/blog-posts";
 
-const TITLE = "ApplyWise Blog — Resume, ATS and job search guides";
+const TITLE = "Nexvi Blog — Resume, ATS and job search guides";
 const DESCRIPTION =
   "Practical guides on writing resumes and cover letters that pass ATS filters, tailored to real job descriptions.";
-const URL = "https://applywise.eu/blog";
+const URL = "https://nexvi.xyz/blog";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -27,10 +27,10 @@ export const Route = createFileRoute("/blog/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Blog",
-          name: "ApplyWise Blog",
+          name: "Nexvi Blog",
           description: DESCRIPTION,
           url: URL,
-          publisher: { "@type": "Organization", name: "ApplyWise", url: "https://applywise.eu" },
+          publisher: { "@type": "Organization", name: "Nexvi", url: "https://nexvi.xyz" },
           blogPost: blogPosts.map((p) => ({
             "@type": "BlogPosting",
             headline: p.title,
@@ -90,7 +90,7 @@ function BlogIndexPage() {
         <section className="mt-14 rounded-2xl border border-border bg-background/70 p-8 backdrop-blur">
           <h2 className="font-display text-2xl tracking-tight">Skip the reading, run the tools</h2>
           <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-            Paste a job description and your current CV. ApplyWise rewrites it around the role and scores it against
+            Paste a job description and your current CV. Nexvi rewrites it around the role and scores it against
             ATS criteria with specific fixes.
           </p>
           <div className="mt-6 flex flex-wrap gap-3">

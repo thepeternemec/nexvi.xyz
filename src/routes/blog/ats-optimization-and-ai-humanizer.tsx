@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 const TITLE = "ATS Optimization + AI Humanizer: Beating AI HR Screening in 2026";
 const DESCRIPTION =
   "How AI HR tools screen applications in 2026, why ATS optimization alone is no longer enough, and how humanizing AI-written CVs and cover letters keeps you in the shortlist.";
-const URL = "https://applywise.eu/blog/ats-optimization-and-ai-humanizer";
+const URL = "https://nexvi.xyz/blog/ats-optimization-and-ai-humanizer";
 
 const STAGES = [
   {
@@ -110,8 +110,8 @@ export const Route = createFileRoute("/blog/ats-optimization-and-ai-humanizer")(
           description: DESCRIPTION,
           datePublished: "2026-08-02",
           mainEntityOfPage: { "@type": "WebPage", "@id": URL },
-          author: { "@type": "Organization", name: "ApplyWise", url: "https://applywise.eu" },
-          publisher: { "@type": "Organization", name: "ApplyWise", url: "https://applywise.eu" },
+          author: { "@type": "Organization", name: "Nexvi", url: "https://nexvi.xyz" },
+          publisher: { "@type": "Organization", name: "Nexvi", url: "https://nexvi.xyz" },
           inLanguage: "en",
         }),
       },
@@ -133,8 +133,8 @@ export const Route = createFileRoute("/blog/ats-optimization-and-ai-humanizer")(
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://applywise.eu/" },
-            { "@type": "ListItem", position: 2, name: "Blog", item: "https://applywise.eu/blog" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://nexvi.xyz/" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://nexvi.xyz/blog" },
             { "@type": "ListItem", position: 3, name: "ATS optimization and AI humanizer", item: URL },
           ],
         }),
@@ -260,7 +260,7 @@ function AtsHumanizerPost() {
           <section className="mt-16 rounded-2xl border border-border bg-background/70 p-8 backdrop-blur">
             <h2 className="font-display text-2xl tracking-tight">Score it, humanize it, send it</h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-              Paste the job description and your CV. ApplyWise scores keyword coverage and formatting with specific
+              Paste the job description and your CV. Nexvi scores keyword coverage and formatting with specific
               fixes, then the Humanizer rewrites the result so it keeps every keyword and still sounds like you.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

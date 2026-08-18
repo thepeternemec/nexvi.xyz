@@ -4,8 +4,8 @@
  */
 import { runSeoChecks, buildAlertEmail, type SeoRunResult } from "@/lib/seo-monitor.server";
 
-const ALERT_TO = process.env["SEO_ALERT_EMAIL"] ?? "info@applywise.eu";
-const SENDER_DOMAIN = "notify.applywise.eu";
+const ALERT_TO = process.env["SEO_ALERT_EMAIL"] ?? "info@nexvi.xyz";
+const SENDER_DOMAIN = "notify.nexvi.xyz";
 
 export interface RecordedRun extends SeoRunResult {
   id: string | null;
@@ -14,7 +14,7 @@ export interface RecordedRun extends SeoRunResult {
 }
 
 export async function runAndRecordSeoChecks(triggerSource: string): Promise<RecordedRun> {
-  const run = await runSeoChecks(process.env["SEO_MONITOR_BASE_URL"] ?? "https://applywise.eu");
+  const run = await runSeoChecks(process.env["SEO_MONITOR_BASE_URL"] ?? "https://nexvi.xyz");
   const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
   // Only alert when the state changed (fail after a healthy run) or on manual runs,
@@ -40,7 +40,7 @@ export async function runAndRecordSeoChecks(triggerSource: string): Promise<Reco
           message_id: messageId,
           idempotency_key: `seo-alert-${messageId}`,
           to: ALERT_TO,
-          from: `ApplyWise Monitoring <alerts@${SENDER_DOMAIN}>`,
+          from: `Nexvi Monitoring <alerts@${SENDER_DOMAIN}>`,
           sender_domain: SENDER_DOMAIN,
           subject,
           html,

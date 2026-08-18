@@ -90,11 +90,11 @@ function Consent() {
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center p-8">
       <h1 className="font-display text-3xl tracking-tight">
-        Connect {clientName} to ApplyWise
+        Connect {clientName} to Nexvi
       </h1>
       <p className="mt-3 text-sm text-muted-foreground">
-        {clientName} is asking to use ApplyWise on your behalf. It will be able to call
-        ApplyWise tools (generate CVs, cover letters, and ATS scores) as you.
+        {clientName} is asking to use Nexvi on your behalf. It will be able to call
+        Nexvi tools (generate CVs, cover letters, and ATS scores) as you.
       </p>
       {error && (
         <p role="alert" className="mt-4 rounded-md border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">

@@ -195,7 +195,7 @@ export const askCopilot = createServerFn({ method: "POST" })
     await guardChatAi();
 
     const system =
-      "You are ApplyWise Copilot, a sharp, friendly career assistant. Answer questions about the user's job search, CV, cover letters, ATS results and interviews. Use the CONTEXT block (job description, the user's CV/background, and the most recent content ApplyWise generated for them) as ground truth and quote or revise it when asked. Never invent facts about the user's history. Be concise and concrete: short paragraphs, bullets where useful, Markdown. If context you need is missing, say exactly what to paste in.";
+      "You are Nexvi Copilot, a sharp, friendly career assistant. Answer questions about the user's job search, CV, cover letters, ATS results and interviews. Use the CONTEXT block (job description, the user's CV/background, and the most recent content Nexvi generated for them) as ground truth and quote or revise it when asked. Never invent facts about the user's history. Be concise and concrete: short paragraphs, bullets where useful, Markdown. If context you need is missing, say exactly what to paste in.";
 
     const contextParts: string[] = [];
     if (data.role) contextParts.push(`TARGET ROLE: ${data.role}`);
@@ -204,7 +204,7 @@ export const askCopilot = createServerFn({ method: "POST" })
       contextParts.push(`JOB DESCRIPTION:\n${data.jobDescription.trim()}`);
     if (data.background?.trim()) contextParts.push(`USER CV / BACKGROUND:\n${data.background.trim()}`);
     if (data.lastOutput?.trim())
-      contextParts.push(`MOST RECENT APPLYWISE OUTPUT:\n${data.lastOutput.trim()}`);
+      contextParts.push(`MOST RECENT NEXVI OUTPUT:\n${data.lastOutput.trim()}`);
 
     const context = contextParts.length
       ? `CONTEXT\n${contextParts.join("\n\n")}`

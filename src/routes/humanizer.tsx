@@ -14,17 +14,17 @@ import { ToolHero, ToolOutro } from "@/components/tool-hero";
 export const Route = createFileRoute("/humanizer")({
   head: () => ({
     meta: [
-      { title: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | ApplyWise" },
+      { title: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { name: "description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
-      { property: "og:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | ApplyWise" },
+      { property: "og:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { property: "og:description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/humanizer" },
+      { property: "og:url", content: "https://nexvi.xyz/humanizer" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | ApplyWise" },
+      { name: "twitter:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { name: "twitter:description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/humanizer" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/humanizer" }],
   }),
 
   component: HumanizerPage,

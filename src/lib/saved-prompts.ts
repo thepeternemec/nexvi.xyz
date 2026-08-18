@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const SAVED_KEY = "applywise:saved-prompts";
-const EVENT = "applywise:saved-changed";
+export const SAVED_KEY = "nexvi:saved-prompts";
+const EVENT = "nexvi:saved-changed";
 
 export function readSaved(): string[] {
   if (typeof window === "undefined") return [];

@@ -33,8 +33,8 @@ function isSafeNext(next: string | undefined): next is string {
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Sign in — ApplyWise" },
-      { name: "description", content: "Sign in to your ApplyWise account." },
+      { title: "Sign in — Nexvi" },
+      { name: "description", content: "Sign in to your Nexvi account." },
       { name: "robots", content: "noindex, follow" },
     ],
   }),
@@ -101,7 +101,7 @@ export function AuthShell({
     const label = provider === "google" ? "Google" : "Apple";
     setBusy(true);
     try {
-      sessionStorage.setItem("applywise:next", nextPath);
+      sessionStorage.setItem("nexvi:next", nextPath);
       const result = await lovable.auth.signInWithOAuth(provider, {
         redirect_uri: window.location.origin,
       });
@@ -158,7 +158,7 @@ export function AuthShell({
           return;
         }
         toast.success(
-          "Email sent — please check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu."
+          "Email sent — please check your inbox, spam, or junk folder. Sent from noreply@notify.nexvi.xyz."
         );
         setShowVerify(true);
       } else {
@@ -197,7 +197,7 @@ export function AuthShell({
         },
       });
       if (error) throw error;
-      toast.success("Verification email sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
+      toast.success("Verification email sent — check your inbox, spam, or junk folder. Sent from noreply@notify.nexvi.xyz.");
       setResendCountdown(30);
     } catch (err) {
       toast.error(
@@ -217,7 +217,7 @@ export function AuthShell({
         redirectTo: `${window.location.origin}${href("/reset-password")}`,
       });
       if (error) throw error;
-      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.applywise.eu.");
+      toast.success("Reset link sent — check your inbox, spam, or junk folder. Sent from noreply@notify.nexvi.xyz.");
       setMode("forgot-sent");
     } catch (err) {
       toast.error(
@@ -291,7 +291,7 @@ export function AuthShell({
           </div>
 
           <div className="flex items-center justify-between border-t border-border/60 pt-6 text-xs text-muted-foreground">
-            <span>© ApplyWise</span>
+            <span>© Nexvi</span>
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck className="h-3.5 w-3.5" />
               Encrypted &amp; private by default
@@ -376,7 +376,7 @@ export function AuthShell({
                     </p>
                     <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                       Check your spam, junk, or promotions folder. Messages come from{" "}
-                      <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                      <span className="font-medium text-foreground">noreply@notify.nexvi.xyz</span>{" "}
                       — add that address to your contacts so future emails land in your inbox.
                     </p>
                   </div>
@@ -434,7 +434,7 @@ export function AuthShell({
                     </p>
                     <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
                       Check your spam, junk, or promotions folder. Messages come from{" "}
-                      <span className="font-medium text-foreground">noreply@notify.applywise.eu</span>{" "}
+                      <span className="font-medium text-foreground">noreply@notify.nexvi.xyz</span>{" "}
                       — add that address to your contacts so future emails land in your inbox.
                     </p>
                   </div>

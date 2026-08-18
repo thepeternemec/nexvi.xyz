@@ -6,7 +6,7 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 const TITLE = "How to Write a Resume in 2026 (Step-by-Step + Examples)";
 const DESCRIPTION =
   "A step-by-step guide to writing a resume that passes ATS filters: structure, wording, keywords, role-specific examples and a free ATS score check.";
-const URL = "https://applywise.eu/blog/how-to-write-a-resume";
+const URL = "https://nexvi.xyz/blog/how-to-write-a-resume";
 
 const STEPS = [
   {
@@ -120,8 +120,8 @@ export const Route = createFileRoute("/blog/how-to-write-a-resume")({
           headline: TITLE,
           description: DESCRIPTION,
           mainEntityOfPage: { "@type": "WebPage", "@id": URL },
-          author: { "@type": "Organization", name: "ApplyWise", url: "https://applywise.eu" },
-          publisher: { "@type": "Organization", name: "ApplyWise", url: "https://applywise.eu" },
+          author: { "@type": "Organization", name: "Nexvi", url: "https://nexvi.xyz" },
+          publisher: { "@type": "Organization", name: "Nexvi", url: "https://nexvi.xyz" },
           inLanguage: "en",
         }),
       },
@@ -159,8 +159,8 @@ export const Route = createFileRoute("/blog/how-to-write-a-resume")({
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
           itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Home", item: "https://applywise.eu/" },
-            { "@type": "ListItem", position: 2, name: "Blog", item: "https://applywise.eu/blog" },
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://nexvi.xyz/" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://nexvi.xyz/blog" },
             { "@type": "ListItem", position: 3, name: "How to write a resume", item: URL },
           ],
         }),
@@ -274,7 +274,7 @@ function ResumeGuidePage() {
           <section className="mt-16 rounded-2xl border border-border bg-background/70 p-8 backdrop-blur">
             <h2 className="font-display text-2xl tracking-tight">Do all seven steps in one run</h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-              Paste a job description and your current CV. ApplyWise rewrites the CV around the role, drafts a matching
+              Paste a job description and your current CV. Nexvi rewrites the CV around the role, drafts a matching
               cover letter and scores the result against ATS criteria with specific fixes.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

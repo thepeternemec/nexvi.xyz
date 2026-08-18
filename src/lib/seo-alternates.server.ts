@@ -1,4 +1,4 @@
-const BASE_URL = "https://applywise.eu";
+const BASE_URL = "https://nexvi.xyz";
 
 /** Locales that have their own URL prefix. English lives at the unprefixed root. */
 export const SEO_LOCALES = ["de", "es", "it", "fr"] as const;

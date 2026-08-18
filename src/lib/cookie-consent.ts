@@ -11,8 +11,8 @@ export type CookieConsent = {
 };
 
 export const CONSENT_VERSION = 1;
-const STORAGE_KEY = "applywise:cookie-consent";
-const EVENT = "applywise:cookie-consent-change";
+const STORAGE_KEY = "nexvi:cookie-consent";
+const EVENT = "nexvi:cookie-consent-change";
 
 export const ALL_ACCEPTED: Omit<CookieConsent, "version" | "decidedAt"> = {
   essential: true,
@@ -78,7 +78,7 @@ export function clearConsent() {
 /** Opens the consent preferences dialog from anywhere (e.g. footer link). */
 export function openCookiePreferences() {
   if (typeof window === "undefined") return;
-  window.dispatchEvent(new CustomEvent("applywise:open-cookie-preferences"));
+  window.dispatchEvent(new CustomEvent("nexvi:open-cookie-preferences"));
 }
 
 export function useCookieConsent() {

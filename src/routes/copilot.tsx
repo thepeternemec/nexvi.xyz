@@ -7,22 +7,22 @@ import { ChatSidebarContext } from "@/components/chat/chat-sidebar-context";
 export const Route = createFileRoute("/copilot")({
   head: () => ({
     meta: [
-      { title: "ApplyWise Copilot — CV, Cover Letter, ATS & Humanizer in one chat" },
+      { title: "Nexvi Copilot — CV, Cover Letter, ATS & Humanizer in one chat" },
       {
         name: "description",
         content:
           "One AI chat for your whole job search: generate tailored CVs and cover letters, score your ATS match, humanize text, and find the right prompt.",
       },
-      { property: "og:title", content: "ApplyWise Copilot — one chat for your job search" },
+      { property: "og:title", content: "Nexvi Copilot — one chat for your job search" },
       {
         property: "og:description",
         content: "CV Generator, Cover Letter, ATS Optimizer, Humanizer and Prompt Library in a single chat interface.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://applywise.eu/copilot" },
+      { property: "og:url", content: "https://nexvi.xyz/copilot" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://applywise.eu/copilot" }],
+    links: [{ rel: "canonical", href: "https://nexvi.xyz/copilot" }],
   }),
   component: ChatLayout,
 });

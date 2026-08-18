@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { prompts } from "@/lib/mock-data";
 
-const BASE_URL = "https://applywise.eu";
+const BASE_URL = "https://nexvi.xyz";
 
 /** Locales that have a full mirrored set of public route files. */
 const LOCALES = ["de", "es", "it", "fr"] as const;

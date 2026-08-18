@@ -15,16 +15,16 @@ function make(locale: Locale, path: string, ogLocale: string) {
       ],
       links: [
         { rel: "canonical", href: path },
-        { rel: "alternate", hrefLang: "en", href: "https://applywise.eu/" },
-        { rel: "alternate", hrefLang: "de", href: "https://applywise.eu/de" },
-        { rel: "alternate", hrefLang: "es", href: "https://applywise.eu/es" },
-        { rel: "alternate", hrefLang: "it", href: "https://applywise.eu/it" },
-        { rel: "alternate", hrefLang: "fr", href: "https://applywise.eu/fr" },
-        { rel: "alternate", hrefLang: "x-default", href: "https://applywise.eu/" },
+        { rel: "alternate", hrefLang: "en", href: "https://nexvi.xyz/" },
+        { rel: "alternate", hrefLang: "de", href: "https://nexvi.xyz/de" },
+        { rel: "alternate", hrefLang: "es", href: "https://nexvi.xyz/es" },
+        { rel: "alternate", hrefLang: "it", href: "https://nexvi.xyz/it" },
+        { rel: "alternate", hrefLang: "fr", href: "https://nexvi.xyz/fr" },
+        { rel: "alternate", hrefLang: "x-default", href: "https://nexvi.xyz/" },
       ],
     }),
     component: () => <LandingPage locale={locale} />,
   };
 }
 
-export const Route = createFileRoute("/de/")(make("de", "https://applywise.eu/de", "de_DE"));
+export const Route = createFileRoute("/de/")(make("de", "https://nexvi.xyz/de", "de_DE"));

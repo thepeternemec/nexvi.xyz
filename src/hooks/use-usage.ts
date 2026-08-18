@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { getMyUsage, consumeToolCredit, type UsageSnapshot } from "@/lib/usage.functions";
 import { FREE_LIMITS, TOOL_KEYS, type ToolKey } from "@/lib/plan-limits";
 
-const ANON_KEY = "applywise:anon-generation-used";
+const ANON_KEY = "nexvi:anon-generation-used";
 
 type State = {
   loading: boolean;
