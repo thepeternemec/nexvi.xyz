@@ -214,7 +214,7 @@ export function ChatWindow({
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [ctx, setCtx] = useState<ComposerContext>(EMPTY_CTX);
-  const [ctxOpen, setCtxOpen] = useState(false);
+  const [ctxOpen, setCtxOpen] = useState(true);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
