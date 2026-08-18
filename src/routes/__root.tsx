@@ -143,7 +143,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
-const GA_ID = "G-JJB1GQ4MN4";
+const GA_ID = "G-Q54BDJJLPW";
 const GTM_ID = "GTM-5LC8WCN6";
 
 function RootShell({ children }: { children: React.ReactNode }) {
