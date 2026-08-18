@@ -5,14 +5,14 @@ import { copy } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nexvi — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { title: "Nexvi — AI that turns your experience into better job applications" },
       { name: "description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
-      { property: "og:title", content: "Nexvi — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { property: "og:title", content: "Nexvi — AI that turns your experience into better job applications" },
       { property: "og:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://nexvi.xyz/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Nexvi — AI CV Generator, Cover Letters & ATS Optimizer" },
+      { name: "twitter:title", content: "Nexvi — AI that turns your experience into better job applications" },
       { name: "twitter:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "de_DE" },
