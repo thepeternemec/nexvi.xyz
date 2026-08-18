@@ -136,8 +136,9 @@ function AdminImport() {
 
   return (
     <SiteShell>
-      <section className="border-b border-border/60 bg-aurora">
-        <div className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6">
+      <section className="relative isolate overflow-hidden border-b border-border/60">
+        <div className="bg-aurora bg-aurora-soft -z-10" aria-hidden="true"><span /><span /><span /></div>
+        <div className="relative mx-auto w-full max-w-5xl px-4 py-12 sm:px-6">
           <div className="flex items-center gap-2 text-xs text-muted-foreground"><Sparkles className="h-3.5 w-3.5" /> Admin</div>
           <h1 className="font-display mt-1 text-5xl tracking-tight">Import prompts</h1>
           <p className="mt-2 max-w-2xl text-muted-foreground">
