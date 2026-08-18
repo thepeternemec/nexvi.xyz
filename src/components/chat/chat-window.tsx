@@ -382,7 +382,7 @@ export function ChatWindow({
       let content = "";
       let data: unknown;
 
-      if (mode === "ask" || mode === "prompts") {
+      if (askMode) {
         setPromptApplied(true);
         const history = [
           ...messages
