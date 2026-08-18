@@ -148,7 +148,8 @@ export function ResetPasswordPage() {
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
-      <div className="relative hidden overflow-hidden bg-aurora lg:block">
+      <div className="relative isolate hidden overflow-hidden lg:block">
+        <div className="bg-aurora bg-aurora-soft -z-10" aria-hidden="true"><span /><span /><span /></div>
         <div className="absolute inset-0 bg-grain opacity-50" />
         <div className="relative flex h-full flex-col justify-between p-12">
           <a href={alternateHref(locale, "/")} className="flex items-center gap-2">
