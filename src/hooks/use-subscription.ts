@@ -10,6 +10,7 @@ const ANON: SubscriptionSnapshot = {
   status: "inactive",
   currentPeriodEnd: null,
   cancelAtPeriodEnd: false,
+  priceId: null,
 };
 
 export function useSubscription() {

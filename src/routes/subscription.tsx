@@ -9,7 +9,7 @@ import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
-import { createPortalSession } from "@/utils/payments.functions";
+import { createPortalSession, changeSubscriptionPlan } from "@/utils/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 import { getSubscriptionStatusConfig, formatSubscriptionPeriod } from "@/lib/subscription-ui";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
@@ -40,8 +40,24 @@ export function SubscriptionPage() {
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
   const portal = useServerFn(createPortalSession);
+  const changePlan = useServerFn(changeSubscriptionPlan);
   const [busy, setBusy] = useState<string | null>(null);
   const [checkoutPrice, setCheckoutPrice] = useState<string | null>(null);
+
+  async function switchPlan(priceId: string) {
+    setBusy(priceId);
+    try {
+      const result = await changePlan({ data: { priceId, environment: getStripeEnvironment() } });
+      if ("error" in result) throw new Error(result.error);
+      toast.success("Plan switched — the difference is prorated on your next invoice.");
+      await sub.refresh();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Could not switch plan");
+    } finally {
+      setBusy(null);
+    }
+  }
+
 
   async function openPortal() {
     setBusy("portal");
@@ -182,6 +198,38 @@ export function SubscriptionPage() {
                 </div>
               ))}
             </div>
+
+            {sub.isPremium && !sub.cancelAtPeriodEnd && (
+              <div className="mt-8 rounded-3xl border border-border/70 bg-card p-7">
+                <h2 className="font-display text-2xl tracking-tight">Change your billing cycle</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Switches happen immediately — Stripe credits the unused part of your current plan
+                  and charges only the difference.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Button
+                    className="rounded-full"
+                    disabled={busy !== null || sub.priceId === "premium_monthly"}
+                    onClick={() => switchPlan("premium_monthly")}
+                  >
+                    {busy === "premium_monthly" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {sub.priceId === "premium_monthly" ? "Current: $7 / month" : "Switch to $7 / month"}
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="rounded-full"
+                    disabled={busy !== null || sub.priceId === "premium_yearly"}
+                    onClick={() => switchPlan("premium_yearly")}
+                  >
+                    {busy === "premium_yearly" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {sub.priceId === "premium_yearly"
+                      ? "Current: $70 / year"
+                      : "Switch to $70 / year — save 17%"}
+                  </Button>
+                </div>
+              </div>
+            )}
+
 
             {!sub.isPremium && (
               <div className="mt-8 rounded-3xl border border-border/70 bg-card p-7">
