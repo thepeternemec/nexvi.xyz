@@ -77,7 +77,8 @@ export function ResumePanel({
   }
 
   return (
-    <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm backdrop-blur-sm">
+    <TooltipProvider delayDuration={200}>
+      <div className="rounded-2xl border border-border/60 bg-background/80 p-4 shadow-sm backdrop-blur-sm">
       <input
         ref={inputRef}
         type="file"
