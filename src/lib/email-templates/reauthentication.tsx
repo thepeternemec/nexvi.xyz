@@ -31,7 +31,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
         <Section style={brand}>
           <span style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>Nexvi</span>
+            <span style={brandName}>nexvi</span>
           </span>
         </Section>
 
@@ -52,7 +52,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
 export default ReauthenticationEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }

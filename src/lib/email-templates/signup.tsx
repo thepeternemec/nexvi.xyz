@@ -42,7 +42,7 @@ export const SignupEmail = ({
         <Section style={brand}>
           <Link href={siteUrl} style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>{siteName}</span>
+            <span style={brandName}>nexvi</span>
           </Link>
         </Section>
 
@@ -85,7 +85,7 @@ export const SignupEmail = ({
 export default SignupEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }
