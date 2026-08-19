@@ -191,6 +191,23 @@ export function Pricing() {
             </p>
           </div>
 
+          {checkoutPrice && (
+            <div className="mx-auto mt-8 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <div className="text-sm font-medium">
+                  Checkout · {checkoutPrice === "premium_yearly" ? "Premium yearly" : "Premium monthly"}
+                </div>
+                <Button variant="ghost" size="sm" className="rounded-full" onClick={() => setCheckoutPrice(null)}>
+                  Cancel
+                </Button>
+              </div>
+              <StripeEmbeddedCheckout
+                priceId={checkoutPrice}
+                returnUrl={`${window.location.origin}/subscription?checkout=success`}
+              />
+            </div>
+          )}
+
           <div className="mx-auto mt-8 grid max-w-3xl gap-5 md:grid-cols-2">
             {plans.map(p => {
               const isPremiumCard = p.key === "premium";
@@ -259,22 +276,6 @@ export function Pricing() {
 
           <PricingComparison />
 
-          {checkoutPrice && (
-            <div className="mx-auto mt-10 max-w-3xl rounded-3xl border border-border/70 bg-card p-6">
-              <div className="mb-4 flex items-center justify-between">
-                <div className="text-sm font-medium">
-                  Checkout · {checkoutPrice === "premium_yearly" ? "Premium yearly" : "Premium monthly"}
-                </div>
-                <Button variant="ghost" size="sm" className="rounded-full" onClick={() => setCheckoutPrice(null)}>
-                  Cancel
-                </Button>
-              </div>
-              <StripeEmbeddedCheckout
-                priceId={checkoutPrice}
-                returnUrl={`${window.location.origin}/subscription?checkout=success`}
-              />
-            </div>
-          )}
           <FaqSection />
 
           <p className="mx-auto mt-10 max-w-xl text-center text-xs text-muted-foreground">
