@@ -18,7 +18,8 @@ export const Route = createFileRoute("/unsubscribe")({
 type Status = "idle" | "loading" | "validating" | "success" | "error" | "already";
 
 function UnsubscribePage() {
-  const { token } = useSearch({ from: "/unsubscribe", strict: false }) as { token?: string };
+  const search = Route.useSearch();
+  const token = typeof search === "object" && search ? (search as { token?: string }).token : undefined;
   const [status, setStatus] = React.useState<Status>("idle");
   const [message, setMessage] = React.useState("");
 
