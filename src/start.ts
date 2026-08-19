@@ -5,7 +5,7 @@ import { renderErrorPage } from "./lib/error-page";
 
 const errorMiddleware = createMiddleware().server(async ({ next, request }) => {
   const { pathname } = new URL(request.url);
-  if (pathname.startsWith("/lovable/")) {
+  if (pathname.startsWith("/lovable/") || pathname === "/email/unsubscribe") {
     return next();
   }
   try {
