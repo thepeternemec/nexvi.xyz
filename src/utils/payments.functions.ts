@@ -121,3 +121,60 @@ export const createPortalSession = createServerFn({ method: "POST" })
       return { error: getStripeErrorMessage(error) };
     }
   });
+
+type PlanChangeResult = { ok: true; priceId: string } | { error: string };
+
+/**
+ * Immediate upgrade/downgrade between Premium monthly and yearly, with Stripe
+ * proration (credit/charge the difference right away).
+ */
+export const changeSubscriptionPlan = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: { priceId: string; environment: StripeEnv }) => {
+    if (!/^[a-zA-Z0-9_-]+$/.test(data.priceId)) throw new Error("Invalid priceId");
+    return data;
+  })
+  .handler(async ({ data, context }): Promise<PlanChangeResult> => {
+    const { supabase, userId } = context;
+
+    const { data: sub } = await supabase
+      .from("subscriptions")
+      .select("provider_subscription_id, price_id, status")
+      .eq("user_id", userId)
+      .eq("environment", data.environment)
+      .not("provider_subscription_id", "is", null)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    if (!sub?.provider_subscription_id) {
+      return { error: "No active subscription to change. Start a plan first." };
+    }
+    if (sub.price_id === data.priceId) {
+      return { error: "You're already on that plan." };
+    }
+
+    try {
+      const stripe = createStripeClient(data.environment);
+      const prices = await stripe.prices.list({ lookup_keys: [data.priceId] });
+      if (!prices.data.length) throw new Error("Price not found");
+      const newPrice = prices.data[0];
+
+      const current = await stripe.subscriptions.retrieve(sub.provider_subscription_id as string);
+      const itemId = current.items?.data?.[0]?.id;
+      if (!itemId) throw new Error("Subscription item not found");
+
+      await stripe.subscriptions.update(sub.provider_subscription_id as string, {
+        items: [{ id: itemId, price: newPrice.id }],
+        proration_behavior: "create_prorations",
+        // Charge/credit the prorated difference immediately.
+        billing_cycle_anchor: "now",
+        cancel_at_period_end: false,
+        metadata: { ...(current.metadata ?? {}), userId },
+      });
+
+      return { ok: true, priceId: data.priceId };
+    } catch (error) {
+      return { error: getStripeErrorMessage(error) };
+    }
+  });
