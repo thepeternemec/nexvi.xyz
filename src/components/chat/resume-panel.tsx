@@ -194,5 +194,6 @@ export function ResumePanel({
         )}
       </div>
     </div>
+    </TooltipProvider>
   );
 }
