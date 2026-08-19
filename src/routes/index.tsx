@@ -5,15 +5,15 @@ import { copy } from "@/lib/i18n";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
-      { name: "description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
-      { property: "og:title", content: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
-      { property: "og:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
+      { title: "Nexvi — AI That Tailors Your Experience to the Job" },
+      { name: "description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
+      { property: "og:title", content: "Nexvi — AI That Tailors Your Experience to the Job" },
+      { property: "og:description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://nexvi.xyz/" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Nexvi — AI CV, Cover Letters & ATS Optimizer" },
-      { name: "twitter:description", content: "Paste any job description and get an ATS-optimized CV, tailored cover letter, and match score with concrete fixes in 60 seconds. Free to try, no credit card." },
+      { name: "twitter:title", content: "Nexvi — AI That Tailors Your Experience to the Job" },
+      { name: "twitter:description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
       { property: "og:locale", content: "en_US" },
       { property: "og:locale:alternate", content: "de_DE" },
       { property: "og:locale:alternate", content: "es_ES" },
