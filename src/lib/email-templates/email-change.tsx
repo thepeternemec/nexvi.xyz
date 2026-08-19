@@ -78,6 +78,10 @@ export const EmailChangeEmail = ({
           If you didn't request this change, please secure your account
           immediately.
         </Text>
+
+        <Text style={footer}>
+          nexvi — AI that turns your experience into better job applications.
+        </Text>
       </Container>
     </Body>
   </Html>
