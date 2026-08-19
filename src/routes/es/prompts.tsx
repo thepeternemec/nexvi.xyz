@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { localeHead } from "@/lib/localized-meta";
 import { PromptsPage } from "@/routes/prompts";
 
 export const Route = createFileRoute("/es/prompts")({
-  head: () => ({ meta: [{ title: "Prompt Library — Nexvi" }] }),
+  head: () => localeHead("es", "prompts"),
   validateSearch: (s: Record<string, unknown>) => ({
     q: typeof s.q === "string" ? s.q : undefined,
     category: typeof s.category === "string" ? s.category : undefined,

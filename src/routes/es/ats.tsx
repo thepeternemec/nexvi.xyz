@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { localeHead } from "@/lib/localized-meta";
 import { ATSPage } from "@/routes/ats";
 
 
 
 
 export const Route = createFileRoute("/es/ats")({
-  head: () => ({ meta: [{ title: "ATS Optimizer — Nexvi" }] }),
-
+  head: () => localeHead("es", "ats"),
   component: ATSPage,
 });
