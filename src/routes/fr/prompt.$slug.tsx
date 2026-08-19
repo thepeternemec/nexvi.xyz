@@ -1,12 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import { PromptDetail } from "@/routes/prompt.$slug";
 import { getPrompt } from "@/lib/mock-data";
-import { notFound } from "@tanstack/react-router";
-
-
+import { promptHead } from "@/lib/localized-meta";
 
 export const Route = createFileRoute("/fr/prompt/$slug")({
-  head: () => ({ meta: [{ title: "Prompt — Nexvi" }] }),
+  head: ({ params, loaderData }) => promptHead("fr", params.slug, loaderData?.prompt),
   loader: ({ params }) => {
     const prompt = getPrompt(params.slug);
     if (!prompt) throw notFound();
