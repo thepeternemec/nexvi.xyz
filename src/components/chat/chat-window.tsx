@@ -555,83 +555,91 @@ export function ChatWindow({
           </aside>
         )}
 
-        <div className="flex min-h-0 flex-1 flex-col">
-
-
-
-      {/* Context panel */}
-      {meta.needs.length > 0 && (
-        <div className="border-b border-border/60 bg-muted/20">
-          <button
-            onClick={() => setCtxOpen((o) => !o)}
-            className="flex w-full items-center justify-between px-3 py-2 text-left text-[12.5px] font-medium sm:px-5"
-          >
-            <span className="text-muted-foreground">
-              Context ·{" "}
-              <span className={ready ? "text-primary" : "text-foreground"}>
-                {ready
-                  ? "ready"
-                  : mode === "ask"
-                    ? "optional — add a job ad or your CV for sharper answers"
-                    : "job description + your background needed"}
+      <div className="flex min-h-0 flex-1 flex-col">
+        {/* Context panel */}
+        {meta.needs.length > 0 && (
+          <div className="border-b border-border/60 bg-muted/20">
+            <button
+              onClick={() => setCtxOpen((o) => !o)}
+              className="flex w-full items-center justify-between px-3 py-2.5 text-left text-[12.5px] font-medium sm:px-5"
+            >
+              <span className="text-muted-foreground">
+                Context ·{" "}
+                <span className={ready ? "text-primary" : "text-foreground"}>
+                  {ready
+                    ? "ready"
+                    : mode === "ask"
+                      ? "optional — add a job ad or your CV for sharper answers"
+                      : "job description + your background needed"}
+                </span>
               </span>
-            </span>
-            <ChevronDown
-              className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-          {ctxOpen && (
-            <div className="grid gap-3 px-3 pb-4 sm:px-5 lg:grid-cols-2">
-              {mode === "coverLetter" && (
-                <div className="grid grid-cols-2 gap-3 lg:col-span-2">
-                  <Input
-                    value={ctx.company}
-                    onChange={(e) => updateCtx({ company: e.target.value })}
-                    placeholder="Company (optional)"
-                  />
-                  <Input
-                    value={ctx.role}
-                    onChange={(e) => updateCtx({ role: e.target.value })}
-                    placeholder="Role title (optional)"
-                  />
-                </div>
-              )}
-              {meta.needs.includes("jobDescription") && (
-                <div>
-                  <label className="text-[12px] font-medium text-muted-foreground">
-                    Job description
-                  </label>
-                  <Textarea
-                    value={ctx.jobDescription}
-                    onChange={(e) => updateCtx({ jobDescription: e.target.value })}
-                    placeholder="Paste the job posting…"
-                    className="mt-1.5 min-h-[110px]"
-                  />
-                </div>
-              )}
-              {meta.needs.includes("background") && (
-                <div className="xl:hidden">
-                  <label className="text-[12px] font-medium text-muted-foreground">
-                    Your CV / background
-                  </label>
-                  <div className="mt-1.5">
-                    <ResumePanel
-                      value={ctx.background}
-                      saved={savedResume}
-                      userId={user?.id}
-                      onChange={(text, rec) => {
-                        updateCtx({ background: text });
-                        setSavedResume(rec);
-                      }}
+              <ChevronDown
+                className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`}
+              />
+            </button>
+            {ctxOpen && (
+              <div className="grid gap-4 px-3 pb-5 sm:px-5 lg:grid-cols-2">
+                {mode === "coverLetter" && (
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-2">
+                    <div>
+                      <label className="text-[12px] font-semibold text-muted-foreground">
+                        Company
+                      </label>
+                      <Input
+                        value={ctx.company}
+                        onChange={(e) => updateCtx({ company: e.target.value })}
+                        placeholder="e.g. Stripe"
+                        className="mt-1.5 h-10 rounded-xl border-border/60 bg-background/80 text-[13px] placeholder:text-muted-foreground/50 focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[12px] font-semibold text-muted-foreground">
+                        Role title
+                      </label>
+                      <Input
+                        value={ctx.role}
+                        onChange={(e) => updateCtx({ role: e.target.value })}
+                        placeholder="e.g. Senior Product Manager"
+                        className="mt-1.5 h-10 rounded-xl border-border/60 bg-background/80 text-[13px] placeholder:text-muted-foreground/50 focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring"
+                      />
+                    </div>
+                  </div>
+                )}
+                {meta.needs.includes("jobDescription") && (
+                  <div>
+                    <label className="text-[12px] font-semibold text-muted-foreground">
+                      Job description
+                    </label>
+                    <Textarea
+                      value={ctx.jobDescription}
+                      onChange={(e) => updateCtx({ jobDescription: e.target.value })}
+                      placeholder="Paste the job posting…"
+                      className="mt-1.5 min-h-[130px] resize-none rounded-xl border-border/60 bg-background/80 text-[13px] placeholder:text-muted-foreground/50 focus-visible:bg-background focus-visible:ring-1 focus-visible:ring-ring"
                     />
                   </div>
-                </div>
-              )}
-
-            </div>
-          )}
-        </div>
-      )}
+                )}
+                {meta.needs.includes("background") && (
+                  <div className="xl:hidden">
+                    <label className="text-[12px] font-semibold text-muted-foreground">
+                      Your CV / background
+                    </label>
+                    <div className="mt-1.5">
+                      <ResumePanel
+                        value={ctx.background}
+                        saved={savedResume}
+                        userId={user?.id}
+                        onChange={(text, rec) => {
+                          updateCtx({ background: text });
+                          setSavedResume(rec);
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
       {/* Transcript */}
       <ChatContext.Provider value={{ insertPrompt }}>
@@ -726,13 +734,14 @@ export function ChatWindow({
       </ChatContext.Provider>
 
       {/* Composer */}
-      <div className="border-t border-border/60 px-3 py-3 sm:px-5">
+      <div className="border-t border-border/60 bg-background/50 px-3 py-3 backdrop-blur-sm sm:px-5">
         <div className="mx-auto w-full max-w-3xl">
           <PromptInput
             onSubmit={(message, event) => {
               event.preventDefault();
               void send(message.text || input);
             }}
+            className="rounded-2xl border border-border/60 bg-background/90 p-2 shadow-sm transition-shadow focus-within:shadow-md"
           >
             <PromptInputTextarea
               key={mode}
@@ -740,17 +749,22 @@ export function ChatWindow({
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={meta.placeholder}
+              className="px-3 py-2.5 text-[13px] placeholder:text-muted-foreground/60"
             />
-            <PromptInputFooter className="justify-between">
+            <PromptInputFooter className="justify-between px-1 pb-1 pt-1">
               <PromptInputTools>
                 <span
                   key={mode}
-                  className="inline-flex items-center gap-1.5 px-1 text-[11.5px] text-muted-foreground"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-muted/40 px-2 py-1 text-[11.5px] font-medium text-muted-foreground"
                 >
-                  <meta.icon className="h-3.5 w-3.5" /> {meta.label}
+                  <meta.icon className="h-3.5 w-3.5 text-primary" /> {meta.label}
                 </span>
               </PromptInputTools>
-              <PromptInputSubmit status={busy ? "submitted" : undefined} disabled={busy} />
+              <PromptInputSubmit
+                status={busy ? "submitted" : undefined}
+                disabled={busy}
+                className="h-8 w-8 rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+              />
             </PromptInputFooter>
           </PromptInput>
           {!user && (
