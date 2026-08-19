@@ -9,7 +9,7 @@ import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 import { StripeEmbeddedCheckout } from "@/components/StripeEmbeddedCheckout";
 import { useAuth } from "@/hooks/use-auth";
 import { useSubscription } from "@/hooks/use-subscription";
-import { createPortalSession, changeSubscriptionPlan } from "@/utils/payments.functions";
+import { createPortalSession } from "@/utils/payments.functions";
 import { getStripeEnvironment } from "@/lib/stripe";
 import { getSubscriptionStatusConfig, formatSubscriptionPeriod } from "@/lib/subscription-ui";
 import { alternateHref, detectLocaleFromPath } from "@/lib/i18n";
