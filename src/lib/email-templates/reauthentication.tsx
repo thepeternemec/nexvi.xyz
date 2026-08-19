@@ -31,7 +31,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
         <Section style={brand}>
           <span style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>Nexvi</span>
+            <span style={brandName}>nexvi</span>
           </span>
         </Section>
 
@@ -44,6 +44,10 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
           This code will expire shortly. If you didn't request this, you can
           safely ignore this email.
         </Text>
+
+        <Text style={footer}>
+          nexvi — AI that turns your experience into better job applications.
+        </Text>
       </Container>
     </Body>
   </Html>
@@ -52,7 +56,7 @@ export const ReauthenticationEmail = ({ token }: ReauthenticationEmailProps) => 
 export default ReauthenticationEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }

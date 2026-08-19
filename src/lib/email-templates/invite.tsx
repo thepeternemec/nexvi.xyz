@@ -39,7 +39,7 @@ export const InviteEmail = ({
         <Section style={brand}>
           <Link href={siteUrl} style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>{siteName}</span>
+            <span style={brandName}>nexvi</span>
           </Link>
         </Section>
 
@@ -69,6 +69,10 @@ export const InviteEmail = ({
           If you weren't expecting this invitation, you can safely ignore this
           email.
         </Text>
+
+        <Text style={footer}>
+          nexvi — AI that turns your experience into better job applications.
+        </Text>
       </Container>
     </Body>
   </Html>
@@ -77,7 +81,7 @@ export const InviteEmail = ({
 export default InviteEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }

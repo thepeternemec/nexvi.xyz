@@ -36,7 +36,7 @@ export const RecoveryEmail = ({
         <Section style={brand}>
           <span style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>{siteName}</span>
+            <span style={brandName}>nexvi</span>
           </span>
         </Section>
 
@@ -60,6 +60,10 @@ export const RecoveryEmail = ({
           If you didn't request a password reset, you can safely ignore this
           email. Your password will not be changed.
         </Text>
+
+        <Text style={footer}>
+          nexvi — AI that turns your experience into better job applications.
+        </Text>
       </Container>
     </Body>
   </Html>
@@ -68,7 +72,7 @@ export const RecoveryEmail = ({
 export default RecoveryEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }

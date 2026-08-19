@@ -42,7 +42,7 @@ export const EmailChangeEmail = ({
         <Section style={brand}>
           <span style={brandLink}>
             <span style={brandDot} />
-            <span style={brandName}>{siteName}</span>
+            <span style={brandName}>nexvi</span>
           </span>
         </Section>
 
@@ -78,6 +78,10 @@ export const EmailChangeEmail = ({
           If you didn't request this change, please secure your account
           immediately.
         </Text>
+
+        <Text style={footer}>
+          nexvi — AI that turns your experience into better job applications.
+        </Text>
       </Container>
     </Body>
   </Html>
@@ -86,7 +90,7 @@ export const EmailChangeEmail = ({
 export default EmailChangeEmail
 
 const main = {
-  backgroundColor: SURFACE,
+  backgroundColor: '#ffffff',
   fontFamily: '"Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif',
   padding: '40px 0',
 }

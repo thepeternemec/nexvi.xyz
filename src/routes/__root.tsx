@@ -17,6 +17,8 @@ import { TranslationProvider, AutoTranslate } from "@/lib/use-translation";
 import { LocaleProvider, useLocale } from "@/lib/locale-context";
 import { gtmPageView, gtmSetUser, gtmClearUser } from "@/lib/gtm";
 import { useAuth } from "@/hooks/use-auth";
+import { useWelcomeEmail } from "@/hooks/use-welcome-email";
+
 import { useSubscription } from "@/hooks/use-subscription";
 
 import appCss from "../styles.css?url";
@@ -202,6 +204,9 @@ function App() {
   const { locale } = useLocale();
   const { user } = useAuth();
   const { isPremium, status } = useSubscription();
+  useWelcomeEmail();
+
+
 
   React.useEffect(() => {
     gtmPageView(pathname, document.title, locale);
