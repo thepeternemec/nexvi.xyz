@@ -4,7 +4,7 @@ import { FileText, Loader2, RefreshCw, Trash2, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { extractResumeText } from "@/lib/resume.functions";
 import { clearResume, fileToBase64, saveResume, type SavedResume } from "@/lib/resume-store";
 
