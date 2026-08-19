@@ -188,7 +188,7 @@ export function SubscriptionPage() {
             <div className="mt-5 grid gap-4 sm:grid-cols-3">
               {[
                 { icon: CreditCard, title: "Payment details", desc: "Update your card or billing address." },
-                { icon: CalendarClock, title: "Switch plans", desc: "Move between monthly and yearly Premium." },
+                { icon: CalendarClock, title: "Monthly plan", desc: "Premium renews every month." },
                 { icon: ShieldCheck, title: "Cancel anytime", desc: "Keep access until the end of your period." },
               ].map((f) => (
                 <div key={f.title} className="rounded-2xl border border-border/70 bg-card p-5">
@@ -198,37 +198,6 @@ export function SubscriptionPage() {
                 </div>
               ))}
             </div>
-
-            {sub.isPremium && !sub.cancelAtPeriodEnd && (
-              <div className="mt-8 rounded-3xl border border-border/70 bg-card p-7">
-                <h2 className="font-display text-2xl tracking-tight">Change your billing cycle</h2>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Switches happen immediately — Stripe credits the unused part of your current plan
-                  and charges only the difference.
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Button
-                    className="rounded-full"
-                    disabled={busy !== null || sub.priceId === "premium_monthly"}
-                    onClick={() => switchPlan("premium_monthly")}
-                  >
-                    {busy === "premium_monthly" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {sub.priceId === "premium_monthly" ? "Current: $7 / month" : "Switch to $7 / month"}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="rounded-full"
-                    disabled={busy !== null || sub.priceId === "premium_yearly"}
-                    onClick={() => switchPlan("premium_yearly")}
-                  >
-                    {busy === "premium_yearly" && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    {sub.priceId === "premium_yearly"
-                      ? "Current: $70 / year"
-                      : "Switch to $70 / year — save 17%"}
-                  </Button>
-                </div>
-              </div>
-            )}
 
 
             {!sub.isPremium && (
