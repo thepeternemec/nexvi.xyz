@@ -2139,7 +2139,7 @@ const fr = {
   "Payment method": "Moyen de paiement",
   "Update your card or billing address.": "Mettez à jour votre carte ou votre adresse de facturation.",
   "Plan & invoices": "Forfait et factures",
-  "Switch monthly/yearly, download receipts.": "Changez de cycle mensuel/annuel, téléchargez vos reçus.",
+  "Manage your monthly plan and download receipts.": "Gérez votre plan mensuel et téléchargez vos reçus.",
   "Keep access until your period ends.": "Gardez l'accès jusqu'à la fin de votre période.",
   "Billing overview": "Aperçu de la facturation",
   "Usage history": "Historique d'utilisation",
