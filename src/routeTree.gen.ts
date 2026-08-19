@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VerifyEmailRouteImport } from './routes/verify-email'
+import { Route as UnsubscribeRouteImport } from './routes/unsubscribe'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SubscriptionRouteImport } from './routes/subscription'
 import { Route as StatusRouteImport } from './routes/status'
@@ -119,6 +120,7 @@ import { Route as EsAtsRouteImport } from './routes/es/ats'
 import { Route as EsAssistantRouteImport } from './routes/es/assistant'
 import { Route as EsAccountRouteImport } from './routes/es/account'
 import { Route as EsAboutRouteImport } from './routes/es/about'
+import { Route as EmailUnsubscribeRouteImport } from './routes/email/unsubscribe'
 import { Route as DeVerifyEmailRouteImport } from './routes/de/verify-email'
 import { Route as DeTermsRouteImport } from './routes/de/terms'
 import { Route as DeSubscriptionRouteImport } from './routes/de/subscription'
@@ -149,6 +151,7 @@ import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
 import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
 import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
@@ -156,6 +159,8 @@ import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
 import { Route as ApiPublicSeoMonitorRouteImport } from './routes/api/public/seo-monitor'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as LovableEmailTransactionalSendRouteImport } from './routes/lovable/email/transactional/send'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailQueueProcessRouteImport } from './routes/lovable/email/queue/process'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -164,6 +169,11 @@ import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/publi
 const VerifyEmailRoute = VerifyEmailRouteImport.update({
   id: '/verify-email',
   path: '/verify-email',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnsubscribeRoute = UnsubscribeRouteImport.update({
+  id: '/unsubscribe',
+  path: '/unsubscribe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -711,6 +721,11 @@ const EsAboutRoute = EsAboutRouteImport.update({
   path: '/es/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EmailUnsubscribeRoute = EmailUnsubscribeRouteImport.update({
+  id: '/email/unsubscribe',
+  path: '/email/unsubscribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DeVerifyEmailRoute = DeVerifyEmailRouteImport.update({
   id: '/de/verify-email',
   path: '/de/verify-email',
@@ -864,6 +879,11 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
+  id: '/lovable/email/suppression',
+  path: '/lovable/email/suppression',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItPromptSlugRoute = ItPromptSlugRouteImport.update({
   id: '/it/prompt/$slug',
   path: '/it/prompt/$slug',
@@ -900,6 +920,18 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LovableEmailTransactionalSendRoute =
+  LovableEmailTransactionalSendRouteImport.update({
+    id: '/lovable/email/transactional/send',
+    path: '/lovable/email/transactional/send',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LovableEmailQueueProcessRoute =
   LovableEmailQueueProcessRouteImport.update({
     id: '/lovable/email/queue/process',
@@ -952,6 +984,7 @@ export interface FileRoutesByFullPath {
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
   '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -983,6 +1016,7 @@ export interface FileRoutesByFullPath {
   '/de/subscription': typeof DeSubscriptionRoute
   '/de/terms': typeof DeTermsRoute
   '/de/verify-email': typeof DeVerifyEmailRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
   '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
@@ -1071,10 +1105,13 @@ export interface FileRoutesByFullPath {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -1104,6 +1141,7 @@ export interface FileRoutesByTo {
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
   '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -1135,6 +1173,7 @@ export interface FileRoutesByTo {
   '/de/subscription': typeof DeSubscriptionRoute
   '/de/terms': typeof DeTermsRoute
   '/de/verify-email': typeof DeVerifyEmailRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
   '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
@@ -1223,10 +1262,13 @@ export interface FileRoutesByTo {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -1258,6 +1300,7 @@ export interface FileRoutesById {
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
   '/terms': typeof TermsRoute
+  '/unsubscribe': typeof UnsubscribeRoute
   '/verify-email': typeof VerifyEmailRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -1289,6 +1332,7 @@ export interface FileRoutesById {
   '/de/subscription': typeof DeSubscriptionRoute
   '/de/terms': typeof DeTermsRoute
   '/de/verify-email': typeof DeVerifyEmailRoute
+  '/email/unsubscribe': typeof EmailUnsubscribeRoute
   '/es/about': typeof EsAboutRoute
   '/es/account': typeof EsAccountRoute
   '/es/assistant': typeof EsAssistantRoute
@@ -1377,10 +1421,13 @@ export interface FileRoutesById {
   '/es/prompt/$slug': typeof EsPromptSlugRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
+  '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
   '/lovable/email/queue/process': typeof LovableEmailQueueProcessRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
+  '/lovable/email/transactional/send': typeof LovableEmailTransactionalSendRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1413,6 +1460,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/subscription'
     | '/terms'
+    | '/unsubscribe'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1444,6 +1492,7 @@ export interface FileRouteTypes {
     | '/de/subscription'
     | '/de/terms'
     | '/de/verify-email'
+    | '/email/unsubscribe'
     | '/es/about'
     | '/es/account'
     | '/es/assistant'
@@ -1532,10 +1581,13 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1565,6 +1617,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/subscription'
     | '/terms'
+    | '/unsubscribe'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1596,6 +1649,7 @@ export interface FileRouteTypes {
     | '/de/subscription'
     | '/de/terms'
     | '/de/verify-email'
+    | '/email/unsubscribe'
     | '/es/about'
     | '/es/account'
     | '/es/assistant'
@@ -1684,10 +1738,13 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   id:
     | '__root__'
     | '/'
@@ -1718,6 +1775,7 @@ export interface FileRouteTypes {
     | '/status'
     | '/subscription'
     | '/terms'
+    | '/unsubscribe'
     | '/verify-email'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
@@ -1749,6 +1807,7 @@ export interface FileRouteTypes {
     | '/de/subscription'
     | '/de/terms'
     | '/de/verify-email'
+    | '/email/unsubscribe'
     | '/es/about'
     | '/es/account'
     | '/es/assistant'
@@ -1837,10 +1896,13 @@ export interface FileRouteTypes {
     | '/es/prompt/$slug'
     | '/fr/prompt/$slug'
     | '/it/prompt/$slug'
+    | '/lovable/email/suppression'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
     | '/lovable/email/queue/process'
+    | '/lovable/email/transactional/preview'
+    | '/lovable/email/transactional/send'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1872,6 +1934,7 @@ export interface RootRouteChildren {
   StatusRoute: typeof StatusRoute
   SubscriptionRoute: typeof SubscriptionRoute
   TermsRoute: typeof TermsRoute
+  UnsubscribeRoute: typeof UnsubscribeRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -1902,6 +1965,7 @@ export interface RootRouteChildren {
   DeSubscriptionRoute: typeof DeSubscriptionRoute
   DeTermsRoute: typeof DeTermsRoute
   DeVerifyEmailRoute: typeof DeVerifyEmailRoute
+  EmailUnsubscribeRoute: typeof EmailUnsubscribeRoute
   EsAboutRoute: typeof EsAboutRoute
   EsAccountRoute: typeof EsAccountRoute
   EsAssistantRoute: typeof EsAssistantRoute
@@ -1989,10 +2053,13 @@ export interface RootRouteChildren {
   EsPromptSlugRoute: typeof EsPromptSlugRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
   ItPromptSlugRoute: typeof ItPromptSlugRoute
+  LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
   LovableEmailQueueProcessRoute: typeof LovableEmailQueueProcessRoute
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
+  LovableEmailTransactionalSendRoute: typeof LovableEmailTransactionalSendRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -2002,6 +2069,13 @@ declare module '@tanstack/react-router' {
       path: '/verify-email'
       fullPath: '/verify-email'
       preLoaderRoute: typeof VerifyEmailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unsubscribe': {
+      id: '/unsubscribe'
+      path: '/unsubscribe'
+      fullPath: '/unsubscribe'
+      preLoaderRoute: typeof UnsubscribeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -2767,6 +2841,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsAboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/email/unsubscribe': {
+      id: '/email/unsubscribe'
+      path: '/email/unsubscribe'
+      fullPath: '/email/unsubscribe'
+      preLoaderRoute: typeof EmailUnsubscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/verify-email': {
       id: '/de/verify-email'
       path: '/de/verify-email'
@@ -2977,6 +3058,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lovable/email/suppression': {
+      id: '/lovable/email/suppression'
+      path: '/lovable/email/suppression'
+      fullPath: '/lovable/email/suppression'
+      preLoaderRoute: typeof LovableEmailSuppressionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it/prompt/$slug': {
       id: '/it/prompt/$slug'
       path: '/it/prompt/$slug'
@@ -3024,6 +3112,20 @@ declare module '@tanstack/react-router' {
       path: '/.lovable/oauth/consent'
       fullPath: '/.lovable/oauth/consent'
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/send': {
+      id: '/lovable/email/transactional/send'
+      path: '/lovable/email/transactional/send'
+      fullPath: '/lovable/email/transactional/send'
+      preLoaderRoute: typeof LovableEmailTransactionalSendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/lovable/email/queue/process': {
@@ -3099,6 +3201,7 @@ const rootRouteChildren: RootRouteChildren = {
   StatusRoute: StatusRoute,
   SubscriptionRoute: SubscriptionRoute,
   TermsRoute: TermsRoute,
+  UnsubscribeRoute: UnsubscribeRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
@@ -3131,6 +3234,7 @@ const rootRouteChildren: RootRouteChildren = {
   DeSubscriptionRoute: DeSubscriptionRoute,
   DeTermsRoute: DeTermsRoute,
   DeVerifyEmailRoute: DeVerifyEmailRoute,
+  EmailUnsubscribeRoute: EmailUnsubscribeRoute,
   EsAboutRoute: EsAboutRoute,
   EsAccountRoute: EsAccountRoute,
   EsAssistantRoute: EsAssistantRoute,
@@ -3218,10 +3322,13 @@ const rootRouteChildren: RootRouteChildren = {
   EsPromptSlugRoute: EsPromptSlugRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
   ItPromptSlugRoute: ItPromptSlugRoute,
+  LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,
   LovableEmailQueueProcessRoute: LovableEmailQueueProcessRoute,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
+  LovableEmailTransactionalSendRoute: LovableEmailTransactionalSendRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
