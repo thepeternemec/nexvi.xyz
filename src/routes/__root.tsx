@@ -202,6 +202,9 @@ function App() {
   const { locale } = useLocale();
   const { user } = useAuth();
   const { isPremium, status } = useSubscription();
+  useWelcomeEmail();
+
+
 
   React.useEffect(() => {
     gtmPageView(pathname, document.title, locale);
