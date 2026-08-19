@@ -40,24 +40,8 @@ export function SubscriptionPage() {
   const locale = detectLocaleFromPath(pathname);
   const href = (p: string) => alternateHref(locale, p);
   const portal = useServerFn(createPortalSession);
-  const changePlan = useServerFn(changeSubscriptionPlan);
   const [busy, setBusy] = useState<string | null>(null);
   const [checkoutPrice, setCheckoutPrice] = useState<string | null>(null);
-
-  async function switchPlan(priceId: string) {
-    setBusy(priceId);
-    try {
-      const result = await changePlan({ data: { priceId, environment: getStripeEnvironment() } });
-      if ("error" in result) throw new Error(result.error);
-      toast.success("Plan switched — the difference is prorated on your next invoice.");
-      await sub.refresh();
-    } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not switch plan");
-    } finally {
-      setBusy(null);
-    }
-  }
-
 
   async function openPortal() {
     setBusy("portal");
