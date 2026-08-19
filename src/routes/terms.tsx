@@ -46,7 +46,7 @@ export function TermsPage() {
 
         <Section title="Plans and billing">
           <p>
-            The Free plan includes a limited number of generations per tool. Premium is billed monthly or yearly through
+            The Free plan includes a limited number of generations per tool. Premium is billed monthly through
             our payment provider and renews automatically until you cancel. You can cancel any time from Subscription in
             your dashboard; access continues until the end of the paid period.
           </p>

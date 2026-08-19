@@ -225,7 +225,7 @@ export function DashboardAccountSections() {
         <ul className="mt-5 space-y-3 text-sm">
           {[
             { icon: CreditCard, title: "Payment method", desc: "Update your card or billing address." },
-            { icon: CalendarClock, title: "Plan & invoices", desc: "Switch monthly/yearly, download receipts." },
+            { icon: CalendarClock, title: "Plan & invoices", desc: "Manage your monthly plan and download receipts." },
             { icon: ShieldCheck, title: "Cancel anytime", desc: "Keep access until your period ends." },
           ].map((f) => (
             <li key={f.title} className="flex gap-3">
