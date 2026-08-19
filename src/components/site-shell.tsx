@@ -415,7 +415,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
           </a>
           <div className="mt-6 flex items-center gap-3">
             <a
-              href="https://www.linkedin.com/company/in-nexvi/"
+              href="https://www.linkedin.com/company/101902719/"
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -433,7 +433,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               <Instagram className="h-4 w-4" />
             </a>
             <a
-              href="https://x.com/nexvi_"
+              href="https://x.com/nexvi__"
               target="_blank"
               rel="noreferrer"
               aria-label="X"
@@ -442,7 +442,7 @@ export function SiteFooter({ locale = "en" }: { locale?: Locale }) {
               <XLogo className="h-4 w-4" />
             </a>
             <a
-              href="https://www.threads.com/@nexvi_"
+              href="https://www.threads.com/@nexvi_xyz"
               target="_blank"
               rel="noreferrer"
               aria-label="Threads"

@@ -114,9 +114,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           url: "https://nexvi.xyz",
           email: "info@nexvi.xyz",
           sameAs: [
-            "https://www.linkedin.com/company/nexvi",
-            "https://x.com/nexvi",
-            "https://www.instagram.com/nexvi",
+            "https://www.linkedin.com/company/101902719/",
+            "https://x.com/nexvi__",
+            "https://www.instagram.com/nexvi.xyz/",
+            "https://www.threads.com/@nexvi_xyz",
           ],
           description: "AI tools for job seekers: ATS-optimized CVs, tailored cover letters, humanized writing and match scoring.",
         }),
