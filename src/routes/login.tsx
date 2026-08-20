@@ -103,7 +103,7 @@ export function AuthShell({
     try {
       sessionStorage.setItem("nexvi:next", nextPath);
       const result = await lovable.auth.signInWithOAuth(provider, {
-        redirect_uri: window.location.origin,
+        redirect_uri: `${window.location.origin}/auth/callback`,
       });
       if (result.error) {
         toast.error(result.error.message ?? `Could not sign in with ${label}`);
