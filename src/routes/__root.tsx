@@ -95,8 +95,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "twitter:title", content: "Nexvi — AI That Tailors Your Experience to the Job" },
       { name: "twitter:description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
-      { property: "og:image", content: "https://nexvi.xyz/og.png" },
-      { name: "twitter:image", content: "https://nexvi.xyz/og.png" },
+      { property: "og:image", content: "https://nexvi.xyz/og-v2.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Nexvi landing page — tailor your CV to any job description and score it against the ATS" },
+      { name: "twitter:image", content: "https://nexvi.xyz/og-v2.png" },
+
     ],
     links: [
       { rel: "stylesheet", href: appCss },
