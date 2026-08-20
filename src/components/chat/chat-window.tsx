@@ -567,24 +567,50 @@ export function ChatWindow({
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         {/* Context panel */}
         {meta.needs.length > 0 && (
-          <div className="border-b border-border/60 bg-muted/20">
+          <div className="border-b border-border/60 bg-card/80 px-3 pt-3 pb-2 sm:px-5">
             <button
               onClick={() => setCtxOpen((o) => !o)}
-              className="flex w-full items-center justify-between px-3 py-2.5 text-left text-[12.5px] font-medium sm:px-5"
+              className="flex w-full items-center justify-between gap-3 rounded-2xl border border-border/70 bg-background px-4 py-3 text-left shadow-sm transition hover:border-border hover:shadow-md"
             >
-              <span className="text-muted-foreground">
-                Context ·{" "}
-                <span className={ready ? "text-primary" : "text-foreground"}>
-                  {ready
-                    ? "ready"
-                    : mode === "ask"
-                      ? "optional — add a job ad or your CV for sharper answers"
-                      : "job description + your background needed"}
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <SlidersHorizontal className="h-4 w-4" />
                 </span>
-              </span>
-              <ChevronDown
-                className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`}
-              />
+                <div className="min-w-0">
+                  <p className="text-[13px] font-semibold text-foreground">Context</p>
+                  <p className="truncate text-[12px] text-muted-foreground">
+                    {ready
+                      ? "Ready to generate"
+                      : mode === "ask"
+                        ? "Add a job ad or your CV for sharper answers"
+                        : "Job description + your background needed"}
+                  </p>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                <span
+                  className={`hidden items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold sm:flex ${
+                    ready
+                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                      : "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                  }`}
+                >
+                  {ready ? (
+                    <>
+                      <CheckCircle2 className="h-3 w-3" />
+                      Ready
+                    </>
+                  ) : (
+                    <>
+                      <AlertCircle className="h-3 w-3" />
+                      Needs info
+                    </>
+                  )}
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 text-muted-foreground transition ${ctxOpen ? "rotate-180" : ""}`}
+                />
+              </div>
             </button>
             {ctxOpen && (
               <div className="grid gap-4 px-3 pb-5 sm:px-5 lg:grid-cols-2">
