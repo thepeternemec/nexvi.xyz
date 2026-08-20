@@ -95,8 +95,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { name: "twitter:title", content: "Nexvi — AI That Tailors Your Experience to the Job" },
       { name: "twitter:description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c2a31f54-f01b-4751-9835-0c10daae18d1/id-preview-3965c72d--16e4ecf7-814f-4fba-ade3-3bc51de0ca46.lovable.app-1785689887212.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c2a31f54-f01b-4751-9835-0c10daae18d1/id-preview-3965c72d--16e4ecf7-814f-4fba-ade3-3bc51de0ca46.lovable.app-1785689887212.png" },
+      { property: "og:image", content: "https://nexvi.xyz/og.png" },
+      { name: "twitter:image", content: "https://nexvi.xyz/og.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
