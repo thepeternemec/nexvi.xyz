@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
@@ -216,6 +217,14 @@ export function ChatWindow({
   const [busy, setBusy] = useState(false);
   const [ctx, setCtx] = useState<ComposerContext>(EMPTY_CTX);
   const [ctxOpen, setCtxOpen] = useState(true);
+  const isMobile = useIsMobile();
+  const collapsedOnMobile = useRef(false);
+  useEffect(() => {
+    if (isMobile && !collapsedOnMobile.current) {
+      collapsedOnMobile.current = true;
+      setCtxOpen(false);
+    }
+  }, [isMobile]);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
@@ -536,7 +545,7 @@ export function ChatWindow({
         </div>
       </div>
 
-      <div className="flex min-h-0 flex-1">
+      <div className="flex min-h-0 w-full min-w-0 flex-1">
         {/* Resume sidebar */}
         {meta.needs.includes("background") && (
           <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-r border-border/60 bg-muted/20 px-4 py-4 xl:block">
@@ -555,7 +564,7 @@ export function ChatWindow({
           </aside>
         )}
 
-      <div className="flex min-h-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         {/* Context panel */}
         {meta.needs.length > 0 && (
           <div className="border-b border-border/60 bg-muted/20">
