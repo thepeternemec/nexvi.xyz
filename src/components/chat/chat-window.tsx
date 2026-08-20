@@ -3,7 +3,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQueryClient } from "@tanstack/react-query";
-import { ChevronDown, Copy, Download, PanelRightOpen } from "lucide-react";
+import { ChevronDown, Copy, Download, PanelRightOpen, SlidersHorizontal, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 import {
   Conversation,
