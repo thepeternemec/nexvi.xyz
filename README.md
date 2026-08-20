@@ -1,290 +1,84 @@
 # Nexvi
 
-Build a production-ready SaaS web platform called “Prompt Academia”.
+### AI that turns your experience into better job applications.
 
-Prompt Academia is an AI prompt marketplace and discovery platform designed for everyday people — not developers.
+Nexvi is an AI-powered layer between your experience and a specific job description.
 
-The platform helps users discover, save, buy, and use AI prompts and AI-powered toolkits for real-world outcomes like:
+Instead of generating another generic AI-written resume or cover letter, Nexvi helps you understand what a role is looking for, identify the most relevant parts of your experience, and create a stronger application that still sounds like you.
 
-getting a job
+🌐 **Website:** nexvi.xyz
 
-improving productivity
+---
 
-creating content
+## The problem
 
-studying
+Applying for jobs with AI usually looks like this:
 
-marketing
+1. Copy your resume
+2. Copy the job description
+3. Paste both into an AI chatbot
+4. Ask it to tailor your application
+5. Get generic, overly polished AI text
+6. Repeat for every job
 
-starting a business
+The result often sounds impressive but fails to clearly connect your actual experience with what the employer is looking for.
 
-fitness planning
+Nexvi is built to solve that.
 
-travel planning
+---
 
-writing emails
+## What Nexvi does
 
-creating presentations
+Nexvi combines:
 
-social media growth
+**Your experience + a specific job description**
 
-learning new skills
+It helps you:
 
-The product should feel like a mix of:
+- 🎯 Identify where your experience matches the role
+- 📊 Score your application against job requirements
+- ✍️ Tailor your CV and application for a specific position
+- 🧠 Find relevant experience you may have overlooked
+- 🗣️ Rewrite content while keeping your voice
+- ✨ Remove generic AI-sounding language
+- 🔍 Keep your application grounded in what you actually did
 
-Netflix (content discovery)
+The goal is simple:
 
-Pinterest (visual browsing)
+> **Make your experience easier for both ATS systems and humans to understand.**
 
-Gumroad (digital product selling)
+---
 
-Notion (clean UX)
+## Not another resume builder
 
-ChatGPT (AI interaction)
+There is no single "perfect resume."
 
-DESIGN STYLE:
+A strong application for one role can be completely wrong for another.
 
-Modern
+Nexvi treats job applications as a translation problem:
 
-Premium
+```text
+Your Experience
+      ↓
+Understand the Job
+      ↓
+Find Relevant Evidence
+      ↓
+Tailor the Application
+      ↓
+Optimize for ATS + Humans
+      ↓
+Sound Like You
 
-Minimal
+Feedback:
 
-Soft gradients
+Nexvi is early, and feedback is very welcome.
 
-Large typography
+Try it at https://nexvi.xyz and let us know:
 
-Clean spacing
+What part of the application process takes you the most time?
+What do existing AI job tools get wrong?
+What would make this genuinely useful enough to use for every application?
+Nexvi — Turn your experience into better job applications.
 
-Smooth animations
-
-Mobile-first
-
-Extremely intuitive for non-technical users
-
-Use:
-
-Next.js
-
-TailwindCSS
-
-Supabase
-
-Stripe
-
-Server-side rendering
-
-SEO optimization
-
-Responsive layouts
-
-Authentication system
-
-MAIN PAGES:
-
-LANDING PAGE
-Include:
-
-Hero section with CTA
-
-Search bar: “What do you want AI to help you with?”
-
-Trending prompts
-
-Popular categories
-
-Featured creators
-
-Testimonials
-
-Pricing section
-
-FAQ
-
-Footer
-
-PROMPT MARKETPLACE
-Create a searchable marketplace with:
-
-Prompt cards
-
-Categories
-
-Ratings
-
-Bookmark button
-
-Free/Paid labels
-
-AI tool compatibility badges
-
-Filters:
-
-category
-
-popularity
-
-newest
-
-beginner-friendly
-
-free vs premium
-
-PROMPT DETAIL PAGE
-Include:
-
-Prompt title
-
-Description
-
-Copy prompt button
-
-Example outputs
-
-Usage instructions
-
-Tags
-
-Reviews
-
-Related prompts
-
-Creator profile section
-
-USER DASHBOARD
-Include:
-
-Saved prompts
-
-Purchase history
-
-Recently used prompts
-
-Account settings
-
-Subscription management
-
-CREATOR DASHBOARD
-Allow creators to:
-
-Upload prompts
-
-Sell prompt bundles
-
-Track revenue
-
-Manage products
-
-View analytics
-
-AI ASSISTANT
-Build an AI recommendation assistant that asks:
-“What are you trying to achieve?”
-Then recommends prompts and prompt packs.
-
-MONETIZATION
-Include:
-
-Free plan
-
-Premium membership
-
-Paid prompt packs
-
-Creator commissions
-
-Stripe payments
-
-DATABASE STRUCTURE
-Generate scalable Supabase schema for:
-
-users
-
-prompts
-
-categories
-
-purchases
-
-subscriptions
-
-creator profiles
-
-reviews
-
-bookmarks
-
-BRANDING
-Generate:
-
-modern logo concept
-
-color palette
-
-typography system
-
-UI design system
-
-onboarding copy
-
-landing page copy
-
-empty states
-
-CTA buttons
-
-IMPORTANT PRODUCT DIRECTION
-This should NOT feel technical or developer-focused.
-
-The platform should feel approachable for:
-
-students
-
-freelancers
-
-marketers
-
-creators
-
-small business owners
-
-regular consumers curious about AI
-
-Focus on:
-
-simplicity
-
-trust
-
-discoverability
-
-visual browsing
-
-outcomes instead of technical prompting
-
-The final result should look like a real startup ready for launch and investors, not a template or hackathon project.
-
-Generate all pages, navigation, responsive UI, database structure, and polished UX flows automatically.
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://nexvi.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/16e4ecf7-814f-4fba-ade3-3bc51de0ca46).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+🌐 https://nexvi.xyz
