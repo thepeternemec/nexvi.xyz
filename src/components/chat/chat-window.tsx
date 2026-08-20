@@ -216,6 +216,14 @@ export function ChatWindow({
   const [busy, setBusy] = useState(false);
   const [ctx, setCtx] = useState<ComposerContext>(EMPTY_CTX);
   const [ctxOpen, setCtxOpen] = useState(true);
+  const isMobile = useIsMobile();
+  const collapsedOnMobile = useRef(false);
+  useEffect(() => {
+    if (isMobile && !collapsedOnMobile.current) {
+      collapsedOnMobile.current = true;
+      setCtxOpen(false);
+    }
+  }, [isMobile]);
   const activeThread = useRef<string | undefined>(threadId);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [previewSlug, setPreviewSlug] = useState<string | null>(null);
