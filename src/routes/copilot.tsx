@@ -2,6 +2,7 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { useState } from "react";
 import { ChatSidebar } from "@/components/chat/chat-sidebar";
 import { ChatSidebarContext } from "@/components/chat/chat-sidebar-context";
+import { SiteHeader } from "@/components/site-shell";
 
 export const Route = createFileRoute("/copilot")({
   head: () => ({
