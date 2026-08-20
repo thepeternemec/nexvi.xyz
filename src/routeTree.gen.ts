@@ -148,6 +148,7 @@ import { Route as DeAboutRouteImport } from './routes/de/about'
 import { Route as CopilotThreadIdRouteImport } from './routes/copilot.$threadId'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -862,6 +863,11 @@ const BlogAtsOptimizationAndAiHumanizerRoute =
     path: '/blog/ats-optimization-and-ai-humanizer',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/auth/callback',
+  path: '/auth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminImportRoute = AdminImportRouteImport.update({
   id: '/admin/import',
   path: '/admin/import',
@@ -989,6 +995,7 @@ export interface FileRoutesByFullPath {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
@@ -1146,6 +1153,7 @@ export interface FileRoutesByTo {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
@@ -1305,6 +1313,7 @@ export interface FileRoutesById {
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/import': typeof AdminImportRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
@@ -1465,6 +1474,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/copilot/$threadId'
@@ -1622,6 +1632,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/copilot/$threadId'
@@ -1780,6 +1791,7 @@ export interface FileRouteTypes {
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/import'
+    | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
     | '/copilot/$threadId'
@@ -1939,6 +1951,7 @@ export interface RootRouteChildren {
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   AdminImportRoute: typeof AdminImportRoute
+  AuthCallbackRoute: typeof AuthCallbackRoute
   BlogAtsOptimizationAndAiHumanizerRoute: typeof BlogAtsOptimizationAndAiHumanizerRoute
   BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
   DeAboutRoute: typeof DeAboutRoute
@@ -3037,6 +3050,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogAtsOptimizationAndAiHumanizerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/auth/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/import': {
       id: '/admin/import'
       path: '/admin/import'
@@ -3207,6 +3227,7 @@ const rootRouteChildren: RootRouteChildren = {
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   AdminImportRoute: AdminImportRoute,
+  AuthCallbackRoute: AuthCallbackRoute,
   BlogAtsOptimizationAndAiHumanizerRoute:
     BlogAtsOptimizationAndAiHumanizerRoute,
   BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
