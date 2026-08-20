@@ -23,11 +23,24 @@ export function useWelcomeEmail() {
 
         const { data: profile, error } = await supabase
           .from("profiles")
-          .select("welcome_email_sent_at, full_name")
+          .select("welcome_email_sent_at, full_name, created_at")
           .eq("id", user.id)
           .maybeSingle();
 
         if (error || !profile || profile.welcome_email_sent_at || cancelled) return;
+
+        // Only genuinely new accounts get a welcome email — never long-time users.
+        const createdAt = profile.created_at ? Date.parse(profile.created_at) : NaN;
+        const isNewAccount =
+          Number.isFinite(createdAt) && Date.now() - createdAt < 24 * 60 * 60 * 1000;
+        if (!isNewAccount) {
+          await supabase
+            .from("profiles")
+            .update({ welcome_email_sent_at: new Date().toISOString() })
+            .eq("id", user.id)
+            .is("welcome_email_sent_at", null);
+          return;
+        }
 
         // Claim the slot first so concurrent tabs cannot both send.
         const { data: claimed, error: claimError } = await supabase
