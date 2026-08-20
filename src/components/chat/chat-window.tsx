@@ -536,7 +536,7 @@ export function ChatWindow({
         </div>
       </div>
 
-      <div className="flex min-h-0 flex-1">
+      <div className="flex min-h-0 w-full min-w-0 flex-1">
         {/* Resume sidebar */}
         {meta.needs.includes("background") && (
           <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-r border-border/60 bg-muted/20 px-4 py-4 xl:block">
