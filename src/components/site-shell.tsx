@@ -518,7 +518,6 @@ export function SiteShell({ children, locale: explicitLocale }: { children: Reac
   const locale = useActiveLocale(explicitLocale);
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader locale={locale} />
       <main className="flex-1">{children}</main>
       <SiteFooter locale={locale} />
     </div>
