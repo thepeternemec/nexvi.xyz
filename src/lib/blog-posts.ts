@@ -9,6 +9,15 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "nexvi-copilot",
+    title: "Nexvi Copilot: one chat for your entire job search",
+    excerpt:
+      "CV generator, cover letter writer, ATS optimizer, humanizer and prompt library — all inside a single chat workspace that remembers your resume and the job description.",
+    category: "Product",
+    readingTime: "7 min read",
+    date: "2026-08-20",
+  },
+  {
     slug: "ats-optimization-and-ai-humanizer",
     title: "ATS optimization and why the humanizer matters when AI screens your application",
     excerpt:
