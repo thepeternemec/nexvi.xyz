@@ -146,6 +146,7 @@ import { Route as DeAssistantRouteImport } from './routes/de/assistant'
 import { Route as DeAccountRouteImport } from './routes/de/account'
 import { Route as DeAboutRouteImport } from './routes/de/about'
 import { Route as CopilotThreadIdRouteImport } from './routes/copilot.$threadId'
+import { Route as BlogNexviCopilotRouteImport } from './routes/blog/nexvi-copilot'
 import { Route as BlogHowToWriteAResumeRouteImport } from './routes/blog/how-to-write-a-resume'
 import { Route as BlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/blog/ats-optimization-and-ai-humanizer'
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
@@ -852,6 +853,11 @@ const CopilotThreadIdRoute = CopilotThreadIdRouteImport.update({
   path: '/$threadId',
   getParentRoute: () => CopilotRoute,
 } as any)
+const BlogNexviCopilotRoute = BlogNexviCopilotRouteImport.update({
+  id: '/blog/nexvi-copilot',
+  path: '/blog/nexvi-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogHowToWriteAResumeRoute = BlogHowToWriteAResumeRouteImport.update({
   id: '/blog/how-to-write-a-resume',
   path: '/blog/how-to-write-a-resume',
@@ -998,6 +1004,7 @@ export interface FileRoutesByFullPath {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/blog/nexvi-copilot': typeof BlogNexviCopilotRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
@@ -1156,6 +1163,7 @@ export interface FileRoutesByTo {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/blog/nexvi-copilot': typeof BlogNexviCopilotRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
@@ -1316,6 +1324,7 @@ export interface FileRoutesById {
   '/auth/callback': typeof AuthCallbackRoute
   '/blog/ats-optimization-and-ai-humanizer': typeof BlogAtsOptimizationAndAiHumanizerRoute
   '/blog/how-to-write-a-resume': typeof BlogHowToWriteAResumeRoute
+  '/blog/nexvi-copilot': typeof BlogNexviCopilotRoute
   '/copilot/$threadId': typeof CopilotThreadIdRoute
   '/de/about': typeof DeAboutRoute
   '/de/account': typeof DeAccountRoute
@@ -1477,6 +1486,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/blog/nexvi-copilot'
     | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
@@ -1635,6 +1645,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/blog/nexvi-copilot'
     | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
@@ -1794,6 +1805,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/blog/ats-optimization-and-ai-humanizer'
     | '/blog/how-to-write-a-resume'
+    | '/blog/nexvi-copilot'
     | '/copilot/$threadId'
     | '/de/about'
     | '/de/account'
@@ -1954,6 +1966,7 @@ export interface RootRouteChildren {
   AuthCallbackRoute: typeof AuthCallbackRoute
   BlogAtsOptimizationAndAiHumanizerRoute: typeof BlogAtsOptimizationAndAiHumanizerRoute
   BlogHowToWriteAResumeRoute: typeof BlogHowToWriteAResumeRoute
+  BlogNexviCopilotRoute: typeof BlogNexviCopilotRoute
   DeAboutRoute: typeof DeAboutRoute
   DeAccountRoute: typeof DeAccountRoute
   DeAssistantRoute: typeof DeAssistantRoute
@@ -3036,6 +3049,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CopilotThreadIdRouteImport
       parentRoute: typeof CopilotRoute
     }
+    '/blog/nexvi-copilot': {
+      id: '/blog/nexvi-copilot'
+      path: '/blog/nexvi-copilot'
+      fullPath: '/blog/nexvi-copilot'
+      preLoaderRoute: typeof BlogNexviCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/how-to-write-a-resume': {
       id: '/blog/how-to-write-a-resume'
       path: '/blog/how-to-write-a-resume'
@@ -3231,6 +3251,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogAtsOptimizationAndAiHumanizerRoute:
     BlogAtsOptimizationAndAiHumanizerRoute,
   BlogHowToWriteAResumeRoute: BlogHowToWriteAResumeRoute,
+  BlogNexviCopilotRoute: BlogNexviCopilotRoute,
   DeAboutRoute: DeAboutRoute,
   DeAccountRoute: DeAccountRoute,
   DeAssistantRoute: DeAssistantRoute,
