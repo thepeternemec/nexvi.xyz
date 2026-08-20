@@ -1,6 +1,6 @@
 import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
+import { Search, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -301,27 +301,6 @@ export function PromptsPage() {
         </div>
 
 
-        <div id="library-results" className="mt-4 flex flex-wrap items-center justify-between gap-3 scroll-mt-24 border-y border-border/60 py-4 text-sm">
-          <div className="flex flex-wrap items-center gap-2 text-muted-foreground">
-            <SlidersHorizontal className="h-3.5 w-3.5" />
-            <span className="mr-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Filter</span>
-            <FilterChip label="Free" active={search.price === "free"} onClick={() => update({ price: search.price === "free" ? "all" : "free" })} />
-            <FilterChip label="Premium" active={search.price === "paid"} onClick={() => update({ price: search.price === "paid" ? "all" : "paid" })} />
-            <FilterChip label="Beginner-friendly" active={search.beginner === 1 || search.beginner === "1"} onClick={() => update({ beginner: search.beginner ? undefined : 1 })} />
-            {(search.q || search.category || search.pack || search.price !== "all" || search.beginner) && (
-              <button onClick={() => (navigate as any)({ search: {} })} className="ml-2 inline-flex items-center gap-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground transition hover:text-foreground"><X className="h-3 w-3" /> Clear all</button>
-            )}
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Sort</span>
-            <select value={(search.sort as string) ?? "popular"} onChange={(e) => update({ sort: e.target.value as Search["sort"] })} className="rounded-full border border-border/70 bg-background/70 px-3 py-1.5 text-[13px] transition hover:border-foreground/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/40">
-              <option value="popular">Popular</option>
-              <option value="newest">Newest</option>
-              <option value="rating">Top rated</option>
-              <option value="tier">Free / Premium / Beginner</option>
-            </select>
-          </div>
-        </div>
 
 
         <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted-foreground">
@@ -398,8 +377,3 @@ export function PromptsPage() {
   );
 }
 
-function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
-  return (
-    <button onClick={onClick} className={`rounded-full border px-3 py-1.5 text-[12px] transition ${active ? "border-primary/40 bg-primary/10 text-primary" : "border-border/70 bg-background/70 text-foreground/80 hover:border-foreground/25 hover:text-foreground"}`}>{label}</button>
-  );
-}
