@@ -1,4 +1,4 @@
-# Nexvi
+ nexvi.xyz
 
 ### AI that turns your experience into better job applications.
 
