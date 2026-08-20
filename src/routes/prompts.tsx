@@ -1,6 +1,6 @@
 import { createFileRoute, useRouterState, useSearch, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Search, SlidersHorizontal, X, Bookmark, FileDown } from "lucide-react";
+import { Search, X, Bookmark, FileDown } from "lucide-react";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -377,8 +377,3 @@ export function PromptsPage() {
   );
 }
 
-function FilterChip({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
-  return (
-    <button onClick={onClick} className={`rounded-full border px-3 py-1.5 text-[12px] transition ${active ? "border-primary/40 bg-primary/10 text-primary" : "border-border/70 bg-background/70 text-foreground/80 hover:border-foreground/25 hover:text-foreground"}`}>{label}</button>
-  );
-}
