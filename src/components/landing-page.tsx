@@ -186,13 +186,12 @@ Led <mark className="rounded bg-primary/12 px-1 text-foreground">end-to-end desi
                   key={link}
                   data-tool-card
                   href={href(link)}
-                  className={`group relative flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-card/70 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 sm:w-[320px] ${
+                  className={`group relative flex w-[280px] shrink-0 snap-start flex-col overflow-hidden rounded-2xl bg-card/70 p-7 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 sm:w-[320px] ${
                     isClaude
-                      ? "border-primary/30 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset,0_18px_40px_-24px_rgba(79,70,229,0.45)] hover:border-primary/50"
-                      : "border-border/60 shadow-[0_1px_0_rgba(255,255,255,0.6)_inset,0_12px_32px_-24px_rgba(16,24,64,0.35)] hover:border-foreground/25"
+                      ? "shadow-[0_18px_40px_-24px_rgba(79,70,229,0.45)]"
+                      : "shadow-[0_12px_32px_-24px_rgba(16,24,64,0.35)]"
                   }`}
                 >
-                  <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   {!isClaude && t.badge && (
                     <span className="absolute right-5 top-5 rounded-full bg-foreground px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-background">
                       {t.badge}
