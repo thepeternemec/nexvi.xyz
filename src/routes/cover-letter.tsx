@@ -18,6 +18,14 @@ export const Route = createFileRoute("/cover-letter")({
     meta: [
       { title: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { name: "description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
+      ...crawlerMeta([
+        "cover letter generator",
+        "AI cover letter generator",
+        "free cover letter writer",
+        "ATS cover letter",
+        "cover letter for job application",
+        "personalized cover letter AI",
+      ]),
       { property: "og:title", content: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { property: "og:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
       { property: "og:type", content: "website" },
@@ -26,7 +34,37 @@ export const Route = createFileRoute("/cover-letter")({
       { name: "twitter:title", content: "AI Cover Letter Generator That Sounds Human | Nexvi" },
       { name: "twitter:description", content: "Create personalized, ATS-friendly cover letters that connect your experience to the job. Free to try." },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/cover-letter" }],
+    links: canonicalAndAlternates("/cover-letter"),
+    scripts: [
+      toolJsonLd({
+        name: "Nexvi Cover Letter Generator",
+        path: "/cover-letter",
+        description:
+          "Generate a personalized, ATS-friendly cover letter that links your experience to a specific job description.",
+        featureList: [
+          "Cover letter tailored to a job description",
+          "Company and role personalization",
+          "Tone control",
+          "ATS-friendly plain structure",
+          "Copy and download output",
+        ],
+      }),
+      howToJsonLd({
+        name: "How to write a tailored cover letter with AI",
+        description: "Create a cover letter that maps your background to the role.",
+        steps: [
+          "Paste the job description.",
+          "Add your background and the company and role name.",
+          "Choose a tone and generate the cover letter.",
+          "Review, edit and download it.",
+        ],
+      }),
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Tools", path: "/prompts" },
+        { name: "Cover Letter Generator", path: "/cover-letter" },
+      ]),
+    ],
   }),
 
   component: CoverLetterPage,

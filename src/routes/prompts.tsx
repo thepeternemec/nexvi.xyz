@@ -34,6 +34,14 @@ export const Route = createFileRoute("/prompts")({
     meta: [
       { title: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
+      ...crawlerMeta([
+        "job search prompts",
+        "CV prompts",
+        "cover letter prompts",
+        "ChatGPT prompts for job applications",
+        "ATS prompts",
+        "interview prep prompts",
+      ]),
       { property: "og:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { property: "og:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
       { property: "og:type", content: "website" },
@@ -42,8 +50,13 @@ export const Route = createFileRoute("/prompts")({
       { name: "twitter:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "twitter:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/prompts" }],
+    links: canonicalAndAlternates("/prompts"),
     scripts: [
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Prompt Library", path: "/prompts" },
+      ]),
+
       {
         type: "application/ld+json",
         children: JSON.stringify({

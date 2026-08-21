@@ -17,6 +17,14 @@ export const Route = createFileRoute("/humanizer")({
     meta: [
       { title: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { name: "description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
+      ...crawlerMeta([
+        "AI text humanizer",
+        "humanize AI text",
+        "AI detector bypass",
+        "make AI writing sound human",
+        "rewrite AI generated CV",
+        "natural sounding cover letter",
+      ]),
       { property: "og:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { property: "og:description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
       { property: "og:type", content: "website" },
@@ -25,7 +33,36 @@ export const Route = createFileRoute("/humanizer")({
       { name: "twitter:title", content: "AI Text Humanizer for CVs & Cover Letters — Bypass Detectors | Nexvi" },
       { name: "twitter:description", content: "Rewrite AI-generated text so it sounds natural and human. Side-by-side diff, strips generic phrases, helps pass AI detectors." },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/humanizer" }],
+    links: canonicalAndAlternates("/humanizer"),
+    scripts: [
+      toolJsonLd({
+        name: "Nexvi Humanizer",
+        path: "/humanizer",
+        description:
+          "Rewrite AI-generated CV and cover letter text so it reads naturally and keeps your own voice.",
+        featureList: [
+          "Rewrites AI-sounding text",
+          "Side-by-side diff view",
+          "Adjustable rewrite strength",
+          "Removes generic filler phrases",
+        ],
+      }),
+      howToJsonLd({
+        name: "How to humanize AI-written job application text",
+        description: "Turn robotic AI output into text that sounds like you wrote it.",
+        steps: [
+          "Paste the AI-generated paragraph or document.",
+          "Pick a rewrite strength.",
+          "Run the humanizer and compare the diff.",
+          "Copy the natural-sounding version into your application.",
+        ],
+      }),
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Tools", path: "/prompts" },
+        { name: "Humanizer", path: "/humanizer" },
+      ]),
+    ],
   }),
 
   component: HumanizerPage,
