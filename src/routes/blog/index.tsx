@@ -45,7 +45,7 @@ export const Route = createFileRoute("/blog/")({
   component: BlogIndexPage,
 });
 
-function BlogIndexPage() {
+export function BlogIndexPage() {
   return (
     <SiteShell>
     <div className="relative overflow-hidden">

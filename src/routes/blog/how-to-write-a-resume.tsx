@@ -170,7 +170,7 @@ export const Route = createFileRoute("/blog/how-to-write-a-resume")({
   component: ResumeGuidePage,
 });
 
-function ResumeGuidePage() {
+export function ResumeGuidePage() {
   return (
     <SiteShell>
       <article className="relative overflow-hidden">
