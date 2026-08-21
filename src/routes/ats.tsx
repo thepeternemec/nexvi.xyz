@@ -11,6 +11,7 @@ import { downloadDocumentPdf } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
 import { ResumeField } from "@/components/resume-field";
+import { canonicalAndAlternates, crawlerMeta, toolJsonLd, howToJsonLd, breadcrumbJsonLd } from "@/lib/seo-head";
 
 
 export const Route = createFileRoute("/ats")({
@@ -18,6 +19,14 @@ export const Route = createFileRoute("/ats")({
     meta: [
       { title: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { name: "description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
+      ...crawlerMeta([
+        "ATS resume checker",
+        "ATS score checker",
+        "resume keyword scanner",
+        "CV job description match score",
+        "applicant tracking system checker",
+        "free resume scan",
+      ]),
       { property: "og:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { property: "og:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
       { property: "og:type", content: "website" },
@@ -26,7 +35,37 @@ export const Route = createFileRoute("/ats")({
       { name: "twitter:title", content: "Free ATS Resume Checker & Match Score — Keyword Gap Analysis | Nexvi" },
       { name: "twitter:description", content: "Score your CV against any job description. See matched keywords, gaps, formatting issues, and get concrete rewrite suggestions." },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/ats" }],
+    links: canonicalAndAlternates("/ats"),
+    scripts: [
+      toolJsonLd({
+        name: "Nexvi ATS Resume Checker",
+        path: "/ats",
+        description:
+          "Score a CV against any job description with keyword coverage, formatting checks and rewrite suggestions.",
+        featureList: [
+          "Overall ATS match score",
+          "Matched and missing keyword breakdown",
+          "Formatting and parsability checks",
+          "Section coverage analysis",
+          "Concrete rewrite suggestions",
+        ],
+      }),
+      howToJsonLd({
+        name: "How to check your CV against an ATS",
+        description: "Find out how well your CV matches a job description before you apply.",
+        steps: [
+          "Paste the job description.",
+          "Paste or upload your current CV.",
+          "Run the analysis to get your match score.",
+          "Fix the missing keywords and formatting issues it flags.",
+        ],
+      }),
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Tools", path: "/prompts" },
+        { name: "ATS Resume Checker", path: "/ats" },
+      ]),
+    ],
   }),
 
   component: ATSPage,

@@ -13,6 +13,7 @@ import { detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { ToolOutro } from "@/components/tool-hero";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
+import { canonicalAndAlternates, crawlerMeta, toolJsonLd, howToJsonLd, breadcrumbJsonLd } from "@/lib/seo-head";
 
 export type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" | 1 };
 
@@ -33,6 +34,14 @@ export const Route = createFileRoute("/prompts")({
     meta: [
       { title: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
+      ...crawlerMeta([
+        "job search prompts",
+        "CV prompts",
+        "cover letter prompts",
+        "ChatGPT prompts for job applications",
+        "ATS prompts",
+        "interview prep prompts",
+      ]),
       { property: "og:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { property: "og:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
       { property: "og:type", content: "website" },
@@ -41,8 +50,13 @@ export const Route = createFileRoute("/prompts")({
       { name: "twitter:title", content: "Job Search Prompt Library — ATS, Interview & Negotiation Prompts | Nexvi" },
       { name: "twitter:description", content: "Curated prompts for CVs, cover letters, ATS optimization, STAR stories, recruiter outreach and salary negotiation. Free prompts included." },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/prompts" }],
+    links: canonicalAndAlternates("/prompts"),
     scripts: [
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Prompt Library", path: "/prompts" },
+      ]),
+
       {
         type: "application/ld+json",
         children: JSON.stringify({
