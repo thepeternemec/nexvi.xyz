@@ -16,32 +16,63 @@ import { ResumeField } from "@/components/resume-field";
 
 
 
+const CV_TITLE = "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi";
+const CV_DESC =
+  "Free AI CV generator: paste a job description and get a keyword-optimized, ATS-friendly resume tailored to that role, with a match score and rewrite suggestions.";
+
 export const Route = createFileRoute("/cv")({
   head: () => ({
     meta: [
-      { title: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
-      { name: "description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
-      { property: "og:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
-      { property: "og:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
+      { title: CV_TITLE },
+      { name: "description", content: CV_DESC },
+      ...crawlerMeta([
+        "CV generator",
+        "AI CV generator",
+        "free resume builder",
+        "ATS resume generator",
+        "tailor CV to job description",
+        "resume optimizer",
+        "AI resume writer",
+        "CV keyword optimization",
+      ]),
+      { property: "og:title", content: CV_TITLE },
+      { property: "og:description", content: CV_DESC },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://nexvi.xyz/cv" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "AI CV Generator & ATS Optimizer — Tailor Your Resume in 60 Seconds | Nexvi" },
-      { name: "twitter:description", content: "Generate a keyword-optimized, ATS-friendly CV tailored to any job description. Free AI resume builder with match scoring." },
+      { name: "twitter:title", content: CV_TITLE },
+      { name: "twitter:description", content: CV_DESC },
     ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/cv" }],
+    links: canonicalAndAlternates("/cv"),
     scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          name: "Nexvi CV Generator",
-          applicationCategory: "BusinessApplication",
-          operatingSystem: "Web",
-          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        }),
-      },
+      toolJsonLd({
+        name: "Nexvi CV Generator",
+        path: "/cv",
+        description: CV_DESC,
+        featureList: [
+          "Tailor a CV to any job description",
+          "ATS keyword coverage and match scoring",
+          "ATS-safe formatting",
+          "Tone control (professional, confident, friendly, concise)",
+          "PDF export",
+          "Reusable saved CV background",
+        ],
+      }),
+      howToJsonLd({
+        name: "How to generate an ATS-optimized CV",
+        description: "Turn your experience into a CV tailored to a specific job description.",
+        steps: [
+          "Paste the job description you are applying for.",
+          "Add your background, experience and skills, or upload your existing CV.",
+          "Pick a tone and generate the tailored CV.",
+          "Review the ATS match score and download the CV as a PDF.",
+        ],
+      }),
+      breadcrumbJsonLd([
+        { name: "Nexvi", path: "/" },
+        { name: "Tools", path: "/prompts" },
+        { name: "CV Generator", path: "/cv" },
+      ]),
     ],
   }),
 
