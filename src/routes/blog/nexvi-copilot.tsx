@@ -152,7 +152,7 @@ export const Route = createFileRoute("/blog/nexvi-copilot")({
   component: CopilotPost,
 });
 
-function CopilotPost() {
+export function CopilotPost() {
   return (
     <SiteShell>
       <article className="relative overflow-hidden">

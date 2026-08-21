@@ -153,11 +153,27 @@ import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as AdminImportRouteImport } from './routes/admin.import'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
+import { Route as ItBlogIndexRouteImport } from './routes/it/blog/index'
+import { Route as FrBlogIndexRouteImport } from './routes/fr/blog/index'
+import { Route as EsBlogIndexRouteImport } from './routes/es/blog/index'
+import { Route as DeBlogIndexRouteImport } from './routes/de/blog/index'
 import { Route as LovableEmailSuppressionRouteImport } from './routes/lovable/email/suppression'
 import { Route as ItPromptSlugRouteImport } from './routes/it/prompt.$slug'
+import { Route as ItBlogNexviCopilotRouteImport } from './routes/it/blog/nexvi-copilot'
+import { Route as ItBlogHowToWriteAResumeRouteImport } from './routes/it/blog/how-to-write-a-resume'
+import { Route as ItBlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/it/blog/ats-optimization-and-ai-humanizer'
 import { Route as FrPromptSlugRouteImport } from './routes/fr/prompt.$slug'
+import { Route as FrBlogNexviCopilotRouteImport } from './routes/fr/blog/nexvi-copilot'
+import { Route as FrBlogHowToWriteAResumeRouteImport } from './routes/fr/blog/how-to-write-a-resume'
+import { Route as FrBlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/fr/blog/ats-optimization-and-ai-humanizer'
 import { Route as EsPromptSlugRouteImport } from './routes/es/prompt.$slug'
+import { Route as EsBlogNexviCopilotRouteImport } from './routes/es/blog/nexvi-copilot'
+import { Route as EsBlogHowToWriteAResumeRouteImport } from './routes/es/blog/how-to-write-a-resume'
+import { Route as EsBlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/es/blog/ats-optimization-and-ai-humanizer'
 import { Route as DePromptSlugRouteImport } from './routes/de/prompt.$slug'
+import { Route as DeBlogNexviCopilotRouteImport } from './routes/de/blog/nexvi-copilot'
+import { Route as DeBlogHowToWriteAResumeRouteImport } from './routes/de/blog/how-to-write-a-resume'
+import { Route as DeBlogAtsOptimizationAndAiHumanizerRouteImport } from './routes/de/blog/ats-optimization-and-ai-humanizer'
 import { Route as ApiPublicSeoMonitorRouteImport } from './routes/api/public/seo-monitor'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -891,6 +907,26 @@ const Char91DotmcpChar93ListToolsRoute =
     path: '/.mcp/list-tools',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ItBlogIndexRoute = ItBlogIndexRouteImport.update({
+  id: '/it/blog/',
+  path: '/it/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrBlogIndexRoute = FrBlogIndexRouteImport.update({
+  id: '/fr/blog/',
+  path: '/fr/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBlogIndexRoute = EsBlogIndexRouteImport.update({
+  id: '/es/blog/',
+  path: '/es/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBlogIndexRoute = DeBlogIndexRouteImport.update({
+  id: '/de/blog/',
+  path: '/de/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailSuppressionRoute = LovableEmailSuppressionRouteImport.update({
   id: '/lovable/email/suppression',
   path: '/lovable/email/suppression',
@@ -901,21 +937,85 @@ const ItPromptSlugRoute = ItPromptSlugRouteImport.update({
   path: '/it/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItBlogNexviCopilotRoute = ItBlogNexviCopilotRouteImport.update({
+  id: '/it/blog/nexvi-copilot',
+  path: '/it/blog/nexvi-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItBlogHowToWriteAResumeRoute = ItBlogHowToWriteAResumeRouteImport.update({
+  id: '/it/blog/how-to-write-a-resume',
+  path: '/it/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItBlogAtsOptimizationAndAiHumanizerRoute =
+  ItBlogAtsOptimizationAndAiHumanizerRouteImport.update({
+    id: '/it/blog/ats-optimization-and-ai-humanizer',
+    path: '/it/blog/ats-optimization-and-ai-humanizer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const FrPromptSlugRoute = FrPromptSlugRouteImport.update({
   id: '/fr/prompt/$slug',
   path: '/fr/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrBlogNexviCopilotRoute = FrBlogNexviCopilotRouteImport.update({
+  id: '/fr/blog/nexvi-copilot',
+  path: '/fr/blog/nexvi-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrBlogHowToWriteAResumeRoute = FrBlogHowToWriteAResumeRouteImport.update({
+  id: '/fr/blog/how-to-write-a-resume',
+  path: '/fr/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrBlogAtsOptimizationAndAiHumanizerRoute =
+  FrBlogAtsOptimizationAndAiHumanizerRouteImport.update({
+    id: '/fr/blog/ats-optimization-and-ai-humanizer',
+    path: '/fr/blog/ats-optimization-and-ai-humanizer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EsPromptSlugRoute = EsPromptSlugRouteImport.update({
   id: '/es/prompt/$slug',
   path: '/es/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EsBlogNexviCopilotRoute = EsBlogNexviCopilotRouteImport.update({
+  id: '/es/blog/nexvi-copilot',
+  path: '/es/blog/nexvi-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBlogHowToWriteAResumeRoute = EsBlogHowToWriteAResumeRouteImport.update({
+  id: '/es/blog/how-to-write-a-resume',
+  path: '/es/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EsBlogAtsOptimizationAndAiHumanizerRoute =
+  EsBlogAtsOptimizationAndAiHumanizerRouteImport.update({
+    id: '/es/blog/ats-optimization-and-ai-humanizer',
+    path: '/es/blog/ats-optimization-and-ai-humanizer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DePromptSlugRoute = DePromptSlugRouteImport.update({
   id: '/de/prompt/$slug',
   path: '/de/prompt/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeBlogNexviCopilotRoute = DeBlogNexviCopilotRouteImport.update({
+  id: '/de/blog/nexvi-copilot',
+  path: '/de/blog/nexvi-copilot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBlogHowToWriteAResumeRoute = DeBlogHowToWriteAResumeRouteImport.update({
+  id: '/de/blog/how-to-write-a-resume',
+  path: '/de/blog/how-to-write-a-resume',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeBlogAtsOptimizationAndAiHumanizerRoute =
+  DeBlogAtsOptimizationAndAiHumanizerRouteImport.update({
+    id: '/de/blog/ats-optimization-and-ai-humanizer',
+    path: '/de/blog/ats-optimization-and-ai-humanizer',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicSeoMonitorRoute = ApiPublicSeoMonitorRouteImport.update({
   id: '/api/public/seo-monitor',
   path: '/api/public/seo-monitor',
@@ -1115,11 +1215,27 @@ export interface FileRoutesByFullPath {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
+  '/de/blog/ats-optimization-and-ai-humanizer': typeof DeBlogAtsOptimizationAndAiHumanizerRoute
+  '/de/blog/how-to-write-a-resume': typeof DeBlogHowToWriteAResumeRoute
+  '/de/blog/nexvi-copilot': typeof DeBlogNexviCopilotRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/blog/ats-optimization-and-ai-humanizer': typeof EsBlogAtsOptimizationAndAiHumanizerRoute
+  '/es/blog/how-to-write-a-resume': typeof EsBlogHowToWriteAResumeRoute
+  '/es/blog/nexvi-copilot': typeof EsBlogNexviCopilotRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/blog/ats-optimization-and-ai-humanizer': typeof FrBlogAtsOptimizationAndAiHumanizerRoute
+  '/fr/blog/how-to-write-a-resume': typeof FrBlogHowToWriteAResumeRoute
+  '/fr/blog/nexvi-copilot': typeof FrBlogNexviCopilotRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/blog/ats-optimization-and-ai-humanizer': typeof ItBlogAtsOptimizationAndAiHumanizerRoute
+  '/it/blog/how-to-write-a-resume': typeof ItBlogHowToWriteAResumeRoute
+  '/it/blog/nexvi-copilot': typeof ItBlogNexviCopilotRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/de/blog/': typeof DeBlogIndexRoute
+  '/es/blog/': typeof EsBlogIndexRoute
+  '/fr/blog/': typeof FrBlogIndexRoute
+  '/it/blog/': typeof ItBlogIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1274,11 +1390,27 @@ export interface FileRoutesByTo {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
+  '/de/blog/ats-optimization-and-ai-humanizer': typeof DeBlogAtsOptimizationAndAiHumanizerRoute
+  '/de/blog/how-to-write-a-resume': typeof DeBlogHowToWriteAResumeRoute
+  '/de/blog/nexvi-copilot': typeof DeBlogNexviCopilotRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/blog/ats-optimization-and-ai-humanizer': typeof EsBlogAtsOptimizationAndAiHumanizerRoute
+  '/es/blog/how-to-write-a-resume': typeof EsBlogHowToWriteAResumeRoute
+  '/es/blog/nexvi-copilot': typeof EsBlogNexviCopilotRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/blog/ats-optimization-and-ai-humanizer': typeof FrBlogAtsOptimizationAndAiHumanizerRoute
+  '/fr/blog/how-to-write-a-resume': typeof FrBlogHowToWriteAResumeRoute
+  '/fr/blog/nexvi-copilot': typeof FrBlogNexviCopilotRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/blog/ats-optimization-and-ai-humanizer': typeof ItBlogAtsOptimizationAndAiHumanizerRoute
+  '/it/blog/how-to-write-a-resume': typeof ItBlogHowToWriteAResumeRoute
+  '/it/blog/nexvi-copilot': typeof ItBlogNexviCopilotRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/de/blog': typeof DeBlogIndexRoute
+  '/es/blog': typeof EsBlogIndexRoute
+  '/fr/blog': typeof FrBlogIndexRoute
+  '/it/blog': typeof ItBlogIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1435,11 +1567,27 @@ export interface FileRoutesById {
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/api/public/seo-monitor': typeof ApiPublicSeoMonitorRoute
+  '/de/blog/ats-optimization-and-ai-humanizer': typeof DeBlogAtsOptimizationAndAiHumanizerRoute
+  '/de/blog/how-to-write-a-resume': typeof DeBlogHowToWriteAResumeRoute
+  '/de/blog/nexvi-copilot': typeof DeBlogNexviCopilotRoute
   '/de/prompt/$slug': typeof DePromptSlugRoute
+  '/es/blog/ats-optimization-and-ai-humanizer': typeof EsBlogAtsOptimizationAndAiHumanizerRoute
+  '/es/blog/how-to-write-a-resume': typeof EsBlogHowToWriteAResumeRoute
+  '/es/blog/nexvi-copilot': typeof EsBlogNexviCopilotRoute
   '/es/prompt/$slug': typeof EsPromptSlugRoute
+  '/fr/blog/ats-optimization-and-ai-humanizer': typeof FrBlogAtsOptimizationAndAiHumanizerRoute
+  '/fr/blog/how-to-write-a-resume': typeof FrBlogHowToWriteAResumeRoute
+  '/fr/blog/nexvi-copilot': typeof FrBlogNexviCopilotRoute
   '/fr/prompt/$slug': typeof FrPromptSlugRoute
+  '/it/blog/ats-optimization-and-ai-humanizer': typeof ItBlogAtsOptimizationAndAiHumanizerRoute
+  '/it/blog/how-to-write-a-resume': typeof ItBlogHowToWriteAResumeRoute
+  '/it/blog/nexvi-copilot': typeof ItBlogNexviCopilotRoute
   '/it/prompt/$slug': typeof ItPromptSlugRoute
   '/lovable/email/suppression': typeof LovableEmailSuppressionRoute
+  '/de/blog/': typeof DeBlogIndexRoute
+  '/es/blog/': typeof EsBlogIndexRoute
+  '/fr/blog/': typeof FrBlogIndexRoute
+  '/it/blog/': typeof ItBlogIndexRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
   '/lovable/email/auth/webhook': typeof LovableEmailAuthWebhookRoute
@@ -1597,11 +1745,27 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/seo-monitor'
+    | '/de/blog/ats-optimization-and-ai-humanizer'
+    | '/de/blog/how-to-write-a-resume'
+    | '/de/blog/nexvi-copilot'
     | '/de/prompt/$slug'
+    | '/es/blog/ats-optimization-and-ai-humanizer'
+    | '/es/blog/how-to-write-a-resume'
+    | '/es/blog/nexvi-copilot'
     | '/es/prompt/$slug'
+    | '/fr/blog/ats-optimization-and-ai-humanizer'
+    | '/fr/blog/how-to-write-a-resume'
+    | '/fr/blog/nexvi-copilot'
     | '/fr/prompt/$slug'
+    | '/it/blog/ats-optimization-and-ai-humanizer'
+    | '/it/blog/how-to-write-a-resume'
+    | '/it/blog/nexvi-copilot'
     | '/it/prompt/$slug'
     | '/lovable/email/suppression'
+    | '/de/blog/'
+    | '/es/blog/'
+    | '/fr/blog/'
+    | '/it/blog/'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -1756,11 +1920,27 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/seo-monitor'
+    | '/de/blog/ats-optimization-and-ai-humanizer'
+    | '/de/blog/how-to-write-a-resume'
+    | '/de/blog/nexvi-copilot'
     | '/de/prompt/$slug'
+    | '/es/blog/ats-optimization-and-ai-humanizer'
+    | '/es/blog/how-to-write-a-resume'
+    | '/es/blog/nexvi-copilot'
     | '/es/prompt/$slug'
+    | '/fr/blog/ats-optimization-and-ai-humanizer'
+    | '/fr/blog/how-to-write-a-resume'
+    | '/fr/blog/nexvi-copilot'
     | '/fr/prompt/$slug'
+    | '/it/blog/ats-optimization-and-ai-humanizer'
+    | '/it/blog/how-to-write-a-resume'
+    | '/it/blog/nexvi-copilot'
     | '/it/prompt/$slug'
     | '/lovable/email/suppression'
+    | '/de/blog'
+    | '/es/blog'
+    | '/fr/blog'
+    | '/it/blog'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -1916,11 +2096,27 @@ export interface FileRouteTypes {
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
     | '/api/public/seo-monitor'
+    | '/de/blog/ats-optimization-and-ai-humanizer'
+    | '/de/blog/how-to-write-a-resume'
+    | '/de/blog/nexvi-copilot'
     | '/de/prompt/$slug'
+    | '/es/blog/ats-optimization-and-ai-humanizer'
+    | '/es/blog/how-to-write-a-resume'
+    | '/es/blog/nexvi-copilot'
     | '/es/prompt/$slug'
+    | '/fr/blog/ats-optimization-and-ai-humanizer'
+    | '/fr/blog/how-to-write-a-resume'
+    | '/fr/blog/nexvi-copilot'
     | '/fr/prompt/$slug'
+    | '/it/blog/ats-optimization-and-ai-humanizer'
+    | '/it/blog/how-to-write-a-resume'
+    | '/it/blog/nexvi-copilot'
     | '/it/prompt/$slug'
     | '/lovable/email/suppression'
+    | '/de/blog/'
+    | '/es/blog/'
+    | '/fr/blog/'
+    | '/it/blog/'
     | '/api/public/payments/webhook'
     | '/lovable/email/auth/preview'
     | '/lovable/email/auth/webhook'
@@ -2075,11 +2271,27 @@ export interface RootRouteChildren {
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
   ApiPublicSeoMonitorRoute: typeof ApiPublicSeoMonitorRoute
+  DeBlogAtsOptimizationAndAiHumanizerRoute: typeof DeBlogAtsOptimizationAndAiHumanizerRoute
+  DeBlogHowToWriteAResumeRoute: typeof DeBlogHowToWriteAResumeRoute
+  DeBlogNexviCopilotRoute: typeof DeBlogNexviCopilotRoute
   DePromptSlugRoute: typeof DePromptSlugRoute
+  EsBlogAtsOptimizationAndAiHumanizerRoute: typeof EsBlogAtsOptimizationAndAiHumanizerRoute
+  EsBlogHowToWriteAResumeRoute: typeof EsBlogHowToWriteAResumeRoute
+  EsBlogNexviCopilotRoute: typeof EsBlogNexviCopilotRoute
   EsPromptSlugRoute: typeof EsPromptSlugRoute
+  FrBlogAtsOptimizationAndAiHumanizerRoute: typeof FrBlogAtsOptimizationAndAiHumanizerRoute
+  FrBlogHowToWriteAResumeRoute: typeof FrBlogHowToWriteAResumeRoute
+  FrBlogNexviCopilotRoute: typeof FrBlogNexviCopilotRoute
   FrPromptSlugRoute: typeof FrPromptSlugRoute
+  ItBlogAtsOptimizationAndAiHumanizerRoute: typeof ItBlogAtsOptimizationAndAiHumanizerRoute
+  ItBlogHowToWriteAResumeRoute: typeof ItBlogHowToWriteAResumeRoute
+  ItBlogNexviCopilotRoute: typeof ItBlogNexviCopilotRoute
   ItPromptSlugRoute: typeof ItPromptSlugRoute
   LovableEmailSuppressionRoute: typeof LovableEmailSuppressionRoute
+  DeBlogIndexRoute: typeof DeBlogIndexRoute
+  EsBlogIndexRoute: typeof EsBlogIndexRoute
+  FrBlogIndexRoute: typeof FrBlogIndexRoute
+  ItBlogIndexRoute: typeof ItBlogIndexRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -3098,6 +3310,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93ListToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/blog/': {
+      id: '/it/blog/'
+      path: '/it/blog'
+      fullPath: '/it/blog/'
+      preLoaderRoute: typeof ItBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/blog/': {
+      id: '/fr/blog/'
+      path: '/fr/blog'
+      fullPath: '/fr/blog/'
+      preLoaderRoute: typeof FrBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/blog/': {
+      id: '/es/blog/'
+      path: '/es/blog'
+      fullPath: '/es/blog/'
+      preLoaderRoute: typeof EsBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/blog/': {
+      id: '/de/blog/'
+      path: '/de/blog'
+      fullPath: '/de/blog/'
+      preLoaderRoute: typeof DeBlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/suppression': {
       id: '/lovable/email/suppression'
       path: '/lovable/email/suppression'
@@ -3112,11 +3352,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItPromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it/blog/nexvi-copilot': {
+      id: '/it/blog/nexvi-copilot'
+      path: '/it/blog/nexvi-copilot'
+      fullPath: '/it/blog/nexvi-copilot'
+      preLoaderRoute: typeof ItBlogNexviCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/blog/how-to-write-a-resume': {
+      id: '/it/blog/how-to-write-a-resume'
+      path: '/it/blog/how-to-write-a-resume'
+      fullPath: '/it/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof ItBlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/blog/ats-optimization-and-ai-humanizer': {
+      id: '/it/blog/ats-optimization-and-ai-humanizer'
+      path: '/it/blog/ats-optimization-and-ai-humanizer'
+      fullPath: '/it/blog/ats-optimization-and-ai-humanizer'
+      preLoaderRoute: typeof ItBlogAtsOptimizationAndAiHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/prompt/$slug': {
       id: '/fr/prompt/$slug'
       path: '/fr/prompt/$slug'
       fullPath: '/fr/prompt/$slug'
       preLoaderRoute: typeof FrPromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/blog/nexvi-copilot': {
+      id: '/fr/blog/nexvi-copilot'
+      path: '/fr/blog/nexvi-copilot'
+      fullPath: '/fr/blog/nexvi-copilot'
+      preLoaderRoute: typeof FrBlogNexviCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/blog/how-to-write-a-resume': {
+      id: '/fr/blog/how-to-write-a-resume'
+      path: '/fr/blog/how-to-write-a-resume'
+      fullPath: '/fr/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof FrBlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/blog/ats-optimization-and-ai-humanizer': {
+      id: '/fr/blog/ats-optimization-and-ai-humanizer'
+      path: '/fr/blog/ats-optimization-and-ai-humanizer'
+      fullPath: '/fr/blog/ats-optimization-and-ai-humanizer'
+      preLoaderRoute: typeof FrBlogAtsOptimizationAndAiHumanizerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/es/prompt/$slug': {
@@ -3126,11 +3408,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EsPromptSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/es/blog/nexvi-copilot': {
+      id: '/es/blog/nexvi-copilot'
+      path: '/es/blog/nexvi-copilot'
+      fullPath: '/es/blog/nexvi-copilot'
+      preLoaderRoute: typeof EsBlogNexviCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/blog/how-to-write-a-resume': {
+      id: '/es/blog/how-to-write-a-resume'
+      path: '/es/blog/how-to-write-a-resume'
+      fullPath: '/es/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof EsBlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/es/blog/ats-optimization-and-ai-humanizer': {
+      id: '/es/blog/ats-optimization-and-ai-humanizer'
+      path: '/es/blog/ats-optimization-and-ai-humanizer'
+      fullPath: '/es/blog/ats-optimization-and-ai-humanizer'
+      preLoaderRoute: typeof EsBlogAtsOptimizationAndAiHumanizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/de/prompt/$slug': {
       id: '/de/prompt/$slug'
       path: '/de/prompt/$slug'
       fullPath: '/de/prompt/$slug'
       preLoaderRoute: typeof DePromptSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/blog/nexvi-copilot': {
+      id: '/de/blog/nexvi-copilot'
+      path: '/de/blog/nexvi-copilot'
+      fullPath: '/de/blog/nexvi-copilot'
+      preLoaderRoute: typeof DeBlogNexviCopilotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/blog/how-to-write-a-resume': {
+      id: '/de/blog/how-to-write-a-resume'
+      path: '/de/blog/how-to-write-a-resume'
+      fullPath: '/de/blog/how-to-write-a-resume'
+      preLoaderRoute: typeof DeBlogHowToWriteAResumeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/de/blog/ats-optimization-and-ai-humanizer': {
+      id: '/de/blog/ats-optimization-and-ai-humanizer'
+      path: '/de/blog/ats-optimization-and-ai-humanizer'
+      fullPath: '/de/blog/ats-optimization-and-ai-humanizer'
+      preLoaderRoute: typeof DeBlogAtsOptimizationAndAiHumanizerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/seo-monitor': {
@@ -3360,11 +3684,31 @@ const rootRouteChildren: RootRouteChildren = {
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
   ApiPublicSeoMonitorRoute: ApiPublicSeoMonitorRoute,
+  DeBlogAtsOptimizationAndAiHumanizerRoute:
+    DeBlogAtsOptimizationAndAiHumanizerRoute,
+  DeBlogHowToWriteAResumeRoute: DeBlogHowToWriteAResumeRoute,
+  DeBlogNexviCopilotRoute: DeBlogNexviCopilotRoute,
   DePromptSlugRoute: DePromptSlugRoute,
+  EsBlogAtsOptimizationAndAiHumanizerRoute:
+    EsBlogAtsOptimizationAndAiHumanizerRoute,
+  EsBlogHowToWriteAResumeRoute: EsBlogHowToWriteAResumeRoute,
+  EsBlogNexviCopilotRoute: EsBlogNexviCopilotRoute,
   EsPromptSlugRoute: EsPromptSlugRoute,
+  FrBlogAtsOptimizationAndAiHumanizerRoute:
+    FrBlogAtsOptimizationAndAiHumanizerRoute,
+  FrBlogHowToWriteAResumeRoute: FrBlogHowToWriteAResumeRoute,
+  FrBlogNexviCopilotRoute: FrBlogNexviCopilotRoute,
   FrPromptSlugRoute: FrPromptSlugRoute,
+  ItBlogAtsOptimizationAndAiHumanizerRoute:
+    ItBlogAtsOptimizationAndAiHumanizerRoute,
+  ItBlogHowToWriteAResumeRoute: ItBlogHowToWriteAResumeRoute,
+  ItBlogNexviCopilotRoute: ItBlogNexviCopilotRoute,
   ItPromptSlugRoute: ItPromptSlugRoute,
   LovableEmailSuppressionRoute: LovableEmailSuppressionRoute,
+  DeBlogIndexRoute: DeBlogIndexRoute,
+  EsBlogIndexRoute: EsBlogIndexRoute,
+  FrBlogIndexRoute: FrBlogIndexRoute,
+  ItBlogIndexRoute: ItBlogIndexRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

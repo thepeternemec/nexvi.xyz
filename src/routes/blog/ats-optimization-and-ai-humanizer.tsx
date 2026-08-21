@@ -144,7 +144,7 @@ export const Route = createFileRoute("/blog/ats-optimization-and-ai-humanizer")(
   component: AtsHumanizerPost,
 });
 
-function AtsHumanizerPost() {
+export function AtsHumanizerPost() {
   return (
     <SiteShell>
       <article className="relative overflow-hidden">
