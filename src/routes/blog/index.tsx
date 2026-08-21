@@ -3,6 +3,8 @@ import { SiteShell } from "@/components/site-shell";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { blogPosts } from "@/lib/blog-posts";
+import { useLocale } from "@/lib/locale-context";
+import { alternateHref } from "@/lib/i18n";
 
 const TITLE = "Nexvi Blog — Resume, ATS and job search guides";
 const DESCRIPTION =
@@ -46,6 +48,8 @@ export const Route = createFileRoute("/blog/")({
 });
 
 export function BlogIndexPage() {
+  const { locale } = useLocale();
+  const href = (p: string) => alternateHref(locale, p);
   return (
     <SiteShell>
     <div className="relative overflow-hidden">
@@ -54,7 +58,7 @@ export function BlogIndexPage() {
 
       <div className="mx-auto w-full max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
         <nav aria-label="Breadcrumb" className="text-[12px] text-muted-foreground">
-          <a href="/" className="hover:text-primary">Home</a> <span aria-hidden="true">/</span>{" "}
+          <a href={href("/")} className="hover:text-primary">Home</a> <span aria-hidden="true">/</span>{" "}
           <span className="text-foreground">Blog</span>
         </nav>
 
@@ -68,7 +72,7 @@ export function BlogIndexPage() {
           {blogPosts.map((post) => (
             <a
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={href(`/blog/${post.slug}`)}
               className="group block bg-background px-6 py-7 transition-colors hover:bg-muted/40"
             >
               <div className="flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
@@ -95,12 +99,12 @@ export function BlogIndexPage() {
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg" className="cta-sheen">
-              <a href="/cv">
+              <a href={href("/cv")}>
                 Generate my CV free <ArrowRight className="ml-1.5 h-4 w-4" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="/ats">Check my ATS score</a>
+              <a href={href("/ats")}>Check my ATS score</a>
             </Button>
           </div>
         </section>
