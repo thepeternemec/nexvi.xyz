@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { humanizeText } from "@/lib/career.functions";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
+import { canonicalAndAlternates, crawlerMeta, toolJsonLd, howToJsonLd, breadcrumbJsonLd } from "@/lib/seo-head";
 
 export const Route = createFileRoute("/humanizer")({
   head: () => ({

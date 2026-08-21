@@ -13,6 +13,7 @@ import { detectLocaleFromPath } from "@/lib/i18n";
 import { useSavedPrompts } from "@/lib/saved-prompts";
 import { ToolOutro } from "@/components/tool-hero";
 import { buildPackTemplate, copyToClipboard, downloadText } from "@/lib/apply-template";
+import { canonicalAndAlternates, crawlerMeta, toolJsonLd, howToJsonLd, breadcrumbJsonLd } from "@/lib/seo-head";
 
 export type Search = { q?: string; category?: string; pack?: string; sort?: "popular" | "newest" | "rating" | "tier"; price?: "all" | "free" | "paid"; beginner?: "1" | 1 };
 

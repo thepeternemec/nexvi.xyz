@@ -12,6 +12,7 @@ import { downloadDocumentPdf, createDocumentPdfUrl } from "@/lib/document-pdf";
 import { useToolGate, ToolCreditBar } from "@/components/usage-gate";
 import { ToolHero, ToolOutro } from "@/components/tool-hero";
 import { ResumeField } from "@/components/resume-field";
+import { canonicalAndAlternates, crawlerMeta, toolJsonLd, howToJsonLd, breadcrumbJsonLd } from "@/lib/seo-head";
 
 
 
