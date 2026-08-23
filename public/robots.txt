@@ -45,3 +45,9 @@ User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://nexvi.xyz/sitemap.xml
+Sitemap: https://nexvi.xyz/sitemap-en.xml
+Sitemap: https://nexvi.xyz/sitemap-de.xml
+Sitemap: https://nexvi.xyz/sitemap-es.xml
+Sitemap: https://nexvi.xyz/sitemap-it.xml
+Sitemap: https://nexvi.xyz/sitemap-fr.xml
+
