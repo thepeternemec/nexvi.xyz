@@ -4,6 +4,6 @@ export const Route = createFileRoute("/es/marketplace")({
   beforeLoad: () => {
     // Permanent (301) so Google consolidates the legacy URL into /es/prompts
     // instead of reporting it as "Page with redirect".
-    throw redirect({ to: "/es/prompts", statusCode: 301, replace: true });
+    throw redirect({ to: "/es/prompts", search: {} as never, statusCode: 301, replace: true });
   },
 });

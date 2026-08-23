@@ -4,6 +4,6 @@ export const Route = createFileRoute("/library")({
   beforeLoad: () => {
     // Permanent (301) so Google consolidates the legacy URL into /prompts
     // instead of reporting it as "Page with redirect".
-    throw redirect({ to: "/prompts", statusCode: 301, replace: true });
+    throw redirect({ to: "/prompts", search: {} as never, statusCode: 301, replace: true });
   },
 });
