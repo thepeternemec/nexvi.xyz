@@ -1,16 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/components/landing-page";
-import { copy } from "@/lib/i18n";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
-// Legacy path kept for backwards compatibility; canonical is /de.
+// Legacy path: permanently redirects to the canonical German landing page.
 export const Route = createFileRoute("/ger/")({
-  head: () => ({
-    meta: [
-      { title: copy.de.metaTitle },
-      { name: "description", content: copy.de.metaDesc },
-      { property: "og:locale", content: "de_DE" },
-    ],
-    links: [{ rel: "canonical", href: "https://nexvi.xyz/de" }],
-  }),
-  component: () => <LandingPage locale="de" />,
+  beforeLoad: () => {
+    throw redirect({ to: "/de", statusCode: 301, replace: true });
+  },
 });

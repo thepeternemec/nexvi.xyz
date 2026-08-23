@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/es/marketplace")({
-  beforeLoad: ({ search }) => {
-    throw redirect({ to: "/es/prompts", search: search as never });
+  beforeLoad: () => {
+    // Permanent (301) so Google consolidates the legacy URL into /es/prompts
+    // instead of reporting it as "Page with redirect".
+    throw redirect({ to: "/es/prompts", statusCode: 301, replace: true });
   },
-  component: () => null,
 });
-
