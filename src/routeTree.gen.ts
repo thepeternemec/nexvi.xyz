@@ -15,6 +15,11 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SubscriptionRouteImport } from './routes/subscription'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapItDotxmlRouteImport } from './routes/sitemap-it[.]xml'
+import { Route as SitemapFrDotxmlRouteImport } from './routes/sitemap-fr[.]xml'
+import { Route as SitemapEsDotxmlRouteImport } from './routes/sitemap-es[.]xml'
+import { Route as SitemapEnDotxmlRouteImport } from './routes/sitemap-en[.]xml'
+import { Route as SitemapDeDotxmlRouteImport } from './routes/sitemap-de[.]xml'
 import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SeoMonitorRouteImport } from './routes/seo-monitor'
@@ -212,6 +217,31 @@ const StatusRoute = StatusRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapItDotxmlRoute = SitemapItDotxmlRouteImport.update({
+  id: '/sitemap-it.xml',
+  path: '/sitemap-it.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapFrDotxmlRoute = SitemapFrDotxmlRouteImport.update({
+  id: '/sitemap-fr.xml',
+  path: '/sitemap-fr.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapEsDotxmlRoute = SitemapEsDotxmlRouteImport.update({
+  id: '/sitemap-es.xml',
+  path: '/sitemap-es.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapEnDotxmlRoute = SitemapEnDotxmlRouteImport.update({
+  id: '/sitemap-en.xml',
+  path: '/sitemap-en.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDeDotxmlRoute = SitemapDeDotxmlRouteImport.update({
+  id: '/sitemap-de.xml',
+  path: '/sitemap-de.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapRoute = SitemapRouteImport.update({
@@ -1092,6 +1122,11 @@ export interface FileRoutesByFullPath {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-de.xml': typeof SitemapDeDotxmlRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-fr.xml': typeof SitemapFrDotxmlRoute
+  '/sitemap-it.xml': typeof SitemapItDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1267,6 +1302,11 @@ export interface FileRoutesByTo {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-de.xml': typeof SitemapDeDotxmlRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-fr.xml': typeof SitemapFrDotxmlRoute
+  '/sitemap-it.xml': typeof SitemapItDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1444,6 +1484,11 @@ export interface FileRoutesById {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-de.xml': typeof SitemapDeDotxmlRoute
+  '/sitemap-en.xml': typeof SitemapEnDotxmlRoute
+  '/sitemap-es.xml': typeof SitemapEsDotxmlRoute
+  '/sitemap-fr.xml': typeof SitemapFrDotxmlRoute
+  '/sitemap-it.xml': typeof SitemapItDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1622,6 +1667,11 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-de.xml'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-fr.xml'
+    | '/sitemap-it.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -1797,6 +1847,11 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-de.xml'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-fr.xml'
+    | '/sitemap-it.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -1973,6 +2028,11 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-de.xml'
+    | '/sitemap-en.xml'
+    | '/sitemap-es.xml'
+    | '/sitemap-fr.xml'
+    | '/sitemap-it.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -2150,6 +2210,11 @@ export interface RootRouteChildren {
   SeoMonitorRoute: typeof SeoMonitorRoute
   SignupRoute: typeof SignupRoute
   SitemapRoute: typeof SitemapRoute
+  SitemapDeDotxmlRoute: typeof SitemapDeDotxmlRoute
+  SitemapEnDotxmlRoute: typeof SitemapEnDotxmlRoute
+  SitemapEsDotxmlRoute: typeof SitemapEsDotxmlRoute
+  SitemapFrDotxmlRoute: typeof SitemapFrDotxmlRoute
+  SitemapItDotxmlRoute: typeof SitemapItDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatusRoute: typeof StatusRoute
   SubscriptionRoute: typeof SubscriptionRoute
@@ -2342,6 +2407,41 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-it.xml': {
+      id: '/sitemap-it.xml'
+      path: '/sitemap-it.xml'
+      fullPath: '/sitemap-it.xml'
+      preLoaderRoute: typeof SitemapItDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-fr.xml': {
+      id: '/sitemap-fr.xml'
+      path: '/sitemap-fr.xml'
+      fullPath: '/sitemap-fr.xml'
+      preLoaderRoute: typeof SitemapFrDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-es.xml': {
+      id: '/sitemap-es.xml'
+      path: '/sitemap-es.xml'
+      fullPath: '/sitemap-es.xml'
+      preLoaderRoute: typeof SitemapEsDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-en.xml': {
+      id: '/sitemap-en.xml'
+      path: '/sitemap-en.xml'
+      fullPath: '/sitemap-en.xml'
+      preLoaderRoute: typeof SitemapEnDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-de.xml': {
+      id: '/sitemap-de.xml'
+      path: '/sitemap-de.xml'
+      fullPath: '/sitemap-de.xml'
+      preLoaderRoute: typeof SitemapDeDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap': {
@@ -3561,6 +3661,11 @@ const rootRouteChildren: RootRouteChildren = {
   SeoMonitorRoute: SeoMonitorRoute,
   SignupRoute: SignupRoute,
   SitemapRoute: SitemapRoute,
+  SitemapDeDotxmlRoute: SitemapDeDotxmlRoute,
+  SitemapEnDotxmlRoute: SitemapEnDotxmlRoute,
+  SitemapEsDotxmlRoute: SitemapEsDotxmlRoute,
+  SitemapFrDotxmlRoute: SitemapFrDotxmlRoute,
+  SitemapItDotxmlRoute: SitemapItDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatusRoute: StatusRoute,
   SubscriptionRoute: SubscriptionRoute,
