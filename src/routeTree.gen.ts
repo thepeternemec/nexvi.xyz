@@ -15,6 +15,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SubscriptionRouteImport } from './routes/subscription'
 import { Route as StatusRouteImport } from './routes/status'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapLocaleDotxmlRouteImport } from './routes/sitemap-$locale[.]xml'
 import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SeoMonitorRouteImport } from './routes/seo-monitor'
@@ -212,6 +213,11 @@ const StatusRoute = StatusRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapLocaleDotxmlRoute = SitemapLocaleDotxmlRouteImport.update({
+  id: '/sitemap-$locale.xml',
+  path: '/sitemap-$locale.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapRoute = SitemapRouteImport.update({
@@ -1092,6 +1098,7 @@ export interface FileRoutesByFullPath {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-$locale.xml': typeof SitemapLocaleDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1267,6 +1274,7 @@ export interface FileRoutesByTo {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-$locale.xml': typeof SitemapLocaleDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1444,6 +1452,7 @@ export interface FileRoutesById {
   '/seo-monitor': typeof SeoMonitorRoute
   '/signup': typeof SignupRoute
   '/sitemap': typeof SitemapRoute
+  '/sitemap-$locale.xml': typeof SitemapLocaleDotxmlRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/status': typeof StatusRoute
   '/subscription': typeof SubscriptionRoute
@@ -1622,6 +1631,7 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-$locale.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -1797,6 +1807,7 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-$locale.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -1973,6 +1984,7 @@ export interface FileRouteTypes {
     | '/seo-monitor'
     | '/signup'
     | '/sitemap'
+    | '/sitemap-$locale.xml'
     | '/sitemap.xml'
     | '/status'
     | '/subscription'
@@ -2150,6 +2162,7 @@ export interface RootRouteChildren {
   SeoMonitorRoute: typeof SeoMonitorRoute
   SignupRoute: typeof SignupRoute
   SitemapRoute: typeof SitemapRoute
+  SitemapLocaleDotxmlRoute: typeof SitemapLocaleDotxmlRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatusRoute: typeof StatusRoute
   SubscriptionRoute: typeof SubscriptionRoute
@@ -2342,6 +2355,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap-$locale.xml': {
+      id: '/sitemap-$locale.xml'
+      path: '/sitemap-$locale.xml'
+      fullPath: '/sitemap-$locale.xml'
+      preLoaderRoute: typeof SitemapLocaleDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap': {
@@ -3561,6 +3581,7 @@ const rootRouteChildren: RootRouteChildren = {
   SeoMonitorRoute: SeoMonitorRoute,
   SignupRoute: SignupRoute,
   SitemapRoute: SitemapRoute,
+  SitemapLocaleDotxmlRoute: SitemapLocaleDotxmlRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatusRoute: StatusRoute,
   SubscriptionRoute: SubscriptionRoute,
