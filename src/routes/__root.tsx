@@ -168,6 +168,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
             __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${GA_ID}', { send_page_view: false });`,
           }}
         />
+        <script
+          defer
+          data-website-id="dfid_d56VohHFoeqZSJ0oWJUZS"
+          data-domain="nexvi.xyz"
+          src="https://datafa.st/js/script.js"
+        />
         <HeadContent />
         <script dangerouslySetInnerHTML={{ __html: getInitialThemeScript() }} />
       </head>
