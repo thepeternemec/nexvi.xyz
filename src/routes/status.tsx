@@ -22,6 +22,10 @@ const services = [
   { name: "Cover Letter Generator", note: "AI drafting and export" },
   { name: "ATS Optimizer", note: "Scoring and keyword analysis" },
   { name: "Humanizer", note: "Rewriting engine" },
+  { name: "Copilot chat", note: "AI assistant and context-aware answers" },
+  { name: "Gemini API", note: "Google generative AI responses" },
+  { name: "Supabase", note: "Auth, database and storage" },
+  { name: "Stripe payments", note: "Checkout, subscriptions and billing" },
   { name: "Accounts & billing", note: "Sign-in, subscriptions, payments" },
 ];
 
