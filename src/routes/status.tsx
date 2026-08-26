@@ -26,7 +26,7 @@ const services = [
   { name: "Gemini API", note: "Google generative AI responses" },
   { name: "Supabase", note: "Auth, database and storage" },
   { name: "Stripe payments", note: "Checkout, subscriptions and billing" },
-  { name: "Accounts & billing", note: "Sign-in, subscriptions, payments" },
+  { name: "Accounts & User administration", note: "Sign-in, profiles, email and account management" },
 ];
 
 export function StatusPage() {
