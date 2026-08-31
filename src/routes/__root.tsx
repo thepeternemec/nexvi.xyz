@@ -85,6 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "mcI0Vp7XfUlaDHzs4YyBvyRnqmpnNFnecpmtnyz9xl4" },
       { title: "Nexvi — AI That Tailors Your Experience to the Job" },
       { name: "description", content: "Nexvi sits between your experience and the job description: rewriting, scoring and humanizing your CV and cover letter so you pass ATS filters and sound like yourself." },
       { property: "og:site_name", content: "Nexvi" },
