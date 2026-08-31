@@ -209,11 +209,11 @@ export function Pricing() {
                           className="group w-full rounded-full shadow-lg shadow-primary/25 transition hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/35"
                           size="lg"
                         >
-                          {sub.isAuthenticated ? "Go unlimited — $7/mo" : "Unlock unlimited for $7/mo"}
+                          {sub.isAuthenticated ? "Go unlimited — $7/mo" : "Go unlimited — $7/mo"}
                           <ArrowRight className="ml-2 h-4 w-4 transition group-hover:translate-x-0.5" />
                         </Button>
                         <p className="text-center text-xs text-muted-foreground">
-                          Cancel anytime · 14-day refund · secure Stripe checkout
+                          Cancel anytime · 14-day refund
                         </p>
                       </div>
                     )
