@@ -179,7 +179,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
           src="https://datafa.st/js/script.js"
         />
         <HeadContent />
-        <script dangerouslySetInnerHTML={{ __html: getInitialThemeScript() }} />
       </head>
       <body>
         <noscript>
