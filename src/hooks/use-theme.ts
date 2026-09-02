@@ -15,6 +15,8 @@ function applyTheme(next: Theme) {
   const root = document.documentElement;
   if (next === "dark") root.classList.add("dark");
   else root.classList.remove("dark");
+  root.style.colorScheme = next;
+  root.style.backgroundColor = next === "dark" ? "#0b0d16" : "#ffffff";
   try {
     localStorage.setItem(STORAGE_KEY, next);
   } catch {
