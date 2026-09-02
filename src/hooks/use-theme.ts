@@ -52,12 +52,20 @@ export function useTheme() {
 export function getInitialThemeScript(): string {
   return `
     (function() {
+      var el = document.documentElement;
+      var theme = 'light';
       try {
-        var theme = localStorage.getItem('${STORAGE_KEY}');
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
-        }
+        if (localStorage.getItem('${STORAGE_KEY}') === 'dark') theme = 'dark';
       } catch (e) {}
+      if (theme === 'dark') {
+        el.classList.add('dark');
+        el.style.colorScheme = 'dark';
+        el.style.backgroundColor = '#0b0d16';
+      } else {
+        el.classList.remove('dark');
+        el.style.colorScheme = 'light';
+        el.style.backgroundColor = '#ffffff';
+      }
     })();
   `;
 }
